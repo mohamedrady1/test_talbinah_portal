@@ -34,7 +34,7 @@ import { registerFormConfig } from '../../configs';
 import { IRegisterRequestDto } from '../../dtos';
 import { RegisterFacade } from '../../services';
 import { NewLoginComponent } from '../new-login';
-import { TranslateApiPipe } from '../../../../../common/core/translations/pipes';
+import { TranslateApiPipe } from '../../../../../common/core/translations/pipes/translate-api.pipe';
 
 export interface NewRegisterModalData {
   icon: string;
