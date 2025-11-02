@@ -15,19 +15,19 @@
           stroke="#E00000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
       <div class="d-flex flex-col gap-2">
-        <p class="popup__card__title">{{ "confirm_deletion" |translateApi}}</p>
-        <p class="popup__card__sub-title">{{ "confirm_delete_post_action_irreversible" |translateApi }}</p>
+        <p class="popup__card__title">{{ translate("confirm_deletion") }}</p>
+        <p class="popup__card__sub-title">{{ translate("confirm_delete_post_action_irreversible") }}</p>
       </div>
     </div>
     <div class="buttons d-flex align-items-center justify-end gap-2">
       <button id="back" type="button" class="btn btn--outline" (click)="closeModal()"
-        [attr.aria-label]="'back' | translateApi">
-        <span class="btn__label">{{ "back" | translateApi }}</span>
+        [attr.aria-label]="translate('back')">
+        <span class="btn__label">{{ translate("back") }}</span>
       </button>
 
       <button id="logOut" type="button" class="btn btn--solid" (click)="confirmDelete()"
-        [attr.aria-label]="'delete' | translateApi">
-        <span class="btn__label">{{ "delete" | translateApi }}</span>
+        [attr.aria-label]="translate('delete')">
+        <span class="btn__label">{{ translate("delete") }}</span>
       </button>
     </div>
   </div>

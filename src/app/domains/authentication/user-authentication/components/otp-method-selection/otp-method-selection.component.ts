@@ -10,7 +10,7 @@ import { UserAuthenticationApiClientProvider } from '../../clients';
 import { OtpMethodsFormConfig } from '../../configs';
 import { finalize, take } from 'rxjs';
 import { Router } from '@angular/router';
-import { TranslateApiPipe } from '../../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../../common/core/translations';
 
 @Component({
   selector: 'app-otp-method-selection',
@@ -19,8 +19,7 @@ import { TranslateApiPipe } from '../../../../../common/core/translations/pipes/
     ReactiveFormsModule,
     TranslateModule,
     FormRadioGroupsComponent,
-    CommonModule,
-    TranslateApiPipe
+    CommonModule
   ],
   templateUrl: './otp-method-selection.component.html',
   styleUrls: ['./otp-method-selection.component.scss'],
@@ -34,6 +33,11 @@ export class OtpMethodSelectionComponent {
   private recaptcha = inject(RecaptchaService);
   recaptchaToken = signal<string | null>(null);
   private readonly _ToastService = inject(ToastService);
+  private readonly translationsFacade = inject(TranslationsFacade);
+
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
 
   readonly isLoading = signal<boolean>(false);
   readonly methodSelectionRequest = signal<IMethodSelectionParams | null>(null);

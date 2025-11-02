@@ -1,23 +1,29 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
 import { ErrorStateConfig } from '../error-state-card';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { TranslateApiPipe } from '../../../common/core/translations';
+import { TranslationsFacade } from '../../../common/core/translations';
 
 @Component({
   selector: 'app-error-state',
   standalone: true,
   imports: [
     TranslateModule,
-    CommonModule,
-    TranslateApiPipe
+    CommonModule
   ],
   templateUrl: './error-state.component.html',
   styleUrls: ['./error-state.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ErrorStateComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
   @Input({ required: true }) config!: ErrorStateConfig;
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   get backgroundColor(): string {
     return this.config.backgroundColor || '#fff3f3';
   }

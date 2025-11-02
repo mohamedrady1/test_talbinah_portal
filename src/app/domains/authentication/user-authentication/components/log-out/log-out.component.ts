@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter, inject, effect, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { TranslateApiPipe } from './../../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from './../../../../../common/core/translations';
 import { UserIdentityStore } from '../../../../talbinah-community/routes/user-identity.service';
 import { StorageService, Logger } from '../../../../../common';
 import { UserContextService } from '../../services';
@@ -12,9 +12,7 @@ import { Router } from '@angular/router';
   selector: 'app-log-out',
   standalone: true,
   imports: [
-    CommonModule,
-
-    TranslateApiPipe,
+    CommonModule
   ],
   templateUrl: './log-out.component.html',
   styleUrls: ['./log-out.component.scss'],
@@ -28,9 +26,14 @@ export class LogOutComponent implements OnDestroy {
   private readonly userContext = inject(UserContextService);
   private readonly userIdentityStore = inject(UserIdentityStore);
   private readonly logoutFacade = inject(LogoutFacade);
+  private readonly translationsFacade = inject(TranslationsFacade);
   readonly isLoading = this.logoutFacade.isLoading;
 
   private hasLoggedOut = false;
+
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
 
   constructor() {
     effect(() => {

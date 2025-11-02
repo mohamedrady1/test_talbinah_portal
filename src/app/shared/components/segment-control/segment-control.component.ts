@@ -1,7 +1,7 @@
-import { Component, Input, Output, EventEmitter, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, signal, ChangeDetectionStrategy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { TranslateApiPipe } from '../../../common/core/translations';
+import { TranslationsFacade } from '../../../common/core/translations';
 
 export interface SegmentOption {
     id: string | number;
@@ -12,8 +12,7 @@ export interface SegmentOption {
     selector: 'app-segment-control',
     standalone: true,
     imports: [
-        CommonModule,
-        TranslateApiPipe
+        CommonModule
 
     ],
     templateUrl: './segment-control.component.html',
@@ -21,9 +20,15 @@ export interface SegmentOption {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SegmentControlComponent {
+    private readonly translationsFacade = inject(TranslationsFacade);
+    
     @Input() options: SegmentOption[] = [];
     @Input() selectedId: string | number | null = null;
     @Output() selectionChanged = new EventEmitter<SegmentOption>();
+
+    protected translate(key: string): string {
+        return this.translationsFacade.translate(key);
+    }
 
     selectOption(option: SegmentOption): void {
         this.selectedId = option.id;

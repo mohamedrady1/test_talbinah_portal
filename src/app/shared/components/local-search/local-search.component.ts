@@ -1,18 +1,23 @@
-import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectionStrategy, OnChanges, SimpleChanges, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TranslateApiPipe } from '../../../common/core/translations';
+import { TranslationsFacade } from '../../../common/core/translations';
 import { SvgIconComponent } from "../svg-icon";
 
 @Component({
   selector: 'app-local-search',
   standalone: true,
-  imports: [CommonModule, FormsModule, TranslateApiPipe, SvgIconComponent],
+  imports: [CommonModule, FormsModule, SvgIconComponent],
   templateUrl: './local-search.component.html',
   styleUrls: ['./local-search.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LocalSearchComponent implements OnInit, OnChanges {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   @Input() searchTerm: string = '';
   @Input() isFullWidth: boolean = true;
 

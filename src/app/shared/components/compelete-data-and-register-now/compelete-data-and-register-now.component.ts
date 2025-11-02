@@ -10,22 +10,26 @@ import { AuthenticationRoutesEnum } from '../../../domains/authentication/user-a
 import { LogoutFacade } from '../../../domains/settings/services/logout.facade';
 import { StorageKeys } from '../../config/constants/storage.keys';
 import { StorageService } from '../../../common/core/data-access/storages/session-local-storages/session-local-storage.service';
+import { TranslationsFacade } from '../../../common/core/translations';
 // import { ModalService } from '../../services/model.service';
 // import { NewLoginComponent } from '../../../domains/authentication/user-authentication/components/new-login/new-login.component';
-// import { TranslateApiPipe } from '../../../common/core/translations/pipes/translate-api.pipe';
 @Component({
   selector: 'app-compelete-data-and-register-now',
   standalone: true,
   imports: [
     TranslateModule,
-    CommonModule,
-    // TranslateApiPipe
+    CommonModule
   ],
   templateUrl: './compelete-data-and-register-now.component.html',
   styleUrls: ['./compelete-data-and-register-now.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CompeleteDataAndRegisterNowComponent implements OnDestroy {
+  private readonly translationsFacade = inject(TranslationsFacade);
+
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   // ====== SSR Check ======
   private readonly platformId = inject(PLATFORM_ID);
   @Input() isEmptyState: boolean = false;

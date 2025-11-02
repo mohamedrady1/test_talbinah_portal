@@ -1,4 +1,4 @@
-import { TranslateApiPipe } from './../../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from './../../../../../common/core/translations';
 
 import {
   ChangeDetectionStrategy,
@@ -50,9 +50,7 @@ export interface NewLoginModalData {
     CommonModule,
     SelectModule,
     FormsModule,
-    SvgIconComponent,
-
-    TranslateApiPipe
+    SvgIconComponent
   ],
   templateUrl: './new-login.component.html',
   styleUrls: ['./new-login.component.scss'],
@@ -68,9 +66,14 @@ export class NewLoginComponent implements OnDestroy {
   protected readonly _LoginFacade = inject(LoginFacade);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly _router = inject(Router);
+  private readonly translationsFacade = inject(TranslationsFacade);
   protected readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   protected readonly allInputTypes = ALL_INPUT_TYPES;
   private readonly destroy$ = new Subject<void>();
+
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
 
   // Modal data inputs
   @Input() icon: string = 'images/logos/icon.png';

@@ -9,7 +9,7 @@
             @if (formItem.label) {
             <label [attr.for]="formItem.name" class="general-form-wrapper__label"
               [ngClass]="{'general-form-wrapper__label--error': getError(formItem.name),'general-form-wrapper__label--clickable': formItem.enableLabelClick}">
-              {{ formItem.label |translateApi}}
+              {{ translate(formItem.label) }}
               @if (formItem.isRequired) {
               <span class="general-form-wrapper__required">*</span>
               }
@@ -21,7 +21,7 @@
           <div class="form-group-wrapper">
             <div class="form-field">
               <app-form-radio-groups [formItem]="formItem" [control]="getFormControl(formItem.name)!"
-                [whatsappLabel]="'via_whatsapp' | translateApi" [smsLabel]="'via_sms' | translateApi"
+                [whatsappLabel]="translate('via_whatsapp')" [smsLabel]="translate('via_sms')"
                 [attr.aria-describedby]="formItem.name + '-hint'" [attr.aria-invalid]="!!getError(formItem.name)" />
 
               <!-- ✅ Semantic Error and Hint Section -->
@@ -30,13 +30,13 @@
                 !getFormControl(formItem.name)?.value &&
                 !formItem.fixedHint) {
                 <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
-                  {{ formItem.hint | translateApi }}
+                  {{ translate(formItem.hint) }}
                 </small>
                 }
 
                 @if (getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched) {
                 <span class="general-form-wrapper__error-message error-label" role="alert">
-                  {{ 'please_choose_verification_method' | translateApi }}
+                  {{ translate('please_choose_verification_method') }}
                 </span>
                 }
               </div>
@@ -56,16 +56,16 @@
         </button>
         } -->
         <button id="submit-dynamic-form-btn" type="submit" class="btn btn--solid" [disabled]="isLoading()"
-          [attr.aria-label]="'send_verification_code' | translateApi">
+          [attr.aria-label]="translate('send_verification_code')">
           <span class="btn__label">
             @if (isLoading()) {
             <div class="general-form-wrapper__loading" aria-label="Submit in progress">
-              {{ 'in_progress' | translateApi }}
+              {{ translate('in_progress') }}
               <span class="dot-loader"></span>
             </div>
             }
             @if (!isLoading()) {
-            {{ 'send_verification_code' | translateApi }}
+            {{ translate('send_verification_code') }}
             }
           </span>
         </button>

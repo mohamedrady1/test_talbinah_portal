@@ -2,7 +2,7 @@
     @for (option of options; track option.id) {
     <button type="button" class="segment-control__option" [class.active]="isSelected(option)"
         (click)="selectOption(option)">
-        {{ option.title | translateApi }}
+        {{ translate(option.title) }}
     </button>
     }
 </div>

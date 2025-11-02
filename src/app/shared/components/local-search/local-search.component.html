@@ -2,8 +2,8 @@
   <div class="local-search__container">
     <div class="local-search__input-wrapper" [ngClass]="{'local-search__input-wrapper--full-width': isFullWidth}">
       <app-svg-icon class="local-search__icon" name="search-icon" />
-      <input type="text" class="local-search__input" [placeholder]="'search2' | translateApi" [(ngModel)]="searchTerm"
-        (input)="onSearchChange($event)" [attr.aria-label]="'search2' | translateApi" />
+      <input type="text" class="local-search__input" [placeholder]="translate('search2')" [(ngModel)]="searchTerm"
+        (input)="onSearchChange($event)" [attr.aria-label]="translate('search2')" />
       @if (searchTerm) {
       <button type="button" class="local-search__clear" aria-label="Clear search" (click)="clearSearch()">
         ✕
