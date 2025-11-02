@@ -11,7 +11,8 @@ import { LogoutFacade } from '../../../domains/settings/services/logout.facade';
 import { StorageKeys } from '../../config/constants/storage.keys';
 import { StorageService } from '../../../common/core/data-access/storages/session-local-storages/session-local-storage.service';
 import { ModalService } from '../../services/model.service';
-import { TranslateApiPipe } from '../../../common/core/translations';
+import { NewLoginComponent } from '../../../domains/authentication/user-authentication/components/new-login/new-login.component';
+import { TranslateApiPipe } from '../../../common/core/translations/pipes/translate-api.pipe';
 @Component({
   selector: 'app-compelete-data-and-register-now',
   standalone: true,
@@ -93,16 +94,16 @@ export class CompeleteDataAndRegisterNowComponent implements OnDestroy {
       description: 'welcome_safe_space',
     };
 
-    // this.modalService.open(NewLoginComponent, {
-    //   inputs: modalData,
-    //   minWidth: '70vh',
-    //   maxWidth: '70vh',
-    //   minHeight: '50vh',
-    //   outputs: {
-    //     closed: (data: any): void => {
-    //     }
-    //   },
-    // });
+    this.modalService.open(NewLoginComponent, {
+      inputs: modalData,
+      minWidth: '70vh',
+      maxWidth: '70vh',
+      minHeight: '50vh',
+      outputs: {
+        closed: (data: any): void => {
+        }
+      },
+    });
   }
 
   // ====== Helpers ======

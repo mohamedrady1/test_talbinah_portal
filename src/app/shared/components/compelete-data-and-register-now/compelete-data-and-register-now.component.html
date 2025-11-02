@@ -6,25 +6,25 @@
 
   <!-- Title -->
   <h2 class="compelete-data-and-register-now__title">
-    {{ 'complete_registration_benefits' | translate }}
+    {{ 'complete_registration_benefits' | translateApi }}
   </h2>
 
   <!-- Subtitle -->
   <p class="compelete-data-and-register-now__subtitle">
-    {{ 'fill_your_data_personalized' | translate }}
+    {{ 'fill_your_data_personalized' | translateApi }}
   </p>
 
   <!-- Actions -->
   <div class="compelete-data-and-register-now__actions">
     <button type="button" class="btn btn--solid" (click)="Register()" [disabled]="logoutFacade.isLoading()"
-      [attr.aria-label]="'start_now' | translate">
+      [attr.aria-label]="'start_now' | translateApi">
       <span class="btn__label">
         @if (logoutFacade.isLoading()) {
         <span role="status" aria-live="polite" aria-label="Loading, please wait">
-          {{ 'in_progress' | translate }}
+          {{ 'in_progress' | translateApi }}
         </span>
         } @else {
-        <span>{{ 'start_now' | translate }}</span>
+        <span>{{ 'start_now' | translateApi }}</span>
         }
       </span>
     </button>
