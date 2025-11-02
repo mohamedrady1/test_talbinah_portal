@@ -1,0 +1,85 @@
+@if (isBrowser) {
+<main class="khawiik-voice-types" role="main" aria-labelledby="khawiik-heading" appAutoExactHeight
+  heightMode="max-height">
+  <section class="khawiik-voice-types__hero-aduio" aria-labelledby="welcome-title">
+    <div class="khawiik-voice-types__avatar-aduio" aria-hidden="true">
+      <img class="khawiik-voice-types__avatar-aduio-image" [src]="content()?.icon || ''" alt="avatar-aduio" />
+    </div>
+
+    @if (pageTitle()) {
+    <div class="khawiik-voice-types__hero-aduio-titles">
+      <h3 id="welcome-title" class="khawiik-voice-types__hero-aduio-title">
+        {{ pageTitle() | translateApi }}
+      </h3>
+      <p id="welcome-subtitle" class="khawiik-voice-types__hero-aduio-subtitle">
+        {{ pageSubtitle() | translateApi }}
+      </p>
+    </div>
+    }
+  </section>
+
+  <!-- Loader -->
+  @if (isLoading()) {
+  <app-khawiik-voice-types-skeleton></app-khawiik-voice-types-skeleton>
+  }
+
+  <!-- Error -->
+  @if (errorMessage()) {
+  <app-error-state-card [config]="errorStateConfig"></app-error-state-card>
+  }
+
+  <!-- Voices List -->
+  @if (!isLoading() && voicesResponse()?.data?.voices?.length) {
+  <section class="khawiik-voice-types__items" aria-labelledby="voices-list" #swipeContainer>
+    @for (voice of voicesResponse()?.data?.voices; track voice.name) {
+    <div class="khawiik-voice-types__items--item"
+      [class.khawiik-voice-types__items--item--active]="voice.name === activeVoice()?.name"
+      [class.khawiik-voice-types__items--item--disabled]="isSaving()" role="button" tabindex="0"
+      (click)="selectVoice(voice)" (keydown)="onKeydown($event, voice)"
+      [attr.aria-pressed]="voice.name === activeVoice()?.name ? 'true' : 'false'"
+      [attr.aria-disabled]="isSaving() ? 'true' : 'false'">
+
+      <div class="khawiik-voice-types__items--item-avatar">
+        <img class="khawiik-voice-types__items--item-avatar-image" [src]="'images/community/avatars/avatar-3.png'"
+          [alt]="voice.name || 'avatar'" />
+      </div>
+
+      <div class="khawiik-voice-types__items--item-voice-icon">
+        <img class="khawiik-voice-types__items--item-voice-icon-image" [src]="voice.name === activeVoice()?.name
+                ? 'images/khawiik/activity-voice-cricle-white.png'
+                : 'images/khawiik/activity-voice-cricle-colored.png'" [alt]="voice.name || 'voice icon'" />
+      </div>
+
+      <span class="khawiik-voice-types__items--item-voice-name"
+        [ngClass]="{'khawiik-voice-types__items--item-voice-name--active':voice.name === activeVoice()?.name}">
+        {{ voice.name | translateApi }}
+      </span>
+    </div>
+    }
+  </section>
+  }
+
+  <!-- Action Button -->
+  <footer class="khawiik-voice-types__footer">
+    <button type="button" class="khawiik-voice-types__start" [disabled]="!activeVoice() || isSaving() || isLoading()"
+      [ngClass]="{'khawiik-voice-types__start--disabled': isLoading()}" (click)="onSaveVoice()"
+      [attr.aria-label]="'continue'| translateApi">
+      @if(isLoading()){
+      {{ 'please_wait' | translateApi }}
+      }
+      @else{
+      @if (!isSaving()) {
+      @if (from === 'chat') {
+      {{ 'confirm' | translateApi }}
+      }
+      @else{
+      {{ 'continue' | translateApi }}
+      }
+      }@else {
+      {{ 'in_progress' | translateApi }}
+      }
+      }
+    </button>
+  </footer>
+</main>
+}

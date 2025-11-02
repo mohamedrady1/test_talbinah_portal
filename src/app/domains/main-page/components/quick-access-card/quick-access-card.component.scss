@@ -1,0 +1,115 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+
+.card {
+  // BEM: Block .card - Base styles for an individual quick access card
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0.5625rem 2rem 1.5rem; // Padding for LTR
+  height: 100%; // Ensure card fills its parent container
+  width: 100%; // Ensure card fills its parent container
+  box-sizing: border-box; // Include padding in width/height calculation
+
+  // RTL specific padding adjustment
+  &:dir(rtl) {
+    padding: 2rem 1.5rem 2rem 0.5625rem;
+  }
+
+  // Modifier for column layout
+  &--column {
+    flex-direction: column;
+    padding-left: 0.5625rem; // Adjusted initial padding for column layout
+
+    @include respond(sm) {
+      flex-direction: row; // Revert to row on small screens
+      justify-content: space-between;
+      padding-inline: 0; // Reset inline padding
+    }
+
+    // Styles for content within column layout
+    .card__content {
+      order: 2; // Move content below image in column layout
+      align-items: center;
+      text-align: center;
+      width: 16.375rem; // Specific width for content in column layout
+
+      @include respond(sm) {
+        order: 1; // Revert content order on small screens
+      }
+    }
+
+    // RTL specific padding adjustment for column layout
+    &:dir(rtl) {
+      padding-right: 0.5625rem;
+      @include respond(sm) {
+        padding: 2rem 1.5rem 2rem 0.5625rem;
+      }
+    }
+  }
+
+  &__content {
+    // BEM: Element .card__content - Container for title and description
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 22.25rem; // Default width for content
+
+    @include respond(sm) {
+      text-align: center;
+    }
+
+    &-title {
+      // BEM: Element .card__content-title - Title text
+      color: var(--card-title-color, #006a82); // Use CSS custom property for dynamic color
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0; // Remove default paragraph margin
+    }
+
+    &-description {
+      // BEM: Element .card__content-description - Description text
+      color: var(--color-text-secondary, #47586e); // Use CSS custom property with fallback
+      font-size: 0.875rem;
+      font-weight: 500;
+      opacity: 0.9;
+      margin: 0; // Remove default paragraph margin
+    }
+
+    // Mixin for dynamic gap classes (from original, ensure mixin exists)
+    @for $i from 1 through 24 {
+      $gap-lg: $i * 1px;
+      $gap-md: max(0px, ($i - 2) * 1px);
+      $gap-sm: max(0px, ($i - 4) * 1px);
+
+      &.gap-#{$i} {
+        gap: $gap-lg;
+
+        @include respond(md) {
+          gap: $gap-md;
+        }
+
+        @include respond(sm) {
+          gap: $gap-sm;
+        }
+      }
+    }
+  }
+
+  &__image {
+    // BEM: Element .card__image - Container for the card's icon/image
+    order: 1; // Image appears first in default (row) layout
+    flex-shrink: 0; // Prevent image from shrinking
+    @include respond(sm) {
+      max-width: 50%; // Ensure image doesn't overflow its container
+    }
+    img {
+      display: block; // Remove extra space below image
+      max-width: 100%; // Ensure image doesn't overflow its container
+      height: auto; // Maintain aspect ratio
+      @include respond(sm) {
+        max-width: 6rem; // Ensure image doesn't overflow its container
+        margin: auto;
+      }
+    }
+  }
+}

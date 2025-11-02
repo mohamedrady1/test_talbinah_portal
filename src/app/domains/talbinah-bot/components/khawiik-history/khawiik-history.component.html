@@ -1,0 +1,99 @@
+@if (isBrowser) {
+<section class="khawiik-history" role="region" [attr.aria-label]="'section'">
+  <div class="khawiik-history__container" appAutoExactHeight="100" heightMode="max-height">
+    <div class="khawiik-history__banner" [attr.aria-label]="'history banner'">
+      <h4 class="khawiik-history__banner-title">
+        {{'this_week_statistics' | translateApi}}
+      </h4>
+
+      <div class="khawiik-history__mood-data">
+        <div class="khawiik-history__mood-data-item khawiik-history__mood-data-item--current">
+          <span class="khawiik-history__label">
+            {{ 'average_feelings_this_week' | translateApi }}
+          </span>
+          <span class="khawiik-history__value">
+            {{ 'معتدل' }}
+          </span>
+        </div>
+
+        <div class="khawiik-history__mood-data-item khawiik-history__mood-data-item--last-listen">
+          <span class="khawiik-history__label">
+            {{ 'last_listened' | translateApi }}
+          </span>
+          <span class="khawiik-history__value">
+            {{ 'امس' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="khawiik-history__mood-last-subject">
+        <span class="khawiik-history__label">
+          {{ 'most_discussed_topic' | translateApi }}
+        </span>
+        <span class="khawiik-history__value">
+          {{ 'الغضب' }}
+        </span>
+      </div>
+    </div>
+
+    <div class="khawiik-history__content" [attr.aria-label]="'content'">
+      <!-- Header -->
+      <div class="khawiik-history__content--header">
+        <h5 class="khawiik-history__content--header-title">
+          {{'مقتطفات من هذا الأسبوع'}}
+        </h5>
+        <span class="khawiik-history__content--header-icon">
+          <app-svg-icon name="calender-icon" [fillColor]="'#47586E'" />
+        </span>
+      </div>
+
+
+      <!-- Loading -->
+      @if (isLoadingHistory()) {
+      <div class="khawiik-history__loading">
+        <app-khawiik-history-skeleton></app-khawiik-history-skeleton>
+      </div>
+      }
+
+      <!-- Chats -->
+      @else if (filteredChats().length > 0) {
+      <!-- Search -->
+      <div class="khawiik-history__search">
+        <input type="text" class="khawiik-history__search-input" [placeholder]="'search2' | translateApi"
+          [(ngModel)]="searchQuery" [attr.aria-label]="'search2' | translateApi" />
+      </div>
+
+      <ul class="khawiik-history__list" role="list">
+        @for (chat of filteredChats(); track chat.id) {
+        <li class="khawiik-history__item" [class.selected]="chat.selected" (click)="selectChat(chat)"
+          role="listitem button" tabindex="0" [attr.aria-current]="chat.selected ? 'true' : null"
+          (keydown.enter)="selectChat(chat)" (keydown.space)="selectChat(chat)">
+          <div class="khawiik-history__info">
+            <div class="khawiik-history__title" [innerHTML]="chat.highlightedTitle || chat.name || ''"></div>
+            <div class="khawiik-history__date">
+              {{ chat.created_at | date: 'EEEE - d MMMM':'':currentLang }}
+            </div>
+          </div>
+
+          <div class="khawiik-history__actions">
+            <app-chat-menu [chatItem]="chat" [actionIconName]="'arrow-down'" (click)="$event.stopPropagation()"
+              (titleUpdated)="onChatTitleUpdated($event)" (editRequested)="startEditingTitle(chat)"></app-chat-menu>
+          </div>
+        </li>
+        }
+      </ul>
+      }
+
+      <!-- Empty -->
+      @else if (filteredChats().length == 0) {
+      <app-empty-state [config]="emptyState"></app-empty-state>
+      }
+
+      <!-- Error -->
+      @else if (errorMessageHistory() && !status()) {
+      <app-error-state [config]="errorState"></app-error-state>
+      }
+    </div>
+  </div>
+</section>
+}

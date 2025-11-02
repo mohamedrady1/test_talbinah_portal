@@ -1,0 +1,33 @@
+.report-card {
+    display: flex;
+    height: 11.125rem;
+    padding: 0.75rem;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.75rem;
+    background: var(--Dark-WHITE, #fff);
+    position: relative;
+    border-radius: 1rem;
+    cursor: pointer;
+    &__content {
+        &--title {
+            color: var(--text-primary, #000);
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        &--description {
+            color: var(--text-primary, #000);
+            text-align: right;
+            font-size: 0.75rem;
+            font-weight: 500;
+            line-height: normal;
+            letter-spacing: -0.015rem;
+            max-width: 13.6875rem;
+        }
+    }
+    &__image {
+        position: absolute;
+        inset-inline-end: 0rem;
+        bottom: 0;
+    }
+}

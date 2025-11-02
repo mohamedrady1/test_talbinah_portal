@@ -1,0 +1,90 @@
+<main class="transfer-to-department" role="main">
+  <section class="transfer-to-department__container">
+    <div class="transfer-to-department__listing">
+
+      <!-- Search -->
+      <div class="transfer-to-department__search">
+        <app-local-search class="transfer-to-department__search-input" [searchTerm]="searchTerm()"
+          (searchChange)="handleSearch($event)">
+        </app-local-search>
+      </div>
+
+      <!-- Loading -->
+      @if (isLoading()) {
+      <div class="transfer-to-department__status-message transfer-to-department__status-message--loading"
+        aria-live="polite" aria-atomic="true">
+        @for (item of [1,2]; track $index) {
+        <app-appointment-card-skeleton></app-appointment-card-skeleton>
+        }
+      </div>
+      }
+
+      <!-- Error -->
+      @else if (errorMessage()) {
+      <div class="transfer-to-department__status-message transfer-to-department__status-message--error"
+        aria-live="assertive" aria-atomic="true">
+        <app-error-state-card [config]="visitReportsErrorState"></app-error-state-card>
+      </div>
+      }
+
+      <!-- Empty -->
+      @else if (!filteredDepartments().length) {
+      <div class="transfer-to-department__status-message transfer-to-department__status-message--empty"
+        aria-live="polite" aria-atomic="true">
+        <app-empty-state-card [config]="visitReportsEmptyState"></app-empty-state-card>
+      </div>
+      }
+
+      <!-- Success -->
+      @else {
+      <div class="transfer-to-department__cards-list" role="list" aria-live="polite" appAutoExactHeight
+        heightMode="max-height">
+
+        @for (department of pageDepartments(); track department.id) {
+        <article class="transfer-to-department__card" role="listitem">
+          <!-- Circle (radio-like, selecting one department) -->
+          <app-selection-option [config]="{
+          id: department.id,
+          name: department.title,
+          image: 'images/icons/logo-2.png',
+          selected: selectedOption()?.id === department.id
+        }" [iconOnly]="true" [isIconStart]="true" [shape]="'circle'" (selected)="onOptionSelected($event)">
+          </app-selection-option>
+        </article>
+        }
+      </div>
+
+
+      <!-- Pagination -->
+      @if (totalPages() > 1) {
+      <app-pagination-listing [paginationConfig]="localPaginationConfig()" />
+      }
+      }
+    </div>
+
+    <!-- Actions -->
+    <div class="general-form-wrapper__actions">
+      <button id="transfer-btn" type="button" class="btn btn--outline" (click)="onCancel()">
+        <span class="btn__label">
+          {{ 'cancel' | translateApi }}
+        </span>
+      </button>
+
+      <button id="submit-transfer-btn" type="submit" class="btn btn--solid" (click)="assignNow()"
+        [attr.aria-label]="'transfer' | translateApi"
+        [disabled]="_TechnicalSupportDepartmentsFacade.isLoading()|| _AssignToDepartmentFacade.loading()|| !selectedOption()"
+        [ngClass]="{'disabled': _TechnicalSupportDepartmentsFacade.isLoading()|| _AssignToDepartmentFacade.loading()|| !selectedOption()}">
+        <span class="btn__label">
+          @if (!_AssignToDepartmentFacade.loading()) {
+          {{ 'transfer' | translateApi }}
+          } @else {
+          <span class="general-form-wrapper__loading" aria-live="polite">
+            {{ 'in_progress' | translateApi }}
+            <span class="dot-loader"></span>
+          </span>
+          }
+        </span>
+      </button>
+    </div>
+  </section>
+</main>

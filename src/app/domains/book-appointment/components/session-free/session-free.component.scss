@@ -1,0 +1,85 @@
+@use "./../../../../common/styles/scss/buttons/button.mixins" as btn;
+
+.session-free {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 1rem 1rem;
+  margin: auto;
+
+  &__status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    background: var(--Dark-WHITE, #FFF);
+
+    &-icon {
+      display: flex;
+      justify-content: center;
+    }
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    &-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-400, #0F0F0F);
+      text-align: center;
+    }
+
+    &-subtitle {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-300, #47586E);
+      text-align: center;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.625rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+
+    .btn {
+      @include btn.button-base;
+      @include btn.button-size("small");
+      @include btn.button-color("main");
+      @include btn.button-spinner;
+
+      width: auto;
+      min-width: 6rem;
+
+      &--outline {
+        @include btn.button-type("outline");
+      }
+
+      &--solid {
+        @include btn.button-type("solid");
+      }
+    }
+
+    .spinner {
+      width: 1rem;
+      height: 1rem;
+      border: 2px solid #ccc;
+      border-top-color: var(--Primary-primary, #0E39B6);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

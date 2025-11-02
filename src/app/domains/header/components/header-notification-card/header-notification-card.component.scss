@@ -1,0 +1,116 @@
+.notification-card {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    transition: all 0.2s ease;
+
+    // // Unread state
+    // &--unread {
+    //     background: rgba(104, 144, 223, 0.05);
+
+    //     .notification-card__content--text {
+    //         font-weight: 600;
+    //         color: var(--text-400, #0f0f0f);
+    //     }
+    // }
+
+    &:hover {
+        .notification-card__content {
+            &--text {
+                color: white;
+            }
+        }
+    }
+    &.details {
+        display: flex;
+        height: 3.25rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        background: var(--Dark-50, #f6f7f8);
+    }
+    &.column {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+    // // Icon wrapper with badge
+    // &__icon-wrapper {
+    //     position: relative;
+    //     flex-shrink: 0;
+    // }
+
+    // // Unread badge on icon
+    // &__unread-badge {
+    //     position: absolute;
+    //     inset-block-start: -2px;
+    //     inset-inline-end: -2px;
+    //     width: 0.625rem;
+    //     height: 0.625rem;
+    //     border-radius: 50%;
+    //     background: var(--Primary-primary);
+    //     border: 2px solid white;
+    //     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    // }
+
+    &__content {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        &.details {
+            align-items: flex-start;
+        }
+
+        &.column {
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.25rem;
+            flex: 1;
+            align-items: flex-start;
+        }
+
+        &--image {
+            width: 1.875rem;
+            height: 1.875rem;
+            border-radius: 0.75rem;
+            object-fit: cover;
+        }
+
+        &--text {
+            font-size: 0.75rem;
+            font-weight: 400;
+
+            // &-unread {
+            //     font-weight: 600;
+            //     color: var(--text-400, #0f0f0f);
+            // }
+        }
+
+        color: var(--text-300, #47586e);
+
+        &__config {
+            color: var(--text-400, #0f0f0f);
+        }
+    }
+    &__timestamp {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 0.5rem;
+        &.column {
+            flex-direction: row;
+            width: 100%;
+        }
+        .time,
+        .date {
+            color: var(--text-200, #909dad);
+            font-size: 0.625rem;
+            font-weight: 400;
+        }
+    }
+}

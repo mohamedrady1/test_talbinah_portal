@@ -1,0 +1,1 @@
+export * from './welcome-to-talbinah-community-card.component';

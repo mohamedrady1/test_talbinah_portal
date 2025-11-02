@@ -1,0 +1,92 @@
+.complaint-card {
+    display: flex;
+    padding: 0.5rem;
+    flex-direction: column;
+    gap: 0.75rem;
+    border-radius: var(--Radius-12, 0.75rem);
+    border: 1px solid var(--Dark-50, #f6f7f8);
+    background: var(--Dark-WHITE, #fff);
+    cursor: pointer;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    &__id {
+        display: flex;
+        height: 1.375rem;
+        padding: 0.25rem 0.625rem;
+        justify-content: center;
+        align-items: center;
+        gap: 0.125rem;
+        border-radius: 1rem;
+        background: var(--Primary-50, #e7ebf8);
+        color: var(--Primary-primary, #0e39b6);
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    &__status {
+        display: flex;
+        padding: 0.25rem 0.625rem;
+        justify-content: center;
+        align-items: center;
+        gap: 0.125rem;
+        border-radius: 1rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+
+        &--pending {
+            background: var(--Warning-50, #faf4eb);
+            color: var(--Warning-primary, #ffaf44);
+        }
+
+        &--resolved {
+            background: var(--Success-50, #e6f4ea);
+            color: var(--Success-primary, #34a853);
+        }
+    }
+
+    &__content {
+        display: flex;
+        padding: 0.5rem 0rem;
+        justify-content: space-between;
+        align-items: center;
+        flex: 1;
+    }
+
+    &__title-section {
+        display: flex;
+        align-items: center;
+        gap: 0.125rem;
+    }
+
+    &__icon {
+        display: flex;
+        width: 0.875rem;
+        height: 0.875rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__title {
+        color: var(--text-300, #47586e);
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    &__date {
+        display: flex;
+        align-items: center;
+        gap: 0.125rem;
+    }
+
+    &__date-text {
+        color: var(--text-300, #47586e);
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+}

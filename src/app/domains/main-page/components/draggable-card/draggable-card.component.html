@@ -1,0 +1,30 @@
+<article class="draggable-card" [attr.aria-labelledby]="generateElementId('title')">
+  <div class="draggable-card__content">
+    <h3 [id]="generateElementId('title')" class="draggable-card__title"
+      [ngStyle]="{ 'color': config.titleColor || '#006a82' }">
+      {{ config.title | translateApi }}
+    </h3>
+    <!-- @if (config.description) {
+    <p class="draggable-card__description" [id]="generateElementId('description')">
+      {{ config.description | translateApi }}
+    </p>
+    } -->
+  </div>
+  <img appLazyLoadImage="{{ config.img }}" [alt]="config.title | translateApi" class="draggable-card__image"
+    ngOptimizedImage priority />
+
+  @if (config.isPinned) {
+  @if (enableAllowUnPinning()) {
+  <button class="draggable-card__action-button draggable-card__action-button--remove" (click)="onUnpinClick()"
+    [attr.aria-label]="'home.RemoveFromPinned' | translateApi" [title]="'home.RemoveFromPinned' | translateApi">
+    &minus;
+  </button>
+  }
+  } @else {
+  <button class="draggable-card__action-button draggable-card__action-button--add" (click)="onPinClick()"
+    [attr.aria-label]="'home.AddToPinned' | translateApi" [title]="'home.AddToPinned' | translateApi"
+    [disabled]="!allowPinning()" [class.draggable-card__action-button--disabled]="!allowPinning()">
+    &plus;
+  </button>
+  }
+</article>

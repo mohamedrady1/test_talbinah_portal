@@ -1,0 +1,1 @@
+export * from './mental-scale-health-test-header.component'

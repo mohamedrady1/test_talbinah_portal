@@ -1,0 +1,130 @@
+<div class="notifications" [ngClass]="{'notifications--colored': type=='colored'}">
+  <button class="notifications__button" (click)="toggleNotifications()" [attr.aria-expanded]="openNotifications()"
+    [attr.aria-controls]="'notifications-dropdown'" [attr.aria-label]="'toggle'">
+
+    @if(type=='colored'){
+    <app-svg-icon name="notifications-colored-icon" />
+    }
+    @else{
+    <app-svg-icon name="notifications-dark-icon" />
+    }
+
+    <!-- Unread Badge Count -->
+    @if (_NotificationsFacade.unreadCount() > 0) {
+    <span class="notifications__badge">{{ _NotificationsFacade.unreadCount() > 9 ? '9+' :
+      _NotificationsFacade.unreadCount() }}</span>
+    }
+  </button>
+
+  @if (openNotifications()) {
+  <div id="notifications-dropdown" class="notifications__details" appClickOutside (clickOutside)="closeNotifications()"
+    [ngClass]="currentLanguage() === 'ar' ? 'notifications__details--ar' : 'notifications__details--en'" role="menu"
+    aria-labelledby="notifications-button">
+
+    @if (this._NotificationsFacade.isLoadingAllNotifications()) {
+    <!-- Loading state -->
+    <div class="notifications__list" role="presentation">
+      <div class="notifications__title">
+        <p>
+          {{'notification2'|translateApi}}
+        </p>
+      </div>
+      <ul class="notifications__list-items">
+        <div class="card__notification">
+          @for (item of [1,2,3,4]; track $index) {
+          <div class="card__notification--loading">
+            <div class="card__notification__avatar skeleton"></div>
+            <div class="card__notification__input-wrapper">
+              <div class="skeleton skeleton-input"></div>
+            </div>
+          </div>
+          }
+        </div>
+      </ul>
+    </div>
+    } @else if (this._NotificationsFacade.allNotifications() && (this._NotificationsFacade.allNotifications()?.length ??
+    0) > 0) {
+    <div class="notifications__list" role="presentation">
+      <div class="notifications__title">
+        <p>
+          {{'notification2'|translateApi}}
+        </p>
+      </div>
+      <ul class="notifications__list-items">
+        @if (this._NotificationsFacade.allNotificationsErrorMessage() &&
+        !this._NotificationsFacade.allNotificationsStatus()) {
+        <!-- Error state -->
+        <div class="error-state">
+          <img class="error-state__image" [src]="notificationsErrorState.imageUrl" alt="Error state" />
+
+          @if (notificationsErrorState.title) {
+          <h2 class="error-state__title">{{ notificationsErrorState.title | translateApi }}</h2>
+          }
+
+          @if (notificationsErrorState.message) {
+          <p class="error-state__message">{{ notificationsErrorState.message | translateApi }}</p>
+          }
+
+          @if (notificationsErrorState.onRetry) {
+          <button class="error-state__button" type="button"
+            (click)="this._NotificationsFacade.fetchAllNotifications(1)">
+            {{ notificationsErrorState.retryLabel || ('retry' | translateApi) }}
+          </button>
+          }
+        </div>
+        }
+        @else if (this._NotificationsFacade.totalAllNotificationsItems() == 0) {
+        <!-- Empty state -->
+        <div class="empty-state">
+          <img class="empty-state__image" [src]="notificationsEmptyState.imageUrl" alt="Empty state" />
+          @if (notificationsEmptyState.title) {
+          <h2 class="empty-state__title">{{ notificationsEmptyState.title |translateApi }}</h2>
+          }
+          @if (notificationsEmptyState.message) {
+          <p class="empty-state__message">{{ notificationsEmptyState.message |translateApi }}</p>
+          }
+        </div>
+        }
+        @else {
+        <!-- Show actual notifications -->
+        @for (item of this._NotificationsFacade.allNotifications()?.slice(0,5); track item) {
+        <li class="notifications__list-item" (click)="triggerAction(item)" role="menuitem" tabindex="0"
+          [attr.aria-label]="item">
+
+          <app-header-notification-card [type]="cardType.COLUMN" [item]="item" />
+        </li>
+        }
+        }
+      </ul>
+    </div>
+    } @else {
+    <!-- Empty state when no notifications -->
+    <div class="notifications__list" role="presentation">
+      <div class="notifications__title">
+        <p>
+          {{'notification2'|translateApi}}
+        </p>
+      </div>
+      <ul class="notifications__list-items">
+        <div class="empty-state">
+          <img class="empty-state__image" [src]="notificationsEmptyState.imageUrl" alt="Empty state" />
+          @if (notificationsEmptyState.title) {
+          <h2 class="empty-state__title">{{ notificationsEmptyState.title |translateApi }}</h2>
+          }
+          @if (notificationsEmptyState.message) {
+          <p class="empty-state__message">{{ notificationsEmptyState.message |translateApi }}</p>
+          }
+        </div>
+      </ul>
+    </div>
+    }
+    @if(this._NotificationsFacade.totalAllNotificationsItems()>5){
+    <div class="notifications__actions">
+      <button (click)="viewAllNotifications()" class="notifications-dropdown__submit-button btn btn--ghost">
+        {{ 'show_more' | translateApi }}
+      </button>
+    </div>
+    }
+  </div>
+  }
+</div>

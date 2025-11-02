@@ -1,0 +1,42 @@
+.security-card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    border-radius: 0.75rem;
+    background: var(--Dark-WHITE, #fff);
+    padding: 0.75rem;
+    gap: 1rem;
+    margin: 1rem;
+    .security-card {
+        display: flex;
+        padding: 0.625rem 0.75rem;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 0.625rem;
+        border: 1px solid var(--Dark-100, #eee);
+        cursor: pointer;
+        &__information {
+            display: flex;
+            gap: 0.5rem;
+        }
+        &__content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        &__title {
+            color: var(--text-400, #0f0f0f);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        &__description {
+            color: var(--text-300, #47586e);
+            text-align: right;
+            font-size: 0.75rem;
+            font-weight: 400;
+        }
+    }
+}

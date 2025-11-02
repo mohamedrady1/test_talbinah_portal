@@ -1,0 +1,49 @@
+{
+  "@context": "https://schema.org",
+  "@type": "TouristDestination",
+  "name": "[Project Name]",
+  "url": "[Project URL]",
+  "image": "[Project Logo or Image URL]",
+  "description": "[Brief description of the project, services, or offerings.]",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "[City or Country]"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "[Latitude]",
+    "longitude": "[Longitude]"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "[Offer Catalog Name]",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "[Service Name]",
+          "description": "[Description of the service or offering.]"
+        }
+      }
+    ]
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "opens": "[Opening Time, e.g., 00:00]",
+    "closes": "[Closing Time, e.g., 23:59]"
+  },
+  "sameAs": [
+    "[Social Media URL 1]",
+    "[Social Media URL 2]"
+  ]
+}

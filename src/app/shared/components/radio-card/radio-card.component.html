@@ -1,0 +1,38 @@
+<div class="input-group">
+  <!-- Use a native label to associate the input with its visual representation for accessibility -->
+  <label (click)="onSelect()" [attr.aria-label]="config.name | translate" [attr.aria-checked]="isChecked()" role="radio"
+    tabindex="0">
+    <div class="label__title">
+      <div class="label--icon">
+        <!-- Robust image loading: Ensure valid src, alt text, and lazy loading for performance. -->
+        <img [src]="config.image" [alt]="config.name ? (config.name | translate) : 'Payment method icon'" loading="lazy"
+          decoding="async" fetchpriority="low" width="auto" height="auto" />
+      </div>
+      <div class="label__method-name">
+        <!-- Display method name, translated if available. config.name is guaranteed due to `required: true` on input. -->
+        <p>{{ config.name | translate }}</p>
+
+        <!-- Conditionally display balance if it exists for the payment method -->
+        @if (config.balance !== undefined && config.balance !== null) {
+        <p class="label__method-count">
+          ({{ config.balance }} <svg width="11" height="13" viewBox="0 0 11 13" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.82347 11.4072L10.9322 10.5364C10.8847 11.0156 10.7602 11.4779 10.5585 11.9234L6.4593 12.7942C6.50152 12.3086 6.62291 11.8463 6.82347 11.4072ZM10.5585 9.30927L6.4593 10.1801V7.56761L5.17997 7.84152V9.29185C5.17997 9.42169 5.14408 9.53991 5.0723 9.64652L4.40572 10.6329C4.22838 10.8884 3.99088 11.0457 3.69322 11.1048L0.0673828 11.879C0.114883 11.3987 0.239438 10.9364 0.44105 10.492L3.89905 9.75419V8.10752L0.672216 8.7931C0.719716 8.31283 0.843744 7.85366 1.0443 7.4156L3.89905 6.80127V1.7251C4.26005 1.28599 4.68702 0.927104 5.17997 0.648438V6.53527L6.4593 6.25977V2.36477C6.82135 1.92672 7.24516 1.56783 7.73072 1.2881V5.99219L10.9322 5.30819C10.8847 5.78847 10.7602 6.2508 10.5585 6.69519L7.73072 7.30002V8.59835L10.9322 7.92227C10.8847 8.40783 10.7602 8.87016 10.5585 9.30927Z"
+              fill="#0E39B6" />
+          </svg>
+          )
+        </p>
+        }
+      </div>
+    </div>
+    <!--
+      Hidden native radio input for true accessibility.
+      Its `value` should be a simple string (ID).
+      Its `checked` state is controlled by the `isChecked` computed signal.
+    -->
+    <input type="radio" [name]="config.id.toString()" [value]="config.id.toString()" [checked]="isChecked()" hidden
+      tabindex="-1" aria-hidden="true" />
+    <span class="custom-radio"></span>
+  </label>
+</div>

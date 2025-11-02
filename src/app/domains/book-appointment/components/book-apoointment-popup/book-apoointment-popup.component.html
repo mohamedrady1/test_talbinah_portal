@@ -1,0 +1,169 @@
+<div class="book-appointment">
+  <div class="book-appointment__container" appAutoExactHeight>
+    @if (!isLoading()) {
+    <div class="book-appointment__right-side">
+      <app-doctor-card-for-details [item]="doctor()!"></app-doctor-card-for-details>
+
+      <div class="book-appointment--information">
+        @for (box of DoctorDetailsBoxes; track $index) {
+        <app-doctor-details-box [config]="box"></app-doctor-details-box>
+        }
+      </div>
+
+      @if (doctor()?.packages && (doctor()?.packages?.length || 0) > 0) {
+      <div class="book-appointment--packages">
+        <h4 class="book-appointment--packages-title">
+          {{ 'subscribed_offers' | translateApi }}
+        </h4>
+
+        <div class="book-appointment--packages-list">
+          @for (item of doctor()?.packages; track $index) {
+          <div class="book-appointment--packages-item">
+            <div class="book-appointment--packages-details">
+              <img class="book-appointment--packages-details-image" src="images/icons/packages-icon-offers.png"
+                alt="Package {{ $index + 1 }}" loading="lazy" decoding="async"
+                onerror="this.onerror=null;this.src='images/icons/logo-2.png';" />
+
+              <div class="book-appointment--packages-details-texts">
+                <div
+                  class="book-appointment--packages-details-texts-item book-appointment--packages-details-texts-item--bold">
+                  <span>
+                    {{ item?.reminder_reservation || 0 }}
+                  </span>
+                  <label>
+                    {{ 'remaining_sessions' | translateApi }}
+                  </label>
+                </div>
+
+                <div class="book-appointment--packages-details-texts-item">
+                  <label>
+                    {{ 'appointment_duration' | translateApi }}:
+                  </label>
+                  <span>
+                    {{item?.duration || 0}} {{ 'minute' | translateApi }}
+                  </span>
+                </div>
+
+                <div class="book-appointment--packages-details-texts-item">
+                  <label>
+                    {{ 'valid_until2' | translateApi }}:
+                  </label>
+                  <span>
+                    {{ item.end_at | date: 'd/M/yyyy' : undefined : currentLang }}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="book-appointment--packages-remaining">
+              <span class="book-appointment--packages-remaining-icon">
+                <app-svg-icon name="package-remainig-days"></app-svg-icon>
+              </span>
+              <span class="book-appointment--packages-remaining-label">
+                {{'remaining_days'|translateApi}} {{item?.end_in_days}}
+              </span>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+      }
+
+      <div class="book-appointment--details">
+        <div class="book-appointment--tabs">
+          <app-tabs [tabs]="doctorInfosTabsConfig" [multiSelect]="false" (tabSelected)="onTabSelected($event)">
+          </app-tabs>
+
+          @if ((isMobile() && activeListLength() > 1) || (!isMobile() && activeListLength() > getItemsToShow())) {
+          <div class="carousel-controls">
+            <button class="carousel-controls__btn carousel-controls__btn--left" (click)="goToPrevPage()"
+              [disabled]="currentPage() === 0" aria-label="Previous page">‹</button>
+            <button class="carousel-controls__btn carousel-controls__btn--right" (click)="goToNextPage()"
+              [disabled]="currentPage() === maxPageIndex()" aria-label="Next page">›</button>
+          </div>
+          }
+        </div>
+
+        <div class="tab-content">
+          @if (selectedTabId() === 'bio') {
+          <app-doctor-bio [item]="doctor()"></app-doctor-bio>
+          }
+
+          @if (selectedTabId() === 'gallery') {
+          @if (images) {
+          <app-doctor-gallery [images]="images"></app-doctor-gallery>
+          } @else {
+          <app-empty-state-card [config]="attachmentsEmptyState" [type]="'small'"></app-empty-state-card>
+          }
+          }
+
+          @if (selectedTabId() === 'programs') {
+          @if (doctor()?.programme?.length ?? 0 > 0) {
+          <div class="doctor-cards-carousel">
+            <div class="doctor-cards-grid">
+              @for (program of getVisibleItems(doctor()?.programme); track program.id) {
+              <div class="doctor-cards-grid__item">
+                <app-global-therapeutic-program-card [type]="CardTypes.SUMMARY"
+                  [item]="program"></app-global-therapeutic-program-card>
+              </div>
+              }
+            </div>
+          </div>
+          } @else {
+          <app-empty-state-card [config]="treatmentProgramsEmptyState" [type]="'small'"></app-empty-state-card>
+          }
+          }
+
+          @if (selectedTabId() === 'ratings') {
+          @if (doctor()?.reviews?.length ?? 0 > 0) {
+          <div class="doctor-cards-carousel">
+            <div class="doctor-cards-grid">
+              @for (review of getVisibleItems(doctor()?.reviews); track $index) {
+              <div class="doctor-cards-grid__item">
+                <app-global-rate-card [item]="review"></app-global-rate-card>
+              </div>
+              }
+            </div>
+          </div>
+          } @else {
+          <app-empty-state-card [config]="reviewsEmptyState" [type]="'small'"></app-empty-state-card>
+          }
+          }
+
+          @if (selectedTabId() === 'discounts') {
+          @if (doctor()?.coupons?.length ?? 0 > 0) {
+          <div class="doctor-cards-carousel">
+            <div class="doctor-cards-grid">
+              @for (coupon of getVisibleItems(doctor()?.coupons); track $index) {
+              <div class="doctor-cards-grid__item">
+                <app-discount-code-card [item]="coupon"></app-discount-code-card>
+              </div>
+              }
+            </div>
+          </div>
+          } @else {
+          <app-empty-state-card [config]="couponsEmptyState" [type]="'small'"></app-empty-state-card>
+          }
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="book-appointment__left-side">
+      <app-rate-your-compatibility class="w-100" [doctorId]="doctorId"></app-rate-your-compatibility>
+      <div class="book-appointment__left-side--new-reservation">
+        <h4 class="title">{{ 'available_appointments' | translateApi }}</h4>
+        <div class="reservation-form">
+          @if (doctor()) {
+          <app-reservation-with-doctor-form [doctor]="doctor()!"></app-reservation-with-doctor-form>
+          } @else {
+          <app-empty-state-card [config]="doctorEmptyState" [type]="'small'"></app-empty-state-card>
+          }
+        </div>
+      </div>
+    </div>
+    } @else {
+    <app-book-apoointment-popup-skeleton class="w-100"></app-book-apoointment-popup-skeleton>
+    }
+  </div>
+</div>

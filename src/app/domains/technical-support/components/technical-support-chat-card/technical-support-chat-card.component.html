@@ -1,0 +1,54 @@
+<div class="chat-card" (click)="openSupportConversationModal()">
+  <div class="chat-card__body">
+    <!-- Avatar -->
+    <div class="chat-card__avatar">
+      <img class="chat-card__avatar-img" src="images/icons/logo-2.png" alt="chat" loading="lazy" decoding="async"
+        onerror="this.onerror=null;this.src='images/icons/logo-2.png';" />
+    </div>
+
+    <!-- Content -->
+    <div class="chat-card__content">
+      <!-- Chat Details -->
+      <div class="chat-card__details">
+        <div class="chat-card__title">
+          <span class="chat-card__label">
+            @if(chat?.customer_support_user_id){
+            {{chat?.customer_support_user_id?.full_name || ''}}
+            }@else {
+            {{'لم يتم التعيين بعد'}}
+            }
+          </span>
+          <span class="chat-card__badge">
+            {{ chat.queue || 0 }}
+          </span>
+        </div>
+        <div class="chat-card__subtitle">
+          {{ chat.department_id?.title }}
+        </div>
+      </div>
+
+      <!-- Status + Date -->
+      <div class="chat-card__meta">
+        <span class="chat-card__status"
+          [ngClass]="chat.is_closed ? 'chat-card__status--ended' : 'chat-card__status--active'">
+          {{ chat.is_closed ? 'منتهية' : 'نشطة' }}
+          <span>
+            <app-svg-icon name="dot-status" [fillColor]="chat.is_closed?'#666':'#00AF6C'" />
+          </span>
+        </span>
+        <!-- <span class="chat-card__date">
+          <span class="chat-card__date--icon">
+            <app-svg-icon name="time" />
+          </span>
+          <span class="chat-card__date--label">
+            @if (chat.user_id && chat.user_id.created_at) {
+            {{ returnItemTimeAgo(chat.user_id.id, chat.user_id.created_at) }}
+            } @else {
+            {{ '--' }}
+            }
+          </span>
+        </span> -->
+      </div>
+    </div>
+  </div>
+</div>

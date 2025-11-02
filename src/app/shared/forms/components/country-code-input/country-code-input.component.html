@@ -1,0 +1,70 @@
+<div class="custom-input-wrapper" [ngClass]="{
+  'custom-input-wrapper--with-icon': formItem.inputWithIcon,
+  'custom-input-wrapper--icon-start': formItem.inputWithIcon && formItem.inputIconPosition === 'start',
+  'custom-input-wrapper--icon-end': formItem.inputWithIcon && formItem.inputIconPosition === 'end',
+  'p-invalid': this.isInvalid
+}">
+  @if (formItem.inputWithIcon && formItem.inputIconPosition === 'start') {
+  @switch (formItem.inputIconType) {
+  @case (InputIconType.PRIMEICONS) {
+  <i [class]="formItem.inputIcon + ' custom-input-wrapper__icon'"></i>
+  }
+
+  @case (InputIconType.IMAGE) {
+  <img [src]="formItem.inputIcon" [alt]="formItem.label">
+  }
+  @case (InputIconType.SVG) {
+  <span [innerHTML]="formItem.inputIcon"></span>
+  }
+  @default {
+  <i class="default-icon-class"></i>
+  }
+  }
+  }
+
+  <div class="select-wrapper relative">
+    <p-select class="w-full md:w-56" [options]="sortedCountriesList()" [(ngModel)]="selectedCountryModel"
+      (ngModelChange)="onCountryChange($event)" optionLabel="name" [filter]="true" filterBy="name" [placeholder]="
+      !isLoadingCountriesLookups()? ('code' | translate):null
+    " [disabled]="isLoadingCountriesLookups() || isDisabled" [virtualScroll]="true" [virtualScrollItemSize]="42"
+      [autoDisplayFirst]="false" appendTo="body">
+
+      <ng-template #selectedItem let-selectedOption>
+        <div class="flex items-center gap-2">
+          <img [src]="selectedOption.flag" [class]="'flag flag-' + (selectedCountryModel?.code?.toLowerCase() || '')"
+            onerror="this.src='images/icons/no-flag.svg'" />
+          <div>{{ selectedOption.phone_code }}</div>
+        </div>
+      </ng-template>
+
+      <ng-template let-country #item>
+        <div class="flex items-center gap-2">
+          <img [src]="country.flag" [class]="'flag flag-' + (selectedCountryModel?.code?.toLowerCase() || '')"
+            onerror="this.src='images/icons/no-flag.svg'" />
+          <div>{{ country.name }}</div>
+        </div>
+      </ng-template>
+    </p-select>
+    @if (isLoadingCountriesLookups()) {
+    <div class="dots-loader">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    }
+
+    <input type="number" [class]="formItem.inputClass ?? 'form-control custom-input-wrapper__input'"
+      [ngClass]="{'disbaled':!selectedCountryModel?.code}" [formControl]="control" [id]="formItem.name"
+      [attr.aria-label]="ariaLabel" [attr.title]="(formItem.label ?? '') | translate" [attr.role]="roleAttr"
+      [attr.autocomplete]="autocompleteAttr" [attr.placeholder]="!selectedCountryModel? ('phone_should_select_code'|translate): (placeholderText | translate)
+  " [disabled]="
+    !selectedCountryModel ||
+    isDisabled ||
+    isLoadingCountriesLookups() ||
+    sortedCountriesList().length <= 0
+  " [readonly]="isReadonly ? true : null" />
+
+    @if (formItem.inputWithIcon && formItem.inputIconPosition === 'end') {
+    <i [class]="formItem.inputIcon + ' custom-input-wrapper__icon'"></i>
+    }
+  </div>

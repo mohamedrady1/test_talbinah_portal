@@ -1,0 +1,12 @@
+<div class="tooltip" [ngClass]="[
+    'tooltip--' + position,
+    visible() ? 'tooltip--visible' : '',
+    trigger === 'click' ? 'tooltip--click' : ''
+  ]" (mouseenter)="trigger === 'hover' && show()" (mouseleave)="trigger === 'hover' && hide()"
+    (click)="trigger === 'click' && toggle()">
+    <ng-content></ng-content>
+
+    <span class="tooltip__bubble">
+        {{ text | translate}}
+    </span>
+</div>

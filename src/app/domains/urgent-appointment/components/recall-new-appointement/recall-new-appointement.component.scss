@@ -1,0 +1,92 @@
+@use "./../../../../common/styles/scss/buttons/button.mixins" as btn;
+
+.recall-appointment {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 1rem 1rem 1rem;
+  margin: auto;
+
+  /* --- Status Section Styles (Icon & Text) --- */
+  &__status {
+    display: flex;
+    padding: 0.75rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    border-radius: 0.75rem;
+    background: var(--Dark-WHITE, #FFF);
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    &__title {
+      color: var(--text-400, #0F0F0F);
+      text-align: center;
+      font-size: 0.875rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+
+    &__subtitle {
+      overflow: hidden;
+      color: var(--text-300, #47586E);
+      text-align: center;
+      text-overflow: ellipsis;
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+  }
+
+  /* --- Actions (Buttons) Section --- */
+  &--actions {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    justify-content: end;
+    flex-wrap: wrap;
+
+    .btn {
+      @include btn.button-base;
+      @include btn.button-size("small");
+      @include btn.button-icon-position("left");
+      @include btn.button-icon-size("medium");
+      @include btn.button-color("main");
+      @include btn.button-spinner;
+
+      width: fit-content;
+      padding: 0 1rem;
+
+      &__icon {
+        display: inline-flex;
+        align-items: center;
+      }
+
+      &__label {
+        padding: 0 0.5rem;
+        white-space: nowrap;
+      }
+
+      &[disabled] {
+        @include btn.button-disabled;
+      }
+
+      &--outline {
+        @include btn.button-type("outline");
+      }
+
+      &--solid {
+        @include btn.button-type("solid");
+      }
+    }
+  }
+}

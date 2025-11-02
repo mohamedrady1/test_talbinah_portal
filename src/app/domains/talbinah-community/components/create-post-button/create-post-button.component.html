@@ -1,0 +1,4 @@
+<button class="button" [class.button--active]="active" (click)="onClick()">
+    <img class="button__icon" [src]="active ? config.activeImageSrc : config.imageSrc" alt="{{ config.text }} icon" />
+    <span class="button__text">{{ config.text |translateApi}}</span>
+</button>

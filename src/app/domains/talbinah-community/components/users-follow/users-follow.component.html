@@ -1,0 +1,61 @@
+<div class="users-follow-container">
+    <div *ngIf="isLoading()" class="users-follow-skeleton-wrapper">
+        @for (i of [1, 2, 3, 4]; track i) {
+        <div class="users-follow__card skeleton">
+            <div class="users-follow__card--profile">
+                <div class="users-follow__card--profile--img skeleton-avatar"></div>
+                <p class="users-follow__card--profile--name skeleton-text"></p>
+            </div>
+            <div class="users-follow__card--action skeleton-button"></div>
+        </div>
+        }
+    </div>
+
+    @if(!isLoading() && errorMessage() && !status()){
+    <app-error-state [config]="usersFollowErrorState"></app-error-state>
+    }
+    @else if(!isLoading() && !errorMessage() && usersIFollow().length === 0) {
+    <app-empty-state [config]="usersFollowEmptyState"></app-empty-state>
+    }
+    @else if(!isLoading() && !errorMessage() && usersIFollow().length > 0) {
+    <div class="users-follow" appAutoExactHeight heightMode="max-height">
+        @for (user of usersIFollow(); track $index) {
+        <div class="users-follow__card" (click)="handleUserInteraction(user)">
+            <div class="users-follow__card--profile" (click)="goToProfile(user.id); $event.stopPropagation()">
+                <div class="users-follow__card--profile--img">
+                    <img [src]="user.image?.image || '/images/logos/logo-2.png'" [alt]="user.name || 'User'"
+                        class="users-follow__card--profile--img--avatar"
+                        (error)="$any($event.target).src='/images/logos/logo-2.png'">
+                </div>
+                <p class="users-follow__card--profile--name">{{ user.name || ('unknown_user' |
+                    translateApi) }}</p>
+            </div>
+            @if(!isUnfollowingUser(user.id)){
+
+            <div class="users-follow__card--action" (click)="$event.stopPropagation(); unfollowUser(user.id)">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M4.35714 4.35714C4.528 4.18629 4.80501 4.18629 4.97586 4.35714L6.99984 6.38112L9.02381 4.35714C9.19467 4.18629 9.47168 4.18629 9.64253 4.35714C9.81338 4.528 9.81338 4.80501 9.64253 4.97586L7.61856 6.99984L9.64253 9.02381C9.81338 9.19467 9.81338 9.47168 9.64253 9.64253C9.47168 9.81338 9.19467 9.81338 9.02381 9.64253L6.99984 7.61856L4.97586 9.64253C4.80501 9.81338 4.528 9.81338 4.35714 9.64253C4.18629 9.47168 4.18629 9.19467 4.35714 9.02381L6.38112 6.99984L4.35714 4.97586C4.18629 4.80501 4.18629 4.528 4.35714 4.35714Z"
+                        fill="#47586E" />
+                </svg>
+                <p class="users-follow__card--action--text">
+                    {{ 'unfollow' | translateApi }}
+                </p>
+            </div>
+            }@else{
+            <div class="users-follow__card--action loading" aria-label="Submit in progress">
+                <p class="users-follow__card--action--text">
+                    {{ 'in_progress' | translateApi }}
+                </p>
+                <span class="dot-loader"></span>
+            </div>
+            }
+        </div>
+        }
+        @if (totalItems() > (usersIFollowFacade.currentPaginationParams().per_page || 1))
+        {
+        <app-pagination-listing [paginationConfig]="paginationConfig()" />
+        }
+    </div>
+    }
+</div>

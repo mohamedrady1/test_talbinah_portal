@@ -1,0 +1,76 @@
+@use "./../../../../../common/styles/scss/buttons/button.mixins" as btn;
+.gift-card {
+    border-radius: 0.75rem;
+    background: var(--Dark-50, #f6f7f8);
+
+    display: flex;
+    padding: 0.625rem 0.75rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.625rem;
+
+    &__img {
+        width: 1.5625rem;
+        height: 2.3125rem;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.625rem;
+        &--container {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+    }
+    &__title {
+        color: var(--text-primary, #000);
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+    &__price {
+        color: var(--Success-primary, #00af6c);
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    &__date-time {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+    &__date,
+    &__time {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        color: var(--Text-400, #0f0f0f);
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+    &__action {
+        @include btn.button-base;
+        @include btn.button-size("medium");
+        @include btn.button-icon-position("left");
+        @include btn.button-icon-size("medium");
+        @include btn.button-color("main");
+        @include btn.button-spinner;
+        padding: 0.5rem 1rem;
+        color: var(--Dark-WHITE, #fff);
+        font-size: 0.75rem;
+        font-weight: 500;
+        width: fit-content;
+        &--accept {
+            background: var(--Success-primary, #00af6c);
+        }
+        &--cancel {
+            background: var(--Sacondry-Color-primary, #b80924);
+        }
+    }
+}

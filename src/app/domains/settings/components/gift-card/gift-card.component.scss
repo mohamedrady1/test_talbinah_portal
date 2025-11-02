@@ -1,0 +1,36 @@
+.gift-card {
+    display: flex;
+    height: 12.4375rem;
+    padding: 2.875rem 1rem;
+    flex-direction: column;
+    gap: 1.5625rem;
+    flex: 1 0 0;
+    background-image: url("../../../../../../public/images/settings/gift/gift-bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 1rem;
+    cursor: pointer;
+    position: relative;
+    &__content {
+        &--title {
+            color: var(--text-primary, #000);
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        &--description {
+            color: var(--text-primary, #000);
+            text-align: right;
+            font-size: 0.75rem;
+            font-weight: 500;
+            line-height: normal;
+            letter-spacing: -0.015rem;
+            max-width: 13.6875rem;
+        }
+    }
+    &__image {
+        position: absolute;
+        inset-inline-end: 2rem;
+        bottom: 0;
+    }
+}

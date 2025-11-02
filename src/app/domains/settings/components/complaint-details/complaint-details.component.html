@@ -1,0 +1,30 @@
+<div class="complaint-details">
+    <div class="complaint-details__container">
+        <!-- Complaint Card -->
+        <app-complaint-card [complaint]="item" class="complaint-details__card"></app-complaint-card>
+
+        <!-- Details Section -->
+        <div class="complaint-details__section">
+            <h3 class="complaint-details__title">
+                {{ 'complaint_details' | translateApi }}
+            </h3>
+
+            <div class="complaint-details__content">
+                {{ item.description || ('no_details_available' | translateApi) }}
+            </div>
+        </div>
+
+        <!-- Images Gallery -->
+        @if (item.image && item.image.length > 0) {
+        <div class="complaint-details__gallery">
+            <div class="complaint-details__images-list">
+                @for (image of item.image; track image.id) {
+                <div class="complaint-details__image-card" (click)="openImageViewer(image.url)">
+                    <img [src]="image.url" class="complaint-details__image" onerror="src='images/logos/icon.png'" />
+                </div>
+                }
+            </div>
+        </div>
+        }
+    </div>
+</div>

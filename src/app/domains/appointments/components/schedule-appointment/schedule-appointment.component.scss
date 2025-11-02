@@ -1,0 +1,496 @@
+@use "./../../../../common/styles/scss/abstracts/general-form-wrapper.mixins" as form;
+@use "./../../../../common/styles/scss/abstracts/mixins" as *;
+
+.schedule-appointment-form {
+  // Renamed to follow BEM for this component
+  display: flex;
+  padding: 0.75rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  align-self: stretch;
+
+  // No need for &__container if it's just a wrapper with no specific styles.
+  // If it serves a purpose, give it a meaningful style.
+  // For now, I'm removing the inner .patient-details-form which was a redundant class.
+
+  &__container {
+    width: 100%;
+    padding-inline-end: 0.425rem;
+  }
+
+  .general-form-wrapper {
+    // Existing mixin usage, keep as is
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: space-between;
+    height: 100%;
+
+    &__groups {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); // 4-column grid
+      gap: 0.75rem;
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      background: var(--Dark-WHITE, #fff);
+    }
+
+    &__field {
+      @include form.general-form-wrapper-field;
+    }
+
+    &__label-group {
+      @include form.general-form-wrapper-label-group;
+      color: var(--Dark-DARK, #1d1f1f);
+      font-size: 0.875rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    &__label {
+      @include form.general-form-wrapper-label;
+    }
+
+    &__required {
+      @include form.general-form-wrapper-required;
+    }
+
+    &__error-message {
+      @include form.general-form-wrapper-error;
+    }
+
+    .form-field {
+      // Keep this for now as it's part of the mixin usage
+      @include form.general-form-field;
+    }
+
+    &__actions {
+      @include form.general-form-wrapper-actions;
+      justify-content: flex-end; // Use flex-end for better alignment
+
+      .btn {
+        width: auto;
+
+        &.disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+          pointer-events: none;
+        }
+      }
+    }
+
+    &__loading {
+      display: flex;
+      align-items: center;
+    }
+
+    .dot-loader::after {
+      content: "";
+      animation: dots 1.5s steps(4, end) infinite;
+      white-space: pre;
+    }
+
+    @keyframes dots {
+      0% {
+        content: "";
+      }
+
+      25% {
+        content: ".";
+      }
+
+      50% {
+        content: "..";
+      }
+
+      75% {
+        content: "...";
+      }
+
+      100% {
+        content: "";
+      }
+    }
+  }
+
+  &__loading {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+  }
+}
+
+// Custom input and textarea wrappers with BEM
+.custom-input {
+  // Renamed from custom-input-wrapper
+  display: flex;
+  padding: 0 0.5rem; // Simplified padding
+  align-items: center;
+  gap: 0.5rem;
+  height: 3.125rem;
+  color: #a3adbb; // Placeholder color reference
+  font-size: 0.875rem;
+  border-radius: 0.75rem;
+  color: black; // Default text color
+  overflow: hidden;
+  border: 1px solid #eeeeee; // Using a direct color as per instruction
+
+  &.p-invalid {
+    border-color: red; // Use border-color for clarity
+  }
+
+  &__icon {
+    display: flex;
+    width: 1.25rem;
+    height: 1.25rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background-color: transparent;
+
+    &::placeholder {
+      color: #a3adbb !important; // !important might be needed for PrimeNG overrides
+      font-size: 0.875rem !important;
+      font-weight: 500 !important;
+    }
+  }
+
+  &--disabled {
+    // BEM modifier for disabled state
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.7; // Visual cue for disabled
+  }
+
+  // Modifiers for icon positioning
+  &--with-icon {
+    gap: 0.5rem; // Redundant if the default gap is already 0.5rem. Keep if there's a specific need.
+  }
+
+  &--icon-start {
+    flex-direction: row; // Explicit
+
+    .custom-input__icon {
+      order: 0;
+    }
+  }
+
+  &--icon-end {
+    flex-direction: row-reverse;
+
+    .custom-input__icon {
+      order: 1;
+    }
+  }
+
+  .password-toggle-btn {
+
+    // Keep this if it's a general style, otherwise scope it
+    @include respond(sm) {
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+.custom-textarea {
+  // Renamed from custom-textarea-wrapper
+  height: auto;
+  padding: 1rem;
+
+  textarea {
+    height: 5.93rem;
+    width: 100%;
+    resize: none; // Allow vertical resize only for usability
+  }
+}
+
+::ng-deep {
+  .p-select {
+    width: 100%;
+    border: none !important;
+    min-width: 100px !important;
+    box-shadow:
+      00 0 transparent,
+      0 0 transparent,
+      0 1px 2px 0 transparent !important;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    border-radius: var(--Radius-12, 0.75rem);
+    border: 1px solid var(--Dark-100, #eee) !important;
+    padding: 0rem 16px;
+    height: 3.125rem;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0px;
+      height: 80%;
+      background-color: var(--Dark-100);
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &:dir(rtl) {
+      &::after {
+        right: initial !important;
+        left: 5px !important;
+      }
+    }
+  }
+
+  .p-select-dropdown {
+    justify-content: end !important;
+  }
+
+  .p-select-list-container {
+    min-width: 250px !important;
+    margin-inline: 0.5rem;
+  }
+
+  img {
+    border-radius: 50%;
+  }
+}
+
+.select-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 3.125rem;
+  gap: 1rem;
+  width: 100%;
+
+  ::ng-deep {
+    .p-iconwrapper {
+      margin-inline-start: 0rem !important;
+    }
+  }
+}
+
+.radio-select-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+
+  .radio-select {
+    &__radio-label {
+      display: flex;
+      padding: 0.75rem;
+      justify-content: center;
+      align-items: center;
+      gap: 0.625rem;
+
+      border-radius: 0.75rem;
+      background: var(--Dark-50, #f6f7f8);
+
+      color: var(--text-400, #0f0f0f);
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+
+      margin: 0;
+      min-width: 6.5rem; // Adjust as needed for specific radio label width
+
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #e6ecef;
+      }
+
+      // New: checked state modifier using :has()
+      &:has(input[type="radio"]:checked) {
+        background: #e7ebf8;
+        color: var(--Primary-primary, #0e39b6);
+        font-weight: 600;
+      }
+
+      & input[type="radio"] {
+        appearance: none;
+        width: 1rem;
+        height: 1rem;
+        border: 2px solid #47586e;
+        border-radius: 50%;
+        position: relative;
+        cursor: pointer;
+        display: none; // Hide the default radio input
+
+        &:checked {
+          background-color: var(--Primary-primary, #0e39b6);
+          border-color: var(--Primary-primary, #0e39b6);
+
+          &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0.5rem;
+            height: 0.5rem;
+            background: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+          }
+        }
+      }
+    }
+
+    &__radio-input {
+      /* If you want to separate the input styling from label, you can customize here */
+    }
+
+    &__radio-text {
+      // color: var(--text-300);
+      // font-size: 0.875rem;
+    }
+  }
+}
+
+.group-radio-shimmer {
+  &__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+
+    &--shimmer {
+      width: 5rem; // Adjust shimmer width as appropriate for duration options
+      height: 2.5rem; // Adjust shimmer height as appropriate for duration options
+      border-radius: 8px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 37%, #f0f0f0 63%);
+      background-size: 400% 100%;
+      animation: shimmer 1.4s ease infinite;
+
+      &.large {
+        width: 5rem;
+        height: 3rem;
+      }
+    }
+  }
+
+  .general-form-wrapper {
+    // Existing mixin usage, keep as is
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: space-between;
+    height: 100%;
+
+    &__groups {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); // 4-column grid
+      gap: 0.75rem;
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      background: var(--Dark-WHITE, #fff);
+    }
+
+    &__field {
+      @include form.general-form-wrapper-field;
+    }
+
+    &__label-group {
+      @include form.general-form-wrapper-label-group;
+      color: var(--Dark-DARK, #1d1f1f);
+      font-size: 0.875rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    &__label {
+      @include form.general-form-wrapper-label;
+    }
+
+    &__required {
+      @include form.general-form-wrapper-required;
+    }
+
+    &__error-message {
+      @include form.general-form-wrapper-error;
+    }
+
+    .form-field {
+      // Keep this for now as it's part of the mixin usage
+      @include form.general-form-field;
+    }
+
+    &__actions {
+      @include form.general-form-wrapper-actions;
+      justify-content: flex-end; // Use flex-end for better alignment
+
+      .btn {
+        width: auto;
+
+        &.disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+          pointer-events: none;
+        }
+      }
+    }
+
+    &__loading {
+      display: flex;
+      align-items: center;
+    }
+
+    .dot-loader::after {
+      content: "";
+      animation: dots 1.5s steps(4, end) infinite;
+      white-space: pre;
+    }
+
+    @keyframes dots {
+      0% {
+        content: "";
+      }
+
+      25% {
+        content: ".";
+      }
+
+      50% {
+        content: "..";
+      }
+
+      75% {
+        content: "...";
+      }
+
+      100% {
+        content: "";
+      }
+    }
+  }
+
+  &__loading {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+  }
+}
+
+// Keyframe animation for shimmer effect
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}

@@ -1,0 +1,36 @@
+@if (isBrowser) {
+<div class="khawiik-instructions" (scroll)="onScroll($event)">
+    <div class="khawiik-instructions__content" appAutoExactHeight="100" heightMode="max-height">
+        <!-- Header Section -->
+        <div class="khawiik-instructions__header">
+            <p class="khawiik-instructions__title">
+                {{ keys.INSTRUCTIONS.TITLE | translateApi }}
+            </p>
+            <p class="khawiik-instructions__subtitle">
+                {{ keys.INSTRUCTIONS.SUBTITLE | translateApi }}
+            </p>
+        </div>
+
+        <!-- Cards Section -->
+        <div class="khawiik-instructions__cards">
+            @for (card of instructionCards; track card.id) {
+            <div class="khawiik-instructions__card">
+                <p class="khawiik-instructions__card-title">
+                    {{ card.titleKey | translateApi }}
+                </p>
+                <p class="khawiik-instructions__card-subtitle">
+                    {{ card.subtitleKey | translateApi }}
+                </p>
+            </div>
+            }
+        </div>
+    </div>
+    <!-- Actions Section (Sticky) -->
+    <div class="khawiik-instructions__actions khawiik-instructions__actions--sticky">
+        <button type="button" class="khawiik-instructions__continue" (click)="onContinue()"
+            [attr.aria-label]="keys.INSTRUCTIONS.CONTINUE | translateApi">
+            {{ keys.INSTRUCTIONS.CONTINUE | translateApi }}
+        </button>
+    </div>
+</div>
+}

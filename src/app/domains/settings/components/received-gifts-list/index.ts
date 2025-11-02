@@ -1,0 +1,1 @@
+export * from './received-gifts-list.component';

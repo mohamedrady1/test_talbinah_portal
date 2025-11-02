@@ -1,0 +1,141 @@
+@use "./../../../../common/styles/scss/abstracts/general-form-wrapper.mixins" as form;
+@use "./../../../../common/styles/scss/abstracts/mixins" as *;
+
+.government-agencies-doctors {
+  display: flex;
+  padding: 0.75rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  align-self: stretch;
+
+  &__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    margin-inline-end: 0.5rem;
+  }
+
+  &__data-list-label {
+    display: flex;
+    padding: 1rem 0.75rem;
+    align-items: center;
+    gap: 0.5rem;
+    align-self: stretch;
+
+    border-radius: 0.75rem;
+    border: 1px solid var(--Dark-50, #f6f7f8);
+    background: var(--Dark-WHITE, #fff);
+  }
+
+  &__icon {
+    font-size: 0.75rem;
+    line-height: 1;
+  }
+
+  &__label-text {
+    color: var(--text-400, #0f0f0f);
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  &__data-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    background: var(--Dark-WHITE, #fff);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+
+    &--label-list {
+      color: var(--text-300, #47586e);
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    &--search {
+      display: flex;
+      width: 16.8125rem;
+      height: 2.375rem;
+      padding: var(--Radius-8, 0.5rem) 0.75rem;
+      align-items: center;
+      gap: 0.5rem;
+
+      border-radius: var(--Radius-12, 0.75rem);
+      border: 1px solid var(--Dark-50, #f6f7f8);
+    }
+  }
+
+  &__cards-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+
+    @include respond(sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__status-message {
+    padding: 1rem;
+    text-align: center;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+
+    &--loading {
+      color: var(--text-500, #6b7280);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      padding: 0;
+      text-align: left;
+    }
+
+    &--empty {
+      color: var(--text-500, #6b7280);
+      background: #f3f4f6;
+    }
+
+    &--error {
+      color: #b91c1c;
+      background: #fee2e2;
+    }
+  }
+}
+
+.skeleton-card {
+  height: 4rem;
+  background: #e5e7eb;
+  border-radius: 0.5rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,63 @@
+<div class="services-layout-container" appAutoExactHeight heightMode="max-height">
+  <div class="services-layout">
+    <!-- Header Section -->
+    <div class="services-layout__header">
+      <div class="services-layout__title">
+        {{'services'|translateApi}}
+      </div>
+      <div class="services-layout__description">
+        {{'redeem_points_for_services'|translateApi}}
+      </div>
+    </div>
+
+    <!-- Content Section -->
+    <div class="services-layout__content">
+      @if (isLoading()) {
+      <!-- Loading State -->
+      <div class="services-layout__loading-state" aria-live="polite">
+        @for (item of [1, 2, 3, 4]; track $index) {
+        <div class="services-layout__loading-card shimmer-effect">
+          <div class="services-layout__loading-icon shimmer-circle"></div>
+          <div class="services-layout__loading-content">
+            <div class="services-layout__loading-title shimmer-text"></div>
+            <div class="services-layout__loading-description shimmer-text"></div>
+          </div>
+        </div>
+        }
+      </div>
+      }
+
+      <!-- Error State -->
+      @if (!isLoading() && hasError()) {
+      <app-error-state-card [config]="errorStateConfig" (retry)="onRetry()">
+      </app-error-state-card>
+      }
+
+      <!-- Empty State -->
+      @if (!isLoading() && !hasError() && isEmpty()) {
+      <app-empty-state-card [config]="emptyStateConfig">
+      </app-empty-state-card>
+      }
+
+      <!-- Services Grid -->
+      @if (!isLoading() && !hasError() && !isEmpty()) {
+      <div class="services-layout__grid">
+        @for (service of items(); track service?.title) {
+        <div class="services-layout__card">
+          <div class="services-layout__card-icon">
+            <app-svg-icon name="star-card" />
+          </div>
+          <p class="services-layout__card-title">
+            {{ service?.title }} = <span class="services-layout__card-points">{{ service?.points }}</span>
+            {{'point' | translateApi}}
+          </p>
+          <button class="services-layout__card-button" (click)="openServiceModal(service)">
+            <app-svg-icon name="send-icon" />
+          </button>
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </div>
+</div>

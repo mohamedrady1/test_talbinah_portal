@@ -1,0 +1,154 @@
+@use "../abstracts/mixins" as *;
+.form {
+    &__group:not(:last-child) {
+        margin-bottom: 2rem;
+    }
+
+    &__input {
+        font-size: 1.5rem;
+        font-family: inherit;
+        color: inherit;
+        padding: 1.5rem 2rem;
+        border-radius: 2px;
+        background-color: rgba($color-white, 0.5);
+        border: none;
+        border-bottom: 3px solid transparent;
+        width: 90%;
+        display: block;
+        transition: all 0.3s;
+
+        @include respond(md) {
+            width: 100%;
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
+            border-bottom: 3px solid $color-primary;
+        }
+
+        &:focus:invalid {
+            border-bottom: 3px solid $color-secondary-dark;
+        }
+
+        &::-webkit-input-placeholder {
+            color: $color-grey-dark-2;
+        }
+    }
+
+    &__label {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-left: 2rem;
+        margin-top: 0.7rem;
+        display: block;
+        transition: all 0.3s;
+    }
+
+    &__input:placeholder-shown + &__label {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-4rem);
+    }
+
+    &__radio-group {
+        width: 49%;
+        display: inline-block;
+
+        @include respond(md) {
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+    }
+
+    &__radio-input {
+        display: none;
+    }
+
+    &__radio-label {
+        // font-size: $default-font-size;
+        cursor: pointer;
+        position: relative;
+        padding-left: 4.5rem;
+    }
+
+    &__radio-button {
+        height: 3rem;
+        width: 3rem;
+        border: 5px solid $color-primary;
+        border-radius: 50%;
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: -0.4rem;
+
+        &::after {
+            content: "";
+            display: block;
+            height: 1.3rem;
+            width: 1.3rem;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: $color-primary;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+    }
+
+    &__radio-input:checked ~ &__radio-label &__radio-button::after {
+        opacity: 1;
+    }
+}
+
+// This SCSS defines the styles for a form with various elements like input fields, labels, and radio buttons with hover and focus effects.
+
+// The form group has spacing between inputs, specifically adding a margin at the bottom of each group except the last one.
+// The input fields have custom styling with padding, font size, background color, and a transition effect for smooth interactions.
+// On focus, the input field has a box shadow and a colored border-bottom to indicate that it's selected. If the input is invalid, the border color changes to a different shade.
+// The placeholder text is styled with a grey color.
+
+// The label of the input is initially visible, but it disappears when the input has a placeholder shown, using a combination of opacity, visibility, and translation for smooth animation.
+// The radio buttons are styled with a custom circular button that shows a colored dot inside when selected, with transitions applied for smooth feedback.
+
+// For responsive design, the form elements are adjusted (e.g., width 100% on smaller screens) to ensure they display properly across devices.
+
+// Example
+
+//<form class="form">
+// <div class="form__group">
+// <input type="text" id="name" class="form__input" placeholder="اسمك" required>
+// <label for="name" class="form__label">الاسم الكامل</label>
+// </div>
+
+// <div class="form__group">
+// <input type="email" id="email" class="form__input" placeholder="بريدك الإلكتروني" required>
+// <label for="email" class="form__label">البريد الإلكتروني</label>
+// </div>
+
+// <div class="form__group">
+// <input type="password" id="password" class="form__input" placeholder="كلمة المرور" required>
+// <label for="password" class="form__label">كلمة المرور</label>
+// </div>
+
+// <div class="form__group">
+// <div class="form__radio-group">
+//     <input type="radio" id="male" name="gender" class="form__radio-input">
+//     <label for="male" class="form__radio-label">
+//         <span class="form__radio-button"></span>
+//         ذكر
+//     </label>
+// </div>
+// <div class="form__radio-group">
+//     <input type="radio" id="female" name="gender" class="form__radio-input">
+//     <label for="female" class="form__radio-label">
+//         <span class="form__radio-button"></span>
+//         أنثى
+//     </label>
+// </div>
+// </div>
+
+// <button type="submit">إرسال</button>
+// </form>

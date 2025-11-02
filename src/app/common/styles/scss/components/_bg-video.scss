@@ -1,0 +1,36 @@
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: .15;
+    overflow: hidden;
+
+    &__content {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+// The .bg-video class is designed to create a full-screen background video effect with specific styling.
+// The .bg-video__content class styles the actual video element
+// Together, these styles provide a responsive, visually appealing background video effect while maintaining focus on foreground content.
+
+//Example
+
+// <section class="bg-video">
+//     <video class="bg-video__content" autoplay loop muted>
+//         <source src="https://youtu.be/X3_MAQGY2Ko" type="video/mp4">
+//         <!-- Fallback for unsupported video formats -->
+//         Your browser does not support the video tag.
+//     </video>
+
+//     <div class="bg-video__overlay">
+//         <!-- Optional: Add overlay content here -->
+//         <h1>Welcome to Our Website</h1>
+//         <p>Discover amazing content below.</p>
+//     </div>
+// </section>

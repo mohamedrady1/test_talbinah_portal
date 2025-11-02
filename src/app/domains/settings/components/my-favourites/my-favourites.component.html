@@ -1,0 +1,79 @@
+<main class="my-favourites" role="main" appAutoExactHeight heightMode="max-height">
+  <section class="my-favourites__container">
+
+    <div class="my-favourites__modal-filterations">
+      <h4 class="my-favourites__label-list">
+        ❤️ {{'explore_favorites' | translateApi}}
+      </h4>
+      <div class="my-favourites__modal-filterations--tabs">
+        <button type="button" class="my-favourites__tab" [class.my-favourites__tab--active]="selected() === 'doctors'"
+          (click)="selectTab('doctors')">
+          {{ 'doctors' | translateApi }}
+        </button>
+
+        <button type="button" class="my-favourites__tab" [class.my-favourites__tab--active]="selected() === 'podcasts'"
+          (click)="selectTab('podcasts')">
+          {{ 'podcast' | translateApi }}
+        </button>
+
+        <button type="button" class="my-favourites__tab" [class.my-favourites__tab--active]="selected() === 'articles'"
+          (click)="selectTab('articles')">
+          {{ 'home_card_articles_title' | translateApi }}
+        </button>
+      </div>
+
+    </div>
+
+    @if (isLoading()) {
+    <div class="loading">
+      <div class="shimmer-cards-list">
+        @for (i of [1,2,3,4]; track $index) {
+        <app-appointment-card-skeleton></app-appointment-card-skeleton>
+        }
+      </div>
+    </div>
+    }
+    @else if (errorMessage() && !status()) {
+    @if (selected() === 'doctors') {
+    <app-error-state-card [config]="doctorsErrorState"></app-error-state-card>
+    }
+    @if (selected() === 'podcasts') {
+    <app-error-state-card [config]="podcastsErrorState"></app-error-state-card>
+    }
+    @if (selected() === 'articles') {
+    <app-error-state-card [config]="articlesErrorState"></app-error-state-card>
+    }
+    }
+    @else if (!responseLength()) {
+    <div class="empty">
+      @if (selected() === 'doctors') {
+      <app-empty-state-card [config]="doctorsEmptyState"></app-empty-state-card>
+      }
+      @if (selected() === 'podcasts') {
+      <app-empty-state-card [config]="podcastsEmptyState"></app-empty-state-card>
+      }
+      @if (selected() === 'articles') {
+      <app-empty-state-card [config]="articlesEmptyState"></app-empty-state-card>
+      }
+    </div>
+    }
+    @else {
+    <div class="my-favourites__cards-list" role="list">
+      @for (item of pagedData(); track item.id) {
+      @if (selected() === 'doctors') {
+      <app-doctor-card-for-favourite [item]="item"></app-doctor-card-for-favourite>
+      }
+      @if (selected() === 'podcasts') {
+      <app-podcast-card-for-favourite [item]="item"></app-podcast-card-for-favourite>
+      }
+      @if (selected() === 'articles') {
+      <app-article-card [item]="item"></app-article-card>
+      }
+      }
+    </div>
+    @if (!isLoading() && totalPages() > 1) {
+    <app-pagination-listing [paginationConfig]="paginationConfig()" />
+    }
+    }
+  </section>
+</main>

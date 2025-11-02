@@ -1,0 +1,50 @@
+<div class="podcast-layout__container" #card>
+  <div class="podcast" appAutoExactHeight [enabled]="!isFullscreen" heightMode="max-height">
+    <div class="podcast__favourite-list">
+      @if (!isLoading()) {
+      @if ((favouritePodcastsResponse()?.data?.data?.length ?? 0) > 0) {
+      <div class="podcast__list">
+        @for (podcast of favouritePodcastsResponse()?.data?.data; track podcast.id) {
+        <app-podcast-card [item]="podcast" [isborder]="true"></app-podcast-card>
+        }
+      </div>
+      } @else if ( errorMessage() ) {
+      <app-error-state-card [config]="favoritePodcastsError" [type]="'small'"></app-error-state-card>
+      } @else {
+      <app-empty-state-card [config]="noFavoritePodcasts" [type]="'small'"></app-empty-state-card>
+      }
+      } @else {
+      <div class="podcast__skeleton">
+        <div class="podcast-grid">
+          <div class="podcast-card shimmer" *ngFor="let i of [1,2]; track $index">
+            <div class="podcast-card__details">
+              <div class="podcast-card__thumbnail">
+                <div class="podcast-card__image shimmer__element"></div>
+              </div>
+              <div class="podcast-card__content">
+                <div class="podcast-card__content-header">
+                  <div class="podcast-card__content-row">
+                    <div class="podcast-card__title shimmer__element shimmer__text"></div>
+                    <div class="podcast-card__like-button shimmer__circle"></div>
+                  </div>
+                  <div class="podcast-card__description shimmer__text-line"></div>
+                </div>
+                <div class="podcast-card__content-row">
+                  <div class="podcast-card__information shimmer__text-line"></div>
+                  <div class="podcast-card__duration-button">
+                    <div class="shimmer__icon shimmer__element"></div>
+                    <div class="podcast-card__duration shimmer__text shimmer__small"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+      @if ( !isLoading() && shouldShowPagination()) {
+      <app-pagination-listing [paginationConfig]="paginationConfig()" />
+      }
+    </div>
+  </div>
+</div>

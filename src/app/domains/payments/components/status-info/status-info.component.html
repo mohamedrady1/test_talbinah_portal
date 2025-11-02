@@ -1,0 +1,57 @@
+<section class="confirm-subscription">
+  <div class="confirm-subscription__status" role="status" aria-live="polite">
+    <div class="confirm-subscription__status__icon">
+      <img [src]="status?'images/status/success-status.png':'images/status/error-status-icon.png'"
+        [alt]="'status-image'" loading="lazy" width="200" height="200" />
+    </div>
+    <div class="confirm-subscription__status__content">
+      <h2 class="confirm-subscription__status__title">
+        {{ statusTitleKey | translateApi }}
+      </h2>
+      <p class="confirm-subscription__status__subtitle">
+        {{ statusSubtitleKey | translateApi }}
+      </p>
+    </div>
+  </div>
+
+  <div class="confirm-subscription--actions">
+    @if (confirmMode) {
+    <button type="button" class="btn btn--outline" (click)="onCancel()" [disabled]="isSubmitting">
+      {{ 'cancel' | translateApi }}
+    </button>
+    <button type="button" class="btn btn--solid" (click)="onConfirm()" [disabled]="isSubmitting">
+      @if (isSubmitting) { {{ 'in_progress' | translateApi }} } @else { {{ 'confirm' | translateApi }} }
+    </button>
+    } @else {
+    <button id="cancel-btn" type="button" class="btn btn--outline" (click)="onCancel()">
+      {{ 'close' | translateApi }}
+    </button>
+
+    @if (status && itemId) {
+    <button [id]="'item-details'" type="button" class="btn btn--solid" (click)="goToDetails()"
+      [attr.aria-busy]="'item-details'" [attr.aria-label]="'item-details'">
+      <span class="confirm-subscription__button__label">
+        {{ 'general.statusDetails' | translateApi }}
+      </span>
+    </button>
+    }
+    @if (status && pageType === PaymentPageTypeEnum.URGENT_APPOINTMENT) {
+    <button [id]="'item-details'" type="button" class="btn btn--solid" (click)="openUrgentAppointment()"
+      [attr.aria-busy]="'item-details'" [attr.aria-label]="'item-details'">
+      <span class="confirm-subscription__button__label">
+        {{ 'general.trackAppointment' | translateApi }}
+      </span>
+    </button>
+    }
+
+    @if (!status && repayURL) {
+    <button [id]="'item-details'" type="button" class="btn btn--solid" (click)="retryPayment($event)"
+      [attr.aria-busy]="'item-details'" [attr.aria-label]="'item-details'">
+      <span class="confirm-subscription__button__label">
+        {{ 'general.repayButton' | translateApi }}
+      </span>
+    </button>
+    }
+    }
+  </div>
+</section>

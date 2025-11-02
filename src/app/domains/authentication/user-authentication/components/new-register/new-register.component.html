@@ -1,0 +1,193 @@
+<div class="new-register" appAutoExactHeight="100" heightMode="max-height">
+    <div class="new-register__content">
+        <div class="new-register__header">
+            <h2 class="new-register__title">{{ title | translateApi }}</h2>
+            <p class="new-register__description">{{ description | translateApi }}</p>
+        </div>
+
+        <form class="new-register__form" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+            <div class="new-register__form-groups">
+                @for (field of formConfigs; track field.name) {
+                <div class="new-register__form-field">
+                    <div class="new-register__form-label-group">
+                        @if (field.label) {
+                        <label [for]="field.name" class="new-register__form-label" [ngClass]="{
+                    'new-register__form-label--error': getError(field.name),
+                    'new-register__form-label--clickable': field.enableLabelClick
+                  }">
+                            {{ field.label | translateApi }}
+                            @if (field.isRequired) {
+                            <span class="new-register__form-required">*</span>
+                            }
+                        </label>
+                        }
+                    </div>
+
+                    @switch(field.type) {
+                    @case(allInputTypes.COUNTRYCODEINPUT) {
+                    <!-- Phone Number Input with Country Selection -->
+                    <div class="new-register__input-wrapper new-register__input-wrapper--with-icon new-register__input-wrapper--icon-start new-register__country-code-input"
+                        [class.new-register__input-wrapper--error]="getError(field.name)">
+                        <img src="images/icons/call.svg" [alt]="'mobile_number' | translateApi"
+                            class="new-register__input-icon">
+                        <div class="new-register__select-wrapper">
+                            <p-select class="new-register__country-select w-full md:w-56"
+                                [options]="allowedCountries() || []" [ngModel]="selectedCountryModel()"
+                                (ngModelChange)="onCountryChange($event)" [ngModelOptions]="{ standalone: true }"
+                                optionLabel="name" [filter]="true" filterBy="name"
+                                [placeholder]="isLoadingCountries() ? undefined : ('code' | translateApi)"
+                                [virtualScroll]="true" [virtualScrollItemSize]="42" [autoDisplayFirst]="false"
+                                appendTo="body" [attr.aria-label]="('mobile_number' | translateApi)">
+                                @if (!isLoadingCountries()) {
+                                <ng-template #selectedItem let-selectedOption>
+                                    <div class="new-register__select-item">
+                                        <img [src]="selectedOption.flag"
+                                            [class]="'new-register__flag new-register__flag--' + (selectedOption?.code?.toLowerCase() || '')"
+                                            onerror="this.src='images/icons/no-flag.svg'" />
+                                        <div>{{ selectedOption.phone_code }}</div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-country #item>
+                                    <div class="new-register__select-item">
+                                        <img [src]="country.flag" [alt]="country.name"
+                                            [class]="'new-register__flag new-register__flag--' + (country?.code?.toLowerCase() || '')"
+                                            onerror="this.src='images/icons/no-flag.svg'" />
+                                        <div>{{ country.name }}</div>
+                                    </div>
+                                </ng-template>
+                                }
+                            </p-select>
+                            <input type="number" class="new-register__input" [id]="field.name"
+                                [formControlName]="field.name" [placeholder]="
+                    !selectedCountryModel()
+                      ? ('phone_should_select_code' | translateApi)
+                      : ('phone_placeholder' | translateApi)
+                  " autocomplete="tel" [attr.aria-describedby]="getError(field.name) ? field.name + '-error' : null"
+                                [attr.aria-invalid]="getError(field.name) ? 'true' : 'false'" />
+                            @if (isLoadingCountries()) {
+                            <div class="new-register__loader" role="status" aria-live="polite"
+                                aria-label="Loading countries">
+                                <span class="new-register__loader-dot"></span>
+                                <span class="new-register__loader-dot"></span>
+                                <span class="new-register__loader-dot"></span>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                    }
+                    @case(allInputTypes.TEXT) {
+                    <div class="new-register__input-wrapper new-register__input-wrapper--with-icon new-register__input-wrapper--icon-start"
+                        [class.new-register__input-wrapper--error]="getError(field.name)">
+                        <img [src]="field.inputIcon" [alt]="field.label??''  | translateApi"
+                            class="new-register__input-icon">
+                        <input [id]="field.name" [formControlName]="field.name" [type]="field.type || 'text'"
+                            [placeholder]="(field.placeholder || '') | translateApi" class="new-register__input"
+                            autocomplete="off" [attr.aria-invalid]="getError(field.name) ? 'true' : 'false'"
+                            [attr.aria-describedby]="getError(field.name) ? field.name + '-error' : null" />
+                    </div>
+                    }
+                    @case(allInputTypes.PASSWORD) {
+                    <div class="new-register__input-wrapper new-register__input-wrapper--with-icon new-register__input-wrapper--icon-start"
+                        [class.new-register__input-wrapper--error]="getError(field.name)">
+                        <img [src]="field.inputIcon" [alt]="field.label??'' | translateApi"
+                            class="new-register__input-icon">
+                        <input [id]="field.name" [formControlName]="field.name" [type]="inputType()"
+                            [placeholder]="(field.placeholder || '') | translateApi" class="new-register__input"
+                            autocomplete="new-password" [attr.aria-invalid]="getError(field.name) ? 'true' : 'false'"
+                            [attr.aria-describedby]="getError(field.name) ? field.name + '-error' : null" />
+                        <button type="button" class="new-register__password-toggle-btn" (click)="toggleVisibility()"
+                            [attr.aria-label]="passwordVisible() ? ('general.hidePassword' | translateApi) : ('general.showPassword' | translateApi)">
+                            @if (passwordVisible()) {
+                            <app-svg-icon name="eye-slash"></app-svg-icon>
+                            }
+                            @if (!passwordVisible()) {
+                            <app-svg-icon name="eye-open"></app-svg-icon>
+                            }
+                        </button>
+                    </div>
+                    }
+                    @case(allInputTypes.EMAIL) {
+                    <div class="new-register__input-wrapper new-register__input-wrapper--with-icon new-register__input-wrapper--icon-start"
+                        [class.new-register__input-wrapper--error]="getError(field.name)">
+                        <img [src]="field.inputIcon" [alt]="field.label??'' | translateApi"
+                            class="new-register__input-icon">
+                        <input [id]="field.name" [formControlName]="field.name" [type]="'email'"
+                            [placeholder]="(field.placeholder || '') | translateApi" class="new-register__input"
+                            autocomplete="email" [attr.aria-invalid]="getError(field.name) ? 'true' : 'false'"
+                            [attr.aria-describedby]="getError(field.name) ? field.name + '-error' : null" />
+                    </div>
+                    }
+                    @case(allInputTypes.DATE) {
+                    <div class="new-register__input-wrapper new-register__input-wrapper--with-icon new-register__input-wrapper--icon-start"
+                        [class.new-register__input-wrapper--error]="getError(field.name)">
+                        <img [src]="field.inputIcon" [alt]="field.label ??'' | translateApi"
+                            class="new-register__input-icon">
+                        <input [id]="field.name" [formControlName]="field.name"
+                            [type]="isDateActive(field.name) ? 'date' : 'text'"
+                            [placeholder]="!isDateActive(field.name) ? ((field.placeholder || '') | translateApi) : ''"
+                            class="new-register__input" autocomplete="bday"
+                            [attr.aria-invalid]="getError(field.name) ? 'true' : 'false'"
+                            [attr.aria-describedby]="getError(field.name) ? field.name + '-error' : null"
+                            [attr.max]="maxDate" (click)="onDateClick($event, field.name)" (focus)="onDateFocus($event)"
+                            (blur)="onDateBlur($event, field.name)" />
+                    </div>
+                    }
+                    @case(allInputTypes.SELECT) {
+                    <div class="new-register__input-wrapper new-register__input-wrapper--with-icon new-register__input-wrapper--icon-start"
+                        [class.new-register__input-wrapper--error]="getError(field.name)">
+                        <img [src]="field.inputIcon" [alt]="field.label ??'' | translateApi"
+                            class="new-register__input-icon">
+                        <p-select [options]="field.listValues || []" [formControlName]="field.name" optionValue="value"
+                            [placeholder]="(field.placeholder || '') | translateApi" class="new-register__select"
+                            [attr.aria-label]="(field.label || '') | translateApi"
+                            [attr.aria-invalid]="getError(field.name) ? 'true' : 'false'"
+                            [attr.aria-describedby]="getError(field.name) ? field.name + '-error' : null">
+                            <ng-template let-option pTemplate="item">
+                                <span>{{ option.label | translateApi }}</span>
+                            </ng-template>
+                            <ng-template let-selectedOption pTemplate="selectedItem">
+                                <span>{{ selectedOption?.label | translateApi }}</span>
+                            </ng-template>
+                        </p-select>
+                    </div>
+                    }
+                    }
+                    @if (getError(field.name)) {
+                    <div class="new-register__form-feedback" role="status" aria-live="polite">
+                        <span class="new-register__form-error" role="alert" [id]="field.name + '-error'">
+                            {{ getValidationErrorMessage(field.name, field.validation || []) | translateApi }}
+                        </span>
+                    </div>
+                    }
+                </div>
+                }
+            </div>
+
+            <!-- Submit Button -->
+            <div class="new-register__form__actions">
+                <button type="submit" class="btn btn--solid" [disabled]="_RegisterFacade.loading()"
+                    [attr.aria-label]="'general.register' | translateApi">
+                    <span class="btn__label">
+                        @if (_RegisterFacade.loading()) {
+                        <span role="status" aria-live="polite" aria-label="Registration in progress">
+                            {{ 'in_progress' | translateApi }}
+                        </span>
+                        } @else {
+                        <span>{{ 'create_account' | translateApi }}</span>
+                        }
+                    </span>
+                </button>
+                <div class="new-register__form__divider">
+                    <app-svg-icon name="divider-1"></app-svg-icon>
+                    <p>
+                        {{ "or" | translateApi }}
+                    </p>
+                    <app-svg-icon name="divider-2"></app-svg-icon>
+                </div>
+                <button type="button" class="btn btn--outline" (click)="openLoginModal()">
+                    <span class="btn__label">{{ "login" | translateApi }}</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+.my-psychological-society-information-card {
+  display: flex;
+  padding: 0.75rem;
+  flex-direction: column;
+  border-radius: var(--Radius-12);
+  background: var(--Gray-White);
+  gap: 0.75rem;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &--profile {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+
+      &__emoji {
+        width: 2rem;
+        height: 2rem;
+        aspect-ratio: 1/1;
+        border-radius: 0.75rem;
+      }
+
+      p {
+        color: var(--text-400);
+        font-size: 0.75rem;
+        font-weight: 700;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    &--edit-profile {
+      display: flex;
+      padding: 0.375rem;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.625rem;
+      border-radius: 0.5rem;
+      background: var(--Dark-100);
+      cursor: pointer;
+    }
+  }
+
+  &__mood {
+    &--header {
+      p {
+        &:first-child {
+          color: var(--text-primary, #000);
+          font-size: 0.75rem;
+          font-weight: 500;
+        }
+
+        &:last-child {
+          color: var(--text-300);
+          font-size: 0.625rem;
+          font-weight: 400;
+        }
+      }
+    }
+
+    &--choose {
+      padding-top: 0.75rem;
+    }
+  }
+
+  &__info {
+    display: flex;
+    padding: 0.25rem;
+    border-radius: var(--Radius-12, 0.75rem);
+    border: 1px solid rgba(144, 157, 173, 0.15);
+    background: var(--Dark-50);
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.25rem;
+      flex: 1;
+
+      p {
+        &:first-child {
+          color: var(--text-400);
+          font-size: 0.75rem;
+          font-weight: 600;
+        }
+
+        &:last-child {
+          color: var(--text-300);
+          font-size: 0.75rem;
+          font-weight: 400;
+        }
+      }
+
+      &:nth-child(2) {
+        border: 1px solid rgba(128, 128, 128, 0.133);
+        border-top: transparent;
+        border-bottom: transparent;
+      }
+    }
+  }
+}

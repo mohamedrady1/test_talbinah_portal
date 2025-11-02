@@ -1,0 +1,12 @@
+<div class="story-card" [ngStyle]="{ 'width.px': cardWidth }" (click)="storyDetails()" tabindex="0" role="link"
+  [attr.aria-label]="config.title + ' by ' + config.doctorName">
+  <img appLazyLoadImage="{{ config.image }}" [alt]="'Image for ' + config.title" class="story-card__image"
+    ngOptimizedImage priority />
+
+  <div class="story-card__content">
+    <p class="story-card__title">
+      {{ config.title }}
+      <span class="story-card__doctor-name">{{ config.doctorName }}</span>
+    </p>
+  </div>
+</div>

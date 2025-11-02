@@ -1,0 +1,55 @@
+<section class="accordion" role="region" aria-label="Dynamic Accordion Item">
+  <nav class="accordion-menu" role="navigation" aria-label="Accordion Menu">
+    <div class="accordion-menu__item">
+      @defer (when itemValue.id) {
+      <button class="accordion-menu__header" (click)="toggleItem()" [attr.aria-expanded]="itemValue.isOpen"
+        [attr.aria-controls]="'content-' + itemValue.id" type="button">
+        <span class="accordion-menu__title">
+          <span class="accordion-menu__status-icon">
+            {{ itemValue.reaction }}
+          </span>
+          @if (itemValue.title) {
+          <span class="accordion-menu__username">
+            {{ itemValue.title | translateApi }}
+          </span>
+          } @else {
+          {{ itemValue.username }}
+          }
+        </span>
+        <span class="accordion-menu__toggle-icon">
+          @if (itemValue.isOpen) {
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
+            <path
+              d="M5.25008 13.3337H8.75008C11.6667 13.3337 12.8334 12.167 12.8334 9.25033V5.75033C12.8334 2.83366 11.6667 1.66699 8.75008 1.66699H5.25008C2.33341 1.66699 1.16675 2.83366 1.16675 5.75033V9.25033C1.16675 12.167 2.33341 13.3337 5.25008 13.3337Z"
+              stroke="#A3ADBB" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M5.25 1.66699V13.3337" stroke="#A3ADBB" stroke-width="1.2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+          }
+          @if (!itemValue.isOpen) {
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
+            <path
+              d="M5.25002 13.3337H8.75002C11.6667 13.3337 12.8334 12.167 12.8334 9.25033V5.75033C12.8334 2.83366 11.6667 1.66699 8.75002 1.66699H5.25002C2.33335 1.66699 1.16669 2.83366 1.16669 5.75033V9.25033C1.16669 12.167 2.33335 13.3337 5.25002 13.3337Z"
+              stroke="#A3ADBB" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          }
+        </span>
+      </button>
+      <div id="content-{{ itemValue.id }}" class="accordion-menu__content"
+        [class.accordion-menu__content--open]="itemValue.isOpen" role="region" [attr.aria-hidden]="!itemValue.isOpen">
+        <div class="accordion-menu__content-inner">
+          @if (customContent) {
+          <ng-container [ngTemplateOutlet]="customContent"
+            [ngTemplateOutletContext]="{ item: itemValue }"></ng-container>
+          } @else {
+          <p [innerHTML]="itemValue.content"></p>
+          @if (itemValue.reaction) {
+          <span class="accordion-menu__reaction">{{ itemValue.reaction }}</span>
+          }
+          }
+        </div>
+      </div>
+      }
+    </div>
+  </nav>
+</section>

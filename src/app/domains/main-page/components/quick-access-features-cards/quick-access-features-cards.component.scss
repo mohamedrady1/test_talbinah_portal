@@ -1,0 +1,148 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+@use "../../../../common/styles/scss/abstracts/variables" as *; // Assuming this includes $home-hero-bg, $color-grey-dark-4
+@use "./../../../../common/styles/scss/buttons/button.mixins" as btn;
+
+// The home-layout block is not directly managed by this component.
+// Its styles belong in the parent component that uses the home-layout.
+// For this component, we define styles for `quick-access-cards`.
+
+.quick-access-cards {
+  &__container {
+    // BEM: Element .quick-access-cards__container - The flex container for individual cards
+    display: flex;
+    flex-direction: row; // Arrange cards in a row initially
+    gap: 12px; // Gap between cards
+    flex-wrap: wrap; // Allow cards to wrap to the next line on smaller screens
+    justify-content: center; // Center cards when they wrap
+
+    app-quick-access-card {
+      width: 100%;
+    }
+
+    // Styles for individual card items within the container
+    .quick-access-cards__item {
+      // BEM: Element .quick-access-cards__item - Base styles for each clickable card wrapper
+      display: flex;
+      width: fit-content; // Let content determine width, or define explicitly
+      box-shadow: 0px -1px 4px 0px rgba(0, 0, 0, 0.007);
+      border-radius: 2.6rem;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden; // Ensure background image is clipped to border-radius
+      transition:
+        transform 0.2s ease-out,
+        box-shadow 0.2s ease-out; // Smooth transitions
+
+      &:hover {
+        transform: translateY(-2px); // Subtle lift effect on hover
+        // box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); // Enhance shadow
+      }
+
+      &:focus-visible {
+        // outline: 2px solid var(--color-focus-outline, #007bff); // Accessibility outline
+        // outline-offset: 2px;
+      }
+
+      // Define default flex values or base flex values here
+      flex: 1 1 auto; // Default to allow shrinking and growing, with automatic basis
+
+      // Background images for each card, dynamically using index
+      @for $i from 0 through 9 {
+
+        // Loop through the first 10 cards (index 0 to 9)
+        &--#{$i} {
+          // Adjust this path if HOME_IMAGES_BASE_PATH is not accessible via relative path from SCSS
+          // Use mixins for consistent image handling if possible.
+          background: url("../../../../../../public/images/home/cards/card-#{$i}.png") no-repeat center;
+          background-size: cover;
+        }
+      }
+    }
+  }
+
+  &__load-more {
+    display: flex;
+    flex-direction: row; // Arrange cards in a row initially
+    gap: 12px;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn {
+    @include btn.button-base;
+    @include btn.button-size("medium");
+    @include btn.button-icon-position("left");
+    @include btn.button-icon-size("medium");
+    @include btn.button-color("main");
+    @include btn.button-spinner;
+
+
+    width: auto;
+
+    &__icon {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    &__label {
+      padding: 0 0.5rem;
+      white-space: nowrap;
+
+      .loading {
+        display: flex;
+        align-items: center;
+
+        .dot-loader::after {
+          content: "";
+          animation: dots 1.5s steps(4, end) infinite;
+          white-space: pre;
+        }
+
+        @keyframes dots {
+          0% {
+            content: "";
+          }
+
+          25% {
+            content: ".";
+          }
+
+          50% {
+            content: "..";
+          }
+
+          75% {
+            content: "...";
+          }
+
+          100% {
+            content: "";
+          }
+        }
+      }
+    }
+
+    &--disabled {
+      @include btn.button-disabled;
+    }
+
+    // Add variants
+    &--solid {
+      @include btn.button-type("solid");
+    }
+
+    &--outline {
+      @include btn.button-type("outline");
+    }
+
+    &--ghost {
+      @include btn.button-type("ghost");
+    }
+
+    &--link {
+      @include btn.button-type("link");
+    }
+  }
+}

@@ -1,0 +1,72 @@
+<div class="security-card-list">
+    <div class="security-card" (click)="openNationalIdVerificationModal()">
+        <div class="security-card__information">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.49707 6.375H8.62207" stroke="#0E39B6" stroke-width="1.5" stroke-miterlimit="10"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M4.49707 12.375H5.99707" stroke="#0E39B6" stroke-width="1.5" stroke-miterlimit="10"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M7.87207 12.375H10.8721" stroke="#0E39B6" stroke-width="1.5" stroke-miterlimit="10"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                <path
+                    d="M16.4971 9.0225V12.0825C16.4971 14.715 15.8296 15.375 13.1671 15.375H4.82707C2.16457 15.375 1.49707 14.715 1.49707 12.0825V5.9175C1.49707 3.285 2.16457 2.625 4.82707 2.625H10.8721"
+                    stroke="#0E39B6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path
+                    d="M14.3071 3.09748L11.5246 5.87998C11.4196 5.98498 11.3146 6.19498 11.2921 6.34498L11.1421 7.40998C11.0896 7.79248 11.3596 8.06248 11.7421 8.00998L12.8071 7.85998C12.9571 7.83748 13.1671 7.73248 13.2721 7.62748L16.0546 4.84498C16.5346 4.36498 16.7596 3.80998 16.0546 3.10498C15.3421 2.39248 14.7871 2.61748 14.3071 3.09748Z"
+                    stroke="#0E39B6" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path d="M13.9096 3.49512C14.1496 4.34262 14.8096 5.00262 15.6496 5.23512" stroke="#0E39B6"
+                    stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+
+            <div class="security-card__content">
+                <div class="security-card__title">
+                    {{ 'ID_number'|translateApi }}
+                </div>
+                <div class="security-card__description">
+                    {{ 'enter_nationalId_for_vat'|translateApi }}
+                </div>
+            </div>
+        </div>
+        <div class="faq-question-card__icon">
+            <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M8.80248 12.5574C8.91332 12.5574 9.02415 12.5166 9.11165 12.4291C9.28082 12.2599 9.28082 11.9799 9.11165 11.8107L5.30832 8.00739C5.02832 7.72739 5.02832 7.27239 5.30832 6.99239L9.11165 3.18906C9.28082 3.01989 9.28082 2.73989 9.11165 2.57072C8.94248 2.40156 8.66248 2.40156 8.49332 2.57072L4.68998 6.37406C4.39248 6.67156 4.22332 7.07406 4.22332 7.49989C4.22332 7.92572 4.38665 8.32822 4.68998 8.62572L8.49332 12.4291C8.58082 12.5107 8.69165 12.5574 8.80248 12.5574Z"
+                    fill="#47586E" />
+            </svg>
+        </div>
+    </div>
+    <div class="security-card" (click)="openChangePasswordModal()">
+        <div class="security-card__information">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M4.5 7.5V6C4.5 3.5175 5.25 1.5 9 1.5C12.75 1.5 13.5 3.5175 13.5 6V7.5" stroke="#0E39B6"
+                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path
+                    d="M12.75 16.5H5.25C2.25 16.5 1.5 15.75 1.5 12.75V11.25C1.5 8.25 2.25 7.5 5.25 7.5H12.75C15.75 7.5 16.5 8.25 16.5 11.25V12.75C16.5 15.75 15.75 16.5 12.75 16.5Z"
+                    stroke="#0E39B6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M11.9973 12H12.0041" stroke="#0E39B6" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path d="M8.99661 12H9.00335" stroke="#0E39B6" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path d="M5.99588 12H6.00262" stroke="#0E39B6" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+            <div class="security-card__content">
+                <div class="security-card__title">
+                    {{ 'reset_password'|translateApi }}
+                </div>
+                <div class="security-card__description">
+                    {{ 'whatsapp_notifications_linked_number'|translateApi }}
+                </div>
+            </div>
+
+        </div>
+        <div class="security-card__icon">
+            <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M8.80248 12.5574C8.91332 12.5574 9.02415 12.5166 9.11165 12.4291C9.28082 12.2599 9.28082 11.9799 9.11165 11.8107L5.30832 8.00739C5.02832 7.72739 5.02832 7.27239 5.30832 6.99239L9.11165 3.18906C9.28082 3.01989 9.28082 2.73989 9.11165 2.57072C8.94248 2.40156 8.66248 2.40156 8.49332 2.57072L4.68998 6.37406C4.39248 6.67156 4.22332 7.07406 4.22332 7.49989C4.22332 7.92572 4.38665 8.32822 4.68998 8.62572L8.49332 12.4291C8.58082 12.5107 8.69165 12.5574 8.80248 12.5574Z"
+                    fill="#47586E" />
+            </svg>
+        </div>
+    </div>
+</div>

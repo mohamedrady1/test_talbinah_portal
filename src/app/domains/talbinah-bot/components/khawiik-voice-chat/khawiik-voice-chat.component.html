@@ -1,0 +1,117 @@
+@if (isBrowser) {
+<div class="chat-layout__container">
+  <div class="khawiik-voice-chat">
+    <!-- Header -->
+    <div class="khawiik-voice-chat__header">
+      <!-- Week days -->
+      <div class="khawiik-voice-chat__week-days">
+        @for (day of weekDays; track day.id) {
+        <div class="khawiik-voice-chat__day" [class.khawiik-voice-chat__day--today]="isToday(day)">
+          <span class="khawiik-voice-chat__day-number">
+            {{ day.dayDate | date:'d' }}
+          </span>
+          <span class="khawiik-voice-chat__day-name">
+            {{ getDayName(day) | translateApi }}
+          </span>
+        </div>
+        }
+      </div>
+
+      <!-- Actions -->
+      <div class="khawiik-voice-chat__actions">
+        <button type="button" class="khawiik-voice-chat__action" (click)="_openKhawiikActivitesModal()">
+          <app-svg-icon name="khawiik-star"></app-svg-icon>
+        </button>
+
+        <button type="button" class="khawiik-voice-chat__action" (click)="_openKhawiikHistoryModal()">
+          <app-svg-icon name="khawiik-folder"></app-svg-icon>
+        </button>
+
+        <button type="button" class="khawiik-voice-chat__action" [class.active]="currentBook()"
+          (click)="_openKhawiikBooksModal()">
+          @if (currentBook()) {
+          <app-svg-icon name="khawiik-book-active"></app-svg-icon>
+          }
+          @else{
+          <app-svg-icon name="khawiik-book"></app-svg-icon>
+          }
+        </button>
+      </div>
+    </div>
+
+    @if (_sessionFacade.isLoading()) {
+    <app-khawiik-voice-chat-skeleton />
+    } @else {
+    <!-- Chat header -->
+    <div id="khawiik-voice-chat__chat-area">
+      <div class="khawiik-voice-chat__messages--header">
+        <button class="khawiik-voice-chat__messages--header-new-chat" (click)="onNewChatClick()">
+          <app-svg-icon name="new-khawiik-chat"></app-svg-icon>
+        </button>
+        <div class="khawiik-voice-chat__messages--header-actions">
+          <button class="khawiik-voice-chat__messages--header-settings" (click)="openSettingsModal()">
+            <app-svg-icon name="khawiik-settings"></app-svg-icon>
+          </button>
+          <button class="khawiik-voice-chat__messages--header-full-screen" (click)="onFullScreenClick()">
+            <app-svg-icon [name]="isFullScreen() ? 'khawiik-minimize-icon' : 'khawiik-full-screen'"></app-svg-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- Chat area -->
+      <div class="khawiik-voice-chat__chat-area">
+        @if (_sessionFacade.errorMessage()) {
+        <app-error-state-card [config]="errorStateConfig"></app-error-state-card>
+        } @else {
+        @if (!isRecording()) {
+        <div class="khawiik-voice-chat__welcome">
+          <img src="images/khawiik/khawiik-welcome-mian-icon-2.png" alt="Khawiik Welcome Icon"
+            class="khawiik-voice-chat__welcome-icon" />
+          <div class="khawiik-voice-chat__content">
+            <p class="khawiik-voice-chat__welcome-title">
+              {{ keys.VOICE_CHAT.WELCOME.WELCOME | translateApi }}
+            </p>
+            <p class="khawiik-voice-chat__welcome-subtitle">
+              {{ keys.VOICE_CHAT.WELCOME.SUBTITLE | translateApi }}
+            </p>
+          </div>
+        </div>
+        }
+
+        <!-- Incoming Messages -->
+        @if (isRecording() && incomingMessages().length > 0) {
+        <div class="khawiik-voice-chat__record-messages">
+          @for (msg of incomingMessages(); track $index) {
+          <p class="record-message" [class.main]="$index === incomingMessages().length - 1"
+            [class.sub]="$index !== incomingMessages().length - 1">
+            {{ msg }}
+          </p>
+          }
+        </div>
+        }
+
+        <!-- ✅ Voice Area OUTSIDE -->
+        <div class="khawiik-voice-chat__voice-area">
+          <button class="khawiik-voice-chat__voice-area--voice-btn" [class.muted]="isMuted()" (click)="onVoiceClick()"
+            [attr.aria-label]="isMuted() ? 'Unmute' : 'Mute'">
+            <app-svg-icon [name]="isMuted() ? 'khawiik-voice-muted-icon' : 'khawiik-voice-icon'"></app-svg-icon>
+          </button>
+
+          <button class="khawiik-voice-chat__voice-area--record-btn" [class.recording]="isRecording()"
+            (click)="onRecordClick()">
+            <app-svg-icon [name]="isRecording()
+                ? 'khawiik-start-recording'
+                : 'khawiik-record-icon'"></app-svg-icon>
+          </button>
+
+          <button class="khawiik-voice-chat__voice-area--text-btn" (click)="onTextClick()">
+            <app-svg-icon name="khawiik-text-icon"></app-svg-icon>
+          </button>
+        </div>
+        }
+      </div>
+    </div>
+    }
+  </div>
+</div>
+}

@@ -1,0 +1,1 @@
+export * from './podcast-details-for-mobile.component'; 

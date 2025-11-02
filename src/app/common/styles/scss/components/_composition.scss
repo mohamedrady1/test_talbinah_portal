@@ -1,0 +1,82 @@
+@use "../abstracts/mixins" as *;
+
+.composition {
+    position: relative;
+
+    &__photo {
+        width: 55%;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, 0.4);
+        border-radius: 2px;
+        position: absolute;
+        z-index: 10;
+        transition: all 0.2s;
+        outline-offset: 2rem;
+
+        @include respond(md) {
+            float: left;
+            position: relative;
+            width: 33.33333333%;
+            box-shadow: 0 1.5rem 3rem rgba($color-black, 0.2);
+        }
+
+        &--p1 {
+            left: 0;
+            top: -2rem;
+
+            @include respond(md) {
+                top: 0;
+                transform: scale(1.2);
+            }
+        }
+
+        &--p2 {
+            right: 0;
+            top: 2rem;
+
+            @include respond(md) {
+                top: -1rem;
+                transform: scale(1.3);
+                z-index: 100;
+            }
+        }
+
+        &--p3 {
+            left: 20%;
+            top: 10rem;
+
+            @include respond(md) {
+                top: 1rem;
+                left: 0;
+                transform: scale(1.1);
+            }
+        }
+
+        &:hover {
+            outline: 1.5rem solid $color-primary;
+            transform: scale(1.05) translateY(-0.5rem);
+            box-shadow: 0 2.5rem 4rem rgba($color-black, 0.5);
+            z-index: 20;
+        }
+    }
+
+    &:hover &__photo:not(:hover) {
+        transform: scale(0.95);
+    }
+}
+
+// This structure is used to display multiple photos with specific positioning,
+// scaling, and hover effects as defined in the SCSS code above.
+
+// Example
+
+// <div class="composition">
+//     <div class="composition__photo composition__photo--p1">
+//       <img src="https://images.pexels.com/photos/29696169/pexels-photo-29696169/free-photo-of-minimalist-living-room-with-indoor-plants.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="photo1">
+//     </div>
+//     <div class="composition__photo composition__photo--p2">
+//       <img src="https://images.pexels.com/photos/29696169/pexels-photo-29696169/free-photo-of-minimalist-living-room-with-indoor-plants.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="photo2">
+//     </div>
+//     <div class="composition__photo composition__photo--p3">
+//       <img src="https://images.pexels.com/photos/29696169/pexels-photo-29696169/free-photo-of-minimalist-living-room-with-indoor-plants.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="photo3">
+//     </div>
+//   </div>

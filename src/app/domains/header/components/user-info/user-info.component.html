@@ -1,0 +1,60 @@
+<div class="user-info" (click)="openUserInfo = !openUserInfo">
+  <div class="user-info__button">
+    <div class="user-info__image-container">
+      @if (internalUserInfo()?.gender==1) {
+      <img #userImg class="user-info__image-container--img"
+        [src]="isLoggedIn ? internalUserInfo()?.image : 'images/icons/logo-2.png'" width="24" height="24"
+        [alt]="internalUserInfo()?.full_name" onerror="src='images/not-found/no-woman-doctor.svg'" />
+      }
+      @else{
+      <img #userImg class="user-info__image-container--img"
+        [src]="isLoggedIn ? internalUserInfo()?.image : 'images/icons/logo-2.png'" width="24" height="24"
+        [alt]="internalUserInfo()?.full_name" onerror="src='images/not-found/no-doctor.svg'" />
+      }
+    </div>
+    <div class="user-info__welcome">
+      <p class="user-info__welcome--text">{{'welcome'|translateApi}}</p>
+      <p class="user-info__welcome--name">
+        {{ isLoggedIn ? truncateName(internalUserInfo()?.full_name?? '', 14) : 'guest'|translateApi }}
+      </p>
+    </div>
+    <a class="user-info__logout--link" (click)="isLoggedIn ? logOut() : openLoginModal()" aria-label="Logout Now">
+      <span class="user-info__logout--icon" aria-hidden="true">
+        @if (isLoggedIn) {
+        <app-svg-icon name="logout-header-icon" [fillColor]="'#FF0000'" />
+        } @else {
+        <app-svg-icon name="user-info-login-icon" [fillColor]="'#FF0000'" />
+        }
+
+      </span>
+      <span class="visually-hidden">Logout</span>
+    </a>
+
+    <!-- <div class="user-info__icon" [class.rotated]="openUserInfo">
+      <app-svg-icon name="arrow-down" />
+    </div> -->
+  </div>
+
+  <!-- @if (openUserInfo) {
+  <div class="user-info__details" appClickOutside (clickOutside)="openUserInfo = false"
+    [ngClass]="_PublicService.getCurrentLanguage() === 'ar' ? 'user-info__details--ar' : 'user-info__details--en'">
+    @if (userConfig.list) {
+    <div class="user-info__list">
+      <ul class="user-info__list-items">
+        @for (item of userConfig.list; track item) {
+        <li class="user-info__list-item" [routerLink]="item.action === 'openSettings' ? ['/settings'] : null"
+          (click)="item.action !== 'openSettings' && triggerAction(item.action)">
+          <div class=" user-info__list-item-image">
+            <img [src]="item.icon" [alt]="getTextByLang(item, _PublicService.getCurrentLanguage())" />
+          </div>
+          <p class="user-info__list-item-text">{{getTextByLang(item, _PublicService.getCurrentLanguage())}}</p>
+        </li>
+        }
+      </ul>
+    </div>
+    }
+  </div>
+  } -->
+</div>
+
+<ng-template #modalContainer></ng-template>

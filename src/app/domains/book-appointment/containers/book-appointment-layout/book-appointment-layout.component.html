@@ -1,0 +1,14 @@
+<main class="book-appointment-layout" role="main">
+  <header class="book-appointment-layout__header">
+    <app-site-header></app-site-header>
+  </header>
+  <section class="book-appointment-layout__container" #card>
+    <div [attr.aria-label]="headerConfig.title + ' header'">
+      <app-page-layout-header [config]="headerConfig" [card]="cardRef"
+        (closeRequested)="onCloseRequested()"></app-page-layout-header>
+    </div>
+    <app-doctors-listing-for-booking class="book-appointment-layout__cards" appAutoExactHeight
+      [enabled]="!isFullscreen()" role="region"
+      aria-label="Book and manage appointments"></app-doctors-listing-for-booking>
+  </section>
+</main>

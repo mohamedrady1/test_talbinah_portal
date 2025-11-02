@@ -1,0 +1,10 @@
+<app-details-for-mobile [showCloseButton]="showCloseButton" [title]="'podcast_details2'" (close)="onClose()">
+    <div class="podcast-details">
+        <app-podcast-card [item]="podcast" [hideFavouriteAction]="false" [hideDescription]="false"
+            [preventDetailsModal]="true" [actionNotWorking]="false" [isMobile]="true" [hideButtonAction]="true" />
+    </div>
+</app-details-for-mobile>
+<div class="podcast-details--box-card">
+    <app-podcast-details-box-card [item]="podcast" [isMobile]="true" style="height: 100%;"
+        (playPodcast)="openPodcastMediaPlayer()" />
+</div>

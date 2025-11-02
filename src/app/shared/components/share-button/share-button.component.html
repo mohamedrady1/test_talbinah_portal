@@ -1,0 +1,30 @@
+@for (btn of socialBtns; track btn.name) {
+
+@if (type === btn.name) {
+<!--
+      Anchor tag for accessibility and click handling.
+      The 'share()' method is expected to be defined in this component's TypeScript.
+    -->
+<a (click)="share()" class="social-btn-link">
+  <div class="social-btn-content">
+    <!--
+          Icon container with dynamic class based on social media name.
+          This allows specific background/text colors via SCSS modifiers.
+        -->
+    <div class="social-btn-content__icon social-btn-content__icon--{{btn.name}}">
+      @if (btn.name === 'twitter') {
+      <!-- Twitter icon as an image -->
+      <img src="images/icons/twitter.png" alt="Twitter icon" class="social-btn-content__icon-img">
+      } @else {
+      <!-- Other social media icons using Font Awesome -->
+      <i class="fab fa-{{btn.icon}} social-btn-content__icon-fa"></i>
+      }
+    </div>
+    <!-- Text label for the social media button -->
+    <p class="social-btn-content__text">
+      {{btn.name}}
+    </p>
+  </div>
+</a>
+}
+}

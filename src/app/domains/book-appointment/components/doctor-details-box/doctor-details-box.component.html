@@ -1,0 +1,13 @@
+<div class="doctor-details">
+    <div class="doctor-details--icon">
+        <img [src]="config.icon" [alt]="config.title |translateApi">
+    </div>
+    <div class="doctor-details--content">
+        <p class="doctor-details--content--title">
+            {{config.title |translateApi}}
+        </p>
+        <p class="doctor-details--content--value" [style.color]="config.valueColor">
+            {{ config.value }}
+        </p>
+    </div>
+</div>

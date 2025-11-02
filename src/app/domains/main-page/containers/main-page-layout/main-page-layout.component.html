@@ -1,0 +1,41 @@
+@if(isBrowser){
+<div class="home-page">
+  <header class="home-page__header">
+    <app-site-header />
+  </header>
+
+  <main class="home-page__container" role="main" aria-label="Welcome and main features of the application">
+    <section class="home-page__welcome" aria-labelledby="welcome-heading">
+      <h1 id="welcome-heading" class="sr-only">Welcome to Our Self-Care Platform</h1>
+
+      <p class="home-page__welcome-message" [attr.aria-label]="'home_welcome_safe_space' | translateApi">
+        {{'home_welcome_safe_space' |translateApi}}
+      </p>
+      <p class="home-page__welcome-tagline" [attr.aria-label]="'home_self_care_investment' | translateApi">
+        {{ "home_self_care_investment" |translateApi }}
+      </p>
+    </section>
+
+    <!-- ✅ Only show when logged in AND profile data is available -->
+    @if(isLoggedIn() && userIdentityProfileDataSignal() && userIdentityProfileDataSignal()?.id){
+    <app-comment-box [userIdentityProfileData]="userIdentityProfileDataSignal" [placeholder]="placeholderHeader"
+      [readonlyOnClick]="readonlyOnClick" (inputClicked)="openAddEditPostPopup()" [type]="''"
+      (addReelsClicked)="openReelsPopup()">
+    </app-comment-box>
+    }
+
+    <div class="home-page__content">
+      <!-- Banners Section -->
+      @if(banners() && banners()!.length > 0) {
+      <section class="home-page__banners" aria-label="Featured promotions and announcements">
+        <app-banner-carousel [banners]="banners()" />
+      </section>
+      }
+
+      <section class="home-page__quick-access-cards" aria-label="Quick access to key features and services">
+        <app-quick-access-features-cards />
+      </section>
+    </div>
+  </main>
+</div>
+}

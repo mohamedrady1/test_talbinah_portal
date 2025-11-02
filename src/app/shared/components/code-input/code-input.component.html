@@ -1,0 +1,10 @@
+<div id="otp-container">
+  @for (num of inputs; track $index) {
+  <input #inputRefs class="form-control input-style"
+    [ngClass]="{'focus-style': focusedIndex() === $index, 'normal-style': focusedIndex() !== $index}"
+    [type]="typedInput === 'num' ? 'tel' : 'text'" [attr.inputmode]="typedInput === 'num' ? 'numeric' : null"
+    [attr.pattern]="typedInput === 'num' ? '[0-9]*' : null" [attr.id]="'input' + num" maxlength="1"
+    (keyup)="onCodeChanged($index, $event)" (focus)="focusedIndex.set($index)" (blur)="focusedIndex.set(-1)"
+    [attr.tabindex]="$index + 1" placeholder="_">
+  }
+</div>

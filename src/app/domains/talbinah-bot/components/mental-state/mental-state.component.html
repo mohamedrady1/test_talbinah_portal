@@ -1,0 +1,46 @@
+<section class="mental-state" role="region" aria-label="Mental State">
+  <app-dynamic-accordion-item [item]="item">
+    <ng-template let-item="item">
+      <div class="mental-state__content" [attr.aria-label]="item.title + ' content'">
+        <div class="mental-state__item" [attr.aria-label]="item.title + ' item'">
+          <div class="mental-state__record" [attr.aria-label]="item.title + ' record'">
+            <span class="mental-state__record--icon" [attr.aria-label]="item.title + ' icon'">
+              🥰
+            </span>
+            <span class="mental-state__record--text" [attr.aria-label]="item.title + ' text'">
+              متعب
+            </span>
+          </div>
+          <div class="mental-state__record" [attr.aria-label]="item.title + ' record'">
+            <span class="mental-state__record--label" [attr.aria-label]="item.title + ' label'">
+              {{'talbinahBot.LastHeard' | translate}}
+            </span>
+            <span class="mental-state__record--text" [attr.aria-label]="item.title + ' text'">
+              امس
+            </span>
+          </div>
+        </div>
+
+        <div class="mental-state__item" [attr.aria-label]="item.title + ' item'">
+          <div class="mental-state__record" [attr.aria-label]="item.title + ' record'">
+            <span class="mental-state__record--label" [attr.aria-label]="item.title + ' label'">
+              {{'talbinahBot.CurrentState' | translate}}
+            </span>
+            <span class="mental-state__record--text" [attr.aria-label]="item.title + ' text'">
+              متوسط
+            </span>
+          </div>
+          <div class="mental-state__record" [attr.aria-label]="item.title + ' record'">
+            <span class="mental-state__record--label" [attr.aria-label]="item.title + ' label'">
+              {{'talbinahBot.RecordedCount' | translate}}
+            </span>
+            <span class="mental-state__record--text" [attr.aria-label]="item.title + ' text'">
+              5 {{'talbinahBot.Times' | translate}}
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </ng-template>
+  </app-dynamic-accordion-item>
+</section>

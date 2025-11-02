@@ -1,0 +1,131 @@
+<div class="my-psychological-society">
+  <div class="my-psychological-society--right">
+    <div class="my-psychological-society--add-post">
+      <app-comment-box [userIdentityProfileData]="userIdentityProfileData" [placeholder]="placeholderHeader"
+        [readonlyOnClick]="readonlyOnClick" (inputClicked)="openAddEditPostPopup()">
+      </app-comment-box>
+    </div>
+    <div>
+      <app-tab-switcher [tabs]="tabs()" (tabSelected)="onTabInterestSelected($event)"
+        [isLoadingItems]="isLoadingPostsFilter"></app-tab-switcher>
+    </div>
+
+    <div class="my-psychological-society--posts">
+
+      @if (isLoadingDeletePost()) {
+      <div class=" my-psychological-society--delete-post">
+        <div class="delete-post__icon-wrapper">
+          <svg class="delete-post__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <polyline points="3 6 5 6 21 6" />
+            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m5 0V4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2" />
+            <line x1="10" y1="11" x2="10" y2="17" />
+            <line x1="14" y1="11" x2="14" y2="17" />
+          </svg>
+
+          <div class="delete-post__spinner"></div>
+        </div>
+      </div>
+      }
+
+      @if (isLoadingPosts() || isLoadingPostsFilter()) { <div class="posts-loading-state">
+        <app-psychological-society-card-shemmer class="w-100"></app-psychological-society-card-shemmer>
+      </div>
+      } @else if (allPostsList().length) { @for (postItem of allPostsList(); track postItem.id) {
+      <app-psychological-society-card [type]="cardType.DETAILS" [isEnableCommented]="true" [hasBorder]="false"
+        [userIdentityProfileData]="userIdentityProfileData" (commentChanged)="handleCommentChange($event)"
+        [config]="postItem" (editPostAction)="editPostDetails($event)" (deletePostAction)="deletePost($event)" />
+      }
+
+      @if (hasMorePostsToLoad()) {
+      <div class="load-more-container" #loadMoreContainer>
+        <button id="load-more-btn" type="button" class="learn-more" (click)="loadMore()"
+          [disabled]="isLoadingMorePosts()" [class.is-loading]="isLoadingMorePosts()">
+          <span class="circle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z"
+                  fill="#0e39b6"></path>
+              </g>
+            </svg>
+          </span>
+          <span class="button-text">
+            @if (isLoadingMorePosts()) {
+            {{'in_progress' | translateApi}}
+            } @else {
+            {{'load_more' | translateApi}}
+            }
+          </span>
+        </button>
+      </div>
+      }
+      <div class="my-psychological-society--posts__recommended" style="display: none;">
+        <p>
+          {{"people_with_your_condition_also_read_this"|translateApi}}
+        </p>
+        <div class="my-psychological-society--posts__recommended--list">
+          @for (postItem of allPostsList(); track postItem.id) { <app-psychological-society-card
+            (editPostAction)="editPostDetails($event)" [type]="cardType.SUMMARY" [isEnableCommented]="true"
+            [hasBorder]="false" [userIdentityProfileData]="userIdentityProfileData"
+            (commentChanged)="handleCommentChange($event)" [config]="postItem" />
+          }
+        </div>
+      </div>
+
+      } @else {
+      @if(errorMessagePosts()&& !statusPosts()) {
+      <app-error-state [config]="postsErrorState" class="w-100"></app-error-state>
+      }
+      @else {
+      <app-empty-state [config]="postsEmptyState" class="w-100"></app-empty-state>
+      }
+      }
+
+    </div>
+  </div>
+
+  @if (isLoggedIn()) {
+  <div class="my-psychological-society--left">
+
+    <app-my-psychological-society-information-card
+      (inputClicked)="openEditProfilePopup()"></app-my-psychological-society-information-card>
+    <div class="notification">
+      <div class="notification__title">
+        <p>
+          {{"notification2"|translateApi}}
+        </p>
+      </div>
+      <div class="notification__list">
+        @if (isLoadingNotifications()) {
+        <div class="shimmer-wrapper">
+          <app-notification-skeleton></app-notification-skeleton>
+        </div>
+        } @else if (notificationsList().length == 0) {
+        <app-empty-state [config]="notificationsEmptyState" class="w-100"></app-empty-state>
+        }
+        @else if (notificationsList().length != 0){
+        @for (item of notificationsList().slice(0,5); track item.id) { <div class="notification__card"
+          [class.notification__card-enter]="true" [class.notification__card-enter-active]="true">
+          <app-my-psychological-society-notification-card [item]="item" />
+        </div>
+        }
+        @if (notificationsList().length > 5) {
+        <button class="notification__show-more" (click)="showAllNotifications()">
+          {{"show_more"|translateApi}}
+        </button>
+        }
+        }
+        @else {
+        <app-error-state [config]="notificationsErrorState" class="w-100"></app-error-state>
+        }
+      </div>
+    </div>
+    <!-- <app-mood-statistics [config]="moodStatistics"></app-mood-statistics> -->
+    <app-need-support-card></app-need-support-card>
+  </div>
+  }
+
+</div>

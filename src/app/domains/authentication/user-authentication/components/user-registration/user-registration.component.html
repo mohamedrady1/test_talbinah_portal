@@ -1,0 +1,166 @@
+<div id="register">
+  <div class="register">
+    <div class="register__welcome">
+      <h1 class="register__welcome-title">
+        {{"general.welcome"|translate}}
+      </h1>
+      <p class="register__welcome-description">
+        {{"welcome_safe_space"|translate}}
+      </p>
+    </div>
+    @if (formConfigs.length) {
+    <div class="form-box">
+      <form class="general-form-wrapper" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="general-form-wrapper__groups">
+          @for (formItem of formConfigs; track $index) {
+          <div class="general-form-wrapper__field {{formItem.widthClass}}">
+            <div class="general-form-wrapper__label-group">
+              @if (formItem.label) {
+              <label [for]="formItem.name" class="general-form-wrapper__label" [ngClass]="{
+                  'general-form-wrapper__label--error': getError(formItem.name),
+                  'general-form-wrapper__label--clickable': formItem.enableLabelClick
+                }">
+                {{ formItem.label | translate }}
+                @if (formItem.isRequired) {
+                <span class="general-form-wrapper__required">*</span>
+                }
+              </label>
+              }
+            </div>
+            <div class="general-form-">
+              @switch(formItem.type) {
+              @case(allInputTypes.COUNTRYCODEINPUT) {
+              <div
+                class="custom-input-wrapper custom-input-wrapper--with-icon custom-input-wrapper--icon-start country-code-input"
+                [class.p-invalid]="getError('phoneNumber')">
+                <img src="images/icons/call.svg" [alt]="'mobile_number' | translate">
+                <div class="select-wrapper relative">
+                  <p-select class="country-code-input-select w-full md:w-56" [options]="allowedCountries()"
+                    [ngClass]="{ 'p-invalid': getError('phoneNumber') }" [ngModel]="selectedCountryModel()"
+                    (ngModelChange)="onCountryChange($event)" [ngModelOptions]="{ standalone: true }" optionLabel="name"
+                    [filter]="true" filterBy="name" [placeholder]="isLoadingCountries() ? '' : ('code' | translate)"
+                    [virtualScroll]="true" [virtualScrollItemSize]="42" [autoDisplayFirst]="false" appendTo="body"
+                    [attr.aria-label]="('mobile_number' | translate)">
+                    @if (!isLoadingCountries()) {
+                    <ng-template #selectedItem let-selectedOption>
+                      <div class="flex items-center gap-2">
+                        <img [src]="selectedOption.flag" [alt]="selectedOption.name + ' flag'"
+                          [class]="'flag flag-' + (selectedOption?.code?.toLowerCase() || '')"
+                          onerror="this.src='images/icons/no-flag.svg'" />
+                        <div>{{ selectedOption.phone_code }}</div>
+                      </div>
+                    </ng-template>
+                    <ng-template #item let-country>
+                      <div class="flex items-center gap-2">
+                        <img [src]="country.flag" [alt]="country.name + ' flag'"
+                          [class]="'flag flag-' + (country?.code?.toLowerCase() || '')"
+                          onerror="this.src='images/icons/no-flag.svg'" />
+                        <div>{{ country.name }}</div>
+                      </div>
+                    </ng-template>
+                    }
+                  </p-select>
+                  <input [id]="formItem.name" type="number" class="form-control custom-input-wrapper__input"
+                    [formControlName]="formItem.name" [placeholder]="
+                    !selectedCountryModel()
+                      ? ('phone_should_select_code' | translate)
+                      : ('phone_placeholder' | translate)
+                  " autocomplete="tel"
+                    [attr.aria-describedby]="getError(formItem.name) ? formItem.name + '-error' : null"
+                    [attr.aria-invalid]="getError(formItem.name) ? 'true' : 'false'" />
+                  @if (isLoadingCountries()) {
+                  <div class="dots-loader" role="status" aria-live="polite" aria-label="Loading countries">
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                  </div>
+                  }
+                </div>
+              </div>
+              }
+              @case(allInputTypes.SELECT) {
+              <div class="custom-input-wrapper custom-input-wrapper--with-icon custom-input-wrapper--icon-start"
+                [class.p-invalid]="getError(formItem.name)">
+
+                <img [src]="formItem.inputIcon" [alt]="formItem.label  || ''| translate" />
+                <p-select [id]="formItem.name" class="w-full form-select" [options]="formItem.listValues || []"
+                  [formControlName]="formItem.name" optionLabel="label" optionValue="value"
+                  [placeholder]="(formItem.placeholder || '') | translate" [showClear]="true" appendTo="body"
+                  [ngClass]="{ 'p-invalid': getError(formItem.name) }"
+                  [attr.aria-describedby]="getError(formItem.name) ? formItem.name + '-error' : null"
+                  [attr.aria-invalid]="getError(formItem.name) ? 'true' : 'false'">
+                  <ng-template #selectedItem let-selectedOption>
+                    <span>{{ (selectedOption?.label || '') | translate }}</span>
+                  </ng-template>
+                  <ng-template #item let-opt>
+                    <span>{{ (opt?.label || '') | translate }}</span>
+                  </ng-template>
+                </p-select>
+              </div>
+              }
+              @default {
+              <div class="custom-input-wrapper custom-input-wrapper--with-icon custom-input-wrapper--icon-start"
+                [class.p-invalid]="getError(formItem.name)">
+                <span class="custom-input-wrapper__icon" role="img"
+                  [attr.aria-label]="formItem.label  || ''| translate">
+                  <img [src]="formItem.inputIcon" [alt]="formItem.label  || ''| translate" />
+                </span>
+                <input [id]="formItem.name" [formControlName]="formItem.name" [type]="formItem.type === allInputTypes.DATE
+                    ? ((registerForm.get(formItem.name)?.value || isDateActive(formItem.name)) ? 'date' : 'text')
+                    : (formItem.type === allInputTypes.EMAIL ? 'email' : 'text')"
+                  [attr.max]="formItem.type === allInputTypes.DATE ? maxDate : null" [placeholder]="formItem.type === allInputTypes.DATE
+                    ? ((registerForm.get(formItem.name)?.value ? '' : ('choose_your_date_of_birth' | translate)))
+                    : ((formItem.placeholder || '') | translate)" class="custom-input-wrapper__input"
+                  [ngClass]="{ 'custom-input-wrapper__input--date': formItem.type === allInputTypes.DATE }"
+                  (focus)="formItem.type === allInputTypes.DATE ? onDateFocus($event) : null"
+                  (blur)="formItem.type === allInputTypes.DATE ? onDateBlur($event, formItem.name) : null"
+                  [attr.aria-describedby]="getError(formItem.name) ? formItem.name + '-error' : null"
+                  [attr.aria-invalid]="getError(formItem.name) ? 'true' : 'false'" />
+              </div>
+              }
+              }
+              @if (getError(formItem.name)) {
+              <span class="general-form-wrapper__error-message" role="alert" [id]="formItem.name + '-error'">
+                {{ getValidationErrorMessage(formItem.name, formItem.validation || []) | translate }}
+              </span>
+              } @else if (formItem.hint && !registerForm.get(formItem.name)?.value && !formItem.fixedHint) {
+              <small class="form-field__hint text-secondary">
+                {{ formItem.hint | translate }}
+              </small>
+              }
+            </div>
+          </div>
+          }
+        </div>
+        <div class="general-form-wrapper__actions">
+          <button type="submit" class="btn btn--solid" [disabled]="_RegisterFacade.loading()">
+            <span class="btn__label">
+              @if (_RegisterFacade.loading()) {
+              <span role="status" aria-live="polite" aria-label="Registration in progress">
+                {{ 'in_progress' | translate }}
+              </span>
+              } @else {
+              <span>{{ 'create_account' | translate }}</span>
+              }
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+    }
+
+    <div class="register__form__divider">
+      <app-svg-icon name="divider-2" [attr.aria-label]="'Divider'"></app-svg-icon>
+      <p>
+        {{'form.alreadyHaveAccount'|translate}}
+      </p>
+      <app-svg-icon name="divider-1" [attr.aria-label]="'Divider'"></app-svg-icon>
+    </div>
+    <div class="register__form__buttons" role="group" [attr.aria-label]="'form.roleSelect' | translate">
+      <button id="login-btn" type="button" class="btn btn--outline" (click)="onRoleSelect('login')"
+        [attr.aria-label]="'تسجيل الدخول' | translate">
+        <span class="btn__label">
+          {{'login' | translate}}
+        </span>
+      </button>
+    </div>
+  </div>
+</div>

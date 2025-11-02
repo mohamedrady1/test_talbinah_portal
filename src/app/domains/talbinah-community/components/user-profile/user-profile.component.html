@@ -1,0 +1,201 @@
+<main class="user-profile-layout" role="main">
+    <header class="user-profile-layout__header">
+        <app-site-header></app-site-header>
+    </header>
+    <section class="user-profile-layout__container" #card>
+        <div [attr.aria-label]="headerConfig.title + ' header'">
+            @if (cardRef) {
+            <app-page-layout-header [config]="headerConfig" [card]="cardRef" [disablePadding]="true"
+                (closeRequested)="onCloseRequested()"></app-page-layout-header>
+            }
+        </div>
+
+        <div class="user-profile-layout__cards" appAutoExactHeight [enabled]="!isFullscreen()" role="region"
+            aria-label="user profile">
+            <div class="profile__header">
+                <div class="profile__header__images">
+                    <div class="profile__header__images--background">
+                        <img src="images/layout/header/Logo-light.png" alt="Logo">
+                    </div>
+                    <div class="profile__header__images--user-img">
+                        @if (isLoadingProfile()&&!disableHeaderLoading()&&!disableLoading()) {
+                        <div class="shimmer shimmer--circle"></div>
+                        }
+                        @else if (userCommunityProfileResponse()?.data?.profileData?.emoji?.image) {
+                        <img [src]="userCommunityProfileResponse()?.data?.profileData?.emoji?.image"
+                            [alt]="userCommunityProfileResponse()?.data?.profileData?.dummy_name"
+                            onerror="src='images/not-found/talbinah-2.png'" />
+                        }
+                        <!-- @else {
+                        <img [src]="'images/not-found/talbinah-2.png'"
+                            [alt]="userCommunityProfileResponse()?.data?.profileData?.dummy_name"
+                            onerror="src='images/not-found/talbinah-2.png'" />
+                        } -->
+
+                    </div>
+                </div>
+            </div>
+            <div class="profile__information">
+                <div class="profile__information--content">
+                    <p class="profile__information--content--name">
+                        @if (isLoadingProfile()&&!disableHeaderLoading()&&!disableLoading()) {
+                        <span class="shimmer shimmer--text"></span>
+                        }
+                        @else {
+                        {{userCommunityProfileResponse()?.data?.profileData?.dummy_name}}
+                        }
+
+                    </p>
+                    <div class="profile__information--content--info" [ngClass]="{'data-info': isMyCommunityProfile()}">
+                        @if (isLoadingProfile()&&!disableHeaderLoading()&&!disableLoading()) {
+                        <div class="shimmer shimmer--text short"></div>
+                        }
+                        @else {
+                        @if (isMyCommunityProfile()) {
+                        <div>
+                            <p>
+                                {{'posts'|translateApi}}
+                            </p>
+                            <span>
+                                {{userCommunityProfileResponse()?.data?.profileData?.my_post_count}}
+                            </span>
+                        </div>
+                        <div>
+                            <p>
+                                {{'followers'|translateApi}}
+                            </p>
+                            <span>
+                                {{userCommunityProfileResponse()?.data?.profileData?.my_followers_count}}
+                            </span>
+                        </div>
+                        <div class="profile__information--content--info--i-follow-them" (click)="openFollowingList()">
+                            <p>
+                                {{'i_follow_them'|translateApi}}
+                            </p>
+                            <span>
+                                {{userCommunityProfileResponse()?.data?.profileData?.my_following_count}}
+                            </span>
+                        </div>
+                        }
+                        @else{
+                        <p>
+                            {{ userCommunityProfileResponse()?.data?.profileData?.my_followers_count | number }}
+                            {{'from_followers'|translateApi}}
+                        </p>
+                        <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M6.1064 8.24683C6.0864 8.24683 6.07307 8.24683 6.05307 8.24683C6.01973 8.24016 5.97307 8.24016 5.93307 8.24683C3.99973 8.18683 2.53973 6.66683 2.53973 4.7935C2.53973 2.88683 4.09307 1.3335 5.99973 1.3335C7.9064 1.3335 9.45973 2.88683 9.45973 4.7935C9.45307 6.66683 7.9864 8.18683 6.1264 8.24683C6.11973 8.24683 6.11307 8.24683 6.1064 8.24683ZM5.99973 2.3335C4.6464 2.3335 3.53973 3.44016 3.53973 4.7935C3.53973 6.12683 4.57973 7.20016 5.9064 7.24683C5.9464 7.24016 6.03307 7.24016 6.11973 7.24683C7.4264 7.18683 8.45307 6.1135 8.45973 4.7935C8.45973 3.44016 7.35307 2.3335 5.99973 2.3335Z"
+                                fill="#47586E" />
+                            <path
+                                d="M11.0264 8.33317C11.0064 8.33317 10.9864 8.33317 10.9664 8.3265C10.6931 8.35317 10.4131 8.15984 10.3864 7.8865C10.3597 7.61317 10.5264 7.3665 10.7997 7.33317C10.8797 7.3265 10.9664 7.3265 11.0397 7.3265C12.0131 7.27317 12.7731 6.47317 12.7731 5.49317C12.7731 4.47984 11.9531 3.65984 10.9397 3.65984C10.6664 3.6665 10.4397 3.43984 10.4397 3.1665C10.4397 2.89317 10.6664 2.6665 10.9397 2.6665C12.4997 2.6665 13.7731 3.93984 13.7731 5.49984C13.7731 7.03317 12.5731 8.27317 11.0464 8.33317C11.0397 8.33317 11.0331 8.33317 11.0264 8.33317Z"
+                                fill="#47586E" />
+                            <path
+                                d="M6.11307 15.5332C4.80641 15.5332 3.49307 15.1998 2.49974 14.5332C1.57307 13.9198 1.06641 13.0798 1.06641 12.1665C1.06641 11.2532 1.57307 10.4065 2.49974 9.7865C4.49974 8.45984 7.73974 8.45984 9.72641 9.7865C10.6464 10.3998 11.1597 11.2398 11.1597 12.1532C11.1597 13.0665 10.6531 13.9132 9.72641 14.5332C8.72641 15.1998 7.41974 15.5332 6.11307 15.5332ZM3.05307 10.6265C2.41307 11.0532 2.06641 11.5998 2.06641 12.1732C2.06641 12.7398 2.41974 13.2865 3.05307 13.7065C4.71307 14.8198 7.51307 14.8198 9.17307 13.7065C9.81307 13.2798 10.1597 12.7332 10.1597 12.1598C10.1597 11.5932 9.80641 11.0465 9.17307 10.6265C7.51307 9.51984 4.71307 9.51984 3.05307 10.6265Z"
+                                fill="#47586E" />
+                            <path
+                                d="M12.2264 14.3333C11.9931 14.3333 11.7864 14.1733 11.7397 13.9333C11.6864 13.66 11.8597 13.4 12.1264 13.34C12.5464 13.2533 12.9331 13.0867 13.2331 12.8533C13.6131 12.5667 13.8197 12.2067 13.8197 11.8267C13.8197 11.4467 13.6131 11.0867 13.2397 10.8067C12.9464 10.58 12.5797 10.42 12.1464 10.32C11.8797 10.26 11.7064 9.99335 11.7664 9.72001C11.8264 9.45335 12.0931 9.28001 12.3664 9.34001C12.9397 9.46668 13.4397 9.69335 13.8464 10.0067C14.4664 10.4733 14.8197 11.1333 14.8197 11.8267C14.8197 12.52 14.4597 13.18 13.8397 13.6533C13.4264 13.9733 12.9064 14.2067 12.3331 14.32C12.2931 14.3333 12.2597 14.3333 12.2264 14.3333Z"
+                                fill="#47586E" />
+                        </svg>
+                        }
+                        }
+                    </div>
+                </div>
+
+                @if (!isMyCommunityProfile()&& !isLoadingProfile() &&!isLoadingPosts()) {
+                <div class="profile__information--action">
+                    <span class="profile__information--action--follow" (click)="toggleFollow()"
+                        [class.disabled]="isLoadingFollow()">
+                        @if (isLoadingFollow()) {
+                        <div class="profile__information--action--follow__loading" aria-label="Submit in progress">
+                            {{ 'in_progress' | translateApi }}
+                            <span class="dot-loader"></span>
+                        </div> } @else if (!userCommunityProfileResponse()?.data?.is_followd) {
+                        <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M10.5 7.9375H3.5C3.26083 7.9375 3.0625 7.73917 3.0625 7.5C3.0625 7.26083 3.26083 7.0625 3.5 7.0625H10.5C10.7392 7.0625 10.9375 7.26083 10.9375 7.5C10.9375 7.73917 10.7392 7.9375 10.5 7.9375Z"
+                                fill="#0E39B6" />
+                            <path
+                                d="M7 11.4375C6.76083 11.4375 6.5625 11.2392 6.5625 11V4C6.5625 3.76083 6.76083 3.5625 7 3.5625C7.23917 3.5625 7.4375 3.76083 7.4375 4V11C7.4375 11.2392 7.23917 11.4375 7 11.4375Z"
+                                fill="#0E39B6" />
+                        </svg>
+                        <p>
+                            {{"follow3"|translateApi}}
+                        </p>
+                        } @else {
+                        <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M6.93722 13.5C6.71711 13.5 6.508 13.4107 6.35393 13.2544L3.23937 10.0957C2.92021 9.77206 2.92021 9.23631 3.23937 8.91263C3.55853 8.58894 4.08679 8.58894 4.40595 8.91263L6.93722 11.4798L12.594 5.74276C12.9132 5.41908 13.4415 5.41908 13.7606 5.74276C14.0798 6.06645 14.0798 6.6022 13.7606 6.92588L7.52051 13.2544C7.36643 13.4107 7.15733 13.5 6.93722 13.5Z"
+                                fill="#0E39B6" />
+                        </svg>
+                        <p>
+                            {{"following"|translateApi}}
+                        </p>
+                        }
+                    </span>
+                </div>
+                }
+                @if(isMyCommunityProfile() && !isLoadingProfile()){
+                <div class="profile__information--action">
+                    <span class="profile__information--action--saved-posts" (click)="openSavedPosts()">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M2.47517 17.0623C2.20517 17.0623 1.94267 16.9949 1.71767 16.8599C1.21517 16.5674 0.930176 15.9823 0.930176 15.2548V6.73486C0.930176 5.13736 2.22766 3.83984 3.82516 3.83984H9.66019C11.2577 3.83984 12.5552 5.13736 12.5552 6.73486V15.2548C12.5552 15.9823 12.2702 16.5599 11.7677 16.8599C11.2652 17.1524 10.6202 17.1223 9.98268 16.7698L7.03519 15.1274C6.89269 15.0449 6.59266 15.0449 6.45016 15.1274L3.50267 16.7698C3.15767 16.9648 2.80517 17.0623 2.47517 17.0623ZM3.83267 4.97235C2.85767 4.97235 2.06268 5.76734 2.06268 6.74234V15.2624C2.06268 15.5699 2.15268 15.8098 2.29518 15.8923C2.43768 15.9748 2.69269 15.9373 2.96269 15.7873L5.91019 14.1448C6.39019 13.8823 7.11018 13.8823 7.59018 14.1448L10.5377 15.7873C10.8077 15.9373 11.0552 15.9748 11.2052 15.8923C11.3477 15.8098 11.4377 15.5699 11.4377 15.2624V6.74234C11.4377 5.76734 10.6427 4.97235 9.66769 4.97235H3.83267Z"
+                                fill="#0E39B6" />
+                            <path
+                                d="M11.0175 17.0625C10.6875 17.0625 10.3425 16.965 9.99001 16.7775L7.04251 15.135C6.90001 15.06 6.59248 15.06 6.44998 15.135L3.50999 16.7775C2.87249 17.13 2.21999 17.16 1.72499 16.8675C1.22249 16.575 0.9375 15.99 0.9375 15.27V6.74997C0.9375 5.15247 2.23499 3.85498 3.83249 3.85498H9.66751C11.265 3.85498 12.5625 5.15247 12.5625 6.74997V15.27C12.5625 15.99 12.2775 16.575 11.775 16.8675C11.55 16.995 11.295 17.0625 11.0175 17.0625ZM6.75 13.95C7.05 13.95 7.3425 14.0175 7.59 14.1525L10.5375 15.795C10.8075 15.945 11.0625 15.9825 11.205 15.8925C11.3475 15.81 11.4375 15.57 11.4375 15.2625V6.74246C11.4375 5.76746 10.6425 4.97247 9.66751 4.97247H3.83249C2.85749 4.97247 2.0625 5.76746 2.0625 6.74246V15.2625C2.0625 15.57 2.1525 15.81 2.295 15.8925C2.4375 15.975 2.69251 15.9375 2.96251 15.7875L5.91 14.145C6.15 14.0175 6.45 13.95 6.75 13.95Z"
+                                fill="#0E39B6" />
+                            <path
+                                d="M15.5175 14.1523C15.1875 14.1523 14.8425 14.0548 14.49 13.8673L11.7225 12.3223C11.5425 12.2248 11.4375 12.0373 11.4375 11.8348V6.74982C11.4375 5.77482 10.6425 4.97983 9.66751 4.97983H6C5.6925 4.97983 5.4375 4.72483 5.4375 4.41733V3.83981C5.4375 2.24231 6.73499 0.944824 8.33249 0.944824H14.1675C15.765 0.944824 17.0625 2.24231 17.0625 3.83981V12.3598C17.0625 13.0798 16.7775 13.6648 16.275 13.9573C16.05 14.0848 15.795 14.1523 15.5175 14.1523ZM12.5625 11.4973L15.0375 12.8848C15.3075 13.0348 15.555 13.0723 15.705 12.9823C15.855 12.8923 15.9375 12.6598 15.9375 12.3523V3.83231C15.9375 2.85731 15.1425 2.06232 14.1675 2.06232H8.33249C7.35749 2.06232 6.5625 2.85731 6.5625 3.83231V3.84732H9.66751C11.265 3.84732 12.5625 5.14481 12.5625 6.74231V11.4973Z"
+                                fill="#0E39B6" />
+                        </svg>
+
+                        <p>
+                            {{"saved_posts"|translateApi}}
+                        </p>
+
+                    </span>
+                </div>
+                }
+            </div>
+            @if (isMyCommunityProfile()) {
+            <div class="profile__add-post">
+                @if (!isLoadingProfile()||disableHeaderLoading()|| disableLoading()) {
+                <app-comment-box class="w-100" [userIdentityProfileData]="userProfileSignal"
+                    [placeholder]="placeholderHeader" (inputClicked)="openAddEditPostPopup()"
+                    [readonlyOnClick]="readonlyOnClick">
+                </app-comment-box>
+                }
+                @else {
+                <app-comment-box-skeleton></app-comment-box-skeleton>
+                <app-tabs-shemmer></app-tabs-shemmer>
+                }
+            </div>
+
+            }
+            <div class="profile__tabs">
+                <app-tab-switcher [tabs]="tabs()" (tabSelected)="onTabInterestSelected($event)"></app-tab-switcher>
+            </div>
+            <div class="profile__posts">
+                @if (!isLoadingPosts() && !isLoadingPostsFilter()) {
+                @for (post of allPostsResponse()?.data?.data ?? []; track post.id) {
+                <app-psychological-society-card [type]="cardType.DETAILS" [isEnableCommented]="true" [hasBorder]="false"
+                    (commentChanged)="handleCommentChange($event)" [config]="post"
+                    [userIdentityProfileData]="userIdentityProfileDataSignal"
+                    (editPostAction)="openAddEditPostPopup($event)" (deletePostAction)="deletePost($event)"
+                    [isUserProfile]="isUserProfile" />
+                }
+                @empty {
+                @if (!errorMessagePosts() && !statusPosts()) {
+                <app-error-state [config]="postsErrorState" class="w-100"></app-error-state>
+                } @else {
+                <app-empty-state [config]="postsEmptyState" class="w-100"></app-empty-state>
+                }
+                }
+                }
+                @else {
+                <app-psychological-society-card-shemmer></app-psychological-society-card-shemmer>
+                }
+            </div>
+        </div>
+    </section>
+</main>

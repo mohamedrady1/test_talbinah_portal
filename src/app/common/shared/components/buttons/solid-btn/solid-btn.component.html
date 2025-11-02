@@ -1,0 +1,6 @@
+<button class="btn btn-solid-main d-flex align-items-center gap-1" (click)="onClick()">
+    @if(icon){
+    <img [src]="icon" alt="{{label | translate}}">
+    }
+    <span class="font-bold">{{ label | translate }}</span>
+</button>

@@ -1,0 +1,135 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+@use "../../../../common/styles/scss/abstracts/variables" as *;
+
+.referenced-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.425rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+
+  background: var(--Dark-WHITE, #fff); // default
+
+  &:hover {
+    background: var(--light-gray, #f0f0f0);
+  }
+
+  &--user {
+    background: var(--Primary-100, #DBE1F4);
+  }
+
+  &--doctor {
+    background: var(--Dark-50, #F6F7F8);
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    width: 100%;
+  }
+
+  &__item {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+
+    &--user {
+      justify-content: flex-start;
+
+      .referenced-message__message-group {
+        flex-direction: row;
+      }
+
+      .referenced-message__bubble-area {
+        align-items: flex-start;
+      }
+    }
+  }
+
+  &__message-group {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    flex-grow: 1;
+
+    @include respond(xxs) {
+      max-width: 100%;
+    }
+  }
+
+  &__bubble-area {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex-grow: 1;
+  }
+
+  &__content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    position: relative;
+    width: 100%;
+
+    app-file-viewer,
+    app-chat-message-image,
+    app-chat-message-video,
+    app-chat-message-voice,
+    app-article-card,
+    app-podcast-bot,
+    app-chat-doctor-card,
+    app-discount-card-for-meeting-chat,
+    app-mental-health-scale-card {
+      width: 100%;
+    }
+
+    &--voice,
+    &--audio,
+    &--event,
+    &--deleted,
+    &--success,
+    &--danger {
+      padding: 0;
+      border-radius: 0;
+      background: none;
+      box-shadow: none;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    color: var(--Dark-light-600, #333);
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+    .referenced-message__item--user & {
+      align-items: flex-start;
+    }
+  }
+
+  &__text {
+    color: var(--Dark-light-600, #333);
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-self: stretch;
+    margin-bottom: 0;
+
+    &--deleted {
+      color: var(--Sacondry-Color-primary, #b80924);
+      font-style: italic;
+    }
+  }
+}

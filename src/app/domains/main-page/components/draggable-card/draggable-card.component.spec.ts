@@ -1,0 +1,23 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { DraggableCardComponent } from './draggable-card.component';
+
+describe('DraggableCardComponent', () => {
+  let component: DraggableCardComponent;
+  let fixture: ComponentFixture<DraggableCardComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [DraggableCardComponent]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(DraggableCardComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

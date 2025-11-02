@@ -1,0 +1,53 @@
+@if (isBrowser) {
+<section class="khawiik-activities" [attr.aria-labelledby]="'khawiik-activities-heading'">
+  <div class="khawiik-activities__container" role="region" [attr.aria-live]="'polite'" appAutoExactHeight="50"
+    heightMode="max-height">
+
+    <!-- Loading Skeleton -->
+    @if (isLoading()) {
+    <app-khawiik-activities-skeleton></app-khawiik-activities-skeleton>
+    }
+
+    <!-- Error State -->
+    @else if (errorMessage() && status() === false) {
+    <app-error-state-card [config]="errorState"></app-error-state-card>
+    }
+    @else if (activityCards().length === 0) {
+    <app-empty-state-card [config]="emptyState" style="width: 100%;"></app-empty-state-card>
+    }
+    <!-- Activities Grid -->
+    @else {
+    <ul class="khawiik-activities__grid" role="list">
+      @for (card of activityCards(); track card.id) {
+      <li class="khawiik-activities__card" role="listitem">
+        <article class="khawiik-activities__card-inner" role="article" tabindex="0" (click)="onCardSelect(card)"
+          (keydown.enter)="onCardSelect(card)" (keydown.space)="onCardSelect(card)">
+
+          <div class="khawiik-activities__icon" [attr.aria-hidden]="'true'">
+            @if (card.icon) {
+            <img [src]="'images/khawiik/activities/'+card.icon+'.png'" [alt]="card.title + ' icon'" loading="lazy"
+              decoding="async" class="khawiik-activities__icon-img" (error)="onIconError($event)" />
+            }
+          </div>
+
+          <header class="khawiik-activities__card-header">
+            @if (card.opening) {
+            <p class="khawiik-activities__card-subtitle">{{ card.opening }}</p>
+            }
+            <h3 class="khawiik-activities__card-title">{{ card.title }}</h3>
+          </header>
+
+          <div class="khawiik-activities__card-footer">
+            <button type="button" class="khawiik-activities__cta" (click)="onCardSelect(card); $event.stopPropagation()"
+              [attr.aria-label]="card.title + ' - ' + ('start_now' | translateApi)">
+              {{ 'start_now' | translateApi }}
+            </button>
+          </div>
+        </article>
+      </li>
+      }
+    </ul>
+    }
+  </div>
+</section>
+}

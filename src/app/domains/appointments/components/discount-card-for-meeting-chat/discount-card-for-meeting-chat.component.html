@@ -1,0 +1,26 @@
+<article class="discount-card-for-meeting-chat" role="region" [attr.aria-label]="'discount_card_title2' | translateApi">
+
+  <div class="discount-card-for-meeting-chat__label">
+    {{"discount_code2"|translateApi}}
+  </div>
+
+  <div class="discount-card-for-meeting-chat__content">
+    <div class="discount-card-for-meeting-chat__value-code">
+      <div class="discount-card-for-meeting-chat__value">
+        {{ item?.discount ?? 0 }}%
+      </div>
+
+      <app-tooltip [text]="'copied' | translateApi" [position]="Position.TOP" [trigger]="trigger.CLICK">
+        <div class="discount-card-for-meeting-chat__code" (click)="copyToClipboard()" role="button"
+          [attr.aria-label]="'Copy discount code ' + (item?.coupon ?? 'N/A')">
+          <span>{{ item?.coupon ?? '' }}</span>
+          <app-svg-icon name="copy-clipboard" />
+        </div>
+      </app-tooltip>
+    </div>
+    <p class="discount-card-for-meeting-chat__description"
+      [ngClass]="{'text-truncate': allowShortTexts, 'text-truncate-3': !allowShortTexts}">
+      {{ item?.coupon ?? '' }}
+    </p>
+  </div>
+</article>

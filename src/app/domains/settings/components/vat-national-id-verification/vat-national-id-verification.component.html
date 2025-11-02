@@ -1,0 +1,133 @@
+<main class="vat-national-id-verification" role="main">
+    <section class="vat-national-id-verification__container">
+        <div class="vat-national-id-verification__header">
+            ❤️ {{ 'your_id_number' | translateApi }}
+        </div>
+        <div class="vat-national-id-verification__description">
+            {{ 'enter_nationalId_for_vat' | translateApi }}
+        </div>
+        <form class="general-form-wrapper" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="general-form-wrapper__groups">
+                <div class="general-form-wrapper__field">
+                    <div class="general-form-wrapper__label-group">
+                        <label for="nationalIdInput" class="general-form-wrapper__label"
+                            style="color: var(--Dark-DARK, #1D1F1F); font-size: 0.875rem; font-weight: 400;">
+                            {{'ID_number'|translateApi}}
+                            <span class="general-form-wrapper__required" aria-hidden="true">*</span>
+                        </label>
+                    </div>
+                    <div class="custom-input-wrapper custom-input-wrapper--with-icon custom-input-wrapper--icon-start"
+                        [class.p-invalid]="getFormControl('national_id').invalid && getFormControl('national_id').touched">
+                        <span class="custom-input-wrapper__icon">
+                            <!-- SVG for national ID -->
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.66345 7.0835H9.58012" stroke="#909DAD" stroke-width="1.5"
+                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M4.99677 13.75H6.66343" stroke="#909DAD" stroke-width="1.5"
+                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M8.74677 13.75H12.0801" stroke="#909DAD" stroke-width="1.5"
+                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                <path
+                                    d="M18.3301 10.0248V13.4248C18.3301 16.3498 17.5885 17.0832 14.6301 17.0832H5.36345C2.40512 17.0832 1.66345 16.3498 1.66345 13.4248V6.57484C1.66345 3.64984 2.40512 2.9165 5.36345 2.9165H12.0801"
+                                    stroke="#909DAD" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M15.8968 3.4416L12.8051 6.53326C12.6885 6.64993 12.5718 6.88326 12.5468 7.04993L12.3801 8.23326C12.3218 8.65826 12.6218 8.95826 13.0468 8.89993L14.2301 8.73326C14.3968 8.70826 14.6301 8.5916 14.7468 8.47493L17.8385 5.38326C18.3718 4.84993 18.6218 4.23326 17.8385 3.44993C17.0468 2.65826 16.4301 2.90826 15.8968 3.4416Z"
+                                    stroke="#909DAD" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M15.4551 3.8833C15.7217 4.82497 16.4551 5.5583 17.3884 5.81663"
+                                    stroke="#909DAD" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <input id="nationalIdInput" type="text" formControlName="national_id"
+                            class="custom-input-wrapper__input" [placeholder]="'enter_id' | translateApi"
+                            aria-required="true"
+                            [attr.aria-invalid]="getFormControl('national_id').invalid && getFormControl('national_id').touched ? 'true' : 'false'"
+                            aria-describedby="nationalIdError" autocomplete="one-time-code" />
+                    </div>
+                    @if (getFormControl('national_id').invalid && getFormControl('national_id').touched) {
+                    <small id="nationalIdError" class="general-form-wrapper__error-message" role="alert">
+                        {{ getValidationErrorMessage('national_id', [
+                        { errorName: 'required', errorMessage: ('national_id_required' | translateApi) },
+                        ]) }}
+                    </small>
+                    }
+                </div>
+
+                <div class="general-form-wrapper__field">
+                    <div class="general-form-wrapper__label-group">
+                        <label for="birthDateInput" class="general-form-wrapper__label"
+                            style="color: var(--Dark-DARK, #1D1F1F); font-size: 0.875rem; font-weight: 400;">
+                            {{ 'date_of_birth' | translateApi }}<span class="general-form-wrapper__required"
+                                aria-hidden="true">*</span>
+                        </label>
+                    </div>
+                    <div class="custom-input-wrapper custom-input-wrapper--with-icon custom-input-wrapper--icon-start"
+                        [class.p-invalid]="getFormControl('birth_date').invalid && getFormControl('birth_date').touched">
+                        <span class="custom-input-wrapper__icon">
+                            <!-- SVG for birth date -->
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.66669 1.6665V4.1665" stroke="#909DAD" stroke-width="1.5"
+                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M13.3333 1.6665V4.1665" stroke="#909DAD" stroke-width="1.5"
+                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M2.91669 7.5752H17.0834" stroke="#909DAD" stroke-width="1.5"
+                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                <path
+                                    d="M16.0083 13.1416L13.0584 16.0916C12.9417 16.2082 12.8333 16.4249 12.8083 16.5832L12.65 17.7082C12.5917 18.1166 12.875 18.3999 13.2833 18.3416L14.4084 18.1833C14.5667 18.1583 14.7917 18.0499 14.9 17.9332L17.85 14.9833C18.3584 14.4749 18.6 13.8833 17.85 13.1333C17.1084 12.3916 16.5167 12.6332 16.0083 13.1416Z"
+                                    stroke="#909DAD" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M15.5834 13.5664C15.8334 14.4664 16.5334 15.1664 17.4334 15.4164"
+                                    stroke="#909DAD" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M10 18.3332H6.66667C3.75 18.3332 2.5 16.6665 2.5 14.1665V7.08317C2.5 4.58317 3.75 2.9165 6.66667 2.9165H13.3333C16.25 2.9165 17.5 4.58317 17.5 7.08317V9.99984"
+                                    stroke="#909DAD" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M9.99626 11.4167H10.0037" stroke="#909DAD" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M6.91191 11.4167H6.91939" stroke="#909DAD" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M6.91191 13.9167H6.91939" stroke="#909DAD" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <p-datepicker id="birthDateInput" formControlName="birth_date" [showIcon]="true"
+                            iconDisplay="input" dateFormat="yy-mm-dd" [maxDate]="maxBirthDate" [readonlyInput]="true"
+                            [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" appendTo="body"
+                            class="custom-input-wrapper__input custom-input-wrapper__input--p-datepicker"
+                            [placeholder]="'choose_your_date_of_birth' | translateApi" aria-required="true"
+                            [attr.aria-invalid]="getFormControl('birth_date').invalid && getFormControl('birth_date').touched ? 'true' : 'false'"
+                            aria-describedby="birthDateError"></p-datepicker>
+                    </div>
+                    @if (getFormControl('birth_date').invalid && getFormControl('birth_date').touched) {
+                    <small id="birthDateError" class="general-form-wrapper__error-message" role="alert">
+                        {{ getValidationErrorMessage('birth_date', [
+                        { errorName: 'required', errorMessage: ('date_of_birth_required' | translateApi) },
+                        { errorName: 'maxAge', errorMessage: ('birthday_max_age' | translateApi) }
+                        ]) }}
+                    </small>
+                    }
+                </div>
+            </div>
+
+        </form>
+    </section>
+    <div class="general-form-wrapper__actions">
+        <button id="submit-verification-btn" (click)="onSubmit()" class="btn btn--solid" [disabled]="isLoading()"
+            [attr.aria-label]="isLoading() ? ('in_progress' | translateApi) : ('save' | translateApi)">
+            <span class="btn__label">
+                @if (isLoading()) {
+                <div class="general-form-wrapper__loading" [attr.aria-label]="'in_progress' | translateApi">
+                </div>
+                {{ 'in_progress' | translateApi }}
+                } @else {
+                {{ 'save' | translateApi }}
+                }
+            </span>
+        </button>
+    </div>
+</main>

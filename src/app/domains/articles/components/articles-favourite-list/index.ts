@@ -1,0 +1,1 @@
+export * from './articles-favourite-list.component';

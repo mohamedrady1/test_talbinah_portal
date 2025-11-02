@@ -1,0 +1,79 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+@use "../../../../common/styles/scss/abstracts/variables" as *; // Assuming this contains $Primary-50
+
+.story-slider {
+  // BEM: Block .story-slider - Main container for the slider
+  position: relative;
+  overflow: hidden; // Ensures content outside the slider is clipped
+
+  &__wrapper {
+    // BEM: Element .story-slider__wrapper - The scrollable area for cards
+    display: flex;
+    gap: 1.25rem; // Equivalent to 20px
+    overflow-x: scroll; // Use 'scroll' instead of 'hidden' to ensure scrollability for mouse/touch
+    scroll-behavior: smooth;
+    cursor: grab;
+    touch-action: pan-y; // Allows vertical scrolling if content outside is long, but handles horizontal pan
+    user-select: none; // Prevents text selection during drag
+    scrollbar-width: none; // Firefox
+    -ms-overflow-style: none; // IE/Edge
+
+    // Hide scrollbar for Webkit browsers (Chrome, Safari)
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &:active {
+      cursor: grabbing; // Visual feedback when dragging
+    }
+  }
+
+  // The `story-slider__card` rule from the original SCSS is for `app-story-slider-card`
+  // and should ideally reside in `story-slider-card.component.scss` for encapsulation.
+  // If it's used directly in this component's HTML, it should be applied to an element here,
+  // but since `app-story-slider-card` is a child component, its styles belong there.
+
+  &__controls {
+    // BEM: Element .story-slider__controls - Container for navigation buttons
+    display: flex;
+    align-items: center;
+    gap: 0.625rem; // Equivalent to 10px
+    margin-top: 10px; // Spacing below the slider
+    justify-content: center; // Center controls below slider
+  }
+
+  &__button {
+    // BEM: Element .story-slider__button - Styles for individual navigation buttons
+    // background-color: var(--color-primary-50, #{$Primary-50}); // Use CSS custom property with SCSS fallback
+    background-color: var(--Primary-50, #e7ebf8); // Use CSS custom property with SCSS fallback
+    border: none;
+    cursor: pointer;
+    width: 2.5rem; // 40px
+    height: 2.5rem; // 40px
+    border-radius: 50%; // Make it circular
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    flex-shrink: 0;
+
+    &:hover {
+      opacity: 0.8; // Simple hover effect
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-focus-outline, #007bff); // Accessibility outline
+      outline-offset: 2px;
+    }
+
+    // Modifiers for specific button types (prev/next)
+    &--prev,
+    &--next {
+      svg {
+        width: 20px;
+        height: 20px;
+        // The scaleX-rtl class is expected to handle SVG direction based on RTL/LTR
+      }
+    }
+  }
+}

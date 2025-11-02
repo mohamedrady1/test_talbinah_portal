@@ -1,0 +1,43 @@
+<div class="podcast-card" (click)="openPopup()">
+  <div class="podcast-card__details">
+    <div class="podcast-card__thumbnail">
+      <img [src]="podcastDetails?.thumbnail_image" [alt]="podcastDetails.title" class="podcast-card__image" />
+    </div>
+    <div class="podcast-card__content">
+      <div class="podcast-card__content-header">
+        <div class="podcast-card__content-row">
+          <h2 class="podcast-card__title" [class.text-truncate]="allowShortTexts || hideButtonAction">
+            {{podcastDetails.title}}
+          </h2>
+          @if (!hideButtonAction) {
+          <button class="podcast-card__duration-button" (click)="$event.stopPropagation();"
+            attr.aria-label="مدة الحلقة {{podcastDetails.duration}} دقيقة">
+            <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M5.09081 12.4134C4.62998 12.4134 4.19248 12.3025 3.80748 12.0809C2.89748 11.5559 2.39581 10.4884 2.39581 9.08253V4.92337C2.39581 3.5117 2.89748 2.45003 3.80748 1.92503C4.71748 1.40003 5.88998 1.4992 7.11498 2.20503L10.7141 4.2817C11.9333 4.98753 12.61 5.95587 12.61 7.00587C12.61 8.05587 11.9391 9.0242 10.7141 9.73003L7.11498 11.8067C6.40915 12.2092 5.72081 12.4134 5.09081 12.4134ZM5.09081 2.4617C4.77581 2.4617 4.49581 2.5317 4.24498 2.67753C3.61498 3.0392 3.27081 3.83837 3.27081 4.92337V9.0767C3.27081 10.1617 3.61498 10.955 4.24498 11.3225C4.87498 11.69 5.73831 11.585 6.67748 11.0425L10.2766 8.96587C11.2158 8.42337 11.735 7.7292 11.735 7.00003C11.735 6.27087 11.2158 5.5767 10.2766 5.0342L6.67748 2.95753C6.10581 2.63087 5.56915 2.4617 5.09081 2.4617Z"
+                fill="#0E39B6" />
+            </svg>
+            <span class="podcast-card__duration">{{podcastDetails.duration}}
+              {{'min'|translateApi}}</span>
+          </button>
+          }
+        </div>
+        <div class="podcast-card__description">
+          <p [ngClass]="{'text-truncate': allowShortTexts,'text-truncate-3': !allowShortTexts}">
+            {{podcastDetails.description}}</p>
+        </div>
+      </div>
+      <div class="podcast-card__content-row">
+        <p class="podcast-card__information">
+          {{'in'|translateApi}} <span class="podcast-card__name">{{'talbinah_podcast'|translateApi}}
+          </span>
+          @if(podcastDetails?.doctor_name){
+          {{'with'|translateApi}} <span class="podcast-card__guest">{{podcastDetails?.doctor_name}}</span>
+          }
+          •<br>
+          {{podcastDetails.date}}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

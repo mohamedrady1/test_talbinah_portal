@@ -1,0 +1,110 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+@use "../../../../common/styles/scss/buttons/button.mixins" as btn;
+
+.podcast-details-box-card {
+  height: 75%;
+  @include flex-box(column, 0, initial, space-between);
+  &__container {
+    @include flex-box(column, 0, center, space-between);
+    background-color: var(--Dark-WHITE);
+    border-radius: 1rem;
+    padding-inline-end: 0.5rem;
+    &--mobile {
+      background-color: transparent;
+    }
+  }
+  &__header {
+    @include flex-box(row, 0, center, space-between);
+    width: 100%;
+  }
+
+  &__title {
+    @include text-style(0.875rem, var(--text-300), 500);
+  }
+
+  &__favorite-button {
+    @include flex-box(row, 0.125rem, center, center);
+    padding: 0.25rem 0.625rem;
+    border-radius: 1rem;
+    background: var(--Dark-50);
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  &__content-body {
+    @include flex-box(column, 1rem, null, null);
+    width: 100%;
+  }
+
+  &__image-wrapper {
+    border-radius: 0.75rem;
+    width: 11.5rem;
+    height: 11.4375rem;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    @include respond(xs) {
+      width: 5.5rem;
+      height: 6.4375rem;
+    }
+  }
+
+  &__image {
+    @include img-cover(0);
+  }
+
+  &__info {
+    @include flex-box(column, 0.5rem, null, null);
+    padding: 0.5rem 0;
+  }
+
+  &__main-title {
+    @include text-style(0.875rem, var(--text-dark), 500);
+  }
+
+  &__guest {
+    @include text-style(0.875rem, var(--text-400), 500, 0.25rem);
+  }
+
+  &__metadata {
+    @include flex-box(row, 0.5rem, center, space-between);
+  }
+
+  &__date,
+  &__duration {
+    @include text-style(0.75rem, var(--text-100), 400);
+  }
+
+  &__about {
+    margin-top: 0.875rem;
+  }
+
+  &__about-title {
+    @include text-style(0.875rem, var(--text-dark), 500);
+  }
+
+  &__description {
+    @include text-style(0.75rem, var(--text-100), 400);
+  }
+  &__play-button {
+    @include btn.button-base;
+    @include btn.button-size("small");
+    @include btn.button-icon-position("left");
+    @include btn.button-icon-size("medium");
+    @include btn.button-color("main");
+    @include btn.button-type("solid");
+    @include btn.button-spinner;
+    @include flex-box(row, 0.5rem, center, center);
+    padding: var(--Radius-8, 0.5rem) 1.5rem;
+    flex-shrink: 0;
+    display: none;
+    @include respond(sm) {
+      display: flex;
+    }
+  }
+}

@@ -1,0 +1,86 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+
+.podcast {
+    &-layout {
+        @include hero-layout("../../../../../../public/images/podcast/bg.png");
+
+        &__container {
+            @include flex-box(column, 1rem);
+            background: var(--Dark-50, #f6f7f8);
+            border-radius: 0.625rem;
+            padding: 1rem;
+            box-shadow:
+                0px -1px 50px 9px rgba(0, 0, 0, 0.08),
+                0px 0px 0px 1.5px rgba(255, 255, 255, 0.25) inset;
+            backdrop-filter: blur(20px);
+
+            .podcast {
+                @include flex-box(column, 0.75rem);
+                padding-inline-end: 0.5rem;
+            }
+        }
+    }
+
+    &__cards {
+        @include flex-box(row, 0.75rem);
+
+        @include respond(lg) {
+            flex-direction: column;
+        }
+    }
+
+    &__most-listened {
+        @include flex-box(column, 0.875rem);
+        border: 1px solid var(--Dark-100, #eee);
+        background: linear-gradient(270deg, var(--color-icon, #c3ece0) 0%, var(--color-icon-2, #ffefd4) 100%);
+        padding: 0.75rem;
+        border-radius: 1rem;
+        width: 23.875rem;
+
+        &__card {
+            height: 100%;
+        }
+
+        @include respond(lg) {
+            width: 100%;
+        }
+    }
+
+    &__recommended-list,
+    &__favourite-list,
+    &__explore-list {
+        @include flex-box(column, 0.75rem);
+        border-radius: 1rem;
+        padding: 0.75rem;
+        background: var(--Dark-WHITE, #fff);
+    }
+
+    &__recommended-list,
+    &__explore-list {
+        flex: 1;
+    }
+
+    &__favourite-list {
+        width: 22.75rem;
+
+        &:dir(rtl) {
+            width: 21.75rem;
+        }
+
+        .podcast__list {
+            @include grid-box(1fr, 1.25rem);
+        }
+
+        @include respond(lg) {
+            width: 100% !important;
+        }
+    }
+
+    &__list {
+        @include grid-box(repeat(2, 1fr), 1.25rem);
+
+        @include respond(lg) {
+            grid-template-columns: 1fr;
+        }
+    }
+}

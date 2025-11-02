@@ -1,0 +1,66 @@
+<div class="wallet-card">
+  <!-- Header -->
+  <div class="wallet-card__header">
+    <!-- Status Badge -->
+    <div class="wallet-card__status-badge" [ngStyle]="{
+        'background-color': cardConfig.type === 1
+          ? 'var(--Success-50, #E5FAF2)'
+          : 'var(--Sacondry-Color-50, #F8E6E9)',
+        'color': cardConfig.type === 1
+          ? 'var(--Success-primary, #00AF6C)'
+          : 'var(--Sacondry-Color-primary, #B80924)'
+      }">
+      @if (cardConfig.type === 1) {
+      {{ 'recharge' | translateApi }}
+      }
+      @else if (cardConfig.type === -1) {
+      {{ 'withdraw' | translateApi }}
+      }
+    </div>
+
+    <!-- Tracking -->
+    @if (cardConfig?.reservation_id) {
+    <div class="wallet-card__tracking" (click)="copyTrackingNumber(cardConfig?.reservation_id?.toString() ?? '')">
+      <app-svg-icon name="copy-clipboard" fillColor="#0e39b6" />
+      <span class="wallet-card__tracking-number">
+        {{ cardConfig?.reservation_id }}
+      </span>
+
+      @if (tooltipVisible()) {
+      <div class="wallet-card__tooltip">
+        {{ 'copied' | translateApi }}
+      </div>
+      }
+    </div>
+    }
+
+  </div>
+
+  <!-- Body -->
+  <div class="wallet-card__body">
+    <div class="wallet-card__price-section">
+      <span class="wallet-card__price-section-label">
+        {{ cardConfig?.name || '' }}
+      </span>
+      <span class="wallet-card__price-section-amount" [ngClass]="{
+          'wallet-card__price-section-amount--shipping': cardConfig.type === 1,
+          'wallet-card__price-section-amount--withdrawal': cardConfig.type !== 1
+        }">
+        {{ cardConfig?.original_value || '' }}
+        <span>{{ 'riyals' | translateApi }}</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="wallet-card__footer">
+    <div class="wallet-card__date-info">
+      <app-svg-icon name="date" type="date"></app-svg-icon>
+      <span class="wallet-card__date">{{ formattedDate }}</span>
+    </div>
+    <div class="wallet-card__time-info">
+      <app-svg-icon name="time" type="time"></app-svg-icon>
+      <span class="wallet-card__time">{{ formattedTime }}</span>
+    </div>
+  </div>
+</div>

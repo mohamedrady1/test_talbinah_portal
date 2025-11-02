@@ -1,0 +1,23 @@
+{
+  "version": 3,
+  "builds": [
+    {
+      "src": "dist/talbinah-portal/server/server.mjs",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "dist/talbinah-portal/browser/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(assets|images|favicon.ico|sitemap.xml|robots.txt|i18n/.*\\.json)",
+      "dest": "/dist/talbinah-portal/browser/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/talbinah-portal/server/server.mjs"
+    }
+  ]
+}

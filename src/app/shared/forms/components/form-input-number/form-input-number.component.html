@@ -1,0 +1,34 @@
+<div class="custom-input-wrapper" [ngClass]="{
+    'custom-input-wrapper--with-icon': formItem.inputWithIcon,
+    'custom-input-wrapper--icon-start': formItem.inputWithIcon && formItem.inputIconPosition === 'start',
+    'custom-input-wrapper--icon-end': formItem.inputWithIcon && formItem.inputIconPosition === 'end',
+    'p-invalid': isInvalid
+  }">
+  @if (formItem.inputWithIcon && formItem.inputIconPosition === 'start') {
+  @switch (formItem.inputIconType) {
+  @case (InputIconType.PRIMEICONS) {
+  <i [class]="formItem.inputIcon + ' custom-input-wrapper__icon'"></i>
+  }
+  @case (InputIconType.IMAGE) {
+  <img [src]="formItem.inputIcon" [alt]="(formItem.label ?? '') | translate" class="custom-input-wrapper__icon" />
+  }
+  @case (InputIconType.SVG) {
+  <span [innerHTML]="(formItem.inputIcon ?? '')"></span>
+  }
+  @default {
+  <i class="default-icon-class"></i>
+  }
+  }
+  }
+
+  <input type="number" [id]="formItem.id ?? formItem.name"
+    [class]="inputClass ?? formItem.inputClass ?? 'form-control custom-input-wrapper__input'" [formControl]="control"
+    [attr.aria-label]="ariaLabel" [attr.title]="(formItem.label ?? '') | translate" [attr.role]="roleAttr"
+    [attr.autocomplete]="autocompleteAttr" [attr.placeholder]="placeholderText | translate"
+    [attr.disabled]="isDisabled ? true : null" [attr.readonly]="isReadonly ? true : null" [attr.min]="formItem.minValue"
+    [attr.max]="formItem.maxValue" (input)="formatNumber($event)" />
+
+  @if (formItem.inputWithIcon && formItem.inputIconPosition === 'end') {
+  <i [class]="formItem.inputIcon + ' custom-input-wrapper__icon'"></i>
+  }
+</div>

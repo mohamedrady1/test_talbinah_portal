@@ -1,0 +1,163 @@
+.discount-card-for-meeting-chat {
+  display: flex;
+  border-radius: 0.5rem;
+  border: 2px solid var(--Dark-50);
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden; // Keep this
+  z-index: 2;
+  background: var(--Dark-WHITE, #fff);
+
+  // This creates the "cut-out" effect
+  &::before {
+    content: "";
+    position: absolute;
+    // These dimensions make it large enough to cover the border and part of the card
+    width: calc(2.5rem + 4px); // Slightly larger than the circle
+    height: calc(2.5rem + 4px);
+    background: var(--Background-main, #f9f9f9); // Match the background OF THE CONTAINER holding this card
+    border-radius: 50%;
+    // We'll create the border with two pseudo-elements for a clean cut, or use box-shadow.
+    // For a cleaner cut, we make the ::before match the background and use ::after for the circle border.
+    border: 2px solid var(--Dark-50); // The border of the "cut-out" circle
+    top: 50%;
+    inset-inline-end: -1.25rem; // Position it to overlap the right border
+    transform: translateY(-50%);
+    z-index: 3; // Ensure it's above the card
+  }
+
+  // To create the actual 'hole' and its inner edge, we might need another pseudo-element or adjust the z-index.
+  // Let's refine for a proper cut.
+
+  // To make a *transparent* cut, you need to literally cut out the shape.
+  // This is typically done with clip-path, but clip-path isn't ideal for arbitrary positioned circles
+  // that need to interact with borders this way.
+
+  // A common technique for this "ticket stub" look:
+  // 1. The parent card has its own background and border.
+  // 2. You use two pseudo-elements on the parent:
+  //    a. One for the inner "hole" (matching the container's background).
+  //    b. One for the border around that "hole".
+
+  // Let's modify the ::before and add an ::after to achieve this.
+
+  // The main card is already set up.
+
+  // ::before will be the "hole" (transparent or background-matching)
+  // ::after will be the border of that hole
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 2rem; // Size of the transparent hole
+    height: 2rem;
+    background: var(--Background-main, #f9f9f9); // This must match the background of the parent's container
+    border-radius: 50%;
+    top: 50%;
+    inset-inline-end: -1rem; // Center the 2rem circle right on the edge (half of 2rem + 2px border)
+    transform: translateY(-50%);
+    z-index: 3; // On top of the card
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: calc(2rem + 4px); // Size of the border around the hole
+    height: calc(2rem + 4px);
+    border: 2px solid var(--Dark-50); // The border of the hole
+    border-radius: 50%;
+    top: 50%;
+    inset-inline-end: -1.25rem; // Position to align with the hole and its border
+    transform: translateY(-50%);
+    z-index: 2; // Below the ::before (hole) but above the card's content
+  }
+
+  // Add a slight box-shadow to the main card to simulate the missing border, if desired
+  box-shadow: 0 0 0 0 transparent; // You can adjust this to simulate a border cut
+
+  &__label {
+    border-radius: 0.5rem;
+    border: 1px solid var(--Dark-50);
+    background: var(--Primary-primary, #0e39b6);
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    padding: 0.5rem 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--Dark-WHITE, #fff);
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  &__content {
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  &__value-code {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  &__value {
+    color: var(--Primary-primary, #0e39b6);
+    font-size: 1.125rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  &__code {
+    display: flex;
+    padding: 0.25rem 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+    border-radius: var(--Radius-8, 0.5rem);
+    background: var(--Primary-50, #e7ebf8);
+    transition:
+      background-color 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:hover {
+      background-color: var(--Primary-100, #d0d7f2);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    span {
+      color: var(--text-300);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    svg {
+      display: block;
+      flex-shrink: 0;
+    }
+  }
+
+  &__description {
+    color: var(--text-400, #969697);
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0;
+  }
+}

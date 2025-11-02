@@ -1,0 +1,74 @@
+<section class="support-messages" role="log" aria-label="Chat Support conversation"
+  [class.support-messages--compact]="!isChatExpanded()" [appAutoExactHeight]="85">
+
+
+
+  <ul class="support-messages__list" appAutoExactHeight #chatSupportMessagesList>
+    @if((messages()?.length || 0) > 0) {
+    <!-- ... render messages ... -->
+    @for (item of messages(); track $index; let i = $index;) {
+
+    <!-- item.senderId -->
+    <li class="support-messages__item" [class.support-messages__item--user]="isSameSender(item?.senderId, userInfo?.id)"
+      [class.support-messages__item--support]="!isSameSender(item?.senderId, userInfo?.id)"
+      [class.support-messages__item--event]="item.msgType === MeetingChatItemsTypes.EVENT"
+      [attr.data-message-id]="item.id">
+      <div class="support-messages__message-group">
+        @if (item.msgType !== MeetingChatItemsTypes.EVENT) {
+        <div class="support-messages__sender-icon">
+          @let sender = resolveSender(item);
+
+          @if (sender.image) {
+          <img [src]="sender.image" [alt]="sender.name" class="user-image" width="36" height="36" />
+          } @else {
+          <div class="user-avatar-fallback" [style.background-color]="sender.bgColor">
+            <span class="user-avatar-initials">{{ sender.initials }}</span>
+          </div>
+          }
+        </div>
+
+        }
+
+        <!-- Bubble -->
+        <div class="support-messages__bubble-area">
+          <div class="support-messages__content-wrapper"
+            [class.support-messages__content-wrapper--event]="item.msgType === MeetingChatItemsTypes.EVENT">
+            @if (item?.msgType === MeetingChatItemsTypes.EVENT) {
+            <p class="support-messages__text support-messages__text--event">
+              <span>{{ item.message }}</span>
+              <time>{{ item.msgTime | date: 'hh:mm a' }}</time>
+            </p>
+            }
+
+            <div class="support-messages__content">
+              @switch (item.msgType) {
+              @case (MeetingChatItemsTypes.TEXT) {
+              <app-chat-message-text [message]="item.message ?? null"></app-chat-message-text>
+              }
+              @case (MeetingChatItemsTypes.IMAGE) {
+              <app-chat-message-image [imageUrl]="item?.message ?? null"></app-chat-message-image>
+              }
+              }
+            </div>
+          </div>
+
+          @if (item.msgType !== MeetingChatItemsTypes.EVENT) {
+          <div class="support-messages__info">
+            <app-svg-icon [name]="item?.is_read ? 'is_read' : 'is_unread'" />
+            <time class="support-messages__timestamp">
+              {{ (item.msgTime | date: 'hh:mm a') }}
+            </time>
+          </div>
+          }
+        </div>
+      </div>
+    </li>
+
+    }
+    } @else {
+    <div class="support-messages__empty-state" role="status" aria-live="polite">
+      <app-empty-state-card [config]="SupportChatMessagesEmptyState"></app-empty-state-card>
+    </div>
+    }
+  </ul>
+</section>

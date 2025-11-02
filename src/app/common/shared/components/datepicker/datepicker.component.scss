@@ -1,0 +1,195 @@
+:host {
+  display: block;
+}
+
+/* Root */
+.dp {
+  display: inline-block;
+  position: relative;
+  font-family: inherit;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* trigger input style */
+.dp__input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  height: 3.125rem;
+  padding: 0 16px;
+  border-radius: 0.75rem;
+  border: 1px solid var(--Dark-100, #eeeeee);
+  background: var(--Dark-WHITE, #fff);
+  color: var(--text-primary, #0b1726);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.dp__input-text {
+  flex: 1;
+  text-align: start;
+  color: var(--text-700, #0b1726);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.dp__icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  color: var(--text-500, #47586e);
+  flex-shrink: 0;
+}
+
+/* popup styling - when created on body we apply same class names */
+.dp__popup {
+  position: absolute;
+  z-index: 1400;
+  margin-top: 0.5rem;
+  left: 0;
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.12);
+  background: var(--Dark-WHITE, #fff);
+  padding: 0.75rem;
+  transform-origin: top center;
+  transition: transform 160ms ease, opacity 160ms ease;
+  will-change: transform, opacity;
+}
+
+.dp__popup--above {
+  transform-origin: bottom center;
+}
+
+/* header */
+.dp__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.dp__title {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* nav */
+.dp__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  border: none;
+  background: var(--bg-nav, #f5f7fb);
+  cursor: pointer;
+}
+
+/* weekdays */
+.dp__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 2rem);
+  gap: .25rem;
+  margin-bottom: .25rem;
+  text-align: center;
+  font-size: .75rem;
+  color: var(--text-400, #667085);
+}
+
+/* grid */
+.dp__grid {
+  display: grid;
+  grid-auto-rows: minmax(2rem, auto);
+  gap: .25rem;
+}
+
+.dp__row {
+  display: grid;
+  grid-template-columns: repeat(7, 2rem);
+  gap: .25rem;
+}
+
+/* day cell */
+.dp__day {
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  border: none;
+  background: var(--day-bg, #f7f8fa);
+  border-radius: .5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: var(--text-700, #0b1726);
+  transition: background 120ms ease, transform 80ms ease, color 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dp__day:hover {
+  background: #e6ecef;
+  transform: translateY(-1px);
+}
+
+.dp__day:focus {
+  outline: 3px solid rgba(100, 114, 255, 0.12);
+  box-shadow: 0 0 0 6px rgba(100, 114, 255, 0.04);
+}
+
+.dp__day--other-month {
+  opacity: 0.45;
+  color: var(--text-500, #47586e);
+}
+
+.dp__day--disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  background: var(--day-disabled-bg, #fafafa);
+  color: var(--text-400, #667085);
+}
+
+.dp__day--today {
+  box-shadow: inset 0 0 0 1px rgba(81, 97, 255, 0.12);
+  outline: 2px solid rgba(81, 97, 255, 0.08);
+}
+
+.dp__day--selected {
+  background: var(--selected-bg, #e7ebf8);
+  color: var(--selected-color, #0e39b6);
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(14, 57, 182, 0.06);
+}
+
+.dp__day--in-range {
+  background: linear-gradient(90deg, rgba(231, 235, 248, 0.9), rgba(231, 235, 248, 0.6));
+}
+
+/* hidden template container in host (we keep calendar here until moved to body) */
+.dp__tpl-container {
+  display: none;
+}
+
+/* accessibility focus-visibility */
+:focus-visible {
+  outline: 3px solid rgba(81, 97, 255, 0.12);
+  outline-offset: 2px;
+}
+
+/* responsive */
+@media (max-width: 640px) {
+
+  // .dp__grid,
+  // .dp__row {
+  //   grid-template-columns: repeat(7, 2.15rem);
+  // }
+
+  // .dp__popup {
+  //   width: calc(100vw - 2rem);
+  //   left: 1rem;
+  // }
+}

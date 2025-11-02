@@ -1,0 +1,17 @@
+<div class="padding-end" appAutoExactHeight>
+    <div class="notifications">
+        <div class="notifications__title">
+            <p>
+                {{"notification2"|translateApi}}
+            </p>
+        </div>
+        <div class="notifications__list">
+            @for (item of notificationsList(); track item.id) {
+            <div class="notification__card" [class.notification__card-enter]="true"
+                [class.notification__card-enter-active]="true">
+                <app-my-psychological-society-notification-card [type]="cardType.DETAILS" [item]="item" />
+            </div>
+            }
+        </div>
+    </div>
+</div>

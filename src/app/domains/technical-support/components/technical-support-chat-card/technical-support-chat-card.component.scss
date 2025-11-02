@@ -1,0 +1,134 @@
+.chat-card {
+  display: flex;
+  padding: 0.75rem;
+  border: 1px solid var(--Dark-100, #EEE);
+  border-radius: 0.75rem;
+  background: #fff;
+
+  &__body {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    flex: 1;
+  }
+
+  // Avatar
+  &__avatar {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: var(--grid-1, linear-gradient(270deg, #BAF0E8 0%, #F5DAB8 100%));
+
+    &-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  // Content
+  &__content {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #000;
+  }
+
+  &__label {
+    color: #000;
+  }
+
+  &__value {
+    font-weight: 600;
+    color: #111827;
+  }
+
+  &__badge {
+    display: flex;
+    padding: 0 0.75rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.75rem;
+    background: var(--Success-500, #2BBF86);
+    color: #FFF;
+    font-size: 0.625rem;
+    font-weight: 500;
+  }
+
+  &__subtitle {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-300, #47586E);
+  }
+
+  // Meta (status + date)
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+  }
+
+  &__status {
+    display: flex;
+    padding: 0.125rem 0.5rem;
+    align-items: center;
+    gap: 0.25rem;
+
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    border-radius: 1rem;
+
+    &--active {
+      color: var(--Success-primary, #00AF6C);
+      background: var(--Success-50, #E5FAF2);
+    }
+
+    &--ended {
+      color: var(--Dark-400, #666);
+      background: var(--Dark-100, #EEE);
+    }
+  }
+
+  &__date {
+    display: flex;
+    padding: 0.125rem 0.5rem;
+    align-items: center;
+    gap: 0.25rem;
+
+    color: var(--text-300, #47586E);
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    &--icon {
+      width: 0.875rem;
+      height: 0.875rem;
+      aspect-ratio: 1/1;
+    }
+  }
+}

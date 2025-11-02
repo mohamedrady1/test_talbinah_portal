@@ -1,0 +1,158 @@
+.podcast-card {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #f6f7f8;
+  border-radius: 0.75rem;
+  background: var(--Dark-WHITE, #fff);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease-in-out;
+
+  &:hover,
+  &:focus-visible {
+    box-shadow: none;
+  }
+
+  &__thumbnail {
+    width: 3.0625rem;
+    height: 3.0625rem;
+    flex-shrink: 0;
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+  }
+
+  &__header {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  &__header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+
+    &[aria-hidden="true"] {
+      display: none;
+    }
+  }
+
+  &__checkbox-wrapper {
+    position: relative;
+    width: 1.125rem;
+    height: 1.125rem;
+    border: 1.5px solid var(--Primary-primary, #0e39b6);
+    border-radius: 4px;
+    background-color: var(--Dark-WHITE);
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 6px;
+      width: 4px;
+      height: 8px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    // ✅ Checked state
+    &--checked {
+      background-color: var(--Primary-primary, #0e39b6);
+      border-color: var(--Primary-primary, #0e39b6);
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    // ✅ Disabled but NOT checked — stay white
+    &--disabled:not(.podcast-card__checkbox-wrapper--checked) {
+      background-color: var(--Dark-WHITE);
+      border-color: #ccc;
+    }
+
+    // ✅ Disabled AND checked (optional override if needed)
+    &--disabled.podcast-card__checkbox-wrapper--checked {
+      background-color: var(--Primary-primary, #0e39b6);
+      border-color: var(--Primary-primary, #0e39b6);
+
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary, #000);
+  }
+
+  &__duration-button {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.625rem;
+    border: none;
+    border-radius: 1rem;
+    background: var(--Primary-50);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  &__duration {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-main-color);
+  }
+
+  &__description {
+    font-size: 0.8125rem;
+    color: var(--text-300);
+  }
+
+  &__meta {
+    font-size: 0.6875rem;
+    color: var(--text-100);
+
+    .podcast-card__guest,
+    .podcast-card__name {
+      color: var(--text-primary, #000);
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}

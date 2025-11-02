@@ -1,0 +1,41 @@
+@if (banners && banners.length > 0) {
+<div class="banner-carousel" role="region" aria-label="Promotional banners">
+    <div class="banner-carousel__container" [class.banner-carousel__container--grabbing]="isGrabbing()"
+        (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd($event)"
+        (mousedown)="onMouseDown($event)" (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp($event)"
+        (mouseleave)="isGrabbing.set(false)">
+        <div class="banner-carousel__slides" [style.transform]="getTransform()">
+            @for (banner of banners; track banner.id) {
+            <div class="banner-carousel__slide" (click)="onBannerClick(banner, $event)" role="button" tabindex="0"
+                [attr.aria-label]="banner.title || 'Banner image'">
+                <img [src]="banner.image" [alt]="banner.title || 'Banner'" class="banner-carousel__image"
+                    (error)="onImageError($event)" loading="lazy">
+
+                @if (banner.title || banner.subTitle) {
+                <div class="banner-carousel__content">
+                    @if (banner.title) {
+                    <h3 class="banner-carousel__title text-truncate">{{ banner.title }}</h3>
+                    }
+                    @if (banner.subTitle) {
+                    <p class="banner-carousel__subtitle text-truncate-2">{{ banner.subTitle }}</p>
+                    }
+                </div>
+                }
+            </div>
+            }
+        </div>
+
+        <!-- Dots Indicator -->
+        @if (banners.length > 1) {
+        <div class="banner-carousel__dots">
+            @for (banner of banners; track banner.id; let i = $index) {
+            <button class="banner-carousel__dot" [class.banner-carousel__dot--active]="currentSlide() === i"
+                (click)="goToSlide(i); $event.stopPropagation()" [attr.aria-label]="'Go to banner ' + (i + 1)"
+                type="button">
+            </button>
+            }
+        </div>
+        }
+    </div>
+</div>
+}

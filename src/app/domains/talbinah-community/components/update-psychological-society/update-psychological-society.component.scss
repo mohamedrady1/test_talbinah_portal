@@ -1,0 +1,356 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+@use "../../../../common/styles/scss/buttons/button.mixins" as btn;
+
+.update-psychological-society-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.75rem;
+
+  &__content {
+    display: flex;
+    padding: 0.75rem;
+    flex-direction: column;
+    gap: 0.75rem;
+    border-radius: 1rem;
+    background: var(--Dark-WHITE, #fff);
+  }
+
+  &__title {
+    color: var(--text-300, #47586e);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  &__input-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.25rem 0;
+
+    & label {
+      &.input-group__label {
+        margin: 0;
+        color: var(--Dark-DARK, #1d1f1f);
+        font-size: 0.875rem;
+        font-weight: 400;
+
+        &--appearance,
+        &--interests {
+          color: var(--text-dark, #0c1037);
+          margin: 0;
+          font-size: 0.75rem;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  .input-group {
+    &__avatars {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    &__interests {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  }
+
+  .avatar-option {
+    border: 2px solid transparent;
+    border-radius: 0.825rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+
+    img {
+      width: 2.5rem;
+      height: 2.5rem;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    &--selected {
+      border-color: var(--Primary-primary, #0e39b6);
+    }
+
+    &.shimmer {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 8px;
+      background: linear-gradient(
+        90deg,
+        var(--grey-200, #f0f0f0) 25%,
+        var(--grey-300, #e0e0e0) 37%,
+        var(--grey-200, #f0f0f0) 63%
+      );
+      background-size: 400% 100%;
+      animation: shimmer 1.4s ease infinite;
+      &.large {
+        width: 5rem;
+        height: 3rem;
+      }
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: -100% 0;
+    }
+  }
+  .shimmer__list {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .interest-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.25rem 3.125rem;
+    justify-content: center;
+    gap: 0.625rem;
+    position: relative;
+    border-radius: 0.375rem;
+    border: 1px solid var(--Dark-50, #f6f7f8);
+    transition:
+      border-color 0.2s ease,
+      background 0.2s ease;
+
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    span {
+      font-size: 0.75rem;
+      color: var(--text-dark, #0c1037);
+    }
+
+    .interest-option__checkmark {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+    }
+
+    &--selected {
+      border: 1px solid var(--Primary-primary, #0e39b6);
+      background: var(--Primary-50, #e7ebf8);
+    }
+  }
+
+  .error {
+    color: var(--error-color, red);
+    font-size: 0.75rem;
+  }
+
+  .error-message {
+    color: var(--error-color, red);
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+  }
+
+  // Moved --actions block out of ::ng-deep and into its correct nesting
+  &--actions {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    padding-top: 0.75rem;
+    justify-content: flex-end;
+
+    .btn {
+      @include btn.button-base;
+      @include btn.button-size("small");
+      @include btn.button-icon-position("left");
+      @include btn.button-icon-size("medium");
+      @include btn.button-color("main");
+      @include btn.button-spinner;
+
+      &__icon {
+        display: inline-flex;
+        align-items: center;
+      }
+
+      &__label {
+        padding: 0 0.5rem;
+        white-space: nowrap;
+      }
+
+      &--disabled {
+        @include btn.button-disabled;
+      }
+
+      &--outline {
+        @include btn.button-type("outline");
+      }
+
+      &--solid {
+        @include btn.button-type("solid");
+      }
+
+      width: fit-content;
+      padding: 0 1rem;
+    }
+  }
+
+  // This `form-action` selector still exists, but it's not present in your HTML after previous updates.
+  // If it's meant to style the actions, the `--actions` block now handles that.
+  // Consider removing it if it's no longer used.
+  /*
+  .form-action {
+    display: flex;
+    justify-content: flex-end;
+
+    .btn-submit {
+      display: flex;
+      padding: 0.75rem 1.5rem;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: var(--Radius-8, 0.5rem);
+      background: var(--Primary-primary, #0e39b6);
+      color: var(--Dark-WHITE, #fff);
+      font-size: 1rem;
+      font-weight: 500;
+      width: fit-content;
+      justify-self: end;
+      margin-top: 0.75rem;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: var(--Primary-primary, #0e39b6);
+      }
+
+      &:disabled {
+        background-color: var(--grey-400, #aaa);
+        cursor: not-allowed;
+      }
+
+      &:dir(rtl) {
+        svg {
+          transform: scaleX(-1);
+        }
+      }
+    }
+  }
+  */
+}
+
+.custom-input-wrapper {
+  display: flex;
+  padding: 0rem 16px;
+  align-items: center;
+  gap: 0.5rem;
+  height: 3.125rem;
+  color: var(--text-200, #a3adbb);
+  font-size: 0.875rem;
+  border-radius: 0.75rem;
+  color: var(--text-primary, black);
+  overflow: hidden;
+  border: 1px solid var(--Dark-100, #eeeeee);
+  transition: border-color 0.2s ease;
+
+  &.has-error {
+    border: 1px solid var(--error-color, red);
+  }
+
+  &__icon {
+    display: flex;
+    width: 1.25rem;
+    height: 1.25rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 1rem;
+    color: var(--text-primary, black);
+
+    &::placeholder {
+      color: var(--text-200, #a3adbb) !important;
+      font-size: 0.875rem !important;
+      font-weight: 500 !important;
+    }
+  }
+
+  &__input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background-color: transparent;
+
+    &::placeholder {
+      color: var(--text-200, #a3adbb);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+  }
+
+  &--with-icon {
+    gap: 0.5rem;
+  }
+
+  &--icon-start {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+
+    .custom-input-wrapper__icon {
+      order: 0;
+    }
+  }
+
+  &--icon-end {
+    flex-direction: row-reverse;
+
+    .custom-input-wrapper__icon {
+      order: 1;
+    }
+  }
+
+  .password-toggle-btn {
+    @include respond(sm) {
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+.form-field__error {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--error-color, #dc3545);
+}
+
+::ng-deep {
+  .p-iconwrapper {
+    margin-inline-start: 1.25rem;
+  }
+}

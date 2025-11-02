@@ -1,0 +1,49 @@
+@if (isBrowser) {
+<main class="khawiik-chat-types" role="main" aria-labelledby="chat-types-heading">
+    <!-- Main Icon -->
+    <div class="khawiik-chat-types__icon-wrapper">
+        <img class="khawiik-chat-types__main-icon" [src]="mainIcon" [alt]="'khawiik chat types main icon'"
+            loading="lazy" />
+    </div>
+
+    <!-- Title and Subtitle -->
+    <div class="khawiik-chat-types__content">
+        <p id="chat-types-heading" class="khawiik-chat-types__title">
+            {{ 'communication_preference' | translateApi }}
+        </p>
+        <p class="khawiik-chat-types__subtitle">
+            {{ 'choose_communication_style' | translateApi }}
+        </p>
+    </div>
+
+    <!-- Chat Type Selection Buttons -->
+    <div class="khawiik-chat-types__buttons-wrapper">
+        @for (option of chatTypeOptions(); track option.id) {
+        <button type="button" [class]="getButtonClasses(option.id)"
+            [attr.aria-pressed]="option.isActive ? 'true' : 'false'"
+            [attr.aria-selected]="option.isActive ? 'true' : 'false'" role="button" tabindex="0"
+            (click)="selectChatType(option.id)" (keydown.enter)="selectChatType(option.id)"
+            (keydown.space)="selectChatType(option.id)">
+            <!-- Icon Wrapper -->
+            <div class="khawiik-chat-types__button-icon-wrapper">
+                <app-svg-icon [name]="option.icon" [class]="'khawiik-chat-types__button-icon'"
+                    [attr.aria-hidden]="'true'"></app-svg-icon>
+            </div>
+
+            <!-- Title -->
+            <span [class]="getTitleClasses(option.id)">
+                {{ option.label | translateApi }}
+            </span>
+        </button>
+        }
+    </div>
+
+    <!-- Footer with Continue Button -->
+    <footer class="khawiik-chat-types__footer">
+        <button type="button" class="khawiik-chat-types__continue-button" (click)="onContinue()"
+            [attr.aria-label]="'continue' | translateApi">
+            {{ 'continue' | translateApi }}
+        </button>
+    </footer>
+</main>
+}

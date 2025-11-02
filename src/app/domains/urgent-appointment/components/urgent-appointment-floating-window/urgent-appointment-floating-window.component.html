@@ -1,0 +1,37 @@
+<div class="urgent-appointment-floating-window">
+  <!-- <div class="urgent-appointment-floating-window__close-icon" (click)="closeWindow()">
+    <app-svg-icon name="audio-player-close-icon" />
+  </div> -->
+  <div class="urgent-appointment-floating-window__info-container">
+    <div class="urgent-appointment-floating-window__info">
+      <img class="urgent-appointment-floating-window__thumbnail" [src]="'images/home/icons/urgent-appointment.png'"
+        [alt]="'urgent-appointment'" width="60" height="60" loading="lazy" fetchpriority="high">
+      <div class="urgent-appointment-floating-window__text">
+        <h6 class="urgent-appointment-floating-window__title">
+          {{'urgentAppointmentWindow.title' | translate}}
+        </h6>
+        <p class="urgent-appointment-floating-window__subtitle">
+          {{'urgentAppointmentWindow.subtitle' | translate}}
+        </p>
+      </div>
+
+    </div>
+    <div class="urgent-appointment-floating-window__actions">
+      <!-- Countdown Timer -->
+      @if(countdownSeconds() > 0) {
+      <div class="urgent-appointment-floating-window__countdown">
+        <span class="urgent-appointment-floating-window__countdown-text">
+          {{ padZero(remainingTimeMinutes()) }}:{{ padZero(remainingTimeSeconds()) }}
+        </span>
+      </div>
+      }
+      <button type="button"
+        class="urgent-appointment-floating-window__actions--btn urgent-appointment-floating-window__actions--btn--follow-up"
+        aria-label="Follow Up" (click)="onButtonClick()">
+        <span>
+          {{'urgentAppointmentWindow.cta' | translate}}
+        </span>
+      </button>
+    </div>
+  </div>
+</div>

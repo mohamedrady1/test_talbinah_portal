@@ -1,0 +1,28 @@
+.tabs-shimmer {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+
+    &__item {
+        width: 80px;
+        height: 28px;
+        border-radius: 0.75rem;
+        background: linear-gradient(
+            90deg,
+            var(--grey-300, #e0e0e0) 0%,
+            var(--grey-200, #f0f0f0) 50%,
+            var(--grey-300, #e0e0e0) 100%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 1.2s infinite;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}

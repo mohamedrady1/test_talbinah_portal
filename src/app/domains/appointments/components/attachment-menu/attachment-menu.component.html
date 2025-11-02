@@ -1,0 +1,29 @@
+<div class="attachment-menu-container" [class.show]="showMenu">
+  <div class="attachment-menu">
+    <button type="button" class="attachment-menu__item attachment-menu__item--audio"
+      (click)="onSelectFileType('audio')">
+      <app-svg-icon name="microphone-icon" />
+      <span>{{ 'podcast' | translateApi }}</span>
+    </button>
+    <button type="button" class="attachment-menu__item attachment-menu__item--document"
+      (click)="onSelectFileType('document')">
+      <app-svg-icon name="file-icon" />
+      <span>{{ 'attachments' | translateApi }}</span>
+    </button>
+    <button type="button" class="attachment-menu__item attachment-menu__item--video"
+      (click)="onSelectFileType('video')">
+      <app-svg-icon name="video-icon" />
+      <span>{{ 'videos' | translateApi }}</span>
+    </button>
+    <button type="button" class="attachment-menu__item attachment-menu__item--image"
+      (click)="onSelectFileType('image')">
+      <app-svg-icon name="image-gallery-icon" />
+      <span>{{ 'images' | translateApi }}</span>
+    </button>
+    <button type="button" class="attachment-menu__item attachment-menu__item--camera"
+      (click)="onSelectFileType('camera')">
+      <app-svg-icon name="camera-icon" />
+      <span>{{ 'camera' | translateApi }}</span>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,184 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+@use "../../../../common/styles/scss/abstracts/_base-layout-mixins" as *;
+
+.chat-layout {
+  @include baseLayout;
+  &__content {
+    height: 100%;
+  }
+  &__container {
+    //khawiik
+    background: linear-gradient(270deg, #f9ebde 0%, #e0f6e9 31.25%, #fcecdb 72.6%, #f6ecea 95.67%),
+      var(--Dark-50, #f6f7f8);
+    height: 80vh;
+    //talbinah-bot
+    // display: flex;
+    // flex-direction: column;
+    // gap: 1.5rem;
+    // background: var(--Dark-50);
+    // border-radius: 0.625rem;
+    // padding: 1rem;
+    // box-shadow:
+    //   0 -1px 50px 9px #00000014,
+    //   0 0 0 1.5px #ffffff40 inset;
+    // -webkit-backdrop-filter: blur(20px);
+    // backdrop-filter: blur(20px);
+    // contain: content;
+  }
+
+  &__send-ction {
+    display: flex;
+    padding: var(--Radius-8, 0.5rem) 1.25rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    align-self: stretch;
+
+    .chat-input {
+      width: 100%;
+    }
+  }
+}
+
+.shimmer-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 1rem;
+  background: var(--Dark-WHITE, #fff);
+  overflow: hidden;
+}
+
+.shimmer-list {
+  list-style: none;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  padding: 0.75rem var(--Radius-20, 1.25rem);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex: 1 0 0;
+  align-self: stretch;
+}
+
+.chat-messages__header.shimmer-wrapper {
+  display: flex;
+  padding: 0.625rem 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.25rem;
+  align-self: stretch;
+  border-bottom: 1px solid var(--Dark-50, #f6f7f8);
+  height: auto !important;
+  /* Override inline style if necessary */
+  background-image: linear-gradient(
+    to right,
+    var(--Dark-50, #f6f7f8) 0%,
+    var(--Dark-100, #edeef1) 20%,
+    var(--Dark-50, #f6f7f8) 40%,
+    var(--Dark-50, #f6f7f8) 100%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 2s infinite linear;
+  background: white;
+}
+
+.chat-messages__header__title {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex: 1 0 0;
+}
+
+.shimmer-wrapper {
+  background: var(--Dark-50, #f6f7f8);
+  background-image: linear-gradient(
+    to right,
+    var(--Dark-50, #f6f7f8) 0%,
+    var(--Dark-100, #edeef1) 20%,
+    var(--Dark-50, #f6f7f8) 40%,
+    var(--Dark-50, #f6f7f8) 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 800px 100%;
+  animation: shimmer 2s infinite linear;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--Radius-12, 0.75rem);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -800px 0;
+  }
+
+  100% {
+    background-position: 800px 0;
+  }
+}
+
+.shimmer-message {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  align-items: start;
+}
+
+.shimmer-message--user {
+  justify-content: flex-start;
+}
+
+.shimmer-message--bot {
+  flex-direction: row-reverse;
+
+  .shimmer-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    max-width: 80%;
+    align-items: flex-end;
+  }
+}
+
+.shimmer-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  aspect-ratio: 1/1;
+  border-radius: var(--Radius-12, 0.75rem);
+  background-color: var(--Dark-100, #edeef1);
+  flex-shrink: 0;
+}
+
+.shimmer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  min-width: 25%;
+  max-width: 60%;
+  box-sizing: border-box;
+  align-items: flex-end;
+}
+
+.shimmer-text-line {
+  height: 0.75rem;
+  border-radius: 4px;
+  background-color: var(--Dark-100, #edeef1);
+}
+
+.shimmer-text-line--short {
+  width: 60%;
+}
+
+.shimmer-text-line--long {
+  width: 90%;
+}
+
+.shimmer-timestamp {
+  height: 0.75rem;
+  width: 40px;
+  border-radius: 4px;
+  background-color: var(--Dark-100, #edeef1);
+  margin-top: 0.25rem;
+}

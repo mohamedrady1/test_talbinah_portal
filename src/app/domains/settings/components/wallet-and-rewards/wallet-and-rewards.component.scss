@@ -1,0 +1,116 @@
+@use "./../../../../common/styles/scss/buttons/button.mixins" as btn;
+.wallet-and-rewards {
+    display: flex;
+    padding: 0.75rem;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.75rem;
+    border-radius: 1rem;
+    border: 1px solid var(--Dark-50, #f6f7f8);
+    cursor: pointer;
+    &__content {
+        display: flex;
+        flex-direction: row;
+        gap: 0.75rem;
+        align-items: center;
+        &--title {
+            display: flex;
+            align-items: center;
+            gap: 0.5625rem;
+            color: var(--text-primary) !important;
+            &--value {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            &-container {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+        &--description {
+            color: var(--text-400, #0f0f0f);
+            font-size: 0.875rem;
+            display: flex;
+            justify-content: space-between;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            font-weight: 500;
+            width: 100%;
+            &--value {
+                border-radius: 1rem;
+                background: var(--Success-50, #e5faf2);
+                display: flex;
+                padding: 0.25rem 0.625rem;
+                justify-content: center;
+                align-items: center;
+                gap: 0.125rem;
+                color: var(--Success-primary, #00af6c);
+                font-size: 0.75rem;
+                font-weight: 500;
+            }
+        }
+        &--title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            &--value {
+                font-weight: 700;
+            }
+        }
+    }
+    &__button {
+        @include btn.button-base;
+        @include btn.button-size("medium");
+        @include btn.button-icon-position("left");
+        @include btn.button-icon-size("medium");
+        @include btn.button-color("main");
+        @include btn.button-spinner;
+        @include btn.button-type("outline");
+        padding: var(--Radius-8, 0.5rem) var(--Radius-16, 1rem);
+
+        width: fit-content;
+        align-self: flex-end;
+    }
+}
+
+.wallet-and-rewards__shimmer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 1rem;
+    border: 1px solid var(--Dark-50, #f6f7f8);
+}
+
+.shimmer {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+.shimmer--circle {
+    border-radius: 50%;
+}
+
+.shimmer--title {
+    border-radius: 0.5rem;
+}
+
+.shimmer--value {
+    border-radius: 0.5rem;
+}
+
+.shimmer--button {
+    border-radius: 0.375rem;
+    margin-top: 0.75rem;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}

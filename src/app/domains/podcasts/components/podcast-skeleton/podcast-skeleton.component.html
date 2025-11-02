@@ -1,0 +1,25 @@
+<div class="podcast-grid" [ngClass]="'count-' + count">
+    <div class="podcast-card shimmer" *ngFor="let i of [].constructor(count)">
+        <div class="podcast-card__details">
+            <div class="podcast-card__thumbnail">
+                <div class="podcast-card__image shimmer__element"></div>
+            </div>
+            <div class="podcast-card__content">
+                <div class="podcast-card__content-header">
+                    <div class="podcast-card__content-row">
+                        <div class="podcast-card__title shimmer__element shimmer__text"></div>
+                        <div class="podcast-card__like-button shimmer__circle"></div>
+                    </div>
+                    <div class="podcast-card__description shimmer__text-line"></div>
+                </div>
+                <div class="podcast-card__content-row">
+                    <div class="podcast-card__information shimmer__text-line"></div>
+                    <div class="podcast-card__duration-button">
+                        <div class="shimmer__icon shimmer__element"></div>
+                        <div class="podcast-card__duration shimmer__text shimmer__small"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

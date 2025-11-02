@@ -1,0 +1,188 @@
+<div class="session-doctor">
+  <div class="session-doctor__main">
+    <app-session-with-doctor-header [config]="headerConfig" (fullscreenRequested)="toggleSessionFullscreen()"
+      (closeRequested)="navigateToHomePage()" />
+
+    <div class="session-doctor__content" [class.session-doctor__content--right-panel-expanded]="isChatPanelExpanded()"
+      appAutoExactHeight [enabled]="!isFullscreen" heightMode="max-height">
+      @if (!isChatPanelExpanded()) {
+      <div class="session-doctor__left-panel">
+        <app-voice-video-agora-chat [currentReservationData]="_reservationDetailsFacade.currentReservation()"
+          (expandChatPanel)="toggleChatPanelExpansion()" />
+      </div>
+      }
+
+
+      <aside class="session-doctor__right-panel">
+        <header id="right-panel-header" class="session-doctor__right-panel-header-container">
+          @if (_reservationDetailsFacade.reservationFetchErrorMessage() &&
+          !_reservationDetailsFacade.reservationFetchStatus() && !_reservationDetailsFacade.isLoadingReservation()) {
+          <!-- Error State in Header -->
+          <div class="session-doctor__header-error">
+            <span class="session-doctor__header-error-text">{{ _reservationDetailsFacade.reservationFetchErrorMessage()
+              }}</span>
+          </div>
+          } @else if (_reservationDetailsFacade.isLoadingReservation() || _CheckDoctorAtReservationFacade.isChecking())
+          {
+          <!-- Shimmer Loading State -->
+          <div class="session-doctor__header-shimmer">
+            <div class="session-doctor__shimmer-content">
+              <div class="session-doctor__shimmer-status-indicator"></div>
+              <div class="session-doctor__shimmer-text">
+                <div class="session-doctor__shimmer-doctor-name"></div>
+                <div class="session-doctor__shimmer-reservation-code"></div>
+              </div>
+            </div>
+            <div class="session-doctor__shimmer-actions">
+              <div class="session-doctor__shimmer-call-controls"></div>
+              <div class="session-doctor__shimmer-toggle-button"></div>
+              <div class="session-doctor__shimmer-menu"></div>
+            </div>
+          </div>
+          } @else {
+          <!-- Normal Content -->
+          <button class="session-doctor__right-panel-header" [attr.aria-expanded]="isChatPanelExpanded()"
+            aria-controls="right-panel-content" type="button"
+            [attr.aria-label]="'Chat with' + (_reservationDetailsFacade.currentReservation()?.doctor?.full_name || 'Doctor')">
+            <div class="session-doctor__right-panel-header-title">
+              <div class="session-doctor__status-indicator">
+                <app-svg-icon name="status-indicator" [fillColor]="statusFillColor" />
+              </div>
+              <span class="session-doctor__doctor-name">
+                @if(_reservationDetailsFacade.currentReservation()?.doctor?.full_name){
+                {{ _reservationDetailsFacade.currentReservation()?.doctor?.full_name || ''}}
+                }@else{
+                {{'no_name' | translateApi}}
+                }
+              </span>
+            </div>
+
+            <div class="session-doctor__right-panel--chat-info">
+
+              <!-- <time class="session-doctor__chat-date">
+                {{
+                _reservationDetailsFacade.currentReservation()?.id !== undefined &&
+                _reservationDetailsFacade.currentReservation()?.created_at !== undefined &&
+                _reservationDetailsFacade.currentReservation()?.created_at !== null ?
+                returnItemTimeAgo(_reservationDetailsFacade.currentReservation()!.id, _reservationDetailsFacade.currentReservation()!.created_at) : ''
+                }}
+              </time> -->
+
+              @if(_reservationDetailsFacade.currentReservation()?.id){
+              <app-tooltip class="session-doctor__copy-tooltip" [text]="'copied' | translateApi"
+                [position]="Position.TOP" [trigger]="Trigger.CLICK">
+                <button type="button" class="session-doctor__copy-button" (click)="copyToClipboard()"
+                  [attr.aria-label]="'Copy reservation code ' + (_reservationDetailsFacade.currentReservation()?.id || 'CODE-101096')">
+                  <app-svg-icon name="copy-clipboard" />
+                  <span class="session-doctor__copy-code">
+                    {{ _reservationDetailsFacade.currentReservation()?.id || '' }}
+                  </span>
+                </button>
+              </app-tooltip>
+              }
+            </div>
+          </button>
+
+          <div class="session-doctor__right-panel-actions">
+            <div class="session-doctor__audio-video-controls">
+              @if (_CheckDoctorAtReservationFacade.isChecking()) {
+              <div class="loading-overlay"></div>
+              }
+              <app-call-type-selector
+                (selectedType)="!_CheckDoctorAtReservationFacade.isChecking()?handleCallTypeSelection($event):''">
+              </app-call-type-selector>
+            </div>
+            @if (isChatPanelExpandedIconVisible()) {
+            <button class="session-doctor__toggle-chat-button" (click)="toggleChatPanelExpansion()"
+              [attr.aria-label]="isChatPanelExpanded() ? 'Collapse chat panel' : 'Expand chat panel'">
+              @if (!isChatPanelExpanded()) {
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none"
+                aria-hidden="true">
+                <path
+                  d="M5.25002 13.3337H8.75002C11.6667 13.3337 12.8334 12.167 12.8334 9.25033V5.75033C12.8334 2.83366 11.6667 1.66699 8.75002 1.66699H5.25002C2.33335 1.66699 1.16669 2.83366 1.16669 5.75033V9.25033C1.16669 12.167 2.33335 13.3337 5.25002 13.3337Z"
+                  stroke="#A3ADBB" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              } @else {
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none"
+                aria-hidden="true">
+                <path
+                  d="M5.25008 13.3337H8.75008C11.6667 13.3337 12.8334 12.167 12.8334 9.25033V5.75033C12.8334 2.83366 11.6667 1.66699 8.75008 1.66699H5.25008C2.33341 1.66699 1.16675 2.83366 1.16675 5.75033V9.25033C1.16675 12.167 2.33341 13.3337 5.25008 13.3337Z"
+                  stroke="#A3ADBB" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M5.25 1.66699V13.3337" stroke="#A3ADBB" stroke-width="1.2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              }
+            </button>
+            }
+            <div class="session-doctor__menu">
+              <app-actions-dropdown-menu [menuItems]="chatActionsMenuItems"
+                (itemClicked)="handleMenuItemClick($event)" />
+            </div>
+          </div>
+          }
+        </header>
+
+        <div id="right-panel-content" class="session-doctor__right-panel-chat-container"
+          [class.session-doctor__right-panel-chat-container--expanded]="isChatPanelExpanded()">
+          @if (_reservationDetailsFacade.reservationFetchErrorMessage() &&
+          !_reservationDetailsFacade.reservationFetchStatus() && !_reservationDetailsFacade.isLoadingReservation()) {
+          <!-- Error State -->
+          <app-error-state-card [config]="reservationDetailsErrorState"></app-error-state-card>
+          } @else if (!_reservationDetailsFacade.isLoadingReservation()) {
+          <!-- Normal Content -->
+          <app-chat-meeting-messages [currentReservationData]="_reservationDetailsFacade.currentReservation()"
+            [isChatExpanded]="isChatPanelExpanded" (replyingMessageChanged)="handleReplyingMessageChange($event)" />
+
+          <div class="session-doctor__right-panel-chat-input">
+            <div class="session-doctor__right-panel-chat-input--container">
+              <app-meeting-chat-input class="chat-input" [replyingToMessageContent]="replyingToMessageContent()"
+                (replyingMessageChanged)="handleReplyingMessageChange($event)"
+                [currentReservation]="_reservationDetailsFacade.currentReservation()"
+                [doctorId]="_reservationDetailsFacade.currentReservation()?.doctor?.id ?? null"
+                [userId]="_reservationDetailsFacade.currentReservation()?.user?.id ?? null" />
+              @if (replyingToMessageContent()) {
+              <div class="reply-box">
+                <div class="reply-box__header">
+                  <span class="reply-box__content-label">
+                    <span>
+                      {{'replying_to' | translateApi}}:
+                    </span>
+                    <span>
+                      @if (replyingToMessageContent()?.senderId ===
+                      _reservationDetailsFacade.currentReservation()?.doctor?.id) {
+                      {{ replyingToMessageContent()?.senderId ===
+                      _reservationDetailsFacade.currentReservation()?.doctor?.full_name ?
+                      (_reservationDetailsFacade.currentReservation()?.doctor?.full_name || '') : '' }}
+                      }@else {
+                      {{'me' | translateApi}}
+                      }
+                    </span>
+                  </span>
+                  <button class="reply-box__close-button" (click)="clearReply()" aria-label="Close reply box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
+                </div>
+                <div class="reply-box__content">
+                  <app-referenced-message [item]="replyingToMessageContent()"
+                    [currentReservationData]="_reservationDetailsFacade.currentReservation()">
+                  </app-referenced-message>
+                </div>
+              </div>
+              }
+            </div>
+          </div>
+          }@else if (_reservationDetailsFacade.isLoadingReservation()) {
+          <p class="session-doctor__loading-message">
+            <app-chat-meeting-messages-skeleton />
+          </p>
+          }
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>

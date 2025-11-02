@@ -1,0 +1,97 @@
+<div class="payment-method-block">
+  <div class="payment-method-block__header">
+    <p class="payment-method-block__title">
+      {{'confirm_join_selected_support_group'|translateApi}}
+    </p>
+  </div>
+
+  <div class="payment-method-block__options-group">
+    <div class="payment-method-block__choose-method">
+      <div class="payment-method-block__choose-method-title">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M9.92682 12.1465H4.06681C3.72015 12.1465 3.39347 12.1132 3.10014 12.0465C2.9468 12.0265 2.76015 11.9732 2.56681 11.8998C1.68015 11.5665 0.633484 10.7465 0.633484 8.7065V5.27315C0.633484 3.09315 1.88681 1.83984 4.06681 1.83984H9.92682C11.7668 1.83984 12.9535 2.71982 13.2735 4.31982C13.3335 4.61316 13.3601 4.92649 13.3601 5.27315V8.7065C13.3601 10.8998 12.1135 12.1465 9.92682 12.1465ZM4.07347 2.85319C2.43347 2.85319 1.64014 3.6465 1.64014 5.2865V8.71985C1.64014 9.91318 2.06015 10.6465 2.92015 10.9732C3.05348 11.0199 3.18015 11.0532 3.30015 11.0732C3.55348 11.1265 3.80013 11.1532 4.07347 11.1532H9.93347C11.5735 11.1532 12.3668 10.3598 12.3668 8.71985V5.2865C12.3668 5.0065 12.3468 4.75983 12.3001 4.53316C12.0735 3.39983 11.3001 2.85319 9.93347 2.85319H4.07347Z"
+            fill="#47586E" />
+          <path
+            d="M11.9267 14.1475H6.06671C5.50004 14.1475 4.99337 14.0675 4.56003 13.9009C3.58003 13.5342 2.94003 12.7609 2.72003 11.6542C2.68669 11.4875 2.74004 11.3142 2.86004 11.2009C2.98004 11.0809 3.15338 11.0342 3.32004 11.0742C3.54004 11.1209 3.78671 11.1475 4.06671 11.1475H9.92671C11.5667 11.1475 12.36 10.3542 12.36 8.71422V5.28087C12.36 5.00087 12.34 4.7542 12.2934 4.52754C12.26 4.36087 12.3134 4.19421 12.4267 4.07421C12.5467 3.95421 12.7134 3.90087 12.88 3.94087C14.48 4.26753 15.36 5.45421 15.36 7.28087V10.7142C15.36 12.9009 14.1134 14.1475 11.9267 14.1475ZM3.94671 12.1475C4.16005 12.5342 4.48004 12.8076 4.92004 12.9676C5.24004 13.0876 5.62669 13.1475 6.07336 13.1475H11.9334C13.5734 13.1475 14.3667 12.3542 14.3667 10.7142V7.28087C14.3667 6.22754 14.04 5.52754 13.3667 5.16088C13.3667 5.20088 13.3667 5.24087 13.3667 5.28087V8.71422C13.3667 10.8942 12.1134 12.1475 9.93337 12.1475H4.07336C4.02669 12.1475 3.98671 12.1475 3.94671 12.1475Z"
+            fill="#47586E" />
+          <path
+            d="M6.99994 9.26025C5.75327 9.26025 4.73993 8.24691 4.73993 7.00024C4.73993 5.75358 5.75327 4.74023 6.99994 4.74023C8.24661 4.74023 9.25995 5.75358 9.25995 7.00024C9.25995 8.24691 8.24661 9.26025 6.99994 9.26025ZM6.99994 5.74023C6.30661 5.74023 5.73993 6.30691 5.73993 7.00024C5.73993 7.69358 6.30661 8.26025 6.99994 8.26025C7.69327 8.26025 8.25995 7.69358 8.25995 7.00024C8.25995 6.30691 7.69327 5.74023 6.99994 5.74023Z"
+            fill="#47586E" />
+          <path
+            d="M3.18683 8.96655C2.9135 8.96655 2.68683 8.73989 2.68683 8.46655V5.5332C2.68683 5.25987 2.9135 5.0332 3.18683 5.0332C3.46016 5.0332 3.68683 5.25987 3.68683 5.5332V8.46655C3.68683 8.73989 3.46683 8.96655 3.18683 8.96655Z"
+            fill="#47586E" />
+          <path
+            d="M10.8066 8.96655C10.5333 8.96655 10.3066 8.73989 10.3066 8.46655V5.5332C10.3066 5.25987 10.5333 5.0332 10.8066 5.0332C11.08 5.0332 11.3066 5.25987 11.3066 5.5332V8.46655C11.3066 8.73989 11.0866 8.96655 10.8066 8.96655Z"
+            fill="#47586E" />
+        </svg>
+        <p>
+          {{'choose_payment_method'|translateApi}}
+        </p>
+      </div>
+    </div>
+    @if (!isLoadingPaymentMethods()) {
+
+    @for (method of paymentMethods(); track method.id) {
+    <div [ngClass]="{'disabled': isLoading}">
+      <app-radio-card [config]="method" [selectedValueId]="selectedMethodId"
+        (selectedChange)="handleRadioCardSelection($event)">
+      </app-radio-card>
+    </div>
+    } @empty {
+    @if (!isLoadingPaymentMethods() && !paymentMethodsErrorMessage()) {
+    <p class="payment-method-block__message--no-data">{{'no_payment_methods_available' | translateApi}}</p>
+    <app-empty-state [config]="paymentMethodsEmptyState"></app-empty-state>
+
+    } @else if(paymentMethodsErrorMessage() &&!paymentMethodsStatus()) {
+    <app-error-state [config]="paymentMethodsErrorState"></app-error-state>
+    }
+    }
+    @if (validationError()) {
+    <p class="payment-method-block__error-message">
+      {{'please_choose_payment_method' |translateApi}}
+    </p>
+
+    }
+    @if (paymentMethodsErrorMessage()) {
+    <p class="payment-method-block__error-message--api">{{ paymentMethodsErrorMessage() }}</p>
+    }
+    }
+    @else {
+    <div class="payment-method-block__loading-state" aria-live="polite">
+      @for (item of [1,2]; track item) {
+      <div class="input-group-shimmer">
+        <div class="input-group-shimmer__icon"></div>
+        <div class="input-group-shimmer__text-content">
+          <div class="input-group-shimmer__title-line"></div>
+          <div class="input-group-shimmer__count-line"></div>
+        </div>
+        <div class="input-group-shimmer__radio-circle"></div>
+      </div>
+      }
+    </div>
+    }
+  </div>
+
+
+  <div class="payment-method-block__actions-group">
+    <button id="cancel-btn" type="button"
+      class="payment-method-block__action-button payment-method-block__action-button--cancel" (click)="onCancel()"
+      [disabled]="isLoading">
+      {{ 'cancel' | translateApi }}
+    </button>
+
+    <button id="next-btn" type="button"
+      class="payment-method-block__action-button payment-method-block__action-button--next" (click)="onNextStep()"
+      [disabled]="isLoading">
+      @if (isLoading) {
+      <div class="payment-method-block__action-button--next__loading">
+        {{ 'in_progress' | translateApi }}
+        <span class="dot-loader"></span>
+      </div>
+      } @else {
+      {{ 'confirm_subscription' | translateApi }}
+      }
+    </button>
+  </div>
+</div>

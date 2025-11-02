@@ -1,0 +1,35 @@
+<div class="empty-state" [ngStyle]="{ 'background-color': backgroundColor(), 'gap': gap() }">
+
+  @if (hasImage()) {
+  <img class="empty-state__image" [style.width]="effectiveImgWidth()" [ngClass]="{'small': type === 'small'}"
+    [src]="config.imageUrl" [alt]="config.title || 'Empty state'" loading="lazy" />
+  }
+
+  @if (hasTitle()) {
+  <h2 class="empty-state__title" [ngClass]="{'small': type === 'small'}">
+    {{ (config.title || '')| translateApi }}
+  </h2>
+  }
+
+  @if (hasMessage()) {
+  <p class="empty-state__message" [ngClass]="{'small': type === 'small'}">
+    {{ (config.message || '') | translate }}
+  </p>
+  }
+
+  @if (hasButton()) {
+  <button class="empty-state__add" (click)="onClick()" [disabled]="buttonLoading()">
+    @if (buttonLoading()) {
+    <div class="general-form-wrapper__actions__loading" aria-label="Submit in progress">
+      {{ 'in_progress' | translateApi }}
+      <span class="dot-loader"></span>
+      <span class="dot-loader"></span>
+      <span class="dot-loader"></span>
+    </div>
+    } @else {
+    <p>{{ (config.buttonText || '') | translateApi }}</p>
+    }
+  </button>
+  }
+
+</div>

@@ -1,0 +1,127 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+
+.faq-details {
+  display: flex;
+  gap: 0.75rem;
+  padding-inline-end: 0.5rem;
+
+  &__content {
+    display: flex;
+    gap: 0.75rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding-inline-end: 0.5rem;
+    padding: 1rem;
+  }
+
+  &__questions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 19rem;
+    max-width: 19rem;
+  }
+
+  &__answer {
+    flex: 1;
+    border-radius: 0.625rem;
+    border: 1px solid var(--Dark-50, #f6f7f8);
+    background: var(--Dark-WHITE, #fff);
+    display: flex;
+    padding: 0.75rem 0.5rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-300, #47586e);
+    font-size: 0.875rem;
+  }
+
+  &__empty {
+    margin: 2rem 0;
+  }
+}
+
+.faq-question-card {
+  display: flex;
+  padding: 0.75rem 1rem;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 0.625rem;
+  border: 1px solid var(--Dark-50, #f6f7f8);
+  background: var(--Dark-WHITE, #fff);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &--active {
+    border: 1px solid var(--grid-2, #b8efe9);
+    background: linear-gradient(180deg, rgba(184, 239, 233, 0.2) 0%, rgba(174, 206, 231, 0.2) 100%);
+
+    .faq-question-card__icon svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  &__title {
+    color: var(--text-primary, #000);
+    font-size: 0.75rem;
+    font-weight: 500;
+    flex: 1;
+    margin-right: 0.5rem;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.3s ease;
+    }
+  }
+}
+
+.faq-answer-card {
+  &__title {
+    color: var(--text-primary, #000);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin: 0 0 0.5rem 0;
+  }
+
+  &__description {
+    color: var(--text-300, #47586e);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.6;
+
+    p {
+      margin: 0 0 0.5rem 0;
+    }
+  }
+}
+
+// Responsive Design
+@include respond(md) {
+  .faq-details {
+    &__questions {
+      max-width: 100%;
+      width: 100%;
+    }
+
+    &__content {
+      flex-direction: column;
+    }
+  }
+}

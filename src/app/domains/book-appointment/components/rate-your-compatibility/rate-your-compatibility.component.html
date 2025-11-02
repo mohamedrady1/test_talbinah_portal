@@ -1,0 +1,13 @@
+<div class="rate-your-compatibility-card" (click)="onRateCompatibilityClick()">
+    <div class="rate-your-compatibility-card__title">
+        <p>{{'rate_doctor_with_assistant'|translateApi}}</p>
+    </div>
+    <div class="rate-your-compatibility-card__subTitle">
+        <p>{{'compatibility_with_doctor'|translateApi}}</p>
+    </div>
+    <div class="rate-your-compatibility-card__actions">
+        <button type="button" class="rate" [attr.aria-label]="'rate_compatibility' | translateApi">
+            {{ 'rate_compatibility' | translateApi }}
+        </button>
+    </div>
+</div>

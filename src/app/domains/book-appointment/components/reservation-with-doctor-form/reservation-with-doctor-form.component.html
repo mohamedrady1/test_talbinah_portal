@@ -1,0 +1,165 @@
+<section class="reservation-form">
+  <div class="reservation-form__container">
+    <form class="form form--reservation" [formGroup]="form" (ngSubmit)="onSubmit()"
+      aria-labelledby="reservationFormTitle">
+      <h2 id="reservationFormTitle" class="visually-hidden">
+        {{ 'available_appointments ' | translateApi }}
+      </h2>
+
+      <div class="form__groups">
+        <div class="form__group">
+          <label for="CommunicationType" class="form__label"
+            [ngClass]="{ 'form__label--error': getError('CommunicationType') }">
+            {{ 'session_type' | translateApi }}
+            <span class="form__required" aria-hidden="true">*</span>
+          </label>
+
+          <div class="form__control">
+            @if (!isLoadingCommunicationTypes()) {
+            <div class="radio-group">
+              @if (CommunicationTypesList()?.data?.length) {
+              @for (type of CommunicationTypesList()?.data; track type.id) {
+              <label class="radio-group__item"
+                [class.radio-group__item--active]="form.get('CommunicationType')?.value === type.id">
+                <input type="radio" [value]="type.id" formControlName="CommunicationType" class="radio-group__input" />
+                <span class="radio-group__text">{{ type.name }}</span>
+              </label>
+              }
+              } @else {
+              <div class="form__empty">{{ 'no_data_available' | translateApi }}</div>
+              }
+            </div>
+            } @else {
+            <div class="form__shimmer">
+              @for (i of [].constructor(4); track i) {
+              <div class="form__shimmer-box"></div>
+              }
+            </div>
+            }
+            <div class="form__feedback" *ngIf="getError('CommunicationType')">
+              {{ 'session_type_error' | translateApi }}
+            </div>
+          </div>
+        </div>
+
+        <div class="form__group">
+          <label for="date" class="form__label" [ngClass]="{ 'form__label--error': getError('date') }">
+            <span>🕒</span> {{ 'date' | translateApi }}
+            <span class="form__required" aria-hidden="true">*</span>
+          </label>
+
+          <div class="form__control">
+            <div class="custom-input date-picker" [ngClass]="{ 'custom-input--error': getError('date') }">
+              <p-datepicker id="date" formControlName="date" [showIcon]="true" iconDisplay="input" dateFormat="yy-mm-dd"
+                [minDate]="today" [readonlyInput]="true" appendTo="body" class="custom-input__native"
+                [placeholder]="!form.get('date')?.value ? ('date' | translateApi) : ''" aria-required="true"
+                [attr.aria-invalid]="getError('date')" [disabledDays]="disabledWeekDays"
+                (onSelect)="onDateSelect($event)"></p-datepicker>
+            </div>
+            <div class="form__feedback" *ngIf="getError('date')">
+              {{ 'date_required' | translateApi }}
+            </div>
+          </div>
+        </div>
+
+        <div class="form__group">
+          <label for="duration_id" class="form__label" [ngClass]="{ 'form__label--error': getError('duration_id') }">
+            <span>🕒</span> {{ 'available_times' | translateApi }}
+            <span class="form__required" aria-hidden="true">*</span>
+          </label>
+
+          <div class="form__control">
+            @if (!durationsLookupFacade.isLoading()) {
+            <div class="radio-group">
+              @for (duration of durationsLookupFacade.Durations()?.data; track duration.id) {
+              <label class="radio-group__item"
+                [class.radio-group__item--active]="form.get('duration_id')?.value === duration.id">
+                <input type="radio" [value]="duration.id" formControlName="duration_id" class="radio-group__input" />
+                <span class="radio-group__text">
+                  {{ duration.duration }} {{ 'min' | translateApi }}
+                </span>
+                @if (duration?.price) {
+                <span class="radio-group__text">
+                  / {{ duration?.price }} {{ 'riyals' | translateApi }}
+                </span>
+                }
+              </label>
+              }
+            </div>
+            } @else {
+            <div class="form__shimmer">
+              @for (i of [].constructor(4); track i) {
+              <div class="form__shimmer-box"></div>
+              }
+            </div>
+            }
+            <div class="form__feedback" *ngIf="getError('duration_id')">
+              {{ 'appointment_duration_error' | translateApi }}
+            </div>
+          </div>
+        </div>
+
+        <div class="form__group">
+          <label for="time_id" class="form__label" [ngClass]="{ 'form__label--error': getError('time_id') }">
+            <span>🕒</span> {{ 'available_times' | translateApi }}
+            <span class="form__required" aria-hidden="true">*</span>
+          </label>
+
+          @if (form.get('duration_id')?.value && form.get('date')?.value) {
+          <div class="form__control">
+            @if (!doctorSlotsFacade.isLoading()) {
+            @if (doctorSlotsFacade.dataSlots()?.length) {
+            <div class="radio-group">
+              @for (time of doctorSlotsFacade.dataSlots(); track time.start_time) {
+              <label class="radio-group__item"
+                [class.radio-group__item--active]="form.get('time_id')?.value?.start_time === time.start_time">
+                <input type="radio" [value]="time" formControlName="time_id" class="radio-group__input" />
+                <span class="radio-group__text">
+                  {{ convertTimeStringToDate(time.start_time) | date: 'hh:mm a' : undefined : currentLang }}
+                </span>
+              </label>
+              }
+            </div>
+            } @else {
+            <div class="form__empty">{{ 'no_available_times' | translateApi }}</div>
+            }
+            } @else {
+            <div class="form__shimmer">
+              @for (i of [].constructor(4); track i) {
+              <div class="form__shimmer-box"></div>
+              }
+            </div>
+            }
+            <div class="form__feedback" *ngIf="getError('time_id')">
+              {{ 'available_times_error' | translateApi }}
+            </div>
+          </div>
+          }
+          @else {
+          <p class="SelectDateFirst">{{'available_times_warning'|translateApi}}</p>
+          }
+        </div>
+      </div>
+
+      <div class="form__actions">
+        <button type="button" class="btn btn--outline" (click)="onReset()">
+          {{ 'reset' | translateApi }}
+        </button>
+        <button type="submit" class="btn btn--solid"
+          [disabled]="_NormalPackagesReservationFacade.isStoring() ||_CheckPackagesReservationFacade.isLoading()">
+          @if (!_NormalPackagesReservationFacade.isStoring() &&!_CheckPackagesReservationFacade.isLoading()) {
+          <span>
+            {{ 'book_now' | translateApi }}
+          </span>
+          }
+          @if (_NormalPackagesReservationFacade.isStoring() || _CheckPackagesReservationFacade.isLoading()) {
+          <span class="form__loading">
+            {{ 'in_progress' | translateApi }}
+            <span class="dot-loader"></span>
+          </span>
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

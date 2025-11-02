@@ -1,0 +1,185 @@
+// BEM-friendly, mobile-first, responsive skeleton styles
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+
+.khawiik-history-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    // Banner Section
+    &__banner {
+        background: var(--skeleton, #edeef1);
+        border-radius: 0.75rem;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__banner-title {
+        width: 60%;
+        height: 20px;
+        border-radius: 0.5rem;
+        background: var(--skeleton, #edeef1);
+    }
+
+    &__mood-data {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    &__mood-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    &__mood-subject {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    // Content Section
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        flex: 1;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    &__header-title {
+        width: 50%;
+        height: 18px;
+        border-radius: 0.5rem;
+        background: var(--skeleton, #edeef1);
+    }
+
+    &__header-icon {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--skeleton, #edeef1);
+    }
+
+    &__search {
+        width: 100%;
+    }
+
+    &__search-input {
+        width: 100%;
+        height: 40px;
+        border-radius: 0.5rem;
+        background: var(--skeleton, #edeef1);
+    }
+
+    // Chat List
+    &__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        flex: 1;
+    }
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        background: var(--skeleton, #edeef1);
+        border-radius: 0.5rem;
+        min-height: 60px;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        flex: 1;
+    }
+
+    &__title {
+        width: 80%;
+        height: 16px;
+        border-radius: 0.25rem;
+        background: var(--skeleton, #edeef1);
+    }
+
+    &__date {
+        width: 40%;
+        height: 14px;
+        border-radius: 0.25rem;
+        background: var(--skeleton, #edeef1);
+    }
+
+    &__actions {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--skeleton, #edeef1);
+        flex-shrink: 0;
+    }
+
+    /* Reusable shimmer helper */
+    .shimmer-wrapper {
+        position: relative;
+        overflow: hidden;
+        background: var(--skeleton, #edeef1);
+        background-image: linear-gradient(
+            to right,
+            var(--skeleton, #edeef1) 0%,
+            #f3f5f8 20%,
+            var(--skeleton, #edeef1) 40%,
+            var(--skeleton, #edeef1) 100%
+        );
+        background-repeat: no-repeat;
+        background-size: 800px 100%;
+        animation: khawiik-history-shimmer 1.8s infinite linear;
+    }
+
+    .shimmer-line {
+        background: var(--skeleton, #edeef1);
+        border-radius: 0.25rem;
+    }
+
+    .shimmer-line--short {
+        width: 30%;
+        height: 12px;
+    }
+
+    .shimmer-line--medium {
+        width: 60%;
+        height: 14px;
+    }
+
+    .shimmer-line--long {
+        width: 85%;
+        height: 16px;
+    }
+}
+
+/* shimmer animation */
+@keyframes khawiik-history-shimmer {
+    0% {
+        background-position: -800px 0;
+    }
+
+    100% {
+        background-position: 800px 0;
+    }
+}

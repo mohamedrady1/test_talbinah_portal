@@ -1,0 +1,57 @@
+<section class="form">
+  @if (formConfig.length) {
+  <div class="form__grid">
+    @for (field of formConfig; track $index) {
+    <div class="form__field {{field.widthClass}}">
+      <div class="form__label-group">
+        <label [attr.for]="field.name" *ngIf="field.label" class="form__label" [ngClass]="{
+                'form__label--error': formError(),
+                'form__label--clickable': field.enableLabelClick
+              }">
+          {{ field.label |translate}} <span *ngIf="field.isRequired" class="form__required">*</span>
+        </label>
+
+        @if (field.enableAddNewBtn) {
+        <button type="button" class="form__add-new" (click)="addNew(field)">
+          <span class="form__add-new-icon pi pi-plus-circle"></span>
+          <span class="form__add-new-text">Add New</span>
+        </button>
+        }
+      </div>
+
+      <app-form-field [formGroup]="formGroup" [formItem]="field" [validationErrors]="validationErrors"></app-form-field>
+    </div>
+    }
+  </div>
+
+  <!-- <div *ngIf="formError()" class="form__error">
+    {{ formError() }}
+  </div> -->
+
+  @if (hasButton) {
+  <div class="form__actions">
+    @if (enablResetButtonText) {
+    <button id="reset-dynamic-form-btn" type="button" class="btn btn--outline" (click)="reset()">
+      <span class="btn__label">
+        {{ resetButtonText }}
+      </span>
+    </button>
+    }
+    <button id="submit-dynamic-form-btn" type="button" class="btn btn--solid" (click)="submitForm()"
+      [disabled]="isLoading()">
+      <span class="btn__label">
+        @if (isLoading()) {
+        <div class="loading" aria-label="Submit in progress">
+          {{ 'in_progress' | translate }}<span class="dot-loader"></span>
+        </div>
+        }
+        @else {
+        {{ submitButtonText | translate }}
+        }
+      </span>
+    </button>
+
+  </div>
+  }
+  }
+</section>

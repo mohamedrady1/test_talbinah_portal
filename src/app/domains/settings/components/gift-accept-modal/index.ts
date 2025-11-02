@@ -1,0 +1,1 @@
+export * from './gift-accept-modal.component';

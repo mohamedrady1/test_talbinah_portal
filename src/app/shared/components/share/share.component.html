@@ -1,0 +1,51 @@
+<!-- Main container for social share buttons -->
+<div class="social-share-section">
+  <!-- List of social share buttons -->
+  <ul class="social-share-list">
+    <!-- Loop through social media buttons, each rendered by app-share-button -->
+    @for (btn of socialBtns; track btn.name) {
+    <li class="social-share-item">
+      <!-- Using the app-share-button component -->
+      <app-share-button [type]="btn.name" [shareUrl]="link"></app-share-button>
+    </li>
+    }
+  </ul>
+
+  <!-- Section for page link and copy functionality -->
+  <div class="share-link-section">
+    <div class="share-link-header">
+      <h5 class="share-link-header__title">
+        @switch (linkType) {
+        @case ('doctor') {
+        {{'doctor_link'|translateApi}}
+        }
+        @case ('program') {
+        {{'program_link'|translateApi}}
+        }
+        @case ('general') {
+        {{'link'|translateApi}}
+        }
+        @default {
+        {{'post_link'|translateApi}}
+        }
+        }
+      </h5>
+      <!-- Display "Copied" message if isCopied is true -->
+      @if (isCopied) {
+      <span class="share-link-header__message">
+        {{'copied'|translateApi}}
+      </span>
+      }
+    </div>
+    <!-- Clickable div for copying the link to clipboard -->
+    <a class="share-link-wrapper" (click)="copyToClipboard(link)">
+      <div class="share-link-input-group">
+        <input class="share-link-input-group__input" type="text" [value]="link" readonly>
+        <p class="share-link-input-group__copy-icon">
+          <!-- Copy icon, changes color when link is copied -->
+          <i class="far fa-copy" [class.share-link-input-group__copy-icon--copied]="isCopied"></i>
+        </p>
+      </div>
+    </a>
+  </div>
+</div>

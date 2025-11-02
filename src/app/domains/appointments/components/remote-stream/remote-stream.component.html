@@ -1,0 +1,67 @@
+<section id="remote-video-container" class="agora-remote" aria-label="Remote Video Streams">
+  @if (remoteUsers().length > 0) {
+  <div class="remote-users-grid" [class.grid-mode]="remoteUsers().length > 1">
+    @for (user of remoteUsers(); track user.uid) {
+    <div class="remote-user-container" [attr.data-uid]="user.uid">
+      <app-remote-user [user]="user"></app-remote-user>
+
+      @if (user.hasVideo) {
+      <div class="media-status video-status">
+        <app-svg-icon [name]="!user.hasAudio? 'mic-off' : 'mic'" [fillColor]="!user.hasAudio? '#ca4146':'white'" />
+      </div>
+      }
+
+      <div [id]="'remote-video-' + user.uid" class="video-container"></div>
+
+      @if (!user.hasVideo) {
+      <div class="agora-remote__content agora-remote__content--placeholder">
+        <div class="media-status">
+          @if (!user.hasVideo) {
+          <span class="status-icon" aria-label="Video off">🎥</span>
+          }
+          @if (!user.hasAudio) {
+          <span class="status-icon" aria-label="Audio muted">🔇</span>
+          }
+        </div>
+        <div class="agora-remote__waves">
+          <img src="images/appointment/circle-waves.png" alt="Wave Image" class="centered-image wave-animated-image"
+            loading="lazy" />
+          <div class="agora-remote__doctor-info">
+            <span class="agora-remote__placeholder--name">
+              User {{ user.uid }} <br> (No Video)
+            </span>
+            @if (user.hasAudio) {
+            <span class="agora-remote__placeholder--status">🎤 Audio Only</span>
+            }
+            @if (!user.hasAudio) {
+            <span class="agora-remote__placeholder--status">🔇 Muted</span>
+            }
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    }
+  </div>
+  } @else {
+  <div class="agora-remote__content">
+    <div class="agora-remote__waves">
+      <img src="images/appointment/circle-waves.png" alt="Wave Image" class="centered-image wave-animated-image"
+        loading="lazy" />
+      <div class="agora-remote__doctor-info">
+        @if (shouldShowDoctorImage()) {
+        <img [src]="currentReservationData?.doctor?.image" [alt]="currentReservationData?.doctor?.full_name || 'Doctor'"
+          class="centered-image top-image" loading="lazy" />
+        } @else {
+        <div class="doctor-avatar-fallback" [style.background-color]="doctorAvatarBackgroundColor()">
+          <span class="doctor-avatar-initials">{{ doctorInitials() }}</span>
+        </div>
+        }
+        <span class="agora-remote__placeholder--name">
+          {{ currentReservationData?.doctor?.full_name || 'Doctor' }}
+        </span>
+      </div>
+    </div>
+  </div>
+  }
+</section>

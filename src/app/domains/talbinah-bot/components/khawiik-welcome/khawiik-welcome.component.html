@@ -1,0 +1,49 @@
+@if (isBrowser) {
+<main class="khawiik-welcome" role="main" aria-labelledby="khawiik-heading">
+  <section class="khawiik-welcome__hero" aria-labelledby="welcome-label welcome-title">
+    @if (labelTitle()) {
+    <p id="welcome-label" class="khawiik-welcome__label">
+      {{ labelTitle() | translateApi}}
+    </p>
+    }
+    <div class="khawiik-welcome__avatar" aria-hidden="true">
+      <img class="khawiik-welcome__avatar--image" src="images/khawiik/khawiik-welcome-mian-icon.png" alt=""
+        decoding="async" fetchpriority="low" />
+    </div>
+    @if (pageTitle()) {
+    <h3 id="welcome-title" class="khawiik-welcome__hero-title">
+      {{ pageTitle()| translateApi }}
+    </h3>
+    }
+  </section>
+
+  @if (items().length > 0) {
+  <section class="khawiik-welcome__features" aria-labelledby="features-heading">
+    <h3 id="features-heading" class="sr-only">features</h3>
+    <ul class="khawiik-welcome__list" role="list">
+      @for (item of items(); track $index) {
+      <li class="khawiik-welcome__item" [attr.aria-describedby]="'item-sub-{{i}}'">
+        <span class="khawiik-welcome__icon" aria-hidden="true">
+          <img [src]="item.icon" [alt]="item.title" decoding="async" />
+        </span>
+        <span class="khawiik-welcome__content">
+          <span class="khawiik-welcome__item-title">
+            {{ item.title| translateApi }}
+          </span>
+          <span id="item-sub-{{item?.title}}" class="khawiik-welcome__item-subtitle">
+            {{ item.subtitle | translateApi}}
+          </span>
+        </span>
+      </li>
+      }
+    </ul>
+  </section>
+  }
+
+  <footer class="khawiik-welcome__footer">
+    <button type="button" class="khawiik-welcome__start" (click)="onStart()" aria-label="ابدأ الآن">
+      {{'start_now' | translateApi}}
+    </button>
+  </footer>
+</main>
+}

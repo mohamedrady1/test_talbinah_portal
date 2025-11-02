@@ -1,0 +1,15 @@
+<div class="therapeutic-programs-layout">
+  <div class="therapeutic-programs-layout__header">
+    <app-site-header></app-site-header>
+  </div>
+
+  <div class="therapeutic-programs-layout__main" #card>
+    <app-header [config]="headerConfig" (fullscreenRequested)="toggleFullscreen()"
+      (closeRequested)="goHome()"></app-header>
+
+    <div class="therapeutic-programs-layout__content" appAutoExactHeight [enabled]="!isFullscreen"
+      heightMode="max-height">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

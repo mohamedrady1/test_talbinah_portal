@@ -1,0 +1,35 @@
+<div class="articles-layout__container" #card>
+    <div class="articles" appAutoExactHeight heightMode="max-height">
+        <div class="articles__favourite-list">
+            @if (!isLoadingFavorites()) {
+            @if (favoriteArticlesErrorMessage() && !statusFavorites()) {
+            <app-error-state [config]="favouriteArticlesErrorState"></app-error-state>
+            } @else if (favoriteArticles()?.length === 0) {
+            <app-empty-state [config]="articlesEmptyState"></app-empty-state>
+            }
+            @else if (favoriteArticles().length > 0) {
+            <div class="articles__list">
+                @for (article of favoriteArticles(); track $index) {
+                <article class="articles-listing__my-program--card" role="listitem">
+                    <app-article-card [type]="cardTypes.SUMMARY" [item]="article"
+                        (favouriteToggled)="handleFavouriteToggle($event)" />
+                </article>
+                }
+
+            </div>
+            @if(this.totalPages() > 1 && !this.isLoadingFavorites()){
+            <app-pagination-listing [paginationConfig]="paginationConfig()" />
+            }
+            }
+            }
+            @else {
+            <div class="articles__skeleton">
+                @for (item of [1,2,3,4]; track $index) {
+                <app-podcast-skeleton></app-podcast-skeleton>
+                }
+            </div>
+            }
+
+        </div>
+    </div>
+</div>

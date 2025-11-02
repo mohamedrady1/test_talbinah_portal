@@ -1,0 +1,1 @@
+export * from './therapeutic-program-card-shimmer.component';

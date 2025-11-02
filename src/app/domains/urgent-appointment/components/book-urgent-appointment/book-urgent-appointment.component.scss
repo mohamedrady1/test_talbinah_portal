@@ -1,0 +1,325 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+@use "../../../../common/styles/scss/abstracts/_base-layout-mixins" as *;
+@use "../../../../common/styles/scss/buttons/button.mixins" as btn;
+
+.book-urgent-appointment-layout {
+  background: transparent;
+
+  &__main-content {
+    display: flex;
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-self: stretch;
+    &--container {
+      padding-inline-end: 0.5rem;
+      display: flex;
+      gap: 0.75rem;
+      width: 100%;
+      flex-direction: row;
+    }
+  }
+
+  &__main-content {
+    display: flex;
+    gap: 0.75rem;
+    width: 100%;
+    flex-direction: row;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__banner {
+    display: flex;
+    width: 16.9375rem;
+    padding: 0.75rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+    align-self: stretch;
+    overflow-y: visible;
+    position: sticky;
+    top: 0;
+    border-radius: 1rem;
+    background: linear-gradient(180deg, rgba(186, 240, 232, 0.5) 0%, rgba(245, 218, 184, 0.5) 100%);
+
+    padding-block-start: 5rem;
+
+    @include respond(md) {
+      padding-block-start: 2rem;
+    }
+
+    @include respond(md) {
+      padding-block-start: inherit;
+    }
+
+    @include respond(lg) {
+      position: relative;
+      &--hidden-on-mobile {
+        display: none;
+      }
+    }
+    .title {
+      width: 14.3125rem;
+
+      color: var(--text-400, #0f0f0f);
+      text-align: center;
+
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+
+    .description {
+      align-self: stretch;
+
+      color: var(--text-300, #47586e);
+      text-align: center;
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+
+  &__img {
+    width: 11.6875rem;
+    height: 17.3125rem;
+    aspect-ratio: 187/277;
+  }
+
+  &__data {
+    display: flex;
+    padding: 0.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    flex: 1 0 0;
+
+    border-radius: 1rem;
+    background: var(--Dark-WHITE, #fff);
+
+    .appointment-form {
+      display: flex;
+      padding: 0.75rem;
+      flex-direction: column;
+      gap: 2rem;
+      flex: 1 0 0;
+
+      width: 100%;
+
+      &__groups {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        align-self: stretch;
+
+        width: 100%;
+      }
+
+      &__group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        align-self: stretch;
+      }
+
+      &__label {
+        color: var(--text-400, #0f0f0f);
+        font-size: 0.75rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: -0.015rem;
+        margin-bottom: 0;
+      }
+
+      &__control-wrapper {
+        display: flex;
+        gap: 0.625rem;
+        align-self: stretch;
+        flex-wrap: wrap;
+      }
+      &__hint {
+        color: #47586eaa;
+        font-size: 0.75rem;
+        text-align: center;
+        width: 100%;
+      }
+      &__radio-label {
+        display: flex;
+        padding: 0.75rem;
+        justify-content: center;
+        align-items: center;
+        gap: 0.625rem;
+
+        border-radius: 0.75rem;
+        background: var(--Dark-50, #f6f7f8);
+
+        color: var(--text-400, #0f0f0f);
+        font-size: 0.75rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+
+        margin: 0;
+        min-width: 6.5rem;
+
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+          background-color: var(--grey-200, #e6ecef);
+        }
+
+        // New: checked state modifier using :has()
+        &:has(input[type="radio"]:checked) {
+          background: var(--Primary-50, #e7ebf8);
+          color: var(--Primary-primary, #0e39b6);
+          font-weight: 600;
+        }
+
+        & input[type="radio"] {
+          appearance: none;
+          width: 1rem;
+          height: 1rem;
+          border: 2px solid var(--text-300, #47586e);
+          border-radius: 50%;
+          position: relative;
+          cursor: pointer;
+          display: none; // Hide the default radio input
+
+          &:checked {
+            background-color: var(--Primary-primary, #0e39b6);
+            border-color: var(--Primary-primary, #0e39b6);
+
+            &::after {
+              content: "";
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              width: 0.5rem;
+              height: 0.5rem;
+              background: white;
+              border-radius: 50%;
+              transform: translate(-50%, -50%);
+            }
+          }
+        }
+      }
+
+      &__radio-input {
+        /* If you want to separate the input styling from label, you can customize here */
+      }
+
+      &__radio-text {
+        // color: var(--text-300, #47586E);
+        // font-size: 0.875rem;
+      }
+
+      &__error-message {
+        color: var(--error-color, #ff0000);
+        font-size: 0.75rem;
+      }
+
+      &__actions {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: end;
+        gap: 2rem;
+        // flex: 1 0 0;
+      }
+    }
+  }
+
+  .btn {
+    @include btn.button-base;
+    @include btn.button-size("medium");
+    @include btn.button-icon-position("left");
+    @include btn.button-icon-size("medium");
+    @include btn.button-color("main");
+    @include btn.button-spinner;
+    min-width: 3rem;
+
+    &__icon {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    width: fit-content;
+
+    &__label {
+      padding: 0 0.5rem;
+      white-space: nowrap;
+    }
+
+    &--disabled {
+      @include btn.button-disabled;
+    }
+
+    &--outline {
+      @include btn.button-type("outline");
+    }
+
+    &--solid {
+      @include btn.button-type("solid");
+    }
+  }
+  .group {
+    &__options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+
+      &--shimmer {
+        width: 5rem;
+        height: 2.5rem;
+        border-radius: 8px;
+        background: linear-gradient(
+          90deg,
+          var(--grey-200, #f0f0f0) 25%,
+          var(--grey-300, #e0e0e0) 37%,
+          var(--grey-200, #f0f0f0) 63%
+        );
+        background-size: 400% 100%;
+        animation: shimmer 1.4s ease infinite;
+
+        &.large {
+          width: 5rem;
+          height: 3rem;
+        }
+      }
+    }
+  }
+}
+
+@include respond(lg) {
+  .book-urgent-appointment-layout {
+    &__main-content {
+      flex-direction: column; // Stack banner and form vertically
+    }
+
+    &__banner {
+      width: 100%; // Banner takes full width
+      padding: 2rem;
+    }
+
+    &__data {
+      display: none;
+      width: 100%; // Form takes full width when visible
+      &--show-on-mobile {
+        display: flex;
+      }
+    }
+  }
+}

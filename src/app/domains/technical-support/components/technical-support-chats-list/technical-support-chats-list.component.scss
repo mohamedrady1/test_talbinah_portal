@@ -1,0 +1,86 @@
+@use "./../../../../common/styles/scss/abstracts/general-form-wrapper.mixins" as form;
+@use "./../../../../common/styles/scss/abstracts/mixins" as *;
+
+.technical-support-chats {
+  display: flex;
+  padding: 0.75rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  align-self: stretch;
+
+  &__container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    background: var(--Dark-WHITE, #fff);
+  }
+
+  &__add-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: var(--Radius-4, 0.25rem);
+    gap: 0.25rem;
+    border: none;
+    color: var(--color-on-primary, #fff);
+    border-radius: 0.75rem;
+    background: var(--Primary-primary, #0e39b6);
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      transform 0.15s ease;
+  }
+
+  &__search {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.25rem;
+    align-items: center;
+  }
+
+  // Element: __cards-list - grid container for the cards
+  &__cards-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding-inline-end: 0.5rem;
+  }
+
+  // Element: __status-message - common styles for loading, empty, error states
+  &__status-message {
+    padding: 1rem;
+    text-align: center;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+
+    // Modifier: __status-message--loading
+    &--loading {
+      color: var(--text-500, #6b7280);
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 0.75rem;
+      padding: 0;
+      text-align: start;
+    }
+
+    // Modifier: __status-message--empty
+    &--empty {
+      color: var(--text-500, #6b7280);
+    }
+
+    // Modifier: __status-message--error
+    &--error {
+      color: var(--text-400, #9ca3af);
+    }
+  }
+}

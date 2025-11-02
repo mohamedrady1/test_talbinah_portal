@@ -1,0 +1,21 @@
+<div class="received-gifts-list">
+    @if (isLoading()) {
+    <app-gift-card-shimmer style="width: 100%;"></app-gift-card-shimmer>
+    }
+    @else {
+    @if (errorMessage() && !status()) {
+    <app-error-state-card [config]="errorConfig"></app-error-state-card>
+    }
+    @else if (isEmpty) {
+    <app-empty-state-card [config]="emptyConfig"></app-empty-state-card>
+    }
+    @else {
+    @for (item of pagedItems; track item.id) {
+    <app-gift-card [item]="item" type="receiver"></app-gift-card>
+    }
+    @if (totalPages > 1 && !isLoading() && !isEmpty && !errorMessage()) {
+    <app-pagination-listing [paginationConfig]="paginationConfig"></app-pagination-listing>
+    }
+    }
+    }
+</div>

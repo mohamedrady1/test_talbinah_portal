@@ -1,0 +1,48 @@
+<div class="technical-support-conversation">
+  <div class="technical-support-conversation__container">
+    <!-- Header -->
+    <div class="technical-support-conversation__header">
+      <h6 class="technical-support-conversation__title">
+        {{ details()?.user_id?.full_name || '' }}
+      </h6>
+      @if (isSupport() && details()?.is_closed==false && details()?.is_started==true) {
+      <app-actions-dropdown-menu [menuItems]="chatSupportActionsMenuItems"
+        (itemClicked)="handleMenuItemClick($event, null)" />
+      }
+    </div>
+
+    <!-- States -->
+    @if (isLoading()) {
+    <div class="technical-support-conversation__state technical-support-conversation__state--loading">
+      <app-chat-meeting-messages-skeleton />
+    </div>
+    } @else if (errorMessage()) {
+    <div class="technical-support-conversation__state technical-support-conversation__state--error">
+      <span class="technical-support-conversation__error-message">{{ errorMessage() }}</span>
+      <button class="technical-support-conversation__retry-btn" (click)="refreshConversation()">Retry</button>
+    </div>
+    } @else {
+    @if (details(); as conversation) {
+    <div class="technical-support-conversation__content" appAutoExactHeight>
+
+      <!-- Messages container -->
+      <div class="technical-support-conversation__messages">
+        @for (message of [1,2,3]; track message) {
+        <app-support-messages [currentSupportConversationData]="details()" [isSupport]="isSupport()" />
+
+        } @empty {
+        <div class="technical-support-conversation__no-messages">No messages yet</div>
+        }
+      </div>
+
+      @if (!details()?.is_closed) {
+      <!-- Message input -->
+      <div class="technical-support-conversation__input">
+        <app-support-message-input [currentSupportConversation]="details()" [isSupport]="isSupport()" />
+      </div>
+      }
+    </div>
+    }
+    }
+  </div>
+</div>

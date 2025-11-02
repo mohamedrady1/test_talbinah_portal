@@ -1,0 +1,131 @@
+@use "../../../common/styles/scss/abstracts/mixins" as *;
+
+.faq-details-loading {
+    display: flex;
+    gap: 0.75rem;
+
+    &__content {
+        display: flex;
+        gap: 0.75rem;
+        width: 100%;
+    }
+
+    &__questions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 19rem;
+        max-width: 19rem;
+        margin-inline-start: 0.5rem;
+    }
+
+    &__answer {
+        flex: 1;
+        border-radius: 0.625rem;
+        border: 1px solid var(--Dark-50, #f6f7f8);
+        background: var(--Dark-WHITE, #fff);
+        display: flex;
+        padding: 0.75rem 0.5rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+.faq-details-loading__question-card {
+    display: flex;
+    padding: 0.75rem 1rem;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.625rem;
+    border: 1px solid var(--Dark-50, #f6f7f8);
+    background: var(--Dark-WHITE, #fff);
+    transition: all 0.3s ease;
+
+    &__title {
+        flex: 1;
+        margin-right: 0.5rem;
+        height: 0.75rem;
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        border-radius: 0.25rem;
+    }
+
+    &__icon {
+        flex-shrink: 0;
+        width: 18px;
+        height: 18px;
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        border-radius: 50%;
+    }
+}
+
+.faq-details-loading__answer {
+    &__title {
+        height: 0.875rem;
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        border-radius: 0.25rem;
+        margin-bottom: 0.5rem;
+    }
+
+    &__line {
+        height: 0.875rem;
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        border-radius: 0.25rem;
+        margin-bottom: 0.25rem;
+
+        &:nth-child(2) {
+            width: 90%;
+        }
+
+        &:nth-child(3) {
+            width: 85%;
+        }
+
+        &:nth-child(4) {
+            width: 95%;
+        }
+
+        &:nth-child(5) {
+            width: 80%;
+        }
+
+        &:nth-child(6) {
+            width: 70%;
+        }
+
+        &:nth-child(7) {
+            width: 60%;
+        }
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+// Responsive Design
+@include respond(md) {
+    .faq-details-loading {
+        &__questions {
+            max-width: 100%;
+            width: 100%;
+        }
+
+        &__content {
+            flex-direction: column;
+        }
+    }
+}

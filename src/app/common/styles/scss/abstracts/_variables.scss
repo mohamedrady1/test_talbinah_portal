@@ -1,0 +1,367 @@
+$sm: 540px;
+$md: 720px;
+$lg: 960px;
+$xl: 1140px;
+
+$primary-color: #2563eb;
+$secondary-color: #f5f6f8;
+$success-color: #28a745;
+$info-color: #17a2b8;
+$warning-color: #ffc107;
+$danger-color: #dc3545;
+$light-color: #f8f9fa;
+$dark-color: #343a40;
+
+// Grey Scale Colors
+$color-white: #ffffff; // White color for background and text
+$color-black: #000000; // Black color for text and background
+$color-grey-light-1: #edeef3; // Light grey background
+$color-grey-light-2: #eee; // Lighter grey for borders and backgrounds
+$color-grey-dark: #333333; // Dark grey for text
+$color-grey-dark-2: #555555; // Medium dark grey for borders or text
+$color-grey-dark-3: #777777; // Dark grey for footer, borders
+$color-grey-dark-4: #0f0f0f;
+
+/* Primary Colors */
+$color-primary: #4caf50; // Green color for primary buttons
+$color-primary-light: #6c757d; // Light primary color
+$color-primary-dark: #343a40; // Dark primary color
+
+/* Secondary Colors */
+$color-secondary-light: #ffb900; // Light secondary color
+$color-secondary-dark: #ff7730; // Dark secondary color
+
+/* Tertiary Colors */
+$color-tertiary-light: #2998ff; // Light tertiary color
+$color-tertiary-dark: #5643fa; // Dark tertiary color
+
+// Typography
+$font-family-base: "Helvetica Neue", Arial, sans-serif;
+$font-size-base: 1rem; // 16px
+$font-size-lg: 1.25rem; // 20px
+$font-size-sm: 0.875rem; // 14px
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+// Spacing
+$spacer: 1rem; // 16px
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  // 4px
+  2: $spacer * 0.5,
+  // 8px
+  3: $spacer,
+  // 16px
+  4: $spacer * 1.5,
+  // 24px
+  5: $spacer * 3 // 48px
+);
+
+// Gutter Spacing
+$gutter-horizontal: 2rem; // Horizontal gutter between columns
+$gutter-vertical: 3rem; // Vertical gutter between rows
+$gutter-vertical-small: 1.5rem; // Smaller vertical gutter for mobile views
+
+// Breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+// Container widths
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px
+);
+// Border radius
+$border-radius: 0.25rem; // 4px
+$border-radius-lg: 0.3rem; // 5px
+$border-radius-sm: 0.2rem; // 3px
+
+// Shadows
+$box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+$box-shadow-lg: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+
+// Default Font Size
+$default-font-size: 1.6rem; // Default font size for body text
+
+// Grid
+$grid-width: 120rem; // Full grid width
+
+// Layout variables
+$layout-min-height: 100vh !default;
+$layout-background: url("../../../../../../public/images/mentalHealthScale/bg.png") no-repeat center/cover !default;
+$layout-display: flex !default;
+$layout-flex-direction: column !default;
+$layout-padding-base: 2rem 6.25rem !default;
+$layout-gap-base: 3rem !default;
+
+// Responsive breakpoints
+$layout-padding-md: 1.5rem 4.25rem !default;
+$layout-gap-md: 4rem !default;
+$layout-padding-sm: 1rem 2.25rem !default;
+$layout-gap-sm: 2rem !default;
+
+//new variables
+:root {
+  --Primary-primary: #0e39b6;
+  --Primary-100: #dbe1f4;
+  --Sacondry-Color-primary: #b80924;
+  --Warning-primary: #ffaf44;
+  --Success-primary: #00af6c;
+  --Success-50: #e5faf2;
+  --Dark-WHITE: #fff;
+  --Dark-black: #090b0e;
+  --text-200: #a3adbb;
+  --text-primary: #000;
+  --Dark-50: #f6f7f8;
+  --Dark-100: #eee;
+  --Dark-200: #f8f8f8;
+  --Dark-300: #a5a5a5;
+  --Dark-400: #666;
+  --Primary-50: #e7ebf8;
+  --text-100: #909dad;
+  --text-300: #47586e;
+  --Light-50: #fbfbfb;
+  --text-400: #0f0f0f;
+  --text-500: #000;
+  --Text-Gray: #897c94;
+  --text-dark: #000;
+  --Primary-50: #e7ebf8;
+  --Radius-2: 2px;
+  --Gray-White: #fff;
+  --Dark-light-600: #333;
+  --Dark-DARK: #1d1f1f;
+  --Dark-light-500: #708387;
+
+  --gold: #ffaf44;
+  --Warning-50: #faf4eb;
+  --Radius-1: 0.0625rem;
+  --Radius-2: 0.125rem;
+  --Radius-3: 0.1875rem;
+  --Radius-4: 0.25rem;
+  --Radius-5: 0.3125rem;
+  --Radius-6: 0.375rem;
+  --Radius-7: 0.4375rem;
+  --Radius-8: 0.5rem;
+  --Radius-9: 0.5625rem;
+  --Radius-10: 0.625rem;
+  --Radius-11: 0.6875rem;
+  --Radius-12: 0.75rem;
+  --Radius-13: 0.8125rem;
+  --Radius-14: 0.875rem;
+  --Radius-15: 0.9375rem;
+  --Radius-16: 1rem;
+  --Radius-17: 1.0625rem;
+  --Radius-18: 1.125rem;
+  --Radius-19: 1.1875rem;
+  --Radius-20: 1.25rem;
+  --Radius-21: 1.3125rem;
+  --Radius-22: 1.375rem;
+  --Radius-23: 1.4375rem;
+  --Radius-24: 1.5rem;
+  --grid-4: linear-gradient(180deg, #c9fbee 0%, #afd2e7 100%);
+  --grid-5: linear-gradient(180deg, #baf0e8 0%, #f5dab8 100%);
+  --OmnesArabic: "OmnesArabic";
+  --light-color: $light-color;
+  --gold-color: #c40;
+}
+
+/* Light Theme Variables */
+:root[data-theme="light"] {
+  --Primary-primary: #0e39b6;
+  --Primary-100: #dbe1f4;
+  --Primary-600: #3751fe;
+  --Sacondry-Color-primary: #b80924;
+  --Warning-primary: #ffaf44;
+  --Success-primary: #00af6c;
+  --Success-50: #e5faf2;
+  --Danger-50: #f9e7e8;
+  --Danger-600: #ca4146;
+  --Dark-WHITE: #fff;
+  --Dark-black: #090b0e;
+  --text-200: #a3adbb;
+  --text-primary: #000;
+  --Dark-50: #f6f7f8;
+  --Dark-100: #eee;
+  --Dark-200: #f8f8f8;
+  --Dark-300: #a5a5a5;
+  --Dark-400: #666;
+  --Primary-50: #e7ebf8;
+  --text-100: #909dad;
+  --text-300: #47586e;
+  --text-400: #0f0f0f;
+  --text-500: #fff;
+  --text-500: #000;
+  --Text-Gray: #897c94;
+  --text-dark: #000;
+  --Primary-50: #e7ebf8;
+  --Radius-2: 2px;
+  --Gray-White: #feffff;
+  --gold: #ffaf44;
+  --Warning-50: #faf4eb;
+  --warning-color-light: #fff3cd;
+  --Radius-1: 0.0625rem;
+  --Radius-2: 0.125rem;
+  --Radius-3: 0.1875rem;
+  --Radius-4: 0.25rem;
+  --Radius-5: 0.3125rem;
+  --Radius-6: 0.375rem;
+  --Radius-7: 0.4375rem;
+  --Radius-8: 0.5rem;
+  --Radius-9: 0.5625rem;
+  --Radius-10: 0.625rem;
+  --Radius-11: 0.6875rem;
+  --Radius-12: 0.75rem;
+  --Radius-13: 0.8125rem;
+  --Radius-14: 0.875rem;
+  --Radius-15: 0.9375rem;
+  --Radius-16: 1rem;
+  --Radius-17: 1.0625rem;
+  --Radius-18: 1.125rem;
+  --Radius-19: 1.1875rem;
+  --Radius-20: 1.25rem;
+  --Radius-21: 1.3125rem;
+  --Radius-22: 1.375rem;
+  --Radius-23: 1.4375rem;
+  --Radius-24: 1.5rem;
+  --grid-4: linear-gradient(180deg, #c9fbee 0%, #afd2e7 100%);
+  --grid-5: linear-gradient(180deg, #baf0e8 0%, #f5dab8 100%);
+
+  --OmnesArabic: "OmnesArabic";
+  --light-color: $light-color;
+  --Dark-light-600: #333;
+  --Dark-DARK: #1d1f1f;
+  --Dark-light-500: #708387;
+  --gold-color: #c40;
+  /* Additional Light Theme Specific Variables */
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --card-bg: #ffffff;
+  --border-color: #e5e7eb;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --hover-bg: #f9fafb;
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+  --input-text: #000000;
+  --placeholder-color: #9ca3af;
+  --link-color: #0e39b6;
+  --link-hover: #0d2f8f;
+  --error-color: #b80924;
+  --error-color-dark: #800000;
+  --success-color: #00af6c;
+  --warning-color: #ffaf44;
+  --info-color: #0e39b6;
+  --color-icon: #cae8db;
+  --color-icon-2: #e7d4ba;
+  --error-color-light: #ffe0e0;
+  --success-color-light: #e0ffe0;
+  --grey-200: #e5e7eb;
+  --grey-300: #d1d5db;
+  --grey-400: #9ca3af;
+  --grey-50: #f9fafb;
+  --text-dark: #000000;
+  --text-muted-color: #6c757d;
+}
+
+/* Dark Theme Variables */
+:root[data-theme="dark"] {
+  --Primary-primary: #4a90e2;
+  --Primary-100: #1a2332;
+  --Primary-600: #6ba3e8;
+  --Sacondry-Color-primary: #ff6b6b;
+  --Warning-primary: #ffd93d;
+  --Success-primary: #6bcf7f;
+  --Success-50: #1a2f1a;
+  --Danger-50: #2a1a1a;
+  --Danger-600: #cc4444;
+  --Dark-WHITE: #1a1a1a;
+  --Dark-black: #ffffff;
+  --text-200: #8b9bb4;
+  --text-primary: #ffffff;
+  --Dark-50: #2a2a2a;
+  --Dark-100: #3a3a3a;
+  --Dark-200: #4a4a4a;
+  --Dark-300: #6b6b6b;
+  --Dark-400: #8b8b8b;
+  --Primary-50: #1a2332;
+  --text-100: #a3adbb;
+  --text-300: #c4c4c4;
+  --text-400: #ffffff;
+  --Text-Gray: #a3adbb;
+  --text-dark: #ffffff;
+  --text-500: #fff;
+  --Primary-50: #1a2332;
+  --Radius-2: 2px;
+  --Gray-White: #1a1a1a;
+  --gold: #ffd93d;
+  --Warning-50: #2a2a1a;
+  --warning-color-light: #2a2a1a;
+  --Radius-1: 0.0625rem;
+  --Radius-2: 0.125rem;
+  --Radius-3: 0.1875rem;
+  --Radius-4: 0.25rem;
+  --Radius-5: 0.3125rem;
+  --Radius-6: 0.375rem;
+  --Radius-7: 0.4375rem;
+  --Radius-8: 0.5rem;
+  --Radius-9: 0.5625rem;
+  --Radius-10: 0.625rem;
+  --Radius-11: 0.6875rem;
+  --Radius-12: 0.75rem;
+  --Radius-13: 0.8125rem;
+  --Radius-14: 0.875rem;
+  --Radius-15: 0.9375rem;
+  --Radius-16: 1rem;
+  --Radius-17: 1.0625rem;
+  --Radius-18: 1.125rem;
+  --Radius-19: 1.1875rem;
+  --Radius-20: 1.25rem;
+  --Radius-21: 1.3125rem;
+  --Radius-22: 1.375rem;
+  --Radius-23: 1.4375rem;
+  --Radius-24: 1.5rem;
+  --grid-4: linear-gradient(180deg, #1a2f2a 0%, #1a2332 100%);
+  --grid-5: linear-gradient(180deg, #2a2a1a 0%, #1a2332 100%);
+  --OmnesArabic: "OmnesArabic";
+  --light-color: #2a2a2a;
+  --Light-50: #2a2a2a;
+  --Dark-light-600: #fff;
+  --Dark-DARK: #fff;
+  --Dark-light-500: #708387;
+  --gold-color: #c40;
+  /* Additional Dark Theme Specific Variables */
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --card-bg: #1e1e1e;
+  --border-color: #333333;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --hover-bg: #2a2a2a;
+  --input-bg: #2a2a2a;
+  --input-border: #444444;
+  --input-text: #ffffff;
+  --placeholder-color: #888888;
+  --link-color: #4a90e2;
+  --link-hover: #6ba3e8;
+  --error-color: #ff6b6b;
+  --error-color-dark: #cc4444;
+  --success-color: #6bcf7f;
+  --warning-color: #ffd93d;
+  --info-color: #4a90e2;
+  --color-icon: #1a2f2a;
+  --color-icon-2: #2a2a1a;
+  --error-color-light: #2a1a1a;
+  --success-color-light: #1a2a1a;
+  --grey-200: #4a4a4a;
+  --grey-300: #6b6b6b;
+  --grey-400: #8b8b8b;
+  --grey-50: #2a2a2a;
+  --text-dark: #ffffff;
+  --text-muted-color: #a3adbb;
+}

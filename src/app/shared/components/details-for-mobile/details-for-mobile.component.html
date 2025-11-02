@@ -1,0 +1,17 @@
+<div class="details-for-mobile" [style.background]="background">
+  <!-- <div class="details-for-mobile__header">
+    <button class="details-for-mobile__close-btn" (click)="onClose()" type="button" [attr.aria-label]="'back'">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.45846 3.39961L12.8918 8.83294C13.5335 9.47461 13.5335 10.5246 12.8918 11.1663L7.45846 16.5996"
+          stroke="#1D1F1F" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <p class="details-for-mobile__title">
+      {{ title |translate }}
+    </p>
+  </div> -->
+
+  <div class="details-for-mobile__content">
+    <ng-content></ng-content>
+  </div>
+</div>

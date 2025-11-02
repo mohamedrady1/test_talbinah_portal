@@ -1,0 +1,20 @@
+.box-shadow {
+    box-shadow: var(--box-shadow);
+}
+.box-shadow-lg {
+    box-shadow: var(--box-shadow-lg);
+}
+
+//Example
+
+// <div class="box-shadow">
+//     <div>
+//         <p>This content has a small shadow.</p>
+//     </div>
+// </div>
+
+// <div class="box-shadow-lg">
+//     <div>
+//         <p>This content has a large shadow.</p>
+//     </div>
+// </div>

@@ -1,0 +1,236 @@
+<main class="schedule-appointment-form" role="main">
+  <section class="schedule-appointment-form__container" appAutoExactHeight="100">
+    <form class="general-form-wrapper" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="general-form-wrapper__groups">
+        @for (formItem of formConfig; track formItem.name) {
+        <div class="general-form-wrapper__field {{formItem.widthClass || ''}}">
+          @if ((!showNextStep() &&(formItem.type === allInputTypes.TEXTAREA || formItem.type === allInputTypes.SELECT)))
+          {
+          <div class="general-form-wrapper__label-group">
+            @if (formItem.label) {
+            <label [attr.for]="formItem.name" class="general-form-wrapper__label"
+              [ngClass]="{'general-form-wrapper__label--error': getError(formItem.name), 'general-form-wrapper__label--clickable': formItem.enableLabelClick}">
+              {{ formItem.label | translateApi }}
+              @if (formItem.isRequired) {
+              <span class="general-form-wrapper__required" aria-hidden="true">*</span>
+              }
+            </label>
+            }
+          </div>
+          }
+          @if ((showNextStep() &&(formItem.type === allInputTypes.DATE || formItem.type === allInputTypes.SELECT_TABS)))
+          {
+          <div class="general-form-wrapper__label-group">
+            @if (formItem.label) {
+            <label [attr.for]="formItem.name" class="general-form-wrapper__label"
+              [ngClass]="{'general-form-wrapper__label--error': getError(formItem.name), 'general-form-wrapper__label--clickable': formItem.enableLabelClick}">
+              {{ formItem.label | translateApi }}
+              @if (formItem.isRequired) {
+              <span class="general-form-wrapper__required" aria-hidden="true">*</span>
+              }
+            </label>
+            }
+          </div>
+          }
+
+          @if (!showNextStep() && formItem.type === allInputTypes.TEXTAREA) {
+          <div class="form-group-wrapper">
+            <div class="form-field">
+              <div class="custom-input custom-textarea"
+                [ngClass]="{'p-invalid': getFormControl(formItem.name)?.invalid && (getFormControl(formItem.name)?.touched || getFormControl(formItem.name)?.dirty)}">
+                <textarea [class]="formItem.inputClass ?? 'custom-input__input'" [formControlName]="formItem.name"
+                  [id]="formItem.name" [attr.aria-label]="(formItem.label ?? '') | translateApi"
+                  [attr.title]="(formItem.label ?? '') | translateApi"
+                  [attr.autocomplete]="formItem.name === 'reasonDetails' ? 'off' : null"
+                  [attr.placeholder]="(formItem.placeholder ?? '') | translateApi" [rows]="formItem.rows ?? 5"
+                  [attr.aria-required]="formItem.isRequired ? 'true' : 'false'"
+                  [attr.aria-describedby]="formItem.name + '-hint ' + formItem.name + '-error'"></textarea>
+              </div>
+
+              <div class="form-field__feedback" role="status" aria-live="polite">
+                @if (!getError(formItem.name) && formItem.hint && !getFormControl(formItem.name)?.value &&
+                !formItem.fixedHint) {
+                <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+                  {{ formItem.hint | translateApi }}
+                </small>
+                }
+
+                @if (getFormControl(formItem.name)?.invalid && (getFormControl(formItem.name)?.touched ||
+                getFormControl(formItem.name)?.dirty)) {
+                <span id="{{ formItem.name }}-error" class="general-form-wrapper__error-message error-label"
+                  role="alert">
+                  {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+                </span>
+                }
+              </div>
+            </div>
+          </div>
+          }
+
+          @if (!showNextStep() && formItem.type === allInputTypes.SELECT) {
+          <div class="form-group-wrapper">
+            <div class="form-field">
+              <div class="select-wrapper">
+                <p-select [options]="formItem.listValues" [formControlName]="formItem.name"
+                  [loading]="reasonsFacade.isLoading()==true"
+                  [optionLabel]="(formItem.optionLabel || 'label') | translateApi" [showClear]="true"
+                  [readonly]="reasonsFacade.isLoading()==true" [optionValue]="formItem.optionValue || 'value'"
+                  [filter]="formItem.name" [filterBy]="formItem.name"
+                  [placeholder]="(formItem.placeholder ?? '') | translateApi" [id]="formItem.name"
+                  [attr.aria-describedby]="formItem.name + '-hint'" [attr.aria-invalid]="!!getError(formItem.name)"
+                  [ngClass]="{'p-invalid': getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched}"
+                  appendTo="body" appPrimeSelectFilterFocus>
+                  <ng-template pTemplate="selectedItem" let-option>
+                    <!-- Custom selected item display if needed -->
+                    <div class="p-select-item-selected-custom">
+                      {{ option[formItem.optionLabel || 'label'] | translateApi }}
+                    </div>
+                  </ng-template>
+                  <ng-template let-option pTemplate="item">
+                    <!-- Custom item list display if needed -->
+                    <div class="p-select-item-custom">
+                      {{ option[formItem.optionLabel || 'label'] | translateApi}}
+                    </div>
+                  </ng-template>
+                </p-select>
+              </div>
+
+              <div class="form-field__feedback" role="status" aria-live="polite">
+                @if (!getError(formItem.name) && formItem.hint && !getFormControl(formItem.name)?.value &&
+                !formItem.fixedHint) {
+                <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+                  {{ formItem.hint | translateApi }}
+                </small>
+                }
+
+                @if (getFormControl(formItem.name)?.invalid && (getFormControl(formItem.name)?.touched ||
+                getFormControl(formItem.name)?.dirty)) {
+                <span id="{{ formItem.name }}-error" class="general-form-wrapper__error-message error-label"
+                  role="alert">
+                  {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+                </span>
+                }
+              </div>
+            </div>
+          </div>
+          }
+
+          @if (showNextStep() && formItem.type === allInputTypes.DATE) {
+          <div class="form-field">
+            <div class="custom-input p-0"
+              [ngClass]="{'p-invalid': getFormControl(formItem.name)?.invalid && (getFormControl(formItem.name)?.touched || getFormControl(formItem.name)?.dirty)}">
+              <p-datepicker id="DateInput" formControlName="date" [showIcon]="true" iconDisplay="input"
+                dateFormat="yy-mm-dd" [minDate]="today" [readonlyInput]="true" [showTransitionOptions]="'0ms'"
+                [hideTransitionOptions]="'0ms'" appendTo="body"
+                class="custom-input-wrapper__input custom-input-wrapper__input--p-datepicker w-100"
+                placeholder="{{ (formItem.placeholder ?? '') | translateApi }}" aria-required="true"
+                [attr.aria-invalid]="getFormControl('date')?.invalid && getFormControl('date')?.touched ? 'true' : 'false'"
+                [disabledDays]="disabledWeekDays" (onSelect)="onDateSelect($event)"
+                aria-describedby="dateError"></p-datepicker>
+            </div>
+
+            <div class="form-field__feedback" role="status" aria-live="polite">
+              @if (!getError(formItem.name) && formItem.hint && !getFormControl(formItem.name)?.value &&
+              !formItem.fixedHint) {
+              <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+                {{ formItem.hint | translateApi }}
+              </small>
+              }
+
+              @if (getFormControl(formItem.name)?.invalid && (getFormControl(formItem.name)?.touched ||
+              getFormControl(formItem.name)?.dirty)) {
+              <span id="{{ formItem.name }}-error" class="general-form-wrapper__error-message error-label" role="alert">
+                {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+              </span>
+              }
+            </div>
+          </div>
+          }
+
+          @if (showNextStep() && formItem.type === allInputTypes.SELECT_TABS) {
+          <div class="radio-select-group">
+
+            @if (!getFormControl('date')?.value) {
+            <app-empty-state-card style="margin:auto" [config]="ChooseDateEmptyState" [type]="'small'" />
+            }@else {
+            @if (!doctorSlotsFacade.isLoading()) {
+            @if (doctorSlotsFacade.dataSlots() && doctorSlotsFacade.dataSlots().length > 0) {
+            @for (time of doctorSlotsFacade.dataSlots() ; track time) {
+            <label class="radio-select__radio-label">
+              <input type="radio" [value]="time" formControlName="time_id" [attr.aria-label]="time.start_time"
+                class="radio-select__radio-input" />
+              <span class="radio-select__radio-text">
+                {{ getFormattedDate(null,time.start_time, 'h:mm a') }}
+              </span>
+            </label>
+            }
+            } @else if (!doctorSlotsFacade.error()) {
+            <app-empty-state-card style="margin: auto;" [config]="DoctorSlotsEmptyState" [type]="'small'" />
+            } @else {
+            <app-error-state-card style="margin: auto;" [config]="DoctorSlotsErrorState"
+              [type]="'small'"></app-error-state-card>
+            }
+            } @else {
+            <div class="group-radio-shimmer__options">
+              @for (i of [].constructor(5); track i) {
+              <div class="group-radio-shimmer__options--shimmer"></div>
+              }
+            </div>
+            }
+            }
+            <div class="form-field__feedback" role="status" aria-live="polite">
+              @if (!getError(formItem.name) && formItem.hint && !getFormControl(formItem.name)?.value &&
+              !formItem.fixedHint) {
+              <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+                {{ formItem.hint | translateApi}}
+              </small>
+              }
+
+              @if (getFormControl(formItem.name)?.invalid && (getFormControl(formItem.name)?.touched ||
+              getFormControl(formItem.name)?.dirty)) {
+              <span id="{{ formItem.name }}-error" class="general-form-wrapper__error-message error-label" role="alert">
+                {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+              </span>
+              }
+            </div>
+          </div>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="general-form-wrapper__actions">
+        @if (!showNextStep()) {
+        <button id="schedule-appointment-btn" type="button" class="btn btn--outline" (click)="onCancel()">
+          <span class="btn__label">{{ 'cancel' | translateApi }}</span>
+        </button>
+
+        <button type="button" class="btn btn--solid" (click)="onNextStep()">
+          <span class="btn__label">{{ 'next' | translateApi }}</span>
+        </button>
+        } @else {
+        <button id="schedule-appointment-btn" type="button" class="btn btn--outline" (click)="onPreviousStep()"
+          [disabled]="_ScheduleReservationFacade.isScheduling()">
+          <span class="btn__label">{{ 'previous' | translateApi }}</span>
+        </button>
+        <button id="submit-schedule-appointment-btn" type="submit" class="btn btn--solid"
+          [attr.aria-label]="'confirm' | translateApi"
+          [disabled]="_ScheduleReservationFacade.isScheduling() && reasonsFacade.isLoading()"
+          [ngClass]="{'disabled': this._ScheduleReservationFacade.isScheduling()}">
+          <span class="btn__label">
+            @if (!_ScheduleReservationFacade.isScheduling()) {
+            {{ 'confirm' | translateApi }}
+            } @else {
+            <div class="general-form-wrapper__loading" aria-live="polite">
+              {{ 'in_progress' | translateApi }}
+              <span class="dot-loader"></span>
+            </div>
+            }
+          </span>
+        </button>
+        }
+      </div>
+
+    </form>
+  </section>
+</main>

@@ -1,0 +1,140 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+
+.custom-input-wrapper {
+  display: flex;
+  padding: 0rem 16px;
+  align-items: center;
+  gap: 0.5rem;
+  height: 3.125rem;
+  color: var(--text-200, #a3adbb);
+  font-size: 0.875rem;
+  border-radius: 0.75rem;
+  color: var(--text-primary, black);
+  overflow: hidden;
+  border: 1px solid var(--Dark-100, #eeeeee);
+
+  &.p-invalid {
+    border: 1px solid var(--error-color, red);
+  }
+
+  &__icon {
+    display: flex;
+    width: 1.25rem;
+    height: 1.25rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  input {
+    width: 100%;
+
+    &::placeholder {
+      color: var(--text-200, #a3adbb) !important;
+
+      font-size: 0.875rem !important;
+      font-weight: 500 !important;
+    }
+  }
+
+  &__input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background-color: transparent;
+
+    &::placeholder {
+      color: var(--text-200, #a3adbb);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+  }
+
+  &--with-icon {
+    gap: 0.5rem;
+  }
+
+  &--icon-start {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+
+    .custom-input-wrapper__icon {
+      order: 0;
+    }
+  }
+
+  &--icon-end {
+    flex-direction: row-reverse;
+
+    .custom-input-wrapper__icon {
+      order: 1;
+    }
+  }
+
+  .password-toggle-btn {
+    @include respond(sm) {
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+.form-field__error {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--error-color, #dc3545);
+}
+
+::ng-deep {
+  .p-iconwrapper {
+    margin-inline-start: 1.25rem;
+  }
+}
+
+/* Hide native calendar icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  display: none;
+}
+
+input[type="date"]::-moz-calendar-picker-indicator {
+  opacity: 0;
+  display: none;
+}
+
+input[type="date"] {
+  text-align: right;
+}
+
+/* Input wrapper for custom icon */
+.date-input {
+  position: relative;
+  display: inline-block;
+}
+
+.date-input input[type="date"] {
+  padding-left: 2rem;
+  /* space for left icon */
+  padding-right: 0.5rem;
+  text-align: right;
+  /* keep text aligned RTL */
+}
+
+/* Add your own calendar icon on the left */
+.date-input::before {
+  content: url("data:image/svg+xml;utf8,<svg fill='%23999' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M7 10h5v5H7zM19 3h-1V1h-2v2H8V1H6v2H5C3.9 3 3 .9 3 5v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H5V8h14v13z'/></svg>");
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+  /* does not block input clicks */
+}

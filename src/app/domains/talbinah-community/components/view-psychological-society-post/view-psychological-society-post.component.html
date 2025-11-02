@@ -1,0 +1,20 @@
+<div class="view-psychological-society-post">
+  <div class="view-psychological-society-post--comments" appAutoExactHeightParent="20" [additionalHeight]="10"
+    [enabled]="true">
+
+    <app-view-post-card [type]="cardType.DETAILS" [isEnableCommented]="false" [hasBorder]="true" [config]="config.post"
+      (closed)="closeModal()" (actionEmitted)="onActionEmittedFromCard($event)"
+      [userIdentityProfileData]="userIdentityProfileData" />
+
+    @for (comment of config.post.comments; track $index) {
+    <app-comment-card [comment]="comment" [userIdentityProfileData]="userIdentityProfileData"
+      (closePopup)="closeModal()"></app-comment-card>
+    }
+  </div>
+
+  <div class="view-psychological-society-post--add-comment">
+    <app-comment-box [isActions]="isActions" [isLoadingComment]="isLoadingComment" (closed)="closeModal()"
+      [userIdentityProfileData]="userIdentityProfileData" (commentSubmitted)="onCommentSubmit($event)">
+    </app-comment-box>
+  </div>
+</div>

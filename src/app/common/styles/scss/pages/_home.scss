@@ -1,0 +1,59 @@
+//Import Sections
+@use "./sections/section-about";
+@use "./sections/section-features";
+@use "./sections/section-tours";
+@use "./sections/section-stories";
+@use "./sections/section-book";
+@use "./sections/book";
+
+// Example
+
+// <section class="section-about">
+// <div class="container">
+//     <h2>About Us</h2>
+//     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque a lorem at lorem volutpat suscipit.</p>
+// </div>
+// </section>
+
+// <!-- Section Features -->
+// <section class="section-features">
+// <div class="container">
+//     <h2>Features</h2>
+//     <ul>
+//         <li>Feature 1</li>
+//         <li>Feature 2</li>
+//         <li>Feature 3</li>
+//     </ul>
+// </div>
+// </section>
+
+// <!-- Section Tours -->
+// <section class="section-tours">
+// <div class="container">
+//     <h2>Tours</h2>
+//     <p>Explore the world with our amazing tours.</p>
+// </div>
+// </section>
+
+// <!-- Section Stories -->
+// <section class="section-stories">
+// <div class="container">
+//     <h2>Our Stories</h2>
+//     <p>Read about our past adventures and experiences.</p>
+// </div>
+// </section>
+
+// <!-- Section Book -->
+// <section class="section-book">
+// <div class="container">
+//     <h2>Book Your Tour</h2>
+//     <p>Fill out the form below to book your next adventure with us!</p>
+//     <div class="book__form">
+//         <form action="#">
+//             <input type="text" placeholder="Name" required>
+//             <input type="email" placeholder="Email" required>
+//             <button type="submit">Book Now</button>
+//         </form>
+//     </div>
+// </div>
+// </section>

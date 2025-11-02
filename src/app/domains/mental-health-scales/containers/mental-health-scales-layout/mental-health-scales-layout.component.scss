@@ -1,0 +1,105 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+@use "../../../../common/styles/scss/utils/helpers" as *;
+
+.mental-health-scale {
+    &-layout {
+        @include hero-layout("../../../../../../public/images/mentalHealthScale/bg.png");
+
+        &__container {
+            @include flex-box(column, 1.5rem);
+            gap: 1.5rem;
+            background: var(--Dark-50, #f6f7f8);
+            border-radius: 0.625rem;
+            padding: 1rem;
+            box-shadow:
+                0px -1px 50px 9px rgba(0, 0, 0, 0.08),
+                0px 0px 0px 1.5px rgba(255, 255, 255, 0.25) inset;
+            backdrop-filter: blur(20px);
+        }
+
+        &__cards {
+            @include flex-box(row, 0.75rem);
+            overflow-x: hidden;
+            padding-inline-end: 0.5rem;
+
+            .mental-health-scale-layout__choose-mood,
+            .mental-health-scale-layout__metrics,
+            .mental-health-scale-layout__cards-card {
+                padding: 0.75rem;
+                border-radius: 1rem;
+                height: fit-content;
+            }
+
+            .mental-health-scale-layout__cards-card {
+                width: 24.0625rem;
+                position: sticky;
+                top: 0;
+                align-self: flex-start;
+                @include respond(sm) {
+                    width: 100%;
+                    position: relative;
+                }
+            }
+
+            div {
+                &:first-child {
+                    @include flex-box(column, 0.75rem);
+                    flex: 1;
+                    height: fit-content;
+                    padding: 0;
+                    width: 100%;
+                }
+            }
+
+            &-card {
+                @include flex-box(column, 0.75rem);
+                width: 21.0625rem;
+                background: var(--Dark-WHITE);
+
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.75rem;
+                }
+
+                @include respond(sm) {
+                    width: 100%;
+                }
+            }
+
+            @include respond(sm) {
+                flex-direction: column;
+            }
+        }
+
+        &__choose-mood {
+            background: linear-gradient(to right, var(--color-icon-2, #f5dab8) 0%, var(--color-icon, #baf0e8) 100%);
+        }
+
+        &__metrics {
+            @include flex-box(column, 0.75rem);
+
+            background: var(--Dark-WHITE);
+
+            .metrics-list {
+                @include flex-box(column, 0.75rem);
+
+                padding-inline: 0;
+
+                .test {
+                    padding: 0.75rem;
+                    border-radius: 0.75rem;
+                    border: 1px solid var(--Dark-100);
+                }
+            }
+        }
+    }
+
+    &-list {
+        @include flex-box(column, 0.75rem);
+
+        hr {
+            margin-top: -4px;
+        }
+    }
+}

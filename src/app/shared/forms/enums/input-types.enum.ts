@@ -1,0 +1,27 @@
+// 🔹 Enum for Supported Input Types (All Keys in Capital Letters)
+export enum ALL_INPUT_TYPES {
+  TEXT = 'text',
+  NUMBER = 'number',
+  COUNTRYCODEINPUT = 'countryCodeInput',
+  EMAIL = 'email',
+  PASSWORD = 'password',
+  CONFIRMPASSWORD = 'confirmPassword',
+  SELECT = 'select',
+  MULTI_SELECT = 'multiSelect',
+  TOGGLE_BUTTON = 'toggleButton',
+  RANGE = 'range',
+  FILE = 'file',
+  DATE = 'date',
+  DATE_RANGE = 'dateRange',
+  TEXTAREA = 'textarea',
+  RATE = 'rate',
+  SELECT_TABS = 'selectTabs',
+  HTML_EDITOR = 'htmlEditor',
+  CAPTCHA = 'captcha',
+  ARRAY = 'array',
+  GROUP = 'group',
+  AUTO_COMPLETE = 'autoComplete',
+  READ_ONLY = 'readOnly',
+  RADIO_BUTTON = 'radio',
+  CHECK_BOX = 'checkBox'
+}

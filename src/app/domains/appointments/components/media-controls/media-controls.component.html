@@ -1,0 +1,53 @@
+<ng-container *ngIf="isBrowser">
+  <div id="media-controls" role="toolbar" aria-label="Media controls">
+    <button type="button" (click)="openChatOnly()" aria-label="Open chat meeting">
+      <app-svg-icon name="chat-md" />
+    </button>
+
+    <button #videoButton type="button" [class.active]="!videoMuted()"
+      [class.muted]="videoMuted() || !hasVideoPermission()" [disabled]="!hasVideoPermission()"
+      (click)="handleVideoToggle()" [attr.aria-pressed]="!videoMuted()" aria-label="Toggle camera">
+      <app-svg-icon [name]="videoMuted() || !hasVideoPermission() ? 'video-off' : 'video'"
+        [fillColor]="videoMuted() || !hasVideoPermission() ? '#ca4146':'white'" />
+      <span *ngIf="!hasVideoPermission()" class="permission-warning">!</span>
+    </button>
+
+    <button type="button" class="leave-button" (click)="handleLeaveChannel()" aria-label="Leave call">
+      <app-svg-icon name="hangup" />
+    </button>
+
+    <button #micButton type="button" [class.active]="!micMuted()" [class.muted]="micMuted() || !hasAudioPermission()"
+      [disabled]="!hasAudioPermission()" (click)="handleMicToggle()" [attr.aria-pressed]="!micMuted()"
+      aria-label="Toggle microphone">
+      <app-svg-icon [name]="micMuted() || !hasAudioPermission() ? 'mic-off' : 'mic'"
+        [fillColor]="micMuted() || !hasAudioPermission() ? '#ca4146':'white'" />
+      <span *ngIf="!hasAudioPermission()" class="permission-warning">!</span>
+    </button>
+
+    <button #screenButton type="button" [class.active]="screenSharing()"
+      [disabled]="!isBrowser || !hasScreenSharePermission()" (click)="handleScreenShareToggle()"
+      [attr.aria-pressed]="screenSharing()" aria-label="Toggle screen sharing">
+      <app-svg-icon [name]="screenSharing() ? 'screen-share-on' : 'screen-share-off'" />
+      <span *ngIf="!hasScreenSharePermission()" class="permission-warning">!</span>
+    </button>
+
+    <button type="button" (click)="toggleFullScreen()"
+      [attr.aria-label]="isFullscreen ? 'Exit full screen' : 'Enter full screen'">
+      <app-svg-icon [name]="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" />
+    </button>
+
+    <button #micButton type="button" class="volume-change" [class.muted]="micMuted()" [disabled]="!hasAudioPermission()"
+      aria-label="Volume Change">
+      <input #volumeSlider type="range" class="volume-slider" [style.--fill-direction]="fillDirection"
+        [style.--progress]="audioVolume + '%'"
+        [style.--muted-color]="micMuted() ? '#ca4146' : 'var(--Primary-primary, #0e39b6)'" min="0" max="100" step="5"
+        [value]="audioVolume" (input)="handleVolumeChange($event, volumeSlider)" [disabled]="!hasAudioPermission()"
+        aria-label="Microphone volume control" />
+      <app-svg-icon [name]="micMuted() ? 'volume-off' : 'volume'" />
+    </button>
+
+    <button type="button" (click)="openChatLarge()" aria-label="Open chat only">
+      <app-svg-icon name="chat-lg" />
+    </button>
+  </div>
+</ng-container>

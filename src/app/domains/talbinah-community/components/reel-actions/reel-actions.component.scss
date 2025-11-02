@@ -1,0 +1,59 @@
+@use "./../../../../common/styles/scss/abstracts/mixins" as responsive;
+
+.reels-card-action--react {
+    position: relative; /* For positioning reaction-picker */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem; /* Gap between icon and name */
+    cursor: pointer;
+    border-radius: 1rem;
+    transition: background-color 0.2s ease; /* For hover effect on the whole react area */
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05); /* Slight background change on hover */
+    }
+}
+
+.action-icon-wrapper {
+    width: 1.5525rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.default-reaction-icon,
+.default-comment-icon {
+    width: 100%;
+    height: 100%;
+}
+
+.selected-reaction-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Animation for selected reaction image */
+.selected-reaction-image.animated {
+    animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards; /* Pop effect */
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.selected-reaction-name,
+.default-reaction-name,
+.comments-count {
+    color: var(--text-400, #0f0f0f);
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+}

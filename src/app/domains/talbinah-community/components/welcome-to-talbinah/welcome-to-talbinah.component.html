@@ -1,0 +1,33 @@
+<div class="welcome-to-talbinah">
+    <div class="welcome-to-talbinah__header">
+        <p class="welcome-to-talbinah__header--title">
+            {{ 'welcome_to_talbinah_community' | translateApi }}
+        </p>
+        <p class="welcome-to-talbinah__header--subtitle">
+            {{ 'share_thoughts_stories_community' | translateApi }}
+        </p>
+    </div>
+    <div class="welcome-to-talbinah__content">
+        @for (card of welcomeCardConfigData; track $index) {
+        <app-welcome-to-talbinah-community-card [config]="card"></app-welcome-to-talbinah-community-card>
+        }
+    </div>
+    <div class="welcome-to-talbinah__img">
+        <img src="images/community/people.png" alt="people" loading="lazy">
+    </div>
+    <div class="form-action">
+        <button type="submit" class="btn-submit" (click)="skipStep()">
+            <p>
+                {{'general.Skip' | translateApi}}
+            </p>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M12.0248 15.6834C12.1831 15.6834 12.3415 15.6251 12.4665 15.5001L17.5248 10.4418C17.7665 10.2001 17.7665 9.8001 17.5248 9.55843L12.4665 4.5001C12.2248 4.25843 11.8248 4.25843 11.5831 4.5001C11.3415 4.74176 11.3415 5.14176 11.5831 5.38343L16.2002 10.0001L11.5831 14.6168C11.3415 14.8584 11.3415 15.2584 11.5831 15.5001C11.7002 15.6251 11.8665 15.6834 12.0248 15.6834Z"
+                    fill="white" />
+                <path
+                    d="M2.91641 10.625H16.9414C17.2831 10.625 17.5664 10.3417 17.5664 10C17.5664 9.65833 17.2831 9.375 16.9414 9.375H2.91641C2.57475 9.375 2.29141 9.65833 2.29141 10C2.29141 10.3417 2.57475 10.625 2.91641 10.625Z"
+                    fill="white" />
+            </svg>
+        </button>
+    </div>
+</div>

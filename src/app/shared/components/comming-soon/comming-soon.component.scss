@@ -1,0 +1,129 @@
+@use "./../../../common/styles/scss/abstracts/mixins" as responsive;
+@use "./../../../common/styles/scss/buttons/button.mixins" as btn;
+
+.comming-soon {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1rem;
+    justify-content: center;
+    background-color: #e8eaea;
+    &__header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+        justify-content: center;
+        &__construction {
+            &__title {
+                font-size: 2.5rem;
+                color: var(--text-400);
+                font-weight: 600;
+                letter-spacing: 0.2rem;
+                text-transform: uppercase;
+                margin-bottom: 0;
+                text-align: center;
+            }
+        }
+        &__comming-soon {
+            &__title {
+                font-size: 1.5rem;
+                color: var(--Primary-primary);
+                font-weight: 600;
+            }
+        }
+    }
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        p {
+            color: var(--text-300);
+            font-size: 1rem;
+            text-align: center;
+        }
+    }
+    .btn {
+        @include btn.button-base;
+        @include btn.button-type("solid");
+        @include btn.button-size("small");
+        @include btn.button-icon-position("left");
+        @include btn.button-icon-size("medium");
+        @include btn.button-color("main");
+        @include btn.button-spinner;
+
+        &__icon {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        &__label {
+            padding: 0 0.5rem;
+            white-space: nowrap;
+        }
+
+        &--disabled {
+            @include btn.button-disabled;
+        }
+
+        width: 7rem;
+        padding: 0 1rem;
+        @include responsive.respond(xxs) {
+            margin: auto;
+        }
+    }
+    .social-icons {
+        display: flex;
+        gap: 10px;
+        @include responsive.respond(xxs) {
+            margin: auto;
+        }
+        &__link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            transition: background-color 0.3s ease;
+
+            &--hovered {
+                background-color: var(--Primary-primary);
+            }
+
+            svg {
+                transition: fill 0.3s ease;
+                &.hover-icon {
+                    stroke: none;
+                }
+                &.icon-tabler-brand-youtube-filled {
+                    path {
+                        fill: black;
+                    }
+                }
+            }
+
+            &:hover {
+                background-color: var(--Primary-primary);
+
+                svg {
+                    fill: #fff;
+                    path {
+                        &:last-child {
+                            fill: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .actions {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+}

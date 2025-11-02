@@ -1,0 +1,305 @@
+// abstracts/mixins and utils/helpers remain the same
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+@use "../../../../common/styles/scss/utils/helpers" as *;
+
+.reservation-listing {
+  // Block: reservation-listing - overall container for the appointments section
+  padding-inline-end: 0.425rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  overflow-x: hidden;
+
+  @include respond(lg) {
+    flex-direction: column;
+
+    &__sidebar {
+      width: 100% !important;
+      // When switching to column layout, sticky might need re-evaluation
+      // or might not be desired for the mobile layout.
+      position: static !important; // Reset sticky for smaller screens if not desired
+      top: auto;
+    }
+
+    &__main-content {
+      width: 100% !important;
+      // When switching to column layout, sticky might need re-evaluation
+      // or might not be desired for the mobile layout.
+      position: static !important; // Reset sticky for smaller screens if not desired
+      top: auto;
+    }
+  }
+
+  // Element: __tabs - container for navigation tabs
+  &__tabs {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem 0;
+    max-width: 35.25rem;
+    overflow-x: auto;
+
+    @include respond(xs) {
+      max-width: 11rem !important; // Consider if this override is truly necessary
+    }
+
+    @include respond(sm) {
+      max-width: 18.25rem;
+    }
+
+    // Element: __tab - individual tab item
+    &__tab {
+      cursor: pointer;
+      font-weight: 400;
+      color: var(--text-100);
+      position: relative;
+      transition: color 0.3s ease;
+      font-size: 0.75rem;
+      min-width: fit-content;
+
+      // Modifier: __tab--active
+      &--active {
+        color: var(--Primary-primary, #0e39b6);
+        font-weight: 600;
+
+        // Element within active tab: __tab__indicator
+        &::after {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 2px;
+          background: #0e39b6;
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+        }
+      }
+    }
+  }
+
+  // Element: __main-content - left panel for main listing
+  &__main-content {
+    @include flex-box(column, 0.75rem);
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+    background: var(--Dark-WHITE, #fff);
+    height: fit-content;
+    position: sticky;
+    top: 0;
+    flex: 1;
+    align-self: flex-start;
+  }
+
+  // Element: __header - header section within main-content or other areas
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  // Element: __title - a title within a section
+  &__title {
+    color: var(--text-300, #47586e);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: -0.015rem;
+  }
+
+  // Element: __search-box - container for the search input
+  &__search-box {
+    max-width: 20rem;
+  }
+
+  // Element: __cards-section - section containing a list of cards
+  &__cards-section {
+    @include flex-box(column, 0.75rem);
+    min-width: 21rem;
+    height: fit-content;
+
+    @include respond(sm) {
+      min-width: 0;
+      width: 100%;
+    }
+  }
+
+  // Element: __cards-list - grid container for the cards
+  &__cards-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+
+    @include respond(lg) {
+      grid-template-columns: repeat(2,
+          1fr); // This seems redundant if default is 2, check if needed for specific lg breakpoints
+    }
+
+    @include respond(sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // Element: __card - individual card item
+  &__card {
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  // Element: __status-message - common styles for loading, empty, error states
+  &__status-message {
+    padding: 1rem;
+    text-align: center;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+
+    // Modifier: __status-message--loading
+    &--loading {
+      color: var(--text-500, #6b7280);
+      display: grid; // Add display: grid
+      grid-template-columns: repeat(2, 1fr); // Add 2-column grid
+      gap: 0.75rem; // Add gap
+      padding: 0; // Remove padding if it interferes with the grid items directly
+      text-align: left; // Adjust text-align if needed
+      // background: whitesmoke;
+    }
+
+    // Modifier: __status-message--empty
+    &--empty {
+      color: var(--text-500, #6b7280);
+      // background: whitesmoke;
+    }
+
+    // Modifier: __status-message--error
+    &--error {
+      color: var(--text-400, #9ca3af); // This color might be too light for error text, consider accessibility
+      background: #ffebeb;
+    }
+  }
+
+  .custom-inline-calender {
+    cursor: pointer;
+  }
+
+  // Element: __sidebar - right panel for filters/additional content
+  &__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 24rem;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+
+    &__calender-range-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    &__calendar-reset {
+      button {
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        border-radius: 0.25rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        width: 100%;
+        font-size: 0.625rem;
+        width: max-content;
+        height: auto;
+
+        background: #e7ebf8;
+        color: var(--Primary-primary);
+        padding: 0.25rem 0.5rem !important;
+      }
+    }
+
+    @include respond(md) {
+      // flex-direction: row; // Uncomment if desired
+      width: 100%;
+    }
+
+    // Element: __sidebar-section-wrapper - common wrapper for sidebar content sections
+    &__section-wrapper {
+      display: flex;
+      padding: 0.75rem;
+      flex-direction: column;
+      border-radius: 1rem;
+      background: var(--Gray-White, #feffff);
+      height: fit-content;
+
+      @include respond(md) {
+        // flex-direction: row; // Uncomment if desired
+        gap: 0.75rem;
+      }
+    }
+
+    // Element: __sidebar-column - a column layout within the sidebar section
+    &__column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    // Element: __sidebar-title - titles for sidebar columns/sections
+    &__title {
+      color: var(--text-400, #0f0f0f);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: -0.015rem;
+    }
+
+    // Element: __sidebar-section - a logical section within a sidebar column
+    &__section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    // Element: __sidebar-paragraph - general paragraph within sidebar
+    &__paragraph {
+      margin-bottom: 0;
+    }
+
+    // Element: __inline-calendar - specific calendar styling
+    &__inline-calendar {
+      // Styles for the calendar component itself
+    }
+  }
+}
+
+// Session With Doctor (separate block)
+.reservation-listing-box {
+  &-layout {
+    &__main {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      background: var(--Dark-50);
+      border-radius: 0.625rem;
+      padding: 1rem;
+      box-shadow:
+        0px -1px 50px 9px rgba(0, 0, 0, 0.08),
+        0px 0px 0px 1.5px rgba(255, 255, 255, 0.25) inset;
+      backdrop-filter: blur(20px);
+    }
+  }
+}
+
+.fire {
+  border-radius: 0.75rem;
+  background: linear-gradient(270deg, rgba(186, 240, 232, 0.5) 0%, rgba(245, 218, 184, 0.5) 100%);
+}

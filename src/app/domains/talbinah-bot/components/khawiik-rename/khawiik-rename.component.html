@@ -1,0 +1,54 @@
+@if (isBrowser) {
+<div class="khawiik-rename">
+  <div class="khawiik-rename__container">
+    <div class="khawiik-rename__form-field">
+      <div class="khawiik-rename__form-label-group">
+        <label for="khawiik-title" class="khawiik-rename__label"
+          [class.khawiik-rename__label--required]="!editableTitle().trim()">
+          {{ 'rename' | translateApi }}
+          <span class="khawiik-rename__required">*</span>
+        </label>
+      </div>
+
+      <div
+        class="khawiik-rename__input-wrapper khawiik-rename__input-wrapper--with-icon khawiik-rename__input-wrapper--icon-start"
+        [class.khawiiik-rename__input-wrapper--error]="!editableTitle().trim() && isEditMode()">
+        <img src="images/icons/report.png" [alt]="'rename' | translateApi" class="khawiik-rename__input-icon">
+        <input id="khawiik-title" type="text" class="khawiik-rename__input" [(ngModel)]="editableTitle"
+          (keydown)="onInputKeydown($event)" (ngModelChange)="onTitleInputChange()"
+          [class.khawiik-rename__input--required]="!editableTitle().trim()"
+          [placeholder]="'enter_new_conversation_name' | translateApi" [readonly]="!isEditMode()"
+          (click)="startEditing()"
+          [attr.aria-describedby]="(!editableTitle().trim() && isEditMode()) ? 'khawiik-title-error' : null"
+          [attr.aria-invalid]="(!editableTitle().trim() && isEditMode()) ? 'true' : 'false'"
+          aria-label="Chat title input" />
+      </div>
+
+      @if (!editableTitle().trim() && isEditMode()) {
+      <div class="khawiik-rename__form-feedback" role="status" aria-live="polite">
+        <span class="khawiik-rename__form-error" role="alert" id="khawiik-title-error">
+          {{ 'conversation_title_required' | translateApi }}
+        </span>
+      </div>
+      }
+    </div>
+  </div>
+  <div class="khawiik-rename__actions">
+    <button type="button" class="khawiik-rename__cancel-btn" (click)="cancelEdit()" [disabled]="isSaving()"
+      aria-label="Cancel editing">
+      {{ 'cancel' | translateApi }}
+    </button>
+
+    <button type="button" class="khawiik-rename__save-btn" (click)="saveTitle()"
+      [disabled]="isSaving() || !editableTitle().trim() || editableTitle().trim() === lastSavedTitle()"
+      [class.loading]="isSaving()" aria-label="Save title">
+      @if (isSaving()) {
+      <span class="khawiik-rename__loading-spinner"></span>
+      {{ 'in_progress' | translateApi }}
+      } @else {
+      {{ 'edit' | translateApi }}
+      }
+    </button>
+  </div>
+</div>
+}

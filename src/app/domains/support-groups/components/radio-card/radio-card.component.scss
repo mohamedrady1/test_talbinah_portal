@@ -1,0 +1,107 @@
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border: 1px solid var(--Dark-50);
+  border-radius: 0.75rem;
+  gap: 1rem;
+  margin-bottom: 0.5rem; // Added for spacing between cards
+
+  .label {
+    &__title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    &__method-name {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    &__method-count {
+      color: var(--text-300, #47586e);
+      font-size: 0.75rem;
+      font-weight: 400;
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+    }
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+    margin: 0;
+
+    .label--icon {
+      border-radius: var(--Radius-8);
+      background: var(--Dark-50);
+      display: flex;
+      padding: 0.5rem;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      width: 2rem; // Fixed width for consistent icon size
+      height: 2rem; // Fixed height for consistent icon size
+      flex-shrink: 0; // Prevent icon from shrinking
+    }
+
+    img {
+      max-width: 100%; // Ensure image scales within its container
+      max-height: 100%;
+      object-fit: contain; // Maintain aspect ratio
+    }
+
+    p {
+      color: var(--Dark-black, #090b0e);
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin: 0; // Remove default paragraph margin
+    }
+
+    input[type="radio"] {
+      display: none; // Hide the actual radio button
+    }
+
+    .custom-radio {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1.25rem;
+      height: 1.25rem;
+      flex-shrink: 0;
+      border: 1px solid var(--Dark-200);
+      border-radius: 50%;
+      background-color: transparent;
+      transition: all 0.2s ease;
+    }
+
+    // Styles for the checked state of the custom radio
+    input[type="radio"]:checked + .custom-radio {
+      border: 2px solid var(--Primary-primary);
+
+      &::after {
+        content: "";
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 50%;
+        background: var(--Primary-primary);
+      }
+    }
+
+    // Focus styles for accessibility (when label is focused via keyboard)
+    &:focus-visible .custom-radio {
+      outline: 2px solid var(--Primary-primary); // Visible outline for keyboard navigation
+      outline-offset: 2px;
+    }
+  }
+}

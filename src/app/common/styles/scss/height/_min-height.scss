@@ -1,0 +1,9 @@
+@mixin full-height-minus($elements...) {
+    $total-height: 0;
+
+    @each $el in $elements {
+        $total-height: calc(#{$total-height} + #{$el});
+    }
+
+    min-height: calc(100vh - #{$total-height});
+}

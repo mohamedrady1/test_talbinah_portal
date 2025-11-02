@@ -1,0 +1,113 @@
+@let doctors = facade.doctors();
+@let suggestedDoctors = facade.suggestedDoctors();
+@let isFiltering = facade.isFiltering();
+@let errorMessage = facade.errorMessage();
+@let status = facade.statusMessage();
+@let totalDoctors = facade.totalDoctors();
+@let hasActiveFilters = facade.hasActiveFilters();
+@let searching = isSearching();
+@let pagination = paginationConfig();
+
+<div class="doctors-listing-for-booking-layout">
+  <div class="doctors-listing-for-booking-layout__left-panel" role="region"
+    aria-label="Doctors listing for booking appointments">
+    <section class="doctors-listing-for-booking-layout__cards-section">
+      <header class="doctors-listing-for-booking-layout__header">
+        <h2 class="doctors-listing-for-booking-layout__title">
+          {{ 'available_doctors_for_you' | translateApi }}
+        </h2>
+
+        <div class="doctors-listing-for-booking-layout__search-box">
+          <div class="doctors-listing-for-booking-layout__filter-button">
+            <app-aside-filteration (formSubmitted)="onFilterFormSubmitted($event)" />
+          </div>
+          <app-global-search-input [inputSearchConfig]="searchConfig()" (valueChanged)="handleSearch($event)"
+            (cleared)="handleClearSearch()" />
+
+        </div>
+
+      </header>
+      <div class="doctors-listing-for-booking-layout-doctors-list">
+        @if (totalDoctors != 0 ) {
+        <p class="doctors-listing-for-booking-layout__filter-header">
+          <span class="doctors-listing-for-booking-layout__filter-count">
+            {{ 'book_appointment_page_list_filiter_label_1' | translateApi }}
+          </span>
+          <span class="doctors-listing-for-booking-layout__filter-count">
+            @if (isLoading || isFiltering) {
+            <span class="doctors-listing-for-booking-layout__filter-count-dots">
+              (...)
+            </span>
+            } @else {
+            ({{ totalDoctors }})
+            }
+          </span>
+          <span class="doctors-listing-for-booking-layout__filter-count">
+            {{ 'book_appointment_page_list_filiter_label_2' | translateApi }}
+          </span>
+        </p>
+        }
+
+        @if (isLoading || isFiltering) {
+        <div class="doctors-listing-for-booking-layout__loading" aria-busy="true" aria-label="Loading doctors">
+          @for (item of [1,2,3,4,5,6]; track $index) {
+          <app-doctor-card-for-booking-skeleton></app-doctor-card-for-booking-skeleton>
+          }
+        </div>
+        } @else if (errorMessage && !status) {
+        <div class="doctors-listing-for-booking-layout__error" role="alert" aria-label="Error loading doctors">
+          <app-error-state-card [config]="doctorsErrorState"></app-error-state-card>
+        </div>
+        } @else if (doctors.length > 0 || totalDoctors > 0) {
+        <!-- Regular results display -->
+        <div class="doctors-listing-for-booking-layout__cards-list" role="list" aria-live="polite">
+          @for (doctor of doctors; track doctor.id) {
+          <article class="doctors-listing-for-booking-layout__card" role="listitem">
+            <app-doctor-card-for-booking [item]="doctor" [type]="cardTypes.DETAILS" />
+          </article>
+          }
+        </div>
+        @if (totalDoctors > 0) {
+        <app-pagination-listing [paginationConfig]="pagination" />
+        }
+        } @else if (doctors.length == 0 && totalDoctors === 0 && hasActiveFilters && !isLoading && !isFiltering) {
+        <!-- No filtered results, show message and suggestions -->
+        <div class="doctors-listing-for-booking-layout__no-results-container">
+          <div class="doctors-listing-for-booking-layout__no-results-message" role="status">
+            <p class="doctors-listing-for-booking-layout__no-results-text">
+              @if (searching) {
+              {{ 'no_results_found' | translateApi }}
+              } @else {
+              {{ 'no_doctors_available_with_filters' | translateApi }}
+              }
+            </p>
+            <p class="doctors-listing-for-booking-layout__suggestions-title">
+              {{ 'suggested_doctors' | translateApi }}
+            </p>
+          </div>
+          <div class="doctors-listing-for-booking-layout__cards-list" role="list" aria-live="polite">
+            @for (doctor of suggestedDoctors; track doctor.id) {
+            <article class="doctors-listing-for-booking-layout__card" role="listitem">
+              <app-doctor-card-for-booking [item]="doctor" [type]="cardTypes.DETAILS" />
+            </article>
+            }
+          </div>
+          <app-pagination-listing [paginationConfig]="pagination" />
+        </div>
+        }
+        @else{
+        <div class="doctors-listing-for-booking-layout__loading" aria-busy="true" aria-label="Loading doctors">
+          @for (item of [1,2,3,4,5,6]; track $index) {
+          <app-doctor-card-for-booking-skeleton></app-doctor-card-for-booking-skeleton>
+          }
+        </div>
+        }
+      </div>
+    </section>
+  </div>
+  @if(!isMobile()){
+  <div class="doctors-listing-for-booking-layout__filter-list">
+    <app-aside-filteration (formSubmitted)="onFilterFormSubmitted($event)" [resetTrigger]="authResetTick()" />
+  </div>
+  }
+</div>

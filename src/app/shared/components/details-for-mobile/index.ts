@@ -1,0 +1,1 @@
+export * from './details-for-mobile.component'; 

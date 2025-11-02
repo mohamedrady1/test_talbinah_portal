@@ -1,0 +1,170 @@
+@use "./../../../../common/styles/scss/abstracts/mixins" as responsive;
+@use "./../../../../common/styles/scss/buttons/button.mixins" as btn;
+@use "./../../../../common/styles/scss/abstracts/variables" as *;
+
+.form {
+  width: 100%;
+
+  .btn {
+    @include btn.button-base;
+    @include btn.button-size("medium");
+    @include btn.button-icon-position("left");
+    @include btn.button-icon-size("medium");
+    @include btn.button-color("main");
+    @include btn.button-spinner;
+
+    &__icon {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    &__label {
+      padding: 0 0.5rem;
+      white-space: nowrap;
+      .loading {
+        display: flex;
+        align-items: center;
+
+        .dot-loader::after {
+          content: "";
+          animation: dots 1.5s steps(4, end) infinite;
+          white-space: pre;
+        }
+
+        @keyframes dots {
+          0% {
+            content: "";
+          }
+          25% {
+            content: ".";
+          }
+          50% {
+            content: "..";
+          }
+          75% {
+            content: "...";
+          }
+          100% {
+            content: "";
+          }
+        }
+      }
+    }
+
+    &--disabled {
+      @include btn.button-disabled;
+    }
+
+    // Add variants
+    &--solid {
+      @include btn.button-type("solid");
+    }
+
+    &--outline {
+      @include btn.button-type("outline");
+    }
+
+    &--ghost {
+      @include btn.button-type("ghost");
+    }
+
+    &--link {
+      @include btn.button-type("link");
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); // 4 equal columns
+    gap: 1rem; // gap between all items
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    grid-column: span 1; // default is 1/4 width (1 column)
+
+    &.w-half {
+      grid-column: span 2; // half width (2 columns)
+
+      @include responsive.respond(sm) {
+        grid-column: span 4;
+      }
+    }
+
+    &.w-75 {
+      grid-column: span 3; // full width (3 columns)
+    }
+
+    &.w-full {
+      grid-column: span 4; // full width (4 columns)
+    }
+  }
+
+  &__label-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__label {
+    // color: var(--Dark-DARK);
+    color: var(--text-dark, #1d1f1f);
+    font-size: 0.875rem;
+    font-weight: 400;
+    margin: 0;
+
+    &--error {
+      color: var(--error-color, red);
+    }
+
+    &--clickable {
+      cursor: pointer;
+    }
+  }
+
+  &__required {
+    color: var(--error-color, red);
+    margin-left: 0.25rem;
+  }
+
+  &__add-new {
+    background: none;
+    border: 1px solid var(--text-muted-color, #6c757d);
+    padding: 0.12rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    color: var(--text-muted-color, #6c757d);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+
+    &-icon {
+    }
+  }
+
+  &__error {
+    color: var(--error-color, red);
+    margin-top: 1rem;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+
+    &__buttons {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      align-self: stretch;
+
+      @include responsive.respond(sm) {
+        gap: 1rem;
+      }
+    }
+  }
+}

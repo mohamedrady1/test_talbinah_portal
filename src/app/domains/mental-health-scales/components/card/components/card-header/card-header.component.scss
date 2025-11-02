@@ -1,0 +1,92 @@
+@use "../../../../../../common/styles/scss/abstracts/mixins" as *;
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &_title {
+        color: var(--text-300);
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+    &__tabs {
+        display: flex;
+        gap: 2rem;
+        padding: 1rem 0;
+        max-width: 35.25rem;
+        overflow-x: auto;
+        @include respond(xs) {
+            max-width: 11rem !important;
+        }
+        @include respond(sm) {
+            max-width: 18.25rem;
+        }
+        .tab {
+            cursor: pointer;
+            font-weight: 400;
+            color: var(--text-100);
+            position: relative;
+            transition: color 0.3s ease;
+            font-size: 0.75rem;
+            font-weight: 400;
+            min-width: fit-content;
+            &.active {
+                color: #0e39b6;
+                font-weight: 600;
+
+                &::after {
+                    content: "";
+                    display: block;
+                    width: 100%;
+                    height: 2px;
+                    background: #0e39b6;
+                    position: absolute;
+                    bottom: -4px;
+                    left: 0;
+                }
+            }
+        }
+    }
+    &__controls {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    &__button {
+        background-color: var(--Primary-50) !important;
+        cursor: pointer;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &--prev svg,
+        &--next svg {
+            width: 0.875rem;
+            height: 0.875rem;
+        }
+        &.disabled {
+            background-color: var(--Dark-50);
+            svg {
+                path {
+                    fill: #a5a5a5;
+                }
+            }
+        }
+    }
+    &__all-button {
+        border-radius: 1rem;
+        background: var(--Dark-50);
+        display: flex;
+        padding: 0.25rem 0.625rem;
+        justify-content: center;
+        align-items: center;
+        gap: 0.25rem;
+        p {
+            color: var(--text-300);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+    }
+}

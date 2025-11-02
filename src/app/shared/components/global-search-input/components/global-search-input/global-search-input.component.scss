@@ -1,0 +1,113 @@
+.search-box {
+  display: flex;
+  width: 16.8125rem;
+  height: 2.375rem;
+  padding: 0.5rem 0.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--Dark-50, #f6f7f8);
+  background: var(--Dark-WHITE, #fff);
+  position: relative;
+
+  &__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--text-300);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background: transparent;
+    color: var(--text-primary, #000);
+
+    &::placeholder {
+      color: #999;
+    }
+  }
+
+  &__clear {
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    color: var(--text-300);
+    cursor: pointer;
+    padding: 0 0.25rem;
+  }
+
+  &__suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 12rem;
+    overflow-y: auto;
+    margin-top: 0.25rem;
+    padding: 0;
+    list-style: none;
+    background: white;
+    border: 1px solid var(--Dark-50, #f6f7f8);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+    z-index: 10;
+
+    li {
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+
+      &.highlighted,
+      &:hover {
+        background-color: #eef4fc;
+        outline: none;
+      }
+    }
+  }
+}
+.search-box__loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px; /* Adjust size as needed */
+  height: 24px; /* Adjust size as needed */
+  // Basic spinner animation example
+  .spinner {
+    animation: rotate 2s linear infinite;
+    z-index: 2;
+    .path {
+      stroke: #007bff; /* Adjust color as needed */
+      stroke-dasharray: 187;
+      stroke-dashoffset: 0;
+      transform-origin: center;
+      animation:
+        dash 1.5s ease-in-out infinite,
+        colors 6s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}

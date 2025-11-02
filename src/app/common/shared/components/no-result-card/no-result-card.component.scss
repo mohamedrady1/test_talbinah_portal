@@ -1,0 +1,30 @@
+.container {
+    height: 75vh;
+    .card {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        color: black;
+        padding: 40px;
+        gap: 60px;
+        border-radius: 6px;
+        p {
+            font-size: 1.7rem;
+            color: #002551;
+        }
+        .add-new {
+            padding: 30px;
+            width: 22.8125rem;
+            background-color: #e6ebf2;
+            border-radius: 8px;
+            ::ng-deep app-solid-btn button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        @media (max-width: 767px) {
+            gap: 20px;
+        }
+        @media (max-width: 1024px) {
+            flex-direction: column !important;
+        }
+    }
+}

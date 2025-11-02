@@ -1,0 +1,1 @@
+export * from './khawiik-instructions.component';

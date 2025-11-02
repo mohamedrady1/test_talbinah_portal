@@ -1,0 +1,64 @@
+@use "./../../../common/styles/scss/abstracts/mixins" as responsive;
+
+.reaction-picker-container {
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem 1.5rem;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform-origin: bottom center; /* For nice transform animation */
+    animation: fadeInScaleUp 0.2s ease-out forwards;
+    position: absolute; /* Positioned relative to its parent (reels-card-action--react) */
+    bottom: calc(85% + 0.5rem); /* Position above the main reaction icon */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100; /* Ensure it's above other elements */
+    @include responsive.respond(sm) {
+        left: 250%;
+        &:dir(rtl) {
+            left: -88%;
+        }
+    }
+}
+
+.reaction-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 1rem;
+    min-width: 1rem;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+
+    &:hover {
+        transform: translateY(-5px) scale(1.1); /* Pop effect on hover */
+    }
+}
+
+.reaction-image {
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: contain;
+}
+
+.reaction-name {
+    font-size: 0.65rem;
+    color: var(--text-dark, #333);
+    margin-top: 0.2rem;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+@keyframes fadeInScaleUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+}

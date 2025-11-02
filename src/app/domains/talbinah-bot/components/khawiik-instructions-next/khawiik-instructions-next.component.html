@@ -1,0 +1,45 @@
+@if (isBrowser) {
+<div class="khawiik-instructions-next" appAutoExactHeight="40" heightMode="max-height">
+    <!-- Decorative Area -->
+    <div class="khawiik-instructions-next__decor">
+        <!-- Mini Cards -->
+        <div class="khawiik-instructions-next__mini-card">
+            {{ keys.START.CARD_LINE_1 | translateApi }}
+        </div>
+        <div class="khawiik-instructions-next__mini-card">
+            {{ keys.START.CARD_LINE_2 | translateApi }}
+        </div>
+
+        <!-- Center Card -->
+        <div class="khawiik-instructions-next__center-card">
+            {{ keys.START.CENTER_CARD | translateApi }}
+        </div>
+    </div>
+
+    <!-- Prompt Block -->
+    <div class="khawiik-instructions-next__prompt">
+        <!-- Heading -->
+        <div class="khawiik-instructions-next__prompt-heading">
+            <p class="khawiik-instructions-next__prompt-title">
+                {{ keys.START.PROMPT.TITLE | translateApi }}
+            </p>
+            <p class="khawiik-instructions-next__prompt-subtitle">
+                {{ keys.START.PROMPT.SUBTITLE | translateApi }}
+            </p>
+        </div>
+
+        <!-- Input Area -->
+        <div class="khawiik-instructions-next__input">
+            <textarea class="khawiik-instructions-next__textarea" [value]="draftText()" (input)="onTextChange($event)"
+                (keydown)="onKeyDown($event)" [placeholder]="keys.START.PROMPT.PLACEHOLDER | translateApi"
+                [attr.aria-label]="keys.START.PROMPT.PLACEHOLDER | translateApi" rows="3" maxlength="1000"></textarea>
+        </div>
+
+        <!-- Continue Button -->
+        <button type="button" class="khawiik-instructions-next__continue" (click)="onSubmit()"
+            [attr.aria-label]="keys.START.CONTINUE | translateApi">
+            {{ keys.START.CONTINUE | translateApi }}
+        </button>
+    </div>
+</div>
+}

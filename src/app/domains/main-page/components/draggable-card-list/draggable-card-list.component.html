@@ -1,0 +1,57 @@
+<section class="draggable-card-list" aria-labelledby="card-list-heading" appAutoExactHeight heightMode="max-height">
+  <h2 id="card-list-heading" class="sr-only">Manage Your Quick Access Cards</h2>
+
+  <h4 class="draggable-card-list__heading-name">
+    {{ 'home_customize_cards_pinned_title' | translateApi }}
+  </h4>
+
+  <div class="draggable-card-list__container">
+    @if (isBrowser && pinnedCards.length > 0) {
+    @for (card of pinnedCards; track trackByCardId($index, card)) {
+    <app-draggable-card [config]="card" [enableAllowUnPinning]="allowUnPinning" (unpinCard)="onUnpinCard($event)">
+    </app-draggable-card>
+    }
+    } @else if (!isBrowser) {
+    <p>Loading your pinned cards...</p>
+    <div class="draggable-card-list__static-items">
+      @for (card of pinnedCards; track trackByCardId($index, card)) {
+      <app-draggable-card [config]="card" [enableAllowUnPinning]="allowUnPinning"></app-draggable-card>
+      }
+    </div>
+    } @else {
+    <p class="draggable-card-list__no-items">
+      No cards pinned. Add from "Available to Add" below.
+    </p>
+    }
+  </div>
+
+  <h4 class="draggable-card-list__heading-name">
+    {{ 'home_customize_cards_hint' | translateApi }}
+  </h4>
+
+  <div class="draggable-card-list__container">
+    @if (isBrowser && availableCards.length > 0) {
+    @for (card of availableCards; track trackByCardId($index, card)) {
+    <app-draggable-card [config]="card" (pinCard)="onPinCard($event)"></app-draggable-card>
+    }
+    } @else if (!isBrowser) {
+    <p>Loading available cards...</p>
+    <div class="draggable-card-list__static-items">
+      @for (card of availableCards; track trackByCardId($index, card)) {
+      <app-draggable-card [config]="card"></app-draggable-card>
+      }
+    </div>
+    } @else {
+    <app-empty-state [config]="emptyState"></app-empty-state>
+    }
+  </div>
+
+  <div class="draggable-card-list__actions">
+    <button (click)="onCancel()" class="draggable-card-list__submit-button btn btn--outline">
+      {{ 'cancel' | translateApi }}
+    </button>
+    <button (click)="onSubmit()" class="draggable-card-list__submit-button btn btn--solid">
+      {{ 'save' | translateApi }}
+    </button>
+  </div>
+</section>

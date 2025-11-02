@@ -1,0 +1,344 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+// @use "../../../common/styles/scss/abstracts/variables" as *; // Keep existing variables import if you use them elsewhere
+
+.notifications {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--Dark-WHITE, #fff); // Reusing existing variable
+  padding: 0.375rem;
+  border-radius: 50%;
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  &--colored {
+    display: flex;
+    padding: 0.375rem;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 1.625rem;
+    background: #bdece2;
+    .notifications__button {
+      background-color: transparent;
+      width: initial;
+      height: inherit;
+    }
+  }
+
+  &__title {
+    color: var(--text-300, #47586e);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  &__button {
+    // Renamed from &-btn to __button for BEM
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    border-radius: 50%;
+    background: var(--Dark-50, #f6f7f8); // Reusing existing variable
+    border: none; // Ensure button has no default border
+    cursor: pointer; // Indicate it's clickable
+    transition: background-color 0.2s ease-in-out; // Smooth transition
+    width: 100%; // Make it fill its parent .notifications container
+    height: 100%;
+
+    &:hover {
+      background-color: var(--Dark-100, #e0e0e0); // Example hover color
+    }
+
+    &:focus-visible {
+      // For keyboard navigation
+      outline: 2px solid var(--Primary-primary, #007bff); // Focus outline
+      outline-offset: 2px;
+    }
+  }
+
+  // Unread Badge Count
+  &__badge {
+    position: absolute;
+    inset-block-start: -0.125rem;
+    inset-inline-end: -0.125rem;
+    min-width: 1.125rem;
+    height: 1.125rem;
+    padding: 0 0.25rem;
+    background: #ff4444;
+    color: white;
+    font-size: 0.625rem;
+    font-weight: 700;
+    border-radius: 0.625rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+  }
+
+  &__icon {
+    // Styles for the SVG icon within the button
+    // Ensure the SVG fill is controlled by CSS or a variable if needed
+  }
+
+  &__details {
+    background-color: var(--Dark-WHITE);
+    position: absolute;
+    top: 3rem; // Position below the button
+    z-index: 1000; // High z-index to ensure it's on top
+    right: 0; // Aligned to the right
+    display: flex;
+    padding: 0.75rem 0.625rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 0.75rem;
+    box-shadow: 0px 0.25rem 0.5625rem 0px rgba(0, 0, 0, 0.1);
+    min-width: 21.625rem; // Give it a sensible min-width
+    @include respond(md) {
+      min-width: 20.625rem; // Give it a sensible min-width
+    }
+    opacity: 1; // Start with visible state, could animate with CSS or Angular animations
+    transform: translateY(0);
+    transition:
+      opacity 0.2s ease-out,
+      transform 0.2s ease-out;
+
+    // Optional: add initial hidden state if you use Angular animations
+    // &.ng-enter, &.ng-leave-active {
+    //   opacity: 0;
+    //   transform: translateY(-0.5rem);
+    // }
+    // &.ng-leave, &.ng-enter-active {
+    //   opacity: 1;
+    //   transform: translateY(0);
+    // }
+  }
+
+  &__list {
+    background: inherit; // Inherits background from parent details
+    width: 100%;
+    // Remove transition here, as it's not directly height-changing for the list
+  }
+
+  &__list-items {
+    // Renamed from &-items to __list-items for BEM
+    list-style: none;
+    margin: 0;
+    padding: 0; // Reset default padding
+    padding: 0.75rem 0rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    .notifications__list-item {
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out; // Smooth transition on hover
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.5rem;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--Dark-50); // Reusing existing variable
+      }
+
+      &:hover {
+        background-color: var(--Primary-primary, #6890df15); // Example hover color, using primary if available
+      }
+
+      &:focus-visible {
+        // For keyboard navigation
+        outline: 2px solid var(--Primary-primary, #007bff);
+        outline-offset: 2px;
+        background-color: var(--Primary-primary, #6890df15); // Keep hover style on focus
+      }
+    }
+  }
+
+  &__list-item-image {
+    // Renamed for BEM
+    flex-shrink: 0; // Prevent image from shrinking
+    height: 1.25rem;
+    width: 1.25rem;
+    overflow: hidden;
+    border-radius: 50%;
+
+    img {
+      display: block; // Remove extra space below image
+      width: 100%;
+      height: 100%;
+      object-fit: cover; // Ensure image covers the area without distortion
+    }
+  }
+
+  &__list-item-text {
+    // Renamed for BEM
+    font-size: 0.75rem;
+    color: var(--text-300, #47586e); // Reusing existing variable
+    font-weight: 500;
+    line-height: 1.2; // Improve readability
+    flex-grow: 1; // Allow text to take available space
+  }
+
+  &__details--ar {
+    // BEM modifier for RTL direction
+    direction: rtl;
+    right: auto; // Override right: 0
+    left: 0; // Align to the left in RTL
+  }
+
+  &__details--en {
+    // BEM modifier for LTR direction
+    direction: ltr;
+  }
+
+  &__empty-message {
+    // New element for empty state message
+    color: var(--text-200, #888);
+    font-size: 0.875rem;
+    text-align: center;
+  }
+
+  &__actions {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    .btn--ghost {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      border-radius: 0.5rem;
+      background: var(--Dark-50, #f6f7f8);
+      padding: var(--Radius-8, 0.5rem);
+      color: var(--text-300, #47586e);
+      font-size: 0.75rem;
+      font-weight: 500;
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-radius: 1rem;
+  transition: background-color 0.3s ease;
+  padding: 1rem;
+  &__image {
+    max-width: 4.375rem;
+    height: auto;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-300);
+  }
+
+  &__message {
+    font-size: 1rem;
+    color: var(--text-400);
+  }
+}
+
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-radius: 1rem;
+  transition: background-color 0.3s ease;
+  border: 1px dashed var(--error-color, #b00020);
+  padding: 1.25rem;
+
+  &__image {
+    max-width: 4.375rem;
+    height: auto;
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--error-color, #b00020);
+  }
+
+  &__message {
+    font-size: 1rem;
+    color: var(--error-color-dark, #800000);
+  }
+
+  &__button {
+    background-color: var(--error-color, #b00020);
+    color: var(--Dark-WHITE, #fff);
+    border: none;
+    padding: 0.5rem 2rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--error-color-dark, #a0001a);
+    }
+  }
+}
+
+// Shimmer Keyframes
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+// Shared shimmer base
+.skeleton {
+  background: var(--Dark-50, #f6f7f8);
+  background-image: linear-gradient(
+    to right,
+    var(--Dark-50, #f6f7f8) 0%,
+    var(--Dark-100, #edeef1) 20%,
+    var(--Dark-50, #f6f7f8) 40%,
+    var(--Dark-50, #f6f7f8) 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 1000px 100%;
+  animation: shimmer 1.2s infinite linear;
+  border-radius: 4px;
+}
+
+.card {
+  &__notification {
+    display: flex;
+    gap: 0.625rem;
+    flex-direction: column;
+    background-color: var(--Dark-WHITE, white);
+    &--loading {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.625rem;
+      .card__notification__avatar {
+        width: 1.875rem;
+        height: 1.875rem;
+        border-radius: 0.75rem;
+      }
+      .card__notification__input-wrapper {
+        flex: 1;
+        .skeleton-input {
+          width: 100%;
+          height: 1rem;
+        }
+      }
+    }
+  }
+}

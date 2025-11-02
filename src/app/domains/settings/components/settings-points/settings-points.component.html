@@ -1,0 +1,131 @@
+<div class="points-layout" appAutoExactHeight heightMode="max-height">
+  <!-- Initial Loading State -->
+
+
+  <!-- Main Content -->
+  <div class="points-layout__right-side">
+    <div class="points-layout__right-side--cards">
+      <div class="points-layout__right-side--cards-item points-layout__right-side--cards-item--services"
+        (click)="openServices()">
+        <div class="bg-icon-card">
+          <app-svg-icon name="setting-services" />
+        </div>
+        <div class="points-layout__right-side--cards-item--content">
+          <div class="points-layout__right-side--cards-item--content--title">
+            {{ 'services' | translateApi }}
+          </div>
+          <div class="points-layout__right-side--cards-item--content--description">
+            {{ 'earn_talbinah_points' | translateApi }}
+          </div>
+        </div>
+      </div>
+      <div class="points-layout__right-side--cards-item points-layout__right-side--cards-item--points"
+        (click)="openPointsHistory()">
+        <img src="images/settings/gift/settings-points.png" alt="points icon" loading="lazy" decoding="async" width="24"
+          height="27" onerror="this.src='images/auth/icons/talbinah.png';" />
+
+        <div class="points-layout__right-side--cards-item--content">
+          <div class="points-layout__right-side--cards-item--content--title">
+            {{ 'points_history' | translateApi }} </div>
+          <div class="points-layout__right-side--cards-item--content--description points">
+            {{pointsRecordsBalance()}} {{ 'point' | translateApi }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="points-layout__right-side--cards">
+      <div class="points-layout__right-side--cards-item points-layout__right-side--cards-item--rewards"
+        (click)="openRewards()">
+        <div class="bg-icon-card">
+          <img class="icon-card-img" src="images/settings/gift/settings-reward.png" alt="points icon" loading="lazy"
+            decoding="async" width="24" height="27" onerror="this.src='images/auth/icons/talbinah.png';" />
+        </div>
+
+        <div class="points-layout__right-side--cards-item--content">
+          <div class="points-layout__right-side--cards-item--content--title">
+            {{ 'rewards' | translateApi }}
+          </div>
+          <div class="points-layout__right-side--cards-item--content--description">
+            {{ 'points_converted_to_reward' | translateApi }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="points-layout__right-side--content">
+      <div class="points-layout__right-side--content--title">
+        {{ 'gifts' | translateApi }}
+      </div>
+      <div class="points-layout__right-side--content--description">
+        {{ 'earn_talbinah_points' | translateApi }}
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    @if(isLoading()){
+    <div class="service-points-cards-loading">
+      <app-loading-shimmer></app-loading-shimmer>
+    </div>
+    }
+
+    <!-- Error State -->
+    @if(!isLoading() && hasError()){
+    <app-error-state-card [config]="errorStateConfig" (retry)="onRetry()"></app-error-state-card>
+    }
+
+    <!-- Empty State -->
+    @if(!isLoading() && !hasError() && isEmpty()){
+    <app-empty-state-card [config]="emptyStateConfig"></app-empty-state-card>
+    }
+
+    <!-- Success State with Data -->
+    @if(!isLoading() && !hasError() && !isEmpty()){
+    <div class="service-points-cards-list">
+      <div class="service-points-cards-grid">
+        @for (item of items(); track $index) {
+        <div class="service-points-card">
+          <img [src]="item.image" alt="gift" class="service-points-card__img" />
+          <div class="service-points-card__title">{{ item.title }}=<span>{{item.points}}
+            </span>{{'point'|translateApi}}</div>
+          <button class="service-points-card__btn" (click)="openServiceModal(item)">{{ 'follow' |
+            translateApi }}</button>
+        </div>
+        }
+      </div>
+    </div>
+    }
+  </div>
+  <div class="points-layout__banner">
+    <div class="title">
+      {{bannerTitle()}}
+    </div>
+    <div class="description">
+      {{bannerDescription()}}
+    </div>
+    <div class="points-layout__points">
+      @if(isLoadingServices()){
+      <div class="points-layout__initial-loading">
+        <app-loading-shimmer></app-loading-shimmer>
+      </div>
+      }
+      @if(!isLoadingServices()){
+      @for (item of services(); track $index) {
+      <div class="points-layout__points-item">
+        <div class="points-layout__points-item--header">
+          <div class="points-layout__points-item--title">
+            {{item.service_name}}
+          </div>
+          <div class="points-layout__points-item--value">
+            {{item.points}} {{'point' | translateApi}}
+          </div>
+        </div>
+        <div class="points-layout__points-item--description">
+          {{item.description}}
+        </div>
+      </div>
+      }
+      }
+      <img [src]="'images/settings/modal-icons/points-2.png'" [alt]="'Urgent Appointment Image'" loading="lazy"
+        width="100%" height="auto" decoding="async" fetchpriority="low" class="points-layout__img" />
+    </div>
+  </div>
+</div>

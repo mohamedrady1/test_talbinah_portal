@@ -1,0 +1,76 @@
+@if(isOpen$ | async){
+<div class="popup">
+    <div class="popup__overlay"></div>
+    <div class="popup__card d-flex flex-col gap-4">
+        @if (isLoading$ | async) {
+        <div class="popup__loading-overlay">
+            <div class="loader"></div>
+        </div>
+        }
+        <div class="header d-flex justify-between align-items-center">
+            <p class="popup__card__title">{{popupTitle|translate}}</p>
+            <button class="d-flex align-items-center justify-center" (click)="closePopup()">
+                <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 1.5L1 13.5M1 1.5L13 13.5" stroke="#667085" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+        <hr>
+        <form [formGroup]="form">
+            @for (field of formConfig; track field.name) {
+
+            <!-- Input Text -->
+            @if (field.type === 'text') {
+            <div class="mb-3 d-flex flex-col">
+                <label>{{ field.title | translate }}</label>
+                <input pInputText [placeholder]="field.placeholder |translate" [formControlName]="field.name"
+                    class="w-full"
+                    [ngClass]="{'red-border': form.get(field.name)?.invalid && form.get(field.name)?.touched}" />
+                @if (form.get(field.name)?.invalid && form.get(field.name)?.touched) {
+                <small class="text-red-500 mt-1">
+                    {{ field.validationMessage |translate}}
+                </small>
+                }
+            </div>
+            }
+
+
+            <!-- Dropdown -->
+            @if (field.type === 'dropdown') {
+            <div class="dropdown mb-3 d-flex flex-col">
+                <label>{{ field.title |translate }}</label>
+                <p-dropdown [options]="field.options" [formControlName]="field.name"
+                    placeholder="{{ field.placeholder | translate }}" class="w-full"
+                    [ngClass]="{'red-border': form.get(field.name)?.invalid && form.get(field.name)?.touched}"
+                    [showClear]="form.get(field.name)?.value !== null && form.get(field.name)?.value !== ''">
+                </p-dropdown>
+
+                @if (form.get(field.name)?.invalid && form.get(field.name)?.touched) {
+                <small class="text-red-500 mt-1">
+                    {{ field.validationMessage |translate}}
+                </small>
+                }
+            </div>
+            }
+            <!-- MultiSelect -->
+            @if (field.type === 'multiselect') {
+            <div class="mb-3 d-flex flex-col">
+                <label>{{ field.title |translate }}</label>
+                <p-multiSelect [options]="field.options" [formControlName]="field.name"
+                    placeholder="{{ field.placeholder |translate  }}" class="w-full"
+                    [ngClass]="{'red-border': form.get(field.name)?.invalid && form.get(field.name)?.touched}">
+                </p-multiSelect>
+            </div>
+            }
+            }
+            <div class="buttons d-flex align-items-center justify-center gap-3">
+                <button class="btn btn-solid-main" (click)="submitForm()" label="Submit">{{(popupBtnTitle || popupTitle
+                    )|translate}}</button>
+                <button class="btn btn-outline-gray" pButton type="back" label="back"
+                    (click)="closePopup()">{{'back'|translate}}</button>
+            </div>
+        </form>
+    </div>
+</div>
+}

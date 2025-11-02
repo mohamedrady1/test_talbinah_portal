@@ -1,0 +1,21 @@
+.question-card {
+    display: flex;
+    padding: 0.75rem 0.75rem 0.75rem 3.75rem;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--Radius-12, 0.75rem);
+    border: 1px solid var(--Dark-50, #f6f7f8);
+    p {
+        &:first-child {
+            color: var(--text-300, #47586e);
+            font-size: 0.75rem;
+            font-weight: 400;
+        }
+        &:last-child {
+            color: var(--Dark-light-600, #333);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+    }
+}

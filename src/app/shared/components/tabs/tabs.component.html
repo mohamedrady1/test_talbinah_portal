@@ -1,0 +1,7 @@
+<div class="tabs">
+  @for (tab of tabs; track tab.id) {
+  <div class="tab" [class.active]="isSelected(tab)" (click)="selectTab(tab)">
+    {{ tab.title| translateApi }}
+  </div>
+  }
+</div>

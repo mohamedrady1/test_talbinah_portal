@@ -1,0 +1,38 @@
+<div class="mental-health-scale-card mental-health-scale-card" [ngClass]="{'summary': type==cardType.SUMMARY}">
+
+    <div class="mental-health-scale-card__content">
+
+        <!-- <div class="mental-health-scale-card__image"> -->
+        <!-- <div class="mental-health-scale-card__image"></div> -->
+        <!-- </div> -->
+
+        <div class="mental-health-scale-card__info">
+            <h3 class="mental-health-scale-card__title">
+                <span class="mental-health-scale-card__title--details">
+                    <div class="mental-health-scale-card__title"></div>
+                </span>
+
+            </h3>
+            <p class="mental-health-scale-card__description mental-health-scale-card__text-line"></p>
+            <p class="mental-health-scale-card__description mental-health-scale-card__text-line"></p>
+            <p class="mental-health-scale-card__description mental-health-scale-card__text-line short"></p>
+        </div>
+    </div>
+    @if (type==cardType.DETAILS) {
+    <div class="mental-health-scale-card__details--details">
+
+        <div class="mental-health-scale-card__details__item mental-health-scale-card__meta">
+            <div class="mental-health-scale-card__icon"></div>
+            <div class="mental-health-scale-card__text short"></div>
+        </div>
+        <div class="mental-health-scale-card__details__item mental-health-scale-card__meta">
+            <div class="mental-health-scale-card__icon"></div>
+            <div class="mental-health-scale-card__text short"></div>
+        </div>
+        <div class="mental-health-scale-card__details__item mental-health-scale-card__meta">
+            <div class="mental-health-scale-card__icon"></div>
+            <div class="mental-health-scale-card__text short"></div>
+        </div>
+    </div>
+    }
+</div>

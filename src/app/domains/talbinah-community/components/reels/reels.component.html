@@ -1,0 +1,167 @@
+<div class="reel-container">
+    <div class="reels-card-actions-wrapper">
+        <app-reel-actions [initialCommentsCount]="15"></app-reel-actions>
+        <div class="reels-card-action--comments">
+            <div class="action-icon-wrapper">
+                <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="default-reaction-icon">
+                    <path
+                        d="M10.4998 19.0072C9.92484 19.0072 9.38317 18.7155 8.99984 18.2072L7.74984 16.5405C7.72484 16.5072 7.62484 16.4655 7.58317 16.4572H7.1665C3.6915 16.4572 1.5415 15.5155 1.5415 10.8322V6.66553C1.5415 2.98219 3.48317 1.04053 7.1665 1.04053H13.8332C17.5165 1.04053 19.4582 2.98219 19.4582 6.66553V10.8322C19.4582 14.5155 17.5165 16.4572 13.8332 16.4572H13.4165C13.3498 16.4572 13.2915 16.4905 13.2498 16.5405L11.9998 18.2072C11.6165 18.7155 11.0748 19.0072 10.4998 19.0072ZM7.1665 2.29053C4.18317 2.29053 2.7915 3.68219 2.7915 6.66553V10.8322C2.7915 14.5989 4.08317 15.2072 7.1665 15.2072H7.58317C8.00817 15.2072 8.4915 15.4489 8.74984 15.7905L9.99984 17.4572C10.2915 17.8405 10.7082 17.8405 10.9998 17.4572L12.2498 15.7905C12.5248 15.4239 12.9582 15.2072 13.4165 15.2072H13.8332C16.8165 15.2072 18.2082 13.8155 18.2082 10.8322V6.66553C18.2082 3.68219 16.8165 2.29053 13.8332 2.29053H7.1665Z"
+                        fill="#47586E" />
+                    <path
+                        d="M10.4998 9.99919C10.0332 9.99919 9.6665 9.62419 9.6665 9.16585C9.6665 8.70752 10.0415 8.33252 10.4998 8.33252C10.9582 8.33252 11.3332 8.70752 11.3332 9.16585C11.3332 9.62419 10.9665 9.99919 10.4998 9.99919Z"
+                        fill="#47586E" />
+                    <path
+                        d="M13.8333 9.99919C13.3667 9.99919 13 9.62419 13 9.16585C13 8.70752 13.375 8.33252 13.8333 8.33252C14.2917 8.33252 14.6667 8.70752 14.6667 9.16585C14.6667 9.62419 14.3 9.99919 13.8333 9.99919Z"
+                        fill="#47586E" />
+                    <path
+                        d="M7.16683 9.99919C6.70016 9.99919 6.3335 9.62419 6.3335 9.16585C6.3335 8.70752 6.7085 8.33252 7.16683 8.33252C7.62516 8.33252 8.00016 8.70752 8.00016 9.16585C8.00016 9.62419 7.6335 9.99919 7.16683 9.99919Z"
+                        fill="#47586E" />
+                </svg>
+            </div>
+            <span class="comments-count">
+                {{'4'}}</span>
+        </div>
+        <app-share-social [icon]="'images/icons/send-2.svg'"></app-share-social>
+    </div>
+    <div class="reel-card">
+        @if (currentReel(); as reel) {
+        <!-- Media container for video or image -->
+        <div class="reel-card__media">
+            @if (reel.mediaType === MediaType.Video) {
+            <video #videoPlayer [src]="reel.url" (ended)="onVideoEnded()" (timeupdate)="onTimeUpdate($event)"
+                [muted]="isMuted()" autoplay playsinline preload="auto" disablePictureInPicture></video>
+            } @else {
+            <img [src]="reel.url" [alt]="reel.description" />
+            }
+        </div>
+        <!-- Clickable areas for navigation and long press -->
+        <div class="reel-card__click-area reel-card__click-area--left" (click)="onLeftClick()"
+            (mousedown)="onAreaMouseDown('left')" (mouseup)="onAreaMouseUp()" (mouseleave)="onAreaMouseLeave()"></div>
+        <div class="reel-card__click-area reel-card__click-area--right" (click)="onRightClick()"
+            (mousedown)="onAreaMouseDown('right')" (mouseup)="onAreaMouseUp()" (mouseleave)="onAreaMouseLeave()"></div>
+
+        <!-- Mute/Unmute Button (Top Left) -->
+        <button class="reel-card__mute-button" (click)="toggleMuteUnmute()">
+            <!-- Speaker icon for sound, crossed-out speaker for mute -->
+            @if (isMuted()) {
+            <!-- Muted SVG Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <mask id="path-1-inside-1_1281_7164" fill="white">
+                    <path
+                        d="M12.8869 11.1655C12.7802 11.1655 12.6802 11.1322 12.5869 11.0655C12.3669 10.8989 12.3202 10.5855 12.4869 10.3655C13.5336 8.97221 13.5336 7.02555 12.4869 5.63221C12.3202 5.41221 12.3669 5.09888 12.5869 4.93221C12.8069 4.76555 13.1202 4.81221 13.2869 5.03221C14.6002 6.77888 14.6002 9.21888 13.2869 10.9655C13.1936 11.0989 13.0402 11.1655 12.8869 11.1655Z" />
+                </mask>
+
+                <path
+                    d="M7.95703 3.4541C8.73738 2.96806 9.35995 2.94031 9.78711 3.13379L9.87012 3.17578C10.2917 3.41291 10.6367 3.96109 10.6367 4.93945V11.0596C10.6366 12.0396 10.2899 12.5869 9.86719 12.8232C9.68752 12.9228 9.48194 12.9756 9.25293 12.9756C8.89063 12.9756 8.4532 12.8531 7.95703 12.543H7.95605L6.01172 11.3232L6.00488 11.3193L5.99902 11.3164L5.8125 11.2197C5.61799 11.134 5.40045 11.082 5.17285 11.082H4.21973C3.54691 11.082 3.13795 10.8995 2.89551 10.6572C2.6531 10.4148 2.46973 10.0051 2.46973 9.33203V6.66602C2.46973 5.99297 2.6531 5.58323 2.89551 5.34082C3.13796 5.09861 3.54704 4.91602 4.21973 4.91602H5.17285C5.47626 4.91602 5.76193 4.82486 5.99902 4.68262L6.00488 4.67871L6.01172 4.6748L7.95703 3.4541Z"
+                    fill="white" stroke="white" stroke-width="1.5" />
+            </svg>
+            } @else {
+            <!-- Speaker ON SVG Icon (Font Awesome-like, simplified) -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <mask id="path-1-inside-1_1281_7164" fill="white">
+                    <path
+                        d="M12.8869 11.1655C12.7802 11.1655 12.6802 11.1322 12.5869 11.0655C12.3669 10.8989 12.3202 10.5855 12.4869 10.3655C13.5336 8.97221 13.5336 7.02555 12.4869 5.63221C12.3202 5.41221 12.3669 5.09888 12.5869 4.93221C12.8069 4.76555 13.1202 4.81221 13.2869 5.03221C14.6002 6.77888 14.6002 9.21888 13.2869 10.9655C13.1936 11.0989 13.0402 11.1655 12.8869 11.1655Z" />
+                </mask>
+                <path
+                    d="M12.8869 11.1655C12.7802 11.1655 12.6802 11.1322 12.5869 11.0655C12.3669 10.8989 12.3202 10.5855 12.4869 10.3655C13.5336 8.97221 13.5336 7.02555 12.4869 5.63221C12.3202 5.41221 12.3669 5.09888 12.5869 4.93221C12.8069 4.76555 13.1202 4.81221 13.2869 5.03221C14.6002 6.77888 14.6002 9.21888 13.2869 10.9655C13.1936 11.0989 13.0402 11.1655 12.8869 11.1655Z"
+                    fill="white" />
+                <path
+                    d="M12.5869 11.0655L11.6811 12.2612L11.6979 12.2739L11.715 12.2861L12.5869 11.0655ZM12.4869 10.3655L13.6825 11.2713L13.6862 11.2665L12.4869 10.3655ZM12.4869 5.63221L13.6862 4.73129L13.6825 4.72643L12.4869 5.63221ZM13.2869 5.03221L14.4858 4.13074L14.4825 4.12643L13.2869 5.03221ZM13.2869 10.9655L12.088 10.0641L12.0727 10.0845L12.0581 10.1054L13.2869 10.9655ZM12.8869 11.1655V9.66555C13.1168 9.66555 13.3179 9.74435 13.4588 9.84495L12.5869 11.0655L11.715 12.2861C12.0426 12.5201 12.4436 12.6655 12.8869 12.6655V11.1655ZM12.5869 11.0655L13.4927 9.86991C13.9179 10.1921 14.0275 10.816 13.6825 11.2713L12.4869 10.3655L11.2913 9.45976C10.613 10.3551 10.8159 11.6057 11.6811 12.2612L12.5869 11.0655ZM12.4869 10.3655L13.6862 11.2665C15.1338 9.33942 15.1338 6.65834 13.6862 4.7313L12.4869 5.63221L11.2876 6.53313C11.9333 7.39276 11.9333 8.605 11.2876 9.46463L12.4869 10.3655ZM12.4869 5.63221L13.6825 4.72643C14.0275 5.18175 13.9179 5.8057 13.4927 6.12785L12.5869 4.93221L11.6811 3.73658C10.8159 4.39206 10.613 5.64267 11.2913 6.538L12.4869 5.63221ZM12.5869 4.93221L13.4927 6.12785C13.0374 6.4728 12.4134 6.36324 12.0913 5.938L13.2869 5.03221L14.4825 4.12643C13.8271 3.26119 12.5764 3.0583 11.6811 3.73658L12.5869 4.93221ZM13.2869 5.03221L12.088 5.93368C12.9999 7.14641 12.9999 8.85135 12.088 10.0641L13.2869 10.9655L14.4858 11.867C16.2006 9.58642 16.2006 6.41135 14.4858 4.13075L13.2869 5.03221ZM13.2869 10.9655L12.0581 10.1054C12.2842 9.78223 12.6226 9.66555 12.8869 9.66555V11.1655V12.6655C13.4579 12.6655 14.1029 12.4155 14.5157 11.8257L13.2869 10.9655Z"
+                    fill="white" mask="url(#path-1-inside-1_1281_7164)" />
+                <path
+                    d="M7.95703 3.4541C8.73738 2.96806 9.35995 2.94031 9.78711 3.13379L9.87012 3.17578C10.2917 3.41291 10.6367 3.96109 10.6367 4.93945V11.0596C10.6366 12.0396 10.2899 12.5869 9.86719 12.8232C9.68752 12.9228 9.48194 12.9756 9.25293 12.9756C8.89063 12.9756 8.4532 12.8531 7.95703 12.543H7.95605L6.01172 11.3232L6.00488 11.3193L5.99902 11.3164L5.8125 11.2197C5.61799 11.134 5.40045 11.082 5.17285 11.082H4.21973C3.54691 11.082 3.13795 10.8995 2.89551 10.6572C2.6531 10.4148 2.46973 10.0051 2.46973 9.33203V6.66602C2.46973 5.99297 2.6531 5.58323 2.89551 5.34082C3.13796 5.09861 3.54704 4.91602 4.21973 4.91602H5.17285C5.47626 4.91602 5.76193 4.82486 5.99902 4.68262L6.00488 4.67871L6.01172 4.6748L7.95703 3.4541Z"
+                    fill="white" stroke="white" stroke-width="1.5" />
+            </svg>
+            }
+        </button>
+
+        <!-- Content overlay at the bottom -->
+        <div class="reel-card__content">
+            <!-- Dots for navigation -->
+            <ul class="reel-card__dots">
+                @if(reels.length > 1) {
+                @for (dot of reels; track dot.id; let i = $index) {
+                <li class="reel-card__dot" [class.reel-card__dot--active]="i === currentReelIndex()"
+                    (click)="$event.stopPropagation();goToReel(i)">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
+                        xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)">
+                        <circle cx="5" cy="5" r="5" [attr.fill]="i === currentReelIndex() ? '#0E39B6' : '#D9D9D9'"
+                            [attr.fill-opacity]="i === currentReelIndex() ? '1' : '0.65'" />
+                    </svg>
+                </li>
+                }
+                }
+            </ul>
+
+            <!-- User Profile Section -->
+            <div class="reel-card__user-profile">
+                <img [src]="reel.user.avatar" [alt]="reel.user.name" class="reel-card__user-avatar"
+                    onerror="this.onerror=null;this.src='[https://placehold.co/64x64/cccccc/000000?text=User](https://placehold.co/64x64/cccccc/000000?text=User)';" />
+                <span class="reel-card__user-name">
+                    •
+                </span>
+                <span class="reel-card__user-name">
+                    {{ reel.user.name }}
+                </span>
+                @if (!reel.user.isFollowing) {
+                <button class="reel-card__follow-button">
+                    {{'follow3' | translateApi}}
+                </button>
+                }
+            </div>
+
+            <!-- Video/Image Description Text -->
+            <p class="reel-card__text">
+                {{ reel.description }}
+            </p>
+        </div>
+
+        <!-- Play/Pause Button (Centered) -->
+        <button class="reel-card__play-pause-button" (click)="togglePlayPause()"
+            [class.reel-card--controls-hidden]="!controlsVisible()">
+            @if (isInternalPlaying()) {
+            <!-- Pause SVG Icon -->
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path
+                        d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                        stroke="#ffffff" stroke-width="2"></path>
+                    <path d="M14 9L14 15" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                    </path>
+                    <path d="M10 9L10 15" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                    </path>
+                </g>
+            </svg>
+            } @else {
+            <!-- Play SVG Icon -->
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)">
+                <path
+                    d="M7.5835 10.0002V8.7669C7.5835 7.17524 8.7085 6.53357 10.0835 7.32524L11.1502 7.9419L12.2168 8.55857C13.5918 9.35024 13.5918 10.6502 12.2168 11.4419L11.1502 12.0586L10.0835 12.6752C8.7085 13.4669 7.5835 12.8169 7.5835 11.2336V10.0002Z"
+                    stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                    stroke-linejoin="round">
+                </path>
+                <path
+                    d="M9.99984 18.3337C14.6022 18.3337 18.3332 14.6027 18.3332 10.0003C18.3332 5.39795 14.6022 1.66699 9.99984 1.66699C5.39746 1.66699 1.6665 5.39795 1.6665 10.0003C1.6665 14.6027 5.39746 18.3337 9.99984 18.3337Z"
+                    stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            }
+        </button>
+
+        <!-- Progress Bar at the very bottom -->
+        <div class="reel-card__progress-bar">
+            <div class="reel-card__progress-bar-fill" [style.width.%]="currentProgress()"></div>
+        </div>
+        } @else {
+        <div class="reel-card__empty-state">
+            <p>No reels to display.</p>
+        </div>
+        }
+    </div>
+</div>

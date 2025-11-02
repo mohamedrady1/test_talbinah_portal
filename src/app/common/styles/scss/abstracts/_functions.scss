@@ -1,0 +1,45 @@
+// Convert px to rem
+@function rem($px) {
+    @return $px / 16 * 1rem;
+}
+
+// Lighten a color by a specific percentage
+@function lighten-color($color, $amount) {
+    @return lighten($color, $amount);
+}
+
+// Darken a color by a specific percentage
+@function darken-color($color, $amount) {
+    @return darken($color, $amount);
+}
+
+// Calculate percentage value
+@function percentage($partial, $total) {
+    @if $total ==0 {
+        @warn "Total cannot be zero";
+        @return 0%;
+    }
+
+    @return ($partial / $total) * 100%;
+}
+
+
+//Example: Using rem function
+// .box {
+//     padding: rem(32); // Output: 2rem
+// }
+
+//Example: Using lighten-color function
+// .button {
+//     background-color: lighten-color(#007bff, 20%); // Output: Lighter shade of blue
+// }
+
+//Example: Using darken-color function
+// .button:hover {
+//     background-color: darken-color(#007bff, 10%); // Output: Darker shade of blue
+// }
+
+//Example: Using percentage function
+// .progress {
+//     width: percentage(50, 200); // Output: 25%
+// }

@@ -1,0 +1,113 @@
+@if (isBrowser) {
+<section class="khawiik-books" [attr.aria-labelledby]="'khawiik-books-heading'">
+  <div class="khawiik-books__container" role="region" [attr.aria-live]="'polite'" appAutoExactHeight="50"
+    heightMode="max-height">
+
+    <!-- Loading Skeleton -->
+    @if (isLoading()) {
+    <app-khawiik-books-skeleton></app-khawiik-books-skeleton>
+    }
+
+    <!-- Error State -->
+    @else if (errorMessage() && status() === false) {
+    <app-error-state-card [config]="errorState"></app-error-state-card>
+    }
+    @else if (activityCards().length === 0) {
+    <app-empty-state-card [config]="emptyState" style="width: 100%;"></app-empty-state-card>
+    }
+    <!-- Khawiik Book Grid -->
+    @else {
+    <ul class="khawiik-books__grid" role="list">
+      @for (card of activityCards(); track card.id) {
+      <li class="khawiik-books__card" [class.khawiik-books__card--text]="getBookType(card) === 'text'"
+        [class.khawiik-books__card--voice]="getBookType(card) === 'voice'" role="listitem">
+        <article class="khawiik-books__card-inner" role="article" tabindex="0" (click)="onCardSelect(card)"
+          (keydown.enter)="onCardSelect(card)" (keydown.space)="onCardSelect(card)">
+
+          <div class="khawiik-books__grid--image-content">
+            <div class="khawiik-books__grid--image-content-circle"
+              [class.khawiik-books__grid--image-content-circle--text]="getBookType(card) === 'text'"
+              [class.khawiik-books__grid--image-content-circle--voice]="getBookType(card) === 'voice'">
+              @if (getBookType(card) === 'text') {
+              <div class="khawiik-books__grid--image-content-circle--value khawiik-books__grid__days-container">
+                <div class="khawiik-books__days-text">
+                  {{ card.progress.days_done }} / {{ card.progress.days_total }}
+                </div>
+                <div class="khawiik-books__days-label">
+                  {{ 'days ' | translateApi }}
+                </div>
+              </div>
+              } @else if (getBookType(card) === 'voice') {
+              <div class="khawiik-books__grid--image-content-circle--value khawiik-books__grid__voice-container">
+                <div class="khawiik-books__voice-time">
+                  {{ formatVoiceTime(card.progress.voice_seconds || 0) }}
+                </div>
+                <div class="khawiik-books__voice-progress-bar">
+                  <div class="khawiik-books__voice-progress-bar__track">
+                    <div class="khawiik-books__voice-progress-bar__fill" [style.width.%]="getVoiceProgress(card)"
+                      [style.background-color]="'#0B2E92'">
+                    </div>
+                  </div>
+                  <div class="khawiik-books__voice-progress-dots">
+                    <span class="khawiik-books__voice-progress-dot"
+                      *ngFor="let dot of getVoiceProgressDots(card); trackBy: trackByIndex" [class.filled]="dot.filled">
+                    </span>
+                  </div>
+                </div>
+              </div>
+              } @else {
+              <div class="khawiik-books__grid--image-content-circle--value" [class.days]="card.id === 1">
+                {{ card.id }} / {{ activityCards().length }}
+              </div>
+              }
+            </div>
+            @if (card.title) {
+            <h3 class="khawiik-books__card-title">
+              {{ card.title }}
+            </h3>
+
+            }
+          </div>
+          @if (getBookType(card) === 'text') {
+          <span class="khawiik-books__card-mode">
+            {{card.mode}}
+          </span>
+          }
+
+          <header class="khawiik-books__card-header">
+            @if (card.title) {
+            <p class="khawiik-books__card-label">
+              {{ card.title }}
+            </p>
+            }
+            <h3 class="khawiik-books__card-subtitle">
+              {{ card.description }}
+            </h3>
+          </header>
+
+          <div class="khawiik-books__card-footer">
+            <button type="button" class="khawiik-books__cta"
+              [class.khawiik-books__cta--completed]="card.progress.completed"
+              [class.khawiik-books__cta--loading]="isStartingMission() && getBookType(card) === 'text'"
+              [disabled]="card.progress.completed || (isStartingMission() && getBookType(card) === 'text')"
+              (click)="onCardSelect(card); $event.stopPropagation()"
+              [attr.aria-label]="card.title + ' - ' + (card.progress.completed ? ('completed_successfully' | translateApi) : ('start_conversation_now' | translateApi))">
+              @if (isStartingMission() && getBookType(card) === 'text') {
+              <span class="khawiik-books__cta-loading">
+                {{ 'in_progress' | translateApi }}
+              </span>
+              } @else {
+              {{ card.progress.completed ? ('completed_successfully' | translateApi) : ('start_conversation_now' |
+              translateApi)
+              }}
+              }
+            </button>
+          </div>
+        </article>
+      </li>
+      }
+    </ul>
+    }
+  </div>
+</section>
+}

@@ -1,0 +1,75 @@
+<main class="otp-method-selection" role="main">
+  <section class="otp-method-selection__container">
+    <form class="general-form-wrapper" [formGroup]="form" (ngSubmit)="onOtpMethodSelectionSubmit()">
+      @for (formItem of formConfig; track $index) {
+      <div class="general-form-wrapper__groups">
+        <!-- Otp Method Selection -->
+        <div class="general-form-wrapper__field {{formItem.widthClass}}">
+          <div class="general-form-wrapper__label-group">
+            @if (formItem.label) {
+            <label [attr.for]="formItem.name" class="general-form-wrapper__label"
+              [ngClass]="{'general-form-wrapper__label--error': getError(formItem.name),'general-form-wrapper__label--clickable': formItem.enableLabelClick}">
+              {{ formItem.label |translateApi}}
+              @if (formItem.isRequired) {
+              <span class="general-form-wrapper__required">*</span>
+              }
+            </label>
+            }
+          </div>
+
+          @if (formItem.type === allInputTypes.RADIO_BUTTON) {
+          <div class="form-group-wrapper">
+            <div class="form-field">
+              <app-form-radio-groups [formItem]="formItem" [control]="getFormControl(formItem.name)!"
+                [whatsappLabel]="'via_whatsapp' | translateApi" [smsLabel]="'via_sms' | translateApi"
+                [attr.aria-describedby]="formItem.name + '-hint'" [attr.aria-invalid]="!!getError(formItem.name)" />
+
+              <!-- ✅ Semantic Error and Hint Section -->
+              <div class="form-field__feedback" role="status" aria-live="polite">
+                @if (!getError(formItem.name) && formItem.hint && getFormControl(formItem.name) &&
+                !getFormControl(formItem.name)?.value &&
+                !formItem.fixedHint) {
+                <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+                  {{ formItem.hint | translateApi }}
+                </small>
+                }
+
+                @if (getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched) {
+                <span class="general-form-wrapper__error-message error-label" role="alert">
+                  {{ 'please_choose_verification_method' | translateApi }}
+                </span>
+                }
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+      }
+
+      <div class="general-form-wrapper__actions">
+        <!-- @if (enablResetButtonText) {
+        <button id="reset-dynamic-form-btn" type="button" class="btn btn--outline" (click)="reset()">
+          <span class="btn__label">
+            {{ resetButtonText }}
+          </span>
+        </button>
+        } -->
+        <button id="submit-dynamic-form-btn" type="submit" class="btn btn--solid" [disabled]="isLoading()"
+          [attr.aria-label]="'send_verification_code' | translateApi">
+          <span class="btn__label">
+            @if (isLoading()) {
+            <div class="general-form-wrapper__loading" aria-label="Submit in progress">
+              {{ 'in_progress' | translateApi }}
+              <span class="dot-loader"></span>
+            </div>
+            }
+            @if (!isLoading()) {
+            {{ 'send_verification_code' | translateApi }}
+            }
+          </span>
+        </button>
+      </div>
+    </form>
+  </section>
+</main>

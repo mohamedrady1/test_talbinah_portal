@@ -1,0 +1,137 @@
+//Margin Utilities
+.mt-1 {
+    margin-top: 10px;
+}
+
+.mb-2 {
+    margin-bottom: 20px;
+}
+
+.ml-3 {
+    margin-left: 30px;
+}
+
+.mr-3 {
+    margin-right: 30px;
+}
+
+.mt-4 {
+    margin-top: 40px;
+}
+
+.mb-4 {
+    margin-bottom: 40px;
+}
+
+.mx-2 {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.my-3 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+//Padding Utilities
+.pt-1 {
+    padding-top: 10px;
+}
+
+.pb-2 {
+    padding-bottom: 20px;
+}
+
+.pl-3 {
+    padding-left: 30px;
+}
+
+.pr-3 {
+    padding-right: 30px;
+}
+
+.pt-4 {
+    padding-top: 40px;
+}
+
+.pb-4 {
+    padding-bottom: 40px;
+}
+
+.px-2 {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.py-3 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+// Gutter Spacing
+.gutter-horizontal {
+    margin-left: var(--gutter-horizontal);
+    margin-right: var(--gutter-horizontal);
+}
+
+.gutter-vertical {
+    margin-top: var(--gutter-vertical);
+    margin-bottom: var(--gutter-vertical);
+}
+
+.gutter-vertical-small {
+    margin-top: var(--gutter-vertical-small);
+    margin-bottom: var(--gutter-vertical-small);
+}
+
+//Example
+
+//Margin Utilities Example
+
+// <h2>Margin Utilities Example</h2>
+// <div class="m-0 text-primary bg-light">No Margin (m-0)</div>
+// <div class="mt-1 text-secondary bg-info">Margin Top 10px (mt-1)</div>
+// <div class="mb-2 text-success bg-warning">Margin Bottom 20px (mb-2)</div>
+// <div class="ml-3 text-danger bg-light">Margin Left 30px (ml-3)</div>
+// <div class="mr-3 text-dark bg-primary">Margin Right 30px (mr-3)</div>
+// <div class="mt-4 mb-4 text-light bg-secondary">Margin Top 40px and Bottom 40px (mt-4 mb-4)</div>
+// <div class="mx-2 bg-success">Horizontal Margins 20px (mx-2)</div>
+// <div class="my-3 text-warning bg-danger">Vertical Margins 30px (my-3)</div>
+
+//Padding Utilities Example
+
+// <h2>Padding Utilities Example</h2>
+// <div class="p-0 text-primary bg-light">No Padding (p-0)</div>
+// <div class="pt-1 text-secondary bg-info">Padding Top 10px (pt-1)</div>
+// <div class="pb-2 text-success bg-warning">Padding Bottom 20px (pb-2)</div>
+// <div class="pl-3 text-danger bg-light">Padding Left 30px (pl-3)</div>
+// <div class="pr-3 text-dark bg-primary">Padding Right 30px (pr-3)</div>
+// <div class="pt-4 pb-4 text-light bg-secondary">Padding Top 40px and Bottom 40px (pt-4 pb-4)</div>
+// <div class="px-2 bg-success">Horizontal Padding 20px (px-2)</div>
+// <div class="py-3 text-warning bg-danger">Vertical Padding 30px (py-3)</div>
+
+//Gutter Utilities Example
+
+// Container with Horizontal Gutter
+
+// <div class="gutter-horizontal">
+//     <div>
+//         <p>This container has horizontal gutter spacing.</p>
+//     </div>
+// </div>
+
+//Container with Vertical Gutter
+
+// <div class="gutter-vertical">
+//     <div>
+//         <p>This container has vertical gutter spacing.</p>
+//     </div>
+// </div>
+
+//Container with Small Vertical Gutter
+
+// <div class="gutter-vertical-small">
+//     <div>
+//         <p>This container has small vertical gutter spacing.</p>
+//     </div>
+// </div>

@@ -1,0 +1,147 @@
+<div class="create-psychological-society-post" appAutoExactHeight heightMode="max-height"
+  [enabled]="shouldEnableAutoHeight()">
+  <div class="create-psychological-society-post__header">
+    <div class="create-psychological-society-post__profile">
+      <div class="create-psychological-society-post__profile--img-container">
+        <img [src]="data?.userIdentityProfileData?.emoji?.image || '/images/not-found/talbinah.png'"
+          [alt]="data?.userIdentityProfileData?.dummy_name" loading="lazy" decoding="async" fetchpriority="low"
+          width="auto" height="auto" class="card__avatar" />
+      </div>
+      <div class="create-psychological-society-post__profile--name-date">
+        <p>
+          {{ data?.userIdentityProfileData?.dummy_name || ''}}
+        </p>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
+            <path
+              d="M6.99989 10.2999C6.59156 10.2999 6.18322 10.1424 5.87406 9.83321L2.07072 6.02988C1.90156 5.86071 1.90156 5.58071 2.07072 5.41154C2.23989 5.24238 2.51989 5.24238 2.68906 5.41154L6.49239 9.21488C6.77239 9.49488 7.22739 9.49488 7.50739 9.21488L11.3107 5.41154C11.4799 5.24238 11.7599 5.24238 11.9291 5.41154C12.0982 5.58071 12.0982 5.86071 11.9291 6.02988L8.12572 9.83321C7.81656 10.1424 7.40822 10.2999 6.99989 10.2999Z"
+              fill="#47586E" />
+          </svg>
+          <p>{{ 'now' | translateApi }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="create-psychological-society-post__actions">
+      @for (config of buttonConfigs; track config.id) {
+      <app-create-post-button [config]="config" [active]="selectedButtonId === config.id"
+        (buttonClick)="handleSelect(config.id)"></app-create-post-button>
+      }
+    </div> -->
+
+  </div>
+
+  @if(this.selectedButtonId=='post'){
+  <form [formGroup]="postForm" class="create-psychological-society-post__form">
+    <div class="create-psychological-society-post__mood-input">
+      <div class="p-relative">
+        <textarea #textareaRef class="create-psychological-society-post__mood-input__textarea"
+          [attr.placeholder]="'express_your_mood_today' | translateApi" [ngClass]="{ 'has-error': validationError }"
+          formControlName="content" [disabled]="isLoading()" (input)="onInput($event)"></textarea>
+        <!-- formControlName="content" is now bound to the 'content' control -->
+
+        <div class="create-psychological-society-post__inputs">
+          <!-- <div class="create-psychological-society-post__add-media" [ngClass]="{'active':isAddMediaOpen()}"
+            (click)="addMedia()">
+            <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*,video/*" multiple
+              class="hidden-file-input" />
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M5.25016 6.27083C4.3635 6.27083 3.646 5.55333 3.646 4.66667C3.646 3.78 4.3635 3.0625 5.25016 3.0625C6.13683 3.0625 6.85433 3.78 6.85433 4.66667C6.85433 5.55333 6.13683 6.27083 5.25016 6.27083ZM5.25016 3.9375C4.84766 3.9375 4.521 4.26417 4.521 4.66667C4.521 5.06917 4.84766 5.39583 5.25016 5.39583C5.65266 5.39583 5.97933 5.06917 5.97933 4.66667C5.97933 4.26417 5.65266 3.9375 5.25016 3.9375Z"
+                fill="#292D32" />
+              <path
+                d="M8.74984 13.2707H5.24984C2.08234 13.2707 0.729004 11.9173 0.729004 8.74984V5.24984C0.729004 2.08234 2.08234 0.729004 5.24984 0.729004H7.58317C7.82234 0.729004 8.02067 0.927337 8.02067 1.1665C8.02067 1.40567 7.82234 1.604 7.58317 1.604H5.24984C2.56067 1.604 1.604 2.56067 1.604 5.24984V8.74984C1.604 11.439 2.56067 12.3957 5.24984 12.3957H8.74984C11.439 12.3957 12.3957 11.439 12.3957 8.74984V5.83317C12.3957 5.594 12.594 5.39567 12.8332 5.39567C13.0723 5.39567 13.2707 5.594 13.2707 5.83317V8.74984C13.2707 11.9173 11.9173 13.2707 8.74984 13.2707Z"
+                fill="#292D32" />
+              <path
+                d="M10.5 5.10397C10.2608 5.10397 10.0625 4.90563 10.0625 4.66647V1.16647C10.0625 0.991468 10.1675 0.828135 10.3308 0.763968C10.4942 0.699802 10.6808 0.734802 10.8092 0.857302L11.9758 2.02397C12.145 2.19314 12.145 2.47314 11.9758 2.6423C11.8067 2.81147 11.5267 2.81147 11.3575 2.6423L10.9375 2.2223V4.66647C10.9375 4.90563 10.7392 5.10397 10.5 5.10397Z"
+                fill="#292D32" />
+              <path
+                d="M9.3335 2.77068C9.22267 2.77068 9.11184 2.72984 9.02434 2.64234C8.85517 2.47318 8.85517 2.19318 9.02434 2.02401L10.191 0.857344C10.3602 0.688177 10.6402 0.688177 10.8093 0.857344C10.9785 1.02651 10.9785 1.30651 10.8093 1.47568L9.64267 2.64234C9.55517 2.72984 9.44434 2.77068 9.3335 2.77068Z"
+                fill="#292D32" />
+              <path
+                d="M1.55759 11.4917C1.41759 11.4917 1.27759 11.4217 1.19592 11.2992C1.06176 11.1008 1.11426 10.8267 1.31259 10.6925L4.18842 8.76166C4.81842 8.34166 5.68759 8.38833 6.25926 8.87249L6.45176 9.04166C6.74342 9.29249 7.23926 9.29249 7.52509 9.04166L9.95176 6.95916C10.5701 6.42833 11.5443 6.42833 12.1684 6.95916L13.1193 7.77583C13.3001 7.93333 13.3234 8.20749 13.1659 8.39416C13.0084 8.57499 12.7284 8.59833 12.5476 8.44083L11.5968 7.62416C11.3051 7.37333 10.8151 7.37333 10.5234 7.62416L8.09676 9.70666C7.47842 10.2375 6.50426 10.2375 5.88009 9.70666L5.68759 9.53749C5.41926 9.30999 4.97592 9.28666 4.67842 9.49083L1.80842 11.4217C1.72676 11.4683 1.63926 11.4917 1.55759 11.4917Z"
+                fill="#292D32" />
+            </svg>
+          </div> -->
+
+          <div class="create-psychological-society-post__mood-input__icon" [ngClass]="{'active':showEmojiPicker()}"
+            (click)="toggleEmojiPicker()">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true" focusable="false">
+              <path
+                d="M6.98226 13.2707C3.52893 13.2707 0.711426 10.459 0.711426 6.99984C0.711426 3.54067 3.52893 0.729004 6.98226 0.729004C10.4356 0.729004 13.2531 3.54067 13.2531 6.99984C13.2531 10.459 10.4414 13.2707 6.98226 13.2707ZM6.98226 1.604C4.00726 1.604 1.58643 4.02484 1.58643 6.99984C1.58643 9.97484 4.00726 12.3957 6.98226 12.3957C9.95726 12.3957 12.3781 9.97484 12.3781 6.99984C12.3781 4.02484 9.95726 1.604 6.98226 1.604Z"
+                fill="#292D32" />
+              <path
+                d="M6.99977 11.2294C5.7456 11.2294 4.56727 10.6169 3.84977 9.58436C3.70977 9.38603 3.76227 9.11186 3.9606 8.9777C4.15893 8.8377 4.4331 8.8902 4.56727 9.08853C5.12143 9.88186 6.03143 10.3602 6.99977 10.3602C7.9681 10.3602 8.8781 9.8877 9.43227 9.08853C9.57227 8.8902 9.8406 8.84353 10.0389 8.9777C10.2373 9.1177 10.2839 9.38603 10.1498 9.58436C9.43227 10.6169 8.25393 11.2294 6.99977 11.2294Z"
+                fill="#292D32" />
+            </svg>
+          </div>
+        </div>
+
+        @if (showEmojiPicker()) {
+        <div class="emoji-picker-container" appClickOutside (clickOutside)="this.showEmojiPicker.set(false);">
+          <app-emoji-picker (emojiSelected)="onEmojiPicked($event)" />
+        </div>
+        }
+      </div>
+      @if (validationError) {
+      <p class="create-psychological-society-post__mood-input__error">{{ validationError | translateApi }}</p>
+      }
+
+      <!-- <p class="create-psychological-society-post__mood-input--media-hint">
+        {{ 'talbinahCommunity.imageDimensions' | translate }}
+        ( 316 * 104 )
+        {{ 'talbinahCommunity.px' | translate }}
+        {{'talbinahCommunity.imageVideoMaxSize' | translate }}
+      </p> -->
+
+    </div>
+    <!-- Media Previews Section -->
+    @if (imagePreviews().length > 0) {
+    <div class="media-previews-container">
+      @for (previewUrl of imagePreviews(); track $index) {
+      <div class="media-preview-item">
+        <button class="media-preview-item__remove-btn" (click)="removeFile($index)">
+          &times;
+        </button>
+        @if (isFileImage($index)) {
+        <app-image-view [config]="{ title: 'Image Preview', image: previewUrl }"></app-image-view>
+        } @else if (isFileVideo($index)) {
+        <app-video-view [config]="{ title: 'Image Preview', video: previewUrl }"></app-video-view>
+        }
+      </div>
+      }
+    </div>
+    }
+    <div class="create-psychological-society-post__post-classification-tabs">
+      <app-post-classification [tabs]="tabs()" [selectedTabId]="selectedTabId" (tabSelected)="onTabSelected($event)">
+      </app-post-classification>
+    </div>
+
+    <div class="create-psychological-society-post--actions">
+      <button id="cancel-btn" type="button" class="btn btn--outline" (click)="onCancel()" [disabled]="isLoading()">
+        {{ 'cancel' | translateApi }}
+      </button>
+      <button id="next-btn" type="submit" class="btn btn--solid" (click)="onSubmit()" [disabled]="isLoading()">
+        <!-- Disable based on form validity (isPostValid()) and loading state -->
+        @if(data?.itemToEdit){
+        {{'edit' | translateApi }}
+
+        }
+        @else{
+        {{'share' | translateApi }}
+        }
+        @if (isLoading()) {
+        <span class="btn__spinner"></span>
+        }
+      </button>
+    </div>
+  </form>
+  }
+
+  @else {
+  <app-create-reels
+    [data]="{ interests: tabs(), itemToEdit: data?.itemToEdit, userIdentityProfileData: data?.userIdentityProfileData }"
+    (closed)="closed.emit($event)">
+  </app-create-reels> }
+</div>

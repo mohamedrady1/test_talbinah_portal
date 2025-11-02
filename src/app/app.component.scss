@@ -1,0 +1,83 @@
+// @use "./common/styles/scss/abstracts/base-layout-mixins" as *;
+
+.main-wrapper {
+  transition: opacity 0.5s ease-in-out;
+  // @include baseLayout;
+
+  &--ssr-loading {
+    opacity: 0;
+  }
+
+  &__content {
+    // padding: 1rem;
+    // more layout styling here
+  }
+}
+
+:root {
+  --toast-bg: rgba(20, 20, 20, 0.85);
+  --toast-color: #fff;
+  --toast-radius: 12px;
+  --toast-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+:host ::ng-deep .p-toast {
+  margin: 0 1.5rem 1.5rem 0;
+}
+
+:host ::ng-deep .p-toast .p-toast-message {
+  background: var(--toast-bg);
+  color: var(--toast-color);
+  border-radius: var(--toast-radius);
+  backdrop-filter: blur(6px);
+  box-shadow: var(--toast-shadow);
+  border: none;
+  padding: 1rem 1.25rem;
+  animation: slideUp 0.3s ease-out;
+}
+
+:host ::ng-deep .p-toast .p-toast-message .p-toast-message-content {
+  display: flex;
+  align-items: flex-start;
+}
+
+:host ::ng-deep .p-toast .p-toast-message .p-toast-summary {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+:host ::ng-deep .p-toast .p-toast-message .p-toast-detail {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+/* Custom animation */
+@keyframes slideUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Severity colors */
+:host ::ng-deep .p-toast-message.p-toast-message-info {
+  --toast-bg: rgba(33, 150, 243, 0.9);
+}
+
+:host ::ng-deep .p-toast-message.p-toast-message-success {
+  --toast-bg: rgba(76, 175, 80, 0.9);
+}
+
+:host ::ng-deep .p-toast-message.p-toast-message-warn {
+  --toast-bg: rgba(255, 193, 7, 0.9);
+}
+
+:host ::ng-deep .p-toast-message.p-toast-message-error {
+  --toast-bg: rgba(244, 67, 54, 0.9);
+}

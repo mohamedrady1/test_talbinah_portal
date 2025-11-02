@@ -1,0 +1,173 @@
+.voice-message {
+  border-radius: var(--Radius-12, 0.75rem); // var(--Radius-12, 0.75rem);
+  border: 1px solid var(--Dark-50, #f6f7f8); // var(--Dark-50, #F6F7F8);
+  display: flex;
+  padding: 0.5rem 0.75rem;
+  flex-direction: row; // Changed to row for horizontal layout
+  align-items: center;
+  gap: 0.75rem;
+  align-self: stretch;
+  width: fit-content;
+  box-sizing: border-box; // Include padding and border in element's total width and height
+  background: var(--Dark-WHITE, #fff);
+  direction: ltr;
+}
+
+.voice-message__control {
+  display: flex;
+  padding: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.125rem;
+  border-radius: 1rem;
+  background: var(--Primary-50, #e7ebf8);
+  cursor: pointer;
+}
+
+.voice-message__waveform {
+  flex-grow: 1; // Take up available space
+  display: flex;
+  align-items: center;
+  gap: 0.125rem; // As per your design
+  height: 20px; // Fixed height for waveform container
+  position: relative; // Needed for absolute positioning of the seeker
+  cursor: pointer; // Indicate that the waveform is clickable
+}
+
+.voice-message__waveform-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+  width: 100%; // Ensure it fills its parent
+  height: 100%;
+}
+
+.voice-message__waveform-bar {
+  border-radius: 0.1875rem;
+  background: var(--Dark-100, #eee); // var(--Dark-100, #EEE);
+  width: 2px; // Width of each bar, adjust as needed
+  height: 100%; // Will be dynamic later
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease; // Smooth transition
+  min-height: 4px; // Minimum height for visibility
+
+  &:nth-child(even) {
+    // A little variation for visual appeal
+    height: 80%;
+  }
+
+  &:nth-child(odd) {
+    height: 60%;
+  }
+
+  &:nth-child(3n) {
+    height: 90%;
+  }
+}
+
+.voice-message__seeker {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%); // Center the seeker horizontally and vertically
+  width: 10px; // Size of the seeker circle
+  height: 10px;
+  background-color: var(--Primary-primary, #0e39b6);
+  border-radius: 50%;
+  transition:
+    transform 0.15s ease-out,
+    background-color 0.15s ease-out; // Smooth transition for size and color
+  z-index: 1; // Ensure it's above waveform bars
+  cursor: grab; // Indicate it's draggable
+}
+
+.voice-message__waveform-bar--active {
+  background: #000; // var(--Primary-primary, #0E39B6);
+}
+
+.voice-message__duration-speed {
+  flex-shrink: 0; // Prevent shrinking
+  display: flex;
+  align-items: baseline; // Align text by baseline
+  gap: 0.25rem; // Space between duration and speed
+  cursor: pointer;
+  user-select: none; // Prevent text selection on click
+  align-items: center;
+  color: var(--text-300, #47586e);
+  text-align: right;
+  font-size: 0.5rem;
+  font-style: normal;
+  font-weight: 400;
+  &:hover {
+    .voice-message__duration {
+      color: var(--Primary-primary);
+    }
+  }
+
+  &:active {
+    .voice-message__speed {
+      transform: scale(1.05); // Slight scale on click
+    }
+  }
+}
+
+.voice-message__duration {
+  color: var(--text-300, #47586e);
+  font-size: 0.5rem;
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+
+.voice-message__speed {
+  color: var(--Primary-primary, #0e39b6); // Or a slightly darker shade
+  font-size: 0.65rem; // Smaller font size for speed
+  font-weight: 600;
+  opacity: 1; // Hidden by default
+  transition:
+    opacity 0.2s ease,
+    transform 0.1s ease;
+  min-width: 2ch; // Ensure minimum width to prevent jump when text changes
+  text-align: center;
+}
+
+.voice-message__waveform-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.125rem;
+  flex: 1 0 0;
+}
+
+.voice-message-replay-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: #f7f8fa;
+  border-radius: 8px;
+  min-width: 120px;
+  max-width: 220px;
+  box-shadow: none;
+  border: 1px solid #e3e6ee;
+}
+
+.voice-message-replay-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.voice-message-replay-label {
+  font-size: 0.85rem;
+  color: #888;
+  white-space: nowrap;
+}
+
+.voice-message-replay-duration {
+  font-size: 0.85rem;
+  color: #888;
+  margin-left: 0.25rem;
+  white-space: nowrap;
+}

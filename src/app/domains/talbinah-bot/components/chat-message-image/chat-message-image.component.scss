@@ -1,0 +1,144 @@
+.image-card {
+  position: relative; // Needed for absolute positioning of overlay
+  border-radius: 0.75rem;
+  background-color: #3333330a; // Existing background
+  height: 7.5rem;
+  overflow: hidden;
+  width: 100%;
+  cursor: pointer; // Indicate that the card is interactive
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; // Ensures the image covers the area without distortion
+    display: block; // Removes extra space below image
+    transition: transform 0.3s ease; // For potential zoom on hover
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0; // Covers the entire card
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; // Distribute content top/bottom
+    padding: 0.75rem;
+    opacity: 1; // Always visible if `showOverlay` is true
+    transition: opacity 0.3s ease;
+    pointer-events: none; // Allow clicks to pass through by default
+    box-sizing: border-box; // Include padding in width/height
+  }
+
+  &:hover &__overlay {
+    pointer-events: auto; // Enable interaction with overlay contents on hover
+  }
+
+  &__title {
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); // Makes text more readable
+    word-wrap: break-word; // Prevent long words from overflowing
+    max-height: 70%; // Limit title height to allow space for buttons
+    overflow: hidden; // Hide overflow if title is too long
+    text-overflow: ellipsis; // Add ellipsis for overflowing text (single line)
+    display: -webkit-box; // For multi-line ellipsis
+    -webkit-line-clamp: 3; // Limit to 3 lines
+    -webkit-box-orient: vertical;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end; // Align buttons to the right
+    margin-top: auto; // Push actions to the bottom
+  }
+
+  &__button {
+    background-color: rgba(33, 31, 31, 0.3); // Semi-transparent white background
+    border: 1px solid rgba(255, 255, 255, 0.5); // Light border
+    border-radius: 50%; // Circular button
+    width: 2.2rem; // Fixed width
+    height: 2.2rem; // Fixed height
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.5); // More opaque on hover
+      transform: scale(1.1); // Slightly larger on hover
+    }
+
+    svg {
+      width: 1rem; // SVG icon size
+      height: 1rem; // SVG icon size
+      color: white; // Icon color
+    }
+  }
+}
+
+// Unify replay row style with image message
+.image-message-replay-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: space-between;
+  border-radius: var(--Radius-12, 0.75rem);
+  border: 1px solid var(--Dark-50, #f6f7f8);
+  padding: 0.5rem 0.75rem;
+  gap: var(--Radius-8, 0.5rem);
+  box-sizing: border-box;
+  background: var(--Dark-WHITE, #fff);
+}
+
+.image-message-replay-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-message-replay-label {
+  font-size: 0.85rem;
+  color: #888;
+  white-space: nowrap;
+}
+
+.image-message-replay-duration {
+  font-size: 0.85rem;
+  color: #888;
+  margin-left: 0.25rem;
+  white-space: nowrap;
+}
+
+.image-message-replay-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: #f7f8fa;
+  border-radius: 8px;
+  box-shadow: none;
+  border: 1px solid #e3e6ee;
+}
+
+// Remove/override old replay styles for image
+.image-card--replay,
+.image-card__replay-content,
+.image-card__replay-label {
+  all: unset;
+}
+
+.image-card__img--replay {
+  width: 3.5rem;
+  height: 2.2rem;
+  object-fit: cover;
+  border-radius: 0.4rem;
+  flex-shrink: 0;
+  border: 1px solid #e0e0e0;
+  margin-left: 0.25rem;
+}

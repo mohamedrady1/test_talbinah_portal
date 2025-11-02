@@ -1,0 +1,22 @@
+export const avatars: any[] = [
+  { id: 1, name: 'avatar', value: 'Avatar 1', label: '', icon: 'images/community/avatars/avatar-1.png', radioWidth: 'w-avatar' },
+  { id: 2, name: 'avatar', value: 'Avatar 2', label: '', icon: 'images/community/avatars/avatar-2.png', radioWidth: 'w-avatar' },
+  { id: 3, name: 'avatar', value: 'Avatar 3', label: '', icon: 'images/community/avatars/avatar-3.png', radioWidth: 'w-avatar' },
+  { id: 4, name: 'avatar', value: 'Avatar 4', label: '', icon: 'images/community/avatars/avatar-4.png', radioWidth: 'w-avatar' },
+  { id: 5, name: 'avatar', value: 'Avatar 5', label: '', icon: 'images/community/avatars/avatar-5.png', radioWidth: 'w-avatar' },
+  { id: 6, name: 'avatar', value: 'Avatar 6', label: '', icon: 'images/community/avatars/avatar-6.png', radioWidth: 'w-avatar' },
+  { id: 7, name: 'avatar', value: 'Avatar 7', label: '', icon: 'images/community/avatars/avatar-7.png', radioWidth: 'w-avatar' },
+  { id: 8, name: 'avatar', value: 'Avatar 8', label: '', icon: 'images/community/avatars/avatar-8.png', radioWidth: 'w-avatar' },
+  { id: 9, name: 'avatar', value: 'Avatar 9', label: '', icon: 'images/community/avatars/avatar-9.png', radioWidth: 'w-avatar' },
+  { id: 10, name: 'avatar', value: 'Avatar 10', label: '', icon: 'images/community/avatars/avatar-10.png', radioWidth: 'w-avatar' },
+  { id: 11, name: 'avatar', value: 'Avatar 11', label: '', icon: 'images/community/avatars/avatar-11.png', radioWidth: 'w-avatar' },
+  { id: 12, name: 'avatar', value: 'Avatar 12', label: '', icon: 'images/community/avatars/avatar-12.png', radioWidth: 'w-avatar' },
+  { id: 13, name: 'avatar', value: 'Avatar 13', label: '', icon: 'images/community/avatars/avatar-13.png', radioWidth: 'w-avatar' },
+  { id: 14, name: 'avatar', value: 'Avatar 14', label: '', icon: 'images/community/avatars/avatar-14.png', radioWidth: 'w-avatar' },
+  { id: 15, name: 'avatar', value: 'Avatar 15', label: '', icon: 'images/community/avatars/avatar-15.png', radioWidth: 'w-avatar' },
+  { id: 16, name: 'avatar', value: 'Avatar 16', label: '', icon: 'images/community/avatars/avatar-16.png', radioWidth: 'w-avatar' },
+  { id: 17, name: 'avatar', value: 'Avatar 17', label: '', icon: 'images/community/avatars/avatar-17.png', radioWidth: 'w-avatar' },
+  { id: 18, name: 'avatar', value: 'Avatar 18', label: '', icon: 'images/community/avatars/avatar-1.png', radioWidth: 'w-avatar' },
+  { id: 19, name: 'avatar', value: 'Avatar 19', label: '', icon: 'images/community/avatars/avatar-2.png', radioWidth: 'w-avatar' },
+  { id: 20, name: 'avatar', value: 'Avatar 20', label: '', icon: 'images/community/avatars/avatar-3.png', radioWidth: 'w-avatar' }
+];

@@ -1,0 +1,1 @@
+export * from './doctor-details-box.component';

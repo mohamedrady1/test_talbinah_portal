@@ -1,0 +1,26 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+@use "../../../../common/styles/scss/abstracts/_base-layout-mixins" as *;
+
+.book-appointment-layout {
+  @include baseLayout; // Use default variable values
+
+  // @include baseLayout(
+  //   $padding: 1.5rem 5rem,
+  //   $gap: 2.5rem,
+  //   $padding-md: 1rem 3rem,
+  //   $gap-md: 3rem,
+  //   $padding-sm: 0.75rem 1.5rem,
+  //   $gap-sm: 1.5rem
+  // );
+  &__container {
+    gap: 1.5rem;
+  }
+  // @include baseLayout(
+  //   $padding: 1.5rem 5rem,
+  //   $gap: 2.5rem,
+  //   $padding-md: 1rem 3rem,
+  //   $gap-md: 3rem,
+  //   $padding-sm: 0.75rem 1.5rem,
+  //   $gap-sm: 1.5rem
+  // );
+}

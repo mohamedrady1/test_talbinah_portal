@@ -1,0 +1,208 @@
+@if (replay) {
+<div class="video-message-replay-row">
+  <div class="video-message-replay-info">
+    <span class="video-message-replay-icon">
+      <svg fill="#888" width="16" height="16" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+        <g id="SVGRepo_iconCarrier">
+          <title>video</title>
+          <path
+            d="M4 8V24C4 25.1046 4.89543 26 6 26H22C23.1046 26 24 25.1046 24 24V20.382L27.5536 22.2768C28.2182 22.6376 29 22.1541 29 21.382V10.618C29 9.84589 28.2182 9.36236 27.5536 9.72318L24 11.618V8C24 6.89543 23.1046 6 22 6H6C4.89543 6 4 6.89543 4 8ZM6 8H22V24H6V8ZM27 12.382L24 14.118V17.882L27 19.618V12.382Z">
+          </path>
+        </g>
+      </svg>
+    </span>
+    <span class="video-message-replay-label">{{ 'general.videoLabel' | translate }}</span>
+  </div>
+  <video [src]="videoUrl" class="video-card__img--replay" muted playsinline></video>
+</div>
+} @else {
+<div class="video-player" #playerContainer tabindex="0" (keydown)="handleKeyboardShortcuts($event)">
+  <video #video class="video-player__video" (loadedmetadata)="onVideoLoadedMetadata(video)"
+    (timeupdate)="onTimeUpdate()" [volume]="volume()" (click)="togglePlay()">
+    <source [src]="videoUrl" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <div class="video-player__overlay" (click)="togglePlay()">
+    @if (isLoading()) {
+    <div class="video-player__spinner"></div>
+    } @else {
+    @if (isPlaying()) {
+    <span class="video-player__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+          stroke="#ffffff" stroke-width="2"></path>
+        <path d="M14 9L14 15" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M10 9L10 15" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </span>
+    } @else if (isEnded()) {
+    <div class="video-player__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M10.0001 17H8.00098C4.68727 17 2.00098 14.3137 2.00098 11C2.00098 7.68629 4.68727 5 8.00098 5H16.0001C19.3138 5 22.0001 7.68629 22.0001 11C22.0001 14.3137 19.3138 17 16.0001 17H14.0001M17.0001 20L14.0001 17M14.0001 17L17.0001 14"
+            stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
+      </svg>
+    </div>
+    } @else { <div class="video-player__icon">
+      <svg width="24" height="24" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M7.5835 10.0002V8.7669C7.5835 7.17524 8.7085 6.53357 10.0835 7.32524L11.1502 7.9419L12.2168 8.55857C13.5918 9.35024 13.5918 10.6502 12.2168 11.4419L11.1502 12.0586L10.0835 12.6752C8.7085 13.4669 7.5835 12.8169 7.5835 11.2336V10.0002Z"
+          stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        <path
+          d="M9.99984 18.3337C14.6022 18.3337 18.3332 14.6027 18.3332 10.0003C18.3332 5.39795 14.6022 1.66699 9.99984 1.66699C5.39746 1.66699 1.6665 5.39795 1.6665 10.0003C1.6665 14.6027 5.39746 18.3337 9.99984 18.3337Z"
+          stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+    }
+    }
+  </div>
+  <div class="video-player__controls">
+    <button class="video-player__button" (click)="skip(-10)">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11 19L4 12L11 5M18 19L11 12L18 5" stroke="white" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </button>
+    <div class="video-player__time video-player__time--left">
+      {{ formatTime(currentTime()) }}
+    </div>
+    <div class="video-player__progress-container" (mousemove)="onMouseMove($event)" (mouseenter)="onHoverStart()"
+      (mouseleave)="onHoverEnd()" (click)="seek($event)">
+      <input type="range" min="0" max="100" [value]="progress()" class="video-player__progress"
+        [style.--progress.%]="progress()" [style.--buffered.%]="buffered()" />
+      @if (showTooltip()) {
+      <div class="video-player__tooltip" [ngStyle]="{ left: tooltipX() + 'px' }">
+        {{ formatTime(hoverTime()) }}
+      </div>
+      }
+    </div>
+    <div class="video-player__time video-player__time--right" (click)="toggleTimeView()">
+      @if (showRemaining()) {
+      -{{ formatTime(duration() - currentTime()) }}
+      } @else {
+      {{ formatTime(duration()) }}
+      }
+    </div>
+    <button class="video-player__button" (click)="skip(10)">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 5L20 12L13 19M6 5L13 12L6 19" stroke="white" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </button>
+    <div class="video-player__volume-control">
+      <button class="video-player__button" (click)="toggleMute()">
+        @if (isMuted() || volume() === 0) {
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M5.03479 10.9714C5.10847 9.76255 5.14531 9.15814 5.45854 8.57679C5.74473 8.04563 6.2923 7.53042 6.83988 7.27707C7.43921 6.99979 8.12617 6.99979 9.50008 6.99979C10.0122 6.99979 10.2682 6.99979 10.5162 6.95791C10.7614 6.9165 11.0005 6.84478 11.2279 6.74438C11.4581 6.64283 11.6718 6.50189 12.0993 6.22002L12.3183 6.07566C14.8612 4.39898 16.1327 3.56063 17.2001 3.92487C17.4047 3.9947 17.6028 4.09551 17.7797 4.21984C18.7024 4.86829 18.7725 6.37699 18.9127 9.3944C18.9646 10.5117 19 11.4679 19 11.9998C19 12.5317 18.9646 13.4879 18.9127 14.6052C18.7725 17.6226 18.7024 19.1313 17.7797 19.7797C17.6028 19.9041 17.4047 20.0049 17.2001 20.0747C16.1327 20.4389 14.8612 19.6006 12.3183 17.9239L12.0993 17.7796C11.6718 17.4977 11.4581 17.3567 11.2279 17.2552C11.0005 17.1548 10.7614 17.0831 10.5162 17.0417C10.2682 16.9998 10.0122 16.9998 9.50008 16.9998C8.12617 16.9998 7.43921 16.9998 6.83988 16.7225C6.2923 16.4692 5.74473 15.9539 5.45854 15.4228C5.14531 14.8414 5.10847 14.237 5.03479 13.0282C5.01299 12.6706 5 12.3222 5 11.9998C5 11.6774 5.01299 11.329 5.03479 10.9714Z"
+              stroke="#ffffff" stroke-width="1.5"></path>
+          </g>
+        </svg>
+        } @else if (volume() > 0.5) {
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M1.53479 10.9714C1.60847 9.76255 1.64531 9.15814 1.95854 8.57679C2.24473 8.04563 2.7923 7.53042 3.33988 7.27707C3.93921 6.99979 4.62617 6.99979 6.00008 6.99979C6.51215 6.99979 6.76819 6.99979 7.0162 6.95791C7.26138 6.9165 7.50046 6.84478 7.72795 6.74438C7.95806 6.64283 8.17181 6.50189 8.59932 6.22002L8.81825 6.07566C11.3612 4.39898 12.6327 3.56063 13.7001 3.92487C13.9047 3.9947 14.1028 4.09551 14.2797 4.21984C15.2024 4.86829 15.2725 6.37699 15.4127 9.3944C15.4646 10.5117 15.5 11.4679 15.5 11.9998C15.5 12.5317 15.4646 13.4879 15.4127 14.6052C15.2725 17.6226 15.2024 19.1313 14.2797 19.7797C14.1028 19.9041 13.9047 20.0049 13.7001 20.0747C12.6327 20.4389 11.3612 19.6006 8.81825 17.9239L8.59932 17.7796C8.17181 17.4977 7.95806 17.3567 7.72795 17.2552C7.50046 17.1548 7.26138 17.0831 7.0162 17.0417C6.76819 16.9998 6.51215 16.9998 6.00008 16.9998C4.62617 16.9998 3.93921 16.9998 3.33988 16.7225C2.7923 16.4692 2.24473 15.9539 1.95854 15.4228C1.64531 14.8414 1.60847 14.237 1.53479 13.0282C1.51299 12.6706 1.5 12.3222 1.5 11.9998C1.5 11.6774 1.51299 11.329 1.53479 10.9714Z"
+              stroke="#ffffff" stroke-width="1.5"></path>
+            <path d="M20 6C20 6 21.5 7.8 21.5 12C21.5 16.2 20 18 20 18" stroke="#ffffff" stroke-width="1.5"
+              stroke-linecap="round"></path>
+            <path d="M18 9C18 9 18.5 9.9 18.5 12C18.5 14.1 18 15 18 15" stroke="#ffffff" stroke-width="1.5"
+              stroke-linecap="round"></path>
+          </g>
+        </svg>
+        } @else {
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M1.53479 10.9714C1.60847 9.76255 1.64531 9.15814 1.95854 8.57679C2.24473 8.04563 2.7923 7.53042 3.33988 7.27707C3.93921 6.99979 4.62617 6.99979 6.00008 6.99979C6.51215 6.99979 6.76819 6.99979 7.0162 6.95791C7.26138 6.9165 7.50046 6.84478 7.72795 6.74438C7.95806 6.64283 8.17181 6.50189 8.59932 6.22002L8.81825 6.07566C11.3612 4.39898 12.6327 3.56063 13.7001 3.92487C13.9047 3.9947 14.1028 4.09551 14.2797 4.21984C15.2024 4.86829 15.2725 6.37699 15.4127 9.3944C15.4646 10.5117 15.5 11.4679 15.5 11.9998C15.5 12.5317 15.4646 13.4879 15.4127 14.6052C15.2725 17.6226 15.2024 19.1313 14.2797 19.7797C14.1028 19.9041 13.9047 20.0049 13.7001 20.0747C12.6327 20.4389 11.3612 19.6006 8.81825 17.9239L8.59932 17.7796C8.17181 17.4977 7.95806 17.3567 7.72795 17.2552C7.50046 17.1548 7.26138 17.0831 7.0162 17.0417C6.76819 16.9998 6.51215 16.9998 6.00008 16.9998C4.62617 16.9998 3.93921 16.9998 3.33988 16.7225C2.7923 16.4692 2.24473 15.9539 1.95854 15.4228C1.64531 14.8414 1.60847 14.237 1.53479 13.0282C1.51299 12.6706 1.5 12.3222 1.5 11.9998C1.5 11.6774 1.51299 11.329 1.53479 10.9714Z"
+              stroke="#ffffff" stroke-width="1.5"></path>
+            <path d="M18 9C18 9 18.5 9.9 18.5 12C18.5 14.1 18 15 18 15" stroke="#ffffff" stroke-width="1.5"
+              stroke-linecap="round"></path>
+          </g>
+        </svg>
+        }
+      </button>
+      <input type="range" min="0" max="1" step="0.01" [value]="volume()" (input)="onVolumeChange($event)"
+        class="video-player__volume" [style.--volume.%]="volume() * 100" />
+    </div>
+    <select class="video-player__playback-speed" (change)="setPlaybackSpeed($event)" [value]="playbackSpeed()">
+      <option value="0.5">0.5x</option>
+      <option value="0.75">0.75x</option>
+      <option value="1">1x</option>
+      <option value="1.25">1.25x</option>
+      <option value="1.5">1.5x</option>
+      <option value="1.75">1.75x</option>
+      <option value="2">2x</option>
+    </select>
+    <button class="video-player__button" (click)="togglePictureInPicture()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M19 11H5C3.89543 11 3 11.8954 3 13V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V13C21 11.8954 20.1046 11 19 11Z"
+          stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M12 3H20C20.5304 3 21.0391 3.21071 21.4142 3.58579C21.7893 3.96086 22 4.46957 22 5V10" stroke="white"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M7 3C7 3 7 4.7 7 6C7 7.3 7 8 7 8" stroke="white" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </button>
+    <button class="video-player__button" (click)="downloadVideoInNewTab()">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 3V17M12 17L17 12M12 17L7 12" stroke="white" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+        <path d="M20 21H4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <button class="video-player__button" (click)="toggleFullscreen()">
+      @if (fullscreen()) {
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M7 16L2 16C1.44772 16 1 15.5523 1 15C1 14.4477 1.44772 14 2 14L7 14C8.65685 14 10 15.3431 10 17V22C10 22.5523 9.55228 23 9 23C8.44772 23 8 22.5523 8 22V17C8 16.4477 7.55228 16 7 16Z"
+            fill="#ffffff"></path>
+          <path
+            d="M10 2C10 1.44772 9.55229 1 9 1C8.44772 1 8 1.44772 8 2L8 7C8 7.55228 7.55228 8 7 8L2 8C1.44772 8 1 8.44771 1 9C1 9.55228 1.44772 10 2 10L7 10C8.65685 10 10 8.65685 10 7L10 2Z"
+            fill="#ffffff"></path>
+          <path
+            d="M14 22C14 22.5523 14.4477 23 15 23C15.5523 23 16 22.5523 16 22V17C16 16.4477 16.4477 16 17 16H22C22.5523 16 23 15.5523 23 15C23 14.4477 22.5523 14 22 14H17C15.3431 14 14 15.3431 14 17V22Z"
+            fill="#ffffff"></path>
+          <path
+            d="M14 7C14 8.65686 15.3431 10 17 10L22 10C22.5523 10 23 9.55228 23 9C23 8.44772 22.5523 8 22 8L17 8C16.4477 8 16 7.55229 16 7L16 2C16 1.44772 15.5523 1 15 1C14.4477 1 14 1.44772 14 2L14 7Z"
+            fill="#ffffff"></path>
+        </g>
+      </svg>
+      } @else {
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+        <g id="SVGRepo_iconCarrier">
+          <path d="M22 14C22 17.7712 22 19.6569 20.8284 20.8284C19.6569 22 17.7712 22 14 22" stroke="#ffffff"
+            stroke-width="1.5" stroke-linecap="round"></path>
+          <path d="M10 22C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14" stroke="#ffffff"
+            stroke-width="1.5" stroke-linecap="round"></path>
+          <path d="M10 2C6.22876 2 4.34315 2 3.17157 3.17157C2 4.34315 2 6.22876 2 10" stroke="#ffffff"
+            stroke-width="1.5" stroke-linecap="round"></path>
+          <path d="M14 2C17.7712 2 19.6569 2 20.8284 3.17157C22 4.34315 22 6.22876 22 10" stroke="#ffffff"
+            stroke-width="1.5" stroke-linecap="round"></path>
+        </g>
+      </svg>
+      }
+    </button>
+  </div>
+</div>
+}

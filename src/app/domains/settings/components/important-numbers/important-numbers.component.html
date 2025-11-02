@@ -1,0 +1,39 @@
+<div class="important-numbers" appAutoExactHeight heightMode="max-height">
+    <div class="important-numbers__container">
+        <!-- Header -->
+        <div class="important-numbers__header">
+            <p class="important-numbers__header--title">
+                {{ 'explore_important_numbers_heart' | translateApi }}
+            </p>
+            <app-local-search [searchTerm]="localSearchTerm()" (searchChange)="onLocalSearchChange($event)" />
+        </div>
+
+        <!-- Loading State -->
+        @if (isLoading()) {
+        <app-important-numbers-loading></app-important-numbers-loading>
+        }
+
+        <!-- Error State -->
+        @if (errorMessage()) {
+        <div class="important-numbers__error">
+            <app-error-state-card [config]="errorStateConfig"></app-error-state-card>
+        </div>
+        }
+
+        <!-- Important Numbers Content -->
+        @if (!isLoading() && !errorMessage() && filteredImportantNumbers().length > 0) {
+        <div class="important-numbers__content">
+            @for (importantNumber of filteredImportantNumbers(); track importantNumber.id) {
+            <app-important-number-card [importantNumber]="importantNumber"></app-important-number-card>
+            }
+        </div>
+        }
+
+        <!-- Empty State -->
+        @if (!isLoading() && !errorMessage() && filteredImportantNumbers().length === 0) {
+        <div class="important-numbers__empty">
+            <app-empty-state-card [config]="emptyStateConfig"></app-empty-state-card>
+        </div>
+        }
+    </div>
+</div>

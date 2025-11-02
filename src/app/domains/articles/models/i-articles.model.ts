@@ -1,0 +1,41 @@
+export interface IArticleItem {
+  id: number;
+  main_lang: string;
+  translate_id: number | null;
+  article_category_id?: number; // Only in main article
+  title: string;
+  description: string; // HTML content
+  trending?: number; // Only in main article
+  reading_time: number;
+  type?: string; // Only in main article (e.g., "free")
+  active?: number; // Only in main article
+  deleted_at?: string | null; // Only in main article
+  created_at: string;
+  updated_at: string;
+  original_active?: string; // Only in main article
+  image?: IArticleImage; // Only in main article
+  article_category?: IArticleCategory; // Only in main article
+  keywords?: string[]; // Only in main article
+  category?: string; // Only in related articles
+}
+
+export interface IArticleImage {
+  id: number;
+  url: string;
+  imageable_id: number;
+  imageable_type: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface IArticleCategory {
+  id: number;
+  main_lang: string;
+  translate_id: number | null;
+  name: string;
+  active: number;
+  deleted_at: string | null;
+  created_at: string;
+  updated_at: string;
+  original_active: string;
+}

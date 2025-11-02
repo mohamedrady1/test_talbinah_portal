@@ -1,0 +1,34 @@
+<form class="support-message-input-mci" (submit)="sendTextMessage($event)" role="form"
+  aria-label="Send a new support message">
+
+  <!-- ✅ Text input -->
+  <input type="text" class="support-message-input-mci__field" [value]="message()" (input)="updateMessage($event)"
+    [disabled]="isMessageSupportSending()" placeholder="{{ 'general.typeYourMessage' | translate }}"
+    aria-label="Type support message" required />
+
+  <!-- ✅ File attachment button -->
+  <div class="support-message-input-mci__actions">
+    <!-- <button type="button" class="support-message-input-mci__btn" aria-label="Attach files"
+      (click)="toggleAttachmentMenu($event)">
+      <app-svg-icon name="attchments-input-chat" />
+    </button> -->
+
+    <app-upload-attachments-menu-selector [showMenu]="showAttachmentMenu()"
+      (filesSelected)="handleFilesSelected($event.files,$event.fileType)" (menuClosed)="showAttachmentMenu.set(false)"
+      [onlyImage]="true" #uploadAttachmentsMenuSelectorRef />
+  </div>
+
+  <!-- ✅ Send button -->
+  <button type="submit" class="support-message-input-mci__send scaleX-ltr" [disabled]="isSupportSendDisabled()"
+    aria-label="Send">
+    @if (!isMessageSupportSending()) {
+    <app-svg-icon name="send-input-chat" />
+    } @else {
+    <span class="support-message-input-mci__typing">
+      <span class="support-message-input-mci__dot"></span>
+      <span class="support-message-input-mci__dot"></span>
+      <span class="support-message-input-mci__dot"></span>
+    </span>
+    }
+  </button>
+</form>

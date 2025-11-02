@@ -1,0 +1,280 @@
+.notification {
+    &__wrapper {
+        position: fixed;
+        inset-inline-end: 1.25rem;
+        inset-block-end: 1.25rem;
+        z-index: 99999;
+        pointer-events: none;
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 0.75rem;
+        width: 22.5rem;
+        max-width: 22.5rem;
+        pointer-events: auto;
+    }
+
+    &__item {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        background: var(--Dark-WHITE);
+        border-radius: 0.5rem;
+        padding: 0.75rem;
+        padding-block: 0.6rem;
+        padding-inline-end: 2.25rem;
+        box-shadow:
+            0 0.125rem 0.5rem rgba(0, 0, 0, 0.1),
+            0 0.25rem 1rem rgba(0, 0, 0, 0.08);
+        cursor: pointer;
+        transition: all 0.25s ease;
+        animation: slideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        transform-origin: center bottom;
+        border-inline-start: 0.1875rem solid transparent;
+
+        &:hover {
+            transform: translateY(-0.125rem);
+            box-shadow:
+                0 0.25rem 0.75rem rgba(0, 0, 0, 0.12),
+                0 0.375rem 1.25rem rgba(0, 0, 0, 0.1);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+
+        // Type-specific styling (BEM modifiers)
+        &--session_reminder {
+            border-inline-start-color: #1877f2;
+
+            .notification__indicator {
+                background-color: #1877f2;
+            }
+        }
+
+        &--new_message {
+            border-inline-start-color: #06c755;
+
+            .notification__indicator {
+                background-color: #06c755;
+            }
+        }
+
+        &--appointment {
+            border-inline-start-color: #9b59b6;
+
+            .notification__indicator {
+                background-color: #9b59b6;
+            }
+        }
+
+        &--success {
+            border-inline-start-color: #47af73;
+
+            .notification__indicator {
+                background-color: #47af73;
+            }
+        }
+
+        &--warning {
+            border-inline-start-color: #f6c23e;
+
+            .notification__indicator {
+                background-color: #f6c23e;
+            }
+        }
+
+        &--error {
+            border-inline-start-color: #ff4d4f;
+
+            .notification__indicator {
+                background-color: #ff4d4f;
+            }
+        }
+
+        &--info {
+            border-inline-start-color: #477cd2;
+
+            .notification__indicator {
+                background-color: #477cd2;
+            }
+        }
+
+        &--general {
+            border-inline-start-color: #65676b;
+        }
+
+        // New types with unique colors
+        &--reservation {
+            border-inline-start-color: #e91e63; // Pink for reservations
+
+            .notification__indicator {
+                background-color: #e91e63;
+            }
+        }
+
+        &--podcast {
+            border-inline-start-color: #ff6b35; // Orange for podcasts
+
+            .notification__indicator {
+                background-color: #ff6b35;
+            }
+        }
+
+        &--community {
+            border-inline-start-color: #00bcd4; // Cyan for community
+
+            .notification__indicator {
+                background-color: #00bcd4;
+            }
+        }
+
+        &--task {
+            border-inline-start-color: #ffc107; // Amber for tasks
+
+            .notification__indicator {
+                background-color: #ffc107;
+            }
+        }
+
+        &--offer {
+            border-inline-start-color: #4caf50; // Green for offers
+
+            .notification__indicator {
+                background-color: #4caf50;
+            }
+        }
+    }
+
+    &__icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        min-width: 2.5rem;
+        border-radius: 50%;
+        overflow: hidden;
+        background: #f0f2f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 0.125rem solid #ffffff;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+        }
+    }
+
+    &__content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        margin-block-end: 0.25rem;
+    }
+
+    &__title {
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: #1c1e21;
+        margin: 0;
+        line-height: 1.3;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1; // max 1 line
+        -webkit-box-orient: vertical;
+        word-wrap: break-word;
+    }
+
+    &__time {
+        font-size: 0.6rem; // 11px - smaller
+        color: #8a8d91;
+        white-space: nowrap;
+        font-weight: 400;
+        margin-block-start: 0.125rem;
+    }
+
+    &__body {
+        font-size: 0.6rem; // 12px - smaller than title
+        color: #65676b;
+        line-height: 1.4;
+        margin: 0;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; // max 2 lines
+        -webkit-box-orient: vertical;
+        word-wrap: break-word;
+    }
+
+    &__close {
+        position: absolute;
+        inset-block-start: 0.5rem;
+        inset-inline-end: 0.5rem;
+        width: 1.75rem;
+        height: 1.75rem;
+        border: none;
+        background: transparent;
+        color: #8a8d91;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.2s ease;
+        padding: 0;
+        z-index: 10;
+
+        &:hover {
+            background: #f0f2f5;
+            color: #1c1e21;
+            transform: scale(1.1);
+        }
+
+        &:active {
+            background: #e4e6eb;
+            transform: scale(0.95);
+        }
+
+        svg {
+            width: 0.875rem;
+            height: 0.875rem;
+        }
+    }
+
+    &__indicator {
+        position: absolute;
+        inset-block-end: 0.75rem;
+        inset-inline-end: 0.75rem;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background-color: #1877f2;
+        box-shadow: 0 0 0 0.125rem #ffffff;
+    }
+}
+
+// Animation for slide up effect
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.92);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-5px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}

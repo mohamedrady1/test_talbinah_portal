@@ -1,0 +1,15 @@
+<div class="all-doctors" appAutoExactHeight heightMode="max-height">
+  <div class="all-doctors__container">
+    <div class="all-doctors__list">
+      @for (doctor of paginatedDoctors(); track doctor.id) {
+      <div class="all-doctors__list--card">
+        <app-doctor-card-for-booking [item]="doctor" [type]="cardTypes.SUMMARY" />
+      </div>
+      }
+    </div>
+
+    @if (doctors?.length && paginationConfig().totalPages > 1) {
+    <app-pagination-listing [paginationConfig]="paginationConfig()" />
+    }
+  </div>
+</div>

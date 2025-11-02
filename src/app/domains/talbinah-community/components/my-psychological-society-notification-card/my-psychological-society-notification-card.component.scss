@@ -1,0 +1,74 @@
+.notification-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+  &.details {
+    display: flex;
+    height: 3.25rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background: var(--Dark-50, #f6f7f8);
+  }
+  &.column {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &.details {
+      align-items: flex-start;
+    }
+
+    &.column {
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.25rem;
+      flex: 1;
+      align-items: flex-start;
+    }
+
+    &--image {
+      width: 1.875rem;
+      height: 1.875rem;
+      border-radius: 0.75rem;
+      object-fit: cover;
+    }
+
+    &--text {
+      font-size: 0.75rem;
+      font-weight: 400;
+    }
+
+    // &__static {
+    color: var(--text-300, #47586e);
+    // }
+
+    &__config {
+      color: var(--text-400, #0f0f0f);
+    }
+  }
+  &__timestamp {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 0.5rem;
+    &.column {
+      flex-direction: row;
+      width: 100%;
+    }
+    .time,
+    .date {
+      color: var(--text-200, #909dad);
+      font-size: 0.625rem;
+      font-weight: 400;
+    }
+  }
+}

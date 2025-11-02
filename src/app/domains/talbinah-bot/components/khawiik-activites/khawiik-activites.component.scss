@@ -1,0 +1,157 @@
+:host {
+  app-khawiik-activities-skeleton {
+    width: 100%;
+  }
+}
+.khawiik-activities {
+  display: flex;
+  padding: 0.75rem 1rem;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex: 1 0 0;
+  align-self: stretch;
+
+  &__container {
+    display: flex;
+    padding: 2.5rem 5.0625rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    flex: 1 0 0;
+    align-self: stretch;
+  }
+
+  &__loading {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  &__error {
+    padding: 1rem;
+    color: #b91c1c;
+    text-align: center;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__card {
+    display: flex;
+    padding: 0.75rem 1.24438rem;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 0 0;
+    align-self: stretch;
+
+    border-radius: 0.82956rem;
+    box-shadow: 0 3.318px 3.318px 0 rgba(28, 108, 255, 0.18) inset;
+    backdrop-filter: blur(0px);
+
+    &:nth-child(odd) {
+      background-image: url("../../../../../../public/images/khawiik/activities/activites-1.png");
+    }
+
+    &:nth-child(even) {
+      background-image: url("../../../../../../public/images/khawiik/activities/activites-2.png");
+    }
+    background-size: cover;
+
+    display: block;
+    min-height: 11rem;
+    // max-width: 21rem;
+    cursor: pointer;
+
+    @media (max-width: 640px) {
+      min-height: 8rem;
+    }
+
+    &-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      flex: 1 0 0;
+      align-self: stretch;
+      height: 100%;
+      outline: none;
+    }
+  }
+
+  &__icon {
+    width: 3.75rem;
+    height: 1.625rem;
+    aspect-ratio: 30/13;
+
+    &-img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.825rem;
+  }
+
+  &__card-title {
+    color: #000;
+    font-size: 0.541rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  &__card-subtitle {
+    color: #000;
+    font-size: 0.72588rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  &__card-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__cta {
+    width: 100%;
+
+    display: flex;
+    padding: 0.72588rem 0.82956rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.41481rem;
+    align-self: stretch;
+
+    border-radius: 0.82956rem;
+    border: 0.83px solid #5c9dff;
+    background: linear-gradient(
+      103deg,
+      var(--Primary-100, #dbe1f4) -21.22%,
+      var(--Primary-primary, #0e39b6) 118.08%,
+      #3579ff 118.08%
+    );
+    box-shadow: 0 9.955px 26.547px 2.489px rgba(11, 96, 255, 0.07);
+
+    color: var(--white-100, #fffaf7);
+    text-shadow: 0 0.309px 0.309px rgba(25, 22, 20, 0.15);
+    font-size: 0.61831rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+    cursor: pointer;
+  }
+}

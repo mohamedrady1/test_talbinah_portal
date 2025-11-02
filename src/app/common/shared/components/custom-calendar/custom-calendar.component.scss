@@ -1,0 +1,172 @@
+.calendar {
+    padding: 25px 40px;
+    margin: auto;
+    border-radius: 8px;
+    margin: 25px 40px;
+    color: black;
+    border-radius: 8px;
+    background-color: white;
+    p-datepicker {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        z-index: 2;
+
+        .p-datepicker-input {
+            cursor: pointer !important;
+            opacity: 0 !important;
+        }
+    }
+
+    .date {
+        font-size: 1.75rem;
+        font-weight: 400;
+    }
+    hr {
+        border: 0;
+        border-top: 1px solid #f2f2f3;
+        margin: 20px 0; /* مسافة فوق وتحت الـ hr */
+    }
+}
+.year-list {
+    position: absolute;
+    top: 30px;
+    background-color: gray;
+    color: black;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.days-of-week {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    .day {
+        width: 100%;
+        height: 9.0625rem;
+
+        border: 1px solid #e0e4e7;
+
+        padding: 0px 10px;
+
+        div.status {
+            position: relative;
+            p {
+                padding: 3px 10px;
+                font-size: 1rem;
+                font-weight: 400;
+            }
+            &::before {
+                content: "";
+                position: absolute;
+                width: 7px;
+                top: 0;
+                right: -7px;
+                height: 100%;
+            }
+        }
+        &.holiday {
+            color: #858c90;
+
+            div.status {
+                background-color: #f8f9fa;
+
+                &::before {
+                    background-color: #858c90;
+                }
+            }
+        }
+        &.weekend {
+            color: black;
+
+            div.status {
+                background-color: #fce9ea;
+                p {
+                    color: #e22431;
+                }
+                &::before {
+                    background-color: #e22431;
+                }
+            }
+        }
+        &.workday {
+            color: black;
+
+            div.status {
+                background-color: #f5fbe8;
+                p {
+                    color: #4aa147;
+                }
+                &::before {
+                    background-color: #4aa147;
+                }
+            }
+        }
+        &:not(:nth-child(7n)) {
+            border-right: 0px;
+        }
+        &:not(:nth-last-child(-n + 7)) {
+            border-bottom: 0px;
+        }
+        &:last-child {
+            border-right: 1px solid #e0e4e7;
+        }
+
+        &:not(:nth-child(n + 7)):not(:first-child):dir(rtl) {
+            border-right: 0 !important;
+        }
+
+        &:nth-child(7n):dir(rtl) {
+            border-right: 0 !important;
+        }
+
+        &:not(:nth-last-child(-n + 7)):dir(rtl) {
+            border-bottom: 0px !important;
+        }
+        &:nth-child(7n + 1):dir(rtl) {
+            border-right: 1px solid #e0e4e7 !important;
+        }
+        &:not(:nth-first-child(7n)):dir(rtl) {
+            border-right: 1px solid #e0e4e7 !important;
+        }
+        &:nth-child(1):dir(rtl) {
+            border-right: 1px solid #e0e4e7 !important;
+        }
+        &:last-child:dir(rtl) {
+            border-right: 0 !important;
+        }
+    }
+}
+
+button {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+span {
+    display: block;
+    padding: 5px;
+    cursor: pointer;
+}
+
+span.selected {
+    background-color: #007bff;
+    color: white;
+}
+::ng-deep {
+    .p-datepicker-input {
+        cursor: pointer !important;
+        opacity: 0 !important;
+    }
+}

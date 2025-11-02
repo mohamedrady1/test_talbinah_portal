@@ -1,0 +1,47 @@
+<div class="complaints-list" appAutoExactHeight heightMode="max-height">
+    <!-- Header Section -->
+    <div class="complaints-list__container">
+        <div class="complaints-list__header">
+
+            <div class="complaints-list__filters">
+                @for (filter of filters; track filter.value) {
+                <button type="button" class="complaints-list__filter-btn"
+                    [class.complaints-list__filter-btn--active]="activeFilter() === filter.value"
+                    (click)="onFilterChange(filter.value)">
+                    {{ filter.label | translateApi }}
+                </button>
+                }
+            </div>
+
+            <div class="complaints-list__search-section">
+                <app-local-search [searchTerm]="searchTerm()" (searchChange)="onSearchChange($event)"
+                    (search)="onReportClick()"></app-local-search>
+                <button type="button" class="complaints-list__add-complaint-button" (click)="onReportClick()"
+                    [attr.aria-label]="'report_complaint' | translateApi">
+                    {{ 'report_complaint' | translateApi }}
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Content Section -->
+        <div class="complaints-list__content">
+            @if (isLoading()) {
+            <!-- Loading State -->
+            <app-complaint-card-skeleton [count]="6"></app-complaint-card-skeleton>
+            } @else if (errorMessage()) {
+            <!-- Error State -->
+            <app-error-state-card [config]="complaintsErrorState"></app-error-state-card>
+            } @else if (filteredComplaints().length === 0) {
+            <!-- Empty State -->
+            <app-empty-state-card [config]="complaintsEmptyState"></app-empty-state-card>
+            } @else {
+            <!-- Complaints Grid -->
+            <div class="complaints-list__grid">
+                @for (complaint of filteredComplaints(); track complaint.id) {
+                <app-complaint-card [complaint]="complaint" (cardClick)="onComplaintClick($event)"></app-complaint-card>
+                }
+            </div>
+            }
+        </div>
+    </div>

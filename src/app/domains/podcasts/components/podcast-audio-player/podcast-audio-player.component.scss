@@ -1,0 +1,234 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+
+.podcast-audio-player {
+  @include abs-logical(fixed, null, 2.8125rem, null, 50%, 10018);
+  @include flex-box(row, 1.5rem, center, space-between);
+  transform: translateX(-50%);
+  width: 70%;
+  min-height: 4.6875rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(161, 161, 161, 0.1);
+  background: rgba(161, 161, 161, 0.83);
+  backdrop-filter: blur(0.8625rem);
+
+  audio {
+    display: none;
+  }
+  &__info-container {
+    @include flex-box(row, 1.5rem, center, space-between);
+    width: 100%;
+  }
+
+  &__close-icon {
+    @include flex-box(column, 1.5rem, center, center);
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: rgb(228, 227, 226);
+    @include abs-logical(absolute, -15%, null, null, -10px, null);
+    cursor: pointer;
+
+    &:dir(rtl) {
+      right: initial;
+      left: -10px;
+    }
+  }
+
+  &__controls {
+    @include flex-box(row, 0.25rem, center, null);
+  }
+
+  &__button {
+    padding: 0.6875rem;
+
+    &--favourite {
+      width: 1.875rem;
+      padding: 0;
+      @include flex-box(row, 0, center, center);
+      height: 1.875rem;
+      border-radius: 50%;
+      background-color: var(--Dark-WHITE);
+    }
+  }
+
+  &__progress {
+    @include abs-logical(relative, null, 50%, null, null, null);
+    margin: auto 1rem;
+    width: 50%;
+
+    &_controls {
+      @include flex-box(row, 1rem, center, center);
+      .control__shuffle,
+      .control__repeat-one {
+        @include respond(sm) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &__progress-bar {
+    overflow: hidden;
+    @include abs-logical(absolute, null, -0.9375rem, null, null, null);
+    height: 2px;
+    width: 100%;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    direction: ltr !important;
+    transition: 0.1s;
+    &.web {
+      display: block;
+      @include respond(sm) {
+        display: none;
+      }
+    }
+    &.mobile {
+      display: none;
+      @include respond(sm) {
+        display: block;
+        width: 70%;
+        margin: auto;
+      }
+    }
+
+    &:hover {
+      height: 4px;
+    }
+  }
+
+  &__progress-fill {
+    width: 40%;
+    height: 100%;
+    background: #f44336;
+  }
+
+  &__info {
+    @include flex-box(row, 0.75rem, center, center);
+  }
+
+  &__thumbnail {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.375rem;
+    object-fit: cover;
+  }
+
+  &__text {
+    @include flex-box(column, 0, null, null);
+  }
+
+  &__title {
+    @include text-style(0.75rem, var(--Dark-WHITE), bold);
+  }
+
+  &__subtitle {
+    @include text-style(0.75rem, var(--Dark-50), 400);
+    @include respond(sm) {
+      display: none;
+    }
+  }
+
+  // RESPONSIVE STYLES
+  @include respond(sm) {
+    width: 90%;
+    bottom: 0.625rem;
+    gap: 1rem;
+
+    &__progress {
+      width: 100%;
+    }
+
+    &__title,
+    &__subtitle {
+      font-size: 0.7rem;
+    }
+
+    &__thumbnail {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+
+    @include flex-box(column, 0.75rem, stretch, null);
+    height: auto;
+    padding: 1rem;
+
+    &__info {
+      @include flex-box(column, 0, stretch, center);
+    }
+
+    &__progress {
+      width: fit-content;
+      margin: 0;
+    }
+
+    &__progress-bar {
+      position: relative;
+      bottom: 0;
+      margin-top: 0.5rem;
+    }
+
+    &__controls {
+      @include flex-box(row, 0, center, center);
+    }
+    .podcast-audio-player__button--full-screen {
+      @include respond(sm) {
+        display: none;
+      }
+    }
+    &__button {
+      padding: 0.5rem;
+    }
+  }
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #ccc;
+  border-top: 3px solid white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.shimmer-circle {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  background: #66666680;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      rgba(102, 102, 102, 0) 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(102, 102, 102, 0) 100%
+    );
+    animation: shimmer-move 1.2s infinite ease-in-out;
+  }
+}
+
+@keyframes shimmer-move {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}

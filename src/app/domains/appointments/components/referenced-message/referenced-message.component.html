@@ -1,0 +1,86 @@
+<section class="referenced-message" role="log" aria-label="Referenced chat message" (click)="onReferenceClick(item.id)"
+  [class.referenced-message--user]="item?.senderId === userInfo?.id"
+  [class.referenced-message--doctor]="item?.senderId !== userInfo?.id">
+  @if(item){
+  <ul class="referenced-message__list">
+    <li class="referenced-message__item" [class.referenced-message__item--user]="item.senderId === userInfo?.id">
+      <div class="referenced-message__message-group">
+        <div class="referenced-message__bubble-area">
+          <div class="referenced-message__content-wrapper">
+            <div class="referenced-message__content">
+              @switch (item.msgType) {
+              @case (MeetingChatItemsTypes.TEXT) {
+              <app-chat-message-text [message]="item.message" [allowShortTexts]="true" [isExpanded]="true" />
+              }
+              @case (MeetingChatItemsTypes.DOCTOR) {
+              <app-chat-doctor-card [item]="parseJson(item.message) ?? null" [allowShortTexts]="true"
+                [hideButtonAction]="true"></app-chat-doctor-card>
+              }
+              @case (MeetingChatItemsTypes.RECOMMEND) {
+              <app-chat-doctor-card [item]="parseJson(item.message) ?? null" [allowShortTexts]="true"
+                [hideButtonAction]="true"></app-chat-doctor-card>
+              }
+              @case (MeetingChatItemsTypes.TRANSFERRED) {
+              <app-chat-doctor-card [item]="parseJson(item.message) ?? null" [allowShortTexts]="true"
+                [hideButtonAction]="true"></app-chat-doctor-card>
+              }
+              @case (MeetingChatItemsTypes.VIEW_PDF|| MeetingChatItemsTypes.VIEW_PDF_ALT) {
+              @if (getDownloadableFile(item); as fileToView) {
+              <app-file-viewer [file]="fileToView" [allowShortTexts]="true" [hideButtonAction]="true"></app-file-viewer>
+              }
+              }
+              @case (MeetingChatItemsTypes.DOCUMENT) {
+              @if (getDownloadableFile(item); as fileToView) {
+              <app-file-viewer [file]="fileToView" [allowShortTexts]="true" [hideButtonAction]="true"></app-file-viewer>
+              }
+              }
+              @case (MeetingChatItemsTypes.QUIZ) {
+              <app-card [testDetails]="parseJson(item.message) ?? null" [allowShortTexts]="true"
+                [hideButtonAction]="true"></app-card>
+              }
+              @case (MeetingChatItemsTypes.MENTAL_HEALTH) {
+              <ng-container *ngIf="item?.message as message">
+                <app-mental-health-scale-card *ngIf="isMentalHealthScaleMessage(parseJson(message))" [item]="message"
+                  [allowShortTexts]="true" [hideButtonAction]="true" />
+              </ng-container>
+              }
+              @case (MeetingChatItemsTypes.IMAGE) {
+              <app-chat-message-image [imageUrl]="item.message ?? null" [replay]="true"></app-chat-message-image>
+              }
+              @case (MeetingChatItemsTypes.VIDEO) {
+              <app-chat-message-video [videoUrl]="item.message ?? null" [replay]="true"></app-chat-message-video>
+              }
+              @case (MeetingChatItemsTypes.COUPON) {
+              <ng-container *ngIf="item?.message as message">
+                <app-discount-card-for-meeting-chat *ngIf="isDoctorCopounMessage(parseJson(message))" [item]="message"
+                  [allowShortTexts]="true" />
+              </ng-container>
+              }
+              @case (MeetingChatItemsTypes.PODCAST) {
+              <app-podcast-bot [podcastDetails]="parseJson(item.message) ?? null" [allowShortTexts]="true"
+                [hideButtonAction]="true"></app-podcast-bot>
+              }
+              @case (MeetingChatItemsTypes.ARTICLE) {
+              <app-article-card [hideFavouriteAction]="true" [type]="cardTypes.SUMMARY"
+                [item]="parseJson(item.message) ?? null" [allowShortTexts]="true" [hideButtonAction]="true" />
+              }
+              @case (MeetingChatItemsTypes.FILE) {
+              @if (getDownloadableFile(item); as fileToView) {
+              <app-file-viewer [file]="fileToView" [allowShortTexts]="true" [hideButtonAction]="true"></app-file-viewer>
+              }
+              }
+              @case (MeetingChatItemsTypes.VOICE) {
+              <app-chat-message-voice [audioSrc]="item.message ?? null" [replay]="true"></app-chat-message-voice>
+              }
+              @case (MeetingChatItemsTypes.AUDIO) {
+              <app-chat-message-voice [audioSrc]="item.message ?? null" [replay]="true"></app-chat-message-voice>
+              }
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  }
+</section>

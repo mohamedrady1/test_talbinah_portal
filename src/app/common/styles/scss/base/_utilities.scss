@@ -1,0 +1,50 @@
+/* Text alignment */
+@use "../abstracts/mixins" as *;
+
+.u-center-text {
+  text-align: center !important;
+}
+
+/* Margin-bottom styles */
+.u-margin-bottom-small {
+  margin-bottom: 1.5rem !important;
+}
+
+.u-margin-bottom-medium {
+  margin-bottom: 4rem !important;
+
+  @include respond(md) {
+    // Adjust for medium screens (max-width: 900px)
+    margin-bottom: 3rem !important;
+  }
+}
+
+.u-margin-bottom-big {
+  margin-bottom: 8rem !important;
+
+  @include respond(md) {
+    // Adjust for medium screens (max-width: 900px)
+    margin-bottom: 5rem !important;
+  }
+}
+
+/* Margin-top styles */
+.u-margin-top-big {
+  margin-top: 8rem !important;
+}
+
+.u-margin-top-huge {
+  margin-top: 10rem !important;
+}
+
+.scaleX-rtl {
+  &:dir(rtl) {
+    transform: scaleX(-1) !important;
+  }
+}
+
+.scaleX-ltr {
+  &:dir(ltr) {
+    transform: scaleX(-1) !important;
+  }
+}

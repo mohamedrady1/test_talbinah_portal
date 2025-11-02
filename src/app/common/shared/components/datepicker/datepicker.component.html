@@ -1,0 +1,64 @@
+<div class="dp" [class.dp--disabled]="disabled()">
+  <ng-container *ngIf="mode() === 'dropdown'">
+    <button type="button" class="dp__input" (click)="toggleDropdown()">
+      <span class="dp__input-text">
+        {{ value() ? value()!.toLocaleDateString(locale()) : 'Select date' }}
+      </span>
+      <svg class="dp__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+      </svg>
+    </button>
+
+    <div class="dp__popup" *ngIf="isOpen()" [class.dp__popup--above]="position() === 'above'">
+      <ng-container *ngTemplateOutlet="calendarTpl"></ng-container>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="mode() === 'inline'">
+    <ng-container *ngTemplateOutlet="calendarTpl"></ng-container>
+  </ng-container>
+
+  <ng-template #calendarTpl>
+    <div class="dp__header">
+      <button type="button" class="dp__nav" (click)="prevMonth()">‹</button>
+      <div class="dp__title" (click)="openMonthPicker()">{{ monthLabel(viewYear(), viewMonth()) }}</div>
+      <button type="button" class="dp__nav" (click)="nextMonth()">›</button>
+    </div>
+
+    <div class="dp__weekdays">
+      <div>Su</div>
+      <div>Mo</div>
+      <div>Tu</div>
+      <div>We</div>
+      <div>Th</div>
+      <div>Fr</div>
+      <div>Sa</div>
+    </div>
+
+    <div class="dp__grid" role="grid">
+      <div *ngFor="let row of weeks()" class="dp__row" role="row">
+        <button *ngFor="let day of row" type="button" class="dp__day"
+          [class.dp__day--other-month]="day.getMonth() !== viewMonth()" [class.dp__day--selected]="isSelected(day)"
+          [class.dp__day--in-range]="isInRange(day)" [class.dp__day--today]="isToday(day)"
+          [class.dp__day--disabled]="isDisabledDate(day)" (click)="selectDate(day)"
+          [attr.aria-selected]="isSelected(day)" [disabled]="isDisabledDate(day)">
+          {{ day.getDate() }}
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</div>
+
+<!-- Inline single date -->
+<!-- <app-datepicker [value]="selectedDate" (valueChange)="selectedDate = $event" mode="inline"></app-datepicker> -->
+
+<!-- Dropdown single date -->
+<!-- <app-datepicker [value]="selectedDate" (valueChange)="selectedDate = $event" mode="dropdown"></app-datepicker> -->
+
+<!-- Dropdown range -->
+<!-- <app-datepicker [range]="true" [value]="selectedDate" (valueChange)="selectedDate = $event"
+  mode="dropdown"></app-datepicker> -->

@@ -1,0 +1,17 @@
+<main class="chat-layout" role="main">
+  <header class="chat-layout__header">
+    <app-site-header></app-site-header>
+  </header>
+  <section class="chat-layout__container" #card>
+    <div [attr.aria-label]="headerConfig.title + ' header'">
+      <app-page-layout-header [config]="headerConfig" [card]="cardRef"
+        (closeRequested)="onCloseRequested()"></app-page-layout-header>
+    </div>
+    <div class="chat-layout__cards" appAutoExactHeight [enabled]="!isFullscreen()" role="region"
+      aria-label="Chat and appointments">
+      <div class="chat-layout__main-content">
+        <app-book-urgent-appointment />
+      </div>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,40 @@
+<div class="search-waiting-doctor">
+  <div class="search-waiting-doctor__content">
+    <div class="search-waiting-doctor__image-spinner-container" role="status" aria-live="polite">
+      <img src="images/icons/loading-waiting-icon.png" alt="{{ 'doctor_search_in_progress' | translateApi }}"
+        width="100" height="100" loading="lazy" />
+    </div>
+
+    <div class="search-waiting-doctor__titles">
+      <h3 class="search-waiting-doctor__title">
+        {{ 'waiting_doctor_modal_wait_title' | translateApi }}
+      </h3>
+      <p class="search-waiting-doctor__subtitle">
+        @if(!isInitialLoading()) {
+        {{'no_doctor_available_notice'|translateApi}} {{remainingTimeMinutes()}} {{':'}}
+        {{padZero(remainingTimeSeconds())}} {{'minute' | translateApi}}
+        } @else {
+        <span class="cancel-dots" aria-live="polite" aria-label="loading">
+          {{ 'waiting_doctor_modal_warning_label' |translateApi}} <span class="dot-loader"></span>
+          {{'minute' | translateApi}}
+        </span>
+        }
+      </p>
+    </div>
+  </div>
+
+  <div class="search-waiting-doctor__actions">
+    <button type="button" class="btn btn--outline" (click)="cancelRequest()" [attr.aria-label]="'cancel' | translateApi"
+      [disabled]="isCancelling()">
+      <ng-container *ngIf="!isCancelling(); else loading">
+        <span class="btn__label">{{ 'cancel_search' | translateApi }}</span>
+      </ng-container>
+      <ng-template #loading>
+        <div class="search-waiting-doctor__actions__loading" aria-label="Submit in progress">
+          {{ 'in_progress' | translateApi }}
+          <span class="dot-loader"></span>
+        </div>
+      </ng-template>
+    </button>
+  </div>
+</div>

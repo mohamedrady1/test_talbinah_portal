@@ -1,0 +1,33 @@
+#add-new-subscription-card {
+    p {
+        color: var(--text-400);
+        font-size: 0.875rem;
+        font-weight: 600;
+        border-top-left-radius: 0.75rem;
+        border-top-right-radius: 0.75rem;
+        background: var(--Dark-WHITE, #fff);
+        display: flex;
+        padding: 0.75rem;
+        padding-bottom: 0;
+        flex-direction: column;
+    }
+
+    ::ng-deep {
+        .form__grid {
+            background: var(--Dark-WHITE, #fff);
+            display: flex;
+            border-bottom-left-radius: 0.75rem;
+            border-bottom-right-radius: 0.75rem;
+            padding: 0.75rem;
+            flex-direction: column;
+        }
+        .form__actions {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            button {
+                width: fit-content;
+            }
+        }
+    }
+}

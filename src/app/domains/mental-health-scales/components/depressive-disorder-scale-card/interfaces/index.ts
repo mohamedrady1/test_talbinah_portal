@@ -1,0 +1,1 @@
+export * from './depressive-disorder-scale-card.model';

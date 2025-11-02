@@ -1,0 +1,123 @@
+@use "../abstracts/mixins" as *;
+.row {
+    max-width: var(--grid-width);
+    margin: 0 auto;
+
+    &:not(:last-child) {
+        margin-bottom: var(--gutter-vertical);
+
+        @include respond(md) {
+            margin-bottom: var(--gutter-vertical-small);
+        }
+    }
+
+    @include respond(md) {
+        max-width: 50rem;
+        padding: 0 3rem;
+    }
+
+    @include clearfix;
+
+    [class^="col-"] {
+        float: left;
+
+        &:not(:last-child) {
+            margin-right: var(--gutter-horizontal);
+
+            @include respond(md) {
+                margin-right: 0;
+                margin-bottom: var(--gutter-vertical-small);
+            }
+        }
+
+        @include respond(md) {
+            width: 100% !important;
+        }
+    }
+
+    .col-1-of-2 {
+        width: calc((100% - #{var(--gutter-horizontal)}) / 2);
+    }
+
+    .col-1-of-3 {
+        width: calc((100% - 2 * #{var(--gutter-horizontal)}) / 3);
+    }
+
+    .col-2-of-3 {
+        width: calc(2 * ((100% - 2 * #{var(--gutter-horizontal)}) / 3) + #{var(--gutter-horizontal)});
+    }
+
+    .col-1-of-4 {
+        width: calc((100% - 3 * #{var(--gutter-horizontal)}) / 4);
+    }
+
+    .col-2-of-4 {
+        width: calc(2 * ((100% - 3 * #{var(--gutter-horizontal)}) / 4) + #{var(--gutter-horizontal)});
+    }
+
+    .col-3-of-4 {
+        width: calc(3 * ((100% - 3 * #{var(--gutter-horizontal)}) / 4) + 2 * #{var(--gutter-horizontal)});
+    }
+}
+
+.header {
+    height: 85vh;
+    background-image: linear-gradient(to right bottom, rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)),
+        url(https://images.pexels.com/photos/30018774/pexels-photo-30018774/free-photo-of-festive-celebration-cake-with-candles-lit.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+    background-size: cover;
+    background-position: top;
+    position: relative;
+
+    @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+        // If the browser supports the clip-path property (polygon shape), the following styles are applied:
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+        height: 95vh;
+    }
+
+    @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em),
+        only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+        only screen and (min-width: 125em) {
+        background-image: linear-gradient(
+                to right bottom,
+                rgba($color-primary-light, 0.8),
+                rgba($color-primary-dark, 0.8)
+            ),
+            url(https://images.pexels.com/photos/29696169/pexels-photo-29696169/free-photo-of-minimalist-living-room-with-indoor-plants.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+    }
+
+    // @include respond(sm) {
+    //     -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    //     clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    // }
+
+    &__logo-box {
+        position: absolute;
+        top: 4rem;
+        left: 4rem;
+    }
+
+    &__logo {
+        height: 3.5rem;
+    }
+
+    &__text-box {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+}
+
+//Example
+// <header class="header">
+//     <div class="header__logo-box">
+//         <img src="https://images.pexels.com/photos/29696169/pexels-photo-29696169/free-photo-of-minimalist-living-room-with-indoor-plants.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Logo" class="header__logo"> <!-- صورة الشعار -->
+//     </div>
+
+//     <div class="header__text-box">
+//         <h1>Welcome to Our Website</h1>
+//         <p>Your tagline or description goes here.</p>
+//     </div>
+// </header>

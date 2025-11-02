@@ -1,0 +1,16 @@
+.explore-reels-card {
+    border-radius: var(--Radius-8, 0.5rem);
+    background: var(--grid-2, linear-gradient(180deg, #b8efe9 0%, #aecee7 100%));
+    display: flex;
+    padding: var(--Radius-8, 0.5rem) 2rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    cursor: pointer;
+    p {
+        color: var(--Primary-primary, #0e39b6);
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+}

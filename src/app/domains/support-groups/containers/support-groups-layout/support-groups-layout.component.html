@@ -1,0 +1,90 @@
+@if (isBrowser) {
+<div class="support-groups-layout">
+  <div class="support-groups-layout__header">
+    <app-site-header></app-site-header>
+  </div>
+
+  <div class="support-groups-layout__main" #card>
+    <app-page-layout-header [config]="headerConfig" [card]="cardRef" [disablePadding]="true"
+      (closeRequested)="goHome()"></app-page-layout-header>
+
+    <div class="support-groups-layout__wrapper" appAutoExactHeight [enabled]="!isFullscreen" heightMode="max-height">
+      <!-- Tabs Container - Desktop & Mobile -->
+      <div class="support-groups-layout__tabs-container">
+        <div class="support-groups-layout__tabs">
+          <app-support-groups-tabs></app-support-groups-tabs>
+        </div>
+
+        <!-- Mobile Segment Control - Below tabs -->
+        <div class="support-groups-layout__segment">
+          <app-segment-control [options]="segmentOptions" [selectedId]="selectedSegmentId()"
+            (selectionChanged)="onSegmentChanged($event)">
+          </app-segment-control>
+        </div>
+      </div>
+
+      <div class="support-groups-layout__content">
+        <div class="support-groups-layout__left-panel" [class.hidden]="!showAllGroups()">
+          <div class="support-groups-layout__group-cards">
+            <app-card-header [config]="supportGroupsCardsHeader" (allClicked)="openAllSupportGroups('AllGroups')">
+            </app-card-header>
+            <div class="support-groups-layout__group-cards--list"
+              [class.noData]="_SeminarsFacade.allSeminars()?.data?.length??0 == 0">
+              @if (_SeminarsFacade.isLoadingAllSeminars() || _SeminarsFacade.isFilteringAllSeminars()) {
+              @for (item of [1,2]; track $index) {
+              <app-group-card-shimmer></app-group-card-shimmer>
+              }
+              } @else if (_SeminarsFacade.allSeminarsErrorMessage() &&!_SeminarsFacade.allSeminarsStatus()) {
+              <app-error-state-card [config]="allProgramsErrorState()"></app-error-state-card>
+              } @else if (!_SeminarsFacade.allSeminars()?.data?.length) {
+              <app-empty-state-card [config]="emptyState" class="w-100"></app-empty-state-card>
+              } @else {
+              @for (seminar of paginatedSeminars(); track seminar.id) {
+              <app-group-card [type]="cardTypes.DETAILS" (onClick)="openSeminarSubscription(seminar,null)"
+                [item]="seminar"></app-group-card>
+              }
+              }
+
+              <!-- Local Pagination -->
+              @if (_SeminarsFacade.allSeminars()?.data?.length && localPaginationConfig().totalPages > 1) {
+              <div class="support-groups-layout__pagination">
+                <app-pagination-listing [paginationConfig]="localPaginationConfig()" />
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+        <div class="support-groups-layout__my-groups" [class.hidden]="!showMyGroups()">
+          <app-card-header [config]="mySeminarsHeader" [total]="totalMySeminarsItems()" [count]="1"
+            (allClicked)="openAllSupportGroups('myGroups')"></app-card-header>
+          <div class="support-groups-layout__my-groups--list">
+            @if (token()) {
+            @if (_SeminarsFacade.isLoadingMySeminars() || _SeminarsFacade.isFilteringMySeminars()) {
+            @for (item of [1,2]; track $index) {
+            <app-group-card-shimmer></app-group-card-shimmer>
+            }
+            {{_SeminarsFacade.mySeminars()?.data?.length}}
+            }
+            @else if (_SeminarsFacade.mySeminarsErrorMessage() &&!_SeminarsFacade.mySeminarsStatus()) {
+            <app-error-state-card [config]="myProgramsErrorState()"></app-error-state-card>
+            }
+            @else if (_SeminarsFacade.mySeminars()?.data?.length??0 > 0) {
+            @for (seminar of _SeminarsFacade.mySeminars()?.data?.slice(0,6); track seminar.id) {
+            <app-group-card [type]="cardTypes.SUMMARY" (onClick)="openSeminarSubscription(seminar,null)"
+              [item]="seminar"></app-group-card>
+            }
+            }
+            @else {
+            <app-empty-state-card [config]="emptyState" class="w-100"></app-empty-state-card>
+            }
+            }
+            @else {
+            <app-compelete-data-and-register-now [isEmptyState]="true"></app-compelete-data-and-register-now>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+}

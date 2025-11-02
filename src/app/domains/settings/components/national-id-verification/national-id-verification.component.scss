@@ -1,0 +1,254 @@
+@use "./../../../../common/styles/scss/abstracts/general-form-wrapper.mixins" as form;
+@use "./../../../../common/styles/scss/abstracts/mixins" as *;
+@use "./../../../../common/styles/scss/buttons/button.mixins" as btn;
+
+.national-id-verification {
+  display: flex;
+  padding: 0 0.75rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  align-self: stretch;
+
+  &__container {
+    width: 100%;
+  }
+
+  .general-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    &__groups {
+      display: grid; // Change to grid layout
+      grid-template-columns: repeat(1, 1fr); // 1-column grid
+      gap: 0.75rem;
+
+      padding: 0.75rem;
+      border-radius: 0.75rem;
+      background: var(--Dark-WHITE, #fff);
+    }
+
+    &__field {
+      @include form.general-form-wrapper-field;
+    }
+
+    &__label-group {
+      @include form.general-form-wrapper-label-group;
+    }
+
+    &__label {
+      @include form.general-form-wrapper-label;
+    }
+
+    &__required {
+      @include form.general-form-wrapper-required;
+    }
+
+    &__error-message {
+      @include form.general-form-wrapper-error;
+    }
+
+    .form-field {
+      @include form.general-form-field;
+    }
+
+    &__actions {
+      @include form.general-form-wrapper-actions;
+      justify-content: end;
+
+      .btn {
+        width: auto;
+      }
+    }
+
+    &__loading {
+      display: inline-block;
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  .custom-input-wrapper {
+    display: flex;
+    padding: 0rem 16px;
+    align-items: center;
+    gap: 0.5rem;
+    height: 3.125rem;
+    color: #a3adbb;
+    font-size: 0.875rem;
+    border-radius: 0.75rem;
+    color: black;
+    overflow: hidden;
+    border: 1px solid #eeeeee;
+
+    &.p-invalid {
+      border: 1px solid red;
+    }
+
+    &__icon {
+      display: flex;
+      width: 1.25rem;
+      height: 1.25rem;
+      justify-content: center;
+      align-items: center;
+    }
+
+    input {
+      width: 100%;
+
+      &::placeholder {
+        color: #a3adbb !important;
+
+        font-size: 0.875rem !important;
+        font-weight: 500 !important;
+      }
+    }
+
+    &__input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      background-color: transparent;
+
+      &::placeholder {
+        color: #a3adbb;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+    }
+
+    .disbaled {
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    &--with-icon {
+      gap: 0.5rem;
+    }
+
+    &--icon-start {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+
+      .custom-input-wrapper__icon {
+        order: 0;
+      }
+    }
+
+    &--icon-end {
+      flex-direction: row-reverse;
+
+      .custom-input-wrapper__icon {
+        order: 1;
+      }
+    }
+
+    .password-toggle-btn {
+      @include respond(sm) {
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
+
+  // Styles for API response status messages
+  &__api-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: var(--border-radius-medium, 8px); // Example variable
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    width: 100%;
+
+    &--success {
+      background-color: var(--background-success-light, #e6ffe6); // Example variable
+      color: var(--text-color-success, #28a745); // Example variable
+      border: 1px solid var(--border-color-success, #28a745); // Example variable
+    }
+
+    &--error {
+      background-color: var(--background-error-light, #ffe6e6); // Example variable
+      color: var(--text-color-error, #dc3545); // Example variable
+      border: 1px solid var(--border-color-error, #dc3545); // Example variable
+    }
+
+    &--unverified {
+      background-color: var(--background-warning-light, #fffbe6); // Example variable
+      color: var(--text-color-warning, #ffc107); // Example variable
+      border: 1px solid var(--border-color-warning, #ffc107); // Example variable
+    }
+  }
+
+  &__api-status-icon {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  &__api-status-message {
+    flex-grow: 1;
+  }
+}
+
+// Keyframes for the spinner animation
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Dots loader - Use this only if you need a specific loader separate from the main button spinner.
+// Otherwise, general-form-wrapper__loading should be sufficient.
+.dots-loader {
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 0.1875rem;
+  z-index: 10;
+
+  span {
+    width: 0.375rem;
+    height: 0.375rem;
+    background-color: var(--loader-dot-color, rgba(128, 128, 128, 0.486)); // Example variable
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: blink 1.4s infinite;
+
+    &:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+  }
+}
+
+@keyframes blink {
+  0%,
+  80%,
+  100% {
+    opacity: 0.3;
+  }
+
+  40% {
+    opacity: 1;
+  }
+}

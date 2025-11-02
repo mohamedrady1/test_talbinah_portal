@@ -1,0 +1,54 @@
+<section class="select-appointment-type" aria-labelledby="appointment-heading">
+  @if (isLoading()) {
+  <div class="loading-skeleton">
+    @for (item of [1,2]; track $index) {
+    <div class="skeleton-card">
+      <div class="skeleton-content">
+        <div class="skeleton-text">
+          <div class="skeleton-title"></div>
+          <div class="skeleton-subtitle"></div>
+        </div>
+        <div class="skeleton-image"></div>
+      </div>
+      <div class="skeleton-button"></div>
+    </div>
+    }
+  </div>
+  } @else {
+  @if (error()) {
+  <div class="error">
+    <p>{{ error() }}</p>
+    <button (click)="retry()">
+      {{ 'retry' | translateApi }}
+    </button>
+  </div>
+  } @else {
+  <div class="select-appointment-type__list">
+    @for (type of selections(); track type.id) {
+    <article class="select-appointment-type__card" [style.background]="type.bgColor"
+      [style.borderColor]="type.borderColor" tabindex="0" role="button" [attr.aria-label]="type.name">
+      <div class="select-appointment-type__card--content">
+        <div>
+          <h3 class="select-appointment-type__card-title" [style.color]="type.titleColor">
+            {{ type.name }}
+          </h3>
+          <p class="select-appointment-type__card-subtitle">
+            {{ type.description }}
+          </p>
+        </div>
+        <img class="select-appointment-type__icon" [src]="type.image" [alt]="type.name + ' icon'" loading="lazy"
+          (error)="onImageError($event)" />
+      </div>
+
+      <div class="select-appointment-type__card--actions">
+        <button class="btn btn--alt" (click)="onSelect(type)" (keyup.enter)="onSelect(type)">
+          {{ type?.action_text || ('follow' | translateApi) }}
+        </button>
+      </div>
+    </article>
+
+    }
+  </div>
+  }
+  }
+</section>

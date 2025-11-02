@@ -1,0 +1,100 @@
+<div class="book-appointment book-appointment--skeleton">
+    <div class="book-appointment__container">
+        <div class="book-appointment__right-side">
+            <div class="doctor-card doctor-card--skeleton">
+                <figure class="doctor-card__image-container skeleton-box"></figure>
+                <div class="doctor-card__content">
+                    <div class="doctor-card__content--header">
+                        <div class="doctor-card__content--header--info">
+                            <p class="doctor-card__content--header--info--name skeleton-text skeleton-text--medium"></p>
+                            <div class="doctor-card__content--header--info--actions">
+                                <div class="skeleton-box skeleton-box--small-circle"></div>
+                                <div class="skeleton-box skeleton-box--small-circle"></div>
+                            </div>
+                        </div>
+                        <div class="doctor-card__content--header--description">
+                            <div class="skeleton-box skeleton-box--icon"></div>
+                            <p class="skeleton-text skeleton-text--small"></p>
+                        </div>
+                    </div>
+                    <div class="doctor-card__content--expertise">
+                        @for (i of [1, 2]; track i) {
+                        <span class="skeleton-text skeleton-text--tag"></span>
+                        }
+                    </div>
+                    <div class="doctor-card__content--classification">
+                        <div class="skeleton-box skeleton-box--icon"></div>
+                        <p class="skeleton-text skeleton-text--small"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="book-appointment--information">
+                @for (i of [1, 2, 3]; track i) {
+                <div class="doctor-details doctor-details--skeleton">
+                    <div class="doctor-details--icon skeleton-box skeleton-box--icon-large"></div>
+                    <div class="doctor-details--content">
+                        <p class="doctor-details--content--title skeleton-text skeleton-text--small"></p>
+                        <p class="doctor-details--content--value skeleton-text skeleton-text--medium"></p>
+                    </div>
+                </div>
+                }
+            </div>
+
+            <div class="book-appointment--details">
+                <div class="tabs tabs--skeleton">
+                    @for (i of [1, 2, 3, 4, 5]; track i) {
+                    <div class="tab skeleton-text skeleton-text--tab"></div>
+                    }
+                </div>
+
+                <div class="tab-content">
+                    @for (i of [1, 2, 3,4,5]; track i) {
+                    <div class="skeleton-text skeleton-text--paragraph"></div>
+                    }
+                    <div class="skeleton-text skeleton-text--paragraph skeleton-text--short"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="book-appointment__left-side">
+            <div class="book-appointment__left-side--new-reservation" style="height: 100%;">
+                <div class="reservation-form reservation-form--skeleton">
+                    <div class="form__groups">
+                        <div class="form__group">
+                            <label class="form__label skeleton-text skeleton-text--label"></label>
+                            <div class="form__shimmer">
+                                @for (i of [1, 2, 3]; track i) {
+                                <div class="form__shimmer-box"></div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="form__group">
+                            <label class="form__label skeleton-text skeleton-text--label"></label>
+                            <div class="form__shimmer">
+                                @for (i of [1, 2, 3]; track i) {
+                                <div class="form__shimmer-box"></div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="form__group">
+                            <label class="form__label skeleton-text skeleton-text--label"></label>
+                            <div class="custom-input custom-input--skeleton skeleton-box"></div>
+                        </div>
+
+                        <div class="form__group">
+                            <label class="form__label skeleton-text skeleton-text--label"></label>
+                            <div class="form__shimmer">
+                                @for (i of [1, 2, 3, 4,5,6]; track i) {
+                                <div class="form__shimmer-box"></div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

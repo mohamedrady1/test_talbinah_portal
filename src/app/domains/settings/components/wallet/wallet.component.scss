@@ -1,0 +1,111 @@
+.wallet-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 0.75rem 1rem;
+}
+
+.wallet-card {
+    &__list-container {
+        margin-inline-end: 0.5rem;
+    }
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    background: var(--Dark-WHITE, #fff);
+    padding: 1.5rem 1.25rem;
+    box-shadow: 0 2px 8px 0 rgba(14, 57, 182, 0.04);
+    background-image: url("../../../../../../public/images/settings/wallet/wallet-bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    &__points-group {
+        display: flex;
+        align-items: center;
+    }
+    &__list-container {
+        display: flex;
+        padding: 0.75rem;
+        flex-direction: column;
+        gap: 0.75rem;
+        border-radius: 1rem;
+        background: var(--Dark-WHITE, #fff);
+        margin-inline-end: 0.5rem;
+    }
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        &-search {
+            width: fit-content;
+            align-self: flex-end;
+        }
+    }
+    &_list {
+        display: flex;
+        padding-bottom: 1rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+}
+
+.wallet-card__info {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    align-self: stretch;
+}
+
+.wallet-card__title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-self: stretch;
+    align-items: flex-start;
+}
+
+.wallet-card__title {
+    color: var(--Dark-DARK, #1d1f1f);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.wallet-card__points {
+    color: var(--Primary-primary, #0e39b6);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.wallet-card__svg {
+    margin-top: 0.5rem;
+}
+
+.wallet-card__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.75rem;
+    background: var(--Primary-primary, #0e39b6);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: fit-content;
+    &:hover,
+    &:focus {
+        background: #09329e;
+    }
+
+    svg {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}

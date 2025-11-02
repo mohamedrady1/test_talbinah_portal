@@ -1,0 +1,39 @@
+<div class="global-rate-card">
+  <figure class="global-rate-card__thumbnail">
+    <img class="global-rate-card__thumbnail-image" [src]="item?.user?.image" width="40" height="40" loading="lazy"
+      [alt]="item?.user?.full_name ? item?.user?.full_name + ' profile picture' : 'user profile picture'"
+      (error)="onImageError($event, item?.user?.gender ?? null)" />
+  </figure>
+
+  <div class="global-rate-card__info">
+    <div class="global-rate-card__info-header">
+      <h4 class="global-rate-card__name">
+        {{ userInitials }}
+      </h4>
+      <div class="global-rate-card__stars">
+        @for (item of [1, 2, 3, 4]; track $index) {
+        <span class="global-rate-card__star global-rate-card__star--active">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
+            <path
+              d="M8.00917 2.54754L9.03584 4.60087C9.17584 4.88671 9.54917 5.16087 9.86417 5.21337L11.725 5.52254C12.915 5.72087 13.195 6.58421 12.3375 7.43587L10.8908 8.88254C10.6458 9.12754 10.5117 9.60004 10.5875 9.93837L11.0017 11.7292C11.3283 13.1467 10.5758 13.695 9.32167 12.9542L7.57751 11.9217C7.26251 11.735 6.74334 11.735 6.42251 11.9217L4.67834 12.9542C3.43001 13.695 2.67167 13.1409 2.99834 11.7292L3.41251 9.93837C3.48834 9.60004 3.35417 9.12754 3.10917 8.88254L1.66251 7.43587C0.810841 6.58421 1.08501 5.72087 2.27501 5.52254L4.13584 5.21337C4.44501 5.16087 4.81834 4.88671 4.95834 4.60087L5.98501 2.54754C6.54501 1.43337 7.45501 1.43337 8.00917 2.54754Z"
+              fill="#FFAF44" />
+          </svg>
+        </span>
+        }
+        <span class="global-rate-card__star global-rate-card__star--inactive">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
+            <path
+              d="M8.00917 2.54754L9.03584 4.60087C9.17584 4.88671 9.54917 5.16087 9.86417 5.21337L11.725 5.52254C12.915 5.72087 13.195 6.58421 12.3375 7.43587L10.8908 8.88254C10.6458 9.12754 10.5117 9.60004 10.5875 9.93837L11.0017 11.7292C11.3283 13.1467 10.5758 13.695 9.32167 12.9542L7.57751 11.9217C7.26251 11.735 6.74334 11.735 6.42251 11.9217L4.67834 12.9542C3.43001 13.695 2.67167 13.1409 2.99834 11.7292L3.41251 9.93837C3.48834 9.60004 3.35417 9.12754 3.10917 8.88254L1.66251 7.43587C0.810841 6.58421 1.08501 5.72087 2.27501 5.52254L4.13584 5.21337C4.44501 5.16087 4.81834 4.88671 4.95834 4.60087L5.98501 2.54754C6.54501 1.43337 7.45501 1.43337 8.00917 2.54754Z"
+              fill="#A5A5A5" />
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="global-rate-card__description">
+      <p class="global-rate-card__description-text">
+        {{ item?.description }}
+      </p>
+    </div>
+  </div>
+</div>

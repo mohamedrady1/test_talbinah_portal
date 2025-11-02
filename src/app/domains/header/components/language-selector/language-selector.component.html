@@ -1,0 +1,17 @@
+@if (isDropdown()) {
+<select class="language-dropdown" [value]="selectedLanguage()" (change)="onSelectLanguage($event)">
+  @for (lang of availableLanguages(); track lang.code) {
+  <option [ngValue]="lang.code">
+    {{ lang.nativeName }} ({{ lang.name }})
+  </option>
+  }
+</select>
+} @else {
+<div class="language-toggle">
+  <button (click)="onSelectLanguage(toggleLanguage())">
+    <div class="language-toggle__icon">
+      <img [src]="'images/layout/flags/' + toggleLanguage() + '.png'" [alt]="toggleLanguage()" width="24" height="24" />
+    </div>
+  </button>
+</div>
+}

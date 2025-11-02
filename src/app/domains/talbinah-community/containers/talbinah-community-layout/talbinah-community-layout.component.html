@@ -1,0 +1,31 @@
+<main class="chat-layout" role="main">
+  <header class="chat-layout__header">
+    <app-site-header></app-site-header>
+  </header>
+  <section class="chat-layout__container" #card>
+    <div [attr.aria-label]="headerConfig.title + ' header'">
+      <app-page-layout-header [config]="headerConfig" [card]="cardRef" [disablePadding]="true"
+        (closeRequested)="onCloseRequested()"></app-page-layout-header>
+    </div>
+    <div class="chat-layout__cards" appAutoExactHeight [enabled]="!isFullscreen()" role="region"
+      aria-label="Chat and appointments">
+      @if (userIdentityProfileLoaded() && errorMessageUserIdentity() && !isLoadingUserIdentity()) {
+      <div class="error-state">
+        <app-error-state-card [config]="userIdentityProfileErrorState()!"></app-error-state-card>
+      </div>
+      } @else if (userIdentityProfileLoaded() && (isUserIdentityProfile() || !isLoggedIn())) {
+      <app-psychological-society-main-page [userIdentityProfileData]="userIdentityProfileDataSignal"
+        (userIdentityUpdated)="onUserIdentityUpdated($event)"></app-psychological-society-main-page>
+      } @else {
+      @if (userIdentityProfileLoaded() && isLoggedIn()) {
+      <app-my-psychological-society></app-my-psychological-society>
+      } @else {
+      <div class="loading-state">
+        <app-main-page-shemmer></app-main-page-shemmer>
+      </div>
+      }
+      }
+
+    </div>
+  </section>
+</main>

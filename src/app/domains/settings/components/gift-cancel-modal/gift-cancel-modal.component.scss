@@ -1,0 +1,116 @@
+@use "./../../../../common/styles/scss/buttons/button.mixins" as btn;
+@use "./../../../../common/styles/scss/abstracts/mixins" as *;
+
+.gift-cancel-modal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    gap: 1rem;
+
+    @include respond(sm) {
+        padding: 0.5rem;
+    }
+}
+.gift-cancel-modal {
+    border-radius: 0.75rem;
+    background: var(--Dark-WHITE, #fff);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    overflow: hidden;
+    width: 100%;
+
+    @include respond(sm) {
+        background: transparent;
+        padding: 0.5rem;
+    }
+    &__img {
+        width: 6.4375rem;
+        height: 9.5625rem;
+        object-fit: contain;
+    }
+    &__title {
+        color: var(--text-400, #0f0f0f);
+        text-align: center;
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+    &__desc {
+        color: var(--text-300, #47586e);
+        text-align: center;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+    &__cancel {
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        border-radius: 0.75rem;
+        transition:
+            background 0.3s ease,
+            color 0.3s ease;
+        display: flex;
+        height: 2.75rem;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        width: 100%;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+        color: var(--Dark-WHITE, #fff);
+        font-size: 0.75rem;
+        font-weight: 500;
+        width: fit-content;
+        background: var(--Sacondry-Color-primary, #b80924);
+
+        &.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+    }
+    &__close {
+        margin-top: 0.5rem;
+        background: none;
+        border: none;
+        color: var(--text-300, #47586e);
+        font-size: 0.75rem;
+        cursor: pointer;
+    }
+    &__loading {
+        display: flex;
+        align-items: center;
+    }
+
+    .dot-loader::after {
+        content: "";
+        animation: dots 1.5s steps(4, end) infinite;
+        white-space: pre;
+    }
+
+    @keyframes dots {
+        0% {
+            content: "";
+        }
+        25% {
+            content: ".";
+        }
+        50% {
+            content: "..";
+        }
+        75% {
+            content: "...";
+        }
+        100% {
+            content: "";
+        }
+    }
+    &__loading--disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}

@@ -1,0 +1,138 @@
+// Shimmer Keyframes
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+// Shared shimmer base
+.skeleton-box {
+    background: var(--Dark-50, #f6f7f8);
+    background-image: linear-gradient(
+        to right,
+        var(--Dark-50, #f6f7f8) 0%,
+        var(--Dark-100, #edeef1) 20%,
+        var(--Dark-50, #f6f7f8) 40%,
+        var(--Dark-50, #f6f7f8) 100%
+    );
+    background-repeat: no-repeat;
+    background-size: 1000px 100%;
+    animation: shimmer 1.2s infinite linear;
+    border-radius: 4px;
+}
+
+.skeleton-text {
+    @extend .skeleton-box;
+    height: 1em;
+    width: 100%;
+}
+
+.khawiik-voice-types-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    align-items: center;
+    margin: 0 auto;
+    text-align: center;
+
+    &__hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 2.0625rem;
+
+        &-titles {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 1.0625rem;
+        }
+    }
+
+    &__avatar {
+        width: 5.45475rem;
+        height: 5.59375rem;
+        border-radius: 193.00175rem;
+    }
+
+    &__titles {
+        .skeleton-text--title {
+            height: 1.25rem;
+            width: 27.1875rem;
+            border-radius: 0.25rem;
+
+            @media (max-width: 991px) {
+                width: 20rem;
+            }
+        }
+
+        .skeleton-text--subtitle {
+            height: 0.75rem;
+            width: 27.1875rem;
+            border-radius: 0.25rem;
+
+            @media (max-width: 991px) {
+                width: 20rem;
+            }
+        }
+    }
+
+    &__items {
+        display: flex;
+        gap: 1.25rem;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        width: 100%;
+        max-width: 30rem;
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        width: 8.125rem;
+        height: 9.6875rem;
+        flex-shrink: 0;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        background: #dedede;
+        gap: 0.5rem;
+
+        &-avatar {
+            align-self: flex-start;
+            width: 1.24094rem;
+            height: 1.24094rem;
+            border-radius: 0.48038rem;
+        }
+
+        &-voice-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+        }
+
+        &-voice-name {
+            height: 0.75rem;
+            width: 80%;
+            border-radius: 0.25rem;
+        }
+    }
+}
+
+@media (max-width: 540px) {
+    .khawiik-voice-types-skeleton {
+        &__hero {
+            gap: 1.25rem;
+        }
+    }
+}

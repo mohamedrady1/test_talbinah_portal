@@ -1,0 +1,48 @@
+<div class="available-packages-storing">
+  <div class="available-packages-storing__container">
+    <div class="available-packages-storing__labels">
+      <div class="available-packages-storing__steps-label">
+        <span aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13" fill="none">
+            <path
+              d="M6 11.875C3.035 11.875 0.625 9.465 0.625 6.5C0.625 3.535 3.035 1.125 6 1.125C8.965 1.125 11.375 3.535 11.375 6.5C11.375 9.465 8.965 11.875 6 11.875ZM6 1.875C3.45 1.875 1.375 3.95 1.375 6.5C1.375 9.05 3.45 11.125 6 11.125C8.55 11.125 10.625 9.05 10.625 6.5C10.625 3.95 8.55 1.875 6 1.875Z"
+              fill="#47586E" />
+            <path
+              d="M6 7.375C5.795 7.375 5.625 7.205 5.625 7V4.5C5.625 4.295 5.795 4.125 6 4.125C6.205 4.125 6.375 4.295 6.375 4.5V7C6.375 7.205 6.205 7.375 6 7.375Z"
+              fill="#47586E" />
+            <path
+              d="M6 9.00043C5.935 9.00043 5.87 8.98543 5.81 8.96043C5.75 8.93543 5.695 8.90043 5.645 8.85543C5.6 8.80543 5.565 8.75543 5.54 8.69043C5.515 8.63043 5.5 8.56543 5.5 8.50043C5.5 8.43543 5.515 8.37043 5.54 8.31043C5.565 8.25043 5.6 8.19543 5.645 8.14543C5.695 8.10043 5.75 8.06543 5.81 8.04043C5.93 7.99043 6.07 7.99043 6.19 8.04043C6.25 8.06543 6.305 8.10043 6.355 8.14543C6.4 8.19543 6.435 8.25043 6.46 8.31043C6.485 8.37043 6.5 8.43543 6.5 8.50043C6.5 8.56543 6.485 8.63043 6.46 8.69043C6.435 8.75543 6.4 8.80543 6.355 8.85543C6.305 8.90043 6.25 8.93543 6.19 8.96043C6.13 8.98543 6.065 9.00043 6 9.00043Z"
+              fill="#47586E" />
+          </svg>
+        </span>
+        <span>
+          {{ 'select_package_session_appointments' | translateApi }}
+          <span class="available-packages-storing__number">{{ currentStep() }}</span>
+          {{ 'from' | translateApi }}
+          <span class="available-packages-storing__number">{{ data?.number_of_reservations }}</span>
+          {{ 'sessions_can_be_modified_later' | translateApi }}
+        </span>
+      </div>
+
+      <!-- <div class="available-packages-storing__steps-label">
+        {{ 'you_can_edit_appointments_later' | translateApi }}
+      </div> -->
+    </div>
+
+    <div class="steps">
+      <app-reservation-package-item-form [key]="formInstanceKey()"
+        [currentStepData]="getReservationFormDataForCurrentStep()" [reservationFormData]="reservationFormData"
+        [doctor]="doctor" [durationId]="data?.durations?.id ?? 0"
+        [readonlyInitial]="lockInitialSelectionForCurrentStep()" [previouslyUsedTimes]="getAllPreviouslyUsedTimes()" />
+    </div>
+
+    <div class="available-packages-storing__actions">
+      <button type="button" class="btn btn--outline" (click)="isFirstStep() ? onCloseClick() : back()">
+        {{ isFirstStep() ? ('close' | translateApi) : ('back' | translateApi) }}
+      </button>
+      <button type="button" class="btn btn--solid" (click)="continue()">
+        {{ isFinalStep() ? ('confirm' | translateApi) : ('next' | translateApi) }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+.mental-state {
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 1rem;
+  background: var(--Gray-White);
+
+  &__content {
+    display: flex;
+    padding: 0.75rem;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.625rem;
+    align-self: stretch;
+
+    border-radius: var(--Radius-8, 0.5rem);
+    border: 1px solid var(--Dark-50, #f6f7f8);
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    align-self: stretch;
+    gap: 0.5rem;
+  }
+
+  &__record {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+
+    &--icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      aspect-ratio: 1/1;
+    }
+
+    &--text {
+      color: var(--text-400, #0f0f0f);
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+
+    &--label {
+      color: var(--text-300, #47586e);
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+}

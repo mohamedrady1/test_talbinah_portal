@@ -1,0 +1,11 @@
+<div id="add-new-subscription-card">
+    @if (formConfigs.length) {
+    <div class="form-box">
+        <p>بيانات الكارد</p>
+        <app-dynamic-form [formConfig]="formConfigs" [validationEmit]="itemsFormValidationEmit" [changeSensitive]="true"
+            [hasButton]="true" [submitButtonText]="'إضافة' | translate" [enablResetButtonText]="true"
+            [resetButtonText]="'إلغاء'" (onReset)="emitGoBack()" (onSubmit)="emitOnConfirm()">
+        </app-dynamic-form>
+    </div>
+    }
+</div>

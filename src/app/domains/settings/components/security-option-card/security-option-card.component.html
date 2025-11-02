@@ -1,0 +1,23 @@
+<div class="security-option-card" (click)="onOptionClick()">
+
+    <div class="security-option-card__header">
+        <img [src]="config.icon" alt="icon" class="security-option-card__header--icon">
+        <div class="security-option-card__content">
+            <p class="security-option-card__header--title">
+                {{ config.title | translate }}
+            </p>
+            <p class="security-option-card__content--description">
+                {{ config.description | translate }}
+            </p>
+        </div>
+
+    </div>
+    <div class="security-option-card__action">
+        <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M8.80248 12.5574C8.91332 12.5574 9.02415 12.5166 9.11165 12.4291C9.28082 12.2599 9.28082 11.9799 9.11165 11.8107L5.30832 8.00739C5.02832 7.72739 5.02832 7.27239 5.30832 6.99239L9.11165 3.18906C9.28082 3.01989 9.28082 2.73989 9.11165 2.57072C8.94248 2.40156 8.66248 2.40156 8.49332 2.57072L4.68998 6.37406C4.39248 6.67156 4.22332 7.07406 4.22332 7.49989C4.22332 7.92572 4.38665 8.32822 4.68998 8.62572L8.49332 12.4291C8.58082 12.5107 8.69165 12.5574 8.80248 12.5574Z"
+                fill="#47586E" />
+        </svg>
+
+    </div>
+</div>

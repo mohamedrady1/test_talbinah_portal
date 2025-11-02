@@ -1,0 +1,136 @@
+.selection-option {
+  display: flex;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border: 1px solid var(--Dark-50);
+  border-radius: 0.75rem;
+  align-items: center;
+  gap: 1rem;
+
+  &__label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    cursor: pointer;
+    position: relative;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    background: var(--Dark-50);
+    border-radius: var(--Radius-8);
+    flex-shrink: 0;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__details {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex-direction: column;
+  }
+
+  &__subtitle {
+    color: var(--text-200, #909DAD);
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+  }
+
+  &__name {
+    color: var(--text-300, #47586E);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__custom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 1px solid var(--Dark-200);
+    background-color: transparent;
+    transition: all 0.2s ease;
+    position: relative;
+
+    &::after {
+      content: "";
+      display: none;
+    }
+  }
+
+  /* Shared checked state border */
+  &__input:checked+.selection-option__custom {
+    border: 2px solid var(--Primary-primary);
+  }
+
+  /* Circle variant */
+  &--circle {
+    .selection-option__custom {
+      border-radius: 50%;
+    }
+
+    .selection-option__input:checked+.selection-option__custom::after {
+      display: block;
+      width: 0.75rem;
+      height: 0.75rem;
+      background: var(--Primary-primary);
+      border-radius: 50%;
+    }
+  }
+
+  /* Square variant */
+  &--square {
+    .selection-option__custom {
+      border-radius: 0.25rem;
+    }
+
+    .selection-option__input:checked+.selection-option__custom {
+      background: var(--Primary-primary);
+      border: 2px solid var(--Primary-primary);
+
+      &::after {
+        display: block;
+        content: "✔";
+        font-size: 0.75rem;
+        color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: none;
+      }
+    }
+  }
+
+  &:focus-visible .selection-option__custom {
+    outline: 2px solid var(--Primary-primary);
+    outline-offset: 2px;
+  }
+}

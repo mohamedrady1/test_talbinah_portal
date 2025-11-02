@@ -1,0 +1,47 @@
+<input type="file" #fileInput style="display: none;" (change)="onFileInputChange($event)" multiple />
+<input type="file" #imageFileInput style="display: none;" (change)="onFileInputChange($event)" accept="image/*" />
+<input type="file" #videoFileInput style="display: none;" (change)="onFileInputChange($event)" accept="video/*" />
+<input type="file" #documentFileInput style="display: none;" (change)="onFileInputChange($event)"
+  accept=".pdf,.doc,.docx,.xls,.xlsx,.txt" />
+
+<canvas #canvasCapture style="display: none;"></canvas>
+<img *ngIf="capturedImageUrl" [src]="capturedImageUrl" alt="الصورة الملتقطة" style="max-width: 100%; margin-top: 1rem;">
+
+@if (onlyImage) {
+<button type="button" class="attachment-menu__item attachment-menu__item--image only-icon" aria-label="رفع صورة"
+  (click)="triggerFileInput('image')">
+  <app-svg-icon name="image-gallery-icon" />
+</button>
+}
+
+@if (!onlyImage) {
+<div class="attachment-menu-container" [class.show]="showMenu" #attachmentMenuContainer>
+  <div class="attachment-menu">
+    <button type="button" class="attachment-menu__item attachment-menu__item--podcast"
+      (click)="triggerFileInput('podcast')">
+      <app-svg-icon name="microphone-icon" />
+      <span>{{ 'podcast' | translateApi }}</span>
+    </button>
+    <button type="button" class="attachment-menu__item attachment-menu__item--document"
+      (click)="triggerFileInput('document')">
+      <app-svg-icon name="file-icon" />
+      <span>{{ 'attachments' | translateApi }}</span>
+    </button>
+    <button type="button" class="attachment-menu__item attachment-menu__item--video"
+      (click)="triggerFileInput('video')">
+      <app-svg-icon name="video-icon" />
+      <span>{{ 'videos' | translateApi }}</span>
+    </button>
+    <button type="button" class="attachment-menu__item attachment-menu__item--image"
+      (click)="triggerFileInput('image')">
+      <app-svg-icon name="image-gallery-icon" />
+      <span>{{ 'images' | translateApi }}</span>
+    </button>
+    <button type="button" class="attachment-menu__item attachment-menu__item--camera"
+      (click)="triggerFileInput('camera')">
+      <app-svg-icon name="camera-icon" />
+      <span>{{ 'camera' | translateApi }}</span>
+    </button>
+  </div>
+</div>
+}

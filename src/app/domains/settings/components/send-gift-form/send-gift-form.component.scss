@@ -1,0 +1,213 @@
+@use "./../../../../common/styles/scss/abstracts/general-form-wrapper.mixins" as form;
+
+.send-gift-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  &__label {
+    color: var(--Dark-DARK, #1d1f1f);
+    font-size: 0.875rem;
+    font-weight: 400;
+
+    &--amount {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    &-currency {
+      color: var(--text-300, #47586e);
+      font-size: 0.75rem;
+      font-weight: 400;
+    }
+  }
+
+  &__input {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: var(--Radius-12, 12px);
+    border: 1px solid var(--Dark-100, #eee);
+    width: 100% !important;
+    padding-block: 0 !important;
+  }
+
+  &__input-cost {
+    padding: 0.5rem 1rem;
+    height: 2.75rem;
+  }
+
+  &__error {
+    color: #b80924;
+    font-size: 0.75rem;
+    font-weight: 400;
+  }
+
+  &__fees-info {
+    display: flex;
+
+    gap: 0.5rem;
+    color: var(--Primary-primary, #0e39b6);
+    font-size: 0.75rem;
+    font-weight: 400;
+  }
+  .flag {
+    border-radius: 50%;
+    width: 20px;
+    aspect-ratio: 1/1;
+    object-fit: fill;
+  }
+  &__actions {
+    @include form.general-form-wrapper-actions;
+    justify-content: flex-end;
+
+    .btn {
+      width: fit-content;
+    }
+
+    &__loading {
+      display: flex;
+      align-items: center;
+    }
+    .dot-loader::after {
+      content: "";
+      animation: dots 1.5s steps(4, end) infinite;
+      white-space: pre;
+    }
+
+    @keyframes dots {
+      0% {
+        content: "";
+      }
+
+      25% {
+        content: ".";
+      }
+
+      50% {
+        content: "..";
+      }
+
+      75% {
+        content: "...";
+      }
+
+      100% {
+        content: "";
+      }
+    }
+  }
+
+  &__loading {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+  }
+}
+
+:host::ng-deep .custom-input-wrapper {
+  width: 100% !important;
+  padding-block: 0 !important;
+
+  .select-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    height: 2.75rem;
+    padding: 0.5rem;
+    border-radius: 12px;
+    border: 1px solid #eee;
+
+    p-select {
+      flex: 1;
+      border: none !important;
+      position: relative;
+      min-width: 100px !important;
+      max-width: 150px;
+      box-shadow:
+        0 0 transparent,
+        0 0 transparent,
+        0 1px 2px 0 transparent !important;
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 90%;
+        background-color: var(--Dark-100);
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      &:dir(rtl) {
+        &::after {
+          right: initial !important;
+          left: 5px !important;
+        }
+      }
+    }
+
+    .form-control {
+      flex: 2;
+      border: none;
+      padding: 0;
+    }
+
+    .dots-loader {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 4px;
+
+      span {
+        width: 4px;
+        height: 4px;
+        background: #999;
+        border-radius: 50%;
+        animation: blink 1.4s infinite both;
+      }
+
+      span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes blink {
+        0%,
+        80%,
+        100% {
+          opacity: 0;
+        }
+
+        40% {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.flag {
+  border-radius: 50%;
+  width: 20px;
+  aspect-ratio: 1/1;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

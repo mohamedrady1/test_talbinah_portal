@@ -1,0 +1,77 @@
+<div class="verification">
+  <div class="verification__container">
+    <div class="verification__welcome">
+      <h1 class="verification__welcome-title">
+        {{ 'welcome_back' | translate }}
+      </h1>
+      <p class="verification__welcome-description">
+        {{ 'welcome_safe_space' | translate }}
+      </p>
+    </div>
+
+    <div class="verification__code-section">
+      <div class="verification__code-text">
+        <p class="verification__code-text-message">
+          {{ 'enter_code_sent_to_you' | translate }}
+          <span class="verification__code-phone-number">
+            <!-- {{neededDataToVerify()?.data?.country_id || ''}} -->
+            {{neededDataToVerify()?.data?.phone_no || ''}}
+          </span>
+        </p>
+        <a class="verification__code-edit-link" (click)="backTo()">
+          {{ 'general.edit' | translate }}
+        </a>
+      </div>
+
+      <div class="verification__otp-input" [ngClass]="{ 'verification__otp-input--error': codeNotValid() }">
+        <app-code-input [clearInputs]="clearInputsValue" [inputsNumber]="inputsNumber" [typedInput]="'num'"
+          (codeChanged)="handleCodeChange($event)" (codeCompleted)="handleCodeCompletion($event)"></app-code-input>
+      </div>
+    </div>
+
+    <div class="verification__resend-section">
+      <p class="verification__resend-message">
+        @if (codeNotValid()) {
+      <div class="error">
+        <p class="error__message">
+          {{ 'الكود غير صحيح من فضلك اعد المحاولة' }}
+        </p>
+      </div>
+      }
+
+      </p>
+      <div class="d-flex gap-2">
+        <span [ngClass]="isWaitingValue ? 'verification__resend-link' : 'verification__resend-text'"
+          (click)="isWaitingValue && !isLoadingResend() && resendCode(true)"
+          [class.disabled]="!isWaitingValue || isLoadingResend()">
+          @if (isLoadingResend()) {
+          {{ 'in_progress' | translate }}
+          } @else {
+          {{ 'resend' | translate }}
+          }
+        </span>
+        @if (!isWaitingValue && !isLoadingResend()) {
+        <app-countdown [customTime]="customTime" (emitTimeEnd)="printTimeEnd($event)">
+        </app-countdown>
+        }
+      </div>
+
+      <div class="verification__button-container">
+        <button id="submit-dynamic-form-btn" type="button" class="btn btn--solid" (click)="checkCode()"
+          [disabled]="isLoading()" [attr.aria-label]="'OtpMethodSelection.Submit' | translate">
+          <span class="btn__label">
+            @if (isLoading()) {
+            <div class="verification__button-loading" aria-label="Submit in progress">
+              {{ 'in_progress' | translate }}
+              <span class="dot-loader"></span>
+            </div>
+            }
+            @if (!isLoading()) {
+            {{ 'verify_the_code' | translate }}
+            }
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

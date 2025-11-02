@@ -1,0 +1,24 @@
+@use "../abstracts/variables" as *;
+
+.container-sm {
+  max-width: $sm;
+}
+
+.container-md {
+  max-width: $md;
+}
+
+.container-lg {
+  max-width: $lg;
+}
+
+.container-xl {
+  max-width: $xl;
+}
+
+// Example
+
+// <div class="container container-sm" >Small Container (540px for small screens)</div>
+// <div class="container container-md" >Medium Container (720px for medium screens)</div>
+// <div class="container container-lg" >Large Container (960px for large screens)</div>
+// <div class="container container-xl" >Extra Large Container (1140px for extra-largescreens)</div>

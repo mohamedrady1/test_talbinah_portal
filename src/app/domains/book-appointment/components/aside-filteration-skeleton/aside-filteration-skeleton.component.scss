@@ -1,0 +1,115 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *; // Assuming this path is correct
+@use "../../../../common/styles/scss/utils/helpers" as *; // Assuming this path is correct
+
+.aside-filteration-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; // Matches the gap of the actual form
+    padding: 0.75rem; // Matches the padding of the actual aside
+    border-radius: 1rem;
+    background: var(--Gray-White, #feffff);
+
+    // Reusable shimmer animation
+    @keyframes shimmer {
+        0% {
+            background-position: -200% 0;
+        }
+        100% {
+            background-position: 200% 0;
+        }
+    }
+
+    // Base shimmer style
+    %shimmer-base {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 37%, #f0f0f0 63%);
+        background-size: 400% 100%;
+        animation: shimmer 1.4s ease infinite;
+    }
+
+    &__group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem; // Matches the gap of filter-aside__group
+        align-self: stretch;
+    }
+
+    &__label-shimmer {
+        @extend %shimmer-base;
+        width: 70%; // Approximate width for a label
+        height: 0.75rem; // Height of the label text
+        border-radius: 4px;
+        margin-bottom: 0.75rem; // Matches the margin-bottom of filter-aside__label
+    }
+
+    &__checkbox-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem; // Matches the gap of filter-aside__control-wrapper
+        align-self: stretch;
+    }
+
+    &__checkbox-shimmer {
+        @extend %shimmer-base;
+        width: 60%; // Approximate width for a checkbox label
+        height: 1.125rem; // Height of the checkbox input/text
+        border-radius: 4px;
+    }
+
+    &__range-group {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem; // Matches the gap of filter-aside__range-group
+    }
+
+    &__input-shimmer {
+        @extend %shimmer-base;
+        height: 2rem; // Height of the input field
+        flex-grow: 1; // Allows it to take available space
+        border-radius: 0.3rem;
+    }
+
+    &__separator-shimmer {
+        @extend %shimmer-base;
+        width: 0.5rem; // For the '-' separator
+        height: 0.75rem; // Approximate height for separator text
+        border-radius: 2px;
+    }
+
+    &__multi-select-group {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.25rem; // Matches the gap of filter-aside__multi-select-group
+    }
+
+    &__multi-select-shimmer {
+        @extend %shimmer-base;
+        width: 6.5rem; // Matches min-width of filter-aside__multi-label
+        height: 2.5rem; // Matches padding + height of text in filter-aside__multi-label
+        border-radius: 0.75rem;
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.5rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--border-light, #f0f0f0); // Mimic the border
+    }
+
+    &__button-shimmer {
+        @extend %shimmer-base;
+        height: 2.25rem; // Matches the height of the actual buttons
+        border-radius: 0.375rem;
+
+        &--reset {
+            width: 4rem; // Approximate width for reset button
+        }
+
+        &--submit {
+            width: 5rem; // Approximate width for submit button
+        }
+    }
+}

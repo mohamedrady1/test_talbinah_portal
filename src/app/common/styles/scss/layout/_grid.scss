@@ -1,0 +1,160 @@
+@use "../abstracts/mixins" as *;
+.row {
+    max-width: var(--grid-width);
+    margin: 0 auto;
+
+    &:not(:last-child) {
+        margin-bottom: var(--gutter-vertical);
+
+        @include respond(md) {
+            margin-bottom: var(--gutter-vertical-small);
+        }
+    }
+
+    @include respond(md) {
+        max-width: 50rem;
+        padding: 0 3rem;
+    }
+
+    @include clearfix;
+
+    [class^="col-"] {
+        float: left;
+
+        &:not(:last-child) {
+            margin-right: var(--gutter-horizontal);
+
+            @include respond(md) {
+                margin-right: 0;
+                margin-bottom: var(--gutter-vertical-small);
+            }
+        }
+    }
+
+    // 4 Columns by default (for large screens)
+    .col-1-of-2 {
+        width: calc((100% - #{var(--gutter-horizontal)}) / 2);
+    }
+
+    .col-1-of-3 {
+        width: calc((100% - 2 * #{var(--gutter-horizontal)}) / 3);
+    }
+
+    .col-2-of-3 {
+        width: calc(2 * ((100% - 2 * #{var(--gutter-horizontal)}) / 3) + #{var(--gutter-horizontal)});
+    }
+
+    .col-1-of-4 {
+        width: calc((100% - 3 * #{var(--gutter-horizontal)}) / 4);
+    }
+
+    .col-2-of-4 {
+        width: calc(2 * ((100% - 3 * #{var(--gutter-horizontal)}) / 4) + #{var(--gutter-horizontal)});
+    }
+
+    .col-3-of-4 {
+        width: calc(3 * ((100% - 3 * #{var(--gutter-horizontal)}) / 4) + 2 * #{var(--gutter-horizontal)});
+    }
+
+    // Responsive layouts for medium screens (md)
+    @include respond(md) {
+        .col-1-of-4,
+        .col-2-of-4,
+        .col-3-of-4,
+        .col-1-of-3 {
+            width: calc((100% - 2 * #{var(--gutter-horizontal)}) / 3); // 3 columns on medium tablets
+        }
+    }
+
+    // Responsive layouts for small screens (sm)
+    @include respond(sm) {
+        .col-1-of-4,
+        .col-2-of-4,
+        .col-3-of-4,
+        .col-1-of-3 {
+            width: calc((100% - #{var(--gutter-horizontal)}) / 2); // 2 columns for small tablets
+        }
+    }
+
+    // Responsive layouts for extra small screens (xs)
+    @include respond(xs) {
+        .col-1-of-4,
+        .col-2-of-4,
+        .col-3-of-4,
+        .col-1-of-3,
+        .col-1-of-2 {
+            width: 100%; // 1 column for mobile
+        }
+    }
+}
+
+// Example
+
+// <div class="row">
+//     <div class="col-1-of-2">
+//         <div class="box">
+//             <h2>Column 1 (50%)</h2>
+//             <p>Content for the first column goes here.</p>
+//         </div>
+//     </div>
+
+//     <div class="col-1-of-2">
+//         <div class="box">
+//             <h2>Column 2 (50%)</h2>
+//             <p>Content for the second column goes here.</p>
+//         </div>
+//     </div>
+// </div>
+
+// <div class="row">
+//     <div class="col-1-of-3">
+//         <div class="box">
+//             <h2>Column 1 (33%)</h2>
+//             <p>Content for the first column in a 3-column layout.</p>
+//         </div>
+//     </div>
+
+//     <div class="col-1-of-3">
+//         <div class="box">
+//             <h2>Column 2 (33%)</h2>
+//             <p>Content for the second column in a 3-column layout.</p>
+//         </div>
+//     </div>
+
+//     <div class="col-1-of-3">
+//         <div class="box">
+//             <h2>Column 3 (33%)</h2>
+//             <p>Content for the third column in a 3-column layout.</p>
+//         </div>
+//     </div>
+// </div>
+
+// <div class="row">
+//     <div class="col-1-of-4">
+//         <div class="box">
+//             <h2>Column 1 (25%)</h2>
+//             <p>Content for the first column in a 4-column layout.</p>
+//         </div>
+//     </div>
+
+//     <div class="col-1-of-4">
+//         <div class="box">
+//             <h2>Column 2 (25%)</h2>
+//             <p>Content for the second column in a 4-column layout.</p>
+//         </div>
+//     </div>
+
+//     <div class="col-1-of-4">
+//         <div class="box">
+//             <h2>Column 3 (25%)</h2>
+//             <p>Content for the third column in a 4-column layout.</p>
+//         </div>
+//     </div>
+
+//     <div class="col-1-of-4">
+//         <div class="box">
+//             <h2>Column 4 (25%)</h2>
+//             <p>Content for the fourth column in a 4-column layout.</p>
+//         </div>
+//     </div>
+// </div>

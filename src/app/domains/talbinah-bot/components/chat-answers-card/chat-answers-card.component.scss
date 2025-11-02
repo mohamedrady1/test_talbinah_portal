@@ -1,0 +1,22 @@
+.chat-answers-card {
+    border-radius: var(--Radius-8, 0.5rem);
+    border: 1px solid var(--Dark-50, #f6f7f8);
+    display: flex;
+    padding: var(--Radius-8, 0.5rem) 0.25rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+    p {
+        color: var(--text-300, #47586e);
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    &--active {
+        border-color: var(--Primary-primary);
+        p {
+            color: var(--Primary-primary);
+        }
+    }
+}

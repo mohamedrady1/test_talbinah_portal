@@ -1,0 +1,75 @@
+<div class="new-otp-verification">
+    <div class="new-otp-verification__content">
+        <div class="new-otp-verification__header">
+            <h2 class="new-otp-verification__title">{{ titleKey() | translateApi }}</h2>
+            <p class="new-otp-verification__description">{{ 'enter_verification_code_sent_to_your_number' | translateApi
+                }}</p>
+        </div>
+
+        <div class="new-otp-verification__code-section">
+            <div class="new-otp-verification__code-text">
+                <p class="new-otp-verification__code-text-message">
+                    {{ 'enter_code_sent_to_you' | translateApi }}
+                    <span class="new-otp-verification__code-phone-number">
+                        <span class="country-code">{{(neededDataToVerify()?.payploadCheckNumber?.country_code ||
+                            '+966').replace('+', '')}}+</span>
+                        <span class="phone-number">{{neededDataToVerify()?.payploadCheckNumber?.phone_no || ''}}</span>
+                    </span>
+                </p>
+            </div>
+
+            <div class="new-otp-verification__otp-input"
+                [ngClass]="{ 'new-otp-verification__otp-input--error': codeNotValid() }">
+                <app-code-input [clearInputs]="clearInputsValue" [inputsNumber]="inputsNumber" [typedInput]="'num'"
+                    (codeChanged)="handleCodeChange($event)"
+                    (codeCompleted)="handleCodeCompletion($event)"></app-code-input>
+            </div>
+        </div>
+
+        <div class="new-otp-verification__resend-section">
+            <p class="new-otp-verification__resend-message">
+                @if (codeNotValid()) {
+            <div class="error">
+                <p class="error__message">
+                    {{ 'code_incorrect_please_try_again' | translateApi }}
+                </p>
+            </div>
+            }
+
+            </p>
+            <div class="d-flex gap-2">
+                <span
+                    [ngClass]="isWaitingValue ? 'new-otp-verification__resend-link' : 'new-otp-verification__resend-text'"
+                    (click)="isWaitingValue && !isLoadingResend() && resendCode(true)"
+                    [class.disabled]="!isWaitingValue || isLoadingResend()">
+                    @if (isLoadingResend()) {
+                    {{ 'in_progress' | translateApi }}
+                    } @else {
+                    {{ 'resend' | translateApi }}
+                    }
+                </span>
+                @if (!isWaitingValue && !isLoadingResend()) {
+                <app-countdown [customTime]="customTime" (emitTimeEnd)="printTimeEnd($event)">
+                </app-countdown>
+                }
+            </div>
+
+            <div class="new-otp-verification__button-container">
+                <button id="submit-dynamic-form-btn" type="button" class="btn btn--solid" (click)="checkCode()"
+                    [disabled]="isLoading()" [attr.aria-label]="'verify_the_code' | translateApi">
+                    <span class="btn__label">
+                        @if (isLoading()) {
+                        <div class="new-otp-verification-loading" aria-label="Submit in progress">
+                            {{ 'in_progress' | translateApi }}
+                            <span class="dot-loader"></span>
+                        </div>
+                        }
+                        @if (!isLoading()) {
+                        {{ 'verify_the_code' | translateApi }}
+                        }
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

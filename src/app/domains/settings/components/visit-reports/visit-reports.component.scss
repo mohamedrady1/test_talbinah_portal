@@ -1,0 +1,80 @@
+@use "./../../../../common/styles/scss/abstracts/general-form-wrapper.mixins" as form;
+@use "./../../../../common/styles/scss/abstracts/mixins" as *;
+
+.visit-reports {
+  display: flex;
+  padding: 0.75rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  align-self: stretch;
+
+  &__container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    background: var(--Dark-WHITE, #fff);
+  }
+
+  &__search {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  // Element: __cards-list - grid container for the cards
+  &__cards-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    padding-inline-end: 0.5rem;
+
+    @include respond(lg) {
+      grid-template-columns: repeat(
+        2,
+        1fr
+      ); // This seems redundant if default is 2, check if needed for specific lg breakpoints
+    }
+
+    @include respond(sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // Element: __status-message - common styles for loading, empty, error states
+  &__status-message {
+    padding: 1rem;
+    text-align: center;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+
+    // Modifier: __status-message--loading
+    &--loading {
+      color: var(--text-500, #6b7280);
+      display: grid; // Add display: grid
+      grid-template-columns: repeat(2, 1fr); // Add 2-column grid
+      gap: 0.75rem; // Add gap
+      padding: 0; // Remove padding if it interferes with the grid items directly
+      text-align: left; // Adjust text-align if needed
+      // background: whitesmoke;
+    }
+
+    // Modifier: __status-message--empty
+    &--empty {
+      color: var(--text-500, #6b7280);
+      // background: whitesmoke;
+    }
+
+    // Modifier: __status-message--error
+    &--error {
+      color: var(--text-400, #9ca3af); // This color might be too light for error text, consider accessibility
+      // background: #ffebeb;
+    }
+  }
+}

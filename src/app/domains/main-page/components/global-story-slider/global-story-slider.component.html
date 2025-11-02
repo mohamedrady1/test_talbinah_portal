@@ -1,0 +1,32 @@
+<section class="story-slider" aria-label="Featured stories and updates slider">
+  <div class="story-slider__wrapper" #sliderWrapper (mousedown)="onMouseDown($event)" (mousemove)="onMouseMove($event)"
+    (mouseup)="onMouseUp()" (mouseleave)="onMouseLeave()" role="region" aria-live="polite" aria-atomic="true"
+    tabindex="0">
+    @for (card of cards; track card.id) {
+    <app-story-slider-card [config]="card" [cardWidth]="cardWidth"></app-story-slider-card>
+    }
+  </div>
+
+  @if (config.isButtonsVisible) {
+  <div class="story-slider__controls" role="group" aria-label="Slider navigation controls">
+    <button class="story-slider__button story-slider__button--prev" (click)="scrollLeft(sliderWrapper)"
+      aria-label="Scroll left">
+      <svg width="20" height="20" class="scaleX-rtl" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true" focusable="false">
+        <path
+          d="M8.80248 12.0575C8.91332 12.0575 9.02415 12.0167 9.11165 11.9292C9.28082 11.76 9.28082 11.48 9.11165 11.3108L5.30832 7.50751C5.02832 7.22751 5.02832 6.77251 5.30832 6.49251L9.11165 2.68918C9.28082 2.52001 9.28082 2.24001 9.11165 2.07084C8.94248 1.90168 8.66248 1.90168 8.49332 2.07084L4.68998 5.87418C4.39248 6.17168 4.22332 6.57418 4.22332 7.00001C4.22332 7.42584 4.38665 7.82834 4.68998 8.12584L8.49332 11.9292C8.58082 12.0108 8.69165 12.0575 8.80248 12.0575Z"
+          fill="#0E39B6" />
+      </svg>
+    </button>
+    <button class="story-slider__button story-slider__button--next" (click)="scrollRight(sliderWrapper)"
+      aria-label="Scroll right">
+      <svg width="20" height="20" class="scaleX-rtl" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true" focusable="false">
+        <path
+          d="M5.19752 12.0575C5.08668 12.0575 4.97585 12.0167 4.88835 11.9292C4.71918 11.76 4.71918 11.48 4.88835 11.3108L8.69168 7.50751C8.97168 7.22751 8.97168 6.77251 8.69168 6.49251L4.88835 2.68918C4.71918 2.52001 4.71918 2.24001 4.88835 2.07084C5.05752 1.90168 5.33752 1.90168 5.50668 2.07084L9.31002 5.87418C9.60752 6.17168 9.77668 6.57418 9.77668 7.00001C9.77668 7.42584 9.61335 7.82834 9.31002 8.12584L5.50668 11.9292C5.41918 12.0108 5.30835 12.0575 5.19752 12.0575Z"
+          fill="#0E39B6" />
+      </svg>
+    </button>
+  </div>
+  }
+</section>

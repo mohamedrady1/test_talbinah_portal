@@ -1,0 +1,1 @@
+export * from './chat-message-voice.component';

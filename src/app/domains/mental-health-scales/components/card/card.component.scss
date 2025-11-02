@@ -1,0 +1,193 @@
+.test-card {
+  display: flex;
+  gap: 1rem;
+  height: 100%;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--Dark-100);
+  background: var(--Dark-WHITE, #fff);
+
+  &__header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+
+    &[aria-hidden="true"] {
+      display: none;
+    }
+  }
+
+  &__checkbox-wrapper {
+    position: relative;
+    width: 1.125rem;
+    height: 1.125rem;
+    border: 1.5px solid var(--Primary-primary, #0e39b6);
+    border-radius: 4px;
+    background-color: var(--Dark-WHITE);
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 6px;
+      width: 4px;
+      height: 8px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    // ✅ Checked state
+    &--checked {
+      background-color: var(--Primary-primary, #0e39b6);
+      border-color: var(--Primary-primary, #0e39b6);
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    // ✅ Disabled but NOT checked — stay white
+    &--disabled:not(.test-card__checkbox-wrapper--checked) {
+      background-color: var(--Dark-WHITE);
+      border-color: #ccc;
+    }
+
+    // ✅ Disabled AND checked (optional override if needed)
+    &--disabled.test-card__checkbox-wrapper--checked {
+      background-color: var(--Primary-primary, #0e39b6);
+      border-color: var(--Primary-primary, #0e39b6);
+
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: row;
+    gap: 0.375rem;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  &__start-button {
+    display: flex;
+    padding: 0.25rem 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 1rem;
+    background: var(--Dark-50);
+    border-radius: 16px;
+    background: var(--Primary-50);
+  }
+
+  &__duration {
+    color: var(--Primary-primary);
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    &-button {
+      background: var(--Primary-50);
+    }
+
+    &:dir(rtl) {
+      font-size: 0.75rem;
+    }
+  }
+
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    justify-content: space-between;
+    gap: 0.75rem;
+
+    &-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    &-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.625rem;
+
+      p {
+        font-size: 0.6875rem;
+      }
+
+      @media (max-width: 1300px) and (min-width: 1200px) {
+        p {
+          max-width: 11.25rem;
+        }
+      }
+    }
+  }
+
+  &__description {
+    color: var(--text-300);
+    font-size: 0.75rem;
+    font-weight: 400;
+  }
+
+  &__title {
+    color: var(--Primary-primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  &__information {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    div {
+      display: flex;
+      gap: 0.125rem;
+      color: var(--text-300, #47586e);
+      font-size: 0.75rem;
+      font-weight: 400;
+    }
+  }
+
+  .see-button {
+    display: flex;
+    padding: 0.25rem 0.625rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    background: var(--Primary-50);
+  }
+}

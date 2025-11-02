@@ -1,0 +1,1 @@
+export * from './my-psychological-society-notification-card.component';

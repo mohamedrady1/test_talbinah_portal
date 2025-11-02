@@ -1,0 +1,75 @@
+<section class="mood-chart" aria-labelledby="moodChartTitle">
+  <div class="mood-chart__header">
+    <h3 id="moodChartTitle" class="mood-chart__title">
+      {{'track_your_mood'| translateApi}}</h3>
+    <p class="mood-chart__subtitle">
+      {{'last_week'| translateApi}}
+    </p>
+  </div>
+  @if (type === this.DisplayTypes.INFOGRAPH) {
+  <div class="mood-chart__body">
+    <div class="mood-chart__y-axis">
+      @for (mood of moodEmojis.slice().reverse(); track $index) {
+      <div class="mood-chart__emoji">
+        <img appLazyLoadImage="{{ mood }}" ngOptimizedImage width="30" height="30"
+          placeholder="images/mentalHealthScale/moods/smilingFaceWithSmilingEyes.png" />
+      </div>
+      }
+    </div>
+
+    <div class="mood-chart__bars">
+      @for (item of moodData; track item.date) {
+      <div class="mood-chart__bar-group">
+        <div class="mood-chart__date">
+          {{ item.date }}
+        </div>
+        <div class="mood-chart__bar" [ngStyle]="{
+              'height': getBarHeight(item.value),
+              'background-color': getBarColor(item.value)
+            }">
+        </div>
+      </div>
+      }
+
+      @for (line of lines; track $index) {
+      <svg class="mood-chart__line mood-chart__line--{{ $index + 1 }}" xmlns="http://www.w3.org/2000/svg" width="253"
+        height="2" viewBox="0 0 253 2" fill="none">
+        <path d="M252.477 0.962891H0.373201" stroke="#EEEEEE" stroke-width="0.768661" stroke-dasharray="3.07 3.07" />
+      </svg>
+      }
+    </div>
+  </div>
+  }
+
+  @if (type === this.DisplayTypes.CALENDAR) {
+  @if (isLoggedIn()) {
+
+  @if (_lastSevenMoodsFacade.isLoadingLastSevenUserMoods()) {
+  <app-time-scale-calender-shimmer [number]="7" />
+  } @else if (_lastSevenMoodsFacade.lastSevenUserMoodsErrorMessage()) {
+  <app-error-state [config]="lastSevenMoodsErrorState"></app-error-state>
+  } @else if (_lastSevenMoodsFacade.lastSevenUserMoods()?.data?.length) {
+  <ul class="mood-chart__days" role="list">
+    @for (mood of _lastSevenMoodsFacade.lastSevenUserMoods()?.data; track $index) {
+    <li class="mood-chart__day" [ngClass]="{'active': isToday(mood.created_at)}">
+      <span class="mood-chart__weekday" [attr.aria-label]="'day' + mood.mood_id">
+        <span class="text">
+          {{ mood.created_at | date: 'EEEE':'':currentLang }}
+        </span>
+      </span>
+      <span class="mood-chart__mood" role="img" [attr.aria-label]="'mood' + mood.mood_id">
+        <img appLazyLoadImage="{{ mood.icon }}" [alt]="mood.feelings" ngOptimizedImage width="40" height="40"
+          placeholder="images/icons/logo-2.png" aria-hidden="false" />
+      </span>
+    </li>
+    }
+  </ul>
+  } @else {
+  <app-empty-state [config]="lastSevenMoodsEmptyState" class="w-100"></app-empty-state>
+  }
+  }
+  @else {
+  <app-compelete-data-and-register-now [isEmptyState]="true"></app-compelete-data-and-register-now>
+  }
+  }
+</section>

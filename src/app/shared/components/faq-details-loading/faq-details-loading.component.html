@@ -1,0 +1,20 @@
+<div class="faq-details-loading">
+    <div class="faq-details-loading__content">
+        <!-- Questions Loading -->
+        <div class="faq-details-loading__questions">
+            @for (item of loadingCards; track item) {
+            <div class="faq-details-loading__question-card">
+                <div class="faq-details-loading__question-card__title"></div>
+            </div>
+            }
+        </div>
+
+        <!-- Answer Loading -->
+        <div class="faq-details-loading__answer">
+            <div class="faq-details-loading__answer__title"></div>
+            @for (item of loadingLines; track item) {
+            <div class="faq-details-loading__answer__line"></div>
+            }
+        </div>
+    </div>
+</div>

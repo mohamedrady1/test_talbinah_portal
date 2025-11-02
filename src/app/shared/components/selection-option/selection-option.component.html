@@ -1,0 +1,36 @@
+<div class="selection-option" [ngClass]="'selection-option--' + shape" (click)="onSelect($event)">
+  <label class="selection-option__label" role="radio" [attr.aria-checked]="isChecked"
+    [attr.aria-label]="(config.name || '') | translate" tabindex="0">
+    <div class="selection-option__title">
+      @if (isIconStart) {
+      <input class="selection-option__input" type="radio" name="selection-group" [value]="config.id"
+        [checked]="isChecked" hidden tabindex="-1" aria-hidden="true" />
+      <span class="selection-option__custom"></span>
+      }
+
+      @if (!iconOnly) {
+      <div class="selection-option__icon">
+        <img [src]="config.image || 'images/icons/logo-2.png'" [alt]="config.name ? (config.name | translate) : 'icon'"
+          loading="lazy" decoding="async" fetchpriority="low" (error)="onImageError($event)" />
+      </div>
+      }
+
+      <div class="selection-option__details">
+        @if (config.subtitle) {
+        <p class="selection-option__subtitle">
+          {{ config.subtitle }}
+        </p>
+        }
+        <p class="selection-option__name">
+          {{ config.name | translate }}
+        </p>
+      </div>
+    </div>
+
+    @if (!isIconStart) {
+    <input class="selection-option__input" type="radio" name="selection-group" [value]="config.id" [checked]="isChecked"
+      hidden tabindex="-1" aria-hidden="true" />
+    <span class="selection-option__custom"></span>
+    }
+  </label>
+</div>

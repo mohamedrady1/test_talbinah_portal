@@ -1,0 +1,110 @@
+// BEM-friendly, mobile-first, responsive skeleton styles
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+
+.khawiik-voice-chat-skeleton {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: flex-end;
+    // Chat Area
+    &__chat-area {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 0;
+    }
+
+    // Welcome Section
+    &__welcome {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    &__welcome-icon {
+        border-radius: 50% !important;
+        height: 10rem;
+        width: 10rem;
+        border-radius: 1rem;
+        background: var(--skeleton, #edeef1);
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: center;
+    }
+
+    &__welcome-title {
+        width: 200px;
+        height: 24px;
+        border-radius: 0.5rem;
+        background: var(--skeleton, #edeef1);
+    }
+
+    &__welcome-subtitle {
+        width: 300px;
+        height: 16px;
+        border-radius: 0.25rem;
+        background: var(--skeleton, #edeef1);
+    }
+
+    // Voice Area
+    &__voice-area {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    &__voice-btn,
+    &__text-btn {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        background: var(--skeleton, #edeef1);
+    }
+
+    &__record-btn {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        background: var(--skeleton, #edeef1);
+    }
+
+    /* Reusable shimmer helper */
+    .shimmer-wrapper {
+        position: relative;
+        overflow: hidden;
+        background: var(--skeleton, #edeef1);
+        background-image: linear-gradient(
+            to right,
+            var(--skeleton, #edeef1) 0%,
+            #f3f5f8 20%,
+            var(--skeleton, #edeef1) 40%,
+            var(--skeleton, #edeef1) 100%
+        );
+        background-repeat: no-repeat;
+        background-size: 800px 100%;
+        animation: khawiik-voice-chat-shimmer 1.8s infinite linear;
+    }
+}
+
+/* shimmer animation */
+@keyframes khawiik-voice-chat-shimmer {
+    0% {
+        background-position: -800px 0;
+    }
+
+    100% {
+        background-position: 800px 0;
+    }
+}

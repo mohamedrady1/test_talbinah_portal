@@ -1,0 +1,132 @@
+/* الخط الإنجليزي (Aventa) */
+@font-face {
+    font-family: "Aventa";
+    src:
+        url("/n-fonts/EllenLuff - Aventa Black.otf") format("opentype"),
+        url("/n-fonts/EllenLuff - Aventa Bold.otf") format("opentype"),
+        url("/n-fonts/EllenLuff - Aventa ExtraBold.otf") format("opentype"),
+        url("/n-fonts/EllenLuff - Aventa ExtraLight.otf") format("opentype"),
+        url("/n-fonts/EllenLuff - Aventa Light.otf") format("opentype"),
+        url("/n-fonts/EllenLuff - Aventa Medium.otf") format("opentype"),
+        url("/n-fonts/EllenLuff - Aventa Regular.otf") format("opentype"),
+        url("/n-fonts/EllenLuff - Aventa SemiBold.otf") format("opentype"),
+        url("/n-fonts/EllenLuff - Aventa Thin.otf") format("opentype");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Aventa";
+    src: url("/n-fonts/EllenLuff - Aventa Black.otf") format("opentype");
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: "Aventa";
+    src: url("/n-fonts/EllenLuff - Aventa Bold.otf") format("opentype");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Aventa";
+    src: url("/n-fonts/EllenLuff - Aventa ExtraBold.otf") format("opentype");
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: "Aventa";
+    src: url("/n-fonts/EllenLuff - Aventa ExtraLight.otf") format("opentype");
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: "Aventa";
+    src: url("/n-fonts/EllenLuff - Aventa Light.otf") format("opentype");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Aventa";
+    src: url("/n-fonts/EllenLuff - Aventa Medium.otf") format("opentype");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Aventa";
+    src: url("/n-fonts/EllenLuff - Aventa Regular.otf") format("opentype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Aventa";
+    src: url("/n-fonts/EllenLuff - Aventa SemiBold.otf") format("opentype");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Aventa";
+    src: url("/n-fonts/EllenLuff - Aventa Thin.otf") format("opentype");
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: "Omnes";
+    src: url("/n-fonts/Omnes-Black.ttf") format("truetype");
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: "Omnes";
+    src: url("/n-fonts/arfonts-omnes-arabic-thin.ttf") format("truetype");
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Omnes";
+    src: url("/n-fonts/arfonts-omnes-arabic-extra-light.ttf") format("truetype");
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Omnes";
+    src: url("/n-fonts/arfonts-omnes-arabic-light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Omnes";
+    src: url("/n-fonts/arfonts-omnes-arabic.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Omnes";
+    src: url("/n-fonts/arfonts-omnes-arabic-medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Omnes";
+    src: url("/n-fonts/arfonts-omnes-arabic-semi-bold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Omnes";
+    src: url("/n-fonts/arfonts-omnes-arabic-bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Omnes";
+    src: url("/n-fonts/arfonts-omnes-arabic-black.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}

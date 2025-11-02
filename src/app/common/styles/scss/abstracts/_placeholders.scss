@@ -1,0 +1,47 @@
+// Placeholder for clearing floats
+%clearfix {
+    &::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+// Placeholder for hidden elements
+%hidden {
+    display: none !important;
+}
+
+// Placeholder for visibility
+%visible {
+    visibility: visible;
+}
+
+// Placeholder for a center-aligned element
+%center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// Placeholder for a full-width element
+%full-width {
+    width: 100%;
+}
+
+//Examples
+
+// Example of using the clearfix placeholder
+// .container {
+//     @extend %clearfix;
+//   }
+
+// Example of using the hidden placeholder
+//   .hidden-element {
+//     @extend %hidden;
+//   }
+
+// Example of centering content
+//   .center-content {
+//     @extend %center;
+//   }

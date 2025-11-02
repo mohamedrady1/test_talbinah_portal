@@ -1,0 +1,55 @@
+<div class="prescriptions">
+  <section class="prescriptions__container" appAutoExactHeight heightMode="max-height">
+    <div class="prescriptions__header">
+      <p class="prescriptions__header--title">
+        👨🏻‍⚕️ {{ 'prescriptions' | translateApi }}
+      </p>
+
+      <app-local-search [searchTerm]="searchTerm()" (searchChange)="handleSearch($event)" />
+    </div>
+
+    @if (isLoading() || isLoadingFilter()) {
+    <!-- Loading Skeleton -->
+    <div class="prescriptions__loading">
+      @for (item of [1, 2, 3, 4]; track $index) {
+      <div class="skeleton-card"></div>
+      }
+    </div>
+    } @else if (errorMessage()) {
+    <!-- Error State -->
+    <div class="prescriptions__error">
+      <app-error-state-card [config]="errorState" />
+    </div>
+    } @else if (filteredPrescriptions().length > 0) {
+    <!-- Data Cards -->
+    <div class="prescriptions__cards-list" role="list" aria-live="polite">
+      <div class="prescriptions__cards">
+        @for (prescription of pagedPrescriptions(); track prescription.id) {
+        <div class="prescription-card">
+          <div class="label">
+            <span class="text">
+              {{'prescription_for_session_number' | translateApi}}
+            </span>
+            <span class="value">
+              {{prescription?.id || '--'}}
+            </span>
+          </div>
+          @if (getDownloadableFile(prescription); as fileToView) {
+          <app-file-viewer [file]="fileToView"></app-file-viewer>
+          }
+        </div>
+        }
+      </div>
+      @if (totalPages() > 1) {
+      <app-pagination-listing [paginationConfig]="localPaginationConfig()" />
+      }
+    </div>
+    } @else {
+    <!-- Empty State -->
+    <div class="prescriptions__empty">
+      <app-empty-state-card [config]="emptyState" />
+    </div>
+    }
+
+  </section>
+</div>

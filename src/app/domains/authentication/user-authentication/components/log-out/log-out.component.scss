@@ -1,0 +1,141 @@
+@use "./../../../../../common/styles/scss/buttons/button.mixins" as btn;
+@use "./../../../../../common/styles/scss/abstracts/mixins" as *;
+
+.log-out {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+
+    // Mobile styles (for bottom sheet)
+    @include respond(sm) {
+        position: static;
+        width: auto;
+        height: auto;
+    }
+
+    &__card {
+        background: var(--Dark-WHITE);
+        padding: 1.25rem;
+        z-index: 100;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        width: 32rem;
+        margin: 5px;
+
+        // Mobile styles
+        @include respond(sm) {
+            background: transparent;
+            box-shadow: none;
+            width: 100%;
+            margin: 0;
+            padding-block-start: 0;
+        }
+
+        svg {
+            @include respond(sm) {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        p {
+            color: var(--Primary-primary) !important;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .btn {
+            width: 100%;
+            @include btn.button-base;
+            @include btn.button-size("medium");
+            @include btn.button-icon-position("left");
+            @include btn.button-icon-size("medium");
+            @include btn.button-color("main");
+            @include btn.button-spinner;
+            min-width: 3rem;
+            max-width: fit-content;
+            &__icon {
+                display: inline-flex;
+                align-items: center;
+            }
+
+            &__label {
+                padding: 0 0.5rem;
+                white-space: nowrap;
+            }
+
+            &--disabled {
+                @include btn.button-disabled;
+            }
+            &--outline {
+                @include btn.button-type("outline");
+            }
+            &--solid {
+                @include btn.button-type("solid");
+                background-color: #dc3546;
+            }
+        }
+    }
+
+    &__loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        .log-out__loading-content {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .log-out__loading-text {
+            color: inherit;
+            font-weight: 500;
+        }
+
+        .log-out__loading-spinner {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+
+            .spinner-dot {
+                width: 0.5rem;
+                height: 0.5rem;
+                border-radius: 50%;
+                background-color: currentColor;
+                animation: spinner-bounce 1.4s ease-in-out infinite both;
+
+                &:nth-child(1) {
+                    animation-delay: -0.32s;
+                }
+
+                &:nth-child(2) {
+                    animation-delay: -0.16s;
+                }
+
+                &:nth-child(3) {
+                    animation-delay: 0s;
+                }
+            }
+        }
+    }
+
+    @keyframes spinner-bounce {
+        0%,
+        80%,
+        100% {
+            transform: scale(0);
+            opacity: 0.5;
+        }
+        40% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+}

@@ -1,0 +1,83 @@
+/* form-input-number.component.scss */
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+
+.custom-input-wrapper {
+  display: flex;
+  padding: 0rem 16px;
+  align-items: center;
+  gap: 0.5rem;
+  height: 3.125rem;
+  color: var(--text-200, #a3adbb);
+  font-size: 0.875rem;
+  border-radius: 0.75rem;
+  color: var(--text-primary, black);
+  overflow: hidden;
+  border: 1px solid var(--Dark-100, #eeeeee);
+
+  &.p-invalid {
+    border: 1px solid var(--error-color, red);
+  }
+
+  &__icon {
+    display: flex;
+    width: 1.25rem;
+    height: 1.25rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  input {
+    width: 100%;
+
+    &::placeholder {
+      color: var(--text-200, #a3adbb) !important;
+      font-size: 0.875rem !important;
+      font-weight: 500 !important;
+    }
+  }
+
+  &__input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background-color: transparent;
+
+    &::placeholder {
+      color: var(--text-200, #a3adbb);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+  }
+
+  &--with-icon {
+    gap: 0.5rem;
+  }
+
+  &--icon-start {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+
+    .custom-input-wrapper__icon {
+      order: 0;
+    }
+  }
+
+  &--icon-end {
+    flex-direction: row-reverse;
+
+    .custom-input-wrapper__icon {
+      order: 1;
+    }
+  }
+}
+
+.form-field__error {
+  display: inline-block;
+  margin-top: 0;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--error-color, #dc3545);
+}

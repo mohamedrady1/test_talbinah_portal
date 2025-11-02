@@ -1,0 +1,330 @@
+<div class="treatment-program-subsctiption">
+  @if (errorMessage()) {
+  <app-error-state-card [config]="errorState" style="margin: auto;"></app-error-state-card>
+  }
+  @else if (!isLoading()) {
+  <div class="treatment-program-subsctiption__content" appAutoExactHeight="20" heightMode="max-height">
+    <div class="treatment-program-subsctiption--right-side">
+      <div class="treatment-program-subsctiption--right-side--info">
+        <app-program-subscription-information-card [item]="programItem()?.data!"
+          (click)="openSubscriptionModal()"></app-program-subscription-information-card>
+      </div>
+      <div class="treatment-program-information--cards">
+        <div class="treatment-program-information--cards__card">
+          <div class="treatment-program-information--cards__card--image">
+            <svg width="36" height="37" viewBox="0 0 36 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="-0.00012207" y="0.5" width="36" height="36" rx="8" fill="#E7EBF8" />
+              <path
+                d="M20.2065 20.5133C19.8198 20.5133 19.3998 20.3866 18.9798 20.1266L18.0998 19.5933C18.0598 19.5666 17.9398 19.5666 17.8998 19.5933L17.0198 20.1266C16.2998 20.5666 15.5932 20.6333 15.0265 20.3133C14.4732 19.9999 14.1665 19.3733 14.1665 18.5533V13.8533C14.1665 12.2266 15.0532 11.3333 16.6665 11.3333H19.3332C20.9465 11.3333 21.8332 12.2266 21.8332 13.8533V18.5533C21.8332 19.3799 21.5265 20.0066 20.9732 20.3133C20.7398 20.4466 20.4798 20.5133 20.2065 20.5133ZM17.9998 18.5733C18.2198 18.5733 18.4398 18.6266 18.6198 18.7333L19.4998 19.2666C19.8932 19.5066 20.2532 19.5666 20.4798 19.4399C20.6998 19.3133 20.8265 18.9866 20.8265 18.5466V13.8533C20.8265 12.7866 20.3798 12.3333 19.3265 12.3333H16.6598C15.6065 12.3333 15.1598 12.7866 15.1598 13.8533V18.5533C15.1598 18.9933 15.2865 19.3199 15.5065 19.4466C15.7332 19.5733 16.0932 19.5133 16.4865 19.2733L17.3665 18.7399C17.5598 18.6266 17.7798 18.5733 17.9998 18.5733Z"
+                fill="#0E39B6" />
+              <path
+                d="M19.9999 25.6666H15.9999C12.3799 25.6666 10.8333 24.1066 10.8333 20.4533V18.4333C10.8333 15.3266 11.9533 13.7533 14.4599 13.3333C14.7266 13.2866 14.9866 13.4733 15.0333 13.7466C15.0799 14.0199 14.8933 14.2733 14.6199 14.3199C12.6133 14.6533 11.8266 15.8066 11.8266 18.4333V20.4533C11.8266 23.5266 12.9533 24.6666 15.9933 24.6666H19.9933C23.0333 24.6666 24.1599 23.5266 24.1599 20.4533V18.4333C24.1599 15.7666 23.3466 14.6133 21.2533 14.2999C20.9799 14.2599 20.7933 14.0066 20.8333 13.7333C20.8733 13.4599 21.1266 13.2733 21.3999 13.3133C23.9999 13.6999 25.1599 15.2733 25.1599 18.4333V20.4533C25.1666 24.1066 23.6199 25.6666 19.9999 25.6666Z"
+                fill="#0E39B6" />
+            </svg>
+          </div>
+          <div class="treatment-program-information--cards__card--content">
+            <p class="treatment-program-information--cards__card--content--title">
+              {{ 'sessions' | translateApi }}
+            </p>
+            <p class="treatment-program-information--cards__card--content--description">
+              {{ programItem()?.data?.sessions_count }}
+            </p>
+          </div>
+        </div>
+        <div class="treatment-program-information--cards__card">
+          <div class="treatment-program-information--cards__card--image">
+            <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0.333008" y="0.5" width="36" height="36" rx="8" fill="#E5FAF2" />
+              <path
+                d="M18.333 25.6668C17.8663 25.6668 17.393 25.4868 17.0397 25.1335L15.8997 24.0068C15.6197 23.7268 15.233 23.5735 14.8397 23.5735H14.333C12.953 23.5735 11.833 22.4602 11.833 21.0935V13.8135C11.833 12.4468 12.953 11.3335 14.333 11.3335H22.333C23.713 11.3335 24.833 12.4468 24.833 13.8135V21.0868C24.833 22.4535 23.713 23.5668 22.333 23.5668H21.8263C21.433 23.5668 21.0464 23.7268 20.7664 24.0002L19.6263 25.1268C19.273 25.4868 18.7997 25.6668 18.333 25.6668ZM14.333 12.3335C13.5063 12.3335 12.833 13.0002 12.833 13.8135V21.0868C12.833 21.9068 13.5063 22.5668 14.333 22.5668H14.8397C15.4997 22.5668 16.1397 22.8335 16.6063 23.2935L17.7463 24.4202C18.073 24.7402 18.5997 24.7402 18.9264 24.4202L20.0663 23.2935C20.533 22.8335 21.173 22.5668 21.833 22.5668H22.333C23.1597 22.5668 23.833 21.9002 23.833 21.0868V13.8135C23.833 12.9935 23.1597 12.3335 22.333 12.3335H14.333Z"
+                fill="#00AF6C" />
+              <path
+                d="M18.3794 16.9667C18.3661 16.9667 18.3461 16.9667 18.3327 16.9667C18.3127 16.9667 18.2861 16.9667 18.2661 16.9667C17.2927 16.9334 16.5327 16.1467 16.5327 15.1667C16.5327 14.1734 17.3394 13.3667 18.3327 13.3667C19.3261 13.3667 20.1327 14.1734 20.1327 15.1667C20.1261 16.1467 19.3661 16.9334 18.3927 16.9667C18.3927 16.9667 18.3861 16.9667 18.3794 16.9667ZM18.3327 14.3667C17.8927 14.3667 17.5327 14.7267 17.5327 15.1667C17.5327 15.6 17.8727 15.9534 18.2994 15.9667C18.2994 15.96 18.3394 15.96 18.3861 15.9667C18.8061 15.94 19.1327 15.5934 19.1327 15.1667C19.1327 14.7267 18.7727 14.3667 18.3327 14.3667Z"
+                fill="#00AF6C" />
+              <path
+                d="M18.333 21.6335C17.573 21.6335 16.813 21.4335 16.2197 21.0402C15.6597 20.6669 15.333 20.1269 15.333 19.5535C15.333 18.9802 15.653 18.4335 16.2197 18.0602C17.4064 17.2735 19.2597 17.2735 20.4397 18.0602C20.9997 18.4335 21.3263 18.9802 21.3263 19.5469C21.3263 20.1202 21.0063 20.6602 20.4397 21.0402C19.853 21.4402 19.093 21.6335 18.333 21.6335ZM16.773 18.8935C16.4863 19.0869 16.333 19.3202 16.333 19.5535C16.333 19.7869 16.493 20.0202 16.773 20.2135C17.6197 20.7802 19.0397 20.7802 19.8864 20.2135C20.173 20.0202 20.333 19.7869 20.3263 19.5535C20.3263 19.3202 20.1664 19.0869 19.8864 18.8935C19.0464 18.3269 17.6197 18.3269 16.773 18.8935Z"
+                fill="#00AF6C" />
+            </svg>
+
+          </div>
+          @if (programItem()?.data?.seats_label) {
+          <div class="treatment-program-information--cards__card--content">
+            <p class="treatment-program-information--cards__card--content--title">
+              {{ 'reminder_seats' | translateApi }}
+            </p>
+            <p class="treatment-program-information--cards__card--content--description"
+              style="color: var(--Success-primary);">
+              {{ programItem()?.data?.seats_label || '' }}
+            </p>
+          </div>
+          }
+        </div>
+        <div class="treatment-program-information--cards__card">
+          <div class="treatment-program-information--cards__card--image">
+            <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0.666504" y="0.5" width="36" height="36" rx="8" fill="#FAF4EB" />
+              <path
+                d="M22.6665 15.7732C22.6465 15.7732 22.6332 15.7732 22.6132 15.7732H22.5799C21.3199 15.7332 20.3799 14.7598 20.3799 13.5598C20.3799 12.3332 21.3799 11.3398 22.5999 11.3398C23.8199 11.3398 24.8199 12.3398 24.8199 13.5598C24.8132 14.7665 23.8732 15.7398 22.6732 15.7798C22.6732 15.7732 22.6732 15.7732 22.6665 15.7732ZM22.5999 12.3332C21.9266 12.3332 21.3799 12.8798 21.3799 13.5532C21.3799 14.2132 21.8932 14.7465 22.5532 14.7732C22.5599 14.7665 22.6132 14.7665 22.6732 14.7732C23.3199 14.7399 23.8199 14.2065 23.8266 13.5532C23.8266 12.8798 23.2799 12.3332 22.5999 12.3332Z"
+                fill="#FFAF44" />
+              <path
+                d="M22.673 20.6866C22.413 20.6866 22.153 20.6666 21.893 20.6199C21.6197 20.5733 21.4397 20.3133 21.4863 20.0399C21.533 19.7666 21.793 19.5866 22.0663 19.6333C22.8863 19.7733 23.753 19.6199 24.333 19.2333C24.6463 19.0266 24.813 18.7666 24.813 18.5066C24.813 18.2466 24.6397 17.9933 24.333 17.7866C23.753 17.3999 22.873 17.2466 22.0463 17.3933C21.773 17.4466 21.513 17.2599 21.4663 16.9866C21.4197 16.7133 21.5997 16.4533 21.873 16.4066C22.9597 16.2133 24.0863 16.4199 24.8863 16.9533C25.473 17.3466 25.813 17.9066 25.813 18.5066C25.813 19.0999 25.4797 19.6666 24.8863 20.0666C24.2797 20.4666 23.493 20.6866 22.673 20.6866Z"
+                fill="#FFAF44" />
+              <path
+                d="M14.6463 15.7735C14.6397 15.7735 14.633 15.7735 14.633 15.7735C13.433 15.7335 12.493 14.7602 12.4863 13.5602C12.4863 12.3335 13.4863 11.3335 14.7063 11.3335C15.9263 11.3335 16.9263 12.3335 16.9263 13.5535C16.9263 14.7602 15.9863 15.7335 14.7863 15.7735L14.6463 15.2735L14.693 15.7735C14.6797 15.7735 14.6597 15.7735 14.6463 15.7735ZM14.713 14.7735C14.753 14.7735 14.7863 14.7735 14.8263 14.7802C15.4197 14.7535 15.9397 14.2202 15.9397 13.5602C15.9397 12.8868 15.393 12.3402 14.7197 12.3402C14.0463 12.3402 13.4997 12.8868 13.4997 13.5602C13.4997 14.2135 14.0063 14.7402 14.653 14.7802C14.6597 14.7735 14.6863 14.7735 14.713 14.7735Z"
+                fill="#FFAF44" />
+              <path
+                d="M14.64 20.6866C13.82 20.6866 13.0333 20.4666 12.4267 20.0666C11.84 19.6733 11.5 19.1066 11.5 18.5066C11.5 17.9133 11.84 17.3466 12.4267 16.9533C13.2267 16.4199 14.3533 16.2133 15.44 16.4066C15.7133 16.4533 15.8933 16.7133 15.8467 16.9866C15.8 17.2599 15.54 17.4466 15.2667 17.3933C14.44 17.2466 13.5667 17.3999 12.98 17.7866C12.6667 17.9933 12.5 18.2466 12.5 18.5066C12.5 18.7666 12.6733 19.0266 12.98 19.2333C13.56 19.6199 14.4267 19.7733 15.2467 19.6333C15.52 19.5866 15.78 19.7733 15.8267 20.0399C15.8733 20.3133 15.6933 20.5733 15.42 20.6199C15.16 20.6666 14.9 20.6866 14.64 20.6866Z"
+                fill="#FFAF44" />
+              <path
+                d="M18.6665 20.7532C18.6465 20.7532 18.6332 20.7532 18.6132 20.7532H18.5799C17.3199 20.7132 16.3799 19.7398 16.3799 18.5398C16.3799 17.3132 17.3799 16.3198 18.5999 16.3198C19.8199 16.3198 20.8199 17.3198 20.8199 18.5398C20.8132 19.7465 19.8732 20.7198 18.6732 20.7598C18.6732 20.7532 18.6732 20.7532 18.6665 20.7532ZM18.5999 17.3132C17.9266 17.3132 17.3799 17.8598 17.3799 18.5332C17.3799 19.1932 17.8932 19.7265 18.5532 19.7532C18.5599 19.7465 18.6132 19.7465 18.6732 19.7532C19.3199 19.7198 19.8199 19.1865 19.8266 18.5332C19.8266 17.8665 19.2799 17.3132 18.5999 17.3132Z"
+                fill="#FFAF44" />
+              <path
+                d="M18.6662 25.6735C17.8662 25.6735 17.0662 25.4668 16.4462 25.0468C15.8595 24.6535 15.5195 24.0935 15.5195 23.4935C15.5195 22.9002 15.8529 22.3268 16.4462 21.9335C17.6929 21.1068 19.6462 21.1068 20.8862 21.9335C21.4729 22.3268 21.8129 22.8868 21.8129 23.4868C21.8129 24.0801 21.4795 24.6535 20.8862 25.0468C20.2662 25.4602 19.4662 25.6735 18.6662 25.6735ZM16.9995 22.7735C16.6862 22.9801 16.5195 23.2401 16.5195 23.5001C16.5195 23.7601 16.6929 24.0135 16.9995 24.2201C17.8995 24.8268 19.4262 24.8268 20.3262 24.2201C20.6395 24.0135 20.8062 23.7535 20.8062 23.4935C20.8062 23.2335 20.6329 22.9801 20.3262 22.7735C19.4329 22.1668 17.9062 22.1735 16.9995 22.7735Z"
+                fill="#FFAF44" />
+            </svg>
+          </div>
+          <div class="treatment-program-information--cards__card--content">
+            <p class="treatment-program-information--cards__card--content--title">
+              {{ 'registered' | translateApi }}
+            </p>
+            <p class="treatment-program-information--cards__card--content--description"
+              style=" color: var(--Warning-primary);">
+              {{ programItem()?.data?.usage_number }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="treatment-program-details">
+        <div class="treatment-program-details__about-program">
+          <div class="treatment-program-details__about-program--content">
+            <div class="treatment-program-details__about-program--content__header">
+              <p class="treatment-program-details__about-program--content__header--title">
+                {{ 'about_program' | translateApi }}
+              </p>
+              <div class="treatment-program-details__about-program--content__header--period">
+                <p>
+                  <span>
+                    {{ 'program_duration' | translateApi }}
+                  </span>
+                  <span>
+                    {{ programItem()?.data?.programme_period }}
+                  </span>
+                  <span>
+                    {{'day' | translateApi}}
+                  </span>
+                </p>
+              </div>
+            </div>
+            <p class="treatment-program-details__about-program--content__description">
+              {{ programItem()?.data?.description }}
+            </p>
+          </div>
+        </div>
+
+        <div class="treatment-program-details__program-advantages" style="display: none;">
+          <p class="treatment-program-details__program-advantages--title">
+            مزايا البرنامج
+          </p>
+          <p class="treatment-program-details__program-advantages--description">
+            تقييم اولي دقيق لحالة الطفل
+            <br>
+            خطة علاجية متكاملة دوائية و سلوكية
+            <br>
+            استشارات مع نخبة من المختصيين في مجال التوحد
+            <br>
+            خصم 50% لفترة محدوده
+            <br>
+            عرض حصري ومقاعد محدوده
+          </p>
+        </div>
+      </div>
+
+      <div class="treatment-program-details__program-stages">
+        <div class="treatment-program-details__program-stages__header">
+          <p class="treatment-program-details__program-stages__header--title">
+            {{'therapeuticPrograms.programPhases' | translate}}
+          </p>
+          <p class="treatment-program-details__program-stages__header--description">
+            {{ 'therapeuticPrograms.program_phases_description' | translate:{ phasesCount:
+            programItem()?.data?.phases_count || 0} }}
+          </p>
+        </div>
+
+        @if (programItem()?.data?.phases_count && programItem()?.data?.phases_count !== 0) {
+        <div class="treatment-program-details__program-stages--list">
+          @for (phase of programItem()?.data?.phases; track $index; let i = $index) {
+          <div class="treatment-program-details__program-stages__card">
+            <div class="treatment-program-details__program-stages__card--image">
+              <svg width="36" height="37" viewBox="0 0 36 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="-0.00012207" y="0.5" width="36" height="36" rx="8" fill="#E7EBF8" />
+                <path
+                  d="M20.2065 20.5133C19.8198 20.5133 19.3998 20.3866 18.9798 20.1266L18.0998 19.5933C18.0598 19.5666 17.9398 19.5666 17.8998 19.5933L17.0198 20.1266C16.2998 20.5666 15.5932 20.6333 15.0265 20.3133C14.4732 19.9999 14.1665 19.3733 14.1665 18.5533V13.8533C14.1665 12.2266 15.0532 11.3333 16.6665 11.3333H19.3332C20.9465 11.3333 21.8332 12.2266 21.8332 13.8533V18.5533C21.8332 19.3799 21.5265 20.0066 20.9732 20.3133C20.7398 20.4466 20.4798 20.5133 20.2065 20.5133ZM17.9998 18.5733C18.2198 18.5733 18.4398 18.6266 18.6198 18.7333L19.4998 19.2666C19.8932 19.5066 20.2532 19.5666 20.4798 19.4399C20.6998 19.3133 20.8265 18.9866 20.8265 18.5466V13.8533C20.8265 12.7866 20.3798 12.3333 19.3265 12.3333H16.6598C15.6065 12.3333 15.1598 12.7866 15.1598 13.8533V18.5533C15.1598 18.9933 15.2865 19.3199 15.5065 19.4466C15.7332 19.5733 16.0932 19.5133 16.4865 19.2733L17.3665 18.7399C17.5598 18.6266 17.7798 18.5733 17.9998 18.5733Z"
+                  fill="#0E39B6" />
+                <path
+                  d="M19.9999 25.6666H15.9999C12.3799 25.6666 10.8333 24.1066 10.8333 20.4533V18.4333C10.8333 15.3266 11.9533 13.7533 14.4599 13.3333C14.7266 13.2866 14.9866 13.4733 15.0333 13.7466C15.0799 14.0199 14.8933 14.2733 14.6199 14.3199C12.6133 14.6533 11.8266 15.8066 11.8266 18.4333V20.4533C11.8266 23.5266 12.9533 24.6666 15.9933 24.6666H19.9933C23.0333 24.6666 24.1599 23.5266 24.1599 20.4533V18.4333C24.1599 15.7666 23.3466 14.6133 21.2533 14.2999C20.9799 14.2599 20.7933 14.0066 20.8333 13.7333C20.8733 13.4599 21.1266 13.2733 21.3999 13.3133C23.9999 13.6999 25.1599 15.2733 25.1599 18.4333V20.4533C25.1666 24.1066 23.6199 25.6666 19.9999 25.6666Z"
+                  fill="#0E39B6" />
+              </svg>
+            </div>
+            <div class="treatment-program-details__program-stages__card--content">
+              <p class="treatment-program-details__program-stages__card--content--title">
+                <span>
+                  {{'phase' | translateApi}}
+                </span>
+                <span>
+                  {{ i + 1 }} :
+                </span>
+                <span>
+                  {{phase?.title}}
+                </span>
+
+              </p>
+              <p class="treatment-program-details__program-stages__card--content--description">
+                {{phase?.description}}
+              </p>
+            </div>
+          </div>
+          }
+        </div>
+        }
+      </div>
+      @if(programItem()?.data?.doctor?.length==0){
+      <div class="treatment-program-subsctiption__actions sticky">
+        @if ( programItem()?.data?.is_purchased && programItem()?.data?.url) {
+        <button (click)="openSubscriptionModal()" class="btn"
+          [ngClass]="{'btn--outline': data?.item?.is_purchased,'btn--solid':!data?.item?.is_purchased}">
+          {{'supportGroups.programLink' | translateApi}}
+        </button>
+        }
+        @else if(!programItem()?.data?.is_purchased ) {
+        <button (click)="openSubscriptionModal()" class="btn btn--sticy"
+          [ngClass]="{'btn--outline': data?.item?.is_purchased,'btn--solid':!data?.item?.is_purchased}">
+          {{'program_subscription' | translateApi}}
+        </button>
+        }
+      </div>
+      }
+    </div>
+    @if(programItem()?.data?.doctor?.length ?? 0 > 0){
+    <div class="treatment-program-subsctiption--supervising-doctors-wrapper">
+      <div class="treatment-program-subsctiption--supervising-doctors">
+        <app-card-header [config]="doctorsHeader" [total]="programItem()?.data?.doctor?.length ?? 0" [count]="3"
+          (allClicked)="openAllDoctorsPopup()"></app-card-header>
+
+        <div class="treatment-program-subsctiption--supervising-doctors--list">
+          @for (item of programItem()?.data?.doctor?.slice(0,3); track $index) {
+          <app-doctor-card-for-booking [item]="item" [type]="cardTypes.SUMMARY" />
+          }
+        </div>
+        <div class="treatment-program-subsctiption__actions">
+          @if (programItem()?.data?.is_purchased && programItem()?.data?.url) {
+          <button (click)="openSubscriptionModal()" class="btn"
+            [ngClass]="{'btn--outline': data?.item?.is_purchased,'btn--solid':!data?.item?.is_purchased}">
+            {{'supportGroups.programLink' | translateApi}}
+          </button>
+          }
+          @else if(!programItem()?.data?.is_purchased ) {
+          <button (click)="openSubscriptionModal()" class="btn"
+            [ngClass]="{'btn--outline': data?.item?.is_purchased,'btn--solid':!data?.item?.is_purchased}">
+            {{'program_subscription' | translateApi}}
+          </button>
+          }
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+  }
+  @else {
+  <div class="treatment-program-subsctiption__content shimmer-wrapper">
+    <div class="treatment-program-subsctiption--right-side">
+      <div class="treatment-program-subsctiption--right-side--info shimmer-card">
+        <div class="program-subscription-information-card__content">
+          <div class="program-subscription-information-card__image shimmer-circle"></div>
+          <div class="program-subscription-information-card__info">
+            <div class="program-subscription-information-card__title">
+              <div class="shimmer-line short" style="width: 70%;"></div>
+            </div>
+            <div class="program-subscription-information-card__description">
+              <div class="shimmer-line"></div>
+              <div class="shimmer-line short"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="treatment-program-information--cards">
+        @for (i of [1,2,3]; track i) {
+        <div class="treatment-program-information--cards__card shimmer-card">
+          <div class="treatment-program-information--cards__card--image shimmer-wrapper"></div>
+          <div class="treatment-program-information--cards__card--content">
+            <div class="shimmer-line short" style="width: 80%;"></div>
+            <div class="shimmer-line short" style="width: 50%;"></div>
+          </div>
+        </div>
+        }
+      </div>
+
+      <div class="treatment-program-details shimmer-card" style="height: 8rem;">
+        <div class="treatment-program-details__about-program--content">
+          <div class="treatment-program-details__about-program--content__header">
+            <div class="shimmer-line short" style="width: 40%;"></div>
+            <div class="shimmer-line short" style="width: 30%;"></div>
+          </div>
+          <div class="treatment-program-details__about-program--content__description">
+            <div class="shimmer-line"></div>
+            <div class="shimmer-line"></div>
+            <div class="shimmer-line short"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="treatment-program-details__program-stages shimmer-card" style="height: 12rem;">
+        <div class="treatment-program-details__program-stages__header">
+          <div class="shimmer-line short" style="width: 50%;"></div>
+          <div class="shimmer-line"></div>
+          <div class="shimmer-line short"></div>
+        </div>
+        <div class="treatment-program-details__program-stages--list">
+          @for (i of [1,2]; track i) {
+          <div class="treatment-program-details__program-stages__card shimmer-card" style="height: 4rem;">
+            <div class="treatment-program-details__program-stages__card--image shimmer-wrapper"></div>
+            <div class="treatment-program-details__program-stages__card--content">
+              <div class="shimmer-line short" style="width: 70%;"></div>
+              <div class="shimmer-line short" style="width: 90%;"></div>
+            </div>
+          </div>
+          }
+        </div>
+        {{programItem()?.data?.doctor?.length}}
+      </div>
+
+    </div>
+
+    <div class="treatment-program-subsctiption--supervising-doctors shimmer-card">
+      <div class="shimmer-line short" style="width: 60%;"></div>
+      <div class="treatment-program-subsctiption--supervising-doctors--list">
+        @for (i of [1,2,3,4,5]; track i) {
+        <div class="shimmer-card">
+          <div class="program-subscription-information-card__content">
+            <div class="program-subscription-information-card__image shimmer-circle"></div>
+            <div class="program-subscription-information-card__info">
+              <div class="program-subscription-information-card__title">
+                <div class="shimmer-line short" style="width: 80%;"></div>
+              </div>
+              <div class="program-subscription-information-card__description">
+                <div class="shimmer-line short"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+      <div class="treatment-program-subsctiption__actions">
+        <div class="shimmer-line" style="width: 100px; height: 40px; border-radius: 20px;"></div>
+      </div>
+    </div>
+  </div>
+  }
+</div>

@@ -1,0 +1,503 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+@use "../../../../common/styles/scss/utils/helpers" as *;
+
+.session-doctor {
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: var(--Dark-50);
+    border-radius: 0.625rem;
+    padding: 1rem;
+    box-shadow:
+      0px -1px 50px 9px rgba(0, 0, 0, 0.08),
+      0px 0px 0px 1.5px rgba(255, 255, 255, 0.25) inset;
+    backdrop-filter: blur(20px);
+  }
+
+  &__content {
+    @include flex-box(row, 0.75rem);
+
+    @include respond(sm) {
+      flex-direction: column;
+    }
+
+    &--right-panel-expanded {
+      flex-direction: column;
+
+      .session-doctor__right-panel {
+        width: 100% !important;
+        max-width: 100%;
+        min-width: 100%;
+        position: static;
+        align-self: stretch;
+      }
+
+      .session-doctor__left-panel {
+        display: none !important;
+      }
+    }
+  }
+
+  &__left-panel {
+    @include flex-box(column, 0.75rem);
+    flex: 1;
+    border-radius: 1rem;
+    background: var(--Dark-WHITE, #fff);
+    height: fit-content;
+    // padding: 0.75rem;
+
+    &--waiting-doctor {
+      border-radius: 1rem;
+      background: linear-gradient(270deg, rgba(186, 240, 232, 0.5) 0%, rgba(245, 218, 184, 0.5) 100%);
+
+      height: 100%;
+      width: 100%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      position: relative;
+
+      .centered-image {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 10px 0;
+      }
+
+      .top-image {
+        width: 6.25rem;
+        height: 6.25rem;
+        flex-shrink: 0;
+        position: absolute;
+        animation: pulse 0.8s infinite alternate;
+      }
+
+      .wave-animated-image {
+        animation: pulse 0.8s infinite alternate;
+      }
+    }
+  }
+
+  &__right-panel {
+    @include flex-box(column, 0.75rem);
+    padding: 0 0.75rem;
+    border-radius: 1rem;
+    background: var(--Dark-WHITE, #fff);
+    min-width: 21rem;
+    max-width: 25rem;
+    height: fit-content;
+    margin-inline-end: 0.5rem;
+    overflow-y: visible;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+
+    @include respond(sm) {
+      width: 100%;
+      min-width: unset;
+      max-width: unset;
+    }
+
+    &-header-container {
+      display: flex;
+      padding: 0.75rem 0 0 0;
+      justify-content: space-between;
+      align-items: center;
+      align-self: stretch;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    &-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-direction: column;
+      background: none;
+      border: none;
+      padding: 0.25rem 0;
+      cursor: pointer;
+      /* Indicate it's clickable for expansion */
+
+      &-title {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-weight: 600;
+        color: var(--text-400, #0f0f0f);
+        font-size: 0.75rem;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: -0.015rem;
+      }
+    }
+
+    &--chat-info {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    &-chat-container {
+      padding-block-end: 1rem;
+      width: 100%;
+      transition:
+        width 0.3s ease,
+        margin 0.3s ease;
+
+      &--expanded {
+        width: 80%;
+        margin: 0 auto;
+
+        @media (max-width: 991px) {
+          width: 100%;
+          margin: 0;
+        }
+      }
+    }
+
+    &-chat-input {
+      display: flex;
+      padding: var(--Radius-8, 0.5rem) 1.25rem;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      align-self: stretch;
+      width: 100%;
+
+      .chat-input {
+        width: 100%;
+      }
+
+      &--container {
+        position: relative;
+        width: 100%;
+
+        .reply-box {
+          position: absolute;
+          inset-block-end: 100%;
+          z-index: 20;
+        }
+      }
+    }
+  }
+
+  &__status-indicator {
+    display: flex;
+    align-items: center;
+  }
+
+  &__chat-date {
+    color: var(--Dark-DARK, #1d1f1f);
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  &__copy-tooltip {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  &__copy-button {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    /* Remove default button padding */
+  }
+
+  &__copy-code {
+    color: var(--Dark-DARK, #1d1f1f);
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  &__toggle-chat-button {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 0;
+    /* Remove default button padding */
+    cursor: pointer;
+
+    svg {
+      stroke: #a3adbb;
+      transition: transform 0.2s ease;
+    }
+  }
+
+  &__loading-message {
+    text-align: center;
+    padding: 1rem;
+    color: var(--text-400, #0f0f0f);
+    /* Example color */
+  }
+
+  &__audio-video-controls {
+    position: relative;
+
+    .loading-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.7);
+      z-index: 10;
+      border-radius: 0.5rem;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &::after {
+        content: "...";
+        font-size: 1;
+        font-weight: bold;
+        color: #0e38b6b5;
+        animation: dotPulse 1.5s infinite;
+        letter-spacing: 0.5rem;
+      }
+    }
+
+    // Disable interaction when loading
+    app-call-type-selector {
+      &[disabled] {
+        opacity: 0.75;
+        pointer-events: none;
+      }
+    }
+  }
+
+  @keyframes dotPulse {
+    0%,
+    100% {
+      opacity: 0.2;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+}
+
+.reply-box {
+  width: 95%;
+  background: var(--Primary-100, #dbe1f4);
+  border-inline-start: 4px solid var(--Primary-primary, #0e39b6);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  position: relative;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0.25rem;
+  }
+
+  &__content-label {
+    flex-grow: 1;
+    font-size: 14px;
+    color: var(--text-700, #1e1e1e);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+    display: flex;
+    gap: 0.25rem;
+    /* Adjust gap between "Replying to:" and name */
+  }
+
+  &__close-button {
+    position: absolute;
+    inset-block-start: -0.25rem;
+    inset-inline-end: -0.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.125rem;
+    gap: 0.25rem;
+    border: none;
+    border-radius: 0.75rem;
+    background: var(--Dark-50, #f6f7f8);
+    cursor: pointer;
+    color: var(--text-400, #999);
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--red-500, #e53935);
+    }
+
+    svg {
+      width: 0.8rem;
+      height: 0.8rem;
+    }
+  }
+
+  &__content {
+    /* Styles for the referenced message content */
+    /* No specific changes here, app-referenced-message component handles its own styles */
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.1);
+    /* Slightly enlarge */
+    opacity: 0.8;
+    /* Make slightly transparent */
+  }
+}
+
+// Header Error State
+.session-doctor__header-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: var(--Error-50, #ffebee);
+  border-radius: 0.75rem;
+  width: 100%;
+
+  &-text {
+    color: var(--Error-primary, #dc3545);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: center;
+  }
+}
+
+// Shimmer Loading Styles for Header
+.session-doctor__header-shimmer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: var(--Dark-WHITE, #fff);
+  border-radius: 1rem;
+  gap: 1rem;
+
+  .session-doctor__shimmer-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+  }
+
+  .session-doctor__shimmer-status-indicator {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background: var(--Dark-100, #edeef1);
+    flex-shrink: 0;
+  }
+
+  .session-doctor__shimmer-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+  }
+
+  .session-doctor__shimmer-doctor-name {
+    height: 1.125rem;
+    width: 8rem;
+    background: var(--Dark-100, #edeef1);
+    border-radius: 0.25rem;
+  }
+
+  .session-doctor__shimmer-reservation-code {
+    height: 0.875rem;
+    width: 6rem;
+    background: var(--Dark-100, #edeef1);
+    border-radius: 0.25rem;
+  }
+
+  .session-doctor__shimmer-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .session-doctor__shimmer-call-controls {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--Dark-100, #edeef1);
+    border-radius: 0.5rem;
+  }
+
+  .session-doctor__shimmer-toggle-button {
+    width: 2rem;
+    height: 2rem;
+    background: var(--Dark-100, #edeef1);
+    border-radius: 0.25rem;
+  }
+
+  .session-doctor__shimmer-menu {
+    width: 2rem;
+    height: 2rem;
+    background: var(--Dark-100, #edeef1);
+    border-radius: 0.25rem;
+  }
+}
+
+// Shimmer Animation
+.session-doctor__header-shimmer {
+  .session-doctor__shimmer-status-indicator,
+  .session-doctor__shimmer-doctor-name,
+  .session-doctor__shimmer-reservation-code,
+  .session-doctor__shimmer-call-controls,
+  .session-doctor__shimmer-toggle-button,
+  .session-doctor__shimmer-menu {
+    background: linear-gradient(
+      90deg,
+      var(--Dark-100, #edeef1) 25%,
+      var(--Dark-50, #f6f7f8) 50%,
+      var(--Dark-100, #edeef1) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}

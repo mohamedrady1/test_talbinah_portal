@@ -1,0 +1,18 @@
+<div class="session-expired-modal">
+    <div class="session-expired-modal__content">
+        <img src="images/khawiik/khawiik-welcome-mian-icon-2.png" alt="Session Expired"
+            class="session-expired-modal__icon" />
+
+        <h2 class="session-expired-modal__title">
+            {{ 'time_period_ended' | translateApi }}
+        </h2>
+
+        <p class="session-expired-modal__description">
+            {{ 'session_expired_start_new_period' | translateApi }}
+        </p>
+
+        <button class="session-expired-modal__button" (click)="onStartNewSession()">
+            {{ 'start_now' | translateApi }}
+        </button>
+    </div>
+</div>

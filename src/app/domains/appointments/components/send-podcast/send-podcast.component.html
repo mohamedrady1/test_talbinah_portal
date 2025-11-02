@@ -1,0 +1,64 @@
+<div class="send-podcast-modal">
+  <div class="send-podcast-modal__container" appAutoExactHeight="120">
+    <!-- ░░░ Tabs + Search ░░░ -->
+    <div class="send-podcast-modal__modal-filterations">
+      <div class="send-podcast-modal__modal-filterations--tabs">
+        <!-- All‑items tab -->
+        <button type="button" class="send-podcast-modal__tab"
+          [class.send-podcast-modal__tab--active]="selectedCategory() === 'all'" (click)="selectCategory('all')">
+          {{ 'all' | translateApi }}
+        </button>
+
+        <!-- Dynamic category tabs -->
+        @if (!isLoadingCategoriesItem()) {
+        @for (cat of categoriesItem()?.data; track cat.id) {
+        <button type="button" class="send-podcast-modal__tab"
+          [class.send-podcast-modal__tab--active]="selectedCategory() === cat.id" (click)="selectCategory(cat.id)">
+          {{ cat.name }}
+        </button>
+        }
+        } @else {
+        <div class="send-podcast-modal__loading-tabs">
+          @for (item of [1,2,3,4]; track $index) {
+          <div class="send-podcast-modal__tab shimmer-tab"></div>
+          }
+        </div>
+        }
+      </div>
+
+      <!-- Search bar -->
+      <div class="send-podcast-modal__modal-filterations--search">
+        <input type="text" class="send-podcast-modal__search-input" placeholder="ابحث" [value]="searchQuery()"
+          (input)="onSearch($any($event.target).value)" />
+
+        @if (searchQuery()) {
+        <button type="button" class="send-podcast-modal__search-clear" (click)="clearSearch()"
+          aria-label="Clear search">
+          <app-svg-icon name="clear-search-icon" />
+        </button>
+        }
+      </div>
+    </div>
+
+    <!-- ░░░ Content area (unchanged) ░░░ -->
+    <div class="content-area">
+      @if (isLoadingPodcasts()) {
+      <app-podcast-skeleton [count]="2" />
+      } @else if (allPodcastsErrorMessage()) {
+      <div class="error-message">
+        <app-error-state-card [config]="allPodcastsError" [type]="'small'"></app-error-state-card>
+      </div>
+      } @else if (podcastCards().length === 0) {
+      <app-empty-state-card [config]="noPodcasts" [type]="'small'" />
+      } @else {
+      <div class="send-podcast-modal__items podcast-list">
+        @for (podcast of podcastCards(); track podcast.id) {
+        <app-podcast-card-for-meeting-chat [item]="podcast" (cardClicked)="onPodcastSelectedToSend(podcast)"
+          [hideFavouriteAction]="true" [preventDetailsModal]="false" [hideDescription]="true"
+          class="send-podcast-modal__item" [actionNotWorking]="true" />
+        }
+      </div>
+      }
+    </div>
+  </div>
+</div>

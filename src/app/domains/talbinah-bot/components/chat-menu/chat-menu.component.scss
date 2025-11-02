@@ -1,0 +1,114 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+
+.chat-menu {
+    position: relative;
+    direction: rtl;
+    &:dir(rtl) {
+        direction: ltr;
+    }
+    &__button {
+        display: flex;
+        padding: 0.125rem 0.5625rem 0.125rem 0.125rem;
+        align-items: center;
+        gap: 0.375rem;
+        align-self: stretch;
+        border-radius: 1.25rem;
+        background: transparent;
+        text-align: start;
+        border: none;
+        cursor: pointer;
+        &:dir(rtl) {
+            padding: 0.125rem 0.125rem 0.125rem 0.5625rem;
+        }
+        @include respond(sm) {
+            padding: 0.5rem 0.57rem !important;
+        }
+    }
+
+    &__details {
+        background-color: var(--Dark-WHITE);
+        position: absolute;
+        top: 1rem;
+        z-index: 5;
+        display: flex;
+        padding: 0.75rem 0.625rem;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.375rem;
+        border-radius: 0.75rem;
+        background: var(--Dark-WHITE);
+        box-shadow: 0px 0.25rem 0.5625rem 0px rgba(0, 0, 0, 0.1);
+        min-width: 9.375rem;
+        right: 0;
+        &:dir(rtl) {
+            left: 0;
+            right: auto;
+        }
+    }
+    &__list {
+        transition: height 0.3s ease-in-out;
+        background: inherit;
+        width: 100%;
+
+        &-items {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            .chat-menu__list-item {
+                padding: 0.625rem;
+                border-radius: 0.5rem;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 0.425rem;
+                &:not(:last-child) {
+                    border-bottom: 1px solid var(--Dark-50);
+                }
+
+                &:hover {
+                    background-color: #6890df15;
+                }
+                &.delete {
+                    &:hover {
+                        background-color: #dc354619;
+                    }
+                }
+
+                .chat-menu__list-item-image {
+                    height: 1.25rem;
+                    width: 1.25rem;
+                    overflow: hidden;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    svg {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+                .chat-menu__list-item-text {
+                    font-size: 0.75rem;
+                    color: var(--text-300, #47586e);
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+    &__details--ar {
+        direction: rtl;
+    }
+
+    &__details--en {
+        direction: ltr;
+    }
+
+    // Edit item styling
+    &__list-item.edit {
+        &:hover {
+            background-color: #6890df15;
+        }
+    }
+}

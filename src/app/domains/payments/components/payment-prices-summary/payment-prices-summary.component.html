@@ -1,0 +1,149 @@
+<div class="payment-summary">
+  <div class="payment-summary__header">
+    <div class="payment-summary__payment-info">
+      <p class="payment-summary__method-name">
+        {{ dataSummary()?.paymentType?.name }}
+      </p>
+      <p class="payment-summary__method-details">
+        {{ dataSummary()?.paymentType?.original_active }}
+      </p>
+    </div>
+    <div class="payment-summary__icon-wrapper">
+      <app-svg-icon name="wallet-blue-icon" />
+    </div>
+  </div>
+
+  <!-- Discount Code Section -->
+  @if (shouldShowDiscountSection()) {
+
+  <!-- Show Error State Card if there's an error -->
+
+  <div class="payment-method-block__discount-section">
+    <div class="payment-method-block__choose-method">
+      <div class="payment-method-block__choose-method-title">
+        <app-svg-icon name="discount-icon" />
+        <p>
+          {{'discount_code'|translateApi}}
+        </p>
+      </div>
+    </div>
+
+    <form [formGroup]="discountForm" (ngSubmit)="applyDiscount()" class="payment-method-block__discount-form">
+      <div class="payment-method-block__discount-input-group" [ngClass]="{'error': couponErrorMessage()}">
+        <input class="payment-method-block__discount-input" type="text" name="DiscountCode" id="DiscountCode"
+          formControlName="code" [attr.aria-label]="'OrderSummary.DiscountCode' | translate"
+          [ngClass]="{'disabled': isDiscountApplied()}"
+          placeholder="{{ 'OrderSummary.DiscountCodePlaceholder' | translate }}"
+          [ngClass]="{'error': couponErrorMessage()}" [disabled]="isDiscountApplied()" />
+
+        <div class="payment-method-block__discount-actions">
+          @if (isDiscountApplied()) {
+          <button type="button" class="payment-method-block__discount-submit-button" (click)="removeDiscount()"
+            [attr.aria-label]="'cancel' | translateApi">
+            {{ 'cancel' | translateApi }}
+          </button>
+          } @else {
+          <button type="submit" class="payment-method-block__discount-submit-button"
+            [disabled]="isLoadingDiscount() || !discountForm.get('code')?.value?.trim()"
+            [attr.aria-label]="'apply' | translateApi">
+            @if (isLoadingDiscount()) {
+            <div class="payment-method-block__discount-button-loading" role="status" aria-live="polite">
+              {{ 'in_progress' | translateApi }}
+              <span class="dot-loader" aria-hidden="true"></span>
+            </div>
+            } @else {
+            {{ 'apply' | translateApi }}
+            }
+          </button>
+          }
+        </div>
+      </div>
+      @if(couponErrorMessage() && !discountSuccessMessage()) {
+      <span role="alert" class="payment-method-block__discount-error-message"> {{ couponErrorMessage() }} </span>
+      }
+      @if (discountSuccessMessage()) {
+      <span class="payment-method-block__discount-success-message" role="alert">
+        {{ discountSuccessMessage() }}
+      </span>
+      }
+
+    </form>
+  </div>
+  }
+  @if (discountErrorMessage()) {
+  <div class="payment-method-block__discount-error-card">
+    <app-error-state-card [config]="discountErrorState()" type="small"></app-error-state-card>
+  </div>
+  } @else if(!discountErrorMessage() && !isLoadingDiscount()) {
+  <div class="payment-summary__details">
+    @if (dataSummary()?.reservationsSummary?.payments?.length) {
+    @for (item of dataSummary().reservationsSummary.payments; track $index) {
+    <div class="payment-summary__details-item">
+      <p class="payment-summary__details-label">
+        {{ item?.label }}
+      </p>
+      <p class="payment-summary__details-value">
+        {{ item?.value }}
+        {{ item?.currency }}
+      </p>
+    </div>
+    }
+    }
+
+    @if (dataSummary()?.reservationsSummary?.total){
+    <hr>
+    <div>
+
+      <div class="payment-summary__information--current-balance">
+        <p>
+          {{ dataSummary().reservationsSummary?.total?.label }}
+        </p>
+        <p>
+          {{dataSummary().reservationsSummary?.total?.value}}
+          {{dataSummary().reservationsSummary?.total?.currency}}
+        </p>
+      </div>
+
+    </div>
+    }
+  </div>
+
+  @if (hasError()) {
+  <p class="payment-summary__error-message" role="alert">
+    {{ 'error_not_enough_balance' | translateApi }}
+  </p>
+  }
+  }
+  @else {
+  <div class="payment-summary__loading-state" aria-live="polite">
+    <div class="input-group-shimmer">
+      <div class="input-group-shimmer__text-content">
+        <div class="input-group-shimmer__title-line"></div>
+        <div class="input-group-shimmer__count-line"></div>
+      </div>
+    </div>
+  </div>
+  }
+
+</div>
+<div class="payment-summary__actions">
+  <button id="cancel-btn" type="button" class="payment-summary__button payment-summary__button--cancel"
+    (click)="onCancel()" [attr.aria-label]="'back' | translateApi">
+    {{ 'back' | translateApi }}
+  </button>
+
+  @if (!discountErrorMessage()) {
+  <button id="next-btn" type="button" class="payment-summary__button payment-summary__button--confirm"
+    [ngClass]="{'disabled': isLoading}" (click)="onNext()" [disabled]="isLoading"
+    [attr.aria-label]="'confirm_subscription' | translateApi">
+    @if (isLoading) {
+    <div class="payment-summary__button-loading" role="status" aria-live="polite">
+      {{ 'in_progress' | translateApi }}
+      <span class="dot-loader" aria-hidden="true"></span>
+    </div>
+    } @else {
+    {{ 'confirm_subscription' | translateApi }}
+    }
+  </button>
+  }
+</div>

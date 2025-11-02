@@ -1,0 +1,43 @@
+<div class="all-mental-health" appAutoExactHeight="70" heightMode="max-height">
+  <div class="all-mental-health-container">
+    @if (type === 'test') {
+    @if (isLoadingScales()) {
+    <div class="loading-state" aria-live="polite">
+      @for (item of [1,2,3,4,5]; track $index) {
+      <app-mental-health-scale-test-shimmer></app-mental-health-scale-test-shimmer>
+      }
+    </div>
+    } @else if (scalesErrorMessage()) {
+    <div class="error-state" role="alert">
+      <app-error-state [config]="measurementsErrorState"></app-error-state>
+    </div>
+    } @else if (scales() && scales().length > 0) {
+    @for (test of scales(); track test.id) {
+    <app-card [testDetails]="test"></app-card>
+    }
+    } @else {
+    <app-empty-state [config]="measurementsEmptyState" class="w-100"></app-empty-state>
+    }
+    }
+
+    @if (type === 'DepressiveDisorderScale') {
+    @if (isLoadingMyMeasurementsList()) {
+    @for (item of [1,2,3,4,5]; track $index) {
+    <app-mental-health-scale-test-shimmer></app-mental-health-scale-test-shimmer>
+    }
+    } @else if (myMeasurementsList() && myMeasurementsList().length > 0) {
+    @for (measurement of myMeasurementsList(); track measurement.id) {
+    <div class="mental-health-scale">
+      <app-card [testDetails]="measurement" [type]="type"></app-card>
+
+    </div>
+    }
+
+    } @else if (myMeasurementsList().length === 0 && !myMeasurementsListErrorMessage()) {
+    <app-empty-state [config]="measurementsEmptyState" class="w-100"></app-empty-state>
+    } @else {
+    <app-error-state [config]="myMeasurementsErrorState"></app-error-state>
+    }
+    }
+  </div>
+</div>

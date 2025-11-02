@@ -1,0 +1,142 @@
+<main class="update-personal-profile-info" role="main">
+  <section class="update-personal-profile-info__container">
+    <h4 class="update-personal-profile-info__box-label">
+      {{ 'personal_details' | translateApi }}
+    </h4>
+
+    <form class="general-form-wrapper" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <div class="general-form-wrapper__groups">
+        @for (formItem of formConfig; track $index) {
+        <div class="general-form-wrapper__field {{formItem.widthClass}}">
+          <div class="general-form-wrapper__label-group">
+            @if (formItem.label) {
+            <label [for]="formItem.name" class="general-form-wrapper__label" [ngClass]="{
+                    'general-form-wrapper__label--error': getError(formItem.name),
+                    'general-form-wrapper__label--clickable': formItem.enableLabelClick
+                  }">
+              {{ formItem.label | translateApi }}
+              @if (formItem.isRequired) {
+              <span class="general-form-wrapper__required">*</span>
+              }
+            </label>
+            }
+          </div>
+
+          @switch(formItem.type) {
+          @case(allInputTypes.TEXT) {
+          <div class="custom-input-wrapper" [ngClass]="{ 'disabled-input': !isEditable() }">
+            <input type="text" class="form-control custom-input-wrapper__input" [id]="formItem.name"
+              [formControlName]="formItem.name" [placeholder]="(formItem.placeholder ?? '') | translateApi"
+              autocomplete="off" />
+          </div>
+          }
+
+          @case(allInputTypes.EMAIL) {
+          <div class="custom-input-wrapper" [ngClass]="{ 'disabled-input': !isEditable() }">
+            <input type="email" class="form-control custom-input-wrapper__input" [id]="formItem.name"
+              [formControlName]="formItem.name" [placeholder]="(formItem.placeholder ?? '') | translateApi"
+              autocomplete="off" />
+          </div>
+          }
+
+          @case(allInputTypes.NUMBER) {
+          <div class="custom-input-wrapper" [ngClass]="{ 'disabled-input': !isEditable() }">
+            <input type="number" class="form-control custom-input-wrapper__input" [id]="formItem.name"
+              [formControlName]="formItem.name" [placeholder]="(formItem.placeholder ?? '') | translateApi"
+              autocomplete="off" />
+          </div>
+          }
+
+          @case(allInputTypes.SELECT) {
+          <div class="select-wrapper" [ngClass]="{ 'disabled-input': !isEditable() }">
+            <p-select [options]="formItem.listValues" [formControlName]="formItem.name"
+              [optionLabel]="formItem.optionLabel || 'label'" [optionValue]="formItem.optionValue || 'value'"
+              [placeholder]="(formItem.placeholder ?? '') | translateApi  " [filter]="true" appendTo="body">
+              <ng-template let-option pTemplate="item">
+                {{ option[formItem.optionLabel || 'label'] | translateApi }}
+              </ng-template>
+              <ng-template let-selectedOption pTemplate="selectedItem">
+                {{ selectedOption[formItem.optionLabel || 'label'] | translateApi }}
+              </ng-template>
+            </p-select>
+          </div>
+          }
+
+          @case(allInputTypes.COUNTRYCODEINPUT) {
+          <div
+            class="custom-input-wrapper custom-input-wrapper--with-icon custom-input-wrapper--icon-start country-code-input"
+            [ngClass]="{ 'disabled-input': !isEditable() }">
+            <div class="select-wrapper relative">
+              <p-select class="country-code-input-select w-full md:w-56" [options]="allowedCountries() ?? []"
+                [ngModel]="selectedCountryModel()" (ngModelChange)="onCountryChange($event)"
+                [ngModelOptions]="{ standalone: true }" optionLabel="name" [filter]="true" filterBy="name"
+                [placeholder]="isLoadingCountries() ? undefined : ('code' | translateApi)" [virtualScroll]="true"
+                [virtualScrollItemSize]="42" [autoDisplayFirst]="false" appendTo="body">
+                <ng-template #selectedItem let-selectedOption>
+                  <div class="flex items-center gap-2">
+                    <img [src]="selectedOption.flag"
+                      [class]="'flag flag-' + (selectedOption?.code?.toLowerCase() || '')"
+                      onerror="this.src='images/icons/no-flag.svg'" />
+                    <div>{{ selectedOption.phone_code }}</div>
+                  </div>
+                </ng-template>
+                <ng-template let-country #item>
+                  <div class="flex items-center gap-2">
+                    <img [src]="country.flag" [class]="'flag flag-' + (country?.code?.toLowerCase() || '')"
+                      onerror="this.src='images/icons/no-flag.svg'" />
+                    <div>{{ country.name }}</div>
+                  </div>
+                </ng-template>
+              </p-select>
+
+              <input type="number" class="form-control custom-input-wrapper__input" [formControlName]="'phoneNumber'"
+                [placeholder]="
+                        !selectedCountryModel()
+                          ? ('phone_should_select_code' | translateApi)
+                          : ('phone_placeholder' | translateApi)
+                      " autocomplete="tel" />
+
+              @if (isLoadingCountries()) {
+              <div class="dots-loader"><span></span><span></span><span></span></div>
+              }
+            </div>
+          </div>
+          }
+          }
+
+          <div class="form-field__feedback" role="status" aria-live="polite">
+            @if (getError(formItem.name)) {
+            <span class="error-label" role="alert">
+              {{ getValidationErrorMessage(formItem.name, formItem.validation || []) | translateApi }}
+            </span>
+            } @else if (formItem.hint && !getFormControl(formItem.name)?.value && !formItem.fixedHint) {
+            <small class="form-field__hint text-secondary">
+              {{ formItem.hint | translateApi }}
+            </small>
+            }
+          </div>
+        </div>
+        }
+      </div>
+
+      <div class="general-form-wrapper__actions">
+        @if (!isEditable()) {
+        <button type="button" class="btn btn--outline" (click)="isEditable.set(true)">
+          <span class="btn__label">{{ 'edit' | translateApi }}</span>
+        </button>
+        }
+        @if (isEditable()) {
+        <button type="submit" class="btn btn--solid" [disabled]="_UpdateUserProfileFacade.loading()">
+          <span class="btn__label">
+            @if (_UpdateUserProfileFacade.loading()) {
+            <span>{{ 'in_progress' | translateApi }}</span>
+            } @else {
+            <span>{{ 'save' | translateApi }}</span>
+            }
+          </span>
+        </button>
+        }
+      </div>
+    </form>
+  </section>
+</main>

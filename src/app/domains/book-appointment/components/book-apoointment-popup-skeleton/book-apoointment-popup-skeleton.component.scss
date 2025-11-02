@@ -1,0 +1,332 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+@use "../../../../common/styles/scss/utils/helpers" as *; // Ensure this path is correct if you use any helper functions
+
+// Base shimmer animation (reusable)
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+// Global skeleton styles
+.skeleton-box {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 0.5rem; // Default border-radius for boxes
+}
+
+.skeleton-text {
+    @extend .skeleton-box; // Inherit shimmer and background
+    height: 1em; // Default height, adjust with specific classes
+    width: 100%; // Default width, adjust with specific classes
+}
+
+// Specific skeleton text sizes
+.skeleton-text--small {
+    height: 0.75rem; // Matches original p font-size
+    width: 70%;
+}
+
+.skeleton-text--medium {
+    height: 1rem; // Matches original p font-size
+    width: 85%;
+}
+
+.skeleton-text--large {
+    height: 1.25rem; // Larger text placeholder
+    width: 95%;
+}
+
+.skeleton-text--title-small {
+    height: 0.75rem;
+    width: 50%;
+}
+
+.skeleton-text--label {
+    height: 0.875rem; // Matches original label font-size
+    width: 40%;
+}
+
+.skeleton-text--tag {
+    height: 1.5rem; // Height for specialty tags
+    width: 60px; // A fixed width for tags
+    display: inline-block; // To allow multiple tags in a line
+    border-radius: 0.75rem;
+}
+
+.skeleton-text--tab {
+    height: 1rem; // Height for tab text
+    width: 80px; // Fixed width for tab
+    min-width: fit-content;
+    padding: 0.375rem 0.625rem;
+    border-radius: 0.75rem;
+}
+
+.skeleton-text--paragraph {
+    height: 1rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+}
+
+.skeleton-text--short {
+    width: 70%;
+}
+
+// Specific skeleton box sizes
+.skeleton-box--small-circle {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+}
+
+.skeleton-box--icon {
+    width: 14px;
+    height: 15px;
+    border-radius: 4px; // Small rectangle for icon
+}
+
+.skeleton-box--icon-large {
+    width: 38px; // Matches 0.625rem padding + icon size
+    height: 38px;
+    border-radius: 0.5rem;
+}
+
+.skeleton-box--button {
+    height: 2.5rem; // Approximate button height
+    width: 6rem; // Approximate button width
+    border-radius: 0.5rem;
+}
+
+// --- Book Appointment Layout Skeleton (Adjusted) ---
+.book-appointment {
+    // Inherit existing layout styles from the parent
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    // This class is added to the skeleton container
+    &--skeleton {
+        // Ensure the skeleton mirrors the main container's layout
+        .book-appointment__container {
+            display: flex;
+            flex-direction: row; // Explicitly set to row for desktop
+            gap: 0.75rem;
+            padding-inline-end: 0.425rem; // Keep consistent
+            overflow-x: hidden;
+
+            // Responsive adjustments for the container itself
+            @media (max-width: 1200px) {
+                flex-direction: column; // Stack columns on smaller screens
+            }
+        }
+
+        .book-appointment__right-side {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            flex: 1; // Allows it to take available space
+            min-width: 0; // Prevent content from overflowing on small screens
+        }
+
+        .book-appointment__left-side {
+            width: 22rem;
+            flex-shrink: 0; // Prevent it from shrinking too much
+            display: flex;
+            flex-direction: column; // Changed to column for consistency within this side
+            gap: 1rem;
+            flex-wrap: nowrap; // Prevent wrapping of its direct children
+
+            // Responsive adjustments for the left side
+            @media (max-width: 1200px) {
+                width: 100%; // Take full width when stacked
+            }
+        }
+    }
+
+    // General children layout rules (should largely mimic your original component's SCSS)
+    &--information {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+        align-self: stretch;
+
+        @media (max-width: 1024px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &--details {
+        display: flex;
+        padding: 0.75rem;
+        flex-direction: column;
+        gap: 0.75rem;
+        align-self: stretch;
+        border-radius: 1rem;
+        background: var(--Dark-WHITE, #fff);
+    }
+}
+
+// --- Component Specific Skeleton Overrides / Additions ---
+
+// Doctor Card Skeleton
+.doctor-card--skeleton {
+    display: flex; // Ensure it behaves like the original doctor-card
+    gap: 1rem;
+    border-radius: 1rem;
+    background: var(--Dark-WHITE);
+    padding: 0.75rem;
+
+    .doctor-card__image-container {
+        width: 6.4375rem;
+        height: 6.4375rem;
+        border-radius: 0.75rem;
+        flex-shrink: 0; // Ensure image container doesn't shrink
+    }
+
+    .doctor-card__content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        flex: 1; // Allow content to take remaining space
+    }
+
+    .doctor-card__content--header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .doctor-card__content--header--info {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        flex-wrap: wrap; // Allow wrapping if space is tight
+    }
+
+    .doctor-card__content--header--info--actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        div {
+            padding: 0; // Remove padding from wrapper div for skeleton circles
+            border: none; // Remove border from wrapper div
+            gap: 0.5rem;
+            display: flex;
+        }
+    }
+
+    .doctor-card__content--header--description {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .doctor-card__content--expertise {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .doctor-card__content--classification {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+}
+
+// Doctor Details Box Skeleton
+.doctor-details--skeleton {
+    border: 1px solid var(--Dark-50);
+    background: var(--Dark-WHITE, #fff);
+    border-radius: 0.75rem;
+    display: flex;
+    padding: 0.75rem;
+    align-items: center;
+    gap: 0.5rem;
+
+    .doctor-details--content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        flex: 1; // Allows content to take available space
+    }
+}
+
+// Tabs Skeleton
+.tabs--skeleton {
+    display: flex;
+    gap: 1rem;
+    padding: 0.375rem 0.625rem;
+    max-width: 35.25rem;
+    overflow-x: hidden; // Hide overflow for skeleton tabs
+
+    .tab {
+        cursor: default; // No pointer for skeleton
+        &::after {
+            content: none; // Remove active tab underline
+        }
+    }
+}
+
+// Reservation Form Skeleton
+.reservation-form--skeleton {
+    display: flex;
+    flex-direction: column;
+    width: 100%; // Ensure it takes full width of its parent
+
+    .form__groups {
+        display: flex;
+        flex-direction: column;
+        gap: 0.825rem;
+        display: flex;
+        gap: 1rem;
+        border-radius: 1rem;
+        background: var(--Dark-WHITE);
+        padding: 0.75rem;
+    }
+
+    .form__group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form__shimmer {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: flex-start; // Align boxes to the start
+        flex-wrap: wrap; // Allow boxes to wrap if needed
+
+        &-box {
+            // Styles for individual radio button/input shimmer boxes
+            width: 6rem; // A general width for radio options or input
+            height: 2.5rem; // A general height for radio options or input
+            border-radius: 0.5rem;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+    }
+
+    .custom-input--skeleton {
+        height: 3.125rem;
+        width: 100%;
+        border: 1px solid #eeeeee;
+        background-color: var(--Dark-WHITE);
+        border-radius: 0.75rem;
+    }
+
+    .form__actions {
+        display: flex; // Make sure actions are a flex container
+        gap: 0.5rem;
+        padding-top: 0.5rem; // Add some top padding to separate from fields
+    }
+}

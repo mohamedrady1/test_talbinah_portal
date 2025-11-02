@@ -1,0 +1,31 @@
+<article class="appointment-payment-card appointment-payment-card--skeleton"
+    aria-labelledby="appointment-details-title">
+    <h2 id="appointment-details-title"
+        class="appointment-payment-card__title appointment-payment-card__title--skeleton">
+        <div class="skeleton-text skeleton-text--title"></div>
+    </h2>
+
+    <dl class="appointment-payment-card__grid">
+        @for (item of [1, 2, 3]; track $index) {
+        <div class="appointment-payment-card__item">
+            <dt class="appointment-payment-card__label">
+                <div class="skeleton-text skeleton-text--label"></div>
+            </dt>
+            <dd class="appointment-payment-card__value">
+                <div class="skeleton-text skeleton-text--value"></div>
+            </dd>
+        </div>
+        }
+        @for (item of [1, 2, 3]; track $index) {
+
+        <div class="appointment-payment-card__item">
+            <dt class="appointment-payment-card__label">
+                <div class="skeleton-text skeleton-text--label"></div>
+            </dt>
+            <dd class="appointment-payment-card__value">
+                <div class="skeleton-text skeleton-text--value"></div>
+            </dd>
+        </div>
+        }
+    </dl>
+</article>

@@ -1,0 +1,47 @@
+<article class="appointment-payment-card" aria-labelledby="appointment-details-title">
+  <h2 id="appointment-details-title" class="appointment-payment-card__title">
+    {{'payment_details'| translateApi}}
+  </h2>
+
+  <dl class="appointment-payment-card__grid">
+    @for (item of details?.payments?.payments; track $index) {
+    <div class="appointment-payment-card__item">
+      <dt class="appointment-payment-card__label">
+        {{(item?.label || '' | translateApi)}}
+      </dt>
+      <dd class="appointment-payment-card__value">
+        {{(item?.value!== undefined && item?.value!== 'undefined')?item?.value : '0'}}
+        @if (item?.currency) {
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
+            <path
+              d="M11.1555 13.4072L15.2642 12.5364C15.2167 13.0156 15.0922 13.4779 14.8906 13.9234L10.7913 14.7942C10.8336 14.3086 10.9549 13.8463 11.1555 13.4072ZM14.8906 11.3093L10.7913 12.1801V9.56761L9.512 9.84152V11.2919C9.512 11.4217 9.47611 11.5399 9.40433 11.6465L8.73775 12.6329C8.56041 12.8884 8.32291 13.0457 8.02525 13.1048L4.39941 13.879C4.44691 13.3987 4.57147 12.9364 4.77308 12.492L8.23108 11.7542V10.1075L5.00425 10.7931C5.05175 10.3128 5.17578 9.85366 5.37633 9.4156L8.23108 8.80127V3.7251C8.59208 3.28599 9.01905 2.9271 9.512 2.64844V8.53527L10.7913 8.25977V4.36477C11.1534 3.92672 11.5772 3.56783 12.0627 3.2881V7.99219L15.2642 7.30819C15.2167 7.78847 15.0922 8.2508 14.8906 8.69519L12.0627 9.30002V10.5984L15.2642 9.92227C15.2167 10.4078 15.0922 10.8702 14.8906 11.3093Z"
+              fill="#0F0F0F" />
+          </svg>
+        </span>
+        }
+      </dd>
+    </div>
+    }
+
+    @if (details?.payments?.total) {
+    <div class="appointment-payment-card__item">
+      <dt class="appointment-payment-card__label">
+        {{(details?.payments?.total?.label || '')| translateApi}}
+      </dt>
+      <dd class="appointment-payment-card__value">
+        {{ details?.payments?.total?.value}}
+        @if (details?.payments?.total?.currency) {
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
+            <path
+              d="M11.1555 13.4072L15.2642 12.5364C15.2167 13.0156 15.0922 13.4779 14.8906 13.9234L10.7913 14.7942C10.8336 14.3086 10.9549 13.8463 11.1555 13.4072ZM14.8906 11.3093L10.7913 12.1801V9.56761L9.512 9.84152V11.2919C9.512 11.4217 9.47611 11.5399 9.40433 11.6465L8.73775 12.6329C8.56041 12.8884 8.32291 13.0457 8.02525 13.1048L4.39941 13.879C4.44691 13.3987 4.57147 12.9364 4.77308 12.492L8.23108 11.7542V10.1075L5.00425 10.7931C5.05175 10.3128 5.17578 9.85366 5.37633 9.4156L8.23108 8.80127V3.7251C8.59208 3.28599 9.01905 2.9271 9.512 2.64844V8.53527L10.7913 8.25977V4.36477C11.1534 3.92672 11.5772 3.56783 12.0627 3.2881V7.99219L15.2642 7.30819C15.2167 7.78847 15.0922 8.2508 14.8906 8.69519L12.0627 9.30002V10.5984L15.2642 9.92227C15.2167 10.4078 15.0922 10.8702 14.8906 11.3093Z"
+              fill="#0F0F0F" />
+          </svg>
+        </span>
+        }
+      </dd>
+    </div>
+    }
+  </dl>
+</article>

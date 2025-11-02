@@ -1,0 +1,257 @@
+@use "../../../../common/styles/scss/buttons/button.mixins" as btn;
+
+.create-reels-form {
+    // Changed from .create-psychological-society-post
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-inline-end: 0.5rem;
+    // No __header, __actions, __profile in this component anymore
+
+    &__inputs {
+        display: flex;
+        gap: 0.1875rem;
+        position: absolute;
+        bottom: 0.5rem;
+        right: 0.5rem;
+        .hidden-file-input {
+            display: none;
+        }
+        &:dir(rtl) {
+            left: 0.5rem;
+            right: initial;
+        }
+    }
+
+    &__mood-input {
+        // Changed from .create-psychological-society-post__mood-input
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .p-relative {
+            position: relative;
+        }
+
+        &__textarea {
+            display: flex;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--Dark-100);
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: var(--text-300);
+            width: 100%;
+            height: 9rem;
+            resize: none;
+            background-color: transparent;
+            outline: none;
+
+            &::placeholder {
+                color: var(--text-300);
+                font-size: 0.75rem;
+            }
+
+            &.has-error {
+                border-color: red;
+            }
+
+            &:disabled {
+                background-color: var(--Dark-50);
+                cursor: not-allowed;
+            }
+        }
+        &--media-hint {
+            color: var(--Dark-300);
+            font-size: 0.625rem;
+            font-weight: var(--fontWeight-regular, 400);
+        }
+        &__error {
+            font-size: 0.8rem;
+            color: red;
+            margin-top: 0.5rem;
+            &.attachment-error {
+                margin-top: 0rem;
+            }
+        }
+
+        &__icon {
+            // Changed from .create-psychological-society-post__mood-input__icon
+            display: flex;
+            width: 1.75rem;
+            height: 1.75rem;
+            padding: 0.625rem;
+            justify-content: center;
+            align-items: center;
+            border-radius: 1rem;
+            background: var(--Dark-100);
+            cursor: pointer;
+
+            svg {
+                flex-shrink: 0;
+            }
+            &.active {
+                background-color: var(--Primary-primary);
+
+                svg {
+                    path {
+                        fill: var(--Dark-WHITE);
+                    }
+                }
+            }
+        }
+
+        .emoji-picker-container {
+            position: absolute;
+            top: 1.875rem;
+            z-index: 10;
+            margin-top: 8px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            right: 2.5rem;
+
+            &:dir(rtl) {
+                left: 2.5rem;
+                right: initial;
+            }
+        }
+    }
+
+    &--actions {
+        // Changed from .create-psychological-society-post--actions
+        display: flex;
+        align-items: flex-start;
+        gap: 0.625rem;
+        padding-top: 0.75rem;
+        justify-content: flex-end;
+
+        .btn {
+            @include btn.button-base;
+            @include btn.button-size("small");
+            @include btn.button-icon-position("left");
+            @include btn.button-icon-size("medium");
+            @include btn.button-color("main");
+            @include btn.button-spinner;
+
+            &__icon {
+                display: inline-flex;
+                align-items: center;
+            }
+
+            &__label {
+                padding: 0 0.5rem;
+                white-space: nowrap;
+            }
+
+            &--disabled {
+                @include btn.button-disabled;
+            }
+
+            &--outline {
+                @include btn.button-type("outline");
+            }
+
+            &--solid {
+                @include btn.button-type("solid");
+            }
+
+            width: fit-content;
+            padding: 0 1rem;
+        }
+    }
+    &__upload {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        &--title {
+            color: var(--text-primary, #000);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        &--button {
+            border-radius: var(--Radius-8, 0.5rem);
+            background: var(--grid-2, linear-gradient(180deg, #b8efe9 0%, #aecee7 100%));
+            display: flex;
+            padding: var(--Radius-8, 0.5rem) 2rem;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            min-height: 2.75rem;
+            cursor: pointer;
+            width: fit-content;
+            &--text {
+                color: var(--Primary-primary, #0e39b6);
+                font-size: 0.875rem;
+                font-weight: 500;
+            }
+        }
+    }
+
+    // --- Media Previews Container with Responsive Grid ---
+    .create-reels-form__media-previews-container {
+        display: flex;
+        gap: 0.25rem;
+        flex-wrap: wrap; // Allow items to wrap to the next line
+        justify-content: flex-start; // Align items to the start of the row
+
+        .create-reels-form__media-preview-item {
+            flex: 0 1 auto; // Changed: Do not grow, but can shrink, with auto base size
+            position: relative;
+            max-width: 100%; // Ensure it doesn't overflow on very small screens
+
+            // Default for smallest screens (e.g., 1 item per row)
+            flex-basis: calc(100% / 1 - 0.25rem * (1 - 1) / 1); // For 1 item, it takes 100% width, accounting for gap
+
+            &__remove-btn {
+                position: absolute;
+                top: 0.625rem;
+                inset-inline-end: 0.625rem;
+                width: 1rem;
+                height: 1rem;
+                border-radius: 50%;
+                color: var(--Dark-WHITE);
+                background-color: var(--Sacondry-Color-primary);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 4;
+            }
+        }
+
+        // --- Media Queries for different screen sizes ---
+
+        // For screens showing 2 items per row
+        @media (min-width: 480px) {
+            .create-reels-form__media-preview-item {
+                flex-basis: calc(100% / 2 - 0.25rem * (2 - 1) / 2); // For 2 items, each takes 50% width
+            }
+        }
+
+        // For screens showing 3 items per row
+        @media (min-width: 768px) {
+            .create-reels-form__media-preview-item {
+                flex-basis: calc(100% / 3 - 0.25rem * (3 - 1) / 3); // For 3 items, each takes 33.33% width
+            }
+        }
+
+        // For screens showing 4 items per row
+        @media (min-width: 992px) {
+            .create-reels-form__media-preview-item {
+                flex-basis: calc(100% / 4 - 0.25rem * (4 - 1) / 4); // For 4 items, each takes 25% width
+            }
+        }
+
+        // For large screens showing 5 items per row
+        @media (min-width: 1400px) {
+            .create-reels-form__media-preview-item {
+                flex-basis: calc(100% / 5 - 0.25rem * (5 - 1) / 5); // For 5 items, each takes 20% width
+            }
+        }
+    }
+    // Added the classification tabs class for consistency
+    .create-reels-form__post-classification-tabs {
+        // Add any specific styles if needed, otherwise it's just for structural grouping
+    }
+}

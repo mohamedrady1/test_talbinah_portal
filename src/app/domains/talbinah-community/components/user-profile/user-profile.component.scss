@@ -1,0 +1,255 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+@use "../../../../common/styles/scss/abstracts/_base-layout-mixins" as *;
+
+.user-profile-layout {
+    @include baseLayout; // Use default variable values
+
+    // @include baseLayout(
+    //   $padding: 1.5rem 5rem,
+    //   $gap: 2.5rem,
+    //   $padding-md: 1rem 3rem,
+    //   $gap-md: 3rem,
+    //   $padding-sm: 0.75rem 1.5rem,
+    //   $gap-sm: 1.5rem
+    // );
+    &__cards {
+        padding-inline-end: 0.5rem;
+        display: block;
+        .profile {
+            &__tabs {
+                margin-bottom: 0.75rem;
+            }
+            &__header {
+                display: flex;
+                padding-top: 0.75rem;
+                flex-direction: column;
+                align-items: flex-start;
+                align-self: stretch;
+                &__images {
+                    background: var(--grid-4);
+                    width: 100%;
+                    height: 8.1875rem;
+                    border-radius: 0.75rem;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-image: url("../../../../../../public/images/community/user/user-bg.png");
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    &--background {
+                        width: 8.4577rem;
+                        height: 3rem;
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            display: none;
+                        }
+                    }
+                    &--user-img {
+                        position: absolute;
+                        width: 6.25rem;
+                        height: 6.25rem;
+                        overflow: hidden;
+                        border-radius: 50%;
+                        border: 0.125rem solid var(--Dark-WHITE);
+                        inset-inline-start: 2rem;
+                        bottom: 0;
+                        transform: translateY(50%);
+                        background: var(--grid-5);
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+                }
+            }
+            &__information {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 1rem;
+                flex-wrap: wrap;
+                padding: 0.75rem 0rem 1rem 0rem;
+                padding-inline-start: 9rem;
+                &--content {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    gap: 0.5rem;
+                    &--name {
+                        color: var(--text-400);
+                        font-size: 1rem;
+                        font-weight: 600;
+                    }
+                    &--info {
+                        display: flex;
+                        padding: 0.125rem 0.5rem;
+                        align-items: center;
+                        gap: 0.25rem;
+                        flex-wrap: wrap;
+                        &.data-info {
+                            gap: 0.75rem;
+                            div {
+                                gap: 0.25rem;
+                                display: flex;
+                            }
+                            p {
+                                color: var(--text-300, #47586e);
+                                font-size: 0.875rem;
+                                font-weight: 500;
+                            }
+                            span {
+                                color: var(--text-400, #0f0f0f);
+                                font-size: 0.875rem;
+                                font-weight: 600;
+                            }
+                        }
+                        &--i-follow-them {
+                            cursor: pointer;
+                        }
+                        p {
+                            color: var(--text-300);
+                            font-size: 0.75rem;
+                            font-weight: 500;
+                        }
+                    }
+                }
+                &--action {
+                    &--follow,
+                    &--saved-posts {
+                        display: flex;
+                        cursor: pointer;
+                        height: 2rem;
+                        padding: 0.5rem 0.75rem;
+                        align-items: center;
+                        gap: 0.125rem;
+                        border-radius: var(--Radius-16, 1rem);
+                        background: var(--Primary-50);
+                        color: var(--Primary-primary);
+                        font-size: 0.75rem;
+                        font-weight: 500;
+                    }
+                    &--follow {
+                        transition: opacity 0.3s ease; // Smooth transition for visual feedback
+
+                        &.loading,
+                        &.disabled {
+                            cursor: not-allowed; // Change cursor to indicate non-interactiveness
+                            pointer-events: none; // Disable all pointer events (clicks, hovers)
+                            opacity: 0.7; // Visually dim the button to show it's inactive
+                        }
+
+                        // Hide the original SVG and paragraph text when the loading state is active
+                        &.loading > svg,
+                        &.loading > p {
+                            visibility: hidden; // Hides the content without affecting layout
+                        }
+
+                        &__loading {
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        .dot-loader::after {
+                            content: "";
+                            animation: dots 1.5s steps(4, end) infinite;
+                            white-space: pre;
+                        }
+
+                        &__loading {
+                            display: inline-block;
+                            animation: spin 1s linear infinite;
+                        }
+                    }
+                }
+            }
+
+            &__posts {
+                display: flex;
+                padding: 1.5rem 0.625rem;
+                flex-direction: column;
+                gap: 1rem;
+                border-radius: var(--Radius-12);
+                background: var(--Dark-WHITE);
+            }
+            &__add-post {
+                border-radius: var(--Radius-12, 0.75rem);
+                background: var(--Dark-WHITE, #fff);
+                display: flex;
+                padding: 0.75rem 0.625rem;
+                margin-bottom: 0.75rem;
+                flex-direction: column;
+            }
+        }
+    }
+    app-my-psychological-society,
+    app-psychological-society-main-page {
+        width: 100%;
+    }
+}
+.shimmer {
+    background: linear-gradient(
+        90deg,
+        var(--grey-200, #f0f0f0) 25%,
+        var(--grey-300, #e0e0e0) 50%,
+        var(--grey-200, #f0f0f0) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite ease-in-out;
+    border-radius: 0.25rem;
+
+    &--text {
+        height: 1rem;
+        width: 12rem;
+
+        &.short {
+            width: 4rem;
+        }
+    }
+
+    &--circle {
+        width: 6.25rem;
+        height: 6.25rem;
+        border-radius: 50%;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+// Keyframe animation for the shimmer effect
+@keyframes shimmer-2 {
+    0% {
+        background-position: -1000px 0; // Start the gradient off-screen to the left
+    }
+    100% {
+        background-position: 1000px 0; // Move the gradient across to the right
+    }
+}
+
+@keyframes dots {
+    0% {
+        content: "";
+    }
+    25% {
+        content: ".";
+    }
+    50% {
+        content: "..";
+    }
+    75% {
+        content: "...";
+    }
+    100% {
+        content: "";
+    }
+}

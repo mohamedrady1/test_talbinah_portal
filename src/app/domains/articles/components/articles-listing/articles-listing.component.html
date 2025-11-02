@@ -1,0 +1,106 @@
+<main class="articles-listing" role="main" aria-label="Articles Listing">
+  <aside class="articles-listing__left-panel">
+    <section class="articles-listing-layout__program-cards">
+      <header class="articles-listing-layout__header">
+        <h2 class="title">
+          {{ headerConfig.title | translateApi }}
+        </h2>
+        @if (!isLoading() && !errorMessage()) {
+        <div class="search-box-container">
+          <app-global-search-input [inputSearchConfig]="searchConfig()" (valueChanged)="handleSearch($event)"
+            (cleared)="handleClearSearch()" />
+        </div>
+        }
+      </header>
+
+      @if (isLoading() || isLoadingFilter()) {
+      <div class="articles-listing-layout__program-cards--list" role="list" aria-live="polite">
+        @for (i of [].constructor(6); track i) {
+        <app-article-card-shimmer></app-article-card-shimmer>
+        }
+      </div>
+      }
+      @else if (articlesLoaded() && errorMessage() && !isLoading() && !isLoadingFilter()) {
+      <app-error-state [config]="articlesErrorState() "></app-error-state>
+      }
+      @else if (articlesLoaded() && !articlesResponse()?.data?.data?.length) {
+      <div class="empty-state" aria-live="polite" aria-label="No articles found">
+        <app-empty-state [config]="articlesEmptyState"></app-empty-state>
+        @if (searchControl.value) {
+        <button (click)="handleClearSearch()">{{ 'delete' | translateApi }}</button>
+        }
+      </div>
+      }
+      @else if (articlesResponse() && articlesResponse()?.data && articlesResponse()?.data?.data &&
+      articlesResponse()?.data?.data?.length !== 0) {
+      <div class="articles-listing-layout__program-cards--list" role="list" aria-live="polite">
+        @for (article of articlesResponse()!.data!.data; track article.id) {
+        <article class="articles-listing-layout__program-cards--card" role="listitem">
+          <app-article-card [type]="cardTypes.DETAILS" [item]="article"
+            (favouriteToggled)="handleFavouriteToggle($event)" (openPopupAction)="openArticlePopup()" />
+        </article>
+        }
+      </div>
+      <app-pagination-listing [paginationConfig]="paginationConfig()" />
+      }
+      @else {
+      @for (i of [].constructor(6); track i) {
+      <app-article-card-shimmer></app-article-card-shimmer>
+      } }
+    </section>
+  </aside>
+
+  <section class="articles-listing__my-programs" aria-label="Featured Articles">
+    <div class="articles-listing__my-programs-cards">
+      <app-page-layout-card-header [config]="mostReadHeaderConfig" />
+      <div class="articles-listing__my-programs--list" role="list">
+        @if (articlesLoaded() && mostViewedArticlesErrorMessage() && !isLoadingMostViewed()) {
+        <app-error-state [config]="MostViewedArticlesErrorState()"></app-error-state>
+        }
+        @else if (articlesLoaded() && mostViewedArticle() === null) {
+        <app-empty-state [config]="articlesEmptyState"></app-empty-state>
+        }
+        @else if (mostViewedArticle()) {
+        <article class="articles-listing__my-program--card" role="listitem">
+          <app-article-card [type]="cardTypes.DETAILS" [item]="mostViewedArticle()!"
+            (favouriteToggled)="handleFavouriteToggle($event)" />
+        </article>
+        }
+        @else {
+        <app-article-card-shimmer></app-article-card-shimmer>
+        }
+      </div>
+    </div>
+
+    @if (isLoggedIn()) {
+    <div class="articles-listing__my-programs-cards">
+      <app-page-layout-card-header [config]="mostFavoriteHeaderConfig" (allClicked)="openFavouriteArticlesPopup()" />
+      <div class="articles-listing__my-programs--list" role="list">
+
+        @if (articlesLoaded() && favoriteArticlesErrorMessage() && statusFavorites() === false &&
+        !isLoadingFavorites()) {
+        <app-error-state [config]="favouriteArticlesErrorState()"></app-error-state>
+        }
+        @else if (articlesLoaded() && favoriteArticles() && favoriteArticles().length === 0 && !isLoadingFavorites()) {
+        <app-empty-state [config]="articlesEmptyState"></app-empty-state>
+        }
+        @else if (favoriteArticles() && favoriteArticles().length !== 0) {
+        @for (article of favoriteArticles()!.slice(0,4); track article.id) {
+        <article class="articles-listing__my-program--card" role="listitem">
+          <app-article-card [type]="cardTypes.DETAILS" [item]="article"
+            (favouriteToggled)="handleFavouriteToggle($event)" />
+        </article>
+        }
+        }
+        @else {
+        <app-article-card-shimmer></app-article-card-shimmer>
+
+        }
+      </div>
+    </div>
+    }
+    @else if(!isLoadingFavorites()) {
+    <app-compelete-data-and-register-now [isEmptyState]="true"></app-compelete-data-and-register-now>
+    }
+  </section>
+</main>

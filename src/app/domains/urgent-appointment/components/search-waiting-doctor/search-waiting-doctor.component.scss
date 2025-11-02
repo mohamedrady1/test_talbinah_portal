@@ -1,0 +1,185 @@
+/* search-waiting-doctor.component.scss */
+@use "../../../../common/styles/scss/buttons/button.mixins" as btn;
+
+.search-waiting-doctor {
+  display: flex;
+  padding: 0.75rem 1rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  align-self: stretch;
+  height: 100%;
+
+  &__content {
+    display: flex;
+    padding: 3rem;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+
+    flex-direction: column;
+    gap: 2rem;
+
+    border-radius: 1rem;
+    background: linear-gradient(270deg, rgba(186, 240, 232, 0.5) 0%, rgba(245, 218, 184, 0.5) 100%);
+  }
+
+  &__image-spinner-container {
+    width: 9.875rem;
+    height: 9.375rem;
+    flex-shrink: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      // --- Animation for infinite rotation ---
+      animation: spin 2s linear infinite; // Name: spin, Duration: 2s, Timing: linear, Iteration: infinite
+    }
+  }
+
+  &__titles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+    align-self: stretch;
+
+    width: 100%;
+  }
+
+  &__title {
+    color: var(--text-400, #0f0f0f);
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 0;
+  }
+
+  &__subtitle {
+    color: var(--text-300, #47586e);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    align-self: stretch;
+    &__loading {
+      display: flex;
+      align-items: center;
+    }
+
+    .dot-loader::after {
+      content: "";
+      animation: dots 1.5s steps(4, end) infinite;
+      white-space: pre;
+    }
+
+    @keyframes dots {
+      0% {
+        content: "";
+      }
+      25% {
+        content: ".";
+      }
+      50% {
+        content: "..";
+      }
+      75% {
+        content: "...";
+      }
+      100% {
+        content: "";
+      }
+    }
+  }
+
+  // Dots animation for inline loading text (e.g., replacing duration on first load)
+  .cancel-dots {
+    .dot-loader::after {
+      content: "";
+      animation: dots 1.5s steps(4, end) infinite;
+      white-space: pre;
+    }
+  }
+
+  @keyframes dots {
+    0% {
+      content: "";
+    }
+    25% {
+      content: ".";
+    }
+    50% {
+      content: "..";
+    }
+    75% {
+      content: "...";
+    }
+    100% {
+      content: "";
+    }
+  }
+
+  .btn {
+    @include btn.button-base;
+    @include btn.button-size("medium");
+    @include btn.button-icon-position("left");
+    @include btn.button-icon-size("medium");
+    @include btn.button-color("main");
+    @include btn.button-spinner;
+    min-width: 3rem;
+    width: fit-content;
+
+    &__icon {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    &__label {
+      padding: 0 0.5rem;
+      white-space: nowrap;
+    }
+
+    &--disabled {
+      @include btn.button-disabled;
+    }
+
+    &--outline {
+      @include btn.button-type("outline");
+      background: var(--Danger-50, #f9e7e8);
+      color: var(--Danger-600, #ca4146);
+    }
+
+    &--solid {
+      @include btn.button-type("solid");
+      background-color: var(--error-color, #dc3546);
+    }
+  }
+
+  // --- Keyframes for the spinning animation ---
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+      /* Start at no rotation */
+    }
+
+    100% {
+      transform: rotate(360deg);
+      /* Rotate a full circle */
+    }
+  }
+
+  // -------------------------------------------
+}

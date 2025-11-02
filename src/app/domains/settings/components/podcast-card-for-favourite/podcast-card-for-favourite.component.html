@@ -1,0 +1,93 @@
+<article *ngIf="item as podcast" class="podcast-card" tabindex="0" role="button" (click)="onCardClicked(podcast)"
+    (keyup.enter)="onCardClicked(podcast)" (keyup.space)="onCardClicked(podcast)" [attr.aria-label]="podcast.title">
+    <div class="podcast-card__thumbnail">
+        <img [src]="podcast.thumbnail_image" width="49" height="49" loading="lazy" [alt]="podcast.title"
+            class="podcast-card__image" />
+    </div>
+
+    <div class="podcast-card__content">
+        <header class="podcast-card__header">
+            <h3 class="podcast-card__title">
+                {{ podcast.title }}
+            </h3>
+            <div class="podcast-card__header-actions">
+                @if (!hideFavouriteAction) {
+                <button class="podcast-card__like-button" (click)="handleFavouriteToggle($event)"
+                    [attr.aria-label]="item.is_bookmarked ? 'Remove from favourites' : 'Add to favourites'">
+                    @if(isToggleLoading()){
+                    <div class="shimmer-circle"></div>
+                    }
+                    @else if (item.is_bookmarked) {
+                    <!-- Red Heart SVG -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path
+                            d="M9.59 1.80811C8.53417 1.80811 7.58917 2.32144 7 3.10894C6.41084 2.32144 5.46584 1.80811 4.41 1.80811C2.61917 1.80811 1.16667 3.26644 1.16667 5.06894C1.16667 5.76311 1.27751 6.40477 1.47001 6.99977C2.39167 9.91644 5.2325 11.6606 6.63834 12.1389C6.83667 12.2089 7.16334 12.2089 7.36167 12.1389C8.7675 11.6606 11.6083 9.91644 12.53 6.99977C12.7225 6.40477 12.8333 5.76311 12.8333 5.06894C12.8333 3.26644 11.3808 1.80811 9.59 1.80811Z"
+                            fill="#FF0027" aria-hidden="true" focusable="false" />
+                    </svg>
+                    } @else {
+                    <!-- Gray Heart SVG -->
+                    <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M7.50002 12.6292C7.31919 12.6292 7.14419 12.6059 6.99835 12.5534C4.77002 11.7892 1.22919 9.07668 1.22919 5.06918C1.22919 3.02752 2.88002 1.37085 4.91002 1.37085C5.89585 1.37085 6.81752 1.75585 7.50002 2.44418C8.18252 1.75585 9.10419 1.37085 10.09 1.37085C12.12 1.37085 13.7709 3.03335 13.7709 5.06918C13.7709 9.08252 10.23 11.7892 8.00169 12.5534C7.85585 12.6059 7.68085 12.6292 7.50002 12.6292ZM4.91002 2.24585C3.36419 2.24585 2.10419 3.51168 2.10419 5.06918C2.10419 9.05335 5.93669 11.27 7.28419 11.7309C7.38919 11.7659 7.61669 11.7659 7.72169 11.7309C9.06335 11.27 12.9017 9.05918 12.9017 5.06918C12.9017 3.51168 11.6417 2.24585 10.0959 2.24585C9.20919 2.24585 8.38669 2.66002 7.85585 3.37752C7.69252 3.59918 7.31919 3.59918 7.15585 3.37752C6.61335 2.65418 5.79669 2.24585 4.91002 2.24585Z"
+                            fill="#666666" aria-hidden="true" focusable="false" />
+                    </svg>
+                    }
+                </button>
+                }
+
+                @if (isTask) {
+                <div class="podcast-card__checkbox-wrapper"
+                    [class.podcast-card__checkbox-wrapper--checked]="isTask?.status"
+                    [class.podcast-card__checkbox-wrapper--disabled]="true">
+                    <input type="checkbox" class="podcast-card__checkbox" [checked]="isTask?.status" [readonly]="true"
+                        [disabled]="true" tabindex="-1" (click)="logCheckboxState($event)" aria-hidden="true" />
+                </div>
+                }
+            </div>
+
+        </header>
+
+        <!-- @if (!hideDescription) {
+        <p class="podcast-card__description text-truncate-3">
+            {{ podcast.description }}
+        </p>
+        } -->
+
+        <div class="podcast-card__info">
+            <div class="podcast-card__meta-container">
+                <p class="podcast-card__meta">
+                    {{ 'in' | translateApi }}
+                    <span class="podcast-card__name">{{ 'talbinah_podcast' | translateApi }}</span>
+                    @if (podcast.doctor_name) {
+                    {{ 'with' | translateApi }}
+                    <span class="podcast-card__guest">{{ podcast.doctor_name }}</span>
+                    }
+
+                </p>
+                <p class="podcast-card__date">
+                    •
+                    {{ podcast.created_at | date: 'EEEE - d MMMM' : undefined : currentLang }}
+                </p>
+            </div>
+            <div class="podcast-card__actions">
+                <button class="podcast-card__duration-button" type="button"
+                    (click)="$event.stopPropagation();OpenPodcastAudioPlayer()"
+                    [attr.aria-label]="'مدة الحلقة ' + podcast.duration + ' دقيقة'">
+                    <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M5.09081 12.4134C4.62998 12.4134 4.19248 12.3025 3.80748 12.0809C2.89748 11.5559 2.39581 10.4884 2.39581 9.08253V4.92337C2.39581 3.5117 2.89748 2.45003 3.80748 1.92503C4.71748 1.40003 5.88998 1.4992 7.11498 2.20503L10.7141 4.2817C11.9333 4.98753 12.61 5.95587 12.61 7.00587C12.61 8.05587 11.9391 9.0242 10.7141 9.73003L7.11498 11.8067C6.40915 12.2092 5.72081 12.4134 5.09081 12.4134ZM5.09081 2.4617C4.77581 2.4617 4.49581 2.5317 4.24498 2.67753C3.61498 3.0392 3.27081 3.83837 3.27081 4.92337V9.0767C3.27081 10.1617 3.61498 10.955 4.24498 11.3225C4.87498 11.69 5.73831 11.585 6.67748 11.0425L10.2766 8.96587C11.2158 8.42337 11.735 7.7292 11.735 7.00003C11.735 6.27087 11.2158 5.5767 10.2766 5.0342L6.67748 2.95753C6.10581 2.63087 5.56915 2.4617 5.09081 2.4617Z"
+                            fill="#0E39B6" />
+                    </svg>
+                    <span class="podcast-card__duration">
+                        @if (!isTask) {
+                        {{ podcast.duration }} {{ 'min' | translateApi }}
+                        }@else {
+                        {{'play' | translateApi}}
+                        }
+                    </span>
+
+                </button>
+            </div>
+        </div>
+    </div>
+</article>

@@ -1,0 +1,64 @@
+@use "./../../../../common/styles/scss/abstracts/mixins" as responsive;
+.reels-feed {
+    overflow-y: scroll; // Make the container vertically scrollable
+    scroll-snap-type: y mandatory; // Ensure each reel snaps into full view
+    scroll-behavior: smooth; // This is crucial for smooth scrolling animation
+    position: relative;
+    margin-inline: 0.5rem;
+}
+.reels-feed-container {
+    display: flex;
+    flex-direction: column;
+    margin-inline: 0.5rem;
+    border-radius: 0.75rem;
+    background: var(--Dark-WHITE, #fff);
+    .add-reels {
+        border-radius: 0.375rem;
+        background: var(--Primary-primary, #0e39b6);
+        position: absolute;
+        right: 1rem;
+        top: 1.75rem;
+        display: flex;
+        height: 2rem;
+        padding: var(--Radius-8, 0.5rem) var(--Radius-16, 1rem);
+        justify-content: center;
+        align-items: center;
+        gap: 0.25rem;
+        p {
+            color: var(--Dark-WHITE, #fff);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        @include responsive.respond(sm) {
+            display: none;
+        }
+    }
+}
+
+.reel-card-wrapper {
+    scroll-snap-align: start; // Each reel card snaps to the start of the scroll container
+    height: 100%; // Each reel card takes the full height of the container
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+
+    position: relative;
+    transition:
+        transform 0.3s ease-in-out,
+        opacity 0.3s ease-in-out;
+
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+
+    &:not(.active) {
+        opacity: 0.7;
+        transform: scale(0.95);
+    }
+
+    &.active {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

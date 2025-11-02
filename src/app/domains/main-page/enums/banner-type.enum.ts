@@ -1,0 +1,45 @@
+export enum BannerType {
+    IMAGE = 'Image',
+    VIDEO = 'Video',
+    TEXT = 'Text'
+}
+
+export enum BannerActionType {
+    PAGE = 'page',
+    LINK = 'link',
+    NONE = 'none'
+}
+
+export enum BannerPageType {
+    SUPPORT_SESSIONS = 'SUPPORT_SESSIONS',
+    BOOK_APPOINTMENT = 'BOOK_APPOINTMENT',
+    PODCAST = 'PODCAST',
+    ARTICLES = 'ARTICLES',
+    TALBINAH_COMMUNITY = 'TALBINAH_COMMUNITY',
+    MENTAL_HEALTH_SCALES = 'MENTAL_HEALTH_SCALES',
+    THERAPEUTIC_PROGRAMS = 'THERAPEUTIC_PROGRAMS',
+    KHAWIIK = 'KHAWIIK',
+    SUPPORT_GROUPS = 'SUPPORT_GROUPS',
+    APPOINTMENTS = 'APPOINTMENTS',
+    URGENT_APPOINTMENT = 'URGENT_APPOINTMENT',
+    SETTINGS = 'SETTINGS',
+    PROFILE = 'PROFILE',
+    QUICK_RESERVATION = 'QuickReservation',
+    WALLET_GIFT = 'wallet-gift',
+    GOVERNMENT_AGENCIES = 'Government_Agencies',
+    NOTIFICATIONS = 'NOTIFICATIONS',
+    POINTS = 'POINTS',
+    POINTS_REWARDS = 'POINTS_REWARDS',
+    FAVORITES = 'FAVORITES',
+    FAQS = 'FAQS',
+    IMPORTANT_NUMBERS = 'IMPORTANT_NUMBERS',
+    PROBLEMS = 'PROBLEMS',
+    CONTACT_US = 'CONTACT_US'
+}
+
+export enum NormalBannerType {
+    NORMAL = 'normal',
+    FEATURED = 'featured',
+    PROMOTIONAL = 'promotional'
+}
+

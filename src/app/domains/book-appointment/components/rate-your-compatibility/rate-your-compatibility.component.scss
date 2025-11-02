@@ -1,0 +1,46 @@
+.rate-your-compatibility-card {
+    display: flex;
+    padding: 0.5rem 0.75rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    cursor: pointer;
+    border-radius: 1rem;
+    background: linear-gradient(90deg, #baf0e8 0%, #f5dab8 100%);
+    &__title {
+        color: var(--text-400);
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+    &__subTitle {
+        color: var(--text-300);
+        font-size: 0.75rem;
+        font-weight: 400;
+    }
+    &__actions {
+        display: flex;
+        justify-content: flex-end;
+        .rate {
+            display: flex;
+            height: 2rem;
+            padding: var(--Radius-8) var(--Radius-16);
+            justify-content: center;
+            align-items: center;
+            gap: 0.25rem;
+
+            border-radius: 0.375rem;
+            background: var(--Primary-50);
+
+            color: var(--Primary-primary);
+            font-size: 0.75rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+
+            cursor: pointer;
+            &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+        }
+    }
+}

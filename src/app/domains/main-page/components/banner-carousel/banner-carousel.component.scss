@@ -1,0 +1,197 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+@use "../../../../common/styles/scss/abstracts/variables" as *;
+
+.banner-carousel {
+    width: 100%;
+    &__container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 0.81063rem;
+        touch-action: pan-y; // Allow vertical scrolling, but handle horizontal swipes
+        // cursor: grab;
+        transition: box-shadow 0.2s ease;
+
+        &:active {
+            // cursor: grabbing;
+        }
+
+        &--grabbing {
+            // cursor: grabbing !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+
+            .banner-carousel__slide {
+                // cursor: grabbing !important;
+            }
+
+            .banner-carousel__image {
+                transform: scale(0.98);
+                opacity: 0.95;
+            }
+        }
+    }
+
+    &__slides {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        will-change: transform;
+        border-radius: 0.81063rem;
+        height: 9.375rem;
+        flex-shrink: 0;
+    }
+
+    &__slide {
+        min-width: 100%;
+        height: 100%;
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+
+        &:hover {
+            .banner-carousel__image {
+                transform: scale(1.02);
+            }
+        }
+
+        &:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        &:active {
+            // cursor: grabbing;
+        }
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: fill;
+        transition:
+            transform 0.2s ease,
+            opacity 0.2s ease;
+        pointer-events: none; // Prevent image drag
+        user-select: none;
+        -webkit-user-drag: none;
+    }
+
+    &__content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        // background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        padding: 2rem;
+        color: var(--color-white);
+    }
+
+    &__title {
+        color: #000;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 500;
+    }
+
+    &__subtitle {
+        color: #000000a1;
+        text-align: center;
+        font-size: 1rem;
+        font-weight: 400;
+    }
+
+    // Navigation Arrows
+    &__nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.9);
+        border: none;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 2.4rem;
+        color: var(--color-grey-dark-2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        z-index: 10;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+        &:hover {
+            background-color: var(--color-white);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        &:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        &--prev {
+            left: 1rem;
+        }
+
+        &--next {
+            right: 1rem;
+        }
+    }
+
+    // Dots Indicator
+    &__dots {
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        display: flex;
+        width: 4.74875rem;
+        height: 0.49031rem;
+        align-items: center;
+        gap: 0.54044rem;
+        flex-shrink: 0;
+    }
+
+    &__dot {
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 0;
+        width: 0.40531rem;
+        height: 0.40531rem;
+        flex-shrink: 0;
+        background-color: rgba(14, 57, 182, 0.24);
+
+        &:hover {
+            background-color: rgba(14, 57, 182, 0.5);
+            transform: scale(1.1);
+        }
+
+        &--active {
+            background-color: var(--Primary-primary);
+            width: 2.4rem;
+            border-radius: 0.5rem;
+            &:hover {
+                background-color: var(--Primary-primary);
+                transform: scale(1);
+            }
+        }
+
+        &:focus-visible {
+            outline: 2px solid var(--Primary-primary);
+            outline-offset: 2px;
+        }
+    }
+}
+
+// RTL Support - Transform is handled in TypeScript via computed property
+// Navigation buttons automatically flip in RTL via CSS logical properties

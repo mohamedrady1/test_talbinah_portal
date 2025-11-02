@@ -1,0 +1,129 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+
+.radio-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border: none;
+  margin: 0;
+  padding: 0;
+
+  .w-half {
+    width: calc(50% - 0.5rem);
+  }
+
+  .radio-button {
+    display: flex;
+    padding: 10px 12px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid var(--Dark-100, #eee);
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+
+    &__input {
+      // display: none;
+    }
+
+    &__label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      cursor: pointer;
+      margin-bottom: 0;
+      color: var(--text-400, #0f0f0f);
+    }
+
+    &__icon {
+      width: 1.125rem;
+      height: 1.125rem;
+      object-fit: contain;
+    }
+
+    &__text {
+      margin: 0;
+      font-size: 0.875rem;
+      font-weight: 500;
+
+      @include respond(sm) {
+        font-size: 0.75rem !important;
+      }
+    }
+
+    input {
+      appearance: none;
+      width: 22px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid rgba(128, 128, 128, 0.116);
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      @include respond(sm) {
+        width: 17px;
+        height: 15px;
+      }
+
+      &:checked {
+        background-color: transparent;
+        border-color: var(--text-main-color) !important;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 1px;
+          left: 1px;
+          width: 14px;
+          height: 14px;
+          background-color: var(--text-main-color);
+          border-radius: 50%;
+
+          @include respond(sm) {
+            top: 0.4px;
+            left: 0.5px;
+            width: 10px;
+            height: 10px;
+          }
+        }
+      }
+    }
+
+    // ✅ Modifier for avatar-style radio buttons
+    &.w-avatar {
+      flex-direction: column;
+      padding: 0;
+      justify-content: center;
+      align-items: center;
+
+      .radio-button__label {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+        height: 100%;
+      }
+
+      .radio-button__icon {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .radio-button__text {
+        text-align: center;
+      }
+
+      input {
+        display: none;
+      }
+    }
+
+    &--selected {
+      border-color: var(--text-main-color);
+    }
+  }
+}

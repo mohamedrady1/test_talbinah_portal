@@ -1,0 +1,111 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+
+.welcome-to-talbinah {
+  display: flex;
+  width: 21.625rem;
+  padding: 0.75rem 0.75rem 0rem 0.75rem;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 1rem;
+  background: linear-gradient(180deg, rgba(186, 240, 232, 0.5) 0%, rgba(245, 218, 184, 0.5) 100%);
+  align-items: center;
+  position: relative;
+
+  @include respond(tablet) {
+    width: 100%;
+  }
+
+  &__header {
+    display: flex;
+    padding: 1.5rem 0rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    @include respond(tablet) {
+      padding: 0.75rem 0rem;
+    }
+
+    &--title {
+      color: var(--text-400, #0f0f0f);
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 600;
+      width: 17.4375rem;
+
+      @include respond(tablet) {
+        width: 100%;
+      }
+    }
+
+    &--subtitle {
+      color: var(--text-300, #47586e);
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 400;
+      width: 16.4375rem;
+
+      @include respond(tablet) {
+        width: 100%;
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    padding-bottom: 1.5rem;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    @include respond(tablet) {
+      width: 100%;
+    }
+  }
+
+  .form-action {
+    display: none;
+    justify-content: center; // Aligns button to the end (right in LTR, left in RTL)
+    width: 100%;
+    position: absolute;
+    bottom: 1rem;
+
+    @include respond(tablet) {
+      display: flex;
+    }
+
+    .btn-submit {
+      display: flex;
+      padding: 0.75rem 1.5rem;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: var(--Radius-8, 0.5rem);
+      background: var(--Primary-primary, #0e39b6);
+      color: var(--Dark-WHITE, #fff);
+      font-size: 1rem;
+      font-weight: 500;
+      width: fit-content; // Adjust width to content
+      justify-self: end;
+      margin-top: 0.75rem;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: var(--Primary-primary, #0e39b6); // Keep same hover as original
+      }
+
+      &:disabled {
+        background-color: var(--grey-400, #aaa);
+        cursor: not-allowed;
+        opacity: 0.6; // Added opacity for better disabled visual
+      }
+
+      &:dir(rtl) {
+        svg {
+          transform: scaleX(-1);
+        }
+      }
+    }
+  }
+}

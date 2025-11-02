@@ -1,0 +1,234 @@
+<main class="book-urgent-appointment-layout" role="main">
+  <section class="book-urgent-appointment-layout__container">
+    <div class="book-urgent-appointment-layout__cards" role="region"
+      aria-label="Book Urgent Appointment and Appointments">
+      <div class="book-urgent-appointment-layout__main-content">
+        <div class="book-urgent-appointment-layout__main-content--container" appAutoExactHeight heightMode="max-height">
+
+          <div class="book-urgent-appointment-layout__data"
+            [class.book-urgent-appointment-layout__data--show-on-mobile]="showFormOnMobile">
+            <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()" class="appointment-form">
+              @if (isCheckingReservation()) {
+              <div class="group__options">
+                <div class="group__options--shimmer" style="height: 50vh; width: 100%;"></div>
+              </div>
+              } @else {
+              <div class="appointment-form__groups">
+                <div class="appointment-form__group">
+                  <label for="Speciality" class="appointment-form__label">
+                    {{ 'select_specialty' | translateApi }}
+                  </label>
+                  <div class="appointment-form__control-wrapper">
+                    @if (!isLoadingEmergencySpecialties()) {
+                    @if (emergencySpecialtiesList) {
+                    @if (emergencySpecialtiesList && emergencySpecialtiesList?.length !== 0) {
+                    @for (Speciality of emergencySpecialtiesList; track Speciality.id) {
+                    <label class="appointment-form__radio-label">
+                      <input type="radio" [value]="Speciality.id" formControlName="Speciality"
+                        [attr.aria-label]="Speciality.name" class="appointment-form__radio-input"
+                        (change)="onSpecialityChange()" /> <span class="appointment-form__radio-text">
+                        {{ Speciality.name }}
+                      </span>
+                    </label>
+                    }
+                    }
+                    @else if (emergencySpecialtiesList?.length === 0 && !EmergencySpecialtiesListErrorMessage()) {
+                    <app-empty-state style="margin:auto" [config]="chooseSpecialityEmptyState"></app-empty-state>
+                    }@else {
+                    <app-error-state style="margin:auto" [config]="specialityErrorState"></app-error-state>
+                    }
+                    }
+                    } @else {
+                    <div class="group__options">
+                      @for (i of [].constructor(5); track i) {
+                      <div class="group__options--shimmer"></div>
+                      }
+                    </div>
+                    }
+                  </div>
+
+                  @if (appointmentForm.get('Speciality')?.invalid &&
+                  appointmentForm.get('Speciality')?.touched) {
+                  <span class="appointment-form__hint" role="alert">
+                    {{ 'speciality_required' | translateApi }}
+                  </span>
+                  }
+                </div>
+
+                <div class="appointment-form__group">
+                  <label for="duration" class="appointment-form__label">
+                    {{ 'appointment_duration' | translateApi }}
+                  </label>
+                  <div class="appointment-form__control-wrapper appointment-form__control-wrapper--duration-options">
+                    @if(!this.appointmentForm.get('Speciality')?.value){
+                    <div class="group__options">
+                      @for (i of [].constructor(5); track i) {
+                      <div class="group__options--shimmer"></div>
+                      }
+                    </div>
+                    }
+                    @else{
+                    @if (!isLoadingEmergencyDurationsPrice()) {
+                    @if (EmergencyDurationsPriceResponse()) {
+                    @if (EmergencyDurationsPriceResponse()?.data &&
+                    EmergencyDurationsPriceResponse()?.data?.duration_prices?.length !== 0) {
+
+                    @for (duration of EmergencyDurationsPriceResponse()?.data?.duration_prices; track duration.id) {
+                    <label class="appointment-form__radio-label">
+                      <input type="radio" [value]="duration.id" formControlName="Duration"
+                        [attr.aria-label]="duration.duration" class="appointment-form__radio-input" />
+                      <span class="appointment-form__radio-text">
+                        {{ duration.duration }} {{'min' | translateApi}}
+                      </span>
+                    </label>
+                    }
+                    } @else if (EmergencyDurationsPriceResponse()?.data?.duration_prices?.length === 0 &&
+                    !EmergencyDurationsPriceListErrorMessage()) {
+                    <app-empty-state style="margin:auto" [config]="sessionDurationEmptyState"></app-empty-state>
+                    }@else{
+                    <app-error-state style="margin:auto" [config]="sessionDurationErrorState"></app-error-state>
+                    }
+                    }} @else {
+                    <div class="group__options">
+                      @for (i of [].constructor(5); track i) {
+                      <div class="group__options--shimmer"></div>
+                      }
+                    </div>
+                    }
+                    }
+                  </div>
+                  @if (appointmentForm.get('Duration')?.invalid && appointmentForm.get('Duration')?.touched) {
+                  <span class="appointment-form__error-message" role="alert">
+                    {{ 'please_select_reservation_duration' | translateApi }}
+                  </span>
+                  }
+                </div>
+
+                <div class="appointment-form__group">
+                  <label for="problemType" class="appointment-form__label">
+                    {{ 'select_the_problem' | translateApi }}
+                  </label>
+                  <div class="appointment-form__control-wrapper appointment-form__control-wrapper--duration-options">
+                    @if(!this.appointmentForm.get('Speciality')?.value){
+                    <div class="group__options">
+                      @for (i of [].constructor(5); track i) {
+                      <div class="group__options--shimmer"></div>
+                      }
+                    </div>
+                    } @else{
+                    @if (!isLoadingEmergencyDurationsPrice()) {
+                    @if (EmergencyDurationsPriceResponse()) {
+                    @if (EmergencyDurationsPriceResponse()?.data &&
+                    EmergencyDurationsPriceResponse()?.data?.problems?.length !== 0) {
+                    @for ( problemType of EmergencyDurationsPriceResponse()?.data?.problems; track problemType) {
+                    <label class="appointment-form__radio-label">
+                      <input type="radio" [value]="problemType" formControlName="ProblemType"
+                        [attr.aria-label]="problemType" class="appointment-form__radio-input" />
+                      <span class="appointment-form__radio-text">
+                        {{ problemType }}
+                      </span>
+                    </label>
+                    }
+                    } @else if (EmergencyDurationsPriceResponse()?.data?.problems?.length === 0 &&
+                    !EmergencyDurationsPriceListErrorMessage()) {
+                    <app-empty-state style="margin:auto" [config]="problemTypeEmptyState"></app-empty-state>
+                    }@else {
+                    <app-error-state style="margin:auto" [config]="sessionDurationErrorState"></app-error-state>
+                    }
+                    }
+                    } @else {
+                    <div class="group__options">
+                      @for (i of [].constructor(5); track i) {
+                      <div class="group__options--shimmer"></div>
+                      }
+                    </div>
+                    }
+                    }
+                  </div>
+                  @if (appointmentForm.get('ProblemType')?.invalid && appointmentForm.get('ProblemType')?.touched) {
+                  <span class="appointment-form__error-message" role="alert">
+                    {{ 'problem_type_error' | translateApi }}
+                  </span>
+                  }
+                </div>
+
+                <div class="appointment-form__group">
+                  <label for="CommunicationType" class="appointment-form__label">
+                    {{ 'session_type' | translateApi }}
+                  </label>
+                  <div class="appointment-form__control-wrapper">
+                    @if (!isLoadingCommunicationTypes()) {
+                    @if (CommunicationTypesList()) {
+                    @if (CommunicationTypesList()?.data && CommunicationTypesList()?.data?.length !== 0) {
+                    @for (CommunicationType of CommunicationTypesList()?.data; track CommunicationType.id) {
+                    <label class="appointment-form__radio-label">
+                      <input type="radio" [value]="CommunicationType.id" formControlName="CommunicationType"
+                        [attr.aria-label]="CommunicationType.name" class="appointment-form__radio-input" />
+                      <span class="appointment-form__radio-text">
+                        {{ CommunicationType.name }}
+                      </span>
+                    </label>
+                    }
+                    } @else if (CommunicationTypesList()?.data?.length === 0 && !CommunicationTypesListErrorMessage()) {
+                    <app-empty-state style="margin: auto;" [config]="sessionTypeEmptyState"></app-empty-state>
+                    }
+                    @else {
+                    <app-error-state style="margin: auto;" [config]="sessionTypeErrorState"></app-error-state>
+                    }
+                    }
+                    } @else {
+                    <div class="group__options">
+                      @for (i of [].constructor(5); track i) {
+                      <div class="group__options--shimmer"></div>
+                      }
+                    </div>
+                    }
+                  </div>
+                  @if (appointmentForm.get('CommunicationType')?.invalid &&
+                  appointmentForm.get('CommunicationType')?.touched) {
+                  <span class="appointment-form__error-message" role="alert">
+                    {{ 'session_type_error' | translateApi }}
+                  </span>
+                  }
+                </div>
+              </div>
+              }
+              @if(!isCheckingReservation()) {
+              <div class="appointment-form__actions">
+                <button type="submit" class="appointment-form__submit-button btn btn--solid" [disabled]="isLoading()"
+                  [attr.aria-label]="'book_now' | translateApi">
+                  <!-- @if (isLoading()) {
+                  <div class="appointment-form__loading" aria-label="Booking in progress">
+                    {{ 'UrgentAppointment.BookingInProgress' | translate }}
+                  </div>
+                  }@else { -->
+                  {{ 'book_now' | translateApi }}
+                  <!-- } -->
+                </button>
+              </div>
+              }
+            </form>
+          </div>
+          <div class="book-urgent-appointment-layout__banner"
+            [class.book-urgent-appointment-layout__banner--hidden-on-mobile]="showFormOnMobile">
+            <div class="title">
+              {{ 'urgent_appointment_booking_title' | translateApi }}
+            </div>
+            <div class="description">
+              {{ 'urgent_appointment_booking_subtitle' | translateApi }}
+            </div>
+            <img [src]="'images/urgent-appointment/young-man.png'" [alt]="'Urgent Appointment Image'" loading="lazy"
+              width="100%" height="auto" decoding="async" fetchpriority="low"
+              class="book-urgent-appointment-layout__img" />
+            @if (!showFormOnMobile) {
+            <button type="button" class="book-urgent-appointment-layout__next-button btn btn--solid"
+              (click)="toggleFormVisibility()" [attr.aria-label]="'next' | translateApi">
+              {{ 'next' | translateApi }}
+            </button>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

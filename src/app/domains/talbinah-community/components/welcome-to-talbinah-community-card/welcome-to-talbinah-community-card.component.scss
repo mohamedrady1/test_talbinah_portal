@@ -1,0 +1,25 @@
+.welcome-to-talbinah-community-card {
+    display: flex;
+    padding: 0.5rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    border: 0.0625rem solid rgba(255, 255, 255, 0.34);
+    background: rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(7.800000190734863px);
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        &--title {
+            color: var(--Primary-primary, #0e39b6);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+    }
+    &--subtitle {
+        color: var(--text-300, #47586e);
+        font-size: 0.75rem;
+        font-weight: 400;
+    }
+}

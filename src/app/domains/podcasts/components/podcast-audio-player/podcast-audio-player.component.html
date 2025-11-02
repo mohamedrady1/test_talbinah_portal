@@ -1,0 +1,98 @@
+<div class="podcast-audio-player">
+  @if (podcastDetails) {
+  <div class="podcast-audio-player__close-icon" (click)="closeAudioPlayer()">
+    <app-svg-icon name="audio-player-close-icon" />
+  </div>
+  <div class="podcast-audio-player__info-container">
+    <div class="podcast-audio-player__info">
+      <img class="podcast-audio-player__thumbnail" [appLazyLoadImage]="podcastDetails.thumbnail_image || ''"
+        [alt]="podcastDetails.title || ''" ngOptimizedImage width="60" height="60" priority>
+      <div class="podcast-audio-player__text">
+        <div class="podcast-audio-player__title">{{podcastDetails.title}}</div>
+        <div class="podcast-audio-player__subtitle text-truncate-2">
+          {{podcastDetails.description}}
+        </div>
+      </div>
+    </div>
+    <audio #audioPlayer [src]="podcastDetails.file" preload="auto"></audio>
+
+    <div class="podcast-audio-player__progress">
+      <div class="podcast-audio-player__progress_controls">
+
+        <button class="control__shuffle" aria-label="Shuffle" (click)="toggleRepeat()">
+          @if(isRepeatOne){
+          <app-svg-icon name="audio-player-shuffle-on" />
+          }
+          @else{
+          <app-svg-icon name="audio-player-shuffle-off" />
+          }
+        </button>
+        <button class="control__replay-10" aria-label="Replay 10 seconds" (click)="rewind()">
+          <app-svg-icon name="audio-player-replay-10" />
+        </button>
+        <button class="control__play-pause" aria-label="Play/Pause" (click)="togglePlayPause()">
+          @if(isPlaying && !isEnded){
+          <app-svg-icon name="audio-player-pause" />
+          }@else if(!isPlaying && !isEnded){
+          <app-svg-icon name="audio-player-play" />
+          }@else {
+          <app-svg-icon name="audio-player-repeat" />
+          }
+        </button>
+        <button class="control__forward-10" aria-label="Forward 10 seconds" (click)="forward()">
+          <app-svg-icon name="audio-player-forward-10" />
+        </button>
+        <button class="control__repeat-one active" aria-label="Repeat One">
+          <app-svg-icon name="audio-player-repeat-one" />
+        </button>
+      </div>
+      <div #progressBar class="podcast-audio-player__progress-bar web" (click)="seek($event)">
+        <div class="podcast-audio-player__progress-fill" [style.width.%]="progress"></div>
+      </div>
+    </div>
+
+    <div class="podcast-audio-player__controls">
+      <button class="podcast-audio-player__button podcast-audio-player__button--new-window" aria-label="new-window"
+        (click)="maximizePodcast()">
+        <app-svg-icon name="audio-player-minimize" />
+      </button>
+      <button class="podcast-audio-player__button podcast-audio-player__button--full-screen" aria-label="full-screen"
+        (click)="onFullScreen()">
+        <app-svg-icon name="audio-player-full-screen" />
+      </button>
+      <button class="podcast-audio-player__button podcast-audio-player__button--favourite"
+        (click)="handleFavouriteToggle($event)"
+        [attr.aria-label]="podcastDetails.is_bookmarked ? 'Remove from favourites' : 'Add to favourites'">
+        @if(isToggleLoading()){
+        <div class="shimmer-circle"></div>
+        }
+        @else if (podcastDetails.is_bookmarked) {
+        <app-svg-icon name="red-heart" />
+        } @else {
+        <app-svg-icon name="gray-heart" />
+        }
+      </button>
+
+      <button class="podcast-audio-player__button podcast-audio-player__button--volume" (click)="toggleVolume()"
+        [attr.aria-label]="
+    volumeLevel === 0 ? 'Unmute'
+    : volumeLevel === 0.5 ? 'Set Full Volume'
+    : 'Mute'">
+
+        @if (volumeLevel === 0) {
+        <app-svg-icon name="audio-player-mute" />
+        } @else if (volumeLevel === 0.5) {
+        <app-svg-icon name="audio-player-half-volumn" />
+        } @else {
+        <app-svg-icon name="audio-player-full-volumn" />
+        }
+      </button>
+    </div>
+  </div>
+  <div #progressBar class="podcast-audio-player__progress-bar mobile" (click)="seek($event)">
+    <div class="podcast-audio-player__progress-fill" [style.width.%]="progress"></div>
+  </div>
+  }@else {
+  No podcast to view
+  }
+</div>

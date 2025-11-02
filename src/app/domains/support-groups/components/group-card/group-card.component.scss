@@ -1,0 +1,128 @@
+.group-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--Dark-100, #eee);
+  &__title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      color: var(--text-300, #47586e);
+      font-size: 0.75rem;
+      font-weight: 600;
+
+      &.details {
+        color: var(--Primary-primary, #0e39b6);
+      }
+    }
+  }
+
+  &__price {
+    border-radius: 1rem;
+    border-radius: 1rem;
+    background: var(--Dark-50, #f6f7f8);
+    display: flex;
+    padding: 0.25rem 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.125rem;
+    &.details {
+      background: var(--Primary-50, #e7ebf8);
+      padding: 0;
+
+      p {
+        color: var(--Primary-primary, #0e39b6);
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+    }
+
+    .cost {
+      border-radius: 1rem;
+      background: var(--Primary-50, #e7ebf8);
+      display: flex;
+      padding: 0.25rem 0.625rem;
+      justify-content: center;
+      align-items: center;
+      gap: 0.125rem;
+
+      &__prices {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+      }
+
+      &__original-price {
+        color: var(--text-300, #47586e) !important;
+        font-size: 0.625rem !important;
+        font-weight: 500 !important;
+        text-decoration: line-through !important;
+        opacity: 0.7 !important;
+      }
+
+      &__final-price {
+        color: var(--Primary-primary, #0e39b6);
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+    }
+
+    .subscriber {
+      border-radius: 1rem;
+      background: var(--Success-50);
+      padding: 0.25rem 0.625rem;
+
+      p {
+        color: var(--Success-primary);
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.375rem;
+
+    div {
+      display: flex;
+      flex-direction: row;
+      gap: 2px;
+      flex-wrap: wrap;
+      align-items: center;
+
+      p {
+        color: var(--text-300, #47586e);
+        font-size: 0.75rem;
+        font-weight: 400;
+      }
+    }
+
+    &.details {
+      display: flex;
+      padding: 0.5rem;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 0.5rem;
+      background-color: var(--Light-50);
+    }
+  }
+
+  &__description {
+    p {
+      color: var(--text-300, #47586e);
+      font-size: 0.75rem;
+      font-weight: 400;
+    }
+  }
+}

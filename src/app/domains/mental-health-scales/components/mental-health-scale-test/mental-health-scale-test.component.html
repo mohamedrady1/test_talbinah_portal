@@ -1,0 +1,110 @@
+<div class="quiz_container">
+
+  @if (currentStep() === 0) {
+  <app-mental-health-scale-start-test [item]="data?.item!" [messageRef]="data?.messageRef"
+    (startQuiz)="startQuiz($event)"></app-mental-health-scale-start-test>
+  }
+  @else if (!isFinished() &&questions().length > 0) {
+  <div class="quiz" appAutoExactHeight heightMode="max-height">
+    <div class="quiz__header">
+      <p class="quiz__date">
+        {{ today | date: 'd MMMM y' : undefined : currentLang }}
+      </p>
+      <div class="quiz__length">
+        <p>
+          {{ 'finished' | translateApi }}
+          <span>
+            {{ currentIndex() }}
+            {{ 'test' | translateApi }}
+          </span>
+          {{ 'From' | translateApi }}
+          <span>
+            {{ questions().length - 1 }}
+            {{ 'tests' | translateApi }}
+          </span>
+          {{ 'remaining_to_complete_journey' | translateApi }}
+          🌿
+        </p>
+      </div>
+      <div class="quiz__progress">
+        <div class="quiz__progress-bar" [style.width.%]="progress()"></div>
+      </div>
+    </div>
+    <div class="quiz__question">
+      <div class="quiz__question--icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M5.3335 14.8798C5.14683 14.8798 4.95349 14.8331 4.78015 14.7398C4.40015 14.5398 4.16683 14.1398 4.16683 13.7131V12.7665C2.1535 12.5598 0.833496 11.0798 0.833496 8.95976V4.9598C0.833496 2.66646 2.3735 1.12646 4.66683 1.12646H11.3335C13.6268 1.12646 15.1668 2.66646 15.1668 4.9598V8.95976C15.1668 11.2531 13.6268 12.7931 11.3335 12.7931H8.82015L5.98014 14.6865C5.78681 14.8131 5.56016 14.8798 5.3335 14.8798ZM4.66683 2.11979C2.94683 2.11979 1.8335 3.23313 1.8335 4.95312V8.95317C1.8335 10.6732 2.94683 11.7865 4.66683 11.7865C4.94016 11.7865 5.16683 12.0132 5.16683 12.2865V13.7065C5.16683 13.7932 5.22017 13.8331 5.2535 13.8531C5.28683 13.8731 5.35351 13.8931 5.42684 13.8465L8.39351 11.8732C8.47351 11.8198 8.5735 11.7865 8.6735 11.7865H11.3402C13.0602 11.7865 14.1735 10.6732 14.1735 8.95317V4.95312C14.1735 3.23313 13.0602 2.11979 11.3402 2.11979H4.66683Z"
+            fill="#0E39B6" />
+          <path
+            d="M7.99972 8.07324C7.72638 8.07324 7.49972 7.84658 7.49972 7.57324V7.43327C7.49972 6.65993 8.06637 6.27993 8.27970 6.13326C8.52637 5.96659 8.60636 5.85326 8.60636 5.67993C8.60636 5.3466 8.33305 5.07324 7.99972 5.07324C7.66638 5.07324 7.39307 5.3466 7.39307 5.67993C7.39307 5.95326 7.16640 6.17993 6.89307 6.17993C6.61973 6.17993 6.39307 5.95326 6.39307 5.67993C6.39307 4.79326 7.11305 4.07324 7.99972 4.07324C8.88638 4.07324 9.60636 4.79326 9.60636 5.67993C9.60636 6.43993 9.04639 6.81992 8.83972 6.95992C8.57972 7.13325 8.49972 7.24660 8.49972 7.43327V7.57324C8.49972 7.85324 8.27305 8.07324 7.99972 8.07324Z"
+            fill="#0E39B6" />
+          <path
+            d="M8 9.7334C7.72 9.7334 7.5 9.50673 7.5 9.2334C7.5 8.96007 7.72667 8.7334 8 8.7334C8.27333 8.7334 8.5 8.96007 8.5 9.2334C8.5 9.50673 8.28 9.7334 8 9.7334Z"
+            fill="#0E39B6" />
+        </svg>
+      </div>
+      <h2 class="quiz__question--title">
+        {{ currentQuestion().question }}
+      </h2>
+    </div>
+
+    <ul class="quiz__answers">
+      @for (answer of currentQuestion().answers; track answer.id) {
+      <li class="quiz__answer-item">
+        <label class="quiz__custom-radio" [class.quiz__custom-radio--selected]="answer.selected">
+          <input type="radio" name="answer" [checked]="answer.selected" (change)="selectAnswer(answer.id)" />
+          <span class="quiz__custom-circle"></span>
+          <span class="quiz__custom-label">
+            {{ answer.answer }}
+          </span>
+        </label>
+      </li>
+      }
+      @if(validationError()) {
+      <div class="quiz__error">{{ validationError() | translateApi }}</div>
+      }
+    </ul>
+
+    <div class="quiz__navigation">
+      @if (currentIndex() > 0) {
+      <button class="quiz__btn outline" type="button" (click)="goPrevious()">
+        {{'previous'|translateApi}}
+      </button>
+      }
+      @if (currentIndex() < questions().length - 1) { <button class="quiz__btn" type="button" (click)="goNext()">
+        {{'next'|translateApi}}
+        </button>
+        } @else {
+        <button class="quiz__btn" type="button" (click)="goNext()"
+          [disabled]="_CreateMentalHealthScaleFacade.isCreatingScale()">
+          {{'confirm'|translateApi}}
+        </button>
+        }
+    </div>
+    @if (_CreateMentalHealthScaleFacade.isCreatingScale()) {
+    <div class="overlay-loading">
+      <div class="spinner"></div>
+    </div>
+    }
+  </div>
+  }
+  @else if (questions().length === 0 && !isFinished()) {
+  <div class="quiz__step quiz__step--result">
+    <app-empty-state-card [config]="emptyStateConfig" [isLoading]="isProcessingEmptyState()"
+      (action)="onEmptyStateAction()"></app-empty-state-card>
+  </div>
+  }
+  @else if (isFinished()) {
+  <div class="quiz__step quiz__step--result">
+    @if (data?.isView || this.data?.message?.isMessageOpened()) {
+    <app-mental-health-scale-test-result [result]="this.data?.item"
+      [resultScore]="this.data?.mentalHealthResult||null"></app-mental-health-scale-test-result>
+    }
+    @if (!data?.isView || this.data?.message?.isMessageOpened() == false) {
+    <app-mental-health-scale-test-result [result]="resultAfterTest()"></app-mental-health-scale-test-result>
+    }
+  </div>
+  }
+
+</div>

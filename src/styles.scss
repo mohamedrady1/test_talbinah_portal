@@ -1,0 +1,253 @@
+// @use './app/common/styles/scss/vendors/_tailwind.scss' as *;
+
+/* You can add global styles to this file, and also import other style files */
+@use "./app/common/styles/scss/main" as *;
+@import url("https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap");
+@import "primeicons/primeicons.css";
+
+// Translations shimmer loading styles
+@import "./app/common/core/translations/styles/shimmer.scss";
+
+// @use "./app/common/styles/scss/abstracts/mixins" as *;
+
+.p-datepicker-panel,
+.p-overlay {
+  z-index: 1111 !important;
+}
+
+.p-datepicker-day-selected,
+.p-datepicker-year-selected,
+.p-datepicker-year:not(.p-disabled):not(.p-datepicker-year-selected):hover,
+.p-datepicker-month:not(.p-disabled):not(.p-datepicker-month-selected):hover {
+  background-color: var(--Primary-primary) !important;
+  color: white !important;
+}
+.p-inputtext {
+  box-shadow: none !important;
+  font-size: 0.75rem !important;
+  background: var(--Dark-WHITE);
+  color: var(--text-primary, black) !important;
+  // border: 1px solid var(--border-color, #80808029) !important;
+  border: 0 !important;
+}
+.p-placeholder {
+  font-size: 0.75rem !important;
+}
+.p-datepicker-input {
+  background: var(--Dark-WHITE) !important;
+  cursor: pointer !important;
+}
+.p-select-filter {
+  border: 1px solid var(--border-color, #80808029) !important;
+}
+.p-button-rounded {
+  background-color: var(--Primary-primary, #0e38b691) !important;
+}
+#custom-inline-calender {
+  .p-datepicker-panel-inline {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  .p-button {
+    padding: 0 !important;
+    background: var(--text-primary, black);
+  }
+}
+::placeholder {
+  font-size: 0.75rem !important;
+}
+
+/* For Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-input-placeholder {
+  font-size: 0.75rem !important;
+}
+
+/* For Mozilla Firefox */
+::-moz-placeholder {
+  font-size: 0.75rem !important;
+}
+
+/* For Microsoft Edge (older versions) */
+:-ms-input-placeholder {
+  font-size: 0.75rem !important;
+}
+
+.shimmer-circle {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  background: #66666680;
+  position: relative;
+  overflow: hidden;
+  margin-top: 0.14rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      rgba(102, 102, 102, 0) 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(102, 102, 102, 0) 100%
+    );
+    animation: shimmer-move 1.2s infinite ease-in-out;
+  }
+}
+
+@keyframes shimmer-move {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+.p-select-dropdown {
+  width: fit-content !important;
+}
+/* Regular */
+@font-face {
+  font-family: "Omnes";
+  src: url("/n-fonts/Omnes Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Bold */
+@font-face {
+  font-family: "Omnes";
+  src: url("/n-fonts/Omnes Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Bold Italic */
+@font-face {
+  font-family: "Omnes";
+  src: url("/n-fonts/Omnes Bold Italic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Black */
+@font-face {
+  font-family: "Omnes";
+  src: url("/n-fonts/Omnes Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* ExtraLight */
+@font-face {
+  font-family: "Omnes";
+  src: url("/n-fonts/Omnes ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+/* Hairline */
+@font-face {
+  font-family: "Omnes";
+  src: url("/n-fonts/Omnes Hairline.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+
+/* Hairline Italic */
+@font-face {
+  font-family: "Omnes";
+  src: url("/n-fonts/Omnes Hairline Italic.ttf") format("truetype");
+  font-weight: 100;
+  font-style: italic;
+}
+
+/* Italic */
+@font-face {
+  font-family: "Omnes";
+  src: url("/n-fonts/Omnes Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Light */
+@font-face {
+  font-family: "Omnes";
+  src: url("/n-fonts/Omnes Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Light Italic */
+@font-face {
+  font-family: "Omnes";
+  src: url("/n-fonts/Omnes Light Italic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* Medium */
+@font-face {
+  font-family: "Omnes";
+  src: url("/n-fonts/Omnes Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Medium Italic */
+@font-face {
+  font-family: "Omnes";
+  src: url("/n-fonts/Omnes Medium Italic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* SemiBold */
+@font-face {
+  font-family: "Omnes";
+  src: url("/n-fonts/Omnes SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* SemiBold Italic */
+@font-face {
+  font-family: "Omnes";
+  src: url("/n-fonts/Omnes SemiBold Italic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* Thin */
+@font-face {
+  font-family: "Omnes";
+  src: url("/n-fonts/Omnes Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+
+/* Thin Italic */
+@font-face {
+  font-family: "Omnes";
+  src: url("/n-fonts/Omnes Thin Italic.ttf") format("truetype");
+  font-weight: 100;
+  font-style: italic;
+}
+
+/* Arabic Regular */
+@font-face {
+  font-family: "OmnesArabic";
+  src: url("/n-fonts/OMNES-ARABIC-REGULAR.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  // font-family: var(--OmnesArabic), sans-serif;
+}

@@ -1,0 +1,49 @@
+<div class="program-subscription-information-card">
+  <div class="program-subscription-information-card__content">
+
+    <div class="program-subscription-information-card__image">
+      <img [src]="item?.image || 'images/trash/program.png'" [alt]="item?.title" loading="lazy" decoding="async"
+        fetchpriority="low" width="100" height="100" (error)="item && (item.image = 'images/trash/program.png')"
+        aria-hidden="false" />
+    </div>
+    <div class="program-subscription-information-card__info">
+      <div class="program-subscription-information-card__title">
+        <p class="details">
+          {{item?.title || ''}}
+        </p>
+        <div class="program-subscription-information-card__price">
+          @if (item?.is_purchased) {
+          <p>
+            {{'general.subscriber' | translate}}
+          </p>
+          }@else {
+          <div class="program-subscription-information-card__price-container">
+            @if (item?.original_price && item?.original_price !== item?.price) {
+            <span class="program-subscription-information-card__original-price">
+              {{item?.original_price}}
+            </span>
+            }
+            <p class="program-subscription-information-card__current-price">
+              {{item?.price || 0}}
+            </p>
+          </div>
+          }
+          @if(!item?.is_purchased){
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M10.8237 13.4072L14.9325 12.5364C14.885 13.0156 14.7604 13.4779 14.5588 13.9234L10.4595 14.7942C10.5018 14.3086 10.6232 13.8463 10.8237 13.4072ZM14.5588 11.3093L10.4595 12.1801V9.56761L9.18021 9.84152V11.2919C9.18021 11.4217 9.14432 11.5399 9.07254 11.6465L8.40596 12.6329C8.22863 12.8884 7.99113 13.0457 7.69346 13.1048L4.06763 13.879C4.11513 13.3987 4.23968 12.9364 4.44129 12.492L7.89929 11.7542V10.1075L4.67246 10.7931C4.71996 10.3128 4.84399 9.85366 5.04454 9.4156L7.89929 8.80127V3.7251C8.26029 3.28599 8.68727 2.9271 9.18021 2.64844V8.53527L10.4595 8.25977V4.36477C10.8216 3.92672 11.2454 3.56783 11.731 3.2881V7.99219L14.9325 7.30819C14.885 7.78847 14.7604 8.2508 14.5588 8.69519L11.731 9.30002V10.5984L14.9325 9.92227C14.885 10.4078 14.7604 10.8702 14.5588 11.3093Z"
+              fill="#0E39B6" />
+          </svg>
+          }
+        </div>
+
+      </div>
+      <div class="program-subscription-information-card__description">
+        <p class="text-truncate-2">
+          {{item?.description || ''}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>

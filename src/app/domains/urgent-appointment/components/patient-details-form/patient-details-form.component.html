@@ -1,0 +1,215 @@
+<main class="patient-details-form" role="main">
+  <section class="patient-details-form__container">
+    <form class="general-form-wrapper" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="general-form-wrapper__groups">
+        @for (formItem of formConfig; track $index) {
+        <div class="general-form-wrapper__field {{formItem.widthClass}}">
+          <div class="general-form-wrapper__label-group">
+            @if (formItem.label) {
+            <label [attr.for]="formItem.name" class="general-form-wrapper__label"
+              [ngClass]="{'general-form-wrapper__label--error': getError(formItem.name),'general-form-wrapper__label--clickable': formItem.enableLabelClick}">
+              {{ formItem.label |translateApi}}
+              @if (formItem.isRequired) {
+              <span class="general-form-wrapper__required">*</span>
+              }
+            </label>
+            }
+          </div>
+
+          @if (formItem.type === allInputTypes.TEXT) {
+          <div class="form-group-wrapper">
+            <div class="form-field">
+              <div class="custom-input-wrapper"
+                [ngClass]="{'p-invalid': getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched}">
+                <input type="text" [class]="formItem.inputClass ?? 'form-control custom-input-wrapper__input'"
+                  [formControlName]="formItem.name" [id]="formItem.name" [attr.aria-label]="'ariaLabel'+formItem.name"
+                  [attr.title]="(formItem.label ?? '')| translateApi" [attr.role]="'roleAttr'+formItem.name"
+                  [attr.autocomplete]="'autocompleteAttr'+formItem.name"
+                  [attr.placeholder]="(formItem.placeholder ?? '') | translateApi" [attr.autocomplete]="'off'">
+              </div>
+
+              <!-- ✅ Semantic Error and Hint Section -->
+              <div class="form-field__feedback" role="status" aria-live="polite">
+                @if (!getError(formItem.name) && formItem.hint && getFormControl(formItem.name) &&
+                !getFormControl(formItem.name)?.value &&
+                !formItem.fixedHint) {
+                <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+                  {{ formItem.hint | translateApi }}
+                </small>
+                }
+
+                @if (getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched) {
+                <span class="general-form-wrapper__error-message error-label" role="alert">
+                  {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+                </span>
+                }
+              </div>
+            </div>
+          </div>
+          }
+
+          @if (formItem.type === allInputTypes.TEXTAREA) {
+          <div class="form-group-wrapper">
+            <div class="form-field">
+              <div class="custom-input-wrapper custom-textarea-wrapper"
+                [ngClass]="{'p-invalid': getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched}">
+                <textarea [class]="formItem.inputClass ?? 'custom-input-wrapper__input'"
+                  [formControlName]="formItem.name" [id]="formItem.name" [attr.aria-label]="'ariaLabel'+formItem.name"
+                  [attr.title]="(formItem.label ?? '') | translateApi" [attr.role]="'roleAttr'+formItem.name"
+                  [attr.autocomplete]="'off'" [attr.placeholder]="(formItem.placeholder ?? '') | translateApi"
+                  [rows]="formItem.rows ?? 5"></textarea>
+              </div>
+
+              <div class="form-field__feedback" role="status" aria-live="polite">
+                @if (!getError(formItem.name) && formItem.hint && getFormControl(formItem.name) &&
+                !getFormControl(formItem.name)?.value &&
+                !formItem.fixedHint) {
+                <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+                  {{ formItem.hint | translateApi }}
+                </small>
+                }
+
+                @if (getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched) {
+                <span class="general-form-wrapper__error-message error-label" role="alert">
+                  {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+                </span>
+                }
+              </div>
+            </div>
+          </div>
+          }
+
+          @if (formItem.type === allInputTypes.SELECT) {
+          <div class="form-group-wrapper">
+            <div class="form-field">
+              <p-select [options]="formItem.listValues" [formControlName]="formItem.name"
+                [optionLabel]="(formItem.optionLabel || 'label') | translateApi" [showClear]="true"
+                [optionValue]="formItem.optionValue || 'value'" [filter]="formItem.name" [filterBy]="formItem.name"
+                [placeholder]="(formItem.placeholder ?? '') | translateApi" [id]="formItem.name"
+                [attr.aria-describedby]="formItem.name + '-hint'" [attr.aria-invalid]="!!getError(formItem.name)"
+                [ngClass]="{'p-invalid': getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched}"
+                appendTo="body">
+                <ng-template pTemplate="selectedItem" let-option>
+                  <!-- Custom selected item display if needed -->
+                  <div class="p-select-item-selected-custom">
+                    {{ option[formItem.optionLabel || 'label'] | translateApi }}
+                  </div>
+                </ng-template>
+                <ng-template let-option pTemplate="item">
+                  <!-- Custom item list display if needed -->
+                  <div class="p-select-item-custom">
+                    {{ option[formItem.optionLabel || 'label'] | translateApi}}
+                  </div>
+                </ng-template>
+              </p-select>
+
+              <!-- ✅ Semantic Error and Hint Section -->
+              <div class="form-field__feedback" role="status" aria-live="polite">
+                @if (!getError(formItem.name) && formItem.hint && getFormControl(formItem.name) &&
+                !getFormControl(formItem.name)?.value &&
+                !formItem.fixedHint) {
+                <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+                  {{ formItem.hint | translateApi }}
+                </small>
+                }
+
+                @if (getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched) {
+                <span class="general-form-wrapper__error-message error-label" role="alert">
+                  {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+                </span>
+                }
+              </div>
+            </div>
+          </div>
+          }
+
+          @if (formItem.type === allInputTypes.EMAIL) {
+          <div class="form-group-wrapper">
+            <div class="form-field">
+              <div class="custom-input-wrapper"
+                [ngClass]="{'p-invalid': getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched}">
+                <input type="email" [class]="formItem.inputClass ?? 'form-control custom-input-wrapper__input'"
+                  [formControlName]="formItem.name" [id]="formItem.name" [attr.aria-label]="'ariaLabel'+formItem.name"
+                  [attr.title]="(formItem.label ?? '')| translateApi" [attr.role]="'roleAttr'+formItem.name"
+                  [attr.autocomplete]="'autocompleteAttr'+formItem.name"
+                  [attr.placeholder]="(formItem.placeholder ?? '') | translateApi   " [attr.autocomplete]="'off'">
+              </div>
+
+              <!-- ✅ Semantic Error and Hint Section -->
+              <div class="form-field__feedback" role="status" aria-live="polite">
+                @if (!getError(formItem.name) && formItem.hint && getFormControl(formItem.name) &&
+                !getFormControl(formItem.name)?.value &&
+                !formItem.fixedHint) {
+                <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+                  {{ formItem.hint | translateApi }}
+                </small>
+                }
+
+                @if (getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched) {
+                <span class="general-form-wrapper__error-message error-label" role="alert">
+                  {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+                </span>
+                }
+              </div>
+            </div>
+          </div>
+          }
+
+          @if (formItem.type === allInputTypes.NUMBER) {
+          <div class="form-group-wrapper">
+            <div class="form-field">
+              <div class="custom-input-wrapper"
+                [ngClass]="{'p-invalid': getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched}">
+                <input type="number" [class]="formItem.inputClass ?? 'form-control custom-input-wrapper__input'"
+                  [formControlName]="formItem.name" [id]="formItem.name" [attr.aria-label]="'ariaLabel'+formItem.name"
+                  [attr.title]="(formItem.label ?? '')| translateApi" [attr.role]="'roleAttr'+formItem.name"
+                  [attr.autocomplete]="'off'" [attr.placeholder]="(formItem.placeholder ?? '') | translateApi">
+              </div>
+
+              <!-- ✅ Semantic Error and Hint Section -->
+              <div class="form-field__feedback" role="status" aria-live="polite">
+                @if (!getError(formItem.name) && formItem.hint && getFormControl(formItem.name) &&
+                !getFormControl(formItem.name)?.value &&
+                !formItem.fixedHint) {
+                <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+                  {{ formItem.hint | translateApi }}
+                </small>
+                }
+
+                @if (getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched) {
+                <span class="general-form-wrapper__error-message error-label" role="alert">
+                  {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+                </span>
+                }
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="general-form-wrapper__actions">
+        <button id="reset-dynamic-form-btn" type="button" class="btn btn--outline" (click)="closed.emit()">
+          <span class="btn__label">
+            {{ 'cancel' | translateApi }}
+          </span>
+        </button>
+        <button id="submit-dynamic-form-btn" type="submit" class="btn btn--solid"
+          [disabled]="isLoading() || _NormalPackagesReservationFacade.isStoring()"
+          [attr.aria-label]="'confirm' | translateApi">
+          <span class="btn__label">
+            @if (isLoading() || _NormalPackagesReservationFacade.isStoring()) {
+            <div class="general-form-wrapper__loading" aria-label="Submit in progress">
+              {{ 'in_progress' | translateApi }}
+            </div>
+            }
+            @if (!isLoading() || !_NormalPackagesReservationFacade.isStoring()) {
+            {{ 'confirm' | translateApi }}
+            }
+          </span>
+        </button>
+      </div>
+    </form>
+  </section>
+</main>

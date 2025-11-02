@@ -1,0 +1,312 @@
+@use "./../../../../common/styles/scss/abstracts/mixins" as responsive;
+
+.reel-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5625rem;
+    margin: 1rem auto; /* Center the card */
+    @include responsive.respond(sm) {
+        align-items: center;
+        justify-content: center;
+        flex-direction: column-reverse;
+    }
+}
+.reel-card {
+    /* Card base styling */
+    display: flex;
+    width: 18.875rem; /* ~302px */
+    height: 30.9375rem; /* ~495px */
+    flex-direction: column;
+    border-radius: 2rem;
+    overflow: hidden; /* Ensures content respects border-radius */
+    position: relative; /* For absolute positioning of children */
+    background-color: var(--text-dark, #333); /* Fallback/background for empty state */
+    color: var(--Dark-WHITE); /* Default text color */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+
+    /* Ensure responsiveness for smaller screens */
+    max-width: 90vw;
+    max-height: 80vh;
+}
+
+.reel-card__media {
+    /* Media container to hold video or image */
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden; /* To handle aspect ratios and ensure full coverage */
+
+    & video,
+    & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Cover the entire container */
+        display: block; /* Remove extra space below images/videos */
+    }
+}
+
+.reel-card__click-area {
+    /* Base styling for click areas */
+    position: absolute;
+    top: 0;
+    width: 50%; /* Each area covers half the card width */
+    height: calc(100% - 2.5rem); /* Adjust height to not overlap with progress bar and bottom content */
+    cursor: pointer;
+    z-index: 5; /* Below buttons and content overlay, but above media */
+    /* background-color: rgba(0, 255, 0, 0.1); /* For debugging, remove in production */
+
+    &--left {
+        left: 0;
+    }
+
+    &--right {
+        right: 0;
+    }
+}
+.reel-card__content {
+    /* Content overlay at the bottom */
+    display: flex;
+    padding: 0.5rem 0; /* 8px 0px */
+    flex-direction: column;
+    gap: 0.5rem; /* 10px */
+    position: absolute;
+    bottom: -0.00006rem; /* Align to the very bottom */
+    left: 0;
+    right: 0;
+    padding: 0rem 0.75rem;
+    width: 100%;
+    box-sizing: border-box; /* Include padding in width */
+    // background: linear-gradient(
+    //     180deg,
+    //     rgba(0, 0, 0, 0) 0%,
+    //     rgba(0, 0, 0, 0.7) 50%,
+    //     rgba(0, 0, 0, 0.9) 100%
+    // ); /* Gradient for better visibility */
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgb(153 152 152 / 70%) 50%, rgb(176 175 175) 100%);
+    padding-bottom: 0.7rem; /* Give space above progress bar */
+}
+
+.reel-card__dots {
+    /* List of dots for navigation */
+    display: flex;
+    gap: 0.25rem; /* 4px */
+    align-items: center;
+    justify-content: center;
+    list-style: none; /* Remove default list styling */
+    padding: 0;
+    margin: 0.25rem 0; /* Small margin */
+}
+
+.reel-card__dot {
+    /* Individual dot styling */
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out; /* Smooth transition for active state */
+
+    &:hover {
+        transform: scale(1.1); /* Slightly enlarge on hover */
+    }
+
+    & svg {
+        display: block; /* Remove extra space */
+    }
+
+    /* Active dot specific styling is applied via fill attribute in HTML,
+     but this class can be used for other visual indicators if needed. */
+    &--active {
+        /* No additional styling here as fill is directly bound, but useful for debugging or other properties */
+    }
+}
+
+.reel-card__user-profile {
+    /* User profile section below dots */
+    display: flex;
+    align-items: center;
+    gap: 0.3125rem; /* 5px */
+    margin-top: 0.12rem;
+    cursor: pointer;
+    &:hover {
+        /* Slightly enlarge on hover */
+        + .reel-card__user-name {
+            text-decoration: underline;
+        }
+    }
+}
+
+.reel-card__user-avatar {
+    /* User profile image */
+    width: 2rem; /* 32px */
+    height: 2rem; /* 32px */
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    border-radius: 50%; /* 12px */
+    object-fit: cover; /* Ensure image covers the area */
+}
+
+.reel-card__user-name {
+    /* User name text */
+    color: var(--Dark-WHITE);
+    font-size: 0.75rem; /* 12px */
+    font-weight: 600;
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis for long names */
+}
+
+.reel-card__follow-button {
+    /* Follow button */
+    border-radius: 0.5rem; /* 8px */
+    border: 1px solid var(--text-100);
+    padding: 0.25rem 0.375rem; /* 4px 6px */
+    color: var(--Dark-WHITE);
+    background-color: transparent; /* Transparent background */
+    text-align: center;
+    font-size: 0.75rem; /* 12px */
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: var(--Dark-WHITE);
+    }
+
+    &:active {
+        transform: scale(0.98); /* Slight press effect */
+    }
+}
+
+.reel-card__text {
+    /* Description text for video/image */
+    color: var(--Dark-WHITE);
+    font-size: 0.75rem; /* 12px */
+    font-weight: 500;
+    padding: 0 1rem; /* Horizontal padding for text */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis; /* Add ellipsis for overflow */
+}
+
+.reel-card__play-pause-button {
+    /* Play/Pause button in the center */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the button */
+    display: flex;
+    padding: 0.375rem; /* 6px */
+    align-items: center;
+    justify-content: center; /* Center SVG inside button */
+    gap: 0.5rem; /* 10px */
+    border-radius: var(--Radius-8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.31);
+    backdrop-filter: blur(8.4px); /* Blur effect */
+    -webkit-backdrop-filter: blur(8.4px); /* For Safari compatibility */
+    cursor: pointer;
+    z-index: 10; /* Ensure it's above media but below content overlay */
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.45);
+        transform: translate(-50%, -50%) scale(1.05); /* Slight enlargement on hover */
+    }
+
+    &:active {
+        transform: translate(-50%, -50%) scale(0.98); /* Press effect */
+    }
+
+    /* The pointer-events: none; given by user would make the button unclickable.
+     We override it to make it clickable. */
+    pointer-events: auto;
+}
+
+.reel-card__progress-bar {
+    /* Progress bar at the very bottom */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.25rem; /* 4px */
+    background-color: rgba(255, 255, 255, 0.3); /* Lighter background for the bar track */
+    z-index: 1; /* Below content overlay but above media */
+}
+
+.reel-card__progress-bar-fill {
+    /* Filled part of the progress bar */
+    height: 100%;
+    background-color: var(--Primary-primary);
+    transition: width 0.1s linear; /* Smooth progress animation */
+}
+
+.reel-card__mute-button {
+    /* Mute/Unmute button at top-left */
+    position: absolute;
+    top: 1rem; /* 16px from top */
+    left: 1rem; /* 16px from left */
+    border-radius: 1rem; /* 16px */
+    background: rgba(219, 219, 219, 0.2);
+    display: flex;
+    padding: 0.5rem 1.125rem; /* 8px 18px */
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem; /* 10px */
+    border: none; /* No border for this button */
+    cursor: pointer;
+    z-index: 10; /* Above everything */
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+
+    & svg {
+        display: block; /* Remove extra space */
+    }
+
+    &:hover {
+        background: rgba(219, 219, 219, 0.3);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+.reel-card__empty-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--text-dark, #222);
+    color: var(--grey-400, #aaa);
+    font-size: 1rem;
+}
+.reel-card--controls-hidden {
+    opacity: 0;
+    pointer-events: none; /* Make them unclickable when hidden */
+}
+
+.reels-card-actions-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.625rem;
+    @include responsive.respond(sm) {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .reels-card-action--comments {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem; /* Gap between icon and count */
+        cursor: pointer;
+    }
+}

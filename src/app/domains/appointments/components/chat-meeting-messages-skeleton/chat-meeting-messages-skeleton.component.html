@@ -1,0 +1,26 @@
+<ul class="shimmer-list">
+    @for (tab of [1,2]; track $index) {
+    <li class="shimmer-message shimmer-message--user">
+        <div class="shimmer-icon shimmer-wrapper"></div>
+        <div class="shimmer-content-wrapper" style="flex:1">
+            <div class="shimmer-content shimmer-wrapper">
+                <div class="shimmer-text-line shimmer-text-line--long"></div>
+                <div class="shimmer-text-line shimmer-text-line--short"></div>
+            </div>
+            <div class="shimmer-timestamp shimmer-wrapper"></div>
+        </div>
+    </li>
+
+    <li class="shimmer-message shimmer-message--doctor">
+        <div class="shimmer-icon shimmer-wrapper"></div>
+        <div class="shimmer-content-wrapper" style="flex: 1;">
+            <div class="shimmer-content shimmer-wrapper" style="width: 85%;">
+                <div class="shimmer-text-line shimmer-text-line--long"></div>
+                <div class="shimmer-text-line shimmer-text-line--long"></div>
+                <div class="shimmer-text-line shimmer-text-line--short"></div>
+            </div>
+            <div class="shimmer-timestamp shimmer-wrapper"></div>
+        </div>
+    </li>
+    }
+</ul>

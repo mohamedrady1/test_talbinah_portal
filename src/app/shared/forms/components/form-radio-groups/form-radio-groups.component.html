@@ -1,0 +1,17 @@
+<fieldset class="radio-group" role="radiogroup" [attr.aria-label]="ariaLabel">
+  @for (config of formItem.radioGroups; track $index) {
+  <div class="radio-button {{config.radioWidth}}" [class.radio-button--selected]="isChecked(config.value)">
+    <label [for]="config.value" class="radio-button__label">
+      @if (config.icon) {
+      <img [src]="config.icon" [alt]="config.label|translate" class="radio-button__icon" loading="lazy" />
+      }
+      <p class="radio-button__text">
+        {{ config.label|translate }}
+      </p>
+    </label>
+    <input type="radio" class="radio-button__input" [id]="config.value" [name]="config.name" [value]="config.value"
+      [checked]="isChecked(config.value)" (change)="onSelect(config.value)" [formControl]="control"
+      [attr.aria-checked]="isChecked(config.value)" />
+  </div>
+  }
+</fieldset>

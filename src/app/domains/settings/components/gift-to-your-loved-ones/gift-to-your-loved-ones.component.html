@@ -1,0 +1,35 @@
+<div class="gift-loved-ones-layout" appAutoExactHeight heightMode="max-height">
+    <div class="gift-loved-ones-layout__content">
+        <div class="gift-loved-ones-tabs">
+            @for (tab of tabs; track tab.key) {
+            <button class="gift-loved-ones-tabs__btn"
+                [ngClass]="{ 'gift-loved-ones-tabs__btn--active': activeTab === tab.key }"
+                (click)="setActiveTab(tab.key)">
+                {{ tab.label | translateApi }}
+            </button>
+            }
+        </div>
+        @switch (activeTab) {
+        @case ('send') {
+        <app-send-gift-form></app-send-gift-form>
+        }
+        @case ('sent') {
+        <app-sent-gifts-list></app-sent-gifts-list>
+        }
+        @case ('received') {
+        <app-received-gifts-list></app-received-gifts-list>
+        }
+        }
+    </div>
+
+    <div class="gift-loved-ones-layout__banner">
+        <div class="gift-banner">
+            <div class="gift-banner__content">
+                <div class="gift-banner__title">🎁 {{ 'gift_your_loved_ones' | translateApi }}</div>
+                <div class="gift-banner__desc">{{ 'surprise_loved_ones_with_gift' | translateApi }}</div>
+            </div>
+            <img class="gift-banner__img" src="images/settings/gift/gift-3.png" alt="gift" />
+        </div>
+    </div>
+
+</div>

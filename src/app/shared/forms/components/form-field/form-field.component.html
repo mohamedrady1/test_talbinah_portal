@@ -1,0 +1,260 @@
+<form [formGroup]="formGroup" class="form-layout" autocomplete="off">
+  @if (!formItem.hide) {
+  @if (formItem.type === allInputTypes.TEXT) {
+  <div class="form-group-wrapper">
+    <div class="form-field">
+      <app-form-input-text [formItem]="formItem" [control]="getFormControl(formItem.name)" [name]="formItem.name"
+        [inputClass]="formItem.inputClass" [attr.aria-describedby]="formItem.name + '-hint'"
+        [attr.aria-invalid]="!!getError(formItem)" />
+
+      <!-- ✅ Semantic Error and Hint Section -->
+      <div class="form-field__feedback" role="status" aria-live="polite">
+        @if (!getError(formItem) && formItem.hint && !getFormControl(formItem.name).value) {
+        <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+          {{ formItem.hint | translate }}
+        </small>
+        }
+
+        @if (getError(formItem)) {
+        <small class="form-field__error">
+          {{ getError(formItem) |translate }}
+        </small>
+        }
+      </div>
+
+    </div>
+  </div>
+  }
+
+  <!-- New DATE input -->
+  @if (formItem.type === allInputTypes.DATE) {
+  <div class="form-group-wrapper">
+    <div class="form-field">
+      <app-form-input-text [formItem]="formItem" [control]="getFormControl(formItem.name)" [name]="formItem.name"
+        [inputClass]="formItem.inputClass" [attr.aria-describedby]="formItem.name + '-hint'"
+        [attr.aria-invalid]="!!getError(formItem)" type="date" />
+
+      <div class="form-field__feedback" role="status" aria-live="polite">
+        @if (!getError(formItem) && formItem.hint && !getFormControl(formItem.name).value && !formItem.fixedHint) {
+        <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+          {{ formItem.hint | translate }}
+        </small>
+        }
+        @if (getError(formItem)) {
+        <small class="form-field__error">
+          {{ getError(formItem) | translate }}
+        </small>
+        }
+      </div>
+    </div>
+  </div>
+  }
+
+  @if (formItem.type === allInputTypes.NUMBER) {
+  <div class="form-group-wrapper">
+    <div class="form-field">
+
+      <app-form-input-number [formItem]="formItem" [control]="getFormControl(formItem.name)" [name]="formItem.name"
+        [inputClass]="formItem.inputClass" [attr.aria-describedby]="formItem.name + '-hint'"
+        [attr.aria-invalid]="!!getError(formItem)" />
+
+      <!-- ✅ Semantic Error and Hint Section -->
+      <div class="form-field__feedback" role="status" aria-live="polite">
+        @if (!getError(formItem) && formItem.hint && !getFormControl(formItem.name).value) {
+        <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+          {{ formItem.hint | translate }}
+        </small>
+        }
+
+        @if (getError(formItem)) {
+        <small class="form-field__error">
+          {{ getError(formItem) |translate }}
+        </small>
+        }
+      </div>
+
+    </div>
+  </div>
+  }
+
+  @if (formItem.type === allInputTypes.EMAIL) {
+  <div class="form-group-wrapper">
+    <div class="form-field">
+
+      <app-form-input-text [formItem]="formItem" [control]="getFormControl(formItem.name)" [name]="formItem.name"
+        [inputClass]="formItem.inputClass" [attr.aria-describedby]="formItem.name + '-hint'"
+        [attr.aria-invalid]="!!getError(formItem)" />
+
+      <!-- ✅ Semantic Error and Hint Section -->
+      <div class="form-field__feedback" role="status" aria-live="polite">
+        @if (!getError(formItem) && formItem.hint && !getFormControl(formItem.name).value && !formItem.fixedHint) {
+        <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+          {{ formItem.hint | translate }}
+        </small>
+        }
+
+        @if (getError(formItem)) {
+        <small class="form-field__error">
+          {{ getError(formItem) |translate }}
+        </small>
+        }
+      </div>
+
+    </div>
+  </div>
+  }
+  @if (formItem.type === allInputTypes.PASSWORD) {
+  <div class="form-group-wrapper">
+    <div class="form-field">
+
+      <app-form-input-text [formItem]="formItem" [control]="getFormControl(formItem.name)" [name]="formItem.name"
+        [inputClass]="formItem.inputClass" [attr.aria-describedby]="formItem.name + '-hint'"
+        [attr.aria-invalid]="!!getError(formItem)" />
+
+      <!-- ✅ Semantic Error and Hint Section -->
+      <div class="form-field__feedback" role="status" aria-live="polite">
+        @if (!getError(formItem) && formItem.hint && !getFormControl(formItem.name).value && !formItem.fixedHint) {
+        <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+          {{ formItem.hint | translate }}
+        </small>
+        }
+
+        @if (getError(formItem)) {
+        <small class="form-field__error">
+          {{ getError(formItem) |translate }}
+        </small>
+        }
+      </div>
+
+    </div>
+  </div>
+  }
+
+  @if (formItem.type === allInputTypes.RADIO_BUTTON) {
+  <div class="form-group-wrapper">
+    <div class="form-field">
+      <app-form-radio-groups [formItem]="formItem" [control]="getFormControl(formItem.name)"
+        [attr.aria-describedby]="formItem.name + '-hint'" [attr.aria-invalid]="!!getError(formItem)" />
+
+      <!-- ✅ Semantic Error and Hint Section -->
+      <div class="form-field__feedback" role="status" aria-live="polite">
+        @if (!getError(formItem) && formItem.hint && !getFormControl(formItem.name).value && !formItem.fixedHint) {
+        <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+          {{ formItem.hint | translate }}
+        </small>
+        }
+
+        @if (getError(formItem)) {
+        <small class="form-field__error">
+          {{ getError(formItem) |translate }}
+        </small>
+        }
+      </div>
+
+    </div>
+  </div>
+  }
+  @if (formItem.type === allInputTypes.CHECK_BOX) {
+  <div class="form-group-wrapper">
+    <div class="form-field">
+      <app-form-check-groups [formItem]="formItem" [control]="getFormControl(formItem.name)"
+        [attr.aria-describedby]="formItem.name + '-hint'"
+        [attr.aria-invalid]="!!getError(formItem)"></app-form-check-groups>
+
+      <!-- ✅ Semantic Error and Hint Section -->
+      <div class="form-field__feedback" role="status" aria-live="polite">
+        @if (!getError(formItem) && formItem.hint && !getFormControl(formItem.name).value && !formItem.fixedHint) {
+        <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+          {{ formItem.hint | translate }}
+        </small>
+        }
+
+        @if (getError(formItem)) {
+        <small class="form-field__error">
+          {{ getError(formItem) |translate }}
+        </small>
+        }
+      </div>
+
+    </div>
+  </div>
+  }
+
+  @if (formItem.type === allInputTypes.COUNTRYCODEINPUT) {
+  <div class="form-group-wrapper">
+    <div class="form-field">
+
+      <app-country-code-input [formItem]="formItem" [control]="getFormControl(formItem.name)" [name]="formItem.name"
+        [inputClass]="formItem.inputClass" [attr.aria-describedby]="formItem.name + '-hint'"
+        [attr.aria-invalid]="!!getError(formItem)" />
+
+      <!-- ✅ Semantic Error and Hint Section -->
+      <div class="form-field__feedback" role="status" aria-live="polite">
+        @if (!getError(formItem) && formItem.hint && !getFormControl(formItem.name).value && !formItem.fixedHint) {
+        <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+          {{ formItem.hint | translate }}
+        </small>
+        }
+
+        @if (getError(formItem)) {
+        <small class="form-field__error">
+          {{ getError(formItem) |translate }}
+        </small>
+        }
+      </div>
+
+    </div>
+  </div>
+  }
+
+  @if (formItem.type === allInputTypes.SELECT) {
+  <div class="form-group-wrapper">
+    <div class="form-field">
+      <app-form-single-select [formItem]="formItem" [control]="getFormControl(formItem.name)"
+        [attr.aria-describedby]="formItem.name + '-hint'" [attr.aria-invalid]="!!getError(formItem)" />
+
+      <!-- ✅ Semantic Error and Hint Section -->
+      <div class="form-field__feedback" role="status" aria-live="polite">
+        @if (!getError(formItem) && formItem.hint && !getFormControl(formItem.name).value && !formItem.fixedHint) {
+        <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+          {{ formItem.hint | translate }}
+        </small>
+        }
+
+        @if (getError(formItem)) {
+        <small class="form-field__error">
+          {{ getError(formItem) |translate }}
+        </small>
+        }
+      </div>
+
+    </div>
+  </div>
+  }
+
+  @if (formItem.type === allInputTypes.MULTI_SELECT) {
+  <div class="form-group-wrapper">
+    <div class="form-field">
+      <app-form-multi-select [formItem]="formItem" [control]="getFormControl(formItem.name)"
+        [attr.aria-describedby]="formItem.name + '-hint'" [attr.aria-invalid]="!!getError(formItem)" />
+
+      <!-- ✅ Semantic Error and Hint Section -->
+      <div class="form-field__feedback" role="status" aria-live="polite">
+        @if (!getError(formItem) && formItem.hint && !getFormControl(formItem.name).value && !formItem.fixedHint) {
+        <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
+          {{ formItem.hint | translate }}
+        </small>
+        }
+
+        @if (getError(formItem)) {
+        <small class="form-field__error">
+          {{ getError(formItem) |translate }}
+        </small>
+        }
+      </div>
+
+    </div>
+  </div>
+  }
+  }
+</form>

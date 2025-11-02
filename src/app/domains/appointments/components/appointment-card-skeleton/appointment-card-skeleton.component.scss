@@ -1,0 +1,213 @@
+.shimmer-card {
+    display: flex;
+    gap: 1rem;
+    height: 100%;
+    cursor: default; // Change cursor for shimmer state
+    pointer-events: none; // Disable clicks during shimmer
+
+    &__details {
+        display: flex;
+        padding: 0.5rem;
+        gap: 0.375rem;
+        flex: 1 0 0;
+        border-radius: 0.75rem;
+        border: 1px solid var(--Dark-50, #f6f7f8);
+        // background-color: #f0f0f0; // Base background for the shimmer card
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.425rem;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        flex: 1 0 0;
+        padding: 0 0.75rem;
+
+        &-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        &-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.625rem;
+        }
+    }
+
+    &__description {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    &__features {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    &__feature-item {
+        display: flex;
+        flex-direction: row;
+        gap: 0.25rem;
+        align-items: center;
+    }
+
+    &__title {
+        height: 0.875rem; /* Match font-size of original title */
+        width: 30%; /* Placeholder width */
+        border-radius: 0.25rem;
+    }
+
+    &__thumbnail {
+        width: 3.0625rem;
+        height: 3.0625rem;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    &__info-group {
+        display: flex;
+        padding: 0.25rem 0rem;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        align-self: stretch;
+        border-radius: 0.5rem;
+    }
+
+    &__info-item {
+        display: flex;
+        align-items: center;
+        gap: 0.125rem;
+        height: 0.75rem; /* Match font-size of original info text */
+        width: 40%; /* Placeholder width */
+        border-radius: 0.25rem;
+    }
+
+    &__info-icon {
+        width: 0.875rem;
+        height: 0.875rem;
+        flex-shrink: 0;
+        border-radius: 50%; // Make it circular if representing an icon
+        background-color: #d0d0d0; // Placeholder color for icons
+    }
+
+    &__info-text {
+        height: 0.75rem;
+        width: 100%;
+        border-radius: 0.25rem;
+    }
+
+    &__action-dots {
+        width: 3rem;
+        height: 1rem;
+        border-radius: 30%;
+        background-color: #d0d0d0;
+    }
+
+    &__data-time-status {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.375rem;
+    }
+
+    &__status-badge {
+        height: 1.375rem;
+        width: 5rem; // Placeholder width for the badge
+        border-radius: 1rem;
+    }
+
+    &__button {
+        height: 1.5rem; // Approximate height of original buttons
+        width: 5rem; // Approximate width of original buttons
+        border-radius: 0.5rem;
+    }
+
+    /* Shimmer Effect Animation */
+    .shimmer-effect {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+    }
+
+    .shimmer-text-line {
+        height: 0.75rem; /* Standard height for text lines */
+        width: 40%;
+        border-radius: 0.25rem;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Responsive adjustments for shimmer card */
+@media (max-width: 768px) {
+    // Using the respond(sm) mixin equivalent
+    .shimmer-card {
+        // flex-direction: column;
+        gap: 0.5rem;
+
+        .shimmer-card__details {
+            flex-direction: column;
+            padding: 0.75rem;
+        }
+
+        .shimmer-card__thumbnail {
+            // width: 100%;
+            // height: 6rem; /* Adjust height for mobile placeholder image */
+            aspect-ratio: unset; // Remove aspect-ratio for auto height
+        }
+
+        .shimmer-card__content {
+            width: 100%;
+        }
+
+        .shimmer-card__description {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .shimmer-card__info-group {
+            flex-direction: column; // Stack info items vertically on small screens
+            align-items: flex-start;
+            gap: 0.5rem;
+            justify-content: space-between;
+        }
+
+        .shimmer-card__info-item {
+            width: 80%; // Give more width to info items on small screens
+        }
+
+        .shimmer-card__feature-item {
+            width: 100%; // Make features take full width on small screens
+        }
+    }
+}

@@ -1,0 +1,238 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+
+.podcast {
+    &-favourite-header {
+        background: linear-gradient(
+            to right,
+            var(--error-color-light, #cd2d504f) 0%,
+            var(--error-color-light, #cd2d5018) 100%
+        );
+        border-radius: 0.75rem;
+        padding: 2rem 1rem;
+        @include flex-box(column, 0, center, center);
+
+        &__title {
+            @include text-style(1rem, var(--error-color, #cd2d4f), 700);
+        }
+    }
+    &-layout {
+        @include hero-layout("../../../../../../public/images/podcast/bg.png");
+
+        &__container {
+            @include flex-box(column, 1rem);
+            border-radius: 0.625rem;
+            padding: 1rem;
+            padding-top: 0;
+            .podcast {
+                @include flex-box(column, 0.75rem);
+                padding-inline-end: 0.5rem;
+            }
+            @include respond(sm) {
+                background: transparent;
+                box-shadow: none;
+            }
+        }
+    }
+
+    &__cards {
+        @include flex-box(row, 0.75rem);
+
+        @include respond(lg) {
+            flex-direction: column;
+        }
+    }
+
+    &__favourite-list {
+        // Corrected typo: explore-List -> explore-list
+        @include flex-box(column, 1.5rem);
+        border-radius: 16px;
+        padding: 0.75rem;
+        background: var(--Dark-WHITE, #fff);
+        @include respond(sm) {
+            background: transparent;
+        }
+    }
+    .podcast__list,
+    .podcast__skeleton {
+        @include grid-box(repeat(2, 1fr), 1.5rem);
+        @include respond(sm) {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+    $shimmer-bg: var(--grey-200, #f0f0f0);
+    $shimmer-highlight: var(--grey-300, #e0e0e0);
+    .podcast-grid {
+        display: grid;
+        gap: 1rem;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        &.count-1 {
+            grid-template-columns: 1fr;
+        }
+
+        &.count-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        &.count-3,
+        &.count-4 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        &.count-5,
+        &.count-6 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 600px) {
+            grid-template-columns: 1fr !important;
+        }
+    }
+
+    .podcast-card {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        border-radius: 12px;
+        &__details {
+            display: flex;
+            flex-direction: row;
+        }
+
+        &__thumbnail {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            margin-right: 1rem;
+        }
+
+        &__image {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            background-color: $shimmer-bg;
+        }
+
+        &__content {
+            flex: 1;
+            padding-inline-start: 1rem;
+        }
+
+        &__content-header {
+            margin-bottom: 1rem;
+        }
+
+        &__content-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        &__title {
+            width: 60%;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        &__like-button {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: $shimmer-bg;
+        }
+
+        &__description,
+        &__information,
+        &__duration {
+            height: 14px;
+            border-radius: 4px;
+            background-color: $shimmer-bg;
+        }
+
+        &__description {
+            width: 90%;
+            margin-top: 8px;
+        }
+
+        &__information {
+            width: 80%;
+        }
+
+        &__duration-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        &__duration {
+            width: 40px;
+        }
+    }
+
+    .shimmer__element {
+        position: relative;
+        overflow: hidden;
+        background-color: $shimmer-bg;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, $shimmer-highlight, transparent);
+            animation: shimmer 1.2s infinite;
+        }
+    }
+
+    .shimmer__text {
+        height: 14px;
+        border-radius: 4px;
+    }
+
+    .shimmer__text-line {
+        height: 14px;
+        width: 100%;
+        border-radius: 4px;
+        background-color: $shimmer-bg;
+        margin: 0.3rem 0;
+        @extend .shimmer__element;
+    }
+
+    .shimmer__circle {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: $shimmer-bg;
+        @extend .shimmer__element;
+    }
+
+    .shimmer__icon {
+        width: 15px;
+        height: 14px;
+        background-color: $shimmer-bg;
+        border-radius: 4px;
+        margin-inline-start: 0.5rem;
+        @extend .shimmer__element;
+    }
+
+    .shimmer__small {
+        width: 40px;
+        @extend .shimmer__element;
+    }
+
+    @keyframes shimmer {
+        0% {
+            left: -150%;
+        }
+        50% {
+            left: 100%;
+        }
+        100% {
+            left: 100%;
+        }
+    }
+}

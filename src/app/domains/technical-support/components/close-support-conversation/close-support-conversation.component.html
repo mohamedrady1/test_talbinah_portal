@@ -1,0 +1,28 @@
+<section class="close-support-conversation">
+  <div class="close-support-conversation__status" role="status" aria-live="polite">
+    <div class="close-support-conversation__status__icon">
+      <img [src]="'images/status/error-status-icon.png'" [alt]="'status-image'" loading="lazy" width="200"
+        height="200" />
+    </div>
+    <div class="close-support-conversation__status__content">
+      <h2 class="close-support-conversation__status__title">
+        {{ 'confirm_end_support_chat' | translateApi }}
+      </h2>
+      <p class="close-support-conversation__status__subtitle">
+        {{ 'CloseSupportConversation.confirmationSublabel' | translateApi }}
+      </p>
+    </div>
+  </div>
+
+  <div class="close-support-conversation--actions">
+    <button id="cancel-btn" type="button" class="btn btn--outline" (click)="onCancel()">
+      {{ 'close' | translateApi }}
+    </button>
+    <button [id]="'item-details'" type="submit" class="btn btn--solid" (click)="onConfirmCloseConversation()"
+      [attr.aria-label]="'confirm' | translateApi" [disabled]="_CloseSupportConversationFacade?.isClosing()">
+      <span class="btn__label">
+        {{ 'confirm' | translateApi }}
+      </span>
+    </button>
+  </div>
+</section>

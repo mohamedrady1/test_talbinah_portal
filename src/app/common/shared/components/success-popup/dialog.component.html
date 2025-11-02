@@ -1,0 +1,24 @@
+@if (isOpen) {
+<div class="popup">
+  <div class="popup__overlay" (click)="closeDialog()"></div>
+  <div class="popup__card d-flex flex-col align-items-center gap-md-4 gap-2">
+    @if (isSuccess) {
+    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M40.0003 73.3333C58.3337 73.3333 73.3337 58.3333 73.3337 40C73.3337 21.6666 58.3337 6.66663 40.0003 6.66663C21.667 6.66663 6.66699 21.6666 6.66699 40C6.66699 58.3333 21.667 73.3333 40.0003 73.3333Z"
+        fill="#4AA147" />
+      <path d="M25.833 40L35.2663 49.4333L54.1663 30.5667" stroke="#FCFCFD" stroke-width="1.8" stroke-linecap="round"
+        stroke-linejoin="round" />
+    </svg>
+    }@else{
+    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="40" r="33" fill="#D32F2F" />
+      <line x1="26" y1="26" x2="54" y2="54" stroke="white" stroke-width="5" stroke-linecap="round" />
+      <line x1="54" y1="26" x2="26" y2="54" stroke="white" stroke-width="5" stroke-linecap="round" />
+    </svg>
+    }
+    <p class="mb-3">{{ message | translate }}</p>
+    <app-solid-btn [label]="cancelButton.label" (click)="closeDialog()"></app-solid-btn>
+  </div>
+</div>
+}

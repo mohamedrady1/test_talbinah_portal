@@ -1,0 +1,7 @@
+<div class="doctor-gallery--list">
+    @for (image of images; track $index) {
+    <div class="doctor-gallery--img-container">
+        <img [src]="image.src" [alt]="image.alt || 'image'">
+    </div>
+    }
+</div>

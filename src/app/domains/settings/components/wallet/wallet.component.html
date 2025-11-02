@@ -1,0 +1,62 @@
+<div class="wallet-container" appAutoExactHeight="50" heightMode="max-height">
+    <!-- Loading State -->
+    <div class="wallet-card__list-container">
+        @if (isLoading()) {
+        <app-wallet-loading></app-wallet-loading>
+        }
+        @if (errorMessage()&& !isLoading()) {
+        <div class="wallet-error">
+            <app-error-state-card [config]="errorStateConfig"></app-error-state-card>
+        </div>
+        }
+        @if (!isLoading() && !errorMessage()) {
+        <!-- Wallet Content -->
+        <!-- Card Section -->
+        <div class="wallet-card">
+            <div class="wallet-card__info">
+                <div class="wallet-card__title-group">
+                    <span class="wallet-card__title">{{ 'your_current_wallet_balance' | translateApi }}</span>
+                    <div class="wallet-card__points-group">
+                        <span class="wallet-card__points">{{ points() | number:'1.0-0' }}</span>
+                        <app-svg-icon name="wallet-badge" type="wallet-badge" class="wallet-card__svg" width="61"
+                            height="61"></app-svg-icon>
+                    </div>
+                </div>
+            </div>
+            <button class="wallet-card__btn" type="button" (click)="onChargeWallet()">
+                <app-svg-icon name="add-balance" type="add-balance"></app-svg-icon>
+                <span>{{ 'top_up_wallet' | translateApi }}</span>
+            </button>
+        </div>
+        }
+
+        <!-- Movements Section -->
+        <div class="wallet-card__list-container">
+            @if (!isLoading() && !errorMessage()) {
+            <div class="wallet-card__list-search">
+                <app-global-search-input (valueChanged)="onSearchChange($event)" [inputSearchConfig]="searchConfig" />
+            </div>
+
+            <!-- Movements Content -->
+            @if (movements().length > 0) {
+            <div class="wallet-card__list">
+                @for (card of movements(); track card.id) {
+                <app-wallet-card [cardConfig]="card"
+                    [phoneNumber]="this.walletUser()?.phone_no || ''"></app-wallet-card>
+                }
+            </div>
+            }
+            }
+            @if (movementsError() && !movementsStatus()) {
+            <app-error-state-card [config]="errorStateMovementsConfig"></app-error-state-card>
+            }
+            <!-- Empty State -->
+            @if (movements().length === 0 && !movementsError() && isLoading() == false) {
+            <app-empty-state-card [config]="emptyStateMovementsConfig"></app-empty-state-card>
+            }
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,215 @@
+.card {
+  &__add-comment {
+    display: flex;
+    gap: 0.625rem;
+    align-items: center;
+
+    &.main-page {
+      width: 32.625rem;
+      padding: 0.25rem;
+      justify-content: flex-end;
+      border-radius: var(--Radius-12, 0.75rem);
+      background: var(--Dark-WHITE, #fff);
+
+      @media (max-width: 767px) {
+        width: 100%;
+      }
+    }
+
+    &__avatar {
+      width: 2rem;
+      height: 2rem;
+      aspect-ratio: 1/1;
+
+      border-radius: 0.75rem;
+      background: var(--grid-5);
+      cursor: pointer;
+    }
+
+    &__input {
+      display: flex;
+      padding: 0.625rem;
+      align-items: center;
+      gap: 0.625rem;
+      border-radius: 1.125rem;
+      background: var(--Dark-50, #f6f7f8);
+      color: var(--text-300, #47586e);
+      font-size: 0.75rem;
+      font-weight: 500;
+      border: none;
+      outline: none;
+      width: 100%;
+
+      &.main-page {
+        border-radius: var(--Radius-8, 0.5rem);
+        align-items: center;
+      }
+
+      &-wrapper {
+        flex: 1;
+      }
+
+      &::placeholder {
+        color: var(--text-300, #47586e);
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+    }
+
+    &__actions {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 0.62rem;
+
+      &:dir(rtl) {
+        right: initial;
+        left: 10px;
+      }
+
+      &--loading {
+        // Center the spinner within the actions area
+        justify-content: center;
+        width: auto; // Allow spinner to take natural width
+        height: auto; // Allow spinner to take natural height
+        // Adjust these values to position the spinner exactly where the buttons were
+        right: 10px; // Maintain same right position
+        padding: 0.625rem; // Add some padding to match button area
+        box-sizing: border-box; // Include padding in width/height
+      }
+    }
+  }
+
+  &__comment {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+
+    &--add-reels {
+      display: flex;
+      padding: 0.375rem;
+      align-items: center;
+      gap: 0.25rem;
+      border-radius: 0.5rem;
+      background: var(--Primary-50, #e7ebf8);
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      inset-inline-end: 0.75rem;
+
+      &--text {
+        color: var(--Primary-primary, #0e39b6);
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  &__suggestions {
+    display: flex;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  &__add-comment__input {
+    &--clickable {
+      cursor: pointer;
+    }
+  }
+
+  &__add-comment__mood-input__icon {
+    display: flex;
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    background: var(--Dark-100);
+    cursor: pointer;
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    &:dir(rtl) {
+      left: 0.5rem;
+      right: initial;
+    }
+
+    &.active {
+      background-color: var(--Primary-primary);
+
+      svg {
+        path {
+          fill: var(--Dark-WHITE);
+        }
+      }
+    }
+  }
+}
+
+.emoji-picker-container {
+  position: absolute;
+  bottom: 1.875rem;
+  z-index: 10;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  right: 2.5rem;
+
+  &:dir(rtl) {
+    left: 2.5rem;
+    right: initial;
+  }
+}
+
+/* Loading spinner styles */
+.loading-spinner {
+  animation: spin 1s linear infinite; // Apply spin animation
+  color: var(--Primary-primary, #0e39b6); // Use your primary color for the spinner
+  width: 24px; // Set width and height for the spinner
+  height: 24px;
+
+  circle {
+    stroke: currentColor; // Use the color defined by 'color' property
+    stroke-linecap: round;
+    opacity: 0.4; // Make the background circle slightly transparent
+  }
+
+  path {
+    stroke: currentColor; // Use the color defined by 'color' property
+    stroke-dasharray: 60; // Make it look like a segment is animating
+    stroke-dashoffset: 0;
+    stroke-width: 3;
+    fill: none; // Ensure no fill, just stroke
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Remove old loading-indicator styles */
+/*
+.loading-indicator {
+  font-style: italic;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+*/

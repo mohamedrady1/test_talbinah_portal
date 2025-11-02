@@ -1,0 +1,90 @@
+<section class="reservation-package-item-form" aria-labelledby="reservationFormTitle">
+  <div class="reservation-package-item-form__container">
+    <form class="reservation-package-item-form__form" [formGroup]="formPackage" aria-labelledby="reservationFormTitle">
+      <h2 id="reservationFormTitle" class="visually-hidden">
+        {{ 'available_appointments ' | translateApi }}
+      </h2>
+
+      <div class="reservation-package-item-form__groups">
+        <!-- Date -->
+        <div class="reservation-package-item-form__group">
+          <label for="date" class="reservation-package-item-form__label"
+            [ngClass]="{ 'reservation-package-item-form__label--error': getError('date') }">
+            {{ 'form_date' | translateApi }}
+            <span class="reservation-package-item-form__required" aria-hidden="true">*</span>
+          </label>
+
+          <div class="reservation-package-item-form__control">
+            <app-datepicker class="reservation-package-item-form" [value]="pickerValue()" [minDate]="today"
+              [disabledWeekDays]="disabledWeekDays()" [locale]="currentLang"
+              [ngClass]="{ 'reservation-package-item-form__datepicker--disabled': formPackage.get('date')?.disabled }"
+              [disabled]="formPackage.get('date')?.disabled || false" (valueChange)="onPickerChange($event)"
+              mode="dropdown">
+            </app-datepicker>
+
+            <div class="reservation-package-item-form__feedback" role="status" aria-live="polite">
+              @if (getError('date')) {
+              <span class="reservation-package-item-form__error-message" role="alert">
+                {{ 'date_required' | translateApi }}
+              </span>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Time Slots -->
+        @if (formPackage.get('date')?.value) {
+        <div class="reservation-package-item-form__group">
+          <label for="time_id" class="reservation-package-item-form__label"
+            [ngClass]="{ 'reservation-package-item-form__label--error': getError('time_id') }">
+            {{ 'available_times' | translateApi }}
+            <span class="reservation-package-item-form__required" aria-hidden="true">*</span>
+          </label>
+
+          <div class="reservation-package-item-form__control">
+            @if (!doctorSlotsFacade.isLoading()) {
+            @if (doctorSlotsFacade.dataSlots()?.length) {
+            <div class="radio-group" role="radiogroup" aria-labelledby="time_id-label">
+              @for (timeSlot of doctorSlotsFacade.dataSlots(); track timeSlot.start_time) {
+              <label class="radio-group__item"
+                [class.radio-group__item--active]="formPackage.get('time_id')?.value?.start_time === timeSlot.start_time"
+                [class.radio-group__item--disabled]="isTimeDisabledForReuse(timeSlot) || formPackage.get('time_id')?.disabled">
+                <input type="radio" class="radio-group__input" formControlName="time_id" [value]="timeSlot"
+                  [disabled]="!!(isTimeDisabledForReuse(timeSlot) || formPackage.get('time_id')?.disabled)"
+                  (change)="onTimeSelected(timeSlot)"
+                  [attr.aria-label]="convertTimeStringToDate(timeSlot.start_time) | date:'hh:mm a':undefined:currentLang" />
+
+                <span class="radio-group__text">
+                  {{ convertTimeStringToDate(timeSlot.start_time) | date:'hh:mm a':undefined:currentLang }}
+                </span>
+              </label>
+              }
+            </div>
+            } @else {
+            <div class="reservation-package-item-form__empty">{{ 'no_available_times' | translateApi }}</div>
+            }
+            } @else {
+            <div class="reservation-package-item-form__shimmer" [attr.aria-label]="'loading_times' | translateApi">
+              @for (i of [].constructor(4); track i) {
+              <div class="reservation-package-item-form__shimmer-box" aria-hidden="true"></div>
+              }
+            </div>
+            }
+            <div class="reservation-package-item-form__feedback" role="status" aria-live="polite">
+              @if (getError('time_id')) {
+              <span class="reservation-package-item-form__error-message" role="alert">
+                {{ 'available_times_error' | translateApi }}
+              </span>
+              }
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </form>
+  </div>
+</section>
+
+<div class="visually-hidden">
+  <p id="reservationFormTitle">{{ 'available_appointments ' | translateApi }}</p>
+</div>

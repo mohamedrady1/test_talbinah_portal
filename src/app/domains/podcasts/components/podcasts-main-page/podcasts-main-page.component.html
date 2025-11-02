@@ -1,0 +1,132 @@
+<div class="podcast-layout" #layout>
+  <div class="podcast-layout__header">
+    <app-site-header></app-site-header>
+  </div>
+  <div class="podcast-layout__container" #card>
+    <app-page-layout-header [config]="headerConfig" [card]="cardRef" [disablePadding]="true"
+      (closeRequested)="goHome()"></app-page-layout-header>
+    <div class="podcast" appAutoExactHeight="20" [enabled]="!isFullscreen" heightMode="max-height">
+      <div class="podcast__cards">
+        @if (this.facade.allPodcastsResponse()?.data?.most_visit) {
+        <div class="podcast__most-listened">
+          <app-card-header [config]="mostListenedHeaderConfig">
+          </app-card-header>
+          @if (!this.facade.isLoadingAllPodcasts()) {
+          @if (this.facade.allPodcastsResponse()?.data?.most_visit) {
+          <div class="podcast__most-listened__card">
+            @if (this.facade.allPodcastsResponse()?.data?.most_visit;) {
+            <app-podcast-card [item]="this.facade.allPodcastsResponse()?.data?.most_visit"></app-podcast-card>
+            }
+
+          </div>
+          } @else if (this.facade.errorMessage()&& !this.facade.statusRequestAllPodcasts()) {
+          <p>{{ this.facade.errorMessage() ?? '' | translate }}</p>
+          } @else {
+          <p>{{ 'podcast.emptyState.noMostListenedPodcasts' | translate }}</p>
+          }
+          } @else {
+          <app-podcast-skeleton></app-podcast-skeleton>
+          }
+        </div>
+        }
+        <div class="podcast__recommended-list">
+          <app-card-header [config]="recommendedPodcastListListHeaderConfig()"
+            [isPrevDisabled]="isPrevRecommendedDisabled()" [isNextDisabled]="isNextRecommendedDisabled()"
+            (prevClicked)="onPrevRecommended()" (nextClicked)="onNextRecommended()"
+            (tabSelected)="onTabCategorySelected($event)">
+          </app-card-header>
+          @if (!this.facade.isLoadingRecommendedPodcasts()) {
+          @if ((this.facade.recommendedPodcastsResponse()?.data?.length ?? 0) > 0) {
+          <div class="podcast__list">
+            @for (podcast of this.facade.recommendedPodcastsResponse()?.data; track $index) {
+            <app-podcast-card [item]="podcast" [hideDescription]="true"></app-podcast-card>
+
+            }
+          </div>
+          } @else if (this.facade.errorMessageRecommendedPodcasts()&&
+          !this.facade.statusRequestRecommendedPodcast()) {
+          <app-error-state-card [config]="recommendedPodcastsError" [type]="'small'"></app-error-state-card>
+          } @else if (recommendedPodcastsLoaded()) {
+          <app-empty-state-card [config]="noRecommendedPodcasts" [type]="'small'"></app-empty-state-card>
+          }
+          } @else {
+          <app-podcast-skeleton [count]="recommendedSkeletonCount()"></app-podcast-skeleton>
+          }
+        </div>
+      </div>
+
+      <div class="podcast__cards">
+        <div class="podcast__explore-list">
+          <app-card-header [config]="explorePodcastListHeaderConfig()" [isPrevDisabled]="isPrevExploreDisabled()"
+            [isNextDisabled]="isNextExploreDisabled()" (prevClicked)="onPrevExplore()"
+            (tabSelected)="onTabCategorySelected($event)" (nextClicked)="onNextExplore()">
+          </app-card-header>
+          @if (!this.facade.isLoadingAllPodcasts() && !this.facade.isLoadingAllPodcastsFilter()) {
+          @if ((this.facade.allPodcastsResponse()?.data?.podcasts?.length ?? 0) > 0) {
+          <div class="podcast__list">
+            @for (podcast of this.facade.allPodcastsResponse()?.data?.podcasts; track $index) {
+            <app-podcast-card [item]="podcast" [hideDescription]="true"></app-podcast-card>
+
+            }
+          </div>
+          } @else if (this.facade.errorMessage()&& !this.facade.statusRequestAllPodcasts()) {
+          <app-error-state-card [config]="podcastsInCategoryError" [type]="'small'"></app-error-state-card>
+          } @else if (allPodcastsLoaded()) {
+          <app-empty-state-card [config]="noPodcastsInCategory" [type]="'small'"></app-empty-state-card>
+          }
+          } @else {
+          <app-podcast-skeleton [count]="exploreSkeletonCount()"></app-podcast-skeleton>
+          }
+          <!-- <hr>
+                    <app-card-header [config]="selectionsPodcastListHeaderConfig()">
+                    </app-card-header>
+                    @if (!this.facade.isLoadingRandomPodcasts()) {
+                    @if ((this.facade.randomPodcastsResponse()?.data?.length ?? 0) > 0) {
+                    <div class="podcast__list">
+                        @for (podcast of this.facade.randomPodcastsResponse()?.data; track $index) {
+                        <app-podcast-card [item]="podcast" [hideDescription]="true"></app-podcast-card>
+                        }
+                    </div>
+                    } @else if (this.facade.errorMessageRandomPodcasts()&&
+                    !this.facade.statusRequestMessageRandomPodcasts()) {
+                    <app-error-state-card [config]="randomPodcastsError" [type]="'small'"></app-error-state-card>
+                    } @else {
+                    <app-empty-state-card [config]="noRandomPodcasts" [type]="'small'"></app-empty-state-card>
+                    }
+                    } @else {
+                    <app-podcast-skeleton [count]="selectionsSkeletonCount()"></app-podcast-skeleton>
+                    } -->
+        </div>
+
+        <div class="podcast__favourite-list">
+          <app-card-header [config]="favouritePodcastListHeaderConfig()" (allClicked)="openAllFavouritePopup()">
+          </app-card-header>
+          @if(isLoggedIn()){
+          @if (!this.facade.isLoadingFavouritePodcasts()) {
+          @if ((this.facade.favouritePodcastsResponse()?.data?.length ?? 0) > 0) {
+          <div class="podcast__list">
+            @for (podcast of this.facade.favouritePodcastsResponse()?.data.slice(0,
+            favoritesDisplayLimit()); track $index) {
+            <app-podcast-card [item]="podcast" [hideDescription]="true"></app-podcast-card>
+            }
+          </div>
+          } @else if (this.facade.errorMessageFavouritePodcasts() &&
+          !this.facade.statusRequestFavouritePodcasts()) {
+          <app-error-state-card [config]="favoritePodcastsError" [type]="'small'"></app-error-state-card>
+          }
+          @else if(this.facade.favouritePodcastsResponse()?.data?.length === 0) {
+          <app-empty-state-card [config]="noFavoritePodcasts" [type]="'small'"></app-empty-state-card>
+          }
+          }@else {
+          <app-podcast-skeleton></app-podcast-skeleton>
+          }
+          }
+          @else{
+          <app-compelete-data-and-register-now [isEmptyState]="true"></app-compelete-data-and-register-now>
+          }
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,210 @@
+@if (isBrowser) {
+<div class="chat-layout__container">
+  <div class="khawiik-text-chat">
+    <!-- Header with week view and actions -->
+    <div class="khawiik-text-chat__header">
+      <!-- Week days -->
+      @if(hasMessages()) {
+      <div class="khawiik-text-chat__header--title">
+        @if (isEditingTitle()) {
+        <input type="text" class="label" [(ngModel)]="editableTitle" (keydown)="onInputKeydown($event)"
+          (ngModelChange)="onTitleInputChange()" aria-label="edit-chat-title" autofocus />
+        } @else if (isConversationLoading() || isNewChatLoading()) {
+        <div class="label shimmer-placeholder">
+          <div class="shimmer-line shimmer-line--title"></div>
+        </div>
+        } @else {
+        <span class="label">
+          {{ chatTitle() }}
+        </span>
+
+        <!-- Edit Icon -->
+        @if (!isEditingTitle()) {
+
+        <svg _ngcontent-ng-c2655058196="" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"
+          (click)="startEditingTitle()" fill="none">
+          <path _ngcontent-ng-c2655058196=""
+            d="M4.15499 14.6402C3.69749 14.6402 3.26999 14.4827 2.96249 14.1902C2.57249 13.8227 2.38499 13.2677 2.45249 12.6677L2.72999 10.2377C2.78249 9.78016 3.05999 9.17266 3.38249 8.84266L9.53999 2.32516C11.0775 0.697659 12.6825 0.652659 14.31 2.19016C15.9375 3.72766 15.9825 5.33266 14.445 6.96016L8.28749 13.4777C7.97249 13.8152 7.38749 14.1302 6.92999 14.2052L4.51499 14.6177C4.38749 14.6252 4.27499 14.6402 4.15499 14.6402ZM11.9475 2.18266C11.37 2.18266 10.8675 2.54266 10.3575 3.08266L4.19999 9.60766C4.04999 9.76516 3.87749 10.1402 3.84749 10.3577L3.56999 12.7877C3.53999 13.0352 3.59999 13.2377 3.73499 13.3652C3.86999 13.4927 4.07249 13.5377 4.31999 13.5002L6.73499 13.0877C6.95249 13.0502 7.31249 12.8552 7.46249 12.6977L13.62 6.18016C14.55 5.19016 14.8875 4.27516 13.53 3.00016C12.93 2.42266 12.4125 2.18266 11.9475 2.18266Z"
+            fill="#A3ADBB"></path>
+          <path _ngcontent-ng-c2655058196=""
+            d="M13.005 8.21263C12.99 8.21263 12.9675 8.21263 12.9525 8.21263C10.6125 7.98013 8.73002 6.20263 8.37002 3.87763C8.32502 3.57013 8.53502 3.28513 8.84252 3.23263C9.15002 3.18763 9.43502 3.39763 9.48752 3.70513C9.77252 5.52013 11.2425 6.91513 13.0725 7.09513C13.38 7.12513 13.605 7.40263 13.575 7.71013C13.5375 7.99513 13.29 8.21263 13.005 8.21263Z"
+            fill="#A3ADBB"></path>
+          <path _ngcontent-ng-c2655058196=""
+            d="M15.75 17.0625H2.25C1.9425 17.0625 1.6875 16.8075 1.6875 16.5C1.6875 16.1925 1.9425 15.9375 2.25 15.9375H15.75C16.0575 15.9375 16.3125 16.1925 16.3125 16.5C16.3125 16.8075 16.0575 17.0625 15.75 17.0625Z"
+            fill="#A3ADBB"></path>
+        </svg>
+        }
+        }
+        @if (isEditingTitle()) {
+        <div class="icon icon--save" aria-hidden="true" (click)="saveTitle()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
+            <path fill="#4CAF50" d="M9 16.17l-3.88-3.88L4 13.41 9 18.41l12-12-1.41-1.42z" />
+          </svg>
+        </div>
+
+        <div class="icon icon--cancel" aria-hidden="true" (click)="resetTitle()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
+            <path fill="#F44336" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41
+                  17.59 19 19 17.59 13.41 12 19 6.41z" />
+          </svg>
+        </div>
+        }
+      </div>}
+      <div class="khawiik-text-chat__week-days">
+        @for (day of weekDays; track day.id) {
+        <div class="khawiik-text-chat__day" [class.khawiik-text-chat__day--today]="isToday(day)">
+
+          <!-- show numeric day only -->
+          <span class="khawiik-text-chat__day-number">
+            {{ day.dayDate | date:'d' }}
+          </span>
+
+          <!-- show translated day name -->
+          <span class="khawiik-text-chat__day-name">
+            {{ getDayName(day) | translateApi }}
+          </span>
+        </div>
+        }
+      </div>
+
+      <!-- Actions -->
+      <div class="khawiik-text-chat__actions">
+        @if (isConversationLoading() || isNewChatLoading()) {
+        <!-- Shimmer placeholders for actions -->
+        <div class="khawiik-text-chat__action shimmer-placeholder">
+          <div class="shimmer-line shimmer-line--action"></div>
+        </div>
+        <div class="khawiik-text-chat__action shimmer-placeholder">
+          <div class="shimmer-line shimmer-line--action"></div>
+        </div>
+        } @else {
+        <button type="button" class="khawiik-text-chat__action" (click)="_openKhawiikActivitesModal()"
+          [attr.aria-label]="keys.TEXT_CHAT.NEW_CHAT | translateApi">
+          <!-- SVG icon placeholder -->
+          <app-svg-icon name="khawiik-star"></app-svg-icon>
+        </button>
+
+        <button type="button" class="khawiik-text-chat__action" (click)="_openKhawiikHistoryModal()"
+          [attr.aria-label]="keys.TEXT_CHAT.ZOOM_IN | translateApi">
+          <app-svg-icon name="khawiik-folder"></app-svg-icon>
+        </button>
+
+        <button type="button" (click)="_openKhawiikBooksModal()" class="khawiik-text-chat__action"
+          [class.active]="currentBook()" [attr.aria-label]="keys.TEXT_CHAT.ZOOM_OUT | translateApi">
+          @if (currentBook()) {
+          <app-svg-icon name="khawiik-book-active"></app-svg-icon>
+          }
+          @else{
+          <app-svg-icon name="khawiik-book"></app-svg-icon>
+          }
+        </button>
+
+        }
+      </div>
+    </div>
+    @if (isConversationLoading() || isNewChatLoading()) {
+    <app-chat-messages-skeleton />
+    }@else {
+    <!-- Chat area -->
+    <div class="khawiik-text-chat__chat-area" id="khawiik-text-chat__chat-area">
+      @if (!hasMessages()) {
+      <!-- Welcome area -->
+      <div class="khawiik-text-chat__welcome">
+        <img src="images/khawiik/khawiik-welcome-mian-icon.png" alt="Khawiik Welcome Icon"
+          class="khawiik-text-chat__welcome-icon" />
+        <p class="khawiik-text-chat__welcome-date">{{ currentDate() }}</p>
+        <p class="khawiik-text-chat__welcome-title">{{ keys.COMMON.WHATS_ON_MIND | translateApi }}</p>
+        <button class="btn btn--solid" (click)="onNewChatClick()">
+          {{keys.TEXT_CHAT.NEW_CHAT | translateApi }}
+        </button>
+      </div>
+      } @else {
+      <!-- Messages area -->
+      <div class="khawiik-text-chat__messages--header">
+        <button class="khawiik-text-chat__messages--header-new-chat" (click)="onNewChatClick()">
+          <app-svg-icon name="new-khawiik-chat"></app-svg-icon>
+        </button>
+        <button class="khawiik-text-chat__messages--header-actions">
+          <button class="khawiik-text-chat__messages--header-full-screen" (click)="onFullScreenClick()">
+            <app-svg-icon [name]="isFullScreen() ? 'khawiik-minimize-icon' : 'khawiik-full-screen'"></app-svg-icon>
+          </button>
+          <button class="khawiik-text-chat__messages--header-settings" (click)="openSettingsModal()">
+            <app-svg-icon name="khawiik-settings"></app-svg-icon>
+          </button>
+        </button>
+      </div>
+      @if (conversationErrorMessage()) {
+      <app-error-state-card [config]="errorStateConfig"></app-error-state-card>
+      } @else {
+      <div class="khawiik-text-chat__messages" #messagesContainer>
+        <!-- Mission message - show first if available -->
+        @if (missionData() && messages().length === 0) {
+        <div class="khawiik-text-chat__message khawiik-text-chat__message--bot">
+          <div class="khawiik-text-chat__message-content">
+            {{ missionData()?.replay }}
+          </div>
+        </div>
+        }
+
+        <!-- Regular messages -->
+        @for (message of messages(); track message.id) {
+        <div class="khawiik-text-chat__message" [class.khawiik-text-chat__message--user]="message.sender === 'user'">
+          <div class="khawiik-text-chat__message-content">
+            {{ message.content }}
+          </div>
+          <!-- <div class="khawiik-text-chat__message-time">
+            {{ message.timestamp | date:'short' }}
+          </div> -->
+        </div>
+        }
+
+        @if (isSending()) {
+        <div class="khawiik-text-chat__message khawiik-text-chat__message--bot">
+          <div class="khawiik-text-chat__typing-indicator">
+            <span> <app-svg-icon name="khawiik-message-loading" /> </span>
+            <span> <app-svg-icon name="khawiik-message-loading" /> </span>
+            <span> <app-svg-icon name="khawiik-message-loading" /> </span>
+          </div>
+        </div>
+        }
+      </div>
+      }
+      }
+
+      <!-- Input area -->
+      @if (hasMessages()) {
+      <div class="khawiik-text-chat__input-container"
+        [class.khawiik-text-chat__input-container--disabled]="isSending()">
+        <div class="khawiik-text-chat__input">
+          <div class="khawiik-text-chat__input-left">
+            <!-- SVG icon placeholder -->
+            <app-svg-icon name="khawiik-input-icon" />
+
+            <input #messageInput type="text" class="khawiik-text-chat__input-field" [value]="messageText()"
+              (input)="onMessageChange($event)" (keydown)="onKeyDown($event)"
+              [placeholder]="keys.TEXT_CHAT.PLACEHOLDER | translateApi"
+              [attr.aria-label]="keys.TEXT_CHAT.PLACEHOLDER | translateApi" />
+          </div>
+
+          <div class="khawiik-text-chat__input-right">
+            <button type="button" class="khawiik-text-chat__voice-btn" (click)="onVoiceClick()"
+              [attr.aria-label]="keys.TEXT_CHAT.VOICE_BUTTON | translateApi">
+              <!-- SVG icon placeholder -->
+              <app-svg-icon name="khawiik-voice" />
+
+            </button>
+
+            <button type="button" class="khawiik-text-chat__send-btn" [disabled]="!isSubmitEnabled() || isSending()"
+              (click)="onSubmit()" [attr.aria-label]="keys.TEXT_CHAT.SEND | translateApi">
+              <!-- SVG icon placeholder -->
+              <app-svg-icon name="khawiik-send-icon" />
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    }
+  </div>
+</div>
+}

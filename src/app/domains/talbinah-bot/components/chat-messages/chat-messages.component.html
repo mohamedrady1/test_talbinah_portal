@@ -1,0 +1,242 @@
+<section class="chat-messages" role="log" aria-label="Chat conversation" [appAutoExactHeight]="85">
+  @if(currentConversation()){
+  <header class="chat-messages__header">
+    <div class="chat-messages__header__title">
+      @if (isEditingTitle()) {
+      <input type="text" class="label" [(ngModel)]="editableTitle" (keydown)="onInputKeydown($event)"
+        (ngModelChange)="onTitleInputChange()" aria-label="edit-chat-title" autofocus />
+      } @else {
+      <span class="label">
+        {{ this.updatedChat?.name || chatTitle() }}
+      </span>
+      }
+      <!-- Edit Icon -->
+      @if (!isEditingTitle()) {
+      <div class="icon" aria-hidden="true" (click)="startEditingTitle()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path
+            d="M4.15499 14.6402C3.69749 14.6402 3.26999 14.4827 2.96249 14.1902C2.57249 13.8227 2.38499 13.2677 2.45249 12.6677L2.72999 10.2377C2.78249 9.78016 3.05999 9.17266 3.38249 8.84266L9.53999 2.32516C11.0775 0.697659 12.6825 0.652659 14.31 2.19016C15.9375 3.72766 15.9825 5.33266 14.445 6.96016L8.28749 13.4777C7.97249 13.8152 7.38749 14.1302 6.92999 14.2052L4.51499 14.6177C4.38749 14.6252 4.27499 14.6402 4.15499 14.6402ZM11.9475 2.18266C11.37 2.18266 10.8675 2.54266 10.3575 3.08266L4.19999 9.60766C4.04999 9.76516 3.87749 10.1402 3.84749 10.3577L3.56999 12.7877C3.53999 13.0352 3.59999 13.2377 3.73499 13.3652C3.86999 13.4927 4.07249 13.5377 4.31999 13.5002L6.73499 13.0877C6.95249 13.0502 7.31249 12.8552 7.46249 12.6977L13.62 6.18016C14.55 5.19016 14.8875 4.27516 13.53 3.00016C12.93 2.42266 12.4125 2.18266 11.9475 2.18266Z"
+            fill="#A3ADBB" />
+          <path
+            d="M13.005 8.21263C12.99 8.21263 12.9675 8.21263 12.9525 8.21263C10.6125 7.98013 8.73002 6.20263 8.37002 3.87763C8.32502 3.57013 8.53502 3.28513 8.84252 3.23263C9.15002 3.18763 9.43502 3.39763 9.48752 3.70513C9.77252 5.52013 11.2425 6.91513 13.0725 7.09513C13.38 7.12513 13.605 7.40263 13.575 7.71013C13.5375 7.99513 13.29 8.21263 13.005 8.21263Z"
+            fill="#A3ADBB" />
+          <path
+            d="M15.75 17.0625H2.25C1.9425 17.0625 1.6875 16.8075 1.6875 16.5C1.6875 16.1925 1.9425 15.9375 2.25 15.9375H15.75C16.0575 15.9375 16.3125 16.1925 16.3125 16.5C16.3125 16.8075 16.0575 17.0625 15.75 17.0625Z"
+            fill="#A3ADBB" />
+        </svg>
+      </div>
+      }
+
+      @if (isEditingTitle()) {
+      @if (isEditingNameLoading()) {
+      <div class="icon--spinner spinner"></div>
+      }
+      @else {
+
+      <div class="icon icon--save" aria-hidden="true" (click)="saveTitle()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
+          <path fill="#4CAF50" d="M9 16.17l-3.88-3.88L4 13.41 9 18.41l12-12-1.41-1.42z" />
+        </svg>
+      </div>
+
+      <div class="icon icon--cancel" aria-hidden="true" (click)="resetTitle()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
+          <path fill="#F44336" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41
+            17.59 19 19 17.59 13.41 12 19 6.41z" />
+        </svg>
+      </div>
+      }
+      }
+
+
+    </div>
+    <button id="new-chat-btn" type="button" class="chat-messages__header__new-chat" (click)="newChatHandler()"
+      [disabled]="isNewChatLoading()" [ngClass]="{'disabled':currentConversation()?.length == 1}">
+      <span class="btn__label" [class.hidden]="isNewChatLoading()">{{ 'general.newChat' | translate }}</span>
+      <span class="btn__icon">
+        @if (isNewChatLoading()) {
+        <div class="icon--spinner spinner"></div>
+        } @else {
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <mask id="path-1-inside-1_9123_3384" fill="white">
+            <path
+              d="M13.5 9.5625H4.5C4.1925 9.5625 3.9375 9.3075 3.9375 9C3.9375 8.6925 4.1925 8.4375 4.5 8.4375H13.5C13.8075 8.4375 14.0625 8.6925 14.0625 9C14.0625 9.3075 13.8075 9.5625 13.5 9.5625Z" />
+          </mask>
+          <path
+            d="M13.5 9.5625H4.5C4.1925 9.5625 3.9375 9.3075 3.9375 9C3.9375 8.6925 4.1925 8.4375 4.5 8.4375H13.5C13.8075 8.4375 14.0625 8.6925 14.0625 9C14.0625 9.3075 13.8075 9.5625 13.5 9.5625Z"
+            fill="#0E39B6" />
+          <path
+            d="M13.5 9.5625V8.0625H4.5V9.5625V11.0625H13.5V9.5625ZM4.5 9.5625V8.0625C5.02093 8.0625 5.4375 8.47907 5.4375 9H3.9375H2.4375C2.4375 10.1359 3.36407 11.0625 4.5 11.0625V9.5625ZM3.9375 9H5.4375C5.4375 9.52093 5.02093 9.9375 4.5 9.9375V8.4375V6.9375C3.36407 6.9375 2.4375 7.86407 2.4375 9H3.9375ZM4.5 8.4375V9.9375H13.5V8.4375V6.9375H4.5V8.4375ZM13.5 8.4375V9.9375C12.9791 9.9375 12.5625 9.52093 12.5625 9H14.0625H15.5625C15.5625 7.86407 14.6359 6.9375 13.5 6.9375V8.4375ZM14.0625 9H12.5625C12.5625 8.47907 12.9791 8.0625 13.5 8.0625V9.5625V11.0625C14.6359 11.0625 15.5625 10.1359 15.5625 9H14.0625Z"
+            fill="#0E39B6" mask="url(#path-1-inside-1_9123_3384)" />
+          <mask id="path-3-inside-2_9123_3384" fill="white">
+            <path
+              d="M9 14.0625C8.6925 14.0625 8.4375 13.8075 8.4375 13.5V4.5C8.4375 4.1925 8.6925 3.9375 9 3.9375C9.3075 3.9375 9.5625 4.1925 9.5625 4.5V13.5C9.5625 13.8075 9.3075 14.0625 9 14.0625Z" />
+          </mask>
+          <path
+            d="M9 14.0625C8.6925 14.0625 8.4375 13.8075 8.4375 13.5V4.5C8.4375 4.1925 8.6925 3.9375 9 3.9375C9.3075 3.9375 9.5625 4.1925 9.5625 4.5V13.5C9.5625 13.8075 9.3075 14.0625 9 14.0625Z"
+            fill="#0E39B6" />
+          <path
+            d="M9 14.0625V12.5625C9.52093 12.5625 9.9375 12.9791 9.9375 13.5H8.4375H6.9375C6.9375 14.6359 7.86407 15.5625 9 15.5625V14.0625ZM8.4375 13.5H9.9375V4.5H8.4375H6.9375V13.5H8.4375ZM8.4375 4.5H9.9375C9.9375 5.02093 9.52093 5.4375 9 5.4375V3.9375V2.4375C7.86407 2.4375 6.9375 3.36407 6.9375 4.5H8.4375ZM9 3.9375V5.4375C8.47907 5.4375 8.0625 5.02093 8.0625 4.5H9.5625H11.0625C11.0625 3.36407 10.1359 2.4375 9 2.4375V3.9375ZM9.5625 4.5H8.0625V13.5H9.5625H11.0625V4.5H9.5625ZM9.5625 13.5H8.0625C8.0625 12.9791 8.47907 12.5625 9 12.5625V14.0625V15.5625C10.1359 15.5625 11.0625 14.6359 11.0625 13.5H9.5625Z"
+            fill="#0E39B6" mask="url(#path-3-inside-2_9123_3384)" />
+        </svg>
+        }
+      </span>
+    </button>
+  </header>
+  }
+  <ul class="chat-messages__list" appAutoExactHeight #chatMessagesList>
+    @if(!isConversationLoading()){
+    @if(currentConversation()){
+    @for (item of currentConversation(); track $index) {
+    @if (item.message) {
+    <li class="chat-messages__item chat-messages__item--user">
+      <div class="chat-messages__sender-icon">
+        @if (userInfo.gender==1) {
+        <img #userImg [src]="userInfo.image" width="24" height="24" [alt]="userInfo.full_name"
+          onerror="src='images/not-found/no-woman-doctor.svg'" />
+        }
+        @else{
+        <img #userImg [src]="userInfo.image" width="24" height="24" [alt]="userInfo.full_name"
+          onerror="src='images/not-found/no-doctor.svg'" />
+        }
+      </div>
+      <div class="chat-messages__content-time">
+        <div class="chat-messages__content">
+          <p class="chat-messages__text">
+            {{ item.message }}
+          </p>
+        </div>
+        <time class="chat-messages__timestamp">
+          {{ (item.message_timestamp | date: 'hh:mm a') }}
+        </time>
+      </div>
+    </li>
+    }
+
+    <li class="chat-messages__item chat-messages__item--bot">
+      <div class="main-content">
+        <div class="chat-messages__sender">
+          <div class="chat-messages__sender-icon">
+            <img src="images/bot/icons/bot.png" alt="bot">
+          </div>
+          <div class="chat-messages__wrapper">
+            <div class="chat-messages__content">
+              @if (!item.isDraft) {
+              <p class="chat-messages__text">
+                {{ item.replay }}
+              </p>
+              }
+              @else {
+
+              <div class="typing-indicator">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+
+              }
+            </div>
+            @if (item.list && item.list.items && item.list.items.length > 0) {
+            @for (record of item.list.items; track $index) {
+            @if (item?.list?.type == TalbinahItemTypes.DOCTOR) {
+            <div class="chat-messages__doctor-content">
+              <app-chat-doctor-card [item]="record"></app-chat-doctor-card>
+            </div>
+            } @else if (item?.list?.type == TalbinahItemTypes.PODCAST) {
+            <div class="chat-messages__podcast-content">
+              <!-- <app-podcast-bot [podcastDetails]="podcastDetails"></app-podcast-bot> -->
+              <app-podcast-bot [podcastDetails]="record"></app-podcast-bot>
+              <!-- <app-podcast-card /> -->
+            </div>
+            }
+            @else if (item?.list?.type == TalbinahItemTypes.ARTICLE) {
+            <div class="chat-messages__article-content">
+              <app-article-card [type]="cardTypes.SUMMARY" [item]="record" />
+            </div>
+            }
+            @else if (item?.list?.type == TalbinahItemTypes.IMAGES) {
+            <div class="chat-messages__images-content">
+              <app-chat-message-image></app-chat-message-image>
+            </div>
+            }
+            @else if (item?.list?.type == TalbinahItemTypes.VIDEO) {
+            <div class="chat-messages__video-content">
+              <app-chat-message-video></app-chat-message-video>
+            </div>
+            }
+            @else if (item?.list?.type == TalbinahItemTypes.FILE) {
+            <div class="chat-messages__files-content">
+              <app-file-viewer></app-file-viewer>
+            </div>
+            }
+            @else if (item?.list?.type == TalbinahItemTypes.QUIZ) {
+            @for (question of questions.slice(0, visibleQuestions()); track question.id) {
+            <div class="chat-messages__quiz-content animate-question">
+              <app-chat-questions-card></app-chat-questions-card>
+              <div class="chat-messages__quiz-content--answers">
+                @for (answer of question.answers; track answer.id) {
+                <app-chat-answers-card [answer]="answer" [selectedId]="getSelectedId(question.id)"
+                  (selectAnswer)="onSelectAnswer(question.id, answer)">
+                </app-chat-answers-card>
+                }
+              </div>
+            </div>
+            }
+            }
+            }
+            }
+            <time class="chat-messages__timestamp">
+              {{ (item.replay_timestamp | date: 'hh:mm a') }}
+            </time>
+          </div>
+        </div>
+      </div>
+      }
+      }
+      @else {
+      <div class="chat-messages__add-first-chat">
+        <img src="images/home/icons/bot.png" alt="bot">
+        <p class="chat-messages__add-first-chat--title">
+          {{'talbinahBot.FirstChat'|translate}}
+        </p>
+        <button id="new-chat-btn" type="button" class="chat-messages__header__new-chat" (click)="newChatHandler()"
+          [disabled]="isNewChatLoading()">
+          <span class="btn__label" [class.hidden]="isNewChatLoading()">{{ 'talbinahBot.start' | translate }}</span>
+          @if (isNewChatLoading()) {
+          <span class="btn__icon">
+            <div class="icon--spinner spinner"></div>
+          </span>
+          }
+        </button>
+      </div>
+      }
+      }@else {
+      <ul class="shimmer-list">
+        @for (tab of [1,2]; track $index) {
+        <li class="shimmer-message shimmer-message--user">
+          <div class="shimmer-icon shimmer-wrapper"></div>
+          <div class="shimmer-content-wrapper" style="flex:1">
+            <div class="shimmer-content shimmer-wrapper">
+              <div class="shimmer-text-line shimmer-text-line--long"></div>
+              <div class="shimmer-text-line shimmer-text-line--short"></div>
+            </div>
+            <div class="shimmer-timestamp shimmer-wrapper"></div>
+          </div>
+        </li>
+
+        <li class="shimmer-message shimmer-message--bot">
+          <div class="shimmer-icon shimmer-wrapper"></div>
+          <div class="shimmer-content-wrapper" style="flex: 1;">
+            <div class="shimmer-content shimmer-wrapper" style="width: 85%;">
+              <div class="shimmer-text-line shimmer-text-line--long"></div>
+              <div class="shimmer-text-line shimmer-text-line--long"></div>
+              <div class="shimmer-text-line shimmer-text-line--short"></div>
+            </div>
+            <div class="shimmer-timestamp shimmer-wrapper"></div>
+          </div>
+        </li>
+        }
+      </ul> }
+  </ul>
+
+</section>

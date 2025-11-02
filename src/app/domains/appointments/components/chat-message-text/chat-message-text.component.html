@@ -1,0 +1,17 @@
+<p class="chat-meeting-messages__text">
+    <span [ngClass]="{'text-truncate-3': allowShortTexts}">{{ displayedMessage }}
+        @if (showToggle) {
+
+        <button type="button" class="chat-meeting-messages__toggle-button" (click)="toggleExpand()">
+            <!-- @if (isExpanded) {
+            {{ 'general.showLess' | translate }}
+            } @else { -->
+            @if (!isExpanded) {
+            {{ 'load_more' | translate }}
+            }
+            <!-- } -->
+        </button>
+        }
+
+    </span>
+</p>

@@ -1,0 +1,36 @@
+<main class="visit-reports" role="main">
+  <section class="visit-reports__container">
+    <div class="visit-reports__search">
+      <app-local-search [searchTerm]="searchTerm()" (searchChange)="handleSearch($event)" />
+    </div>
+    @if (isLoading() || isLoadingFilter()) {
+    <div class="visit-reports__status-message visit-reports__status-message--loading" aria-live="polite"
+      aria-atomic="true">
+      @for (item of [1,2,3,4]; track $index) {
+      <app-appointment-card-skeleton></app-appointment-card-skeleton>
+      }
+    </div>
+    } @else if (errorMessage()) {
+    <div class="visit-reports__status-message visit-reports__status-message--error" aria-live="assertive"
+      aria-atomic="true">
+      <app-error-state-card [config]="visitReportsErrorState"></app-error-state-card>
+    </div>
+    } @else if (!filteredVisitReports().length) {
+    <div class="visit-reports__status-message visit-reports__status-message--empty" aria-live="polite"
+      aria-atomic="true">
+      <app-empty-state-card [config]="visitReportsEmptyState"></app-empty-state-card>
+    </div>
+    } @else {
+    <div class="visit-reports__cards-list" role="list" aria-live="polite" appAutoExactHeight heightMode="max-height">
+      @for (item of pagedVisitReports(); track item.id) {
+      <article class="visit-reports__card" role="listitem">
+        <app-visit-report-card [item]="item" [hideStatus]="true" [isReport]="true" />
+      </article>
+      }
+    </div>
+    @if (totalPages() > 1) {
+    <app-pagination-listing [paginationConfig]="localPaginationConfig()" />
+    }
+    }
+  </section>
+</main>

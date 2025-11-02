@@ -1,0 +1,42 @@
+/* Text Alignment */
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+/* Text Transformations */
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-lowercase {
+    text-transform: lowercase;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+//Example
+
+// <h2>Text Alignment Example</h2>
+// <div class="text-center bg-primary">This text is centered (text-center)</div>
+// <div class="text-left bg-success">This text is left-aligned (text-left)</div>
+// <div class="text-right bg-warning">This text is right-aligned (text-right)</div>
+// <div class="text-justify bg-info">This text is justified (text-justify). Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sollicitudin, arcu in feugiat sodales, augue purus feugiat felis, a volutpat ante felis in ligula.</div>
+
+// <h2>Text Transformations Example</h2>
+// <div class="text-uppercase bg-danger">This text is uppercase (text-uppercase)</div>
+// <div class="text-lowercase bg-light">This text is lowercase (text-lowercase)</div>
+// <div class="text-capitalize text-light bg-dark">this text is capitalized (text-capitalize)</div>

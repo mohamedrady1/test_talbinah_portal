@@ -1,0 +1,15 @@
+<div class="payment-popup-block">
+  @if (currentStep() === PaymentFlowStep.SELECT_METHOD) {
+  <app-payment-method (selectedChange)="handleSelectedMethod($event)" (onNext)="handleProceedWithPaymentMethod($event)"
+    (addNewCard)="handleAddNewCard()" (close)="handleCancelFlow()" [isLoading]="isCalculatingPriceLoading()">
+  </app-payment-method>
+  }
+
+  @if (currentStep() === PaymentFlowStep.VIEW_SUMMARY) {
+  <app-payment-prices-summary (back)="handleBackToMethodSelection()" (next)="handleConfirmFromSummary()"
+    [dataSummary]="dataSummary" [type]="data?.type ?? ''"
+    [isLoading]="isStoringProgrammeLoading() || isStoringSeminarLoading() || isStoringEmergencyAppointmentLoading()  || isStoringNormalPackageLoading()"
+    (discountApplied)="handleDiscountApplied($event)" (discountRemoved)="handleDiscountRemoved()">
+  </app-payment-prices-summary>
+  }
+</div>

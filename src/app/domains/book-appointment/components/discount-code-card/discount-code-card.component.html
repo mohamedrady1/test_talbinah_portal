@@ -1,0 +1,56 @@
+<!-- BEM Block: discount-card -->
+<article class="discount-card" role="region" [attr.aria-label]="'bookAppointment.discountCardTitle' | translateApi">
+  <!-- Element: discount-card__label -->
+  <div class="discount-card__label">
+    {{"discount_code2"|translateApi}}
+  </div>
+
+  <!-- Element: discount-card__content -->
+  <div class="discount-card__content">
+    <!-- Element: discount-card__value-code -->
+    <div class="discount-card__value-code">
+      <!-- Element: discount-card__value -->
+      <div class="discount-card__value">
+        <!-- Safely display discount, default to 0 if null/undefined -->
+        {{ item?.discount ?? 0 }}%
+      </div>
+
+      <!-- Element: discount-card__code (clickable area for copying) -->
+      <!-- Tooltip for feedback on copy -->
+      <app-tooltip [text]="'copied' | translateApi" [position]="Position.TOP" [trigger]="trigger.CLICK">
+        <div class="discount-card__code" (click)="copyToClipboard()" role="button"
+          [attr.aria-label]="'Copy discount code ' + (item?.coupon ?? 'N/A')">
+          <!-- Safely display coupon code, default to empty string if null/undefined -->
+          <span>{{ item?.coupon ?? '' }}</span>
+          <!-- SVG for copy icon, hidden from screen readers as it's decorative -->
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true" focusable="false">
+            <path
+              d="M7.34992 13.271H9.56659C12.1274 13.271 13.2708 12.1277 13.2708 9.56683V7.35016C13.2708 4.78933 12.1274 3.646 9.56659 3.646L7.81659 3.646C7.57742 3.646 7.37909 3.84433 7.37909 4.0835C7.37909 4.32266 7.57742 4.521 7.81659 4.521L9.56659 4.521C11.6549 4.521 12.3958 5.26183 12.3958 7.35016V9.56683C12.3958 11.6552 11.6549 12.396 9.56659 12.396H7.34992C5.26159 12.396 4.52075 11.6552 4.52075 9.56683V7.81683C4.52075 7.57766 4.32242 7.37933 4.08325 7.37933C3.84409 7.37933 3.64575 7.57766 3.64575 7.81683V9.56683C3.64575 12.1277 4.78909 13.271 7.34992 13.271Z"
+              fill="#47586E" />
+            <path
+              d="M4.08332 8.25396H5.94998C7.58915 8.25396 8.25415 7.58896 8.25415 5.94979V4.08312C8.25415 3.90812 8.14915 3.74479 7.98582 3.68062C7.82248 3.61062 7.63582 3.65146 7.50748 3.77396L3.77415 7.50729C3.65165 7.62979 3.61082 7.82229 3.68082 7.98562C3.74498 8.14896 3.90832 8.25396 4.08332 8.25396ZM7.37915 5.13896V5.94979C7.37915 7.11062 7.11082 7.37896 5.94998 7.37896H5.13915L7.37915 5.13896Z"
+              fill="#47586E" />
+            <path
+              d="M4.90006 1.604L7.2334 1.604C7.47257 1.604 7.6709 1.40567 7.6709 1.1665C7.6709 0.927337 7.47257 0.729004 7.2334 0.729004L4.90006 0.729004C4.6609 0.729004 4.46256 0.927337 4.46256 1.1665C4.46256 1.40567 4.6609 1.604 4.90006 1.604Z"
+              fill="#47586E" />
+            <path
+              d="M9.91675 3.354C10.1559 3.354 10.3542 3.15567 10.3542 2.9165C10.3542 1.709 9.37425 0.729004 8.16675 0.729004L6.63841 0.729004C6.39925 0.729004 6.20091 0.927337 6.20091 1.1665C6.20091 1.40567 6.39925 1.604 6.63841 1.604L8.16675 1.604C8.89008 1.604 9.47925 2.19317 9.47925 2.9165C9.47925 3.15567 9.67758 3.354 9.91675 3.354Z"
+              fill="#47586E" />
+            <path
+              d="M2.80591 10.354C3.04507 10.354 3.24341 10.1557 3.24341 9.9165C3.24341 9.67734 3.04507 9.479 2.80591 9.479C2.14091 9.479 1.60424 8.9365 1.60424 8.27734L1.60424 4.6665C1.60424 4.42734 1.40591 4.229 1.16674 4.229C0.927576 4.229 0.729243 4.42734 0.729243 4.6665L0.729243 8.27734C0.729243 9.42067 1.66258 10.354 2.80591 10.354Z"
+              fill="#47586E" />
+            <path
+              d="M1.16675 5.10412L2.91675 5.10412C4.46841 5.10412 5.10425 4.46829 5.10425 2.91662V1.16662C5.10425 0.991619 4.99925 0.828286 4.83591 0.764119C4.67258 0.694119 4.48591 0.734953 4.35758 0.857453L0.857581 4.35745C0.735081 4.47995 0.694247 4.67245 0.764247 4.83579C0.828414 4.99912 0.991748 5.10412 1.16675 5.10412ZM4.22925 2.22245V2.91662C4.22925 3.98412 3.98425 4.22912 2.91675 4.22912H2.22258L4.22925 2.22245Z"
+              fill="#47586E" />
+          </svg>
+        </div>
+      </app-tooltip>
+    </div>
+    <!-- Element: discount-card__description -->
+    <p class="discount-card__description">
+      <!-- Safely display coupon description, default to empty string if null/undefined -->
+      {{ item?.coupon ?? '' }}
+    </p>
+  </div>
+</article>

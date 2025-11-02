@@ -1,0 +1,33 @@
+<div class="support-options__container">
+  <div class="support-options__container--image-wrapper">
+    <img src="/images/icons/logo-2.png" alt="Support Icon" class="support-options__container--image" />
+  </div>
+
+  <!-- Loading shimmer -->
+  @if (isLoading()) {
+  <div class="support-options__container--options-list">
+    @for (item of [1, 2, 3]; track $index) {
+    <div class="support-options__container--skeleton"></div>
+    }
+  </div>
+  }
+
+  <!-- Error state -->
+  @if (errorMessage()) {
+  <div class="support-options__container--error">
+    {{ errorMessage() }}
+  </div>
+  }
+
+  <!-- Loaded state -->
+  @if (!isLoading() && !errorMessage()) {
+  <div class="support-options__container--options-list">
+    @for (option of departments(); track option.id) {
+    <button class="support-options__container--option-btn" (click)="onSelect(option)"
+      [disabled]="isLoadingCreateConversation()">
+      {{ option?.title || '' }}
+    </button>
+    }
+  </div>
+  }
+</div>

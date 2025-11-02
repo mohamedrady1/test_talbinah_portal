@@ -1,0 +1,8 @@
+<div class="reaction-picker-container">
+    @for (reaction of reactions; track reaction.id) {
+    <div class="reaction-item" (click)="selectReaction(reaction.id)">
+        <img [src]="reaction.imageUrl" [alt]="reaction.name" class="reaction-image">
+        <span class="reaction-name">{{ reaction.name |translate }}</span>
+    </div>
+    }
+</div>

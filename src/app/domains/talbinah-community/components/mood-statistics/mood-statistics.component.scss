@@ -1,0 +1,40 @@
+.mood-statistics {
+    border-radius: var(--Radius-12, 0.75rem);
+    background: var(--Gray-White, #feffff);
+    display: flex;
+    padding: 0.75rem;
+    flex-direction: column;
+    &--today,
+    &--support-statistics {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        p {
+            color: var(--text-300, #47586e);
+            font-size: 0.75rem;
+            font-weight: 400;
+        }
+        &__statistic {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            p {
+                color: var(--text-primary, #000);
+                font-size: 0.75rem;
+                font-weight: 500;
+                &:last-child {
+                    color: var(--text-300, #47586e);
+                    font-size: 0.625rem;
+                    font-weight: 400;
+                    display: flex;
+                    gap: 0.14rem;
+                    align-items: center;
+                }
+            }
+        }
+    }
+    &--support-statistics {
+        padding: 0.5rem 0rem;
+    }
+}

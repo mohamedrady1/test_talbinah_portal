@@ -1,0 +1,125 @@
+@use "./mixins" as *;
+@use "./variables" as *;
+
+// Base layout mixin
+@mixin baseLayout(
+  $min-height: $layout-min-height,
+  $background: $layout-background,
+  $display: $layout-display,
+  $flex-direction: $layout-flex-direction,
+  $padding: $layout-padding-base,
+  $gap: $layout-gap-base,
+  $padding-md: $layout-padding-md,
+  $gap-md: $layout-gap-md,
+  $padding-sm: $layout-padding-sm,
+  $gap-sm: $layout-gap-sm
+) {
+  // Validate inputs
+  @if type-of($min-height) !=number and $min-height !=100vh {
+    @warn "Invalid $min-height: #{$min-height}. Using default: #{$layout-min-height}.";
+    $min-height: $layout-min-height;
+  }
+
+  @if type-of($gap) !=number {
+    @warn "Invalid $gap: #{$gap}. Using default: #{$layout-gap-base}.";
+    $gap: $layout-gap-base;
+  }
+
+  @if type-of($padding) !=list and type-of($padding) !=number {
+    @warn "Invalid $padding: #{$padding}. Using default: #{$layout-padding-base}.";
+    $padding: $layout-padding-base;
+  }
+
+  // Apply base styles
+  min-height: $min-height;
+  background: $background;
+  display: $display;
+  flex-direction: $flex-direction;
+  padding: $padding;
+  gap: $gap;
+  contain: layout; // Optimize layout rendering
+
+  // Responsive breakpoints
+  @include respond(md) {
+    padding: $padding-md;
+    gap: $gap-md;
+  }
+
+  @include respond(sm) {
+    padding: $padding-sm;
+    gap: $gap-sm;
+  }
+
+  &__header {
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: var(--Dark-50);
+    border-radius: 0.625rem;
+    padding: 1rem;
+    box-shadow:
+      0px -1px 50px 9px rgba(0, 0, 0, 0.08),
+      0px 0px 0px 1.5px rgba(255, 255, 255, 0.25) inset;
+    backdrop-filter: blur(20px);
+    contain: content; // Added for performance optimization
+  }
+
+  &__cards {
+    display: flex;
+    flex-direction: row;
+    overflow-x: hidden;
+    gap: 0.75rem;
+
+    @include respond(sm) {
+      flex-direction: column;
+    }
+
+    > div:first-child {
+      flex: 1;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 0;
+    }
+  }
+
+  &__main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background: var(--Dark-WHITE);
+    padding: 0.75rem;
+    border-radius: 1rem;
+    height: fit-content;
+  }
+
+  &__grids-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 21.0625rem;
+    margin-inline-end: 0.5rem;
+    @include respond(sm) {
+      width: 100%;
+    }
+
+    &-card {
+      background: var(--Dark-WHITE);
+      border-radius: 1rem;
+      height: fit-content;
+      // overflow: hidden;
+
+      > div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+<div class="all-therapeutic-programs" appAutoExactHeight="60" heightMode="max-height">
+    <div class="all-therapeutic-programs__content">
+        <div class="all-therapeutic-programs__list">
+            @if (isLoading) {
+            @for (item of [1,2,3,4]; track $index) {
+            <app-therapeutic-program-card-shimmer [type]="cardType.SUMMARY">
+            </app-therapeutic-program-card-shimmer>
+            }
+            } @else if (hasError && !status) {
+            <app-error-state [config]="errorStateConfig"></app-error-state>
+            } @else if (!programsList?.length) {
+            <app-empty-state [config]="emptyState" class="w-100"></app-empty-state>
+            } @else {
+            @for (program of paginatedPrograms(); track program.id) {
+            <div class="therapeutic-programs-listing-layout__program-cards--card">
+                <app-therapeutic-program-card [type]="cardType.SUMMARY" [item]="program" />
+            </div>
+            }
+            }
+
+        </div>
+        @if (programsList?.length && paginationConfig().totalPages > 1 && !isLoading) {
+        <app-pagination-listing [paginationConfig]="paginationConfig()" />
+        }
+    </div>
+</div>

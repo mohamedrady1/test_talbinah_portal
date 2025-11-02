@@ -1,0 +1,26 @@
+<div class="form-single-select__select-item" role="group" [attr.aria-label]="ariaLabel"
+  [ngClass]="{ 'form-single-select__select-item--invalid': showError }">
+  @if (formItem.inputWithIcon && formItem.inputIconPosition === 'start') {
+  @switch (formItem.inputIconType) {
+  @case (InputIconTypes.PRIMEICONS) {
+  <i [class]="formItem.inputIcon + ' custom-input-wrapper__icon'"></i>
+  }
+
+  @case (InputIconTypes.IMAGE) {
+  <img [src]="formItem.inputIcon" [alt]="formItem.label">
+  }
+  @case (InputIconTypes.SVG) {
+  <span [innerHTML]="formItem.inputIcon"></span>
+  }
+  @default {
+  <i class="default-icon-class"></i>
+  }
+  }
+  }
+  <p-select [options]="translatedOptions()" [formControl]="control"
+    [placeholder]="(formItem.placeholder || '') | translate" [optionLabel]="formItem.optionLabel || 'label'"
+    [optionValue]="formItem.optionValue || 'value'" [showClear]="true" [filter]="translatedOptions().length > 4"
+    [autoDisplayFirst]="false" [ngClass]="{ 'ng-invalid': showError }" appendTo="body">
+  </p-select>
+
+</div>

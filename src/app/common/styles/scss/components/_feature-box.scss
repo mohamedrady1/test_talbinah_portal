@@ -1,0 +1,48 @@
+@use "../abstracts/mixins" as *;
+
+.feature-box {
+    background-color: rgba($color-white, 0.8);
+    font-size: 1.5rem;
+    padding: 2.5rem;
+    text-align: center;
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+    transition: transform 0.3s;
+
+    @include respond(md) {
+        padding: 2rem;
+    }
+
+    &__icon {
+        font-size: 6rem;
+        margin-bottom: 0.5rem;
+        display: inline-block;
+        background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+        -webkit-background-clip: text;
+        color: transparent;
+
+        @include respond(md) {
+            margin-bottom: 0;
+        }
+    }
+
+    &:hover {
+        transform: translateY(-1.5rem) scale(1.03);
+    }
+}
+
+// This SCSS defines the styles for a "feature-box" component that is used to display content with a background, icon, and hover effects.
+// The feature box has a semi-transparent white background and a subtle shadow for visual depth.
+// Padding and text alignment are set, and the box is rounded with a smooth transition on hover, which causes a slight upward movement and scaling.
+
+// The __icon inside the feature box is styled to have a large font size with a gradient applied to the text, making it look like the icon is filled with a gradient.
+// On smaller screens (using a media query for `md`), the padding and margin are adjusted for better responsiveness.
+
+// Example
+
+// <div class="feature-box">
+//     <div class="feature-box__icon">
+//         &#9733;
+//     </div>
+//     <p>feature/p>
+// </div>

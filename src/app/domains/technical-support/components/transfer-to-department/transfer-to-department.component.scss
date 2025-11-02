@@ -1,0 +1,118 @@
+@use "./../../../../common/styles/scss/abstracts/general-form-wrapper.mixins" as form;
+@use "./../../../../common/styles/scss/abstracts/mixins" as *;
+
+.transfer-to-department {
+  display: flex;
+  padding: 0.75rem 1rem;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-self: stretch;
+
+  &__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__listing {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    background: var(--Dark-WHITE, #fff);
+  }
+
+  &__search {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    app-local-search {
+      width: 100%;
+    }
+  }
+
+  &__cards-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding-inline-end: 0.5rem;
+  }
+
+  &__status-message {
+    padding: 1rem;
+    text-align: center;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+
+    &--loading {
+      color: var(--text-500, #6b7280);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      padding: 0;
+      text-align: start;
+    }
+
+    &--empty {
+      color: var(--text-500, #6b7280);
+    }
+
+    &--error {
+      color: var(--text-400, #9ca3af);
+    }
+  }
+
+  .general-form-wrapper {
+    &__actions {
+      @include form.general-form-wrapper-actions;
+      justify-content: flex-end;
+
+      .btn {
+        width: auto;
+
+        &.disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+          pointer-events: none;
+        }
+      }
+    }
+
+    &__loading {
+      display: flex;
+      align-items: center;
+    }
+
+    .dot-loader::after {
+      content: "";
+      animation: dots 1.5s steps(4, end) infinite;
+      white-space: pre;
+    }
+
+    @keyframes dots {
+
+      0%,
+      100% {
+        content: "";
+      }
+
+      25% {
+        content: ".";
+      }
+
+      50% {
+        content: "..";
+      }
+
+      75% {
+        content: "...";
+      }
+    }
+  }
+}

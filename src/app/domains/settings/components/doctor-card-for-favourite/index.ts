@@ -1,0 +1,1 @@
+export * from './doctor-card-for-favourite.component';

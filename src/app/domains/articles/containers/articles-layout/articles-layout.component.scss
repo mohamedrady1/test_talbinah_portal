@@ -1,0 +1,21 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+@use "../../../../common/styles/scss/abstracts/_base-layout-mixins" as *;
+
+.articles-layout {
+  @include baseLayout; // Use default variable values
+  &__container {
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  // @include baseLayout(
+  //   $padding: 1.5rem 5rem,
+  //   $gap: 2.5rem,
+  //   $padding-md: 1rem 3rem,
+  //   $gap-md: 3rem,
+  //   $padding-sm: 0.75rem 1.5rem,
+  //   $gap-sm: 1.5rem
+  // );
+  &__content {
+    // margin: 0 1rem 1rem 1rem;
+  }
+}

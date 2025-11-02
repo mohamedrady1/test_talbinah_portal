@@ -1,0 +1,1 @@
+export * from './visit-report-card.component';

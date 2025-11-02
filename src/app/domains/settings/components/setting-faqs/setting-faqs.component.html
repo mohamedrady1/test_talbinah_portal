@@ -1,0 +1,46 @@
+<div class="setting-faqs" [ngClass]="{'setting-faqs--selected': selectedCategoryId()}" appAutoExactHeight
+  heightMode="max-height">
+  <div class="setting-faqs__container">
+    @if (!selectedCategoryId()) {
+    <div class="setting-faqs__container--header">
+      <p class="setting-faqs__container--header--title">
+        {{ 'explore_faq_heart' | translateApi }}
+      </p>
+      <app-local-search [searchTerm]="localSearchTerm()" (searchChange)="onLocalSearchChange($event)" />
+    </div>
+    }
+
+    <!-- Loading State -->
+    @if (isLoading()) {
+    <div class="setting-faqs__container--loading">
+      <app-loading-shimmer></app-loading-shimmer>
+    </div>
+    }
+
+    <!-- Error State -->
+    @if (errorMessage()) {
+    <app-error-state-card [config]="errorStateConfig"></app-error-state-card>
+    }
+
+    <!-- Categories List -->
+    @if (!isLoading() && filteredCategories().length > 0 && !selectedCategoryId()) {
+    <div class="setting-faqs__container--cards">
+      @for (category of filteredCategories(); track category.id) {
+      <app-faq-card [item]="{
+                    id: category.id,
+                    title: category.name,
+                    description: category.description,
+                    image: category.icon || 'images/settings/modal-icons/question.png',
+                    color: category.color,
+                    icon: category.icon
+                }" (click)="onCategoryClick(category)"></app-faq-card>
+      }
+    </div>
+    }
+
+    <!-- Empty State -->
+    @if (!isLoading() && !errorMessage() && filteredCategories().length === 0) {
+    <app-empty-state-card [config]="emptyStateConfig"></app-empty-state-card>
+    }
+  </div>
+</div>

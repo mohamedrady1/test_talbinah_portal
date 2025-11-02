@@ -1,0 +1,77 @@
+<div class="psychological-society">
+  <div class="psychological-society__content">
+    @if (isBelow1000()) {
+    <div class="psychological-society__mobile-view">
+      @if (!showIdentityForm()) {
+      <div class="psychological-society__banner">
+        <div class="psychological-society__banner-title">
+          {{'talbinah_community' | translateApi}}
+        </div>
+        <div class="psychological-society__banner-subtitle">
+          {{'talbinah_community_description' | translateApi}}
+        </div>
+      </div>
+      <div class="psychological-society__form-section">
+        <app-talbinah-identity-form class="psychological-society__form-container"></app-talbinah-identity-form>
+      </div>
+      } @else {
+      <div class="psychological-society__welcome-section">
+        <app-welcome-to-talbinah (skip)="toggleFormVisibility()"
+          class="psychological-society__welcome-container"></app-welcome-to-talbinah>
+      </div>
+      }
+    </div>
+    } @else {
+    <div class="psychological-society__desktop-view">
+      <div class="psychological-society__right-side">
+        <div class="psychological-society__banner">
+          <div class="psychological-society__banner-title">
+            {{'talbinah_community' | translateApi}}
+          </div>
+          <div class="psychological-society__banner-subtitle">
+            {{'talbinah_community_description' | translateApi}}
+          </div>
+        </div>
+        <app-talbinah-identity-form class="psychological-society__form-container"></app-talbinah-identity-form>
+      </div>
+      <app-welcome-to-talbinah class="psychological-society__welcome-container"></app-welcome-to-talbinah>
+    </div>
+    }
+  </div>
+
+  @if (isBelow1000()) {
+  @if(!showIdentityForm()){
+  <div class="psychological-society__form-actions">
+    <button type="submit" class="psychological-society__submit-btn"
+      [class.psychological-society__submit-btn--disabled]="_IdentityFormFacade.isLoadingSubmit()" (click)="onSubmit()"
+      [attr.aria-label]="'create_identity' | translateApi" [disabled]="_IdentityFormFacade.isLoadingSubmit()">
+      @if (!_IdentityFormFacade.isLoadingSubmit()) {
+      {{'create_identity' | translateApi}}
+      <app-svg-icon name="arrow-right" />
+      } @else {
+      <div class="psychological-society__form-actions--loading" aria-live="polite">
+        {{ 'in_progress' | translateApi }}
+        <span class="psychological-society__loading-indicator"></span>
+      </div>
+      }
+    </button>
+  </div>
+  }
+  } @else {
+  <div class="psychological-society__form-actions">
+    <button type="submit" class="psychological-society__submit-btn"
+      [class.psychological-society__submit-btn--disabled]="_IdentityFormFacade.isLoadingSubmit()" (click)="onSubmit()"
+      [attr.aria-label]="'create_identity' | translateApi" [disabled]="_IdentityFormFacade.isLoadingSubmit()">
+      @if (!_IdentityFormFacade.isLoadingSubmit()) {
+      {{'create_identity' | translateApi}}
+      <app-svg-icon name="arrow-right" />
+      } @else {
+      <div class="psychological-society__form-actions--loading" aria-live="polite">
+        {{ 'in_progress' | translateApi }}
+        <span class="psychological-society__loading-indicator"></span>
+      </div>
+      }
+    </button>
+  </div>
+  }
+</div>

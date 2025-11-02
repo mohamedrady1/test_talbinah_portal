@@ -1,0 +1,149 @@
+import { Validators } from "@angular/forms";
+import { ALL_INPUT_TYPES } from "../../../shared/forms/enums/input-types.enum";
+import { IFormInputConfig } from "../../../shared/forms/models";
+import { InputIconPosition } from "../../../shared/forms/enums/input-icon-position.enum";
+import { InputIconType } from "../../../shared/forms/enums/input-icon-type.enum";
+
+
+export const updateProfileConfig: IFormInputConfig[] = [
+  {
+    id: 'updateProfileName',
+    type: ALL_INPUT_TYPES.TEXT,
+    name: 'name',
+    label: 'full_name',
+    isRequired: true,
+    placeholder: 'full_name_placeholder',
+    defaultValue: null,
+    isDisabled: false,
+    widthClass: 'w-half',
+    inputWithIcon: false,
+    inputIconType: InputIconType.IMAGE,
+    inputIcon: 'images/icons/profile.svg',
+    inputIconPosition: InputIconPosition.START,
+    globalClass: 'custom-input-wrapper',
+    inputClass: 'form-control',
+    validation: [
+      { function: Validators.required, errorMessage: 'full_name_required' },
+      { function: Validators.pattern(/^[A-Za-z\s]+$/), errorMessage: 'full_name_pattern', errorName: 'pattern' }
+    ],
+    enableLabelClick: true,
+    stopPaste: true,
+  },
+  {
+    id: 'updateProfileGender',
+    type: ALL_INPUT_TYPES.SELECT,
+    inputWithIcon: false,
+    inputIconType: InputIconType.IMAGE,
+    inputIcon: 'images/icons/password.svg',
+    inputIconPosition: InputIconPosition.START,
+    listValues: [
+      { value: 'male', label: 'male' },
+      { value: 'female', label: 'female' }
+    ],
+    optionLabel: 'label',
+    optionValue: 'value',
+    name: 'gender',
+    label: 'gender',
+    placeholder: 'choose_gender',
+    isRequired: true,
+    defaultValue: null,
+    isDisabled: false,
+    widthClass: 'w-half',
+    validation: [
+      { function: Validators.required, errorMessage: 'gender_required' }
+    ],
+    enableLabelClick: true
+  },
+  {
+    id: 'updateProfileAge',
+    type: ALL_INPUT_TYPES.NUMBER,
+    name: 'age',
+    label: 'age',
+    isRequired: true,
+    placeholder: 'age_placeholder',
+    defaultValue: null,
+    isDisabled: false,
+    widthClass: 'w-half',
+    inputWithIcon: false,
+    inputIconType: InputIconType.IMAGE,
+    inputIcon: 'images/icons/email.svg',
+    inputIconPosition: InputIconPosition.START,
+    globalClass: 'custom-input-wrapper',
+    inputClass: 'form-control',
+    validation: [
+      { function: Validators.required, errorMessage: 'age_required' }
+    ],
+    enableLabelClick: true,
+    stopPaste: true,
+  },
+  {
+    id: 'updateProfileEmail',
+    type: ALL_INPUT_TYPES.EMAIL,
+    name: 'email',
+    label: 'email',
+    isRequired: true,
+    placeholder: 'enter_email',
+    defaultValue: null,
+    isDisabled: false,
+    widthClass: 'w-half',
+    inputWithIcon: false,
+    inputIconType: InputIconType.IMAGE,
+    inputIcon: 'images/icons/email.svg',
+    inputIconPosition: InputIconPosition.START,
+    globalClass: 'custom-input-wrapper',
+    inputClass: 'form-control',
+    validation: [
+      { function: Validators.required, errorMessage: 'email_required' },
+      { function: Validators.email, errorMessage: 'invalid_email', errorName: 'email' }
+    ],
+    enableLabelClick: true,
+    stopPaste: true,
+  },
+  {
+    id: 'updateProfileIdentifyNumber',
+    type: ALL_INPUT_TYPES.TEXT,
+    name: 'identifyNumber',
+    label: 'ID_number',
+    isRequired: false,
+    placeholder: 'enter_id',
+    defaultValue: null,
+    isDisabled: false,
+    widthClass: 'w-half',
+    inputWithIcon: false,
+    inputIconType: InputIconType.IMAGE,
+    inputIcon: 'images/icons/email.svg',
+    inputIconPosition: InputIconPosition.START,
+    globalClass: 'custom-input-wrapper',
+    inputClass: 'form-control',
+    validation: [
+      { function: Validators.required, errorMessage: 'enter_correct_id_number' }
+    ],
+    enableLabelClick: true,
+    stopPaste: true,
+  },
+  {
+    id: 'registerPhoneCode',
+    type: ALL_INPUT_TYPES.COUNTRYCODEINPUT,
+    name: 'phoneNumber',
+    label: 'mobile_number',
+    isRequired: true,
+    placeholder: 'phone_placeholder',
+    defaultValue: null,
+    isDisabled: false,
+    widthClass: 'w-half',
+    inputWithIcon: true,
+    inputIcon: 'images/icons/call.svg',
+    inputIconType: InputIconType.IMAGE,
+    inputIconPosition: InputIconPosition.START,
+    globalClass: 'custom-input-wrapper',
+    inputClass: 'form-control',
+    validation: [
+      { function: Validators.required, errorMessage: 'phone_required' },
+      { function: Validators.pattern(/^[0-9]+$/), errorMessage: 'phone_pattern', errorName: 'pattern' },
+      { function: Validators.minLength(3), errorMessage: 'phone_min_length', errorName: 'minlength' },
+      { function: Validators.maxLength(12), errorMessage: 'phone_max_length', errorName: 'maxlength' }
+    ],
+    enableLabelClick: true,
+    stopPaste: true
+  },
+];

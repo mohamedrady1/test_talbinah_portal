@@ -1,0 +1,99 @@
+@use "./../../../common/styles/scss/buttons/button.mixins" as btn;
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+
+    // Mobile styles
+    @media (max-width: 767px) {
+        position: static;
+        width: auto;
+        height: auto;
+    }
+
+    &--close {
+        position: absolute;
+        inset-inline-end: 1rem;
+        top: 1rem;
+        width: 1.75rem;
+        height: 1.75rem;
+        border: none;
+        border-radius: 50%;
+        background-color: var(--Dark-100);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @media (max-width: 767px) {
+            display: none;
+        }
+    }
+
+    &__card {
+        background: white;
+        padding: 1.25rem;
+        position: relative;
+        z-index: 100;
+        border-radius: 0.3125rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        width: 32rem;
+        margin: 5px;
+
+        // Mobile styles
+        @media (max-width: 767px) {
+            box-shadow: none;
+            width: 100%;
+            margin: 0;
+            padding-block-start: 0;
+        }
+
+        &__title {
+            color: #0a0a0a;
+            font-weight: 600;
+            font-size: 1.25rem;
+            line-height: 26px;
+        }
+        &__sub-title {
+            font-weight: 400;
+            font-size: 0.875rem;
+            color: #676c70;
+        }
+    }
+    .btn {
+        @include btn.button-base;
+        @include btn.button-size("medium");
+        @include btn.button-icon-position("left");
+        @include btn.button-icon-size("medium");
+        @include btn.button-color("main");
+        @include btn.button-spinner;
+        min-width: 3rem;
+        &__icon {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        width: fit-content;
+        &__label {
+            padding: 0 0.5rem;
+            white-space: nowrap;
+        }
+
+        &--disabled {
+            @include btn.button-disabled;
+        }
+        &--outline {
+            @include btn.button-type("outline");
+        }
+        &--solid {
+            @include btn.button-type("solid");
+            background-color: #dc3546;
+        }
+    }
+}

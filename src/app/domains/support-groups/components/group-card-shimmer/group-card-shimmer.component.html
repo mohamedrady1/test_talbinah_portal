@@ -1,0 +1,42 @@
+<div class="group-card group-card" [ngClass]="{'group-card--details': type === cardType.DETAILS}">
+
+    <div class="group-card__content" [ngClass]="{'group-card__content--summary': type === cardType.SUMMARY}">
+
+        <div class="group-card__image" [ngClass]="{'group-card__image--summary': type === cardType.SUMMARY}">
+            <div class="group-card__image"></div>
+        </div>
+
+        <div class="group-card__info" [ngClass]="{'group-card__info--summary': type === cardType.SUMMARY}">
+            <h3 class="group-card__title">
+                <span class="group-card__title--details">
+                    <div class="group-card__title"></div>
+                </span>
+
+                @if (type === cardType.DETAILS) {
+                <div class="group-card__price"></div>
+                }
+            </h3>
+            <p class="group-card__description group-card__text-line"></p>
+            <p class="group-card__description group-card__text-line"></p>
+            <p class="group-card__description group-card__text-line short"></p>
+        </div>
+    </div>
+
+    <div class="group-card__details--details">
+
+        <div class="group-card__details__item group-card__meta">
+            <div class="group-card__icon"></div>
+            <div class="group-card__text short"></div>
+        </div>
+        @if (type === cardType.DETAILS) {
+        <div class="group-card__details__item group-card__meta">
+            <div class="group-card__icon"></div>
+            <div class="group-card__text short"></div>
+        </div>
+        }
+        <div class="group-card__details__item group-card__meta">
+            <div class="group-card__icon"></div>
+            <div class="group-card__text short"></div>
+        </div>
+    </div>
+</div>

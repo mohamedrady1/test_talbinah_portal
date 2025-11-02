@@ -1,0 +1,129 @@
+@use "./../../../../common/styles/scss/buttons/button.mixins" as btn;
+@use "./../../../../common/styles/scss/abstracts/mixins" as *;
+
+.charge-wallet {
+    display: flex;
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    &__container {
+        display: flex;
+        padding: 0.75rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        border-radius: 0.75rem;
+        background: var(--Dark-WHITE, #fff);
+    }
+
+    &__header {
+        width: 100%;
+    }
+
+    &__title {
+        color: var(--text-300, #47586e);
+        font-size: 0.75rem;
+        font-weight: 400;
+    }
+
+    &__form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &__input-group {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: var(--Radius-8, 0.5rem);
+    }
+
+    &__label {
+        color: var(--Dark-DARK, #1d1f1f);
+        font-size: 0.875rem;
+        font-weight: 400;
+        margin: 0;
+    }
+
+    &__input {
+        border-radius: var(--Radius-12, 0.75rem);
+        border: 1px solid var(--Dark-100, #eee);
+        display: flex;
+        height: 2.75rem;
+        padding: var(--Spacing-3S, 0.5rem) 1rem;
+        align-items: center;
+        gap: var(--Spacing---1xl, 1rem);
+        align-self: stretch;
+        font-size: 0.875rem;
+        color: var(--Dark-DARK, #1d1f1f);
+        background: var(--Dark-WHITE, #fff);
+        transition: border-color 0.2s ease;
+
+        &:focus {
+            outline: none;
+            border-color: var(--Primary-500, #007aff);
+        }
+
+        &--error {
+            border-color: var(--Error-500, #ff3b30);
+        }
+
+        &::placeholder {
+            color: var(--Dark-300, #999);
+        }
+    }
+
+    &__error {
+        color: var(--Error-500, #ff3b30);
+        font-size: 0.75rem;
+        font-weight: 400;
+        margin: 0;
+    }
+
+    &__submit-btn {
+        @include btn.button-base;
+        @include btn.button-size("medium");
+        @include btn.button-icon-position("left");
+        @include btn.button-icon-size("medium");
+        @include btn.button-color("main");
+        @include btn.button-spinner;
+        @include btn.button-type("solid");
+        align-self: flex-end;
+        width: fit-content;
+        &--disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        &-loading {
+            display: flex;
+            align-items: center;
+
+            .dot-loader::after {
+                content: "";
+                animation: dots 1.5s steps(4, end) infinite;
+                white-space: pre;
+            }
+
+            @keyframes dots {
+                0% {
+                    content: "";
+                }
+                25% {
+                    content: ".";
+                }
+                50% {
+                    content: "..";
+                }
+                75% {
+                    content: "...";
+                }
+                100% {
+                    content: "";
+                }
+            }
+        }
+    }
+}

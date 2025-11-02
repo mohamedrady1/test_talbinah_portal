@@ -1,0 +1,38 @@
+// .text-sm {
+//     font-size: var(--font-size-sm);
+// }
+.text-base {
+    font-size: var(--font-size-base);
+}
+.text-lg {
+    font-size: var(--font-size-lg);
+}
+
+.font-normal {
+    font-weight: var(--font-weight-normal);
+}
+.font-bold {
+    font-weight: var(--font-weight-bold);
+}
+
+.font-family-base {
+    font-family: var(--font-family-base);
+}
+
+// Example
+
+// <div class="text-sm font-normal">
+//     <p>This text has a small font size and normal font weight.</p>
+// </div>
+
+// <div class="text-base font-bold">
+//     <p>This text has a base font size and bold font weight.</p>
+// </div>
+
+// <div class="text-lg font-normal">
+//     <p>This text has a large font size and normal font weight.</p>
+// </div>
+
+// <div class="font-family-base">
+//     <p>This text uses the base font family.</p>
+// </div>

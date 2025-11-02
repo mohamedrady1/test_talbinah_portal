@@ -1,0 +1,450 @@
+@use "../../../../common/styles/scss/buttons/button.mixins" as btn;
+@use "../../../../common/styles/scss/abstracts/mixins" as responsive;
+
+.treatment-program-subsctiption {
+  display: flex;
+  gap: 0.75rem;
+  align-items: start;
+  padding: 1rem;
+  padding-top: 0;
+
+  mar &.column {
+    flex-direction: column;
+  }
+
+  &__content {
+    display: flex;
+    gap: 0.75rem;
+    align-items: start;
+    flex: 1 0 0;
+
+    @include responsive.respond(sm) {
+      flex-direction: column;
+    }
+  }
+
+  &--right-side {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    flex: 1;
+
+    &--info {
+      padding: 0.75rem;
+      border-radius: 1rem;
+      background: var(--Dark-WHITE);
+    }
+  }
+
+  .treatment-program-information {
+    &--cards {
+      display: flex;
+      width: 32.75rem;
+      gap: 0.75rem;
+    }
+
+    &--cards {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      width: 100%;
+
+      &__card {
+        display: flex;
+        padding: 0.75rem;
+        flex: 1;
+        align-items: center;
+        gap: 0.5rem;
+        border-radius: 0.75rem;
+        border: 1px solid var(--Dark-50);
+        background: var(--Dark-WHITE, #fff);
+
+        &--image {
+          display: flex;
+          width: 2.7rem;
+          height: 2.5rem;
+          justify-content: center;
+          align-items: center;
+          flex-shrink: 0;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        &--content {
+          display: flex;
+          gap: 0.25rem;
+          flex-direction: column;
+          flex: 1;
+
+          &--title {
+            color: var(--text-300);
+            font-size: 0.875rem;
+            font-weight: 400;
+          }
+
+          &--description {
+            color: var(--Primary-primary, #0e39b6);
+            font-size: 0.75rem;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  }
+
+  .treatment-program-details {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem;
+    gap: 0.75rem;
+    border-radius: 1rem;
+    background: var(--Dark-WHITE);
+
+    &__about-program {
+      &--content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        &__header {
+          display: flex;
+          padding: 0.25rem 0rem;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+
+          &--title {
+            color: var(--text-400);
+            font-size: 0.75rem;
+            font-weight: 500;
+          }
+
+          &--period {
+            background: var(--Dark-50);
+            padding: 0.25rem 0.625rem;
+            border-radius: 1rem;
+
+            p {
+              color: var(--Dark-400);
+              font-size: 0.625rem;
+              font-weight: 500;
+            }
+          }
+        }
+
+        &__description {
+          color: var(--text-300);
+          font-size: 0.75rem;
+          font-weight: 400;
+        }
+      }
+    }
+
+    &__program-advantages {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      &--title {
+        color: var(--text-400);
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+
+      &--description {
+        color: var(--text-300, #47586e);
+        font-size: 0.75rem;
+        font-weight: 400;
+      }
+    }
+
+    &__program-stages {
+      display: flex;
+      padding: 0.75rem;
+      flex-direction: column;
+      gap: 0.75rem;
+      border-radius: 1rem;
+      background: var(--Dark-WHITE);
+
+      &__header {
+        &--title {
+          color: var(--text-400);
+          font-size: 0.75rem;
+          font-weight: 500;
+        }
+
+        &--description {
+          color: var(--text-300);
+          font-size: 0.75rem;
+          font-weight: 400;
+        }
+      }
+
+      &--list {
+        display: grid;
+        /* Changed to grid for better control over columns */
+        gap: 0.75rem;
+        /* Maintain your existing gap */
+        align-self: stretch;
+        grid-template-columns: repeat(2, 1fr);
+        /* Two equal columns */
+
+        @include responsive.respond(md) {
+          grid-template-columns: 1fr;
+          /* Three equal columns */
+        }
+      }
+
+      &__card {
+        display: flex;
+        padding: 0.75rem;
+        align-items: center;
+        gap: 0.5rem;
+        border-radius: 0.75rem;
+        border: 1px solid var(--Dark-50, #f6f7f8);
+        flex: 1;
+
+        &--image {
+          height: 2.5rem;
+          border-radius: 0.5rem;
+          background: var(--Primary-50);
+        }
+
+        &--content {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+
+          &--title {
+            color: var(--text-400, #0f0f0f);
+            font-size: 0.75rem;
+            font-weight: 600;
+          }
+
+          &--description {
+            color: var(--text-300, #47586e);
+            font-size: 0.75rem;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+
+  &--supervising-doctors-wrapper {
+    position: relative;
+    height: 65vh;
+
+    @include responsive.respond(sm) {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  &--supervising-doctors {
+    display: flex;
+    padding: 0.75rem;
+    flex-direction: column;
+    gap: 1rem;
+    border-radius: 1rem;
+    background: var(--Dark-WHITE);
+    min-width: 19.875rem;
+    max-width: 19.875rem;
+    min-height: 100%;
+    margin-inline-end: 0.5rem;
+
+    p {
+      color: var(--text-400);
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    &--list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    @include responsive.respond(sm) {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    position: absolute;
+    // box-shadow: 0 6px 18px rgb(53 121 255 / 15%);
+    bottom: 0;
+    /* Adjusted gradient for better visibility */
+    padding: 0.75rem;
+    /* Add padding for better appearance */
+    z-index: 10;
+    /* Ensure it stays above other content */
+    width: 95%;
+    /* Ensure it spans the full width */
+    box-sizing: border-box;
+
+    &.sticky {
+      position: sticky !important;
+      width: 100%;
+    }
+
+    @include responsive.respond(sm) {
+      position: sticky;
+    }
+
+    /* Prevent padding from causing overflow */
+  }
+
+  .btn {
+    @include btn.button-base;
+    @include btn.button-size("medium");
+    @include btn.button-icon-position("left");
+    @include btn.button-icon-size("medium");
+    @include btn.button-color("main");
+    @include btn.button-spinner;
+    width: auto;
+
+    &__icon {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    &__label {
+      padding: 0 0.5rem;
+      white-space: nowrap;
+
+      .loading {
+        display: flex;
+        align-items: center;
+
+        .dot-loader::after {
+          content: "";
+          animation: dots 1.5s steps(4, end) infinite;
+          white-space: pre;
+        }
+
+        @keyframes dots {
+          0% {
+            content: "";
+          }
+
+          25% {
+            content: ".";
+          }
+
+          50% {
+            content: "..";
+          }
+
+          75% {
+            content: "...";
+          }
+
+          100% {
+            content: "";
+          }
+        }
+      }
+    }
+
+    &--disabled {
+      @include btn.button-disabled;
+    }
+
+    // Add variants
+    &--solid {
+      @include btn.button-type("solid");
+    }
+
+    &--outline {
+      @include btn.button-type("outline");
+    }
+  }
+}
+
+/* Add this to your main styles or a dedicated shimmer.scss file */
+
+.shimmer-wrapper {
+  animation-duration: 2.2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: shimmer;
+  animation-timing-function: linear;
+  background: var(--Dark-50, #f6f7f8);
+  background: linear-gradient(
+    to right,
+    var(--Dark-50, #f6f7f8) 8%,
+    var(--Dark-100, #edeef1) 18%,
+    var(--Dark-50, #f6f7f8) 33%
+  );
+  background-size: 800px 104px;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+/* Specific shimmer styles for your layout */
+.shimmer-card {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.shimmer-line {
+  height: 0.75rem;
+  /* Height of the text line */
+  border-radius: 4px;
+  background-color: var(--grey-300, #f0f0f0);
+  /* Lighter background for the shimmer effect */
+  margin-bottom: 0.5rem;
+  /* Space between lines */
+  overflow: hidden;
+  position: relative;
+}
+
+.shimmer-line.short {
+  width: 60%;
+  /* Shorter line for titles/descriptions */
+}
+
+.shimmer-circle {
+  width: 4.0625rem;
+  height: 4.0625rem;
+  border-radius: 1rem;
+  /* For circular image placeholders */
+  background-color: var(--grey-300, #f0f0f0);
+  overflow: hidden;
+  position: relative;
+}
+
+.program-subscription-information-card__content,
+.program-subscription-information-card__content {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.program-subscription-information-card__info {
+  flex: 1;
+}

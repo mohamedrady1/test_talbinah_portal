@@ -1,0 +1,34 @@
+.chat-meeting-messages__text {
+    color: var(--Dark-light-600, #333);
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-self: stretch;
+    margin-bottom: 0;
+    line-height: 1.2;
+
+    .chat-meeting-messages__toggle-button {
+        background: none;
+        border: none;
+        color: var(--Dark-light-400, #666);
+        font-size: 0.7rem;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 0;
+        margin-left: 0.25rem;
+        text-decoration: none;
+        transition: color 0.2s ease-in-out;
+
+        &:hover {
+            color: var(--Dark-light-500, #444);
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+    }
+}

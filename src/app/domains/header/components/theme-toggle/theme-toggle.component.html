@@ -1,0 +1,9 @@
+<div class="theme-toggle">
+    <button class="theme-toggle-btn" (click)="_ThemeService.toggleTheme()">
+        @if (_ThemeService.theme() === 'light') {
+        <app-svg-icon name="theme-toggle-light"></app-svg-icon>
+        } @else {
+        <app-svg-icon name="theme-toggle-dark"></app-svg-icon>
+        }
+    </button>
+</div>

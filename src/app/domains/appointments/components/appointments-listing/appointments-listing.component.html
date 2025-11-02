@@ -1,0 +1,134 @@
+<div class="reservation-listing-box-layout">
+  <main class="reservation-listing-box-layout__main" #card>
+    <app-page-layout-header [config]="headerConfig" [card]="cardRef" [disablePadding]="true"
+      (closeRequested)="navigateToHomePage()"></app-page-layout-header>
+
+    <section class="reservation-listing" appAutoExactHeight heightMode="max-height">
+      <div class="reservation-listing__main-content" role="region" aria-labelledby="appointments-list-header">
+        <header class="reservation-listing__header">
+          <h2 id="appointments-list-header" class="sr-only">
+            Appointments Listing
+          </h2>
+          @if ((appointmentCategories())) {
+          <nav class="reservation-listing__tabs" aria-label="Appointment Categories">
+            @for (tab of appointmentCategories(); track $index) {
+            <button class="reservation-listing__tabs__tab" [class.reservation-listing__tabs__tab--active]="selectedTab()?.id === tab.id
+                  " (click)="onTabCategorySelected(tab)" role="tab"
+              [attr.aria-selected]="selectedTab()?.id === tab.id">
+              {{ tab.name | translateApi }}
+            </button>
+            }
+          </nav>
+          }
+
+          <div class="reservation-listing__search-box">
+            <app-global-search-input [inputSearchConfig]="searchConfig()" [showLoadingIndicator]="isLoadingFilter()"
+              (valueChanged)="handleSearch($event)" (cleared)="handleClearSearch()" />
+          </div>
+
+        </header>
+
+        <section class="reservation-listing__cards-section">
+          @if (isLoading() || isLoadingFilter()) {
+          <div class="reservation-listing__status-message reservation-listing__status-message--loading"
+            aria-live="polite" aria-atomic="true">
+            @for (item of [1,2,3,4]; track $index) {
+            <app-appointment-card-skeleton></app-appointment-card-skeleton>
+            }
+          </div>
+          } @else if (errorMessage()) {
+          <div class="reservation-listing__status-message reservation-listing__status-message--error"
+            aria-live="assertive" aria-atomic="true">
+            <app-error-state-card [config]="reservationsErrorState"></app-error-state-card>
+          </div>
+          } @else if (!appointmentsResponse()?.data?.reservations?.data?.length) {
+          <div class="reservation-listing__status-message reservation-listing__status-message--empty" aria-live="polite"
+            aria-atomic="true">
+            <app-empty-state-card [config]="reservationsEmptyState"></app-empty-state-card>
+          </div>
+          } @else {
+          <div class="reservation-listing__cards-list" role="list" aria-live="polite">
+            @for (item of appointmentsResponse()?.data?.reservations?.data; track item.id) {
+            <article class="reservation-listing__card" role="listitem">
+              <app-appointment-card [item]="item" />
+            </article>
+            }
+          </div>
+          <app-pagination-listing [paginationConfig]="paginationConfig()" />
+          }
+        </section>
+      </div>
+
+      <aside class="reservation-listing__sidebar" role="complementary"
+        aria-label="Appointments listing filters and details">
+        <div class="reservation-listing__sidebar__section-wrapper">
+          <div class="reservation-listing__sidebar__column reservation-listing__sidebar__column--current-appointments">
+            <h3 class="reservation-listing__sidebar__title">
+              {{ 'current_appointments_title' | translateApi }}
+            </h3>
+
+            @if (isLoadingTodayCurrentAppointments()) {
+            <app-appointment-card-skeleton></app-appointment-card-skeleton>
+            } @else if (todayCurrentAppointmentsErrorMessage()) {
+            <div class="reservation-listing__status-message reservation-listing__status-message--error"
+              aria-live="assertive" aria-atomic="true">
+              <app-error-state-card [config]="reservationsErrorState" [type]="'small'"></app-error-state-card>
+            </div>
+            } @else if (todayAppointmentsList().length == 0) {
+            <div class="reservation-listing__status-message reservation-listing__status-message--empty"
+              aria-live="polite" aria-atomic="true">
+              <app-empty-state-card [config]="yourReservationsEmptyState" [type]="'small'"></app-empty-state-card>
+            </div>
+            } @else if (todayAppointmentsList()[0]) {
+            <ng-container *ngIf="todayAppointmentsList()[0] as firstAppointment">
+              <app-appointment-card [type]="cardFire" [item]="firstAppointment" />
+            </ng-container>
+            <ng-container *ngIf="(todayAppointmentsList()?.length|| 0) <= 0">
+              <div class="fire">
+                <app-empty-state-card [config]="reservationsOngoingEmptyState"></app-empty-state-card>
+              </div>
+            </ng-container>
+            }
+          </div>
+        </div>
+
+        <div class="reservation-listing__sidebar__section-wrapper">
+          <div class="reservation-listing__sidebar__column reservation-listing__sidebar__column--calendar-sessions">
+            <section class="reservation-listing__sidebar__section reservation-listing__sidebar__section--calendar">
+              <div class="reservation-listing__sidebar__calender-range-header">
+                <h3 class="reservation-listing__sidebar__title">
+                  {{ 'calendar_title' | translateApi }}
+                </h3>
+                @if (dateRange) {
+                <div class="reservation-listing__sidebar__calendar-reset">
+                  <button type="button" class="btn-reset-calendar" (click)="handleRangeReset()">
+                    {{ 'reset_calendar' | translateApi }}
+                  </button>
+                </div>
+                }
+              </div>
+              <div id="custom-inline-calender" class="reservation-listing__sidebar__inline-calendar">
+                <p-datepicker class="max-w-full" [(ngModel)]="dateRange" [selectionMode]="'range'" [inline]="true"
+                  [showWeek]="true" (onSelect)="handleRangeSelect($event)" (onClearClick)="handleRangeReset()"
+                  dateFormat="yy/mm/dd" [showOnFocus]="false" [showOtherMonths]="true" [selectOtherMonths]="true"
+                  yearNavigator="true" yearRange="2000:2050" [monthNavigator]="true"></p-datepicker>
+              </div>
+            </section>
+
+            <section style="display: none;"
+              class="reservation-listing__sidebar__section reservation-listing__sidebar__section--weekly-sessions">
+              <h3 class="reservation-listing__sidebar__title">
+                {{ 'top_sessions_of_this_week' | translateApi }}
+              </h3>
+              @for (item of appointmentsResponse()?.data?.reservations?.data?.slice(0,2); track item.id) {
+              <article class="reservation-listing__card" role="listitem">
+                <app-appointment-card [item]="item" />
+              </article>
+              }
+            </section>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+</div>

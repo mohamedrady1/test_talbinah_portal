@@ -1,0 +1,97 @@
+// Abstracts
+@use "./abstracts/variables" as *;
+@use "./abstracts/mixins" as *;
+@use "./abstracts/functions" as *;
+@use "./abstracts/placeholders" as *;
+@use "./fonts/font-family" as *;
+
+// Base
+@use "./base/reset" as *;
+@use "./base/typography" as *;
+@use "./base/base" as *;
+@use "./base/animations" as *;
+@use "./base/utilities" as *;
+@use "./base/scrollbar" as *;
+@use "./base/form-field" as *;
+@use "./base/buttons" as *;
+
+// Utils
+@use "./utils/helpers" as *;
+@use "./utils/visibility" as *;
+@use "./utils/border" as *;
+@use "./utils/breakpoints" as *;
+@use "./utils/colors" as *;
+@use "./utils/shadows" as *;
+@use "./utils/spacing" as *;
+@use "./utils/text" as *;
+@use "./utils/Typography" as *;
+
+// Layout
+@use "./layout/grid" as *;
+
+// Themes
+@use "./themes/default" as *;
+@use "./themes/dark" as *;
+
+// Vendors
+@use "./vendors/tailwind" as *;
+// Fonts
+
+.p-drawer-right .p-drawer {
+  width: 350px;
+  background-color: white;
+  color: black;
+}
+
+.p-drawer-header {
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.179);
+}
+
+.p-drawer-content {
+  // padding: 1.25rem 0.5rem;
+  padding: 0;
+}
+
+.closeButton {
+  display: none;
+}
+
+.p-datepicker-prev-button,
+.p-datepicker-next-button {
+  .p-iconwrapper {
+    svg {
+      path {
+        fill: var(--Dark-WHITE) !important;
+      }
+    }
+  }
+}
+
+.p-datepicker-month-selected {
+  background-color: #00377b !important;
+  color: var(--Dark-WHITE) !important;
+}
+
+
+// Autofill override (Chrome, Safari, Edge)
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important; // remove yellow bg
+  -webkit-text-fill-color: #000 !important; // force text color
+  caret-color: #000 !important; // caret matches text
+  outline: none !important;
+  background: transparent !important;
+  transition: background-color 5000s ease-in-out 0s; // prevent bg flash
+}
+
+// Autofill override (Firefox)
+input:-moz-autofill {
+  box-shadow: 0 0 0px 1000px transparent inset !important;
+  -moz-text-fill-color: #000 !important;
+  caret-color: #000 !important;
+  outline: none !important;
+  background: transparent !important;
+}

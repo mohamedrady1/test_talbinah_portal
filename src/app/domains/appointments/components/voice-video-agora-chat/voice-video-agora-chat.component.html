@@ -1,0 +1,56 @@
+<section class="agora-chat" aria-label="Video Consultation">
+  <div class="agora-chat__remote-wrapper">
+    <app-remote-stream [currentReservationData]="currentReservationData" #remoteStreamsContainer />
+  </div>
+  @if (!initFailed()) {
+
+  <div class="agora-chat__bottom-controls">
+    <div id="local-stream" class="agora-chat__local-preview">
+      <!-- Mic Status - Positioned absolutely at top right -->
+      @if (currentReservationData?.user?.id) {
+      <span class="agora-chat__local-preview--mic-status" [class.muted]="micMuted()">
+        <app-svg-icon [name]="micMuted() ? 'mic-off' : 'mic'" [fillColor]="micMuted() ? '#ca4146' : 'white'" />
+      </span>
+      }
+
+      <!-- Video Content -->
+      @if (currentReservationData?.user?.full_name) {
+      <span class="agora-chat__local-preview--username">
+        {{ currentReservationData?.user?.full_name }}
+      </span>
+      }
+
+      @if (!localVideoActive()) {
+      <div class="agora-chat__local-preview--default-image" [style.background-color]="userAvatarBackgroundColor()">
+        <span class="user-avatar-initials">{{ userInitials() }}</span>
+      </div>
+      }
+    </div>
+    <app-media-controls (expandChat)="expandChat()" (expandChatLarge)="expandChatLarge()" />
+
+  </div>
+  }
+
+  @if (isJoined()) {
+  <div class="agora-chat__status-bar">
+    <div class="agora-chat__connection-status" [class]="'quality-' + agora.connectionQuality()">
+      <span class="status-dot"></span>
+      <span class="status-text">{{ connectionQuality() }}</span>
+      <span class="status-stats" *ngIf="connectionStats().rtt > 0">
+        ({{ connectionStats().rtt }}ms)
+      </span>
+    </div>
+
+    <div class="agora-chat__timer" aria-live="polite">
+      @if (!isCallEnded()) {
+      <span class="record-dot" aria-hidden="true">
+        <app-svg-icon name="record-dot" />
+      </span>
+      }
+      <span class="agora-chat__timer--time-value">
+        {{ isCallEnded() ? ('the_consultation_session_has_ended' | translateApi) : callDuration() }}
+      </span>
+    </div>
+  </div>
+  }
+</section>

@@ -1,0 +1,41 @@
+<div class="video-card">
+    <!-- The video element itself -->
+    <video #videoElement [src]="config.video" class="video-card__video"></video>
+
+    <!-- Play/Pause Overlay and Buttons -->
+    <div class="video-card__overlay" (click)="togglePlayPause()">
+        <!-- Conditional rendering for Play button -->
+        @if (!isPlaying()) {
+        <div class="video-card__control-button">
+            <!-- Play SVG Icon -->
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M7.5835 10.0002V8.7669C7.5835 7.17524 8.7085 6.53357 10.0835 7.32524L11.1502 7.9419L12.2168 8.55857C13.5918 9.35024 13.5918 10.6502 12.2168 11.4419L11.1502 12.0586L10.0835 12.6752C8.7085 13.4669 7.5835 12.8169 7.5835 11.2336V10.0002Z"
+                    stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path
+                    d="M9.99984 18.3337C14.6022 18.3337 18.3332 14.6027 18.3332 10.0003C18.3332 5.39795 14.6022 1.66699 9.99984 1.66699C5.39746 1.66699 1.6665 5.39795 1.6665 10.0003C1.6665 14.6027 5.39746 18.3337 9.99984 18.3337Z"
+                    stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </div>
+        } @else {
+        <!-- Conditional rendering for Pause button -->
+        <div class="video-card__control-button">
+            <!-- Pause SVG Icon -->
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path
+                        d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                        stroke="#ffffff" stroke-width="2"></path>
+                    <path d="M14 9L14 15" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                    <path d="M10 9L10 15" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                </g>
+            </svg>
+        </div>
+        }
+    </div>
+</div>

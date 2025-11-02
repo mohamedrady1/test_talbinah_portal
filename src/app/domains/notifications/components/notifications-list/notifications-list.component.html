@@ -1,0 +1,123 @@
+<div class="padding-end">
+  <div class="notifications">
+    <div class="notifications__title">
+      <p class="notifications__title--label">
+        {{"notification2"|translateApi}}
+      </p>
+
+      <div class="notifications__end-actions">
+        <a class="notifications__settings-icon" (click)="openNotificationsSettings()">
+          <app-svg-icon name="settings-color-icon" />
+        </a>
+        <div class="notifications__filter" (click)="openFilterPopup()" appClickOutside
+          (clickOutside)="displayFilterPopup = false">
+          <div class="filter-button">
+            <p>{{'filter'|translateApi}}</p>
+            <span [class.rotate-arrow]="displayFilterPopup">
+              <app-svg-icon name="arrow-bottom" />
+            </span>
+          </div>
+
+          @if(displayFilterPopup) {
+          <div class="filter-popup-overlay">
+            <div class="filter-popup-content">
+              <div class="filter-popup-body">
+                @for (option of filterOptions; track $index) {
+                <div class="radio-option">
+                  <input type="radio" [id]="option.value" [value]="option.value" name="notificationFilter"
+                    [(ngModel)]="selectedFilterType" (change)="applyFilter(option.value!)" class="hidden-radio-input">
+
+                  <label class="label-wrapper" [for]="option.value">
+                    <div class="custom-radio-icon">
+                      @if(selectedFilterType !== option.value) {
+                      <app-svg-icon name="radio-outline" />
+                      }
+                      @if(selectedFilterType === option.value) {
+                      <app-svg-icon name="radio-active" />
+                      }
+                    </div>
+                    <span class="label-text">
+                      {{ option.label | translateApi }}
+                    </span>
+                  </label>
+                </div>
+                }
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="notifications__list" appAutoExactHeight="120">
+      @if (isLoading()) {
+      <div class="card__notification">
+        @for (item of [1,2,3,4,5,6,7]; track $index) {
+        <div class="card__notification--loading">
+          <div class="card__notification__avatar skeleton"></div>
+          <div class="card__notification__input-wrapper">
+            <div class="skeleton skeleton-input"></div>
+          </div>
+        </div>
+        }
+      </div>
+      }
+      @else if (facade.totalAllNotificationsItems() === 0) {
+      <div class="empty-state">
+        <img class="empty-state__image" appLazyLoadImage="{{ notificationsEmptyState.imageUrl }}" alt="Empty state"
+          ngOptimizedImage width="200" height="200" placeholder="images/emptyStates/notifications.svg" />
+
+        @if (notificationsEmptyState.title) {
+        <h2 class="empty-state__title">{{ notificationsEmptyState.title | translateApi }}</h2>
+        }
+
+        @if (notificationsEmptyState.message) {
+        <p class="empty-state__message">{{ notificationsEmptyState.message | translateApi }}</p>
+        }
+      </div>
+      }
+      @else if (facade.allNotificationsErrorMessage() && !facade.allNotificationsStatus()) {
+      <div class="error-state">
+        <img class="error-state__image" appLazyLoadImage="{{ notificationsErrorState().imageUrl }}" alt="Error state"
+          ngOptimizedImage width="200" height="200" placeholder="images/errorStates/notifications.svg" />
+
+        @if (notificationsErrorState().title) {
+        <!-- <h2 class="error-state__title">{{ notificationsErrorState().title | translateApi }}</h2> -->
+        }
+
+        @if (notificationsErrorState().message) {
+        <!-- <p class="error-state__message">{{ notificationsErrorState().message | translateApi }}</p> -->
+        }
+
+        @if (notificationsErrorState().onRetry) {
+        <button class="error-state__button" type="button" (click)="facade.fetchAllNotifications(1)">
+          {{ notificationsErrorState().retryLabel || ('retry' | translateApi) }}
+        </button>
+        }
+      </div>
+      }
+      @else {
+      @for (item of facade.allNotifications(); track item.id) {
+      <div class="notification__card" (click)="handleNotificationInteraction(item)">
+        <app-my-psychological-society-notification-card [type]="cardTypes.DETAILS" [item]="item" />
+      </div>
+      }
+
+      @if (facade.canLoadMoreAllNotifications()) {
+      <div class="notifications__actions">
+        <button (click)="loadMoreNotifications()" class="notifications-dropdown__submit-button btn btn--ghost"
+          [disabled]="isLoadingMore()">
+          @if (isLoadingMore()) {
+          <span class="loading-spinner"></span>
+          {{ 'in_progress' | translateApi }}
+          } @else {
+          {{ 'show_more' | translateApi }}
+          }
+        </button>
+      </div>
+      }
+      }
+    </div>
+  </div>
+</div>

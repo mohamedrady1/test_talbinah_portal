@@ -1,0 +1,71 @@
+@use "../../../common/styles/scss/abstracts/mixins" as *;
+.header-card {
+  @include flex-box(row, 0, center, space-between);
+
+  &--disabled {
+    padding: 0 !important;
+  }
+  &__close-btn {
+    @include flex-box(row, 0.625rem, center, center);
+    border: none;
+    border-radius: 0.75rem;
+    background: var(--Dark-50, #f6f7f8);
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-family: inherit;
+    @include text-style(0.875rem, var(--Dark-900, #1d1f1f), 400);
+
+    display: none;
+    @include respond(sm) {
+      display: flex;
+    }
+
+    // Flip arrow 180 degrees in English (LTR)
+    :host-context(html.en) & svg,
+    :host-context(html[dir="ltr"]) & svg {
+      transform: rotate(180deg);
+    }
+  }
+  &__actions {
+    @include flex-box(row, 0.5rem, center, center);
+    @include respond(sm) {
+      display: none;
+    }
+  }
+
+  &__button {
+    width: 1.75rem;
+    height: 1.75rem;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--Dark-100);
+    cursor: pointer;
+    @include flex-box(row, 0, center, center);
+  }
+
+  &__content {
+    @include flex-box(row, 1rem, center, center);
+  }
+
+  &__icon {
+    width: 2.25rem;
+    height: 2.3125rem;
+    @include flex-box(row, 0, center, center);
+    border-radius: 0.75rem;
+    background: linear-gradient(180deg, #cae8db 0%, #e7d4ba 100%);
+    flex-shrink: 0;
+  }
+
+  &__text {
+    @include flex-box(column, 0, null, center);
+  }
+
+  &__title {
+    @include text-style(1rem, var(--text-primary, #000), 600);
+  }
+
+  &__subtitle {
+    @include text-style(0.75rem, var(--text-300), 400);
+  }
+}

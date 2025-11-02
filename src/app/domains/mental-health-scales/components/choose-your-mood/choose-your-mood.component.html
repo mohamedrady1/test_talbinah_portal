@@ -1,0 +1,42 @@
+<div class="choose-your-mood" [ngClass]="{'small-view':isSmall}">
+  @if (!hideTitle) {
+  <p class="choose-your-mood__title">
+    {{'what_is_your_mood_today'|translateApi}}
+  </p>
+  }
+
+  @if (_moodsFacade.isLoading()) {
+  <div class="shimmer__list">
+    @for (i of [].constructor(10); track i) {
+    <div class="shimmer"></div>
+    }
+  </div>
+  } @else if (_moodsFacade.errorMessage()) {
+  <app-error-state [config]="chooseMoodErrorState"></app-error-state>
+  } @else if (_moodsFacade.moods()?.data?.length) {
+  <div class="choose-your-mood__options">
+    @for (mood of _moodsFacade.moods()?.data; track mood.id) {
+    <div class="choose-your-mood__options-option"
+      (click)="!_userMoodStoreFacade.isStoringMood() ? onMoodClick(mood) : null" role="button" tabindex="0"
+      [attr.aria-label]="'Select ' + mood.feelings">
+      <div class="choose-your-mood__options-option__img">
+        <img appLazyLoadImage="{{ mood.icon }}" [alt]="mood.feelings" ngOptimizedImage width="32" height="32"
+          placeholder="https://talbinah.net/assets/images/not-found/no-article.svg" aria-hidden="false" />
+
+        @if (_userMoodStoreFacade.isStoringMood()) {
+        <div class="image-spinner-overlay">
+          <div class="image-spinner"></div>
+        </div>
+        }
+      </div>
+
+      <p>
+        {{mood.feelings}}
+      </p>
+    </div>
+    }
+  </div>
+  } @else {
+  <app-empty-state [config]="chooseMoodEmptyState" class="w-100"></app-empty-state>
+  }
+</div>

@@ -1,0 +1,121 @@
+<div class="government-agency-verification">
+  <div class="government-agency-verification__container">
+
+    @if (!isCodeSent()) {
+    <div class="government-agency-verification__code-box">
+
+      <!-- Label -->
+      <div class="government-agency-verification__code-section">
+        <div class="government-agency-verification__code-section--label">
+          <span class="text">
+            {{ 'enter_org_email_to_activate_support' | translateApi }}
+          </span>
+        </div>
+
+        <form class="government-agency-verification__email-form" [formGroup]="form" role="group"
+          aria-labelledby="gov-email-label" (ngSubmit)="verifyCode()">
+          <div class="government-agency-verification__email-form__row">
+            <!-- Domain (1) -->
+            <div
+              class="government-agency-verification__email-form__form-group government-agency-verification__email-form__form-group--domain">
+              <label for="gov-domain" class="government-agency-verification__email-form__label">
+                {{ 'form.domain.label' | translateApi }}
+              </label>
+              <div class="government-agency-verification__email-form__inputs">
+                <span id="gov-domain" class="government-agency-verification__email-form__domain">
+                  {{ domain }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Email Prefix Input (3) -->
+            <div
+              class="government-agency-verification__email-form__form-group government-agency-verification__email-form__form-group--email">
+              <label for="emailPrefix" class="government-agency-verification__email-form__label">
+                {{ 'email' | translateApi }}
+              </label>
+              <div class="government-agency-verification__email-form__inputs">
+                <input id="emailPrefix" type="text" class="government-agency-verification__email-form__input"
+                  formControlName="emailPrefix" [attr.aria-invalid]="hasError" aria-describedby="emailError"
+                  [placeholder]="'enter_email' | translateApi" />
+              </div>
+              @if (hasError) {
+              <div id="emailError" class="government-agency-verification__email-form__error" role="alert"
+                aria-live="polite">
+                {{ 'email_required' | translateApi }}
+              </div>
+              }
+            </div>
+          </div>
+
+
+        </form>
+
+      </div>
+      <!-- Submit Button -->
+      <div class="government-agency-verification__button-container">
+        <button type="submit" class="btn" [disabled]="isLoading()" (click)="submitForm()"
+          [attr.aria-label]="'OtpMethodSelection.Submit' | translateApi">
+          <span class="btn__label">
+            @if (isLoading()) {
+            <div class="government-agency-verification__button-loading" aria-label="Submit in progress">
+              {{ 'in_progress' | translateApi }}
+              <span class="dot-loader"></span>
+            </div>
+            } @else {
+            {{ 'verify_the_code' | translateApi }}
+            }
+          </span>
+        </button>
+      </div>
+    </div>
+    }
+
+    @if (isCodeSent()) {
+    <div class="government-agency-verification__code-box">
+      <div class="government-agency-verification__code-section">
+        <div class="government-agency-verification__code-section--label">
+          <span class="text">
+            {{ 'enter_verification_code_email' | translateApi }}
+          </span>
+          <span class="value">
+            {{ EmailSent() || '' }}
+          </span>
+        </div>
+
+        <div class="government-agency-verification__otp-input"
+          [ngClass]="{ 'government-agency-verification__otp-input--error': codeNotValid() }">
+          <app-code-input [clearInputs]="clearInputsValue" [inputsNumber]="inputsNumber" [typedInput]="'num'"
+            (codeChanged)="handleCodeChange($event)" (codeCompleted)="handleCodeCompletion($event)"
+            [attr.aria-label]="'governmentAgency.otpInput' | translateApi"></app-code-input>
+        </div>
+
+        @if (codeNotValid()) {
+        <div class="government-agency-verification__error">
+          <p class="government-agency-verification__error-message">
+            {{ 'الكود غير صحيح من فضلك اعد المحاولة' }}
+          </p>
+        </div>
+        }
+      </div>
+
+      <!-- Submit Button -->
+      <div class="government-agency-verification__button-container">
+        <button type="button" class="btn" [disabled]="isOtpLoading()" (click)="verifyCode()">
+          <span class="btn__label">
+            @if (isOtpLoading()) {
+            <div class="government-agency-verification__button-loading">
+              {{ 'in_progress' | translateApi }}
+              <span class="dot-loader"></span>
+            </div>
+            } @else {
+            {{ 'confirm' | translateApi }}
+            }
+          </span>
+        </button>
+      </div>
+    </div>
+    }
+
+  </div>
+</div>

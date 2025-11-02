@@ -1,0 +1,107 @@
+html {
+    line-height: 1.15;
+    /* Prevent adjustments of font size after orientation changes */
+    -webkit-text-size-adjust: 100%;
+    /* Prevent font scaling in landscape */
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    /* Set a default font */
+    // font-size: 1.6rem;
+    /* Default font size: 16px */
+    line-height: 1.6;
+    /* Better readability */
+    color: var(--text-primary, #000);
+    background-color: var(--Dark-WHITE);
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
+}
+
+// body,
+// .p-component {
+//     font-family: "Aventa", sans-serif;
+
+//     &:dir(rtl) {
+//         font-family: "Omnes", sans-serif;
+//     }
+// }
+
+// body {
+//     font-family: "Omnes", sans-serif;
+// }
+/* Reset for elements */
+main,
+section,
+article,
+aside,
+header,
+footer,
+nav,
+figure,
+figcaption,
+hgroup {
+    display: block;
+}
+
+/* Reset for lists */
+ul,
+ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Reset for links */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Reset for images */
+img,
+video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 0.5rem;
+}
+
+/* Form Elements */
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none !important;
+    background: transparent;
+}
+
+button {
+    cursor: pointer;
+}
+
+textarea {
+    resize: none;
+}
+
+/* Accessibility Improvements */
+[hidden] {
+    display: none !important;
+}

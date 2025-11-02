@@ -1,0 +1,8 @@
+<div class="radio-button">
+    <label [for]="config?.value">
+        <img [src]="config?.icon" [alt]="config?.name">
+        <p>{{ config?.label }}</p>
+    </label>
+    <input type="radio" [id]="config?.value" [name]="config?.name" [value]="config?.value"
+        (change)="onSelect(config?.value)">
+</div>

@@ -1,0 +1,285 @@
+<section class="chat-meeting-messages" role="log" aria-label="Chat conversation"
+  [class.chat-meeting-messages--compact]="!isChatExpanded()" [appAutoExactHeight]="85">
+
+  <!-- @if(!isChatLoading()) { -->
+
+  <ul class="chat-meeting-messages__list" appAutoExactHeight #chatMessagesList>
+
+    <!-- @if((messages()?.length || 0) > 0) {
+    <div class="task-status" role="button" tabindex="0" aria-label="Open tasks" (click)="onOpenChatTasksModal()">
+      <div class="task-status__info">
+        <span class="task-status__icon">
+          <app-svg-icon name="book-icon" />
+        </span>
+        <span class="task-status__text">
+          <span class="task-status__label">
+            {{ 'Chat.TaskCreated' | translate }}
+          </span>
+          <span class="task-status__value">
+            ( {{ 2 }} / {{ 4 }} )
+          </span>
+        </span>
+      </div>
+      <button class="task-status__arrow" type="button" aria-label="Open tasks" (click)="onOpenChatTasksModal()">
+        <app-svg-icon name="single-arrow-left" />
+      </button>
+    </div>
+    }
+
+    <div class="join-at">
+      {{ 'Chat.SessionJoinedMessage' | translate:{
+      date: sessionDate | date:'dd-MM-yyyy': currentLang, time: sessionDate|date:'hh:mma': currentLang}
+      }}
+    </div> -->
+
+    @if((messages()?.length || 0) > 0) {
+    <!-- ... render messages ... -->
+    @for (item of messages(); track $index; let i = $index; let isFirst = $first; let isLast = $last) {
+
+    <li class="chat-meeting-messages__item"
+      [class.chat-meeting-messages__item--user]="item.senderId == this.currentReservationData?.user?.id"
+      [class.chat-meeting-messages__item--doctor]="item.senderId == this.currentReservationData?.doctor?.id"
+      [class.chat-meeting-messages__item--event]="item.msgType === MeetingChatItemsTypes.EVENT"
+      [attr.data-message-id]="item.id">
+
+      <div class="chat-meeting-messages__message-group">
+        @if (item.msgType !== MeetingChatItemsTypes.EVENT) {
+        <div class="chat-meeting-messages__sender-icon">
+          @if (item.senderId == this.currentReservationData?.user?.id) {
+          @if (shouldShowUserImage()) {
+          <!-- User image -->
+          <img class="user-image" width="36" height="36" [src]="userInfo?.image"
+            [alt]="userInfo?.full_name ?? 'User image'" (error)="onImageError($event, userInfo?.gender)"
+            loading="lazy" />
+          } @else {
+          <div class="user-avatar-fallback" [style.background-color]="userAvatarBackgroundColor()">
+            <span class="user-avatar-initials">{{ userInitials() }}</span>
+          </div>
+          }
+          } @else if (item.senderId == this.currentReservationData?.doctor?.id) {
+          @if (shouldShowDoctorImage()) {
+          <!-- Doctor image -->
+          <img class="user-image" width="36" height="36" [src]="currentReservationData?.doctor?.image"
+            [alt]="currentReservationData?.doctor?.full_name ?? 'Doctor image'"
+            (error)="onImageError($event, currentReservationData?.doctor?.gender)" loading="lazy" />
+          } @else {
+          <div class="doctor-avatar-fallback" [style.background-color]="doctorAvatarBackgroundColor()">
+            <span class="doctor-avatar-initials">{{ doctorInitials() }}</span>
+          </div>
+          }
+          } @else {
+          <img src="images/not-found/no-doctor.svg" alt="doctor placeholder" class="user-image" width="36"
+            height="36" />
+          }
+        </div>
+        }
+
+        <div class="chat-meeting-messages__bubble-area"
+          [ngClass]="{'chat-meeting-messages__bubble-area--voice': item.msgType === MeetingChatItemsTypes.VOICE || item.msgType === MeetingChatItemsTypes.AUDIO}">
+          <div class="chat-meeting-messages__content-wrapper"
+            [class.chat-meeting-messages__content-wrapper--voice]="item.msgType === MeetingChatItemsTypes.VOICE || item.msgType === MeetingChatItemsTypes.AUDIO"
+            [class.chat-meeting-messages__content-wrapper--event]="item.msgType === MeetingChatItemsTypes.EVENT"
+            [class.chat-meeting-messages__content-wrapper--deleted]="item.msgType === MeetingChatItemsTypes.DELETED">
+
+            @if(item?.msgType === MeetingChatItemsTypes.RECOMMEND){
+            <div class="recommend">
+              {{ 'chat_recommend' | translateApi }}
+            </div>
+            }
+            @if(item?.msgType === MeetingChatItemsTypes.TRANSFERRED){
+            <div class="transferred">
+              {{ 'chat_transferred' | translateApi }}
+            </div>
+            }
+
+            @if(item?.homeworkId && item?.msgType !== MeetingChatItemsTypes.DELETED){
+            <div class="homework">
+              <div class="homework__label">
+                <span class="homework__text">
+                  {{ 'mission' | translateApi }}
+                </span>
+              </div>
+
+
+              <div class="homework__status">
+                <span class="homework__icon homework__icon--status"
+                  [ngClass]="{'homework__icon homework__icon--status--done': item?.isMessageOpened=='1'}">
+                  @if (item?.isMessageOpened=='1') {
+                  <app-svg-icon name="task-done" />
+                  }
+                </span>
+              </div>
+            </div>
+            }
+
+            @if (item.msgType !== MeetingChatItemsTypes.EVENT && item.msgType !== MeetingChatItemsTypes.DELETED) {
+            <div class="chat-message-actions-container">
+              <app-actions-dropdown-menu [menuItems]="getMenuItemsForMessage(item)"
+                (itemClicked)="handleMenuItemClick($event,item)" [isArrow]="true">
+              </app-actions-dropdown-menu>
+            </div>
+            }
+
+            @if (item?.msgType === MeetingChatItemsTypes.EVENT) {
+            <p class="chat-meeting-messages__text chat-meeting-messages__text--event">
+              <!-- [class.chat-meeting-messages__text--success]="isFirst"
+              [class.chat-meeting-messages__text--danger]="isLast"> -->
+              <span>{{ item.message }}</span>
+              <time>{{ item.msgTime | date: 'hh:mm a' }}</time>
+            </p>
+            }
+
+            <div class="chat-meeting-messages__content">
+              @switch (item.msgType) {
+              @case (MeetingChatItemsTypes.TEXT) {
+              <app-chat-message-text [message]="item.message ?? null"></app-chat-message-text>
+              }
+              @case (MeetingChatItemsTypes.DOCTOR) {
+              <app-chat-doctor-card [item]="parseJson(item.message) ?? null"></app-chat-doctor-card>
+              }
+              @case (MeetingChatItemsTypes.RECOMMEND) {
+              <app-chat-doctor-card [item]="parseJson(item.message) ?? null"></app-chat-doctor-card>
+              }
+              @case (MeetingChatItemsTypes.TRANSFERRED) {
+              <app-chat-doctor-card [item]="parseJson(item.message) ?? null"></app-chat-doctor-card>
+              }
+              @case (MeetingChatItemsTypes.VIEW_PDF || MeetingChatItemsTypes.VIEW_PDF_ALT) {
+              @if (getDownloadableFile(item); as fileToView) {
+              <app-file-viewer [file]="fileToView"></app-file-viewer>
+              }
+              }
+              @case (MeetingChatItemsTypes.DOCUMENT) {
+              @if (getDownloadableFile(item); as fileToView) {
+              <app-file-viewer [file]="fileToView"></app-file-viewer>
+              }
+              }
+              @case (MeetingChatItemsTypes.QUIZ) {
+              <app-card [testDetails]="item?.message ?? null"></app-card>
+              }
+              @case (MeetingChatItemsTypes.MENTAL_HEALTH) {
+              <ng-container *ngIf="item?.message as message">
+                <app-mental-health-scale-card *ngIf="isMentalHealthScaleMessage(parseJson(message))" [messageRef]="item"
+                  [reservationModel]="reservationModel" [item]="parseJson(message)!" />
+              </ng-container>
+              }
+              @case (MeetingChatItemsTypes.IMAGE) {
+              <app-chat-message-image [imageUrl]="item?.message ?? null"></app-chat-message-image>
+              }
+              @case (MeetingChatItemsTypes.VIDEO) {
+              <app-chat-message-video [videoUrl]="item?.message ?? null"></app-chat-message-video>
+              }
+              @case (MeetingChatItemsTypes.COUPON) {
+              <ng-container *ngIf="item?.message as message">
+                <app-discount-card-for-meeting-chat *ngIf="isDoctorCopounMessage(parseJson(message))"
+                  [item]="parseJson(message)" [allowShortTexts]="true" />
+              </ng-container>
+              }
+              @case (MeetingChatItemsTypes.DELETED) {
+              <p class="chat-meeting-messages__text chat-meeting-messages__text--deleted">
+                <span class="chat-meeting-messages__deleted-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13" fill="none"
+                    aria-hidden="true">
+                    <path
+                      d="M6 7.375C5.795 7.375 5.625 7.205 5.625 7V4.375C5.625 4.17 5.795 4 6 4C6.205 4 6.375 4.17 6.375 4.375V7C6.375 7.205 6.205 7.375 6 7.375Z"
+                      fill="#B80924" />
+                    <path
+                      d="M6 9.12462C5.865 9.12462 5.73999 9.07463 5.64499 8.97963C5.59999 8.92963 5.565 8.87462 5.535 8.81462C5.51 8.75462 5.5 8.68962 5.5 8.62462C5.5 8.49462 5.55499 8.36461 5.64499 8.26961C5.82999 8.08461 6.17001 8.08461 6.35501 8.26961C6.44501 8.36461 6.5 8.49462 6.5 8.62462C6.5 8.68962 6.48499 8.75462 6.45999 8.81462C6.43499 8.87462 6.40001 8.92963 6.35501 8.97963C6.26001 9.07463 6.135 9.12462 6 9.12462Z"
+                      fill="#B80924" />
+                    <path
+                      d="M6.00009 11.8746C5.66509 11.8746 5.32509 11.7896 5.02509 11.6146L2.05508 9.89955C1.45508 9.54955 1.08008 8.90455 1.08008 8.20955V4.78957C1.08008 4.09457 1.45508 3.44957 2.05508 3.09957L5.02509 1.38457C5.62509 1.03457 6.3701 1.03457 6.9751 1.38457L9.9451 3.09957C10.5451 3.44957 10.9201 4.09457 10.9201 4.78957V8.20955C10.9201 8.90455 10.5451 9.54955 9.9451 9.89955L6.9751 11.6146C6.6751 11.7896 6.33509 11.8746 6.00009 11.8746ZM6.00009 1.87456C5.79509 1.87456 5.58509 1.92956 5.40009 2.03456L2.43008 3.74956C2.06008 3.96456 1.83008 4.35957 1.83008 4.78957V8.20955C1.83008 8.63455 2.06008 9.03456 2.43008 9.24956L5.40009 10.9646C5.77009 11.1796 6.23009 11.1796 6.59509 10.9646L9.56509 9.24956C9.93509 9.03456 10.1651 8.63955 10.1651 8.20955V4.78957C10.1651 4.36457 9.93509 3.96456 9.56509 3.74956L6.59509 2.03456C6.41509 1.92956 6.20509 1.87456 6.00009 1.87456Z"
+                      fill="#B80924" />
+                  </svg>
+                </span>
+                <span>
+                  @if (item.senderId == this.currentReservationData?.user?.id) {
+                  {{ 'deleted_by_me' | translateApi}}
+                  }
+                  @else if (item.senderId == this.currentReservationData?.doctor?.id) {
+                  {{ 'deleted_by_doctor' | translateApi}}
+                  {{ currentReservationData?.doctor?.full_name ?? '' }}
+                  }
+                </span>
+              </p>
+              }
+              @case (MeetingChatItemsTypes.PODCAST) {
+              <app-podcast-card-for-meeting-chat [item]="parseJson(item.message) ?? null" [messageRef]="item"
+                class="w-100" [reservationModel]="reservationModel" />
+              }
+              @case (MeetingChatItemsTypes.ARTICLE) {
+              <app-article-card [type]="cardTypes.SUMMARY" [hideFavouriteAction]="true" [messageRef]="item"
+                [reservationModel]="reservationModel" [reservation_id]="item.reservation_id"
+                [item]="parseJson(item.message) ?? null" />
+              }
+              @case (MeetingChatItemsTypes.FILE) {
+              @if (getDownloadableFile(item); as fileToView) {
+              <app-file-viewer [file]="fileToView"></app-file-viewer>
+              }
+              }
+              @case (MeetingChatItemsTypes.VOICE) {
+              <app-chat-message-voice [audioSrc]="item?.message ?? null" [item]="item"></app-chat-message-voice>
+              }
+              @case (MeetingChatItemsTypes.AUDIO) {
+              <app-chat-message-voice [audioSrc]="item?.message ?? null" [item]="item"></app-chat-message-voice>
+              }
+              }
+
+              @if(item?.replyReference && item.msgType !== MeetingChatItemsTypes.DELETED){
+              <div class="chat-meeting-messages__reply-reference">
+                <app-referenced-message [item]="item.replyReference" [currentReservationData]="currentReservationData"
+                  [userInfo]="userInfo" (referencedMessageClicked)="scrollToMessage($event)">
+                </app-referenced-message>
+              </div>
+              }
+            </div>
+          </div>
+
+          @if (item.msgType !== MeetingChatItemsTypes.EVENT) {
+          <div class="chat-meeting-messages__info">
+            <app-svg-icon [name]="item?.is_read ? 'is_read' : 'is_unread'" />
+            <time class="chat-meeting-messages__timestamp">
+              {{ (item.msgTime | date: 'hh:mm a') }}
+            </time>
+          </div>
+          }
+        </div>
+      </div>
+    </li>
+    }
+    } @else {
+    <div class="chat-meeting-messages__empty-state" role="status" aria-live="polite">
+      <app-empty-state-card [config]="chatMessagesEmptyState"></app-empty-state-card>
+    </div>
+    }
+  </ul>
+
+  <!-- } -->
+
+  <!-- @else {
+  <ul class="shimmer-list" aria-label="Loading chat messages">
+    @for (tab of [1,2]; track $index) {
+    <li class="shimmer-message shimmer-message--user" role="status" aria-live="polite">
+      <div class="shimmer-icon shimmer-wrapper"></div>
+      <div class="shimmer-content-wrapper" style="flex:1">
+        <div class="shimmer-content shimmer-wrapper">
+          <div class="shimmer-text-line shimmer-text-line--long"></div>
+          <div class="shimmer-text-line shimmer-text-line--short"></div>
+        </div>
+        <div class="shimmer-timestamp shimmer-wrapper"></div>
+      </div>
+    </li>
+    <li class="shimmer-message shimmer-message--doctor" role="status" aria-live="polite">
+      <div class="shimmer-icon shimmer-wrapper"></div>
+      <div class="shimmer-content-wrapper" style="flex: 1;">
+        <div class="shimmer-content shimmer-wrapper">
+          <div class="shimmer-text-line shimmer-text-line--long"></div>
+          <div class="shimmer-text-line shimmer-text-line--long"></div>
+          <div class="shimmer-text-line shimmer-text-line--short"></div>
+        </div>
+        <div class="shimmer-timestamp shimmer-wrapper"></div>
+      </div>
+    </li>
+    }
+  </ul>
+  } -->
+
+</section>

@@ -1,0 +1,79 @@
+<div class="settings-rewards-layout-container" appAutoExactHeight heightMode="max-height">
+  <div class="settings-rewards-layout">
+    <!-- Header Section -->
+    <div class="settings-rewards-layout__header">
+      <div class="settings-rewards-layout__title">
+        {{'rewards'|translateApi}}
+      </div>
+      <div class="settings-rewards-layout__description">
+        {{'points_converted_to_reward'|translateApi}}
+      </div>
+    </div>
+
+    <!-- Content Section -->
+    <div class="settings-rewards-layout__content">
+      @if (isLoading()) {
+      <!-- Loading State -->
+      <div class="settings-rewards-layout__loading-state" aria-live="polite">
+        @for (item of [1, 2, 3, 4]; track $index) {
+        <div class="settings-rewards-layout__loading-card shimmer-effect">
+          <div class="settings-rewards-layout__loading-icon shimmer-circle"></div>
+          <div class="settings-rewards-layout__loading-content">
+            <div class="settings-rewards-layout__loading-title shimmer-text"></div>
+            <div class="settings-rewards-layout__loading-description shimmer-text"></div>
+          </div>
+        </div>
+        }
+      </div>
+      }
+
+      <!-- Error State -->
+      @if (!isLoading() && hasError()) {
+      <app-error-state-card [config]="errorStateConfig" (retry)="onRetry()">
+      </app-error-state-card>
+      }
+
+      <!-- Empty State -->
+      @if (!isLoading() && !hasError() && isEmpty()) {
+      <app-empty-state-card [config]="emptyStateConfig">
+      </app-empty-state-card>
+      }
+
+      <!-- Services Grid -->
+      @if (!isLoading() && !hasError() && !isEmpty()) {
+      <div class="settings-rewards-layout__grid">
+        @for (reward of items(); track reward?.id) {
+        <div class="settings-rewards-layout__card">
+          <div class="settings-rewards-layout__card-icon">
+            <img class="settings-rewards-layout__card--icon-img" src="images/settings/gift/settings-reward.png"
+              alt="points icon" loading="lazy" decoding="async" width="24" height="27"
+              onerror="this.src='images/auth/icons/talbinah.png';" />
+          </div>
+          <p class="settings-rewards-layout__card-title">
+            <span>
+              {{ reward?.name }}
+            </span>
+            <span class="settings-rewards-layout__status" [class.status--expired]="reward?.expired"
+              [class.status--valid]="!reward?.expired">
+              <app-svg-icon name="calender-icon" [fillColor]="reward?.expired ? '#CA4146' : '#00AF6C'" />
+              <span>
+                {{ reward?.expired
+                ? ('code_expired' | translateApi)
+                : ('valid_for_duration' | translateApi) + ' ' + getRemainingDaysIfCoupon(reward?.gift) + ' ' + ('day' |
+                translateApi)
+                }}
+              </span>
+            </span>
+          </p>
+          @if (!reward?.expired) {
+          <button class="settings-rewards-layout__card-button" (click)="openRewardModal(reward)">
+            <app-svg-icon name="eye-icon" fillColor="#0E39B6" />
+          </button>
+          }
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </div>
+</div>

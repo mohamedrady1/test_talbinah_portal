@@ -1,0 +1,38 @@
+.shimmer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    &__list {
+        display: flex;
+        flex-direction: row;
+        gap: 0.75rem;
+    }
+    &--box,
+    &--circle {
+        width: 2rem;
+        height: 4rem;
+        border-radius: 8px;
+        background: #eee;
+        background-size: 400% 100%;
+        position: relative;
+
+        &.large {
+            width: 5rem;
+            height: 3rem;
+        }
+    }
+    &--circle {
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+    }
+}
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}

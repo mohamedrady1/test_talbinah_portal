@@ -1,0 +1,1 @@
+export * from './book-apoointment-popup.component';

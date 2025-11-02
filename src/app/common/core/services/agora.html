@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agora RTC Basic Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    #video-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .video-placeholder {
+      width: 100%;
+      height: 200px;
+      background: #eee;
+      border: 1px solid #ccc;
+    }
+
+    .controls {
+      margin: 20px 0;
+      padding: 10px;
+      background: #f5f5f5;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 8px 15px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Agora RTC Basic Demo</h1>
+
+  <div class="controls">
+    <input type="text" id="appId" placeholder="Your App ID" style="width: 300px"
+      value="b0fc8da1f9304a728076ff96220d3ebb" />
+    <input type="text" id="channel" placeholder="Channel Name" value="3646" />
+    <input type="text" id="token" placeholder="Token (optional)"
+      value="006b0fc8da1f9304a728076ff96220d3ebbIABLHMpleIkdLN78LmEM9FP6wl7njKWNQWBYb7cq2/kEbR93rJf6xyoCIgAeKwAAFtaLaAQAAQCmkopoAwCmkopoAgCmkopoBACmkopo"
+      style="width: 300px" />
+    <input type="text" id="uid" placeholder="User ID (optional)" value="161" />
+    <button id="join">Join Channel</button>
+    <button id="leave" disabled>Leave Channel</button>
+  </div>
+
+  <div class="controls">
+    <button id="toggleAudio">Toggle Audio</button>
+    <button id="toggleVideo">Toggle Video</button>
+  </div>
+
+  <div id="video-container">
+    <div id="local-player" class="video-placeholder"></div>
+  </div>
+
+  <script src="https://download.agora.io/sdk/release/AgoraRTC_N-4.23.4.js"></script>
+  <script>
+    // Agora client instance
+    let client;
+    let localAudioTrack;
+    let localVideoTrack;
+    let remoteUsers = {};
+
+    // DOM elements
+    const joinBtn = document.getElementById("join");
+    const leaveBtn = document.getElementById("leave");
+    const toggleAudioBtn = document.getElementById("toggleAudio");
+    const toggleVideoBtn = document.getElementById("toggleVideo");
+    const localPlayer = document.getElementById("local-player");
+    const videoContainer = document.getElementById("video-container");
+
+    // Initialize Agora client
+    async function initClient() {
+      client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
+
+      // Add event listeners
+      client.on("user-published", handleUserPublished);
+      client.on("user-unpublished", handleUserUnpublished);
+      client.on("user-joined", handleUserJoined);
+      client.on("user-left", handleUserLeft);
+      client.on("connection-state-change", (state) => {
+        console.log("Connection state:", state);
+      });
+      client.on("stream-added", (evt) => {
+        console.log(`%cStream added`, "color: green; font-size:33px");
+        console.log("Stream added", evt);
+      });
+
+      client.on("stream-subscribed", (evt) => {
+        console.log(`%cStream subscribed`, "color: green; font-size:33px");
+        console.log("Stream subscribed", evt);
+      });
+
+      client.on("stream-removed", (evt) => {
+        console.log(`%cStream removed`, "color: green; font-size:33px");
+
+        console.log("Stream removed", evt);
+      });
+    }
+
+    // Join channel
+    async function joinChannel() {
+      const appId = document.getElementById("appId").value;
+      const channel = document.getElementById("channel").value;
+      const token = document.getElementById("token").value;
+      const uid = document.getElementById("uid").value || null;
+
+      if (!appId) {
+        alert("Please enter your App ID");
+        return;
+      }
+
+      try {
+        await initClient();
+
+        // Join the channel
+        const actualUid = await client.join(
+          String(appId),
+          channel,
+          token || null,
+          Number(uid)
+        );
+        console.log(`Joined channel ${channel} as ${actualUid}`);
+
+        // Create and publish local tracks
+        localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
+        localVideoTrack = await AgoraRTC.createCameraVideoTrack();
+
+        // Play local video
+        localPlayer.innerHTML = "";
+        localVideoTrack.play(localPlayer);
+
+        // Publish tracks
+        await client.publish([localAudioTrack, localVideoTrack]);
+
+        // Update UI
+        joinBtn.disabled = true;
+        leaveBtn.disabled = false;
+        toggleAudioBtn.disabled = false;
+        toggleVideoBtn.disabled = false;
+      } catch (error) {
+        console.error("Failed to join channel:", error);
+        alert(`Error: ${error.message}`);
+      }
+    }
+
+    // Leave channel
+    async function leaveChannel() {
+      try {
+        if (localAudioTrack) {
+          localAudioTrack.close();
+          localAudioTrack = null;
+        }
+
+        if (localVideoTrack) {
+          localVideoTrack.close();
+          localVideoTrack = null;
+        }
+
+        // Remove all remote users
+        for (let uid in remoteUsers) {
+          removeVideoPlayer(uid);
+        }
+        remoteUsers = {};
+
+        // Leave the channel
+        await client.leave();
+
+        // Update UI
+        joinBtn.disabled = false;
+        leaveBtn.disabled = true;
+        toggleAudioBtn.disabled = true;
+        toggleVideoBtn.disabled = true;
+
+        console.log("Left channel successfully");
+      } catch (error) {
+        console.error("Failed to leave channel:", error);
+      }
+    }
+
+    // Event handlers
+    async function handleUserPublished(user, mediaType) {
+      console.log(`%cuser-published`, "color: green; font-size:33px");
+      console.log(`User ${user.uid} published ${mediaType}`);
+
+      // Subscribe to the remote user
+      await client.subscribe(user, mediaType);
+
+      if (mediaType === "video") {
+        // Add or update the video player
+        addVideoPlayer(user.uid);
+        user.videoTrack.play(`remote-player-${user.uid}`);
+      }
+
+      if (mediaType === "audio") {
+        user.audioTrack.play();
+      }
+    }
+
+    function handleUserUnpublished(user, mediaType) {
+      console.log(`%cuser-unpublished`, "color: green; font-size:33px");
+      console.log(`User ${user.uid} unpublished ${mediaType}`);
+
+      if (mediaType === "video") {
+        removeVideoPlayer(user.uid);
+      }
+    }
+
+    function handleUserJoined(user) {
+      console.log(`%cuser-joined`, "color: green; font-size:33px");
+      console.log(`User ${user.uid} joined`);
+      remoteUsers[user.uid] = user;
+    }
+
+    function handleUserLeft(user) {
+      console.log(`%cuser-left`, "color: green; font-size:33px");
+      console.log(`User ${user.uid} left`);
+      removeVideoPlayer(user.uid);
+      delete remoteUsers[user.uid];
+    }
+
+    // Helper functions
+    function addVideoPlayer(uid) {
+      if (!document.getElementById(`remote-player-${uid}`)) {
+        const player = document.createElement("div");
+        player.id = `remote-player-${uid}`;
+        player.className = "video-placeholder";
+        videoContainer.appendChild(player);
+      }
+    }
+
+    function removeVideoPlayer(uid) {
+      const player = document.getElementById(`remote-player-${uid}`);
+      if (player) {
+        player.remove();
+      }
+    }
+
+    // Toggle audio
+    async function toggleAudio() {
+      if (localAudioTrack) {
+        const enabled = !localAudioTrack.enabled;
+        await localAudioTrack.setEnabled(enabled);
+        toggleAudioBtn.textContent = enabled ? "Mute Audio" : "Unmute Audio";
+      }
+    }
+
+    // Toggle video
+    async function toggleVideo() {
+      if (localVideoTrack) {
+        const enabled = !localVideoTrack.enabled;
+        await localVideoTrack.setEnabled(enabled);
+        toggleVideoBtn.textContent = enabled ? "Mute Video" : "Unmute Video";
+      }
+    }
+
+    // Event listeners
+    joinBtn.addEventListener("click", joinChannel);
+    leaveBtn.addEventListener("click", leaveChannel);
+    toggleAudioBtn.addEventListener("click", toggleAudio);
+    toggleVideoBtn.addEventListener("click", toggleVideo);
+
+    console.log("Agora RTC demo ready");
+  </script>
+</body>
+
+</html>

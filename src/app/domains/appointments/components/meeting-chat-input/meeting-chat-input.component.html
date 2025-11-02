@@ -1,0 +1,53 @@
+<form class="mci" [class.mci--recording]="isRecordingVoice()" [class.mci--locked]="isVoiceLocked()"
+  (submit)="sendMessage($event)" role="form" aria-label="Send a new message">
+
+  @if (isRecordingVoice()) {
+  <app-voice-recorder-button style="width: 100%;" [isVoicePaused]="isVoicePaused" [isPlayingBack]="isPlayingBack"
+    [playbackTime]="playbackTime" [recordingTime]="recordingTime()" [recordedAudioUrl]="recordedAudioUrl??''"
+    (stopVoiceRecording)="stopVoiceRecording()" (togglePlayback)="togglePlayback()"
+    (onPlaybackEnded)="onPlaybackEnded()"
+    (togglePauseResumeVoiceRecording)="togglePauseResumeVoiceRecording()"></app-voice-recorder-button>
+  } @else {
+  <input type="text" class="mci__field" [value]="message()" (input)="updateMessage($event)"
+    [disabled]="isMessageSending()" placeholder="{{ 'general.typeYourMessage' | translate }}" appAutoFocus
+    aria-label="Type message" required />
+  }
+
+
+  <div class="mci__actions">
+    @if (!isRecordingVoice()) {
+    <button type="button" class="mci__btn" aria-label="Attach files" (click)="toggleAttachmentMenu($event)">
+      <app-svg-icon name="attchments-input-chat" />
+    </button>
+    }
+
+    <app-upload-attachments-menu-selector [showMenu]="showAttachmentMenu()"
+      (filesSelected)="handleFilesSelected($event.files,$event.fileType)" (menuClosed)="showAttachmentMenu.set(false)"
+      #uploadAttachmentsMenuSelectorRef (selectedPodcast)="handlePodcastSelected($event)" />
+
+    <button type="button" class="mci__btn"
+      (mousedown)="!isRecordingVoice() ? startVoiceRecording($event) : togglePauseResumeVoiceRecording()"
+      (touchstart)="!isRecordingVoice() ? startVoiceRecording($event) : togglePauseResumeVoiceRecording()"
+      (mousemove)="onVoiceMove($event)" (touchmove)="onVoiceMove($event)" aria-label="Start voice recording">
+      @if (!isRecordingVoice()) {
+      <app-svg-icon name="voice-input-chat" />
+      } @else if(isVoicePaused) {
+      <app-svg-icon name="voice-input-chat" />
+      } @else {
+      <app-svg-icon name="voice-input-chat-pause" />
+      }
+    </button>
+
+  </div>
+
+  <button type="submit" class="mci__send scaleX-ltr" [disabled]="isSendDisabled()" aria-label="Send">
+    @if (!isMessageSending()) {
+    <app-svg-icon name="send-input-chat" />
+    } @else {
+    <span class="mci__typing">
+      <span class="mci__dot"></span><span class="mci__dot"></span><span class="mci__dot"></span>
+    </span>
+    }
+  </button>
+
+</form>

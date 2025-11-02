@@ -1,0 +1,1 @@
+export * from './mental-health-scale-test-shimmer.component';

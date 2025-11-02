@@ -1,0 +1,36 @@
+<section class="block-doctor-modal">
+  <div class="block-doctor-modal__status" role="status" aria-live="polite">
+    <div class="block-doctor-modal__status__icon">
+      <img [src]="'images/status/error-status-icon.png'" [alt]="'status-image'" loading="lazy" width="200"
+        height="200" />
+    </div>
+    <div class="block-doctor-modal__status__content">
+      <h2 class="block-doctor-modal__status__title">
+        @if (doctor?.is_blocked) {
+        {{ 'block_doctor_confirmation' | translateApi }}
+        }@else {
+        {{ 'block_doctor_confirmation' | translateApi }}
+        }
+      </h2>
+      <p class="block-doctor-modal__status__subtitle">
+        @if (doctor?.is_blocked) {
+        {{ 'unblock_doctor_hint' | translateApi }}
+        }@else {
+        {{ 'block_doctor_hint' | translateApi }}
+        }
+      </p>
+    </div>
+  </div>
+
+  <div class="block-doctor-modal--actions">
+    <button id="cancel-btn" type="button" class="btn btn--outline" (click)="onCancel()">
+      {{ 'close' | translateApi }}
+    </button>
+    <button [id]="'item-details'" type="submit" class="btn btn--solid" (click)="onConfirm()"
+      [attr.aria-label]="'confirm' | translateApi" [disabled]="this._BlockUserFacade.isLoading()">
+      <span class="btn__label">
+        {{ 'confirm' | translateApi }}
+      </span>
+    </button>
+  </div>
+</section>

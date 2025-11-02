@@ -1,0 +1,77 @@
+<div class="therapeutic-programs-listing">
+  <!-- Mobile Segment Control -->
+  <div class="therapeutic-programs-listing__segment">
+    <app-segment-control [options]="segmentOptions" [selectedId]="selectedSegmentId()"
+      (selectionChanged)="onSegmentChanged($event)">
+    </app-segment-control>
+  </div>
+
+  <div class="therapeutic-programs-listing-layout__left-panel" [class.hidden]="!showAllPrograms()">
+    <div class="therapeutic-programs-listing-layout__program-cards">
+      <app-card-header [config]="exploreTherapyProgramsHeader"
+        (allClicked)="openTherapeuticProgramsPopup('exploreTherapyPrograms')"></app-card-header>
+      <div class="therapeutic-programs-listing-layout__program-cards--list">
+
+        @if (_programsFacade.isLoadingAllPrograms()) {
+        @for (item of [1,2]; track $index) {
+        <app-therapeutic-program-card-shimmer></app-therapeutic-program-card-shimmer>
+        }
+        } @else if (_programsFacade.isFilteringAllPrograms()) {
+        @for (item of [1,2]; track $index) {
+        <app-therapeutic-program-card-shimmer></app-therapeutic-program-card-shimmer>
+        }
+        } @else if (allProgramsLoaded() && allProgramsErrorState() && !_programsFacade.allProgramsStatus()) {
+        <app-error-state [config]="allProgramsErrorState()"></app-error-state>
+        } @else if (allProgramsLoaded() && !_programsFacade.allPrograms()?.data?.length) {
+        <app-empty-state [config]="emptyState" class="w-100"></app-empty-state>
+        } @else {
+        @for (program of paginatedPrograms(); track program.id) {
+        <div class="therapeutic-programs-listing-layout__program-cards--card">
+          <app-therapeutic-program-card [type]="cardType.DETAILS" [item]="program" />
+        </div>
+        }
+        }
+      </div>
+
+      <!-- Local Pagination -->
+      @if (_programsFacade.allPrograms()?.data?.length && localPaginationConfig().totalPages > 1) {
+      <div class="therapeutic-programs-listing-layout__pagination">
+        <app-pagination-listing [paginationConfig]="localPaginationConfig()" />
+      </div>
+      }
+    </div>
+  </div>
+
+  <div class="therapeutic-programs-listing__my-programs" [class.hidden]="!showMyPrograms()">
+    <div class="therapeutic-programs-listing__my-programs-cards">
+      <app-card-header [config]="myTherapyProgramsHeader" [total]="_programsFacade.myPrograms()?.data?.length ?? 0"
+        [count]="4" (allClicked)="openTherapeuticProgramsPopup('myTherapyPrograms')"></app-card-header>
+      <div class="therapeutic-programs-listing__my-programs--list">
+        @if(isLoggedIn()) {
+        @if (_programsFacade.isLoadingMyPrograms()) {
+        @for (item of [1,2]; track $index) {
+        <app-therapeutic-program-card-shimmer [type]="cardType.SUMMARY"></app-therapeutic-program-card-shimmer>
+        }
+        } @else if (_programsFacade.isFilteringMyPrograms()) {
+        @for (item of [1,2]; track $index) {
+        <app-therapeutic-program-card-shimmer [type]="cardType.SUMMARY"></app-therapeutic-program-card-shimmer>
+        }
+        } @else if (myProgramsLoaded() && myProgramsErrorState() && !_programsFacade.myProgramsStatus()) {
+        <app-error-state [config]="myProgramsErrorState()"></app-error-state>
+        } @else if (myProgramsLoaded() && !_programsFacade.myPrograms()?.data?.length) {
+        <app-empty-state [config]="emptyState" class="w-100"></app-empty-state>
+        } @else {
+        @for (program of _programsFacade.myPrograms()?.data?.slice(0,4); track program.id) {
+        <div class="therapeutic-programs-listing__my-program--card">
+          <app-therapeutic-program-card [item]="program" />
+        </div>
+        }
+        }
+        }
+        @else{
+        <app-compelete-data-and-register-now [isEmptyState]="true"></app-compelete-data-and-register-now>
+        }
+      </div>
+    </div>
+  </div>
+</div>

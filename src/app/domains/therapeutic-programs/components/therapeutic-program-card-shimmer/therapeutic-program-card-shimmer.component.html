@@ -1,0 +1,46 @@
+<div class="therapeutic-program-card therapeutic-program-card"
+    [ngClass]="{'therapeutic-program-card--details': type === cardType.DETAILS}">
+
+    <div class="therapeutic-program-card__content"
+        [ngClass]="{'therapeutic-program-card__content--summary': type === cardType.SUMMARY}">
+
+        <div class="therapeutic-program-card__image"
+            [ngClass]="{'therapeutic-program-card__image--summary': type === cardType.SUMMARY}">
+            <div class="therapeutic-program-card__image"></div>
+        </div>
+
+        <div class="therapeutic-program-card__info"
+            [ngClass]="{'therapeutic-program-card__info--summary': type === cardType.SUMMARY}">
+            <h3 class="therapeutic-program-card__title">
+                <span class="therapeutic-program-card__title--details">
+                    <div class="therapeutic-program-card__title"></div>
+                </span>
+
+                @if (type === cardType.DETAILS) {
+                <div class="therapeutic-program-card__price"></div>
+                }
+            </h3>
+            <p class="therapeutic-program-card__description therapeutic-program-card__text-line"></p>
+            <p class="therapeutic-program-card__description therapeutic-program-card__text-line"></p>
+            <p class="therapeutic-program-card__description therapeutic-program-card__text-line short"></p>
+        </div>
+    </div>
+
+    <div class="therapeutic-program-card__details--details">
+
+        <div class="therapeutic-program-card__details__item therapeutic-program-card__meta">
+            <div class="therapeutic-program-card__icon"></div>
+            <div class="therapeutic-program-card__text short"></div>
+        </div>
+        @if (type === cardType.DETAILS) {
+        <div class="therapeutic-program-card__details__item therapeutic-program-card__meta">
+            <div class="therapeutic-program-card__icon"></div>
+            <div class="therapeutic-program-card__text short"></div>
+        </div>
+        }
+        <div class="therapeutic-program-card__details__item therapeutic-program-card__meta">
+            <div class="therapeutic-program-card__icon"></div>
+            <div class="therapeutic-program-card__text short"></div>
+        </div>
+    </div>
+</div>

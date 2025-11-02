@@ -1,0 +1,124 @@
+<div class="new-login">
+  <div class="new-login__header">
+    <h2 class="new-login__title">{{ 'welcome_back' | translateApi }}</h2>
+    <p class="new-login__description">{{ description | translateApi }}</p>
+  </div>
+
+  @if (formConfigs.length) {
+  <div class="new-login__form-box">
+    <form class="new-login__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="new-login__form-groups">
+        @for (formItem of formConfigs; track $index) {
+        <div class="new-login__form-field {{formItem.widthClass}}">
+          <div class="new-login__form-label-group">
+            @if (formItem.label) {
+            <label [for]="formItem.name" class="new-login__form-label" [ngClass]="{
+                'new-login__form-label--error': getError(formItem.name),
+                'new-login__form-label--clickable': formItem.enableLabelClick
+              }">
+              {{ formItem.label | translateApi }}
+              @if (formItem.isRequired) {
+              <span class="new-login__form-required">*</span>
+              }
+            </label>
+            }
+          </div>
+
+          @switch(formItem.type) {
+          @case(allInputTypes.COUNTRYCODEINPUT) {
+          <div
+            class="new-login__input-wrapper new-login__input-wrapper--with-icon new-login__input-wrapper--icon-start new-login__country-code-input"
+            [class.new-login__input-wrapper--error]="getError(formItem.name)">
+            <img src="images/icons/call.svg" [alt]="'mobile_number' | translateApi" class="new-login__input-icon">
+            <div class="new-login__select-wrapper">
+              <p-select class="new-login__country-select w-full md:w-56" [options]="allowedCountries() || []"
+                [ngModel]="selectedCountryModel()" (ngModelChange)="onCountryChange($event)"
+                [ngModelOptions]="{ standalone: true }" optionLabel="name" [filter]="true" filterBy="name"
+                [placeholder]="isLoadingCountries() ? undefined : ('code' | translateApi)" [virtualScroll]="true"
+                [virtualScrollItemSize]="42" [autoDisplayFirst]="false" appendTo="body"
+                [attr.aria-label]="('mobile_number' | translateApi)">
+                @if (!isLoadingCountries()) {
+                <ng-template #selectedItem let-selectedOption>
+                  <div class="new-login__select-item">
+                    <img [src]="selectedOption.flag"
+                      [class]="'new-login__flag new-login__flag--' + (selectedOption?.code?.toLowerCase() || '')"
+                      onerror="this.src='images/icons/no-flag.svg'" />
+                    <div>{{ selectedOption.phone_code }}</div>
+                  </div>
+                </ng-template>
+                <ng-template let-country #item>
+                  <div class="new-login__select-item">
+                    <img [src]="country.flag" [alt]="country.name"
+                      [class]="'new-login__flag new-login__flag--' + (country?.code?.toLowerCase() || '')"
+                      onerror="this.src='images/icons/no-flag.svg'" />
+                    <div>{{ country.name }}</div>
+                  </div>
+                </ng-template>
+                }
+              </p-select>
+              <input type="number" class="new-login__input" [id]="formItem.name" [formControlName]="formItem.name"
+                [placeholder]="
+                    !selectedCountryModel()
+                      ? ('phone_should_select_code' | translateApi)
+                      : ('phone_placeholder' | translateApi)
+                  " autocomplete="tel"
+                [attr.aria-describedby]="getError(formItem.name) ? formItem.name + '-error' : null"
+                [attr.aria-invalid]="getError(formItem.name) ? 'true' : 'false'" />
+              @if (isLoadingCountries()) {
+              <div class="new-login__loader" role="status" aria-live="polite" aria-label="Loading countries">
+                <span class="new-login__loader-dot"></span>
+                <span class="new-login__loader-dot"></span>
+                <span class="new-login__loader-dot"></span>
+              </div>
+              }
+            </div>
+          </div>
+          }
+          }
+          @if (getError(formItem.name)) {
+
+          <div class="new-login__form-feedback" role="status" aria-live="polite">
+            <span class="new-login__form-error" role="alert" [id]="formItem.name + '-error'">
+              {{ getValidationErrorMessage(formItem.name, formItem.validation || []) | translateApi }}
+            </span>
+          </div>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="new-login__form-actions">
+        <button type="submit" class="btn btn--solid" [disabled]="_LoginFacade.loading()"
+          [attr.aria-label]="'login' | translateApi">
+          <span class="new-login__submit-btn-label">
+            @if (_LoginFacade.loading()) {
+            <span role="status" aria-live="polite" aria-label="Loading, please wait">
+              {{ 'in_progress' | translateApi }}
+            </span>
+            } @else {
+            <span>{{ 'login' | translateApi }}</span>
+            }
+          </span>
+        </button>
+        <div class="new-login__form__divider">
+          <app-svg-icon name="divider-1"></app-svg-icon>
+          <p>
+            {{ "create_account" | translateApi }}
+          </p>
+          <app-svg-icon name="divider-2"></app-svg-icon>
+        </div>
+        <div class="new-login__form__buttons" role="group" [attr.aria-label]="'roleSelect'">
+          <button id="new-doctor-btn" type="button" class="btn btn--outline" (click)="onRoleSelect('doctor')"
+            [attr.aria-label]="'as_doctor' | translateApi">
+            <span class="btn__label">{{ "as_doctor" | translateApi }}</span>
+          </button>
+          <button id="new-user-btn" type="button" class="btn btn--outline" (click)="onRoleSelect('patient')"
+            [attr.aria-label]="'as_new_user' | translateApi">
+            <span class="btn__label">{{ "as_new_user" | translateApi }}</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  }
+</div>

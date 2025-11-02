@@ -1,0 +1,23 @@
+<section class="podcast-details" aria-labelledby="podcast-details__title">
+  <div class="podcast-details__card" #card [ngClass]="{ 'podcast-details__card--fullscreen': fullScreen() }">
+    <div class="podcast-details__content" [ngClass]="{ 'podcast-details__content--media-only': fullScreen() }"
+      appAutoExactHeight>
+      @if (!fullScreen()) {
+      <div class="podcast-details__info">
+
+        <app-podcast-details-box-card [item]="item" (favouriteToggled)="onPodcastFavouriteToggled($event)" />
+      </div>
+      <div class="podcast-details__mobile">
+        <app-podcast-details-for-mobile [podcast]="item" [title]="'podcast_details2'"
+          (playPodcast)="openPodcastMediaPlayer()" />
+      </div>
+      }
+
+      <div class="podcast-details__media">
+        <app-podcast-media-player [item]="item" [currentTime]="currentTime"
+          (favouriteToggled)="onPodcastFavouriteToggled($event)" [externalFavouriteToggled]="externalFavouriteToggled"
+          (onMaximize)="toggleMediaFullscreen()" (onMinimize)="minimize($event)" />
+      </div>
+    </div>
+  </div>
+</section>

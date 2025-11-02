@@ -1,0 +1,98 @@
+.appointment-card {
+  display: flex;
+  padding: 0.75rem 1.5rem;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-self: stretch;
+
+  border-radius: 1rem;
+  background: var(--Dark-white, #fff);
+
+  &__title {
+    color: var(--text-primary);
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem 2rem;
+  }
+
+  &__item {
+    display: flex;
+    padding: 0.5rem 0.75rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1 0 0;
+
+    border-radius: 0.75rem;
+    border: 1px solid var(--Dark-50, #f6f7f8);
+  }
+
+  &__label {
+    color: var(--text-300, #47586e);
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  &__value {
+    color: var(--Dark-black, #090b0e);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  // Appointment Card Status Badge
+  &__status-badge {
+    display: flex;
+    height: 1.375rem;
+    padding: 0.25rem 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.125rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.015rem;
+    width: fit-content;
+
+    &-text {
+      margin: 0;
+    }
+
+    // Modifiers for status badge colors
+    &.badge-info,
+    &.badge-primary {
+      background: var(--Primary-50, #e7ebf8);
+      color: var(--Primary-primary, #0e39b6);
+    }
+
+    &.badge-warning {
+      background-color: var(--warning-color-light, #fff3cd);
+      color: var(--warning-color, #efb300);
+    }
+
+    &.badge-success {
+      background: var(--Success-50, #e5faf2);
+      color: var(--Success-primary, #00af6c);
+    }
+
+    &.badge-danger {
+      background: var(--Danger-50, #f9e7e8);
+      color: var(--Danger-600, #ca4146);
+    }
+
+    &.badge-secondary {
+      background-color: var(--grey-200, #e2e3e5);
+      color: var(--text-dark, #383d41);
+    }
+  }
+}

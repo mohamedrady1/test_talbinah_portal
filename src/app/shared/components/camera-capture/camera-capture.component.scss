@@ -1,0 +1,232 @@
+.camera-capture {
+    background: #000;
+    color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 1rem;
+    height: 93%;
+}
+
+.camera-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.8);
+    border-bottom: 1px solid #333;
+}
+
+.camera-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+.close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.camera-content {
+    padding: 16px;
+    text-align: center;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+}
+
+video {
+    border-radius: 8px;
+    width: 100%;
+    margin: 0 auto;
+    height: 100%;
+    object-fit: cover;
+}
+
+.camera-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-radius: 8px;
+    margin-top: 8px;
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.mode-toggle-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    font-size: 20px;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mode-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.recording-timer {
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.capture-btn {
+    background: var(--Primary-primary);
+    border: none;
+    color: white;
+    font-size: 24px;
+    padding: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.capture-btn:hover:not(:disabled) {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+.capture-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.record-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.record-circle {
+    width: 24px;
+    height: 24px;
+    background: #ff0000;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+.record-square {
+    width: 16px;
+    height: 16px;
+    background: #ff0000;
+    border: 3px solid white;
+}
+
+.stop-btn {
+    background: #dc3545;
+    border: none;
+    color: white;
+    font-size: 20px;
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stop-btn:hover {
+    background: #c82333;
+    transform: scale(1.05);
+}
+
+.image-preview {
+    height: 100%;
+}
+
+.image-preview img {
+    max-width: 100%;
+    border-radius: 8px;
+    height: 100%;
+    margin-bottom: 16px;
+}
+
+.preview-controls {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.retake-btn,
+.use-photo-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.retake-btn {
+    background: #6c757d;
+    color: white;
+}
+
+.retake-btn:hover {
+    background: #545b62;
+}
+
+.use-photo-btn {
+    background: #28a745;
+    color: white;
+}
+
+.use-photo-btn:hover {
+    background: #1e7e34;
+}

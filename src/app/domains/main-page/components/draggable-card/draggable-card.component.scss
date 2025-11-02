@@ -1,0 +1,106 @@
+@use "../../../../common/styles/scss/abstracts/variables" as *;
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+
+.draggable-card {
+  position: relative;
+  display: flex;
+  min-width: 11.71825rem;
+  padding: 0.75rem;
+  align-items: center;
+  border-radius: 0.75rem;
+  background: var(--Dark-WHITE, #fff);
+
+  &:hover {
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.07);
+  }
+
+  &__image {
+    width: 4.0625rem;
+    height: 4.0625rem;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    object-fit: fill;
+    display: block;
+  }
+
+  &__content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1;
+  }
+
+  &__title {
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%;
+    text-align: center;
+  }
+
+  &__action-button {
+    position: absolute;
+    top: -0.25rem;
+    right: -0.25rem;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+    z-index: 10;
+
+    &--add {
+      background-color: var(--color-add-button-bg, #28a745);
+      color: var(--color-add-button-text, #fff);
+
+      &:hover {
+        background-color: var(--color-add-button-hover, #218838);
+        transform: scale(1.05);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    &--remove {
+      background-color: var(--color-remove-button-bg, #dc3545);
+      color: var(--color-remove-button-text, #fff);
+
+      &:hover {
+        background-color: var(--color-remove-button-hover, #c82333);
+        transform: scale(1.05);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+
+  @include respond(md) {
+    flex-direction: column-reverse;
+    min-width: auto;
+
+    &__image {
+      width: 3.0625rem;
+      height: 3.0625rem;
+    }
+
+    &__title {
+      font-size: 0.75rem;
+    }
+
+    &__content {
+      padding: 0.5rem;
+    }
+  }
+}

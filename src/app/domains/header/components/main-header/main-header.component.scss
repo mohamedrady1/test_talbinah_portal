@@ -1,0 +1,226 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+@use "../../../../common/styles/scss/buttons/button.mixins" as btn;
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__logo {
+        width: 8.4577rem;
+        height: 3rem;
+        display: block;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        @include respond(sm) {
+            width: 6.4577rem;
+        }
+    }
+
+    @include respond(sm) {
+        display: none;
+    }
+    &__menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+
+        @include respond(sm) {
+            gap: 0.5rem;
+        }
+    }
+
+    &__mobile {
+        display: none;
+
+        @include respond(sm) {
+            display: block;
+        }
+        &.guest-header {
+            flex-direction: row-reverse;
+        }
+    }
+
+    @include respond(sm) {
+        display: none;
+    }
+
+    &__settings {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--Dark-WHITE, #fff);
+        padding: 0.375rem;
+        border-radius: 50%;
+        position: relative;
+        width: 2.5rem;
+        height: 2.5rem;
+
+        &--link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.25rem;
+            border-radius: 50%;
+            background: var(--Dark-50, #f6f7f8);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            width: 100%;
+            height: 100%;
+        }
+
+        &--icon {
+            display: flex;
+            width: 1.25rem;
+            height: 1.25rem;
+
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    .dot-loader {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background-color: var(--Primary-primary);
+        animation: dot-loader 1.5s infinite;
+    }
+    @keyframes dot-loader {
+        0% {
+            opacity: 0.5;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0.5;
+        }
+    }
+
+    &__mobile {
+        justify-content: space-between;
+        align-items: center;
+        display: none;
+        @include respond(sm) {
+            display: flex;
+            padding-top: 1.5rem;
+        }
+    }
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+
+        &--points,
+        &--wallet {
+            display: flex;
+            padding: 0.375rem 0.5rem;
+            align-items: center;
+            gap: 0.3125rem;
+            border-radius: 1.625rem;
+            border: 1px solid #85dbcc;
+            cursor: pointer;
+        }
+
+        &--wallet-icon {
+            width: 2rem;
+            height: 2rem;
+            flex-shrink: 0;
+        }
+    }
+    .btn {
+        @include btn.button-base;
+        @include btn.button-size("medium");
+        @include btn.button-icon-position("left");
+        @include btn.button-icon-size("medium");
+        @include btn.button-color("main");
+        @include btn.button-spinner;
+
+        width: auto;
+
+        &__icon {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        &__label {
+            padding: 0 0.5rem;
+            white-space: nowrap;
+
+            .loading {
+                display: flex;
+                align-items: center;
+
+                .dot-loader::after {
+                    content: "";
+                    animation: dots 1.5s steps(4, end) infinite;
+                    white-space: pre;
+                }
+
+                @keyframes dots {
+                    0% {
+                        content: "";
+                    }
+
+                    25% {
+                        content: ".";
+                    }
+
+                    50% {
+                        content: "..";
+                    }
+
+                    75% {
+                        content: "...";
+                    }
+
+                    100% {
+                        content: "";
+                    }
+                }
+            }
+        }
+
+        &--disabled {
+            @include btn.button-disabled;
+        }
+
+        // Add variants
+        &--solid {
+            @include btn.button-type("solid");
+        }
+
+        &--outline {
+            @include btn.button-type("outline");
+        }
+
+        &--ghost {
+            @include btn.button-type("ghost");
+        }
+
+        &--link {
+            @include btn.button-type("link");
+        }
+    }
+}
+
+// Utility class for screen reader only text
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

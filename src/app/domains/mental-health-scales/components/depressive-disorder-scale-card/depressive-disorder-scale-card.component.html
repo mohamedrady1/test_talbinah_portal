@@ -1,0 +1,38 @@
+<div class="depressive-disorder-scale-card">
+
+  <div class="depressive-disorder-scale-card__details">
+    <div class="depressive-disorder-scale-card__content">
+      <div class="depressive-disorder-scale-card__thumbnail">
+        <img appLazyLoadImage="{{ 'images/mentalHealthScale/icons/scale.png' }}" [alt]="item.title" ngOptimizedImage
+          width="39" height="39" placeholder="images/mentalHealthScale/icons/scale.png" aria-hidden="false"
+          (error)="item.icon= 'images/mentalHealthScale/icons/scale.png'"
+          class="depressive-disorder-scale-card__image" />
+      </div>
+      <div class="depressive-disorder-scale-card__content-header">
+        <div class="depressive-disorder-scale-card__content-row">
+          <h2 class="depressive-disorder-scale-card__title">
+            {{item.title}}
+          </h2>
+        </div>
+        <div class="depressive-disorder-scale-card__date">
+          <p class="text-truncate-3">
+            • {{ item.created_at | date: 'd MMMM y' : undefined : currentLang }}
+
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="depressive-disorder-scale-card__content-row">
+      <button class="depressive-disorder-scale-card__see-button" (click)="watchDetailsAction()">
+        <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M7 9.93448C5.60583 9.93448 4.47417 8.80281 4.47417 7.40865C4.47417 6.01448 5.60583 4.88281 7 4.88281C8.39417 4.88281 9.52583 6.01448 9.52583 7.40865C9.52583 8.80281 8.39417 9.93448 7 9.93448ZM7 5.75781C6.09 5.75781 5.34917 6.49865 5.34917 7.40865C5.34917 8.31865 6.09 9.05948 7 9.05948C7.91 9.05948 8.65083 8.31865 8.65083 7.40865C8.65083 6.49865 7.91 5.75781 7 5.75781Z"
+            fill="#0E39B6" />
+          <path
+            d="M7 12.6703C4.80667 12.6703 2.73584 11.387 1.3125 9.15864C0.694172 8.19614 0.694172 6.62697 1.3125 5.65864C2.74167 3.43031 4.8125 2.14697 7 2.14697C9.1875 2.14697 11.2583 3.43031 12.6817 5.65864C13.3 6.62114 13.3 8.19031 12.6817 9.15864C11.2583 11.387 9.1875 12.6703 7 12.6703ZM7 3.02197C5.11584 3.02197 3.31334 4.15364 2.05334 6.13114C1.61584 6.81364 1.61584 8.00364 2.05334 8.68614C3.31334 10.6636 5.11584 11.7953 7 11.7953C8.88417 11.7953 10.6867 10.6636 11.9467 8.68614C12.3842 8.00364 12.3842 6.81364 11.9467 6.13114C10.6867 4.15364 8.88417 3.02197 7 3.02197Z"
+            fill="#0E39B6" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

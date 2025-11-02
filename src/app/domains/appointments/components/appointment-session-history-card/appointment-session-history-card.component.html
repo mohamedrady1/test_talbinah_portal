@@ -1,0 +1,23 @@
+<article class="appointment-session-history-card" aria-labelledby="appointment-details-title">
+  <h2 id="appointment-details-title" class="appointment-session-history-card__title">
+    {{'session_report'| translateApi}}
+  </h2>
+
+  <dl class="appointment-session-history-card__grid">
+    @for (item of details.time_line; track $index) {
+    <div class="appointment-session-history-card__item">
+      <img [src]="details?.user?.image" [alt]="details.full_name" loading="lazy" width="100%" height="auto"
+        decoding="async" fetchpriority="low" class="appointment-session-history-card__item--image"
+        onerror="src='images/not-found/talbinah.png'" />
+      <div class="appointment-session-history-card__item--texts">
+        <dt class="appointment-session-history-card_label">
+          {{item?.label || ''}}
+        </dt>
+        <dd class="appointment-session-history-card__value">
+          {{item?.description || ''}}
+        </dd>
+      </div>
+    </div>
+    }
+  </dl>
+</article>

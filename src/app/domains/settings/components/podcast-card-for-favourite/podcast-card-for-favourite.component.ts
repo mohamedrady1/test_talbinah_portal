@@ -1,0 +1,139 @@
+import {
+  ChangeDetectionStrategy,
+  EventEmitter,
+  Component,
+  Input,
+  Output,
+  inject,
+  signal,
+  computed
+} from '@angular/core';
+import { FavoritePodcastsFacade, PodcastDetailsComponent, PodcastDetailsHeaderConfig, PodcastsListFacade, ToggleFavoritePodcastFacade } from '../../../podcasts';
+import { LocalizationService, ModalService } from '../../../../shared';
+import { IGlobalPodcastItemModel, Logger } from '../../../../common';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
+
+@Component({
+  selector: 'app-podcast-card-for-favourite',
+  standalone: true,
+  imports: [
+    TranslateModule,
+    CommonModule,
+    TranslateApiPipe
+  ],
+  templateUrl: './podcast-card-for-favourite.component.html',
+  styleUrls: ['./podcast-card-for-favourite.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class PodcastCardForFavouriteComponent {
+  @Input({ required: true }) item!: IGlobalPodcastItemModel | null;
+
+  @Input() isTask!: { status: boolean } | null;
+  @Input() hideFavouriteAction!: boolean | null;
+  @Input() hideDescription!: boolean | null;
+  @Input() preventDetailsModal!: boolean | null;
+  @Input() actionNotWorking!: boolean | null;
+
+  //
+  @Input() allowShortTexts!: boolean | null;
+  @Input() hideButtonAction!: boolean | null;
+
+
+  @Output() cardClicked = new EventEmitter<IGlobalPodcastItemModel>();
+
+  private readonly localizationService = inject(LocalizationService);
+  readonly currentLang = this.localizationService.getCurrentLanguage();
+
+  // Dependencies
+  private readonly _PodcastsListFacade = inject(PodcastsListFacade);
+  private readonly _modalService = inject(ModalService);
+
+  @Input() externalFavouriteToggled = signal<IGlobalPodcastItemModel | null>(null);
+  @Output() public favouriteToggled = new EventEmitter<IGlobalPodcastItemModel>();
+  protected readonly _ToggleFavoritePodcastFacade = inject(ToggleFavoritePodcastFacade);
+  protected isToggleLoading = computed(() => {
+    return this.item && this._ToggleFavoritePodcastFacade.loadingPodcastIds().has(this.item.id);
+  });
+  private readonly favouritePodcastFacade = inject(FavoritePodcastsFacade);
+  protected onCardClicked(podcast: IGlobalPodcastItemModel): void {
+    this.cardClicked.emit(podcast);
+    Logger.debug('onCardClicked => preventDetailsModal : ', this.preventDetailsModal);
+    if (!this.preventDetailsModal && !this.actionNotWorking) {
+      this.openPodcastDetailsModal();
+    }
+    else {
+      this.ClosePodcastAudioPlayer();
+    }
+  }
+
+  protected openPodcastDetailsModal(): void {
+    let modalInputs: any = {};
+    let modalOutputs: any = {};
+
+    modalInputs = {
+      ...PodcastDetailsHeaderConfig,
+      item: this.item
+    };
+    modalOutputs = {
+      closed: () => {
+        Logger.debug('Podcast Details modal closed.');
+      },
+    };
+
+    this._modalService.open(PodcastDetailsComponent, {
+      inputs: modalInputs,
+      outputs: modalOutputs,
+      width: '70%',
+      height: '78vh'
+    });
+  }
+
+  protected OpenPodcastAudioPlayer(): void {
+    if (this.actionNotWorking) {
+      return;
+    }
+    this._PodcastsListFacade._openPodcastAudioPlayer$.next({
+      isOpen: true,
+      item: this.item
+    });
+  }
+
+  protected ClosePodcastAudioPlayer(): void {
+    this._PodcastsListFacade._openPodcastAudioPlayer$.next({
+      isOpen: false,
+      item: null
+    });
+  }
+
+  protected handleFavouriteToggle(event: Event): void {
+    event.stopPropagation();
+
+    if (!this.item || this.isToggleLoading()) {
+      Logger.debug('Attempted to toggle favorite on invalid item or while already loading.');
+      return;
+    }
+
+    Logger.debug('Toggling favorite status for podcast ID:', this.item.id);
+
+    this._ToggleFavoritePodcastFacade.togglePodcastFavorite(this.item.id)
+      .subscribe({
+        next: () => {
+          Logger.debug(`Favorite toggle for podcast ${this.item?.id} request completed.`);
+          this.favouriteToggled.emit(this.item!);
+          this.item!.is_bookmarked = !this.item!.is_bookmarked;
+          this.favouritePodcastFacade.fetchFavorites();
+
+        },
+        error: () => {
+          Logger.error(`Favorite toggle for podcast ${this.item?.id} failed, reverting UI.`);
+        }
+      });
+  }
+
+  protected logCheckboxState(event: Event): void {
+    event.stopPropagation(); // Prevent the main button click
+    Logger.debug('PodcastCardForMeetingChatComponent => isTask: ', { isTask: this.isTask, item: this.item });
+  }
+}

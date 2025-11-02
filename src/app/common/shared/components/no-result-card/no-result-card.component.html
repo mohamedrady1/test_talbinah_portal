@@ -1,0 +1,9 @@
+<div class="container d-flex align-items-center justify-center">
+    <div class="card d-flex align-items-center justify-center">
+        <p>{{title |translate}}</p>
+        <div class="add-new">
+            <app-solid-btn [label]="label | translate" [icon]="'images/layout/icons/add.svg'"
+                (click)="onClick()"></app-solid-btn>
+        </div>
+    </div>
+</div>

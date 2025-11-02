@@ -1,0 +1,163 @@
+.choose-your-mood {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &__title {
+    color: #c40;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  &__options {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    &-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      padding-inline: 0.5rem;
+      cursor: pointer;
+
+      &:hover &__img {
+        scale: 1.15;
+      }
+
+      &__img {
+        transition: 0.3s;
+        width: 2rem;
+        height: 2rem;
+        position: relative;
+        .image-spinner-overlay {
+          position: absolute;
+          inset: 0;
+          background-color: rgba(255, 255, 255, 0.208);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          z-index: 2;
+
+          .image-spinner {
+            width: 1.125rem;
+            height: 1.125rem;
+            border: 0.125rem solid #b3c4d5;
+            border-top-color: var(--Primary-primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+          }
+        }
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    }
+
+    p {
+      color: var(--text-300);
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+  }
+
+  // --- START: Styles for small-view ---
+  &.small-view {
+    padding: 0.2rem; // Adjust padding for the container in small view
+
+    .choose-your-mood__options {
+      gap: 0.75rem; // Reduced gap for options
+      justify-content: start; // Align options to the start
+
+      &-option {
+        gap: 0.15rem; // Reduced gap for individual options
+        padding-inline: 0.25rem; // Reduced padding for individual options
+        transition: opacity 0.3s ease;
+        &.disabled {
+          pointer-events: none;
+          opacity: 0.6;
+          cursor: not-allowed;
+          user-select: none;
+          filter: grayscale(0.3);
+          background-color: red;
+        }
+        &__img {
+          width: 1.09806rem; // Smaller image size
+          height: 1.09806rem; // Smaller image size
+          transition: transform 0.3s; // Keep transition for hover effect
+
+          img {
+            width: 100%; // Ensure the image itself scales within its container
+          }
+        }
+      }
+
+      p {
+        font-size: 0.625rem; // Smaller font size for text
+        font-weight: 400; // Lighter font weight
+      }
+    }
+
+    // --- Adapt shimmer-list for small-view ---
+    .shimmer__list {
+      gap: 0.75rem; // Match the gap of the actual options for consistency
+      justify-content: start; // Align shimmer items to the start, like the options
+
+      .shimmer {
+        width: 1.09806rem; // Match the smaller image size
+        height: 1.09806rem; // Match the smaller image size
+        border-radius: 4px; // Slightly smaller border-radius for smaller size
+
+        // If you have a 'large' shimmer variation, adapt it too
+        &.large {
+          width: 3rem; // Example: smaller large shimmer
+          height: 2rem; // Example: smaller large shimmer
+        }
+      }
+    }
+  }
+
+  // --- END: Styles for small-view ---
+}
+
+.shimmer__list {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+.shimmer {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 8px;
+  background: #eee;
+  background-size: 400% 100%;
+
+  &.large {
+    width: 5rem;
+    height: 3rem;
+  }
+}
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}

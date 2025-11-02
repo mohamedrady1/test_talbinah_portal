@@ -1,0 +1,43 @@
+<div class="notification-card" [ngClass]="{
+       'details': type == cardType.DETAILS,
+       'column': type == cardType.COLUMN,
+       'notification-card--unread': item.is_read === 0
+     }">
+    <div class="notification-card__content" [ngClass]="{'details': type == cardType.DETAILS}">
+        <div class="notification-card__icon-wrapper">
+            <img [src]="item.user?.emoji?.image || 'images/icons/logo-2.png'" [alt]="item.title || 'notification icon'"
+                loading="lazy" width="100%" height="auto" decoding="async" fetchpriority="low"
+                class="notification-card__content--image" onerror="this.src='images/icons/logo-2.png'" />
+
+            <!-- Unread Badge on Icon -->
+            @if (item.is_read === 0) {
+            <div class="notification-card__unread-badge"></div>
+            }
+        </div>
+
+        @if (type!=cardType.COLUMN) {
+        <p class="notification-card__content--text">
+            {{item.body}}
+        </p>
+        }
+    </div>
+
+    <div class="notification-card__content" [ngClass]="{'column': type == cardType.COLUMN}">
+        @if (type==cardType.COLUMN) {
+        <p class="notification-card__content--text"
+            [ngClass]="{'notification-card__content--text-unread': item.is_read === 0}">
+            {{item.body}}
+        </p>
+        }
+        @if (type==cardType.DETAILS ||type==cardType.COLUMN) {
+        <div class="notification-card__timestamp" [ngClass]="{'column': type==cardType.COLUMN}">
+            <p class="date">
+                {{ item.created_at | date: 'hh:mm a': undefined : _LocalizationService.getCurrentLanguage() }}
+            </p>
+            <p class="time">
+                {{ item.created_at| date: 'EEEE - d MMMM' : undefined : _LocalizationService.getCurrentLanguage()}}
+            </p>
+        </div>
+        }
+    </div>
+</div>

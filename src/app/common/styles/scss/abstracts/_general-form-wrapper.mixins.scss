@@ -1,0 +1,139 @@
+@use "./mixins" as responsive;
+@use "./../buttons/button.mixins" as btn;
+
+@mixin general-form-wrapper-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  grid-column: span 1; // Works only if parent is display: grid
+
+  &.w-half {
+    grid-column: span 2;
+
+    @include responsive.respond(sm) {
+      grid-column: span 4;
+    }
+  }
+
+  &.w-75 {
+    grid-column: span 3;
+  }
+
+  &.w-full {
+    grid-column: span 4;
+  }
+}
+
+@mixin general-form-wrapper-label-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--Radius-8, 0.5rem);
+  align-self: stretch;
+
+}
+
+@mixin general-form-wrapper-label {
+  color: var(--Dark-DARK, #1D1F1F);
+  font-size: 0.875rem;
+  font-weight: 400;
+  margin: 0;
+
+  &--error {
+    font-weight: 500;
+    color: #dc3545;
+  }
+
+  &--clickable {
+    cursor: pointer;
+  }
+}
+
+@mixin general-form-wrapper-required {
+  color: #dc3545;
+}
+
+@mixin general-form-wrapper-error {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #dc3545;
+}
+
+@mixin general-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  &__feedback {
+    // Optional spacing
+  }
+
+  &__hint {
+    font-size: 0.875rem;
+    color: #6c757d;
+  }
+
+  &__error {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #dc3545;
+  }
+}
+
+@mixin general-form-wrapper-actions {
+  display: flex;
+  gap: 1rem;
+  // margin-top: 2rem;
+
+  &__buttons {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    align-self: stretch;
+
+    @include responsive.respond(sm) {
+      gap: 1rem;
+    }
+  }
+
+  .btn {
+    @include btn.button-base;
+    @include btn.button-size("medium");
+    @include btn.button-icon-position("left");
+    @include btn.button-icon-size("medium");
+    @include btn.button-color("main");
+    @include btn.button-spinner;
+
+    &__icon {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    &__label {
+      padding: 0 0.5rem;
+      white-space: nowrap;
+      margin: 0;
+    }
+
+    &--disabled {
+      @include btn.button-disabled;
+    }
+
+    &--solid {
+      @include btn.button-type("solid");
+    }
+
+    &--outline {
+      @include btn.button-type("outline");
+    }
+
+    &--ghost {
+      @include btn.button-type("ghost");
+    }
+
+    &--link {
+      @include btn.button-type("link");
+    }
+  }
+}

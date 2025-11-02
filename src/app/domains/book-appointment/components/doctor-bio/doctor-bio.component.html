@@ -1,0 +1,30 @@
+<div class="doctor-bio">
+  <div class="doctor-bio--description">
+    <span>
+      🎯
+    </span>
+    <p>
+      {{item?.bio}}
+    </p>
+  </div>
+  <div class="doctor-bio--subspecialties">
+    <p class="doctor-bio--subspecialties--title">
+      <span>
+        🎯
+      </span>
+      <span>
+        {{"minor_specialties2"| translateApi }}
+
+      </span>
+    </p>
+    <div class="doctor-bio--subspecialties--list">
+      @for (specialtiy of item?.last_services; track $index) {
+      <div class="doctor-bio--subspecialties--list--specialization">
+        <p>
+          {{specialtiy?.title || ''}}
+        </p>
+      </div>
+      }
+    </div>
+  </div>
+</div>

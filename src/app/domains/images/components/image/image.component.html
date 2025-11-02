@@ -1,0 +1,18 @@
+<ng-container *ngIf="isArray; else singleImage">
+  <picture>
+    <ng-container *ngFor="let image of srcArray">
+      <source [srcset]="image.src" [attr.media]="image.mediaQuery" [width]="image.width" [height]="image.height"
+        [attr.type]="image.type || 'image/webp'">
+    </ng-container>
+    <img [src]="srcArray[0].src" [class]="class" [width]="srcArray[0].width" [height]="srcArray[0].height"
+      [appLazyLoadImage]="srcArray[0].src" [alt]="getAltText(srcArray[0].src)" (error)="this.src=onError" />
+  </picture>
+</ng-container>
+
+<ng-template #singleImage>
+  <picture>
+    <source [srcset]="src" type="image/webp" />
+    <img [src]="src" [class]="class" [width]="width" [height]="height" [alt]="getAltText(''+src)"
+      [appLazyLoadImage]="''+src" (error)="this.src=onError" />
+  </picture>
+</ng-template>

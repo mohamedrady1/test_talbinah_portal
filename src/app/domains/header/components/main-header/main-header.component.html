@@ -1,0 +1,76 @@
+<div class="header">
+  <div class="header__logo">
+    @if(_Theme.getCurrentTheme() === 'light') {
+    <img appLazyLoadImage="images/layout/header/Logo-light.png" alt="Logo" ngOptimizedImage width="150" height="50" />
+    } @else {
+    <img appLazyLoadImage="images/layout/header/Logo-dark.png" alt="Logo" ngOptimizedImage width="150" height="50" />
+    }
+  </div>
+  <div class="header__menu">
+    <div class="header__language-selector">
+      <app-language-selector [config]="languageConfig">
+      </app-language-selector>
+    </div>
+    <app-notifications></app-notifications>
+
+    <app-points [points]="points()" (click)="emitPointsClick()" />
+    <app-wallet-header [walletBalance]="walletBalance()" (click)="emitWalletClick()" />
+
+    <nav class="header__settings" aria-label="User settings">
+      <a class="header__settings--link" (click)="emitSettingsClick()" aria-label="Go to settings page">
+        <span class="header__settings--icon" aria-hidden="true">
+          <app-svg-icon name="settings-icon" [fillColor]="'#292D32'" />
+        </span>
+        <span class="visually-hidden">Settings</span>
+      </a>
+    </nav>
+    <app-user-info [userInfoConfig]="userInfo" [isLoggedIn]="userInfo ? true : false"></app-user-info>
+    <!-- <app-theme-toggle></app-theme-toggle> -->
+  </div>
+  <!-- <app-button [config]="getButtonConfigById('change-language-btn')" (clicked)="onButtonClicked($event)">
+        </app-button> -->
+</div>
+
+<div class="header__mobile" [ngClass]="{'guest-header': !userInfo}">
+  <div class="header__mobile--left">
+    <app-user-info [userInfoConfig]="userInfo" [isLoggedIn]="userInfo ? true : false"></app-user-info>
+  </div>
+  <div class="header__mobile--center">
+    @if(userInfo){
+    <app-svg-icon name="small-talbinah-logo" />
+    }
+    @else{
+    <img appLazyLoadImage="images/layout/header/Logo-light.png" alt="Logo" ngOptimizedImage width="80" height="50" />
+    }
+  </div>
+  @if(userInfo){
+  <div class="header__mobile--right">
+    @if(userInfo){
+    <div class="header__actions">
+      <div class="header__actions--points" (click)="emitPointsClick()">
+        <app-svg-icon name="points-mobile-icon" />
+        @if(isLoadingPoints()){
+        <span class="dot-loader"></span>
+        }
+        @else{
+        <p>{{points() || 0}}</p>
+        }
+      </div>
+      <div class="header__actions--wallet" (click)="emitWalletClick()">
+        <picture>
+          <img class="header__actions--wallet-icon" src="images/settings/icons/wallet-header.png"
+            alt="Wallet points balance" loading="lazy" width="32" height="32" fetchpriority="low">
+        </picture>
+        @if(isLoadingWallet()){
+        <span class="dot-loader"></span>
+        }
+        @else{
+        <p>{{walletBalance()?.balance || 0}}</p>
+        }
+      </div>
+      <app-notifications [type]="'colored'" />
+    </div>
+    }
+  </div>
+  }
+</div>

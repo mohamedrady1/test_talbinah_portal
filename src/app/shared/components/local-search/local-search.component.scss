@@ -1,0 +1,103 @@
+.local-search {
+  &__container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &__input-wrapper {
+    display: flex;
+    max-width: 16.8125rem; // default
+    height: 2.375rem;
+    padding: var(--Radius-8, 0.5rem) 0.75rem;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: var(--Radius-12, 0.75rem);
+    border: 1px solid var(--Dark-100, #eee);
+    background: var(--Dark-WHITE, #fff);
+    position: relative;
+
+    /* 🔥 Modifier to force full-width */
+    &--full-width {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+  }
+
+  &__input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--text-300, #47586e);
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    &::placeholder {
+      color: var(--text-300, #47586e);
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+  }
+
+  &__clear {
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    color: var(--text-300);
+    cursor: pointer;
+    padding: 0 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba(71, 88, 110, 0.1);
+    }
+  }
+
+  &__button {
+    display: flex;
+    height: 2rem;
+    padding: var(--Radius-8, 0.5rem) var(--Radius-16, 1rem);
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 0.375rem;
+    background: var(--Primary-primary, #0e39b6);
+    color: var(--Dark-WHITE, #fff);
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background: var(--Primary-600, #0a2b8f);
+    }
+
+    &:active {
+      background: var(--Primary-700, #071f6b);
+    }
+  }
+
+  /* 🔥 Full-width mode */
+  &--full-width {
+    width: 100%;
+
+    .local-search__container,
+    .local-search__input-wrapper,
+    .local-search__input {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+  }
+}

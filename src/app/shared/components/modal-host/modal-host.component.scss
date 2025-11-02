@@ -1,0 +1,166 @@
+.modal__wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // z-index will be set dynamically via [style.zIndex]="zIndex"
+
+  &__site-header {
+    padding: 1rem;
+  }
+}
+
+.modal__backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(1.5px);
+}
+
+.modal__content {
+  position: relative; // Important for z-index and positioning relative to wrapper
+  display: flex;
+  flex-direction: column;
+  max-width: 90%; // Max width to ensure it fits on smaller screens
+  max-height: 90%; // Max height
+  // overflow: hidden; // Hide overflow for scrollable content
+  z-index: 1; // Ensure content is above its own backdrop
+  border-radius: 0.625rem;
+  background: var(--Dark-50, #f6f7f8);
+  box-shadow:
+    0px -1px 50px 9px rgba(0, 0, 0, 0.08),
+    0px 0px 0px 1.5px rgba(255, 255, 255, 0.25) inset;
+  overflow: hidden;
+  &.overflow {
+    overflow: visible;
+  }
+}
+
+.modal__content.fullscreen {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+// Phone mode (bottom sheet) styles
+.modal__content.phone {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 80% !important;
+  min-height: auto !important;
+  border-radius: 1rem 1rem 0 0; // Rounded corners only at top
+  box-shadow:
+    0px -4px 20px rgba(0, 0, 0, 0.15),
+    0px 0px 0px 1px rgba(255, 255, 255, 0.1) inset;
+  transform: translateY(100%); // Start from bottom
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+// Drag indicator for phone mode
+.drag-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem 0;
+}
+
+.drag-handle {
+  width: 6rem;
+  height: 0.25rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0.125rem;
+  opacity: 0.5;
+}
+
+// Slide up animation for phone mode
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+// Slide down animation for phone mode (when closing)
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(100%);
+  }
+}
+
+.header {
+  /* Styles for the header within the modal content */
+  padding: 1rem;
+  border-bottom: 1px solid var(--surface-border); // Adjust as needed
+}
+
+// Mobile header styles
+.mobile-header {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.75rem 1rem;
+
+  &__close-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    border: none;
+    border-radius: 0.75rem;
+    background: var(--Dark-50, #f6f7f8);
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-family: inherit;
+    font-size: 0.875rem;
+    color: var(--Dark-900, #1d1f1f);
+
+    &:hover {
+      background: var(--Dark-100, #e8e9ea);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    // Flip arrow 180 degrees in English (LTR)
+    :host-context(html.en) & svg,
+    :host-context(html[dir="ltr"]) & svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--Dark-900, #1d1f1f);
+    margin: 0;
+    flex: 1;
+  }
+}
+
+.modal__scrollable-content {
+  flex-grow: 1;
+  // overflow-y: hidden; // Enable vertical scrolling for modal content
+}

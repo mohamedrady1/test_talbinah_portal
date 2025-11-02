@@ -1,0 +1,91 @@
+<div class="report-complaint">
+    <div class="report-complaint__container">
+        <form [formGroup]="complaintForm" (ngSubmit)="onSubmit()" class="report-complaint__form">
+
+            <!-- Complaint Type -->
+            <div class="report-complaint__field">
+                <label class="report-complaint__label">
+                    {{ 'issue_type' | translateApi }}
+                </label>
+                <p-dropdown formControlName="type" [options]="problems()" optionLabel="problem" optionValue="id"
+                    [placeholder]="'select_issue_type' | translateApi" class="report-complaint__dropdown"
+                    [class.report-complaint__dropdown--error]="isFieldInvalid('type')" [disabled]="isLoadingProblems()">
+                    <ng-template pTemplate="footer">
+                        @if (!isLoadingProblems()) {
+                        <div class="report-complaint__dropdown-loading">
+                            <span class="dot-loader"></span>
+                        </div>
+                        }
+                    </ng-template>
+                </p-dropdown>
+                @if (isFieldInvalid('type')) {
+                <small class="report-complaint__error">
+                    {{ 'issue_type_required' | translateApi }}
+                </small>
+                }
+            </div>
+
+            <!-- Complaint Details -->
+            <div class="report-complaint__field">
+                <label class="report-complaint__label">
+                    {{ 'issue_details' | translateApi }}
+                </label>
+                <textarea formControlName="details" [placeholder]="'enter_issue_details' | translateApi"
+                    class="report-complaint__textarea"
+                    [class.report-complaint__textarea--error]="isFieldInvalid('details')" rows="4"></textarea>
+                @if (isFieldInvalid('details')) {
+                <small class="report-complaint__error">
+                    {{ getDetailsErrorMessage() | translateApi }}
+                </small>
+                }
+            </div>
+
+            <!-- Image Upload -->
+            <div class="report-complaint__upload-section">
+                <div class="report-complaint__upload-area" (click)="fileInput.click()">
+                    <div class="report-complaint__upload-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                            <path
+                                d="M15.3 19.4582H4.65832C3.39166 19.4582 2.23332 18.8165 1.56666 17.7332C0.89999 16.6499 0.841657 15.3332 1.40832 14.1915L2.84166 11.3165C3.30832 10.3832 4.05832 9.79986 4.89999 9.70819C5.74166 9.61652 6.59999 10.0332 7.24999 10.8415L7.43332 11.0749C7.79999 11.5249 8.22499 11.7665 8.64166 11.7249C9.05832 11.6915 9.44166 11.3915 9.72499 10.8832L11.3 8.04152C11.95 6.86652 12.8167 6.25819 13.7583 6.29986C14.6917 6.34986 15.4917 7.04986 16.025 8.28319L18.6333 14.3749C19.1167 15.4999 19 16.7832 18.325 17.8082C17.6583 18.8499 16.525 19.4582 15.3 19.4582ZM5.13332 10.9582C5.09999 10.9582 5.06666 10.9582 5.03332 10.9665C4.61666 11.0082 4.23332 11.3415 3.95832 11.8832L2.52499 14.7582C2.14999 15.4999 2.19166 16.3749 2.62499 17.0832C3.05832 17.7915 3.82499 18.2165 4.65832 18.2165H15.2917C16.1083 18.2165 16.8333 17.8249 17.2833 17.1415C17.7333 16.4582 17.8083 15.6415 17.4833 14.8915L14.875 8.79986C14.5583 8.04986 14.1167 7.59152 13.6917 7.57486C13.3 7.54986 12.7917 7.96652 12.3917 8.67486L10.8167 11.5165C10.3333 12.3832 9.57499 12.9249 8.74999 12.9999C7.92499 13.0665 7.08332 12.6665 6.45832 11.8832L6.27499 11.6499C5.92499 11.1915 5.52499 10.9582 5.13332 10.9582Z"
+                                fill="#0E39B6" />
+                            <path
+                                d="M5.80835 7.79199C4.09168 7.79199 2.68335 6.39199 2.68335 4.66699C2.68335 2.94199 4.08335 1.54199 5.80835 1.54199C7.53335 1.54199 8.93335 2.94199 8.93335 4.66699C8.93335 6.39199 7.53335 7.79199 5.80835 7.79199ZM5.80835 2.79199C4.77502 2.79199 3.93335 3.63366 3.93335 4.66699C3.93335 5.70033 4.77502 6.54199 5.80835 6.54199C6.84168 6.54199 7.68335 5.70033 7.68335 4.66699C7.68335 3.63366 6.84168 2.79199 5.80835 2.79199Z"
+                                fill="#0E39B6" />
+                        </svg>
+                    </div>
+                    <span class="report-complaint__upload-text">
+                        {{ 'upload_complaint_images' | translateApi }}
+                    </span>
+                </div>
+                <input #fileInput type="file" multiple accept="image/*" (change)="onFileSelected($event)"
+                    class="report-complaint__file-input" style="display: none;" />
+            </div>
+
+            <!-- Selected Images -->
+            @if (selectedImages.length > 0) {
+            <div class="report-complaint__images-list">
+                @for (image of selectedImages; track image; let i = $index) {
+                <div class="report-complaint__image-card">
+                    <img [src]="image" [alt]="'صورة الشكوى'" class="report-complaint__image" />
+                    <button type="button" class="report-complaint__remove-image" (click)="removeImage(i)">
+                        ×
+                    </button>
+                </div>
+                }
+            </div>
+            }
+        </form>
+        <!-- Submit Button -->
+        <button type="submit" (click)="onSubmit()" class="report-complaint__submit"
+            [disabled]="isLoadingCreateTicket()">
+            @if (isLoadingCreateTicket()) {
+            <span class="report-complaint__loading" role="status" aria-live="polite">
+                {{ 'in_progress' | translateApi }}
+            </span>
+            }
+            @else {
+            {{ 'send' | translateApi }}
+            }
+        </button>
+    </div>
+</div>

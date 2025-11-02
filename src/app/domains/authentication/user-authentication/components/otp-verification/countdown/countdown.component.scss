@@ -1,0 +1,12 @@
+.countdown {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+
+  .time {
+    color: var(--Danger-600, #CA4146);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: normal;
+  }
+}

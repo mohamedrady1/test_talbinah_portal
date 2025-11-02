@@ -1,0 +1,127 @@
+.attachment-menu-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  position: absolute;
+  bottom: calc(100% + 0.5rem);
+  left: 0;
+  z-index: 1000;
+
+  border-radius: 0.75rem;
+  background: var(--Dark-WHITE, #fff);
+  box-shadow: 0px 4px 9px 0px rgba(0, 0, 0, 0.1);
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
+  min-width: 12rem;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+.attachment-menu {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  width: 100%;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.425rem;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: start;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #333;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--Dark-50, #f6f7f8);
+    }
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #0e39b6;
+      outline-offset: -2px;
+    }
+
+    app-svg-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      transition: background-color 0.2s;
+
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+
+        path {
+          fill: #47586e;
+        }
+      }
+    }
+
+    &--audio app-svg-icon {
+      background: var(--Dark-50, #f6f7f8);
+
+      &:hover {
+        background-color: #e0e4e8;
+      }
+    }
+
+    &--document app-svg-icon {
+      background: var(--Primary-50, #e7ebf8);
+
+      &:hover {
+        background-color: #cdd4eb;
+      }
+    }
+
+    &--video app-svg-icon {
+      background: var(--Success-50, #e5faf2);
+
+      &:hover {
+        background-color: #ccebe0;
+      }
+    }
+
+    &--image app-svg-icon {
+      background: var(--Warning-50, #faf4eb);
+
+      &:hover {
+        background-color: #efe3d5;
+      }
+    }
+
+    &--camera app-svg-icon {
+      background: var(--Sacondry-Color-50, #f8e6e9);
+
+      &:hover {
+        background-color: #eccfd4;
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+/// Flexbox Utility Mixins
+/// -----------------------
+/// Usage:
+/// @include flex-center-column;
+/// @include flex-center-row;
+
+/// Center content using flex with column direction
+/// Responsive flex column layout with center alignment and gap
+/// @param {Length} $gap - Optional static or responsive gap (defaults to clamp)
+@mixin flex-center-column($gap: clamp(0.5rem, 1vw, 1.5rem)) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: $gap;
+}
+
+// 🔎 How clamp() Works
+// The clamp(min, preferred, max) function creates fluid spacing that:
+
+// Grows with viewport width
+
+// Stays within defined bounds
+
+// In this case:
+// clamp(0.5rem, 1vw, 1.5rem) means:
+
+// Minimum gap = 0.5rem
+
+// Preferred = 1vw (1% of viewport width) --- set value of ui/ux desgin
+
+// Maximum gap = 1.5rem
+
+// 🧪 Example Usage
+// .section__content {
+//   @include flex-center-column; // uses default responsive gap
+// }
+
+// .card__list {
+//   @include flex-center-column(clamp(1rem, 2vw, 2rem)); // override with larger responsive gap
+// }
+
+/// Center content using flex with row direction
+@mixin flex-center-row($gap: 0.5rem) {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: $gap;
+}
+
+/// Basic flex layout with optional direction, justify, and align
+@mixin flex-layout($direction: row, $justify: flex-start, $align: stretch) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}

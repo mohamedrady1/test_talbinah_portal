@@ -1,0 +1,44 @@
+<div class="session-details-modal">
+  <div class="session-details-modal_container" appAutoExactHeight="70">
+    @if(isLoadingReservation()){
+    <app-appointment-card-skeleton />
+    @for (item of [1,2,3]; track $index) {
+    <!-- <app-therapeutic-program-card-shimmer></app-therapeutic-program-card-shimmer> -->
+    <app-session-details-skeleton></app-session-details-skeleton>
+    }
+    }
+    @else if(reservationFetchErrorMessage() && !reservationFetchStatus()){
+    <app-error-state-card [config]="reservationDetailsErrorState"></app-error-state-card>
+    }
+    @else {
+    @if (currentReservation()?.doctor) {
+    <app-doctor-card-for-details [item]="currentReservation()?.doctor!" [type]="type"
+      [reservation]="currentReservation()!" />
+    }
+    @if(isLoadingReservation()){
+
+    } @else {
+    <div class="session-details-modal__details">
+      <app-appointment-details-card [details]="currentReservation()!" />
+    </div>
+    @if(!isLoadingReservation()){
+    @if (currentReservation()?.reason) {
+    <div class="session-details-modal__cancellation">
+      <app-appointment-cancellation-card [details]="currentReservation()!" />
+    </div>
+    }
+    @if (currentReservation()?.payments) {
+    <div class="session-details-modal__payment">
+      <app-appointment-payment-card [details]="currentReservation()!" />
+    </div>
+    }
+    @if ((currentReservation()?.time_line?.length || 0) > 0) {
+    <div class="session-details-modal__session-history">
+      <app-appointment-session-history-card [details]="currentReservation()!" />
+    </div>
+    }
+    }
+    }
+    }
+  </div>
+</div>

@@ -1,0 +1,227 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "talbinah-portal": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/talbinah-portal",
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              },
+              "src/sitemap.xml",
+              "src/robots.txt",
+              "src/firebase-messaging-sw.js"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": [],
+            "server": "src/main.server.ts",
+            "prerender": {
+              "discoverRoutes": false,
+              "routesFile": "src/routes.txt"
+            },
+            "ssr": {
+              "entry": "src/server.ts"
+            }
+          },
+          "configurations": {
+            "production": {
+              "aot": true,
+              "optimization": true,
+              "outputHashing": "all",
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "30MB",
+                  "maximumError": "30MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "30MB",
+                  "maximumError": "30MB"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/assets/environments/environment.ts",
+                  "with": "src/assets/environments/environment.live.ts"
+                }
+              ]
+            },
+            "uat": {
+              "optimization": false,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractLicenses": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "30mb",
+                  "maximumError": "30mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "30mb",
+                  "maximumError": "30mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/assets/environments/environment.ts",
+                  "with": "src/assets/environments/environment.uat.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            },
+            "inmemory": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "30mb",
+                  "maximumError": "30mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "30mb",
+                  "maximumError": "30mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/assets/environments/environment.ts",
+                  "with": "src/assets/environments/environment.dev.ts"
+                }
+              ]
+            },
+            "redesign": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "30mb",
+                  "maximumError": "30mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "30mb",
+                  "maximumError": "30mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/assets/environments/environment.ts",
+                  "with": "src/assets/environments/environment.redesign.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "talbinah-portal:build:production"
+            },
+            "development": {
+              "buildTarget": "talbinah-portal:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/talbinah-portal/server",
+            "main": "src/main.server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputPath": "dist/talbinah-portal/server",
+              "main": "src/main.server.ts",
+              "tsConfig": "tsconfig.server.json"
+            },
+            "uat": {
+              "outputPath": "dist/talbinah-portal/server",
+              "main": "src/main.server.ts",
+              "tsConfig": "tsconfig.server.json"
+            },
+            "development": {
+              "outputPath": "dist/talbinah-portal/server",
+              "main": "src/main.server.ts",
+              "tsConfig": "tsconfig.server.json"
+            },
+            "redesign": {
+              "outputPath": "dist/talbinah-portal/server",
+              "main": "src/main.server.ts",
+              "tsConfig": "tsconfig.server.json"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "a60f66fc-da7d-43b2-9946-30b6794c2d0c"
+  }
+}

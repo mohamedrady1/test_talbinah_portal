@@ -1,0 +1,22 @@
+<div class="confirm-subscription">
+    <div class="confirm-subscription__status">
+        <div class="confirm-subscription__status--icon">
+            <img src="images/status/success-status.png" alt="success-icon" />
+        </div>
+        <div class="confirm-subscription__status--content">
+            <h3 class="confirm-subscription__status--content--title">
+                {{'supportGroups.therapySubscriptionSuccess'|translate}}
+
+            </h3>
+            <p class="confirm-subscription__status--content--subtitle">
+                {{'supportGroups.therapySubscriptionSuccessText'|translate}}
+
+            </p>
+        </div>
+    </div>
+    <button id="submit-dynamic-form-btn" type="button" class="btn btn--solid" (click)="openSubscriptionModal()">
+        <span class="btn__label">
+            {{'supportGroups.goToProgramDetails'|translate}}
+        </span>
+    </button>
+</div>

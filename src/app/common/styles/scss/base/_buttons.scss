@@ -1,0 +1,30 @@
+.btn {
+    padding: 0.625rem 1rem;
+    border-radius: 0.25rem;
+    span {
+        font-size: 0.875rem;
+    }
+    &-solid-main {
+        border: 1px solid #00377b;
+        background-color: #00377b;
+        color: white;
+    }
+    &-outline-main {
+        border: 1px solid #00377b;
+        color: #00377b;
+    }
+    &-outline-gray {
+        border: 1px solid #bcc5cb;
+        color: #bcc5cb;
+    }
+    &-solid-danger {
+        border: 1px solid #e22431;
+        background-color: #e22431;
+        color: white;
+    }
+    &-solid-success {
+        border: 1px solid #4aa147;
+        background-color: #4aa147;
+        color: white;
+    }
+}

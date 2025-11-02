@@ -1,0 +1,49 @@
+<div class="modal__wrapper" [style.zIndex]="zIndex">
+
+    <div class="modal__backdrop" (click)="onBackdropClick()"></div>
+    <div class="modal__content" [class.overflow]="overflow" #modalContent [ngStyle]="getModalContentStyles()"
+        [class.fullscreen]="isFullscreen" [class.phone]="isPhoneFromDown">
+        <!-- Drag indicator for phone mode -->
+        @if (!showHeader && showMobileHeader) {
+        <div class="modal__wrapper__site-header">
+            <app-site-header></app-site-header>
+        </div>
+        }
+        @if (isPhoneFromDown) {
+        <div class="drag-indicator">
+            <div class="drag-handle" (mousedown)="onDragStart($event)" (touchstart)="onDragStart($event)"></div>
+        </div>
+        }
+
+        @if (headerConfig && showHeader && !isPhoneFromDown) {
+        <div class="header">
+            <app-header [config]="headerConfig" (fullscreenRequested)="toggleFullscreen()"
+                (closeRequested)="onHeaderCloseRequested()"></app-header>
+        </div>
+        }
+
+        <!-- Mobile header for phone mode -->
+        @if (!showHeader && showMobileHeader && !isPhoneFromDown) {
+        <div class="mobile-header">
+            @if(showCloseButton()){
+            <button class="mobile-header__close-btn" (click)="closeRequested.emit()" type="button"
+                [attr.aria-label]="'back'">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M7.45846 3.39961L12.8918 8.83294C13.5335 9.47461 13.5335 10.5246 12.8918 11.1663L7.45846 16.5996"
+                        stroke="#1D1F1F" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+            }
+            <p class="mobile-header__title">
+                {{ headerConfig?.title |translate }}
+            </p>
+        </div>
+        }
+
+        <div class="modal__scrollable-content">
+            <ng-template #hostVc></ng-template>
+        </div>
+    </div>
+</div>

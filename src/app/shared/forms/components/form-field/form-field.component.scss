@@ -1,0 +1,23 @@
+.form-group-wrapper {
+  // margin-bottom: 1.5rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+
+  &__feedback {
+    // margin-top: 0.25rem;
+  }
+
+  &__hint {
+    font-size: 0.875rem;
+    color: var(--text-muted-color, #6c757d);
+  }
+
+  &__error {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--error-color, #dc3545);
+  }
+}

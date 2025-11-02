@@ -1,0 +1,1 @@
+export * from './add-new-subscription-card.component';

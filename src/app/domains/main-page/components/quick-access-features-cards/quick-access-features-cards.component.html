@@ -1,0 +1,21 @@
+<section class="quick-access-cards" aria-labelledby="quick-access-heading">
+  <h2 id="quick-access-heading" class="sr-only">Quick Access Features</h2>
+
+  <div class="quick-access-cards__container">
+    @for (cardData of pinnedCards; track cardData.id) {
+    <div [ngClass]="['quick-access-cards__item', 'quick-access-cards__item--' + (cardData.id - 1)]"
+      (click)="navigateToPage(cardData)" tabindex="0" role="link" [attr.aria-label]="cardData.title | translateApi">
+      <app-quick-access-card [config]="cardData" />
+    </div>
+    }
+  </div>
+  <div class="quick-access-cards__load-more">
+    <button (click)="editMenuItemsCards()" class="quick-access-cards__load-more-button btn btn--outline">
+      @if (pinnedCards !== cardsData) {
+      {{ 'home_button_add_more' | translateApi }}
+      }@else {
+      {{ 'home_button_view_less' | translateApi }}
+      }
+    </button>
+  </div>
+</section>

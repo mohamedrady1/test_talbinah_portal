@@ -1,0 +1,80 @@
+<div class="doctor-card">
+  <div class="doctor-card__details">
+    <figure class="doctor-card__thumbnail">
+      <img class="doctor-card__image"
+        [src]="item?.image ?? (item?.gender === 1 ? 'images/not-found/no-woman-doctor.svg' : 'images/not-found/no-doctor.svg')"
+        [width]="49" [height]="49" loading="lazy" fetchpriority="low"
+        [alt]="item?.full_name ? (item.full_name + ' ' + ('general.ProfilePictureAlt' | translate)) : ('general.DoctorProfilePictureAlt' | translate)"
+        (error)="onImageError($event, item?.gender)" />
+    </figure>
+
+    <div class="doctor-card__content">
+      <div class="doctor-card__content-header">
+        <div class="doctor-card__content-row">
+          <div class="doctor-card__content--info">
+            <h3 class="doctor-card__title" [attr.title]="item?.full_name">
+              {{ item?.full_name }}
+            </h3>
+            <div class="doctor-card__description">
+              <p [ngClass]="{'text-truncate': allowShortTexts, 'text-truncate-3': !allowShortTexts}">
+                {{item?.bio || ''}}
+              </p>
+            </div>
+          </div>
+          @if(item?.is_recommended){
+          <div class="doctor-card__recommend">
+            @if (item?.is_recommended) { <div class="doctor-card__recommend" role="status" [attr.aria-live]="'polite'">
+              <svg aria-hidden="true" width="14" height="15" viewBox="0 0 14 15" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M12.3959 11.4814L11.4334 11.7089C11.2175 11.7614 11.0484 11.9248 11.0017 12.1406L10.7975 12.9981C10.6867 13.4648 10.0917 13.6106 9.78252 13.2431L8.03835 11.2364C7.89835 11.0731 7.97418 10.8164 8.18418 10.7639C9.21668 10.5131 10.1442 9.93559 10.8267 9.11309C10.9375 8.97892 11.1359 8.96142 11.2584 9.08392L12.5534 10.3789C12.9967 10.8223 12.8392 11.3764 12.3959 11.4814Z"
+                  fill="#0E39B6" />
+                <path
+                  d="M1.57497 11.4814L2.53747 11.7089C2.75331 11.7614 2.92247 11.9248 2.96914 12.1406L3.17331 12.9981C3.28414 13.4648 3.87914 13.6106 4.18831 13.2431L5.93247 11.2364C6.07247 11.0731 5.99664 10.8164 5.78664 10.7639C4.75414 10.5131 3.82664 9.93559 3.14414 9.11309C3.03331 8.97892 2.83497 8.96142 2.71247 9.08392L1.41747 10.3789C0.97414 10.8223 1.13164 11.3764 1.57497 11.4814Z"
+                  fill="#0E39B6" />
+                <path
+                  d="M7.00002 1.87402C4.74252 1.87402 2.91669 3.69986 2.91669 5.95736C2.91669 6.80319 3.16752 7.57902 3.59919 8.22652C4.22919 9.15986 5.22669 9.81902 6.38752 9.98819C6.58585 10.0232 6.79002 10.0407 7.00002 10.0407C7.21002 10.0407 7.41419 10.0232 7.61252 9.98819C8.77335 9.81902 9.77085 9.15986 10.4009 8.22652C10.8325 7.57902 11.0834 6.80319 11.0834 5.95736C11.0834 3.69986 9.25752 1.87402 7.00002 1.87402ZM8.78502 5.82902L8.30085 6.31319C8.21919 6.39486 8.17252 6.55236 8.20169 6.66902L8.34169 7.26986C8.45252 7.74236 8.20169 7.92902 7.78169 7.67819L7.19835 7.33402C7.09335 7.26986 6.91835 7.26986 6.81335 7.33402L6.23002 7.67819C5.81002 7.92319 5.55919 7.74236 5.67002 7.26986L5.81002 6.66902C5.83335 6.55819 5.79252 6.39486 5.71085 6.31319L5.21502 5.82902C4.92919 5.54319 5.02252 5.25736 5.41919 5.19319L6.04335 5.08819C6.14835 5.07069 6.27085 4.97736 6.31752 4.88402L6.66169 4.19569C6.84835 3.82236 7.15169 3.82236 7.33835 4.19569L7.68252 4.88402C7.72919 4.97736 7.85169 5.07069 7.96252 5.08819L8.58669 5.19319C8.97752 5.25736 9.07085 5.54319 8.78502 5.82902Z"
+                  fill="#0E39B6" />
+              </svg>
+              <p>{{ 'recommended' | translateApi }}</p>
+            </div>
+            }
+          </div>
+          }
+        </div>
+
+      </div>
+      @if(!hideButtonAction) {
+      <div class="doctor-card__booking">
+        <div class="doctor-card__booking--cost-date">
+          @if (item?.price_half_hour ) {
+          <div class="doctor-card__booking--cost-date--cost">
+            <p>
+              <!-- {{ item?.price_half_hour ?? ('general.PriceNotAvailable' | translate) }} -->
+              {{ item?.price_half_hour ?? '--' }}
+            </p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+              <path
+                d="M10.8235 13.4072L14.9322 12.5364C14.8847 13.0156 14.7602 13.4779 14.5585 13.9234L10.4593 14.7942C10.5015 14.3086 10.6229 13.8463 10.8235 13.4072ZM14.5585 11.3093L10.4593 12.1801V9.56761L9.17997 9.84152V11.2919C9.17997 11.4217 9.14408 11.5399 9.0723 11.6465L8.40572 12.6329C8.22838 12.8884 7.99088 13.0457 7.69322 13.1048L4.06738 13.879C4.11488 13.3987 4.23944 12.9364 4.44105 12.492L7.89905 11.7542V10.1075L4.67222 10.7931C4.71972 10.3128 4.84374 9.85366 5.0443 9.4156L7.89905 8.80127V3.7251C8.26005 3.28599 8.68702 2.9271 9.17997 2.64844V8.53527L10.4593 8.25977V4.36477C10.8214 3.92672 11.2452 3.56783 11.7307 3.2881V7.99219L14.9322 7.30819C14.8847 7.78847 14.7602 8.2508 14.5585 8.69519L11.7307 9.30002V10.5984L14.9322 9.92227C14.8847 10.4078 14.7602 10.8702 14.5585 11.3093Z"
+                fill="#0E39B6" />
+            </svg>
+          </div>
+          }
+          <div class="doctor-card__booking--cost-date--duration">
+            <p>
+              {{'min' | translateApi}}
+              {{ HALF_HOUR_MINUTES }}
+            </p>
+          </div>
+        </div>
+        <a id="booking-btn" class="btn btn--solid" (click)="ReserveNow()">
+          <span class="btn__label">
+            {{'book_now' | translateApi}}
+          </span>
+        </a>
+      </div>
+      }
+    </div>
+  </div>
+
+</div>

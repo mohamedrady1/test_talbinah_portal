@@ -1,0 +1,37 @@
+@use "./../../../common/styles/scss/buttons/button.mixins" as btn;
+
+.confirm-subscription {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    .btn {
+        @include btn.button-base;
+        @include btn.button-type("solid");
+        @include btn.button-size("medium");
+        @include btn.button-icon-position("left");
+        @include btn.button-icon-size("medium");
+        @include btn.button-color("main");
+        @include btn.button-spinner;
+
+        &__icon {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        &__label {
+            padding: 0 0.5rem;
+            white-space: nowrap;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        &--disabled {
+            @include btn.button-disabled;
+        }
+        border-radius: var(--Radius-8);
+        padding: var(--Radius-8) 2.3125rem;
+        width: fit-content;
+        margin-top: 1rem;
+        margin: auto;
+    }
+}

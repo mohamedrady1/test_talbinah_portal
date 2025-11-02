@@ -1,0 +1,41 @@
+<div class="wallet-and-rewards" (click)="userInfo.page=='wallet' ? openWalletModal() : openPointsModal()">
+
+    <div class="wallet-and-rewards__content">
+        <div class="wallet-and-rewards__content--img-container">
+            <img [src]="userInfo.icon" alt="wallet" onerror="src='images/not-found/talbinah.png'">
+        </div>
+        <div class="wallet-and-rewards__content--title-container">
+            <div class="wallet-and-rewards__content--title" [ngStyle]="{'color': userInfo.color}">
+                <span class="wallet-and-rewards__content--title--label">
+                    {{ userInfo.description }}
+                </span>
+                <span class="wallet-and-rewards__content--title--value">
+                    <span>{{userInfo.sub_title}}</span>
+                    @if (userInfo.page=='wallet') {
+                    <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M11.3929 14.6141L15.7179 13.6974C15.6679 14.2018 15.5368 14.6885 15.3246 15.1574L11.0096 16.0741C11.054 15.563 11.1818 15.0763 11.3929 14.6141ZM15.3246 12.4057L11.0096 13.3224V10.5724L9.66292 10.8607V12.3874C9.66292 12.5241 9.62514 12.6485 9.54958 12.7607L8.84792 13.7991C8.66125 14.068 8.41125 14.2335 8.09792 14.2957L4.28125 15.1107C4.33125 14.6052 4.46236 14.1185 4.67458 13.6507L8.31458 12.8741V11.1407L4.91792 11.8624C4.96792 11.3568 5.09847 10.8735 5.30958 10.4124L8.31458 9.76573V4.4224C8.69458 3.96017 9.14403 3.5824 9.66292 3.28906V9.48573L11.0096 9.19573V5.09573C11.3907 4.63462 11.8368 4.25684 12.3479 3.9624V8.91406L15.7179 8.19406C15.6679 8.69962 15.5368 9.18629 15.3246 9.65406L12.3479 10.2907V11.6574L15.7179 10.9457C15.6679 11.4568 15.5368 11.9435 15.3246 12.4057Z"
+                            fill="#0E39B6" />
+                    </svg>
+                    }
+                    @else {
+                    {{'point'|translateApi}}
+                    }
+                </span>
+            </div>
+
+        </div>
+    </div>
+
+
+    <button class="wallet-and-rewards__button"
+        (click)="userInfo.page=='wallet' ? openWalletPaymentModal($event) : openPointsServicesModal($event)">
+        @if (userInfo.page=='wallet') {
+        {{ 'top_up_wallet' | translateApi }}
+        }
+        @else {
+        {{ 'redeem_your_points' | translateApi }}
+        }
+    </button>
+
+</div>

@@ -1,0 +1,106 @@
+<div class="settings-layout" #layout>
+
+  <div class="settings-layout__header">
+    <app-site-header></app-site-header>
+  </div>
+
+  <div class="settings-layout__container" #card>
+    <app-header [config]="headerConfig" (fullscreenRequested)="toggleFullscreen()"
+      (closeRequested)="goHome()"></app-header>
+    <div class="settings-layout__container--content" appAutoExactHeight heightMode="max-height">
+      <div class="settings-layout__container--header">
+        <div class="settings-layout__container-user-info">
+          <app-user-info-card [userInfo]="userInfo"></app-user-info-card>
+        </div>
+        <div class="settings-layout__container-talbinah">
+          <app-talbinah-card></app-talbinah-card>
+        </div>
+      </div>
+      <div class="settings-layout__profile">
+        <p class="settings-layout__profile--title">
+          <span>
+            {{'your_profile' | translateApi}}
+          </span>
+        </p>
+        <div class="settings-layout__profile--content">
+          <div class="settings-layout__profile--right-side">
+            <div class="settings-layout__profile--right-side-container">
+              <div class="settings-layout__profile--options">
+
+                @if (this._SettingsFacade.isLoading()) {
+                @for (i of [1,2]; track $index) {
+                <div class="profile-option-card-skeleton shimmer-effect">
+                  <div class="profile-option-card-skeleton__icon shimmer-effect"></div>
+                </div>
+                }
+                }
+                @else{
+                @for (option of _SettingsFacade?.profileItems(); track $index) {
+                <app-your-profile-option-card [config]="option"></app-your-profile-option-card>
+                }
+                }
+              </div>
+              <div class="settings-layout__profile--right-side-container--right">
+                <div class="settings-layout__container-gift">
+                  <app-gift-card></app-gift-card>
+                </div>
+                <div class="settings-layout__container-help">
+                  <p class="settings-layout__container-help--title">
+                    <span>
+                      {{'support_and_help' | translateApi}}
+                    </span>
+                  </p>
+                  <div class="settings-layout__container-help--options">
+                    @if (this._SettingsFacade.isLoading()) {
+                    @for (i of [1,2,3,4]; track $index) {
+                    <div class="profile-option-card-skeleton shimmer-effect">
+                      <div class="profile-option-card-skeleton__icon shimmer-effect"></div>
+
+                    </div>
+                    }
+                    }
+                    @else{
+                    @for (option of _SettingsFacade?.supportItems(); track $index) {
+                    <app-your-profile-option-card [config]="option"></app-your-profile-option-card>
+                    }
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="settings-layout__profile--left-side">
+            <div class="settings-layout__profile--left-side--wallet-and-rewards">
+              <p class="settings-layout__profile--left-side--wallet-and-rewards--title">
+                {{ 'wallet_and_rewards' | translateApi }}
+              </p>
+              @if (this._SettingsFacade.isLoading()) {
+              @for (i of [1,2,3,4]; track $index) {
+              <div class="wallet-and-rewards__shimmer">
+                <div class="wallet-and-rewards__content">
+
+                  <div class="wallet-and-rewards__content--title-container">
+                    <div class="shimmer shimmer--title" style="width:100px;height:20px;margin-bottom:8px;"></div>
+                    <div class="shimmer shimmer--value" style="width:60px;height:18px;"></div>
+                  </div>
+                </div>
+                <div class="wallet-and-rewards__button shimmer shimmer--button" style="width:90px;height:32px;"></div>
+              </div>
+              }
+              }@else{
+              @for (card of _SettingsFacade.headerItems(); track $index) {
+
+              <app-wallet-and-rewards [userInfo]="card"></app-wallet-and-rewards>
+              }
+              }
+            </div>
+            <div>
+              <app-report-card></app-report-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

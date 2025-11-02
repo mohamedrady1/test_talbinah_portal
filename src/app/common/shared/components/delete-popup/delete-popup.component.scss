@@ -1,0 +1,70 @@
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+
+    // Mobile styles
+    @media (max-width: 767px) {
+        position: static;
+        width: auto;
+        height: auto;
+    }
+
+    &__overlay {
+        background-color: #344054b2;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 50;
+
+        // Hide overlay on mobile (modal system handles it)
+        @media (max-width: 767px) {
+            display: none;
+        }
+    }
+
+    &__card {
+        background: white;
+        padding: 1.25rem;
+        z-index: 100;
+        border-radius: 0.3125rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        width: 32rem;
+        margin: 5px;
+
+        // Mobile styles
+        @media (max-width: 767px) {
+            box-shadow: none;
+            width: 100%;
+            margin: 0;
+        }
+
+        &__title {
+            color: #0a0a0a;
+            font-weight: 600;
+            font-size: 1.25rem;
+            line-height: 26px;
+        }
+        &__sub-title {
+            font-weight: 400;
+            font-size: 0.875rem;
+            color: #676c70;
+        }
+        .buttons {
+            width: 80%;
+            margin: auto;
+
+            @media (max-width: 767px) {
+                width: 100%;
+            }
+        }
+    }
+}

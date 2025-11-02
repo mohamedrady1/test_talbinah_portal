@@ -1,0 +1,20 @@
+<div class="notification-card" [ngClass]="{'details': type == cardType.DETAILS}" (click)="onCardClick()">
+    <div class="notification-card__content" [ngClass]="{'details': type == cardType.DETAILS}">
+        <img [src]="item?.user?.emoji?.image" [alt]="item.title || 'shared image'" loading="lazy" width="100%"
+            height="auto" decoding="async" fetchpriority="low" class="notification-card__content--image"
+            onerror="src='images/not-found/talbinah.png'" />
+        <p class="notification-card__content--text">
+            {{item.body}}
+        </p>
+    </div>
+    @if (type==cardType.DETAILS ||type==cardType.COLUMN) {
+    <div class="notification-card__timestamp" [ngClass]="{'column': type==cardType.COLUMN}">
+        <p class="date">
+            {{ item.created_at | date: 'hh:mm a': undefined : currentLanguage }}
+        </p>
+        <p class="time">
+            {{ item.created_at| date: 'EEEE - d MMMM' : undefined : currentLanguage}}
+        </p>
+    </div>
+    }
+</div>

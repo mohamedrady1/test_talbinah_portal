@@ -1,0 +1,19 @@
+<div class="gift-cancel-modal-container">
+    <div class="gift-cancel-modal">
+        <img class="gift-cancel-modal__img" src="images/settings/gift/cancel.png" alt="cancel" />
+        <div class="gift-cancel-modal__title">{{ 'cancel_sent_gift_confirmation' | translateApi }}</div>
+        <div class="gift-cancel-modal__desc">{{ 'cancel_sent_gift_notice' | translateApi }}</div>
+    </div>
+    <button class="gift-cancel-modal__cancel" (click)="onCancelGift()" [disabled]="isLoading()"
+        [ngClass]="{ 'disabled': isLoading() }">
+        @if (isLoading()) {
+        <div class="gift-cancel-modal__loading" aria-live="polite">
+            {{ 'in_progress' | translateApi }}
+            <span class="dot-loader"></span>
+        </div>
+        }
+        @else {
+        {{ 'cancel' | translateApi }}
+        }
+    </button>
+</div>

@@ -1,0 +1,273 @@
+@use "./../../../../common/styles/scss/abstracts/general-form-wrapper.mixins" as form;
+@use "./../../../../common/styles/scss/abstracts/mixins" as *;
+@use "./../../../../common/styles/scss/buttons/button.mixins" as btn;
+
+.government-agencies {
+  display: flex;
+  padding: 0.75rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  align-self: stretch;
+
+  &__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    margin-inline-end: 0.5rem;
+  }
+
+  &__data-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    background: var(--Dark-WHITE, #fff);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+
+    &--label-list {
+      color: var(--text-300, #47586e);
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    &--search {
+      display: flex;
+      width: 16.8125rem;
+      height: 2.375rem;
+      padding: var(--Radius-8, 0.5rem) 0.75rem;
+      align-items: center;
+      gap: 0.5rem;
+
+      border-radius: var(--Radius-12, 0.75rem);
+      border: 1px solid var(--Dark-50, #f6f7f8);
+    }
+  }
+
+  &__cards-banner {
+    display: grid;
+    grid-template-columns: 2fr 1fr; // 2:1 layout
+    gap: 0.75rem;
+    position: relative;
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+    }
+    &--icon {
+      position: absolute;
+      top: 0;
+      inset-inline-start: 0;
+    }
+    &--icon-2 {
+      position: absolute;
+      bottom: 0;
+      inset-inline-end: 0;
+    }
+    &--card-one,
+    &--card-two {
+      display: flex;
+      height: 100%;
+      padding: 1rem 0.75rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.625rem;
+      flex: 1 0 0;
+      position: relative;
+      border-radius: 0.75rem;
+      justify-content: space-between;
+      overflow: hidden;
+      word-wrap: break-word;
+      word-break: break-word;
+    }
+
+    &--card-one {
+      background: linear-gradient(270deg, #baf0e8 0%, #f5dab8 100%);
+    }
+
+    &--card-two {
+      background: var(--Dark-WHITE, #fff);
+      &--icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        inset-inline-end: 0;
+      }
+    }
+
+    .title {
+      color: var(--text-400, #0f0f0f);
+      font-size: 0.875rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      margin: 0;
+    }
+
+    .subtitle {
+      display: flex;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.25rem;
+      align-self: stretch;
+
+      color: var(--text-300, #47586e);
+      font-size: 0.6875rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      word-wrap: break-word;
+
+      app-svg-icon {
+        width: 0.75rem;
+        height: 0.75rem;
+        flex-shrink: 0;
+      }
+    }
+
+    .contact-us {
+      &__whatsapp-button {
+        @include btn.button-base;
+        @include btn.button-size("medium");
+        @include btn.button-icon-position("left");
+        @include btn.button-icon-size("medium");
+        @include btn.button-color("main");
+        @include btn.button-spinner;
+        @include btn.button-type("solid");
+        width: fit-content;
+        z-index: 2;
+        &:hover,
+        &:focus-visible {
+          outline: none;
+        }
+
+        &--text {
+          color: var(--Dark-WHITE, #fff);
+          font-size: 0.75rem;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+        }
+      }
+    }
+  }
+
+  &__cards-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-inline-end: 0.5rem;
+    gap: 0.75rem;
+
+    @include respond(sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    display: flex;
+    padding: 0.75rem;
+    align-items: center;
+    gap: 0.8125rem;
+    cursor: pointer;
+    flex: 1 0 0;
+
+    border-radius: 0.75rem;
+    border: 1px solid var(--Dark-50, #f6f7f8);
+
+    transition: box-shadow 0.3s ease;
+
+    &:hover,
+    &:focus-within {
+      outline: none;
+    }
+
+    &-logo {
+      display: flex;
+
+      width: 2.5rem;
+      height: 2.5rem;
+      flex-shrink: 0;
+
+      padding: 0.5rem 0.375rem;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+
+      border-radius: 0.5rem;
+      background: linear-gradient(0deg, rgba(159, 215, 212, 0.5) 0%, rgba(238, 253, 251, 0.5) 100%);
+
+      .image-logo {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    &-name {
+      color: var(--text-400, #0f0f0f);
+      font-size: 0.875rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+  }
+
+  &__status-message {
+    padding: 1rem;
+    text-align: center;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+
+    &--loading {
+      color: var(--text-500, #6b7280);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      padding: 0;
+      text-align: left;
+    }
+
+    &--empty {
+      color: var(--text-500, #6b7280);
+      background: #f3f4f6;
+    }
+
+    &--error {
+      color: #b91c1c;
+      background: #fee2e2;
+    }
+  }
+}
+
+.skeleton-card {
+  height: 4rem;
+  background: #e5e7eb;
+  border-radius: 0.5rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

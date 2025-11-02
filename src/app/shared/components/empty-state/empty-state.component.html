@@ -1,0 +1,21 @@
+<div class="empty-state" [ngStyle]="{ 'background-color': backgroundColor(), 'gap': gap() }">
+
+  @if (hasImage()) {
+  <img class="empty-state__image" [src]="config.imageUrl" [alt]="config.title || 'Empty state'" loading="lazy" />
+  }
+
+  @if (hasTitle()) {
+  <h2 class="empty-state__title">{{ (config.title || '') | translateApi }}</h2>
+  }
+
+  @if (hasMessage()) {
+  <p class="empty-state__message">{{ (config.message || '') | translateApi }}</p>
+  }
+
+  @if (hasButton()) {
+  <button class="empty-state__add" (click)="onClick()">
+    <p>{{ (config.buttonText || '') | translateApi }}</p>
+  </button>
+  }
+
+</div>

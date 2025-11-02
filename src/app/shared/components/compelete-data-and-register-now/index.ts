@@ -1,0 +1,1 @@
+export * from './compelete-data-and-register-now.component';

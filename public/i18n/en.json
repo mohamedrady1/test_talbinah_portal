@@ -1,0 +1,1812 @@
+{
+  "urgentAppointmentWindow": {
+    "title": "Searching for an urgent appointment...",
+    "subtitle": "An urgent appointment is in progress and a doctor is being located. Please follow up on your request and wait for the doctor as soon as possible.",
+    "cta": "Follow Up"
+  },
+  "khawiik": {
+    "history": {
+      "empty": "No conversations found"
+    },
+    "rename": {
+      "chatTitle": "Conversation Title",
+      "title": "Rename",
+      "placeholder": "Enter new conversation name"
+    },
+    "header": {
+      "title": "Your Companion",
+      "subtitle": "Helps you understand your issue and guides you to the most suitable doctor"
+    },
+    "welcomePage": {
+      "labelTitle": "Welcome to Talbinah 🌿",
+      "title": "Start your journey with Talbinah... a safe space to share and find someone who truly listens.",
+      "list": {
+        "item1Title": "Built on science, designed for your comfort",
+        "item1Subtitle": "A simplified psychological experience with a human touch.",
+        "item2Title": "Your space to express without judgment",
+        "item2Subtitle": "Speak freely about what's inside you, without anyone judging."
+      },
+      "actionBtn": "Start Now"
+    },
+    "khawiikVoiceTypes": {
+      "title": "Which voice would you prefer?",
+      "subtitle": "You can change the voice anytime in the settings",
+      "actionBtn": "Continue",
+      "confirm": "Confirm",
+      "pleaseWait": "Please wait"
+    },
+    "chatTypes": {
+      "title": "How would you like to chat?",
+      "subtitle": "Choose your preferred way to communicate with Khawiik",
+      "voice": "Voice Chat",
+      "text": "Text Chat",
+      "continue": "Continue",
+      "mainIcon": "Khawiik Chat Types Icon"
+    },
+    "instructions": {
+      "title": "Before you start...",
+      "subtitle": "Please read these important guidelines to ensure you have the best experience with our mental health support service.",
+      "continue": "Continue",
+      "card1": {
+        "title": "Talbinah Bot does not provide direct medical treatment",
+        "subtitle": "Our AI assistant is designed to provide emotional support and guidance, but it cannot replace professional medical care or therapy."
+      },
+      "card2": {
+        "title": "Talbinah Bot is not for emergencies or critical situations",
+        "subtitle": "If you are experiencing a mental health crisis or having thoughts of self-harm, please contact emergency services immediately."
+      },
+      "card3": {
+        "title": "User age requirements",
+        "subtitle": "This service is intended for users aged 18 and above. Professional conduct and respectful communication are expected at all times."
+      },
+      "card4": {
+        "title": "Privacy and confidentiality",
+        "subtitle": "Your conversations are private and secure. We use industry-standard encryption to protect your personal information and mental health data."
+      },
+      "card5": {
+        "title": "Service limitations",
+        "subtitle": "While our AI can provide valuable support, it has limitations. For complex mental health issues, we recommend consulting with a qualified mental health professional."
+      }
+    },
+    "activities": {
+      "cta": "Start Now"
+    },
+    "books": {
+      "error": {
+        "title": "An error occurred while loading books",
+        "message": "An error occurred while loading the books. Please try again."
+      },
+      "empty": {
+        "title": "No books available",
+        "message": "Sorry, there are no books available at the moment. Please try again later."
+      },
+      "cta": "Start Chat Now",
+      "completed": "Completed",
+      "days": "Days"
+    },
+    "mission": {
+      "startedSuccessfully": "Mission started successfully",
+      "startFailed": "Failed to start mission"
+    },
+    "sessionExpired": {
+      "title": "Session Expired Time",
+      "description": "Your current session has expired. You can start a new session to continue.",
+      "startNew": "Start Now"
+    },
+    "start": {
+      "cardLine1": "Your peace of mind starts here.",
+      "cardLine2": "Your private space... without judgment.",
+      "centerCard": "Write what's on your mind, step by step.",
+      "prompt": {
+        "title": "Finally... what's on your mind these days?",
+        "subtitle": "Write anything you want to talk about, exactly as it is in your mind.",
+        "placeholder": "I'm thinking about..."
+      },
+      "continue": "Continue"
+    },
+    "textChat": {
+      "title": "Text Chat",
+      "subtitle": "Chat with Talbinah bot through text messages",
+      "placeholder": "Type your message..",
+      "whatsOnMind": "What's on your mind today?",
+      "send": "Send",
+      "voiceButton": "Switch to Voice",
+      "newChat": "New Chat",
+      "zoomIn": "Zoom In",
+      "zoomOut": "Zoom Out"
+    },
+    "voiceChat": {
+      "title": "Voice Chat",
+      "subtitle": "Chat with Talbinah bot through voice messages",
+      "placeholder": "Press to speak",
+      "send": "Send",
+      "textButton": "Switch to Text",
+      "newChat": "New Chat",
+      "zoomIn": "Zoom In",
+      "zoomOut": "Zoom Out",
+      "welcome": {
+        "icon": "Khawiik Welcome Icon",
+        "welcome": "Hello, how are you!?",
+        "subtitle": "Are you okay? I'm here with you, what's on your mind today?"
+      },
+      "error": {
+        "message": "An error occurred while loading the session. Please try again."
+      }
+    },
+    "welcome": {
+      "icon": "Khawiik Welcome Icon",
+      "welcome": "Hello, how are you!?",
+      "subtitle": "Are you okay? I'm here with you, what's on your mind today?"
+    },
+    "weekDays": {
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "monday": "Monday",
+      "tuesday": "Tuesday"
+    },
+    "textChatPage": {
+      "header": {
+        "actions": {
+          "newChat": "New Chat",
+          "zoomIn": "Zoom In",
+          "zoomOut": "Zoom Out"
+        }
+      },
+      "welcome": {
+        "icon": "Khawiik Welcome Icon",
+        "date": "Current Date",
+        "title": "What's on your mind today?"
+      },
+      "input": {
+        "placeholder": "Type your message..",
+        "voiceButton": "Switch to Voice",
+        "sendButton": "Send"
+      },
+      "messages": {
+        "typing": "Typing..."
+      },
+      "error": {
+        "message": "An error occurred while loading the session. Please try again."
+      }
+    }
+  },
+  "completeData": {
+    "title": "Complete Your Registration",
+    "subtitle": "Provide your details to unlock all the benefits.",
+    "cta": "Start Now",
+    "or": "OR",
+    "asGuest": "As a guset",
+    "label": "Complete your registration and enjoy all the features",
+    "description": "Fill in your details to unlock new features, access exclusive content, and enjoy a personalized experience."
+  },
+  "general": {
+    "welcome": "Welcome to Talbinah",
+    "subscriptionConfirmed": "Subscription Confirmed",
+    "login": "Login",
+    "subscriptionFaild": "Subscription Failed",
+    "copyCode": "Copy Code",
+    "transfer": "Transfer",
+    "assign": "Assign",
+    "code": "Code",
+    "welcomeBack": "Welcome back",
+    "createNewAccount": "Create New Account",
+    "joinTalbinah": "Join Talbinah and start your journey towards mental wellness",
+    "accountCreatedSuccessfully": "Account created successfully",
+    "report": "Report",
+    "doctors": "Doctors",
+    "personalDetails": "Personal Details",
+    "SelectAll": "Select All",
+    "consultants": "Consultants",
+    "UnselectAll": "Unselect All",
+    "emailVerifiction": "Emai lVerifiction",
+    "noName": "No Name",
+    "task": "Task",
+    "CurrencySAR": "SAR",
+    "Language": "Language",
+    "Services": "Services",
+    "ReserveNowBtn": "Reserve Now",
+    "ServicesLabel": "Current Feeling",
+    "errorLoadingMySeminars": "An error occurred while loading your support groups. Please try again later.",
+    "PriceLabel": "Session Budget",
+    "halfHours": "30 Mins",
+    "playPodcast": "Play Podcast",
+    "Price": "Price",
+    "welcomeText": "We welcome you to a safe space, where we accompany you on your journey towards psychological balance and tranquility.",
+    "edit": "Edit",
+    "sessions": "Sessions",
+    "all": "All",
+    "time": "Time",
+    "playAduio": "Play",
+    "reservationType": "Reservation Type",
+    "reservationDuration": "Reservation Duration",
+    "userPatientName": "Patient Name",
+    "cancelSearch": "Cancel Search",
+    "reorder": "Re-Order",
+    "goToHome": "Go to homepage",
+    "day": "Day",
+    "follow": "Follow",
+    "wallet": "Wallet",
+    "for": "for",
+    "close": "Close",
+    "repayButton": "Repay",
+    "statusDetails": "View Details",
+    "statusSuccess": "Operation Successful!",
+    "statusSuccessText": "Your request has been processed successfully.",
+    "statusError": "Operation Failed!",
+    "statusErrorText": "An error occurred during your request. Please try again.",
+    "allPosts": "All Posts",
+    "retry": "Retry",
+    "me": "Me",
+    "confirm": "Confirm",
+    "now": "Now",
+    "minute": "Min",
+    "Years": "Years",
+    "Minute": "Minute",
+    "in": "In",
+    "with": "With",
+    "user": "User",
+    "minutes": "Minutes",
+    "questions": "Questions",
+    "lastWeek": "Last Week",
+    "cancelAppointment": "Cancel Appointment",
+    "point": "Point",
+    "logOutAreYouSure": "Are you sure you want to log out?",
+    "logOut": "Log Out",
+    "back": "Back",
+    "next": "Next",
+    "cancel": "Cancel",
+    "typeYourMessage": "Type your message..",
+    "image": "Display Image",
+    "imageLabel": "Image",
+    "videoLabel": "Video",
+    "newChat": "New Chat",
+    "Previous": "Previous",
+    "Next": "Next",
+    "Search": "Search",
+    "SelectDateFirst": "You must select the date and available durations first",
+    "noAvailableTimes": "No times available",
+    "filter": "Filter",
+    "YearsOfExperience": "Years of Experience",
+    "Reviews": " Reviews",
+    "Minutes": " Min",
+    "subscriber": "Subscriber",
+    "FilterText1": "Filters applied successfully,",
+    "FilterText2": "doctors match your preferences.",
+    "Apply": "Apply",
+    "InProgress": "In progress",
+    "changePoints": "Redeem Points",
+    "pointsConvertedSuccessfully": "Points converted successfully",
+    "pointsConversionFailed": "Points conversion failed",
+    "ReServe": "Re-Serve",
+    "Reset": "Reset",
+    "Gender": "Gender",
+    "SelectGender": "Select Gender",
+    "Availability": "Availability",
+    "AvailabilityTime": "📅 Available Times",
+    "Ratings": "Ratings",
+    "consultationType": "Consultation Type",
+    "notifications": " Notifications",
+    "notificationsSubtitle": "Stay up to date easily with notifications.",
+    "Skip": "Skip",
+    "Change": "Change",
+    "ChangePassword": "Change Password",
+    "save": "Save",
+    "addMore": "Add More",
+    "viewLess": "View Less",
+    "error": "Error",
+    "success": "Success",
+    "doctorsLoadingError": "Failed to load doctors. Please try again later.",
+    "doctorsFilteringError": "Failed to filter doctors. Please try again later.",
+    "doctorsSearchError": "Failed to search doctors. Please try again later.",
+    "doctorsError": "حدث خطأ في تحميل الأطباء. يرجى المحاولة مرة أخرى.",
+    "NoDoctorsFound": "No doctors found",
+    "NoDoctorsAvailableWithFilters": "No doctors available matching your criteria",
+    "NoSearchResults": "No search results found",
+    "SuggestedDoctors": "Suggested doctors for you:",
+    "loadMore": "Load More",
+    "AvailabilitySeats": "Available Seats",
+    "seats": "Seats",
+    "missingData": "Data not found...",
+    "LoadingCalc": "Loading Calc",
+    "Join": "Join",
+    "Today": "Today",
+    "NoSpecialty": "No Specialty",
+    "NoReviewsYet": "No reviews yet",
+    "loadingAllPodcasts": "Loading all podcasts... Please wait.",
+    "loadingFilterAllPodcasts": "Filtering all podcasts... Please wait.",
+    "errorLoadingPodcasts": "Error loading podcasts. Please try again later.",
+    "loadingFavoritePodcasts": "Loading your favorite podcasts... Please wait.",
+    "errorLoadingFavoritePodcasts": "Error loading favorite podcasts. Please try again later.",
+    "loadingRandomPodcasts": "Loading some random podcasts... Please wait.",
+    "errorLoadingRandomPodcasts": "Error loading random podcasts. Please try again later.",
+    "loadingRecommendedPodcasts": "Loading recommended podcasts... Please wait.",
+    "errorLoadingRecommendedPodcasts": "Error loading recommended podcasts. Please try again later.",
+    "loadingPodcastCategories": "Loading podcast categories... Please wait.",
+    "errorLoadingPodcastCategories": "Error loading podcast categories. Please try again later.",
+    "failedUpdateFavoriteStatus": "Failed to update favorite status. Please try again.",
+    "errorUpdatingFavoriteStatus": "Error updating favorite status. Please try again later.",
+    "Recommended": "Recommended",
+    "pageLink": "Page Link",
+    "link": "Link",
+    "programLink": "Program Link",
+    "copied": "Copied",
+    "unknownUser": "Unknown User",
+    "paymentMethodsEmptyState": "No payment methods available currently",
+    "paymentMethodsErrorState": "An error occurred while loading payment methods. Please try again later.",
+    "search": {
+      "not_found": "We couldn't find what you're looking for.",
+      "try_different_words": "Try different keywords or check your spelling."
+    },
+    "noDoctorToReserve": "No doctor available for reservation.",
+    "PriceNotAvailable": "Price Not Available",
+    "voiceLabel": "Voice message",
+    "cameraTitle": "Camera",
+    "captureImage": "Capture Image",
+    "retakePhoto": "Retake",
+    "usePhoto": "Use Photo",
+    "switchToVideo": "Switch to Video",
+    "switchToPhoto": "Switch to Photo",
+    "startRecording": "Start Recording",
+    "stopRecording": "Stop Recording",
+    "mohApproved": "Approved by the Saudi Ministry of Health",
+    "mohLicense": "License No. 1400054174",
+    "enterNationalIdForVat": "Enter your national ID to apply VAT discount for Saudis.",
+    "resetPassword": "Reset your password",
+    "whatsappNotification": "Notifications will be sent directly to your WhatsApp number linked to your account.",
+    "errorToDeletePost": "Please enter only an image",
+    "unknownStatus": "Unknown Status",
+    "pending": "Pending",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "trackAppointment": "Track Appointment"
+  },
+  "settings": {
+    "changePassword": {
+      "title": "🔒 Change Password",
+      "oldPassword": "Old Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "passwordPlaceholder": "Enter password",
+      "submitButton": "Change Password",
+      "successTitle": "Password changed successfully",
+      "successMessage": "Your password has been changed successfully. You can now use your new password to log in.",
+      "errorTitle": "Failed to change password",
+      "errorMessage": "An error occurred while changing your password. Please try again.",
+      "validation": {
+        "oldPasswordRequired": "Old password is required",
+        "newPasswordRequired": "New password is required",
+        "confirmPasswordRequired": "Password confirmation is required",
+        "passwordsNotMatch": "New password and confirmation password do not match",
+        "newPasswordMinLength": "New password must be at least 8 characters"
+      }
+    }
+  },
+  "points": {
+    "emptyState": {
+      "title": "No gifts available",
+      "message": "Sorry, no gifts are available for redemption at the moment. Check the required points or come back later."
+    },
+    "errorState": {
+      "title": "Error loading gifts",
+      "message": "Sorry, an error occurred while loading available gifts. Please try again."
+    }
+  },
+  "accessibility": {
+    "successStatusIcon": "Success status icon",
+    "errorStatusIcon": "Error status icon",
+    "submittingButton": "Processing your request...",
+    "goToProgramDetailsButton": "Go to program details",
+    "successHeaderIcon": "Success header icon",
+    "submittingHeaderButton": "Submitting header button",
+    "goToDetailsHeaderButton": "Go to details header button"
+  },
+  "userInfo": {
+    "welcome": "Welcome",
+    "reservedSessions": "✅ Reserved sessions count",
+    "lastPsychologicalScale": "🧠 Last psychological scale",
+    "joinedPrograms": "📚 Joined programs",
+    "activeTherapeuticPrograms": "Active therapeutic programs",
+    "session": "Session",
+    "atDate": "At date",
+    "settings": "Settings",
+    "updatePersonalInfoHint": "Review and update your personal information to ensure a better experience.",
+    "giftTitle": "🎁 Gift your loved ones",
+    "giftDescription": "Surprise your loved ones with a simple gift that brings a smile to their face and makes their day better. A small gesture... makes a big difference ❤️",
+    "complaintTitle": "📢 Submit your complaint",
+    "complaintDescription": "Your voice matters. If you face any issue or have a comment, we are here to listen and act with seriousness and care.",
+    "walletButton": "Recharge your wallet",
+    "rewardsButton": "Redeem your points",
+    "rewardsDescription": "🛍️ You can redeem your points for",
+    "walletTitle": "Your current balance:",
+    "rewardsTitle": "You currently have:",
+    "points": "point",
+    "freeSession": "Free session",
+    "gifts": "Gifts",
+    "walletAndRewardsTitle": "❤️ Your wallet & rewards",
+    "welcomePointsTitle": "Welcome to Talbinah Points Service",
+    "welcomePointsDescription": "Earn points for every step you take with us and redeem them for our services ✨",
+    "pointsRedemptionMessage": "Redeem your points for real services inside Talbinah to help you complete your psychological journey.",
+    "changePoints": "Redeem Points",
+    "firstSession": "Your First Session",
+    "firstSessionPoints": "Book your first session and get points you can redeem anytime",
+    "talbinahCommunity": "Talbinah Community",
+    "communitySharePoints": "Share with Talbinah community members and earn points for every contribution you make",
+    "services": "Services",
+    "pointsHistory": "Points History",
+    "earnPointsDescription": "Earn Talbinah points every time you participate in activities that support your mental health. You can use these points later for Talbinah services.",
+    "guest": "Guest"
+  },
+  "Gender": {
+    "Male": "Male",
+    "Female": "Female"
+  },
+  "form": {
+    "resend": "Resend the code",
+    "login": "Login",
+    "forgetPassword": "Forget Password ?",
+    "createAccount": "Create Account",
+    "alreadyHaveAccount": "Already have an account",
+    "cancelReason": {
+      "label": "Select cancellation reason",
+      "placeholder": "Choose a reason",
+      "errors": {
+        "required": "Cancellation reason is required."
+      }
+    },
+    "nationalId": {
+      "label": "National ID",
+      "placeholder": "Enter your 10-digit national ID",
+      "errors": {
+        "required": "National IDn is required.",
+        "length": "National ID must be exactly 10 digits.",
+        "startDigit": "National ID must start with 1 for Saudi nationals or 2 for residents."
+      }
+    },
+    "cancelReasonDetails": {
+      "label": "Reason for cancelling the appointment",
+      "placeholder": "Write the reason in more detail",
+      "errors": {
+        "required": "Details for cancellation are required."
+      }
+    },
+    "rate": {
+      "label": "Rate the session",
+      "placeholder": "Select the number of stars to rate the session",
+      "errors": {
+        "required": "Please select the number of stars to rate the session"
+      }
+    },
+    "sessionComment": {
+      "label": "Your comment about the session",
+      "placeholder": "Write your feedback or comment here",
+      "errors": {
+        "required": "Please enter your comment before submitting"
+      }
+    },
+    "scheduleReason": {
+      "label": "Reason for changing the schedule",
+      "placeholder": "Please choose a reason",
+      "errors": {
+        "required": "Reason for change is required"
+      }
+    },
+    "scheduleReasonDetails": {
+      "label": "Note",
+      "placeholder": "Please write details about the reason",
+      "errors": {
+        "required": "Details of the reason for change are required"
+      }
+    },
+    "availableDurations": {
+      "label": "Available Durations",
+      "placeholder": "available durations",
+      "errors": {
+        "required": "Please select one of the available durations"
+      }
+    },
+    "availableTimes": {
+      "label": "Available Times",
+      "placeholder": "available times",
+      "errors": {
+        "required": "Please select one of the available times"
+      }
+    },
+    "number": {
+      "errors": {
+        "max": "Value must not exceed {{max}}",
+        "min": "Value must be at least {{min}}",
+        "minFraction": "At least {{required}} decimal places required",
+        "maxFraction": "No more than {{allowed}} decimal places allowed"
+      }
+    },
+    "phoneCode": {
+      "label": "Phone Number",
+      "placeholder": "Enter your phone number",
+      "code": "Code",
+      "shouldSelectCode": "Please select the country code first.",
+      "errors": {
+        "required": "Phone number is required",
+        "pattern": "Only letters are allowed",
+        "minLength": "Phone must be at least 3 digits.",
+        "maxLength": "Phone cannot exceed 12 digits."
+      }
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter your password",
+      "verify": "Verify to change password",
+      "verifyButton": "Verify to change password",
+      "errors": {
+        "required": "Password is required",
+        "minLength": "Password must be at least 8 characters"
+      }
+    },
+    "confirmPassword": {
+      "label": "Confirm Password",
+      "placeholder": "Enter confirm password",
+      "errors": {
+        "required": "Confirm password is required",
+        "mismatch": "Passwords do not match"
+      }
+    },
+    "codeConfirmation": {
+      "label": "Verification Method",
+      "options": {
+        "whatsapp": "Via WhatsApp",
+        "email": "Via SMS"
+      },
+      "errors": {
+        "required": "You must select a communication method"
+      }
+    },
+    "fullName": {
+      "label": "Full Name",
+      "placeholder": "Enter Full Name",
+      "hint": "Enter Full Name",
+      "errors": {
+        "required": "Full name is required",
+        "pattern": "Only letters are allowed"
+      }
+    },
+    "problem": {
+      "label": "Problem",
+      "placeholder": "Enter Problem",
+      "hint": "Enter Problem",
+      "errors": {
+        "required": "Problem is required"
+      }
+    },
+    "domain": {
+      "label": "Domain",
+      "placeholder": "Enter your domain",
+      "errors": {
+        "required": "Domain is required"
+      }
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter your email",
+      "errors": {
+        "required": "Email is required",
+        "email": "Invalid email address"
+      }
+    },
+    "age": {
+      "label": "Age",
+      "placeholder": "Enter your age",
+      "errors": {
+        "required": "Age is required"
+      }
+    },
+    "IdentifyNumber": {
+      "label": "Identify Number",
+      "placeholder": "Enter your identify number",
+      "errors": {
+        "required": "Identify number is required"
+      }
+    },
+    "gender": {
+      "label": "Gender",
+      "placeholder": "Select your gender",
+      "male": "Male",
+      "female": "Female",
+      "errors": {
+        "required": "Gender is required"
+      }
+    }
+  },
+  "login": {
+    "form": {
+      "submitCode": "Send Verification Code",
+      "createAccount": "Create Your Account",
+      "roleSelect": "Registration Type",
+      "registerAsDoctor": "Register as Doctor",
+      "registerAsUser": "Register as New User",
+      "asDoctor": "As Doctor",
+      "asUser": "As New User",
+      "phoneCode": {
+        "label": "Phone Number",
+        "placeholder": "Enter your phone number",
+        "code": "Code",
+        "errors": {
+          "required": "Phone number is required",
+          "pattern": "Only letters are allowed",
+          "minLength": "Phone must be at least 3 digits.",
+          "maxLength": "Phone cannot exceed 12 digits."
+        }
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password",
+        "errors": {
+          "required": "Password is required"
+        }
+      },
+      "confirmPassword": {
+        "label": "Confirm Password",
+        "placeholder": "Enter confirm password",
+        "errors": {
+          "required": "Confirm password is required",
+          "mismatch": "Passwords do not match"
+        }
+      },
+      "nationalId": {
+        "label": "National ID",
+        "placeholder": "Enter your National ID",
+        "errors": {
+          "required": "National ID is required.",
+          "pattern": "Please enter a valid National ID (10-15 digits)."
+        }
+      },
+      "birthDate": {
+        "label": "Birth Date",
+        "placeholder": "Select your Birth Date",
+        "errors": {
+          "required": "Birth Date is required.",
+          "maxAge": "You must be less than 18 years old."
+        }
+      },
+      "Date": {
+        "label": "Date",
+        "placeholder": "Select a date",
+        "errors": {
+          "required": "Date is required."
+        }
+      },
+      "verifyButtonAriaLabel": "Verify National ID",
+      "verifyButton": "Verify",
+      "verificationSuccess": "National ID verified successfully!",
+      "verificationFailed": "National ID verification failed. Please try again or contact support.",
+      "codeConfirmation": {
+        "label": "Verification Method",
+        "options": {
+          "whatsapp": "Via WhatsApp",
+          "email": "Via SMS"
+        },
+        "errors": {
+          "required": "You must select a communication method"
+        }
+      },
+      "fullName": {
+        "label": "Full Name",
+        "placeholder": "Enter Full Name",
+        "hint": "Enter Full Name",
+        "errors": {
+          "required": "Full name is required",
+          "pattern": "Only letters are allowed"
+        }
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email",
+        "errors": {
+          "required": "Email is required",
+          "email": "Invalid email address"
+        }
+      },
+      "age": {
+        "label": "Age",
+        "placeholder": "Enter your age",
+        "errors": {
+          "required": "Age is required"
+        }
+      }
+    }
+  },
+  "OtpMethodSelection": {
+    "Title": "Choose Verification Method",
+    "Subtitle": "Choose how you want to receive the verification code",
+    "Label": "Verification Method",
+    "Whatsapp": "Via WhatsApp",
+    "SMSNotificationsDescription": "You will receive a notification as an SMS message for updates or alerts.",
+    "SMS": "Via SMS",
+    "WhatsappNotificationsDescription": "Notifications will be sent directly to your WhatsApp number.",
+    "Submit": "Send Code",
+    "codeResentSuccessfully": "Code resent successfully",
+    "codeResendFailed": "Code resend failed",
+    "Errors": {
+      "Required": "You must select a communication method"
+    }
+  },
+  "opt": {
+    "checkCode": "Check the code",
+    "verificationCode": "Enter the code sent to you",
+    "invalidCode": "Invalid code"
+  },
+  "home": {
+    "welcomeMessage": "Welcome to your safe space",
+    "selfCareMessage": "Every moment you care for yourself... is a true investment in your future.",
+    "EditCrdsView": "Edit Crds View",
+    "FixedCardsTitle": "Pinned Items",
+    "AvailableCardsTitle": "Available Cards",
+    "bookAppointment": "Book your appointment",
+    "podcast": "Podcast",
+    "supportGroups": "Support Groups",
+    "talbinaCommunity": "Talbinah Community",
+    "mentalHealthScale": "Mental Health Scale",
+    "talbinaBot": "Talbinah Bot",
+    "khawiik": "Khawiik",
+    "appointments": "Appointments",
+    "therapeuticPrograms": "The Rapeutic Programs",
+    "UrgentAppointment": "Urgent Appointment",
+    "Articles": "Articles",
+    "AllCardsPinned": "All cards are currently pinned.",
+    "descriptions": {
+      "bookAppointment": "With a single click, book your session and start your recovery journey with the best counselors and mental health specialists.",
+      "podcast": "Presented by mental health experts, discussing topics to support your journey towards better mental well-being.",
+      "supportGroups": "Your safe space to interact, share experiences, and seek support in a community that cares about your mental health.",
+      "talbinaBot": "Helps you identify your issue and guides you to the most suitable doctor.",
+      "mentalHealthScale": "With a single touch, understand your mental state accurately and clearly. This comprehensive assessment helps you track your emotions and better understand your needs, starting your journey towards inner balance and true comfort. 🌿",
+      "UrgentAppointment": "Read simple articles by specialists that explain psychological topics in an easy and relatable way, so you can understand yourself better and deal with it comfortably",
+      "Articles": "If your condition requires immediate intervention, book an urgent appointment with a qualified specialist and start your recovery steps right away."
+    }
+  },
+  "therapeuticPrograms": {
+    "title": "Specialized Therapeutic Programs for Your Mental State",
+    "subtitle": "Therapeutic programs designed to help you understand your emotions and overcome psychological challenges with simple steps.",
+    "sessions": "Sessions",
+    "seats": "Reminder Seats",
+    "usageNumber": "Registered",
+    "therapySubscriptionSuccess": "Successfully subscribed to the therapy program",
+    "therapySubscriptionError": "Therapy Subscription Failed",
+    "therapySubscriptionErrorText": "There was an issue with your therapy subscription. Please try again or contact support.",
+    "therapySubscriptionSuccessText": "The program has been activated. You can now begin your therapy journey with confidence and peace of mind.",
+    "goToProgramDetails": "Go to Program Details",
+    "phase": "Phase",
+    "aboutProgram": "✨About the Program",
+    "programDuration": "Program Duration",
+    "programPhases": "Program Phases",
+    "program_phases_description": "The program consists of {{phasesCount}} essential phases covering assessment, intervention, and follow-up.",
+    "supervisingDoctors": "Supervising Doctors",
+    "exploreTherapyPrograms": "🧠 Explore Therapy Programs",
+    "exploreTherapyProgramsAll": "Explore Therapy Programs",
+    "therapists": "Therapists",
+    "myTherapyPrograms": "✅ Your Therapy Programs",
+    "myTherapyProgramsAll": "Your Therapy Programs",
+    "noTherapyPrograms": "No therapy programs found.",
+    "noTherapyProgramsAvailable": "No therapy programs are currently available.",
+    "noTherapyProgramsAvailableError": "An error occurred while loading the therapy program.",
+    "progress": "Track Progress 🎯",
+    "progressText": "Track your progress and reach your goals step by step",
+    "seatsNotAvailable": "No seats available"
+  },
+  "podcast": {
+    "title": "Podcast",
+    "subtitle": "Listen, discover, and elevate your mind",
+    "talbinahPodcast": "Talbinah Podcast",
+    "selections": "🎯 Talbinah Audio Selections",
+    "explore": "🔊 Explore Episodes",
+    "favorites": "❤️ My Favorite Moments",
+    "favoritesPodcasts": "Favorites Podcasts",
+    "podcastFavoritesDescription": "Small moments leave a big mark on our hearts — we share them with warmth and love in Talbinah.",
+    "mostListened": "🔥 Most Listened This Week",
+    "suggestedEpisodes": "🎙️ Suggested Episodes for You",
+    "podcastDetails": "Podcast Details",
+    "emptyState": {
+      "noPodcastsInCategory": "No podcasts found in this category.",
+      "noRandomPodcasts": "No random podcasts available.",
+      "noFavoritePodcasts": "You don't have any favorite podcasts yet.",
+      "noRecommendedPodcasts": "No recommended podcasts available."
+    },
+    "tabs": {
+      "all": "All",
+      "socialSupport": "Social Support & Relationships",
+      "mentalHealth": "Daily Mental Health",
+      "selfAwareness": "Self-Awareness Journey"
+    },
+    "episodeDetails": "Episode Details",
+    "episodeParagraphs": "🎙️ Episode Paragraphs",
+    "minute": "Min",
+    "aboutPodcast": "About Episode"
+  },
+  "mentalHealthScale": {
+    "title": "Mental Health Scale",
+    "subtitle": "Answer and discover your mental health",
+    "moodQuestion": "What is your mood today?",
+    "yourMood": "Your Mood",
+    "noMentalHealthResultFound": "No mental health result found.",
+    "submit": "Submit",
+    "sending": "Sending...",
+    "reviewTest": " Review Test",
+    "moods": {
+      "tired": "Tired",
+      "friendly": "Friendly",
+      "loving": "Loving",
+      "happy": "Happy",
+      "sad": "Sad"
+    },
+    "startNow": "Start Now",
+    "metrics": "Metrics ❤️",
+    "DepressiveDisorderScale": "Depressive Disorder Scale ❤️",
+    "trackYourMood": "Track your mood",
+    "completed": "You have completed",
+    "test": "test",
+    "from": "out of",
+    "tests": "tests",
+    "continueYourJourney": "remaining to continue your mental journey.",
+    "mood": "🤩 Mood",
+    "noMeasurementsFound": "No measurements found.",
+    "noMeasurementsAvailable": "No measurements available currently.",
+    "noMoodsFound": "No Moods found.",
+    "noMoodsAvailable": "No Moods available currently.",
+    "Test": {
+      "details": "Test Details",
+      "items": "Items",
+      "less_than": "Less than",
+      "total_items": "Total Number of Items",
+      "expected_time_minutes": "Expected Time (minutes)",
+      "note": "Note: These tests are not diagnostic or therapeutic tools and do not replace a session with a doctor or therapist.",
+      "start_test": "Start Test",
+      "minutes": "Minutes",
+      "requiredAnswer": "An answer is required",
+      "suggestedSpecialists": "🩺 Suggested specialists for you",
+      "noQuestions": "No questions available in this assessment"
+    }
+  },
+  "supportGroups": {
+    "title": "Support Groups",
+    "subtitle": "Explore and share your mental health",
+    "intro1": "A safe and guided space that brings together people going through similar experiences, under the supervision of a mental health specialist.",
+    "intro2": "Whether you are facing anxiety, depression, family pressures, or life challenges, you will find a group that shares your experience and provides you with the support you need.",
+    "ourGroups": "🤩 my Groups",
+    "ourGroupsAll": "my Groups",
+    "addNewCard": "Add New Card",
+    "confirmSubscription": "Confirm Subscription",
+    "subscriptionConfirmed": "Subscription Confirmed",
+    "subscriptionFaild": "Subscription Failed",
+    "groupDetails": "Seminar Details",
+    "groupPresenter": "Seminar Presenter",
+    "groupDuration": "Duration",
+    "groupLink": "Seminar Link",
+    "groupSubscription": "Group Subscription",
+    "noSupportGroups": "No support groups found.",
+    "noSupportGroupsAvailable": "No support groups available currently.",
+    "groupDate": "Date",
+    "paymentMethods": {
+      "wallet": "Wallet",
+      "bank": "Bank",
+      "cash": "Cash",
+      "card": "Card",
+      "viaPoints": "Via Points",
+      "viaCard": "Via e-Card"
+    },
+    "pleaseSelectMethod": "Please select a method before continuing",
+    "real": "real",
+    "selectPaymentMethod": "Select Payment Method",
+    "confirmSupportGroupSubscription": "Are you sure you want to subscribe to the selected support group?",
+    "seminarSuccess": "Support Group Subscription Successful",
+    "seminarSuccessText": "Your support group has been activated, and you can now start your support group with confidence and peace of mind.",
+    "seminarError": "Support Group Subscription Failed",
+    "seminarErrorText": "There was an issue with your support group subscription. Please try again or contact support.",
+    "goToSeminarDetails": "Go to seminar",
+    "wallet": {
+      "walletTitle": "Wallet",
+      "walletConfirmationText": "Confirm subscription fee withdrawal from your wallet",
+      "subtotal": "Subtotal",
+      "discountCodeLabel": "Discount Code:",
+      "taxLabel": "Tax",
+      "currentBalance": "Your Current Balance",
+      "subscriptionCostLabel": "Subscription Cost",
+      "remainingBalance": "Remaining Balance",
+      "errorNotEnoughBalance": "You cannot subscribe because the subscription cost is higher than your current balance."
+    },
+    "subscribed": "Subscribed",
+    "subscribe": "Subscribe to the program",
+    "supportGroups": "❤️ Support Groups",
+    "supportGroupsAll": "Support Groups",
+    "seatsNotAvailable": "No seats available"
+  },
+  "talbinahBot": {
+    "title": "Talbinah Bot",
+    "subtitle": "Listen, discover, and elevate your mind",
+    "CardMoodHeader": "Your psychological state",
+    "RecordsHeader": "Your Records",
+    "LastHeard": "Last listened:",
+    "CurrentState": " Psychological level:",
+    "RecordedCount": "Recorded state:",
+    "Times": "Times",
+    "EmptyChats": "No chats available",
+    "ErrorChats": "An error occurred while loading chats. Please try again later.",
+    "FirstChat": "Welcome to the Talbinah Bot! I'm here to assist you on your psychological journey. You can start by asking me about anything on your mind.",
+    "FirstChatMessage": "Start your conversation with the bot to get personalized psychological support and guidance.",
+    "start": "Start your first chat"
+  },
+  "talbinahCommunity": {
+    "title": "Welcome to the Talbinah Mental Health Community 🌿",
+    "subtitle": "Share your experiences, stories, feelings, or daily moments with a safe and supportive community.",
+    "commentInputPlaceHolder": "Write a kind word...",
+    "loadingPosts": "Loading posts...",
+    "noPostsAvailable": "No posts available at the moment.",
+    "noPostsForInterest": "No posts found for this interest.",
+    "communityNotifications": "Community Notifications",
+    "noNotifications": "No notifications found.",
+    "noNotificationsAvailable": "No notifications available at the moment.",
+    "commentInputPlaceholderHeader": "How are you feeling today? 🤔",
+    "exploreReels": "Explore Reels",
+    "MyCommunityForm": {
+      "PageTiltle": "✨ Let's start with your comfortable identity",
+      "DefaultName": {
+        "Label": "Default Name",
+        "placeholder": "Choose any suitable name for you",
+        "Error": {
+          "Required": "Please choose a default name"
+        }
+      },
+      "Emoji": {
+        "Label": "How would you like to appear in the Talbinah community?",
+        "Error": {
+          "Required": "Please choose an image that represents you"
+        }
+      },
+      "Interest": {
+        "Label": "What are your interests?",
+        "Error": {
+          "Required": "Please select at least one interest"
+        }
+      },
+      "SubmitText": "Create Your Identity"
+    },
+    "banner": {
+      "title": "Talbeenah Mental Health Community 🤝",
+      "subtitle": "Talbeenah is a safe, honest, and anonymous space, created so you can express yourself without fear or judgment. Whether you want to vent, share an experience, ask for support, or just read – here you'll find people who understand you, reassure you, and tell you: You're not alone."
+    },
+    "share": "Share",
+    "newShare": "New Share",
+    "shareText": "🌿 Your posts help others feel they are not alone",
+    "classification": "Classification",
+    "optional": "optional",
+    "cancel": "Cancel",
+    "shareNow": "Share Now",
+    "suggestion": "📎 People with your condition also read this",
+    "follow": "Follow",
+    "following": "Following",
+    "followersCount": "followers",
+    "viewPost": "View Post",
+    "notifications": "Notifications 🔔",
+    "seeMore": "See More",
+    "yourPost": "Your Post",
+    "posts": "posts",
+    "followMe": "Followers",
+    "iFollowThem": "following",
+    "sharedPost": "Post shared",
+    "by": "by",
+    "postLink": "Post Link",
+    "status": "Post",
+    "reels": "Reels",
+    "moods": {
+      "tired": "Tired",
+      "friendly": "Friendly",
+      "loving": "Loving",
+      "happy": "Happy",
+      "sad": "Sad"
+    },
+    "expressYourMood": "Express your mood today",
+    "changeMoodHelpText": "Changing your mood helps us improve your community experience.",
+    "textArea": {
+      "shareMood": "Express your mood today...",
+      "required": "The status must be written first",
+      "minLength": "Status must contain at least 12 characters."
+    },
+    "updateIdentity": {
+      "title": "Edit Your Identity",
+      "defaultName": "Default Name",
+      "appearanceLabel": "How would you like to appear in Talbinah Community?",
+      "defaultNamePlaceholder": "Enter a default name",
+      "defaultNameError": "Please enter a default name",
+      "avatarError": "Please select an avatar that represents you"
+    },
+    "post": {
+      "timeUnits": {
+        "second": "s",
+        "minute": "m",
+        "hour": "h",
+        "day": "d",
+        "week": "w",
+        "month": "mo",
+        "year": "y"
+      },
+      "actions": {
+        "hideReplies": "Hide replies",
+        "showAllReplies": "Show all replies",
+        "like": "Like",
+        "unlike": "Unlike"
+      },
+      "answer": "Reply"
+    },
+    "mood": {
+      "todayMoodInCommunity": "🥰 Today's mood in our community",
+      "peopleExpressedMood": "people expressed that they are today"
+    },
+    "supportStats": {
+      "title": "📊 Support Statistics",
+      "youSupportedToday": "You supported today",
+      "people": "people"
+    },
+    "support_message": "We noticed you might need support. Would you like to talk to someone?",
+    "book_session": "Book a session",
+    "talk_to_bot": "Talk to the bot",
+    "support_requested": "❤️‍🩹 This user requested support",
+    "gratitude": "Gratitude 🧠",
+    "delete": {
+      "confirm": "Delete Confirmation",
+      "confirmSubtitle": "Are you sure you want to delete this post? This action cannot be undone."
+    },
+    "welcome": "Welcome to our medical community, Talbinah 🌱",
+    "enjoySharing": "Enjoy sharing your thoughts and psychological stories with our members, and ask for their help anytime.",
+    "Posts": "Posts",
+    "browseStoriesTitle": "Browse stories shared by Talbinah community members, and share your own story.",
+    "comments": "Comments",
+    "shareOpinionsTitle": "Share your opinions with Talbinah community members, and discuss their views.",
+    "browse": "Browse",
+    "browsePostsTitle": "Browse posts and stories from Talbinah members to find what suits you.",
+    "savedPosts": " Saved Posts",
+    "unfollow": "Unfollow",
+    "Follow": "Follow",
+    "usersFollow": {
+      "emptyState": {
+        "title": "No users you are following yet"
+      },
+      "errorState": {
+        "title": "Oops! Something went wrong"
+      }
+    },
+    "reacts": {
+      "like": "Like",
+      "haha": "Haha",
+      "wow": "Wow",
+      "sad": "Sad",
+      "angry": "Angry",
+      "love": "Love"
+    },
+    "addReels": "Add Reels",
+    "Reels": {
+      "emptyState": "No reels available"
+    },
+    "attachments": "Attachments",
+    "addAttachment": "Add Attachment",
+    "addReelsText": "Make your reel shine with your words...",
+    "imageDimensions": "Image is preferably",
+    "imageVideoDimensions": "Image or video is preferably",
+    "px": "pixels.",
+    "imageVideoMaxSize": "and must not exceed 5 MB.",
+    "attachmentRequired": "At least one image or video attachment is required.",
+    "addFirstPost": "Create your first post",
+    "shareFeelings": "Share your feelings in our community"
+  },
+  "Articles": {
+    "Title": "Articles",
+    "Subtitle": "Explore articles that help you improve your health condition",
+    "TitleList": "📑 Articles",
+    "TitleDetails": "📑 Article",
+    "MostRead": "🔥 Most Read This Week",
+    "MostFavorite": "❤️ Favorite Articles",
+    "noArticlesFound": "No articles found.",
+    "noArticlesAvailable": "An error occurred while loading articles."
+  },
+  "UrgentAppointment": {
+    "Title": "Urgent Appointment",
+    "Subtitle": "Book your urgent appointment with ease",
+    "ChooseSpeciality": "👨🏻‍⚕️ Choose Speciality",
+    "SpecialityRequired": "Please select a Speciality.",
+    "SessionDuration": "🕒 Session Duration",
+    "ProblemType": "🕒 Problem Type",
+    "durationRequired": "Please select a session duration.",
+    "SessionType": "📱 Type of Session",
+    "problemTypeRequired": "Please select an problem type.",
+    "SessionTypeRequired": "Please select an session type.",
+    "BookNow": "Book Now",
+    "backToHome": "Back to Home",
+    "appointmentSuccess": "Appointment Confirmed!",
+    "appointmentSuccessText": "Your emergency appointment was successfully created. Our medical team will contact you shortly.",
+    "appointmentError": "Something Went Wrong",
+    "appointmentErrorText": "We couldn't complete your emergency appointment request. Please try again later or contact support.",
+    "bookingTitle": "Book Your Medical Appointment in the Blink of an Eye",
+    "bookingSubtitle": "Easily and quickly book your medical appointment, and enjoy fast access to essential healthcare services",
+    "ChooseSpecialityEmptyState": "No specialties available.",
+    "ChooseSpecialityErrorState": "An error occurred while loading specialties. Please try again.",
+    "SessionDurationEmptyState": "No durations available.",
+    "SessionDurationErrorState": "An error occurred while loading session durations. Please try again.",
+    "problemTypeEmptyState": "No problem types available.",
+    "problemTypeErrorState": "An error occurred while loading problem types. Please try again.",
+    "SessionTypeEmptyState": "No session types available.",
+    "SessionTypeErrorState": "An error occurred while loading session types. Please try again.",
+    "waitingDoctorTitle": "Waiting for Doctor",
+    "waitingDoctorSubtitle": "Track your appointment details and get ready for a session that helps you calm down and understand yourself better.",
+    "SpecialityRequiredFirst": "Please select a Speciality first."
+  },
+  "PatientDetails": {
+    "Title": "Patient Details",
+    "Subtitle": "Explore the specialist’s expertise and ensure they’re the right partner to support your mental health journey with Talbinah."
+  },
+  "OrderSummary": {
+    "Title": "Order Summary",
+    "Subtitle": "Discover the specialist's expertise, and be sure that he is the right partner to support your psychological journey with Talbinah.",
+    "DiscountTitle": "Discount Code",
+    "DiscountCodePlaceholder": "Enter code",
+    "DiscountCodeRequired": "Please enter a valid discount code",
+    "DiscountError": "Discount Code Error",
+    "DiscountErrorMessage": "The discount code you entered is invalid or expired. Please try again with a valid code.",
+    "DiscountErrorRetry": "Try Again"
+  },
+  "PaymentMethods": {
+    "ChoosePaymentMethod": "Choose a payment method",
+    "Wallet": "Wallet",
+    "Point": "Via points",
+    "Card": "Via an electronic card",
+    "ChoosePaymentMethodRequired": "Please select a payment method.",
+    "PaymentMethodsButton": "Confirm Payment",
+    "enterAmount": "Please enter the amount",
+    "paymentAmount": "Payment amount",
+    "deposit": "Deposit",
+    "depositAmount": "Deposit amount"
+  },
+  "BookAppointment": {
+    "Title": "Book Your Appointment in One Simple Step",
+    "Subtitle": "Choose the specialist that suits your mental state and begin your journey to peace of mind with Talbinah.",
+    "TitleList": "🩺 Available Doctors for You",
+    "FilterHeader": "Filter the search results to your preference",
+    "Classification": "Classified by: Saudi Commission for Health Specialties",
+    "doctorLink": "Doctor Link",
+    "Cost": "Cost",
+    "Experiences": "Experiences",
+    "session": "Session",
+    "registered": "Registered",
+    "seats": "Seats",
+    "tabs": {
+      "bio": "Biography",
+      "ratings": "Ratings",
+      "gallery": "Gallery",
+      "programs": "Therapeutic Programs",
+      "discounts": "Discount Codes",
+      "no_discount_codes_available": "No discount codes available",
+      "no_reviews_available": "No reviews available",
+      "no_treatment_programs_available": "No treatment programs available",
+      "no_attachments_available": "No attachments available"
+    },
+    "Subspecialties": "Subspecialties",
+    "DiscountCode": "Discount Code",
+    "emptyState": {
+      "no_doctors_available": "No doctors currently available.",
+      "subtitle": "We apologize, all doctors are currently busy or unavailable. Please check again later."
+    },
+    "errorState": {
+      "error_loading_doctors": "Error loading doctor data.",
+      "subtitle": "Please try again later."
+    }
+  },
+  "Appointments": {
+    "Title": "Your Upcoming Therapy Appointment",
+    "Subtitle": "Track the details of your appointment and get ready for a session that helps you calm down and understand yourself better.",
+    "Tabs": {
+      "Upcoming": "Upcoming",
+      "Ongoing": "Ongoing",
+      "Completed": "Completed",
+      "Cancelled": "Cancelled"
+    },
+    "Aside": {
+      "CurrentAppointmentsTitle": "🥰 Your Current Appointments",
+      "CalendarTitle": "📆 Your Appointment Calendar",
+      "ThisWeeksSessionsTitle": "📅 This Week's Key Sessions",
+      "ResetCalendar": "Reset Calendar"
+    },
+    "RateDoctorCompatibility": "Rate your compatibility with the doctor using the smart assistant",
+    "RateDoctorCompatibilityText": "Answer some simple questions with the bot, and know how much your mental state matches the doctor’s specialty and experience",
+    "RateCompatibility": "Rate the compatibility",
+    "emptyState": {
+      "no_appointments_available": "No appointments available.",
+      "noAppointmentsOngoing": "No ongoing appointments now.",
+      "subtitle": "We apologize, all appointments are currently booked or unavailable. Please check back later.",
+      "no_your_appointments_available": "No current appointments available."
+    },
+    "errorState": {
+      "error_loading_appointments": "Error loading appointments.",
+      "error_loading_reservation_details": "Error loading reservation details.",
+      "subtitle": "Please try again later."
+    },
+    "chat": {
+      "welcomeMessage": "Hello! Start your conversation with the doctor"
+    }
+  },
+  "Tooltip": {
+    "CopiedMessage": "Copied to clipboard!"
+  },
+  "EmojiCategory": {
+    "Search": "Search emojis...",
+    "Smileys": "Smileys",
+    "Animals": "Animals",
+    "Food": "Food",
+    "Activities": "Activities",
+    "Travel": "Travel",
+    "Objects": "Objects",
+    "Symbols": "Symbols",
+    "Flags": "Flags",
+    "NoResults": "No results found"
+  },
+  "comingSoon": {
+    "title": "Under Construction",
+    "subtitle": "We'll be back soon!",
+    "description": "We’re currently putting the finishing touches on this page. It will be back online very soon!"
+  },
+  "menu": {
+    "replay": "Replay",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "copy": "Copy",
+    "rename": "Rename"
+  },
+  "notifications": {
+    "filter": {
+      "all": "General Notifications",
+      "reservations": "Reservations",
+      "specialOffers": "Special Offers",
+      "podcast": "Podcast",
+      "telbinaCommunity": "Telbina Community",
+      "sessionTasks": "Session Tasks"
+    }
+  },
+  "settings": {
+    "nationalIdVerification": {
+      "title": "Security",
+      "subtitle": "Verify your national ID to enhance your account security and unlock more features."
+    },
+    "rewards": {
+      "title": "Rewards",
+      "subtitle": "Your rewards have arrived… use them and enjoy!",
+      "cardPointsTitle": "Rewards",
+      "cardPointsSubtitle": "Your points have been converted into a real reward that you can easily use now.",
+      "expired": "Code has expired",
+      "validForDays": "Valid for {{days}} days",
+      "detailsModalSubtitle": "You can use the code for any of the services provided by Talbinah.",
+      "emptyTitle": "No rewards available",
+      "errorTitle": "An error occurred while loading rewards"
+    },
+    "security": {
+      "title": "Security",
+      "subtitle": "Manage your security preferences and linked devices easily."
+    },
+    "prescription": {
+      "title": "Prescription",
+      "subtitle": "Manage your medical prescriptions and track prescribed medications.",
+      "cardLabel": "Prescription for session number",
+      "emptyTitle": "No prescriptions available",
+      "errorTitle": "An error occurred while loading prescriptions"
+    },
+    "changePassword": {
+      "title": "Security",
+      "subtitle": "Update your password to keep your account safe and secure.",
+      "titleDisplay": "🔒 Change Password",
+      "oldPassword": "Old Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "passwordPlaceholder": "Enter password",
+      "submitButton": "Change Password",
+      "successTitle": "Password changed successfully",
+      "successMessage": "Your password has been changed successfully. You can now use your new password to log in.",
+      "errorTitle": "Failed to change password",
+      "errorMessage": "An error occurred while changing your password. Please try again.",
+      "validation": {
+        "oldPasswordRequired": "Old password is required",
+        "newPasswordRequired": "New password is required",
+        "confirmPasswordRequired": "Password confirmation is required",
+        "passwordsNotMatch": "New password and confirmation password do not match",
+        "newPasswordMinLength": "New password must be at least 8 characters"
+      }
+    },
+    "updatePersonalInfo": {
+      "title": "My Profile",
+      "subtitle": "Review and update your personal details to ensure a better experience."
+    },
+    "governmentAgencies": {
+      "title": "Government Agencies",
+      "subtitle": "Link your account to a government agency and get full access to all available health coverages.",
+      "labelList": "Agencies",
+      "supportMessage": "Dear student, don't let challenges stand in your way! Join support sessions to get the help you need.",
+      "registerWithAgency": "Register with your affiliated agency to receive support for your session.",
+      "registerWithAgencyShort": "Register with your affiliated agency",
+      "agencyNotListed": "If your organization is not listed, you can submit a request to add it now.",
+      "agencyNotAvailable": "Agency not available",
+      "governmentAgencyVerificationCodeLabel": "Enter the verification code sent to your email address",
+      "governmentAgencyEmailInstruction": "Please enter the agency's email address to activate support sessions",
+      "chooseSubsidizedConsultant": "Please choose one of the consultants who offer subsidized sessions",
+      "emptyTitle": "No government agencies available",
+      "errorTitle": "An error occurred while loading government agencies"
+    },
+    "complaintsList": {
+      "title": "Complaints",
+      "subtitle": "Your voice matters. If you face any issues or have feedback, we're here to listen and respond seriously."
+    },
+    "myFavourites": {
+      "title": "Favourites",
+      "subtitle": "All your favourites in one place — saved doctors, articles, and podcasts for quick access anytime.",
+      "myFavouritesExplore": "Explore your favourites",
+      "emptyState": {
+        "no_favourites_available": "No favourites available",
+        "no_favourites_podcasts_available": "No favourite podcasts available",
+        "no_favourites_doctors_available": "No favourite doctors available",
+        "no_favourites_articles_available": "No favourite articles available"
+      },
+      "errorState": {
+        "error_loading_favourites": "Error loading favourites"
+      }
+    },
+    "settingFaqs": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "All your common questions and answers in one place — we made it simple for you.",
+      "exploreQuestions": "Explore Questions",
+      "exploreQuestionsWithHeart": "❤️Explore Questions",
+      "searchPlaceholder": "Search in frequently asked questions...",
+      "loading": "Loading frequently asked questions...",
+      "retry": "Retry",
+      "noCategories": "No categories available",
+      "noCategoriesDescription": "Sorry, no FAQ categories are available at the moment.",
+      "errorTitle": "Error loading frequently asked questions",
+      "errorMessage": "Sorry, an error occurred while loading frequently asked questions. Please try again.",
+      "emptyTitle": "No frequently asked questions available",
+      "emptyMessage": "Sorry, no frequently asked questions are available at the moment. Please try again later.",
+      "selectQuestion": "Select a question"
+    },
+    "importantNumbers": {
+      "title": "Important Numbers",
+      "subtitle": "Key mental health and medical support numbers — easily accessible whenever you need help.",
+      "exploreImportantNumbersWithHeart": "❤️Explore important numbers",
+      "searchPlaceholder": "Search in important numbers...",
+      "errorTitle": "Error loading important numbers",
+      "emptyTitle": "No important numbers available"
+    },
+    "visitReports": {
+      "title": "Visit Reports",
+      "subtitle": "Track the details of your past visits with ease.",
+      "emptyTitle": "No visit reports available",
+      "errorTitle": "Error loading visit reports"
+    },
+    "wallet": {
+      "title": "Your Wallet",
+      "subtitle": "Manage your wallet balance and transactions.",
+      "currentBalance": "Current Wallet Balance",
+      "chargeWallet": "Charge your wallet"
+    },
+    "giftLovedOnes": {
+      "title": "Gift to Your Loved Ones",
+      "subtitle": "Send quick and thoughtful gifts to your loved ones in just a few taps 💝.",
+      "seConfirmed": "Gift sent successfully",
+      "seError": "Gift sending failed",
+      "acceptSuccessTitle": "Gift accepted successfully",
+      "acceptSuccessSubtitle": "The balance will be added to your account.",
+      "acceptErrorTitle": "Gift accepting failed",
+      "acceptErrorSubtitle": "An error occurred while accepting the gift.",
+      "cancelSuccessTitle": "Gift cancelled successfully",
+      "cancelSuccessSubtitle": "The balance will be added to your account.",
+      "cancelErrorTitle": "Gift cancellation failed",
+      "cancelErrorSubtitle": "An error occurred while cancelling the gift."
+    },
+    "pointsHistory": {
+      "filters": {
+        "all": "All",
+        "earned": "Earned Points",
+        "used": "Used Points"
+      },
+      "emptyState": {
+        "title": "No Points History",
+        "message": "No points history found yet"
+      },
+      "errorState": {
+        "title": "Error Loading Points History",
+        "message": "An error occurred while loading points history. Please try again"
+      }
+    },
+    "points": {
+      "title": "My Points",
+      "subtitle": "Redeem your points for real services within Talbina to support your mental wellness journey.",
+      "emptyState": {
+        "title": "No Points Available",
+        "message": "No points found yet"
+      },
+      "errorState": {
+        "title": "Error Loading Points",
+        "message": "An error occurred while loading points. Please try again"
+      }
+    },
+    "services": {
+      "emptyState": {
+        "title": "No Services Available",
+        "message": "No services found yet"
+      },
+      "errorState": {
+        "title": "Error Loading Services",
+        "message": "An error occurred while loading services. Please try again"
+      }
+    },
+    "invitationCode": {
+      "title": "Invitation Code",
+      "subtitle": "Share with your friends and earn rewards.",
+      "titleModalContent": "✨ Share your code and get bonus points!",
+      "subtitleModalContent": "Send your code to a friend or family member, and once they book their first session, you’ll instantly earn 150 points! 🎉",
+      "codeLabel": "Your Personal Code",
+      "copySuccess": "Invitation code copied successfully.",
+      "copyFailed": "Failed to copy the invitation code. Please try again.",
+      "imageAlt": "Invitation code illustration"
+    },
+    "notifications": {
+      "title": "Notification Settings",
+      "subtitle": "Enable notifications to receive updates and medical services faster and easier"
+    },
+    "technicalSupportChats": {
+      "emptyTitle": "No chats available",
+      "errorTitle": "An error occurred while loading chats"
+    },
+    "profile": "Your profile",
+    "governmentAuthorities": "Government authorities",
+    "visitReports": "Visit reports",
+    "favorites": "Favorites",
+    "prescriptions": "Prescriptions",
+    "therapeuticPrescription": "Therapeutic Prescription",
+    "invitationCode": "Invitation code",
+    "security": "Security",
+    "help": "Help",
+    "faq": "FAQ",
+    "importantNumbers": "Important numbers",
+    "contactUs": "Contact us",
+    "supportAndHelp": "Support & Help"
+  },
+  "vatNationalId": {
+    "header": "Your National ID",
+    "description": "Enter your national ID to apply VAT discount for Saudis.",
+    "nationalIdPlaceholder": "Enter your national ID",
+    "nationalIdRequired": "National ID is required.",
+    "birthDateLabel": "Birth Date",
+    "birthDatePlaceholder": "Select your birth date",
+    "birthDateRequired": "Birth date is required.",
+    "birthDateMaxAge": "You must be less than 18 years old.",
+    "save": "Save",
+    "loading": "In progress"
+  },
+  "searchWaitingDoctor": {
+    "loadingAltText": "Doctor search in progress, please wait",
+    "processingRequestTitle": "Processing your request, please wait while we search for an available doctor.",
+    "cancellationMessage": "If no doctor is found, your request will be cancelled after {{duration}} minutes.",
+    "cancellationMessageLoading": "If no doctor is found, your request will be cancelled after"
+  },
+  "RecallAppointment": {
+    "TimeExpiredTitle": "The request period has expired and the urgent appointment has been cancelled",
+    "timeExpired": "The urgent appointment search time has expired",
+    "searchCancelled": "You have cancelled the urgent appointment search",
+    "cancelled": "You have cancelled the urgent appointment search.",
+    "RequestNewAppointmentQuestion": "Do you wish to request a new appointment again?"
+  },
+  "sessionWithDoctor": {
+    "title": "Your Therapy Session",
+    "subtitle": "Follow your appointment details and get ready for a session that helps you calm down and understand yourself better.",
+    "SessionTasksModalTitle": "Session Tasks",
+    "SessionTasksModalSubtitle": "Complete the tasks assigned by your doctor to enhance your therapy experience.",
+    "LeaveRatingModalTitle": " Leave a Rating",
+    "LeaveRatingModalSubtitle": "Rate your session with the doctor to help us improve our services.",
+    "BlockDoctorModalTitle": "Block Doctor",
+    "BlockDoctorModalSubtitle": "You will not be able to book sessions with them in the future.",
+    "ReportIssueModalTitle": "Report Issue",
+    "ReportIssueModalSubtitle": "Review the details of your session with the doctor.",
+    "SessionDetailsTitle": " Session Details",
+    "SessionDetailsSubtitle": "Review the details of your session with the doctor."
+  },
+  "BlockDoctorModal": {
+    "confirmBlockTitle": "Are you sure you want to block the doctor?",
+    "confirmBlockDescription": "This doctor will no longer be able to contact you or view your information.",
+    "confirmUnblockTitle": "Are you sure you want to unblock the doctor?",
+    "confirmUnblockDescription": "The doctor will be able to contact you and view your information again."
+  },
+  "chatActions": {
+    "sessionTasks": "Session Actions",
+    "leaveRating": "Leave a Rating",
+    "blockDoctor": "Block Doctor",
+    "reportIssue": "Report",
+    "sessionDetails": "Session Details"
+  },
+  "reservationsList": {
+    "title": "Your Therapy Session",
+    "subtitle": "Follow your appointment details and get ready for a session that helps you calm down and understand yourself better.",
+    "scheduleAppointment": "Schedule Appointment",
+    "cancelAppointment": "Cancel Appointment",
+    "scheduleAppointmentModal": {
+      "modalTitle": "Schedule a New Appointment",
+      "modalSubtitle": "Choose a time that works best for you."
+    },
+    "cancelAppointmentModal": {
+      "modalTitle": "Cancel Appointment",
+      "modalSubtitle": "Are you sure you want to cancel this appointment?"
+    },
+    "confirmCancelAppointmentModal": {
+      "modalTitle": "Confirm Appointment Cancellation",
+      "modalSubtitle": "Are you sure you want to cancel this appointment?",
+      "confirmButtonText": "Yes, Cancel Appointment",
+      "confirmCancelLabel": "Are you sure you want to cancel the appointment?",
+      "confirmCancelDescription": "This action will cancel the current appointment."
+    }
+  },
+  "AvailableTimes": {
+    "NoAvailableTimes": "No available times",
+    "ChooseDateFirst": "Please select a date to view available times",
+    "AvailableTimesErrorState": "An error has occurred"
+  },
+  "SessionDetails": {
+    "Title": "Appointment Details",
+    "Subtitle": "Discover the specialist's expertise and ensure they are the right partner to support your psychological journey with Talbinah."
+  },
+  "bookAppointmentModal": {
+    "Title": "Doctor Details",
+    "Subtitle": "Please review the details before confirming the booking"
+  },
+  "paymentDetailsCard": {
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "discountCode": "Discount Code",
+    "total": "Total",
+    "taxAmount": "Tax Amount",
+    "paymentMethod": "Payment Method",
+    "discountSuccessMessage": "Discount applied successfully",
+    "discountErrorMessage": "Invalid discount code"
+  },
+  "AvailablePackagesSelection": {
+    "Title": "Available Offers",
+    "Subtitle": "Choose the package that suits you",
+    "packageValidity": "Session validity: {{days}} days",
+    "discountAmount": "Discount of {{amount}} SAR"
+  },
+  "AvailablePackagesStoring": {
+    "Title": "Book Your Sessions",
+    "Subtitle": "Please enter the required information to complete the booking",
+    "SelectSessionReminder.prefix": "Please select the appointment times for the selected sessions ( ",
+    "SelectSessionReminder.connector": " of ",
+    "SelectSessionReminder.suffix": " sessions ).",
+    "AvailableToEdit": "You can edit the appointments later"
+  },
+  "NormalAppointment": {
+    "appointmentError": "Appointment Error",
+    "appointmentErrorText": "An error occurred while trying to book your appointment. Please try again or contact technical support.",
+    "appointmentSuccess": "Appointment Booked Successfully",
+    "backToHome": "Back to Home",
+    "appointmentSuccessText": "We'll see you at the scheduled time."
+  },
+  "ChargeWallet": {
+    "chargeError": "Charge Error",
+    "chargeErrorText": "An error occurred while trying to charge your wallet. Please try again or contact technical support.",
+    "chargeSuccess": "Charge Success",
+    "backToHome": "Back to Home",
+    "chargeSuccessText": "You can now track your balance or complete new transactions."
+  },
+  "chat": {
+    "message": {
+      "deletedByDoctor": "This message was deleted by Dr. {{doctorName}}",
+      "deletedByMe": "You deleted this message"
+    },
+    "messageTooLong": "Message cannot exceed 200000 characters.",
+    "microphoneAccessDenied": "Microphone access denied. Please allow microphone access to record voice messages.",
+    "deleteConfirmTitle": "Are you sure you want to delete the conversation?",
+    "deleteConfirmSubtitle": "This action cannot be undone."
+  },
+  "file": {
+    "size": {
+      "bytes": "Bytes",
+      "kb": "KB",
+      "mb": "MB",
+      "gb": "GB",
+      "tb": "TB"
+    }
+  },
+  "UploadApps": {
+    "Title": "Download the App",
+    "Subtitle": "Enjoy a seamless experience and faster medical services right from your phone",
+    "UploadDescription": "To book an appointment with this doctor, please download the app using the links below",
+    "DownloadNow": "Download the app"
+  },
+  "SelectAppointmentType": {
+    "Title": "Select Appointment Type",
+    "TalbinahClinicTitle": "Talbinah Clinic",
+    "TalbinahClinicSubtitle": "A dedicated platform for organizing psychological sessions with doctors and specialists, whether individual or group, in-person or remotely.",
+    "mentalWellBeingTitle": "Mental Well-being",
+    "mentalWellBeingSubtitle": "A space aimed at enhancing the mental comfort of employees and organizations through supportive activities, educational content, and continuous follow-up on overall mental health."
+  },
+  "Chat": {
+    "SessionJoinedMessage": "You have joined the session on {{date}} at {{time}}",
+    "ReplyingTo": "Replying to",
+    "Recommend": "Recommended",
+    "Transferred": "Transferred",
+    "TaskCreated": "Task created"
+  },
+  "attachmentMenu": {
+    "podcast": "Podcast",
+    "files": "Files",
+    "videos": "Videos",
+    "images": "Images",
+    "camera": "Camera",
+    "sendPodcastTitle": "Send Podcast",
+    "sendPodcastSubtitle": "Share a podcast with your doctor easily"
+  },
+  "walletCard": {
+    "status": {
+      "shipping": "Deposit",
+      "withdrawal": "Withdrawal"
+    },
+    "withdrawalMessage": "An amount of {amount} SAR was withdrawn for booking a session with Dr. {doctorName}",
+    "withdrawalMessageAmount": "An amount of ",
+    "withdrawalMessageAmountUnit": "SAR",
+    "withdrawalMessageDoctor": "for booking a session with Dr.",
+    "searchPlaceholder": "Search in transactions...",
+    "emptyTitle": "No data available",
+    "errorTitle": "Error loading the wallet"
+  },
+  "movements": {
+    "emptyTitle": "No transactions available",
+    "errorTitle": "Error loading the transactions"
+  },
+  "complaints": {
+    "filters": {
+      "all": "All",
+      "pending": "Pending",
+      "resolved": "Resolved"
+    },
+    "search": {
+      "placeholder": "Search"
+    },
+    "reportButton": "Report Complaint",
+    "details": {
+      "title": "Complaint Details",
+      "content": "Complaint Details",
+      "noDetailsAvailable": "No details available"
+    },
+    "report": {
+      "title": "Report Complaint",
+      "form": {
+        "typeLabel": "Complaint Type",
+        "typePlaceholder": "Select complaint type",
+        "detailsLabel": "Complaint Details",
+        "detailsPlaceholder": "Write complaint details",
+        "uploadImages": "Upload complaint images",
+        "submit": "Submit"
+      },
+      "errors": {
+        "typeRequired": "Complaint type is required",
+        "detailsRequired": "Complaint details are required",
+        "detailsMinLength": "Complaint details must be more than 10 characters"
+      },
+      "status": {
+        "successTitle": "Complaint submitted successfully",
+        "successSubTitle": "Your complaint has been received and will be reviewed as soon as possible.",
+        "errorTitle": "Failed to submit complaint",
+        "errorSubTitle": "An error occurred while submitting your complaint. Please try again."
+      }
+    },
+    "emptyState": {
+      "title": "No Complaints",
+      "message": "No complaints found yet"
+    },
+    "errorState": {
+      "title": "Error Loading Complaints",
+      "message": "An error occurred while loading complaints. Please try again"
+    },
+    "loading": "Loading complaints...",
+    "retry": "Retry"
+  },
+  "gift": {
+    "tabs": {
+      "send": "Send Gifts",
+      "sent": "Sent Gifts",
+      "received": "Received Gifts",
+      "phonePattern": "Only numbers are allowed"
+    },
+    "phoneLabel": "Phone Number",
+    "phoneRequired": "Please enter the phone number",
+    "amountLabel": "Enter Amount",
+    "amountCurrency": "(in SAR)",
+    "amountPlaceholder": "In Saudi Riyal",
+    "amountRequired": "Please enter the amount",
+    "feesInfo": "2% of the requested value will be added as an extra transfer fee according to the applicable rate.",
+    "sendButton": "Send",
+    "sentGiftsList": "Sent Gifts",
+    "receivedGiftsList": "Received Gifts",
+    "emptyState": "No gifts found",
+    "errorState": "An error occurred while loading gifts",
+    "cardTitle": "Gift",
+    "accept": "Accept",
+    "cancel": "Cancel",
+    "bannerTitle": "Gift your loved ones",
+    "bannerDesc": "Surprise your loved ones with a simple gift that draws a smile on their face and makes their day better. A small step... makes a big difference ❤️",
+    "emptyTitle": "No gifts found",
+    "emptyMessage": "You haven't sent or received any gifts yet.",
+    "sentEmptyTitle": "No sent gifts",
+    "sentEmptyMessage": "You haven't sent any gifts yet.",
+    "receivedEmptyTitle": "No received gifts",
+    "receivedEmptyMessage": "You haven't received any gifts yet.",
+    "errorTitle": "Error occurred",
+    "errorMessage": "An error occurred while loading gifts. Please try again.",
+    "sentErrorTitle": "Sent gifts error",
+    "sentErrorMessage": "Failed to load sent gifts. Please try again.",
+    "receivedErrorTitle": "Received gifts error",
+    "receivedErrorMessage": "Failed to load received gifts. Please try again.",
+    "acceptModalTitle": "Accept Gift",
+    "acceptModalDesc": "Do you want to accept your gift? The balance will be added to your account.",
+    "cancelModalTitle": "Do you want to cancel the sent gift?",
+    "cancelModalTitleSender": "Cancel Gift",
+    "cancelModalDesc": "The gift will be canceled and the recipient will not be able to receive it.",
+    "sendErrorToast": "An error occurred while sending the gift. Please try again.",
+    "sendSuccessTitle": "Gift Sent Successfully!",
+    "sendSuccessSubtitle": "Your gift has been sent successfully. The recipient will receive it shortly.",
+    "sendErrorTitle": "Failed to Send Gift",
+    "sendErrorSubtitle": "An error occurred while sending your gift. Please try again."
+  },
+  "Technical_Support": {
+    "title": "Technical Support",
+    "subtitle": "All the questions that are running in your head, and the answers to them in one place — we made it easy for you.",
+    "chat": {
+      "welcomeMessage": "Hello! Start your conversation"
+    }
+  },
+  "SessionFree": {
+    "Title": "Notice",
+    "Subtitle": "This session is free because of your previous subscription to the package. Do you want to confirm the booking?"
+  },
+  "packages": {
+    "AvailablePackages": "Available Packages",
+    "RemainingSessions": "Remaining Sessions",
+    "SessionDuration": "Session Duration",
+    "Minutes": "minutes",
+    "ValidUntil": "Valid Until",
+    "RemainingDays": "Remaining days: {{count}}"
+  },
+  "chatSupportActions": {
+    "assignTo": "Assign to",
+    "transferTo": "Transfer to",
+    "closeConversation": "Close conversation"
+  },
+  "AssignToCustomerSupport": {
+    "title": "Assign to",
+    "subtitle": "Assign to"
+  },
+  "TransferToDepartment": {
+    "title": "Transfer to",
+    "subtitle": "Transfer to"
+  },
+  "CloseSupportConversation": {
+    "title": "Close Conversation",
+    "subtitle": "Close Conversation",
+    "confirmationLabel": "Are you sure you want to close this support conversation?",
+    "confirmationSublabel": "You will not be able to continue this conversation once it is closed."
+  },
+  "sessionTasks": {
+    "noPodcastsTasks": "No podcasts tasks",
+    "noPodcastsTasksMessage": "No podcasts tasks found yet",
+    "noArticlesTasks": "No articles tasks",
+    "noArticlesTasksMessage": "No articles tasks found yet",
+    "noMentalHealthTasks": "No mental health tasks",
+    "noMentalHealthTasksMessage": "No mental health tasks found yet",
+    "noTasksAvailable": "No tasks available",
+    "noTasksAvailableMessage": "No tasks available found yet"
+  },
+  "yourCurrentMoodToday": {
+    "moodQuestion": "What is your mood today?",
+    "submit": "Submit",
+    "sending": "Sending..."
+  }
+}

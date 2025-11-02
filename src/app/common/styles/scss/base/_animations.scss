@@ -1,0 +1,64 @@
+// Move in from the left
+@keyframes moveInLeft {
+    0% {
+        opacity: 0; // Start with 0 opacity (invisible)
+        transform: translateX(-10rem); // Start from the left, 10rem off-screen
+    }
+
+    80% {
+        transform: translateX(1rem); // Slightly overshoot the final position to create a smooth effect
+    }
+
+    100% {
+        opacity: 1; // End with full opacity (visible)
+        transform: translate(0); // Final position with no translation
+    }
+}
+
+// Move in from the right
+@keyframes moveInRight {
+    0% {
+        opacity: 0; // Start with 0 opacity (invisible)
+        transform: translateX(10rem); // Start from the right, 10rem off-screen
+    }
+
+    80% {
+        transform: translateX(-1rem); // Slightly overshoot the final position to create a smooth effect
+    }
+
+    100% {
+        opacity: 1; // End with full opacity (visible)
+        transform: translate(0); // Final position with no translation
+    }
+}
+
+// Move in from the bottom
+@keyframes moveInBottom {
+    0% {
+        opacity: 0; // Start with 0 opacity (invisible)
+        transform: translateY(3rem); // Start 3rem below the final position
+    }
+
+    100% {
+        opacity: 1; // End with full opacity (visible)
+        transform: translate(0); // Final position with no vertical translation
+    }
+}
+
+//Examples
+
+// Apply the moveInLeft animation
+// .move-in-left {
+//     animation: moveInLeft 1s ease-out forwards; // 1 second duration, ease-out for smooth stop
+// }
+
+// Apply the moveInRight animation
+// .move-in-right {
+//     animation: moveInRight 1s ease-out forwards; // 1 second duration, ease-out for smooth stop
+// }
+
+// Apply the moveInBottom animation
+// .move-in-bottom {
+//     animation: moveInBottom 1s ease-out forwards; // 1 second duration, ease-out for smooth stop
+// }
+

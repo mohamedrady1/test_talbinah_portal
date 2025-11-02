@@ -1,0 +1,320 @@
+@use "../../../../common/styles/scss/buttons/button.mixins" as btn;
+
+.payment-method-block {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+  gap: 1rem;
+  border-radius: 0.75rem;
+  background: var(--Dark-WHITE); // Assuming --Dark-WHITE is a defined CSS variable for white background
+
+  // Header section of the payment method block
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; // Adjust as needed
+  }
+
+  // Title within the header
+  &__title {
+    color: var(--text-400, #0f0f0f);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin: 0; // Remove default paragraph margin
+  }
+
+  // Grouping for radio options
+  &__options-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem 0; // Padding around the radio cards
+
+    .payment-method-block__error-message {
+      font-size: 0.8rem;
+      color: var(--error-color, #ff0000); // Use CSS variable for error color
+      margin-top: 0.25rem;
+    }
+
+    .payment-method-block__error-message--api {
+      font-size: 0.8rem;
+      color: var(--error-color, #ff0000);
+      margin-top: 0.25rem;
+    }
+
+    .payment-method-block__message--no-data {
+      font-size: 0.9rem;
+      color: var(--text-300, #47586e);
+      text-align: center;
+      padding: 1rem;
+    }
+  }
+
+  // Section for choosing method, includes icon and title
+  &__choose-method {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; // Space between title and first radio card
+  }
+
+  // Title for "Choose Method"
+  &__choose-method-title {
+    color: var(--text-300, #47586e);
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem; // Space between icon and text
+    align-items: center;
+
+    p {
+      margin: 0; // Remove default paragraph margin
+    }
+  }
+
+  // Styling for the "Add New Card" button container
+  &__add-card-container {
+    padding: 0.5rem 0; // Space around the add card button
+
+    // Styles for the add new card button itself
+    .payment-method-block__add-card-button {
+      @include btn.button-base; // Base button styles
+      @include btn.button-type("outline"); // Outline style
+      @include btn.button-size("small"); // Small size
+      @include btn.button-icon-position("left"); // Icon on the left
+      @include btn.button-icon-size("medium"); // Medium icon size
+      @include btn.button-color("main"); // Main color theme
+      @include btn.button-spinner; // Spinner for loading state
+
+      border-radius: 0.375rem;
+      height: 2rem;
+      padding: var(--Radius-8) var(--Radius-16);
+      gap: 0.25rem;
+      width: fit-content; // Adjust width to content
+
+      .btn__label {
+        padding: 0;
+        font-weight: 500;
+      }
+    }
+  }
+
+  // Grouping for action buttons (Cancel, Next)
+  &__actions-group {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem; // Space above action buttons
+
+    // Base styles for action buttons
+    .payment-method-block__action-button {
+      display: flex;
+      height: 2.75rem;
+      padding: var(--Radius-8) 2rem;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: var(--Radius-8);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer; // Indicate interactivity
+
+      // Modifier for 'cancel' button
+      &--cancel {
+        width: 8.5625rem;
+        background: var(--Dark-100);
+        color: inherit;
+        border: 1px solid var(--Dark-100); // Consistent border
+      }
+
+      // Modifier for 'next' button
+      &--next {
+        background: var(--Primary-primary);
+        color: var(--Dark-WHITE);
+        border: 1px solid var(--Primary-primary); // Consistent border
+        &__loading {
+          display: flex;
+          align-items: center;
+        }
+
+        .dot-loader::after {
+          content: "";
+          animation: dots 1.5s steps(4, end) infinite;
+          white-space: pre;
+        }
+
+        @keyframes dots {
+          0% {
+            content: "";
+          }
+          25% {
+            content: ".";
+          }
+          50% {
+            content: "..";
+          }
+          75% {
+            content: "...";
+          }
+          100% {
+            content: "";
+          }
+        }
+      }
+
+      // Disabled state for buttons
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  // Loading state message
+  &__loading-state {
+    text-align: center;
+    padding: 0.5rem;
+    color: var(--text-300, #47586e);
+    font-size: 1rem;
+  }
+}
+/* Base Shimmer Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Shimmer for the payment method block's loading state */
+.payment-method-block__loading-state {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Matches the margin-bottom of input-group */
+}
+
+.payment-method-block__choose-method-shimmer {
+  padding: 0.5rem 0.5rem 0.5rem 1rem; /* Mimics input-group padding */
+  margin-bottom: 0.5rem;
+}
+
+.payment-method-block__choose-method-title-shimmer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--Dark-100, #eee); /* Base background for shimmerable areas */
+  border-radius: 0.75rem; /* Match parent container's border-radius if it applies to this section */
+  position: relative;
+  overflow: hidden;
+
+  /* Apply shimmer gradient */
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      var(--Dark-100, #eee) 0%,
+      var(--grey-50, #f9f9f9) 20%,
+      var(--Dark-100, #eee) 40%,
+      var(--Dark-100, #eee) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.6s infinite;
+  }
+}
+
+.payment-method-block__icon-shimmer {
+  width: 1.5rem; /* Size of the icon */
+  height: 1.5rem; /* Size of the icon */
+  border-radius: 50%; /* Make it circular */
+  background-color: var(--Dark-50, #f6f7f8); /* Lighter shade for icon background */
+  flex-shrink: 0;
+  margin: 0.5rem; /* To center it within the pseudo-padding */
+}
+
+.payment-method-block__text-line-shimmer {
+  height: 0.75rem;
+  background-color: var(--Dark-50, #f6f7f8); /* Lighter shade for text background */
+  border-radius: 4px;
+}
+
+.payment-method-block__text-line-shimmer.short {
+  width: 60%; /* Adjusted width for the "select payment method" text */
+}
+
+/* Shimmer for individual radio cards */
+.input-group-shimmer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border: 1px solid var(--Dark-50);
+  border-radius: 0.75rem;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--grey-50, #fcfcfc); /* A slightly off-white for the card background */
+
+  /* Apply shimmer gradient */
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 200% 100%;
+    animation: shimmer 1.6s infinite;
+  }
+
+  &__icon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--Radius-8);
+    background-color: var(--grey-300, #e0e0e0); /* Slightly darker gray for the icon placeholder */
+    flex-shrink: 0;
+  }
+
+  &__text-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__title-line {
+    height: 0.8rem;
+    width: 60%; /* Represents the payment method name */
+    background-color: var(--grey-300, #e0e0e0);
+    border-radius: 4px;
+  }
+
+  &__count-line {
+    height: 0.7rem;
+    width: 30%; /* Represents the balance/count text */
+    background-color: var(--grey-300, #e0e0e0);
+    border-radius: 4px;
+  }
+
+  &__radio-circle {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    border: 1px solid var(--grey-300, #e0e0e0); /* Mimics the custom radio button border */
+    background-color: var(--grey-200, #f0f0f0); /* Lighter background for the radio circle */
+    flex-shrink: 0;
+  }
+}
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}

@@ -1,0 +1,91 @@
+<main class="assign-to-customer-support" role="main">
+  <section class="assign-to-customer-support__container">
+    <div class="assign-to-customer-support__listing">
+
+      <!-- Search -->
+      <div class="assign-to-customer-support__search">
+        <app-local-search class="assign-to-customer-support__search-input" [searchTerm]="searchTerm()"
+          (searchChange)="handleSearch($event)">
+        </app-local-search>
+      </div>
+
+      <!-- Loading -->
+      @if (isLoading()) {
+      <div class="assign-to-customer-support__status-message assign-to-customer-support__status-message--loading"
+        aria-live="polite" aria-atomic="true">
+        @for (item of [1,2]; track $index) {
+        <app-appointment-card-skeleton></app-appointment-card-skeleton>
+        }
+      </div>
+      }
+
+      <!-- Error -->
+      @else if (errorMessage()) {
+      <div class="assign-to-customer-support__status-message assign-to-customer-support__status-message--error"
+        aria-live="assertive" aria-atomic="true">
+        <app-error-state-card [config]="visitReportsErrorState"></app-error-state-card>
+      </div>
+      }
+
+      <!-- Empty -->
+      @else if (!filteredCustomersSupport().length) {
+      <div class="assign-to-customer-support__status-message assign-to-customer-support__status-message--empty"
+        aria-live="polite" aria-atomic="true">
+        <app-empty-state-card [config]="visitReportsEmptyState"></app-empty-state-card>
+      </div>
+      }
+
+      <!-- Success -->
+      @else {
+      <div class="assign-to-customer-support__cards-list" role="list" aria-live="polite" appAutoExactHeight
+        heightMode="max-height">
+
+        @for (customerSupport of pageCustomersSupport(); track customerSupport.id) {
+        <article class="assign-to-customer-support__card" role="listitem">
+          <app-selection-option [config]="{
+        id: customerSupport.id,
+        name: customerSupport.full_name,
+        subtitle: '#' + customerSupport.id,
+        image: 'images/icons/logo-2.png',
+        selected: selectedOption()?.id === customerSupport.id
+      }" [iconOnly]="true" [isIconStart]="true" [shape]="'square'" (selected)="onOptionSelected($event)">
+          </app-selection-option>
+        </article>
+        }
+
+      </div>
+
+
+      <!-- Pagination -->
+      @if (totalPages() > 1) {
+      <app-pagination-listing [paginationConfig]="localPaginationConfig()" />
+      }
+      }
+    </div>
+
+    <!-- Actions -->
+    <div class="general-form-wrapper__actions">
+      <button id="transfer-btn" type="button" class="btn btn--outline" (click)="onCancel()">
+        <span class="btn__label">
+          {{ 'cancel' | translateApi }}
+        </span>
+      </button>
+
+      <button id="submit-transfer-btn" type="submit" class="btn btn--solid" (click)="assignNow()"
+        [attr.aria-label]="'assign' | translateApi"
+        [disabled]="_CustomersSupportFacade.isLoading()|| _AssignToCustomerSupportFacade.loading()|| !selectedOption()"
+        [ngClass]="{'disabled': _CustomersSupportFacade.isLoading()|| _AssignToCustomerSupportFacade.loading()|| !selectedOption()}">
+        <span class="btn__label">
+          @if (!_AssignToCustomerSupportFacade.loading()) {
+          {{ 'assign' | translateApi }}
+          } @else {
+          <span class="general-form-wrapper__loading" aria-live="polite">
+            {{ 'in_progress' | translateApi }}
+            <span class="dot-loader"></span>
+          </span>
+          }
+        </span>
+      </button>
+    </div>
+  </section>
+</main>

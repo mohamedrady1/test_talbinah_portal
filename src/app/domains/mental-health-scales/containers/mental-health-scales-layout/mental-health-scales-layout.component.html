@@ -1,0 +1,79 @@
+@if (isBrowser) {
+<div class="mental-health-scale-layout">
+  <div class="mental-health-scale-layout__header">
+    <app-site-header></app-site-header>
+  </div>
+  <div class="mental-health-scale-layout__container" #card>
+    <app-page-layout-header [config]="headerConfig" [card]="cardRef" [disablePadding]="true"
+      (closeRequested)="goHome()"></app-page-layout-header>
+    <div class="mental-health-scale-layout__cards" appAutoExactHeight [enabled]="!isFullscreen">
+      <div>
+        <div class="mental-health-scale-layout__choose-mood">
+          <app-choose-your-mood></app-choose-your-mood>
+        </div>
+        <div class="mental-health-scale-layout__metrics">
+          <app-card-header [config]="testHeaderConfig" (allClicked)="openAllMentalHealthScales('test')">
+          </app-card-header>
+          <div class="metrics-list">
+            @if (isLoadingScales()) {
+            <div class="loading-state" aria-live="polite">
+              @for (item of [1,2]; track $index) {
+              <app-mental-health-scale-test-shimmer></app-mental-health-scale-test-shimmer>
+              }
+            </div>
+            } @else if (scalesErrorMessage()) {
+            <div class="error-state" role="alert">
+              <app-error-state [config]="measurementsErrorState"></app-error-state>
+            </div>
+            } @else if (scales() && scales().length > 0) {
+            @for (test of _mentalHealthScalesFacade.scales().slice(0,3); track $index) {
+            <app-card [testDetails]="test"></app-card>
+            }
+            } @else {
+            <app-empty-state [config]="measurementsEmptyState" class="w-100"></app-empty-state>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="mental-health-scale-layout__cards-card">
+        <div>
+          <app-card-header [config]="moodHeaderConfig">
+          </app-card-header>
+          <div class="h-100">
+            <app-time-scale [type]="DisplayTypes.CALENDAR"></app-time-scale>
+          </div>
+        </div>
+        <div>
+          <app-card-header [config]="DepressiveDisorderScaleHeaderConfig"
+            (allClicked)="openAllMentalHealthScales('DepressiveDisorderScale')">
+          </app-card-header>
+          <div class="mental-health-scale-list">
+            @if (isLoadingMyMeasurementsList()) {
+            @for (item of [1,2]; track $index) {
+            <app-mental-health-scale-list-shimmer></app-mental-health-scale-list-shimmer>
+            }
+            } @else if (myMeasurementsList() && myMeasurementsList().length > 0) {
+            @for (test of _MyMeasurementsFacade.myMeasurements().slice(0,4); track $index) {
+            <div class="mental-health-scale">
+              <app-depressive-disorder-scale-card (watchDetails)="onWatchDetails(test)"
+                [item]="test"></app-depressive-disorder-scale-card>
+            </div>
+            }
+            }
+            @else if (myMeasurementsList().length === 0) {
+            @if (isLoggedIn()) {
+            <app-empty-state [config]="measurementsEmptyState" class="w-100"></app-empty-state>
+            } @else {
+            <app-compelete-data-and-register-now [isEmptyState]="true"></app-compelete-data-and-register-now>
+            }
+            }
+            @else if (myMeasurementsListErrorMessage()) {
+            <app-error-state [config]="myMeasurementsErrorState"></app-error-state>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+}

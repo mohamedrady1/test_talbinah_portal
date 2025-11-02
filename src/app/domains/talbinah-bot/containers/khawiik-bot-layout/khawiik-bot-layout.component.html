@@ -1,0 +1,24 @@
+@if (isBrowser) {
+<main class="khawiik-layout" role="main" aria-label="Khawiik Bot Chat">
+  <!-- Header -->
+  <header class="khawiik-layout__header" role="banner">
+    <app-site-header></app-site-header>
+  </header>
+
+  <!-- Chat Container -->
+  <section class="khawiik-layout__container"
+    [ngClass]="{'khawiik-layout__container--chat-background': hasChatBackground()}" #card>
+    <!-- Page Layout Header -->
+    @if (cardRef()) {
+    <app-page-layout-header [config]="headerConfig" [card]="cardRef()!" [disablePadding]="true"
+      (closeRequested)="goHome()"></app-page-layout-header>
+    }
+
+    <!-- Chat Content -->
+    <div class="khawiik-layout__content" appAutoExactHeight [enabled]="!isFullscreen()" role="region"
+      aria-label="Chat conversation area">
+      <router-outlet></router-outlet>
+    </div>
+  </section>
+</main>
+}

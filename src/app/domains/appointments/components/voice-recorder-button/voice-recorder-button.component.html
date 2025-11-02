@@ -1,0 +1,39 @@
+<div class="mci__voice-record-row" role="region" aria-live="polite">
+    <button type="button" class="mci__voice-record-cancel" (mousedown)="isCancelActive = true"
+        (mouseup)="isCancelActive = false; stopVoiceRecording.emit()" (mouseleave)="isCancelActive = false"
+        aria-label="Cancel voice">
+        <app-svg-icon name="voice-input-chat-trash" />
+    </button>
+    <span class="mci__voice-record-dot" aria-label="Recording"></span>
+    <span class="mci__voice-record-timer">
+        @if (isPlayingBack) {
+        {{ playbackTime }}
+        } @else {
+        {{ recordingTime }}
+        }
+    </span>
+    <div class="mci__voice-record-waveform" [class.is-paused]="(isVoicePaused && !isPlayingBack)">
+        <span *ngFor="let bar of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]" class="mci__voice-record-bar"></span>
+    </div>
+    @if (isVoicePaused) {
+    <div class="mci__voice-playback-controls">
+        <button type="button" class="mci__voice-playback-btn" (click)="togglePlayback.emit()"
+            aria-label="Play/Pause playback">
+            @if (!isPlayingBack) {
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M4.1772 11.125C3.81626 11.125 3.4736 11.0328 3.17206 10.8484C2.45932 10.4118 2.06641 9.52392 2.06641 8.35465V4.89535C2.06641 3.72123 2.45932 2.83821 3.17206 2.40155C3.8848 1.9649 4.80313 2.04738 5.76258 2.63444L8.58154 4.36166C9.53642 4.94872 10.0664 5.75411 10.0664 6.62743C10.0664 7.50074 9.54099 8.30613 8.58154 8.8932L5.76258 10.6204C5.20975 10.9552 4.67063 11.125 4.1772 11.125Z"
+                    fill="#0E39B6" />
+            </svg>
+            } @else {
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M6.94922 1.375C9.70922 1.375 11.9492 3.615 11.9492 6.375C11.9492 9.135 9.70922 11.375 6.94922 11.375C4.18922 11.375 1.94922 9.135 1.94922 6.375C1.94922 3.615 4.18422 1.375 6.94922 1.375ZM4.81922 6.99C4.81922 7.82 5.48922 8.49 6.31922 8.49H7.54922C8.37922 8.49 9.04922 7.82 9.04922 6.99V5.76C9.04922 4.93 8.37922 4.26 7.54922 4.26H6.31922C5.48922 4.26 4.81922 4.93 4.81922 5.76V6.99Z"
+                    fill="#0E39B6" />
+            </svg>
+            }
+        </button>
+        <audio #playbackAudio [src]="recordedAudioUrl" (ended)="onPlaybackEnded.emit()"></audio>
+    </div>
+    }
+</div>

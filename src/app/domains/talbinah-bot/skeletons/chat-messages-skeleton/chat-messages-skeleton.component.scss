@@ -1,0 +1,192 @@
+// BEM-friendly, mobile-first, responsive skeleton styles
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+
+.chat-messages-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+  border-radius: 1rem;
+  overflow: hidden;
+  padding: 0.5rem;
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1 1 auto;
+  }
+
+  // List
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    overflow: auto;
+    flex: 1 1 auto;
+
+    /* Hide visible scrollbars while remaining scrollable */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+
+    /* IE 10+ */
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+  }
+
+  &__item {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    width: 100%;
+    align-self: stretch;
+    min-height: 48px;
+
+    // Bot messages (left side)
+    &--bot {
+      justify-content: flex-start;
+
+      .chat-messages-skeleton__body {
+        max-width: 70%;
+        background: var(--skeleton, #edeef1);
+        border-radius: 1rem 1rem 1rem 0.25rem;
+        padding: 0.75rem;
+      }
+    }
+
+    // User messages (right side)
+    &--user {
+      justify-content: flex-end;
+
+      .chat-messages-skeleton__body {
+        max-width: 70%;
+        background: var(--skeleton, #edeef1);
+        border-radius: 1rem 1rem 0.25rem 1rem;
+        padding: 0.75rem;
+      }
+    }
+  }
+
+  &__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 0.75rem;
+    flex-shrink: 0;
+    background: var(--skeleton, #edeef1);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1 1 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Reusable shimmer helper */
+  .shimmer-wrapper {
+    position: relative;
+    overflow: hidden;
+    background: var(--skeleton, #edeef1);
+    background-image: linear-gradient(
+      to right,
+      var(--skeleton, #edeef1) 0%,
+      #f3f5f8 20%,
+      var(--skeleton, #edeef1) 40%,
+      var(--skeleton, #edeef1) 100%
+    );
+    background-repeat: no-repeat;
+    background-size: 800px 100%;
+    animation: chat-skeleton-shimmer 1.8s infinite linear;
+  }
+
+  .shimmer-line {
+    height: 12px;
+    border-radius: 6px;
+    background: var(--skeleton, #edeef1);
+  }
+
+  .shimmer-line--short {
+    width: 30%;
+  }
+
+  .shimmer-line--medium {
+    width: 55%;
+  }
+
+  .shimmer-line--long {
+    width: 85%;
+  }
+
+  // Mobile-first: narrow containers
+  @media (max-width: 599px) {
+    padding: 0.5rem;
+
+    &__header {
+      padding: 0.5rem;
+    }
+
+    &__item {
+      min-height: 44px;
+      gap: 0.5rem;
+
+      &--bot,
+      &--user {
+        .chat-messages-skeleton__body {
+          max-width: 80%;
+          padding: 0.5rem;
+        }
+      }
+    }
+
+    &__avatar {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  // Tablet / desktop
+  @media (min-width: 600px) {
+    padding: 0.75rem;
+
+    &__header {
+      padding: 0.75rem;
+    }
+
+    &__avatar {
+      width: 40px;
+      height: 40px;
+    }
+
+    .shimmer-line {
+      height: 12px;
+      border-radius: 6px;
+    }
+  }
+
+  // reduced-motion accessibility
+  @media (prefers-reduced-motion: reduce) {
+    .shimmer-wrapper {
+      animation: none;
+      background-size: auto;
+    }
+  }
+}
+
+/* shimmer animation */
+@keyframes chat-skeleton-shimmer {
+  0% {
+    background-position: -800px 0;
+  }
+
+  100% {
+    background-position: 800px 0;
+  }
+}

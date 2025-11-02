@@ -1,0 +1,57 @@
+.form-single-select {
+  // Element: select-item
+  &__select-item {
+    position: relative;
+    width: 100%;
+
+    display: flex;
+    padding: 0;
+    padding-inline-start: 1rem;
+    padding-inline-end: 0.5rem;
+    align-items: center;
+    gap: 0.5rem;
+    height: 3.125rem;
+    font-size: 0.875rem;
+    border-radius: 0.75rem;
+    color: var(--text-primary, black);
+    border: 1px solid var(--Dark-100, #eeeeee) !important;
+    box-shadow: none !important;
+    outline: none !important;
+
+    // Modifier: invalid state
+    &--invalid {
+      border-color: var(--error-color, red) !important;
+
+      .p-select {
+        width: 100%;
+        border-color: var(--error-color, red) !important;
+        box-shadow: none !important;
+        outline: none !important;
+      }
+    }
+  }
+}
+
+:host {
+  .p-select {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-primary, black);
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    .p-select-dropdown-icon {
+      color: var(--text-primary, black);
+    }
+    &::after {
+      display: none !important;
+    }
+
+    .p-select-dropdown {
+      justify-content: end !important;
+    }
+  }
+}

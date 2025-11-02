@@ -1,0 +1,14 @@
+<div class="loading-shimmer" [ngClass]="'loading-shimmer--grid'">
+    @for (item of shimmerItems; track item) {
+    <div class="shimmer-item" [style.height]="config.height" [style.width]="config.width"
+        [style.border-radius]="config.borderRadius">
+        <div class="shimmer-content">
+            <div class="shimmer-icon"></div>
+            <div class="shimmer-text">
+                <div class="shimmer-title"></div>
+                <div class="shimmer-description"></div>
+            </div>
+        </div>
+    </div>
+    }
+</div>

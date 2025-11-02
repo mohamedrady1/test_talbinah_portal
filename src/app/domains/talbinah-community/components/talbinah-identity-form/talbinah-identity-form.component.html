@@ -1,0 +1,127 @@
+<div class="identity-form">
+  <div class="identity-form__content">
+    <div class="identity-form__title">{{'start_with_comfortable_identity' | translateApi}}</div>
+    <form [formGroup]="formGroup" class="identity-form__form">
+      <div class="form-shimmer-wrapper" [class.shimmer-active]="isSubmittingWithShimmer()">
+
+        <div class="identity-form__input-group">
+          <label class="input-group__label" for="defaultName">
+            {{'default_name' | translateApi}}
+          </label>
+          <div class="custom-input-wrapper" [ngClass]="{
+            'has-error': formGroup.controls['defaultName'].invalid && formGroup.controls['defaultName'].touched
+            }">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path
+                d="M10 9.99984C12.3012 9.99984 14.1667 8.13436 14.1667 5.83317C14.1667 3.53198 12.3012 1.6665 10 1.6665C7.69885 1.6665 5.83337 3.53198 5.83337 5.83317C5.83337 8.13436 7.69885 9.99984 10 9.99984Z"
+                stroke="#909DAD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M17.1583 18.3333C17.1583 15.1083 13.95 12.5 10 12.5C6.05001 12.5 2.84167 15.1083 2.84167 18.3333"
+                stroke="#909DAD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+
+            <input id="defaultName" type="text" formControlName="defaultName"
+              placeholder="{{'choose_suitable_name' | translateApi}}" class="form-control custom-input-wrapper__input"
+              autocomplete="off" />
+          </div>
+          @if(formGroup.controls['defaultName'].invalid && formGroup.controls['defaultName'].touched){
+          <div class="form-field__error">
+            <span>
+              {{"please_choose_a_default_name" | translateApi}}
+            </span>
+          </div>}
+        </div>
+
+        <div class="identity-form__input-group">
+          <label class="input-group__label input-group__label--appearance">
+            {{'appearance_preference_talbinah' | translateApi}}
+          </label>
+          @if(_IdentityFormFacade.isLoadingEmojis()){
+          <div class="shimmer__list">
+            @for (i of [].constructor(16); track i) {
+            <div class="avatar-option shimmer"></div>
+            }
+          </div>
+          }
+          @if (!_IdentityFormFacade.isLoadingEmojis() && _IdentityFormFacade.emojis().length > 0) {
+          <div class="input-group__avatars">
+            @for (emoji of _IdentityFormFacade.emojis(); track $index) {
+            <div class="avatar-option" [class.avatar-option--selected]="selectedEmoji()?.id === emoji.id"
+              (click)="selectEmoji(emoji)">
+              <img [src]="emoji.image" [alt]="emoji.id" />
+            </div>
+            }
+          </div>
+          }
+          @if (!_IdentityFormFacade.isLoadingEmojis() && _IdentityFormFacade.emojis().length === 0) {
+          <app-empty-state [config]="avatarsEmptyState"></app-empty-state>
+          }
+          @if(_IdentityFormFacade.emojisError()){
+          <app-error-state [config]="avatarsErrorState"></app-error-state>
+          }
+          @if (emojiError()) {
+          <small class="error">
+            {{'please_choose_an_avatar_that_represents_you' | translateApi}}
+          </small>
+          }
+        </div>
+
+        <div class="identity-form__input-group">
+          <div class="input-group__interests-header">
+            <span class="interests-header__title">
+              {{ 'your_interests' | translateApi }}
+            </span>
+            <span class="interests-header__toggle" (click)="toggleSelectAllInterests()">
+              <input type="checkbox" [checked]="isAllInterestsSelected()"
+                [attr.aria-label]="isAllInterestsSelected()? ('unselect_all' | translateApi): ('select_all' | translateApi)"
+                readonly />
+              {{ isAllInterestsSelected()
+              ? ('unselect_all' | translateApi)
+              : ('select_all' | translateApi) }}
+            </span>
+          </div>
+          <div class="input-group__interests">
+            @if (!_IdentityFormFacade.isLoadingInterests() && _IdentityFormFacade.interests().length > 0) {
+            @for (interest of _IdentityFormFacade.interests(); track $index) {
+            <div class="interest-option" [class.interest-option--selected]="isInterestSelected(interest)"
+              (click)="toggleInterest(interest)">
+              <img [src]="interest.image" [alt]="interest.name" />
+              <span>{{ interest.name }}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                class="interest-option__checkmark">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M7.9165 14.1665C11.3683 14.1665 14.1665 11.3683 14.1665 7.9165C14.1665 4.46472 11.3683 1.6665 7.9165 1.6665C4.46472 1.6665 1.6665 4.46472 1.6665 7.9165C1.6665 11.3683 4.46472 14.1665 7.9165 14.1665ZM7.9165 15.1665C11.9206 15.1665 15.1665 11.9206 15.1665 7.9165C15.1665 3.91244 11.9206 0.666504 7.9165 0.666504C3.91244 0.666504 0.666504 3.91244 0.666504 7.9165C0.666504 11.9206 3.91244 15.1665 7.9165 15.1665Z"
+                  fill="#B4C2E8" />
+                @if(isInterestSelected(interest)){
+                <path
+                  d="M12.6668 8.00016C12.6668 10.5775 10.5775 12.6668 8.00016 12.6668C5.42283 12.6668 3.3335 10.5775 3.3335 8.00016C3.3335 5.42283 5.42283 3.3335 8.00016 3.3335C10.5775 3.3335 12.6668 5.42283 12.6668 8.00016Z"
+                  fill="#0E39B6" />
+                }
+              </svg>
+            </div>
+            }
+            }
+            @if (!_IdentityFormFacade.isLoadingInterests() && _IdentityFormFacade.interests().length === 0) {
+            <app-empty-state [config]="interestsEmptyState"></app-empty-state>
+            }
+          </div>
+
+          @if (_IdentityFormFacade.isLoadingInterests()) {
+          <div class="input-group__avatars">
+            @for (i of [].constructor(16); track i) {
+            <div class="avatar-option shimmer large"></div>
+            }
+          </div>
+          }
+          @if (_IdentityFormFacade.interestsError()) {
+          <app-error-state [config]="interestsErrorState"></app-error-state>
+          }
+          @if (interestsError()) {
+          <small class="error">
+            {{'please_select_at_least_one_interest' | translateApi}}
+          </small>
+          }
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

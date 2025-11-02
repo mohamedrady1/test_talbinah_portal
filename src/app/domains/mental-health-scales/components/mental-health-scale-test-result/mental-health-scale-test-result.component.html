@@ -1,0 +1,43 @@
+<div class="result">
+  @if(result){
+  <div class="quiz-result">
+    <div class="quiz-result__details">
+      <div class="quiz-result__details--diagnosis">
+        <p>
+          {{result.mental_category_name}}
+        </p>
+        <p>
+          {{result.title}}
+        </p>
+      </div>
+      <div class="quiz-result__details--advices">
+        {{result.sub_title?? result.brief}}
+      </div>
+    </div>
+    <div class="quiz-result__chart">
+      <app-percentage-knob [value]="result.percentage "></app-percentage-knob>
+
+    </div>
+  </div>
+  @if(result.suggest_doctor){
+  <!-- <div class="specialists"> -->
+  <!-- <p> -->
+  <!-- {{'suggested_doctors_for_you'|translateApi}} -->
+  <!-- </p> -->
+  <!-- <div class="specialists-list"> -->
+  <!-- @for (item of result.suggest_doctor; track $index) { -->
+  <!-- <div class="specialist-card"> -->
+  <!-- <app-specialist-card [specialistDetails]="result.suggest_doctor"></app-specialist-card> -->
+  <!-- <app-chat-doctor-card [item]="result.suggest_doctor"></app-chat-doctor-card> -->
+  <!-- </div> -->
+  <!-- } -->
+  <!-- </div> -->
+  <!-- </div> -->
+  }
+  }
+  @else {
+  <div class="quiz-result">
+    <app-empty-state-card style="margin: auto;" [config]="emptyStateConfig"></app-empty-state-card>
+  </div>
+  }
+</div>

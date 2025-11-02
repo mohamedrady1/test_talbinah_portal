@@ -1,0 +1,59 @@
+@if(isBrowser) {
+<section class="your-current-mood">
+    <!-- Part 1: Heading -->
+    <header class="your-current-mood__heading">
+        {{ "what_is_your_mood_today" | translateApi }}
+    </header>
+
+    <!-- Part 2: Active Mood Display -->
+    @if (activeMood()) {
+    <div class="your-current-mood__active-mood">
+
+        <div class="your-current-mood__active-mood--container">
+            <div class="your-current-mood__active-mood--image-container">
+                <img [src]="activeMood()!.icon" [alt]="activeMood()!.feelings" width="32" height="32"
+                    class="your-current-mood__active-mood--image-container--image" loading="lazy">
+            </div>
+            <p class="your-current-mood__active-mood--name">{{ activeMood()!.feelings }}</p>
+        </div>
+        <span class="your-current-mood__arrow-container">
+            <app-svg-icon name="your-current-mood-arrow" />
+        </span>
+    </div>
+    }
+
+    <!-- Part 3: Mood Selection Row -->
+    @if (!isLoading()) {
+    <div class="your-current-mood__moods-row">
+        @for (mood of allMoods(); track mood.id) {
+        <div class="your-current-mood__mood-item"
+            [class.your-current-mood__mood-item--active]="selectedMoodId() === mood.id" (click)="selectMood(mood)">
+            <div class="your-current-mood__mood-item--image-container">
+                <img [src]="mood.icon" [alt]="mood.feelings" width="24" height="24"
+                    class="your-current-mood__mood-item--image-container--image" loading="lazy">
+            </div>
+            <p class="your-current-mood__mood-item--label">{{ mood.feelings }}</p>
+        </div>
+        }
+    </div>
+    <!-- Part 4: Action Button -->
+    <div class="your-current-mood__action">
+        <button class="your-current-mood__action--submit-btn" [disabled]="!activeMood() || isStoringMood()"
+            (click)="onSubmitMood()">
+            @if (isStoringMood()) {
+            <span>
+                {{ "in_progress" | translateApi }}
+            </span>
+            } @else {
+            <span>
+                {{ "send" | translateApi }}
+            </span>
+            }
+        </button>
+    </div>
+    } @else {
+    <!-- Loading State -->
+    <app-your-current-mood-skeleton />
+    }
+</section>
+}

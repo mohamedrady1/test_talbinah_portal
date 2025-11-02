@@ -1,0 +1,68 @@
+.file-viewer {
+  display: flex;
+  padding: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.625rem;
+
+  border-radius: var(--Radius-12, 0.75rem);
+  border: 1px solid var(--Dark-50, #f6f7f8);
+  background: var(--Dark-WHITE, #fff);
+  flex-wrap: wrap;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+
+    &--icon {
+      display: flex;
+      padding: 0.625rem;
+      justify-content: center;
+      align-items: center;
+      gap: 0.625rem;
+      border-radius: 0.5rem;
+      background: var(--Primary-50, #e7ebf8);
+    }
+
+    &--info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+
+      &--name {
+        color: var(--Danger-light-BG, #1d1f1f);
+        font-size: 0.75rem;
+        font-weight: 500;
+        white-space: normal;
+        word-break: break-all;
+      }
+
+      &--date-size {
+        display: flex;
+        align-items: center;
+        gap: 0.125rem;
+
+        p {
+          color: var(--Dark-light-300, #a5a5a5);
+          font-size: 0.625rem;
+          font-weight: 400;
+
+          &:last-child {
+            direction: ltr;
+          }
+        }
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    div {
+      cursor: pointer;
+    }
+  }
+}

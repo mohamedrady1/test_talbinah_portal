@@ -1,0 +1,17 @@
+<main class="articles-layout" role="main">
+  <header class="articles-layout__header">
+    <app-site-header></app-site-header>
+  </header>
+  <section class="articles-layout__container" #card>
+    <div [attr.aria-label]="headerConfig.title + ' header'">
+      <app-page-layout-header [config]="headerConfig" [card]="cardRef"
+        (closeRequested)="onCloseRequested()"></app-page-layout-header>
+    </div>
+    <div class="articles-layout__content">
+      <div appAutoExactHeight [enabled]="!isFullscreen()" heightMode="max-height" role="Articles"
+        aria-label="Articles Content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,219 @@
+// BEM Block: global-therapeutic-program-card
+.global-therapeutic-program-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  border: 1px solid var(--Dark-50); // Using CSS custom properties for consistency
+  transition: all 0.2s ease-in-out; // Smooth transition for hover effects
+
+  &:hover {
+    transform: translateY(-2px); // Slight lift on hover
+  }
+
+  // Modifier for the details view of the card
+  &--details {
+    // Specific adjustments for the card itself when in details view
+    // Example: background-color: #fbfbfb; might be applied here if it's the card's background.
+    // Based on HTML, __details has this background, so no change here unless needed.
+  }
+
+  // Element: __content
+  &__content {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+
+    // Modifier for the content section when in details view
+    &--details {
+      flex-direction: column;
+    }
+  }
+
+  // Element: __image
+  &__image {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    flex-shrink: 0; // Prevent shrinking
+    overflow: hidden;
+    position: relative; // For better image scaling/centering if needed
+
+    img {
+      display: block;
+      height: 100%;
+      width: 100%;
+      object-fit: cover; // Ensures image covers the area without distortion
+      // For performance, ensure images are optimized (e.g., using a CDN or srcset if possible)
+    }
+
+    // Modifier for the image when in details view
+    &--details {
+      width: 100%;
+      height: 6rem; // Increased height for details view
+      border-radius: 0.75rem; // Adjust border-radius if different in details
+    }
+  }
+
+  // Element: __info
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1; // Allows info to take available space
+    min-width: 0; // Ensures text truncation works inside flex item
+  }
+
+  // Element: __title
+  &__title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap; // Allows title and price to wrap if space is limited
+
+    color: var(--text-400); // Use semantic color variable
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.2; // Improved readability
+
+    span {
+      flex-grow: 1; // Allows title text to take available space
+      min-width: 0; // Important for text truncation
+      // If you need actual text truncation for the title, apply here:
+      // white-space: nowrap;
+      // overflow: hidden;
+      // text-overflow: ellipsis;
+    }
+
+    // Modifier for the title text when in details view
+    &--details {
+      font-size: 1rem; // Larger font size for details view
+      font-weight: 700; // Bolder for details view
+      color: var(--text-500); // Potentially darker color for emphasis
+    }
+  }
+
+  // Element: __price
+  &__price {
+    .cost {
+      display: flex;
+      align-items: center;
+      justify-content: center; // Center content horizontally and vertically
+      padding: 0.25rem 0.625rem;
+      gap: 0.125rem;
+      border-radius: 1rem;
+      background: var(--Primary-50); // Using CSS custom properties
+
+      color: var(--Primary-primary); // Using CSS custom properties
+      font-size: 0.75rem;
+      font-weight: 600;
+      flex-shrink: 0; // Prevent price from shrinking
+
+      p {
+        margin: 0; // Remove default paragraph margin
+        padding: 0; // Remove default paragraph padding
+      }
+
+      svg {
+        display: block; // Prevents extra space below SVG
+      }
+    }
+
+    .subscriber {
+      border-radius: 1rem;
+      background: var(--Success-50);
+      padding: 0.25rem 0.625rem;
+
+      p {
+        color: var(--Success-primary);
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+    }
+  }
+
+  // Element: __description
+  &__description {
+    color: var(--text-300); // Use semantic color variable
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.4; // Improved readability
+    // Assuming 'text-truncate-2' is a utility class for truncation.
+    // If not, include the CSS for multi-line truncation here:
+    // display: -webkit-box;
+    // -webkit-line-clamp: 2;
+    // -webkit-box-orient: vertical;
+    // overflow: hidden;
+    // text-overflow: ellipsis;
+  }
+
+  // Element: __details
+  &__details {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; // Allow items to wrap
+    justify-content: space-between; // Distribute items evenly
+    align-items: center;
+    gap: 0.75rem; // Increased gap for clarity
+    padding: 0.5rem;
+
+    // Modifier for the details section when in details view
+    &--details {
+      border-radius: 0.5rem;
+      background: var(--Background-secondary); // Use a variable for background color if available
+      padding: 1rem; // More padding in details view
+      gap: 1rem; // Larger gap for readability
+      justify-content: flex-start; // Align items to start in details view, if preferred
+      // flex-direction: column; // Uncomment if you want details to stack vertically in details view
+    }
+
+    // Elements within __details (sessions, seats, usage)
+    &__sessions,
+    &__seats,
+    &__usage {
+      display: flex;
+      flex-direction: row;
+      gap: 0.25rem; // Slightly more space than 2px
+      align-items: center; // Vertically align content
+
+      color: var(--text-300); // Use semantic color variable
+      font-size: 0.75rem;
+      font-weight: 400;
+
+      svg {
+        display: block;
+        flex-shrink: 0; // Prevent SVG from shrinking
+        // Consider sizing SVGs with `width` and `height` properties or a CSS variable
+      }
+
+      span {
+        // Ensure no extra margins/paddings on spans
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}
+
+// Utility class for screen readers
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// Global class if needed for LTR/RTL SVG scaling
+.scaleX-ltr {
+  // Assuming this class correctly handles mirroring for RTL
+  // transform: scaleX(-1); // Example for RTL if needed
+}

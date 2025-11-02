@@ -1,0 +1,42 @@
+.button {
+    display: flex;
+    padding: 0.5rem 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--Dark-100, #eee);
+    background: var(--Dark-WHITE, #fff);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    outline: none; // Remove default outline
+
+    &:hover {
+        // Optional: Add hover styles
+        opacity: 0.9;
+    }
+
+    &__icon {
+        width: 1.25rem; // Adjust as needed
+        height: 1.25rem; // Adjust as needed
+    }
+
+    &__text {
+        color: var(--text-300, #47586e);
+        font-size: 0.75rem;
+        font-weight: 500;
+        white-space: nowrap; // Prevent text wrapping
+        transition: color 0.2s ease-in-out;
+    }
+
+    // Active state styles
+    &--active {
+        background: var(--grid-5, linear-gradient(180deg, #baf0e8 0%, #f5dab8 100%));
+        border-color: transparent; // Make border disappear when active
+
+        .button__text {
+            color: var(--text-400, #0f0f0f);
+            font-weight: 600;
+        }
+    }
+}

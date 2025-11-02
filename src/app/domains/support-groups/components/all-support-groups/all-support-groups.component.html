@@ -1,0 +1,32 @@
+<div class="all-support-groups" appAutoExactHeight="70" heightMode="max-height">
+    <div class="all-support-groups-container">
+        <div class="all-support-groups-container-content">
+            @if (isLoading() || isFiltering()) {
+            @for (item of [1,2,3,4,5,6]; track $index) {
+            <app-therapeutic-program-card-shimmer></app-therapeutic-program-card-shimmer>
+            <!-- @if (paginationConfig().totalPages > 1 && !isLoading() && !isFiltering()) {
+        <app-pagination-listing [paginationConfig]="paginationConfig()" />
+        } -->
+            }
+            } @else if(seminarsData()?.data?.length ?? 0 > 0) {
+            @for (seminar of paginatedSeminars(); track seminar.id) {
+            <app-group-card [type]="cardTypes.DETAILS" [item]="seminar"
+                (onClick)="openSeminarSubscription(seminar,null)"></app-group-card>
+            }
+            }
+            @else if (errorMessage()&&!seminarsStatus()) {
+            <app-error-state
+                [config]="type === 'AllGroups' ? allGroupsErrorState : myGroupsErrorState"></app-error-state>
+            }
+            @else {
+            <app-empty-state [config]="emptyStateConfig" class="w-100"></app-empty-state>
+            }
+        </div>
+        @if (seminarsData()?.data?.length && localPaginationConfig().totalPages > 1 && !isLoading() &&
+        !isFiltering()) {
+        <div class="all-support-groups__pagination">
+            <app-pagination-listing [paginationConfig]="localPaginationConfig()" />
+        </div>
+        }
+    </div>
+</div>

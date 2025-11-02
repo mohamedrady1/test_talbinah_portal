@@ -1,0 +1,25 @@
+<div class="khawiik-activities-skeleton">
+    <div class="khawiik-activities-skeleton__container">
+        <ul class="khawiik-activities-skeleton__grid">
+            @for (row of _activityRows; track $index) {
+            <li class="khawiik-activities-skeleton__card">
+                <article class="khawiik-activities-skeleton__card-inner">
+                    <!-- Icon -->
+                    <div class="khawiik-activities-skeleton__icon shimmer-wrapper"></div>
+
+                    <!-- Header -->
+                    <header class="khawiik-activities-skeleton__card-header">
+                        <div class="khawiik-activities-skeleton__subtitle shimmer-wrapper"></div>
+                        <div class="khawiik-activities-skeleton__title shimmer-wrapper"></div>
+                    </header>
+
+                    <!-- Footer -->
+                    <div class="khawiik-activities-skeleton__card-footer">
+                        <div class="khawiik-activities-skeleton__cta shimmer-wrapper"></div>
+                    </div>
+                </article>
+            </li>
+            }
+        </ul>
+    </div>
+</div>

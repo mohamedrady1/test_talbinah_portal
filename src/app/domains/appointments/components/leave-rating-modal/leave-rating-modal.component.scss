@@ -1,0 +1,419 @@
+@use "./../../../../common/styles/scss/abstracts/general-form-wrapper.mixins" as form;
+@use "./../../../../common/styles/scss/abstracts/mixins" as *;
+
+.leave-rating-modal {
+  position: relative;
+  display: flex;
+  padding: 0.75rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  align-self: stretch;
+
+  @include respond(sm) {
+    padding: 0.5rem;
+  }
+
+  &__container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: 100%;
+
+    padding: 0.75rem;
+    padding-inline-end: 0.425rem;
+    border-radius: 0.75rem;
+    background: var(--Dark-WHITE, #fff);
+
+    @include respond(sm) {
+      background: transparent;
+      padding: 0.5rem;
+      padding-inline-end: 0.5rem;
+    }
+  }
+
+  .general-form-wrapper {
+    // Existing mixin usage, keep as is
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: space-between;
+    height: 100%;
+
+    &__groups {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); // 4-column grid
+      gap: 0.75rem;
+    }
+
+    &__field {
+      @include form.general-form-wrapper-field;
+    }
+
+    &__label-group {
+      @include form.general-form-wrapper-label-group;
+      color: var(--Dark-DARK, #1d1f1f);
+      font-size: 0.875rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+    &__label {
+      @include form.general-form-wrapper-label;
+    }
+
+    &__required {
+      @include form.general-form-wrapper-required;
+    }
+
+    &__error-message {
+      @include form.general-form-wrapper-error;
+    }
+
+    .form-field {
+      // Keep this for now as it's part of the mixin usage
+      @include form.general-form-field;
+
+      &__feedback {
+        &--center {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 0.5rem;
+        }
+      }
+    }
+
+    &__actions {
+      @include form.general-form-wrapper-actions;
+      justify-content: flex-end; // Use flex-end for better alignment
+
+      .btn {
+        width: auto;
+
+        &.disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+          pointer-events: none;
+        }
+      }
+    }
+
+    &__loading {
+      display: flex;
+      align-items: center;
+    }
+
+    .dot-loader::after {
+      content: "";
+      animation: dots 1.5s steps(4, end) infinite;
+      white-space: pre;
+    }
+
+    @keyframes dots {
+      0% {
+        content: "";
+      }
+
+      25% {
+        content: ".";
+      }
+
+      50% {
+        content: "..";
+      }
+
+      75% {
+        content: "...";
+      }
+
+      100% {
+        content: "";
+      }
+    }
+  }
+
+  &__loading {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+  }
+
+  &__overlay-loading {
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+
+    .leave-rating-modal__spinner-container {
+      display: flex;
+      gap: 0.5rem;
+
+      .leave-rating-modal__spinner {
+        color: #007bff;
+        width: 1rem;
+        height: 1rem;
+        border: 2px solid currentColor;
+        border-right-color: transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+    }
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__rating-section {
+    margin-top: 2rem;
+
+    @include respond(md) {
+      margin-top: 1rem;
+    }
+  }
+
+  &__actions {
+    @include form.general-form-wrapper-actions;
+    justify-content: flex-end; // Use flex-end for better alignment
+
+    .btn {
+      width: auto;
+
+      &.disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+    }
+  }
+
+  &__loading {
+    display: flex;
+    align-items: center;
+  }
+
+  .dot-loader::after {
+    content: "";
+    animation: dots 1.5s steps(4, end) infinite;
+    white-space: pre;
+  }
+
+  @keyframes dots {
+    0% {
+      content: "";
+    }
+
+    25% {
+      content: ".";
+    }
+
+    50% {
+      content: "..";
+    }
+
+    75% {
+      content: "...";
+    }
+
+    100% {
+      content: "";
+    }
+  }
+
+  &__stars {
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    gap: 0.9375rem !important;
+
+    width: 100%;
+    padding: 0.25rem 0rem;
+
+    label {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: var(--Dark-50);
+      border-radius: 50%;
+      padding: 0.25rem;
+    }
+
+    .leave-rating-modal__star {
+      width: 2.25rem;
+      height: 2.25rem;
+      flex-shrink: 0;
+
+      filter: drop-shadow(0px 0px 216.512px rgba(105, 105, 105, 0.2));
+
+      &--filled svg {
+        fill: #ffc107 !important;
+
+        path {
+          stroke: #ffc107 !important;
+        }
+      }
+
+      @include respond(md) {
+        width: 2rem;
+        height: 2rem;
+      }
+
+      @include respond(sm) {
+        width: 1.75rem;
+        height: 1.75rem;
+      }
+
+      path {
+        stroke: #aeaeae;
+        transition:
+          fill 0.2s ease,
+          stroke 0.2s ease;
+      }
+    }
+
+    .visually-hidden {
+      & + .leave-rating-modal__star svg,
+      &:not(:checked):hover + .leave-rating-modal__star svg {
+        fill: var(--Dark-50, #f6f7f8);
+
+        path {
+          stroke: var(--text-300, #47586e);
+        }
+      }
+    }
+
+    [dir="ltr"] & {
+      .visually-hidden:not(:checked):hover + .leave-rating-modal__star ~ .leave-rating-modal__star svg {
+        fill: #ffc107;
+
+        path {
+          stroke: #ffc107;
+        }
+      }
+    }
+
+    [dir="rtl"] & {
+      .visually-hidden:not(:checked):hover + .leave-rating-modal__star ~ .leave-rating-modal__star svg {
+        fill: #ffc107;
+
+        path {
+          stroke: #ffc107;
+        }
+      }
+    }
+  }
+}
+
+// Custom input and textarea wrappers with BEM
+.custom-input {
+  display: flex;
+  padding: 0 0.5rem;
+  align-items: center;
+  gap: 0.5rem;
+  height: 3.125rem;
+  color: #a3adbb;
+  font-size: 0.875rem;
+  border-radius: 0.75rem;
+  color: black;
+  overflow: hidden;
+  border: 1px solid #eeeeee;
+
+  &.p-invalid {
+    border-color: red;
+  }
+
+  &__icon {
+    display: flex;
+    width: 1.25rem;
+    height: 1.25rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background-color: transparent;
+
+    &::placeholder {
+      color: #a3adbb !important;
+      font-size: 0.875rem !important;
+      font-weight: 500 !important;
+    }
+  }
+
+  &--disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  &--with-icon {
+    gap: 0.5rem;
+  }
+
+  &--icon-start {
+    flex-direction: row;
+
+    .custom-input__icon {
+      order: 0;
+    }
+  }
+
+  &--icon-end {
+    flex-direction: row-reverse;
+
+    .custom-input__icon {
+      order: 1;
+    }
+  }
+
+  .password-toggle-btn {
+    @include respond(sm) {
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+.custom-textarea {
+  height: auto;
+  padding: 1rem;
+
+  textarea {
+    height: 5.93rem;
+    width: 100%;
+    resize: none;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

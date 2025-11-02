@@ -1,0 +1,180 @@
+<div class="filter-toggle-container">
+  <button type="button" class="filter-toggle-button" (click)="toggleFilterDrawer()"
+    [attr.aria-label]="'general.Filter' | translate" *ngIf="showFilterButton()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter">
+      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+    </svg>
+  </button>
+</div>
+
+<div class="filter-overlay" [class.active]="isFilterDrawerOpen()" (click)="closeFilterDrawer()"
+  *ngIf="showFilterButton()"></div>
+
+<section class="filter-aside" role="region" [attr.aria-label]="'filter'" [class.active]="isFilterDrawerOpen()">
+  <app-dynamic-accordion-item [item]="accordionItemConfig">
+    <ng-template let-item="item">
+      @if (!isLoading()) {
+      <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()" class="filter-aside__form" appAutoExactHeight
+        heightMode="max-height">
+        <fieldset class="filter-aside__group">
+          <legend class="filter-aside__label">
+            {{ 'select_specialty' | translateApi }}
+          </legend>
+          <div class="filter-aside__control-wrapper">
+            @for (specialty of specialtiesList(); track specialty.value) {
+            <label class="filter-aside__checkbox-label">
+              <input type="radio" formControlName="specialty" [value]="specialty.value"
+                class="filter-aside__checkbox-input" [attr.aria-label]="specialty.label"
+                [attr.aria-checked]="appointmentForm.get('specialty')?.value === specialty.value" />
+              <span class="filter-aside__checkbox-text">{{ specialty.label }}</span>
+            </label>
+            }
+          </div>
+          <!-- @if (appointmentForm.get('specialty')?.invalid && appointmentForm.get('specialty')?.touched) {
+          <div class="filter-aside__error-message" role="alert">
+            {{ 'validation.required' | translate }}
+          </div>
+          } -->
+        </fieldset>
+
+        <fieldset class="filter-aside__group">
+          <legend class="filter-aside__label">
+            {{ 'gender' | translateApi }}
+          </legend>
+          <div class="filter-aside__control-wrapper">
+            @for (gender of gendersList(); track gender.value) {
+            <label class="filter-aside__checkbox-label">
+              <input type="radio" formControlName="gender" [value]="gender.value" class="filter-aside__checkbox-input"
+                [attr.aria-label]="gender.label"
+                [attr.aria-checked]="appointmentForm.get('gender')?.value === gender.value" />
+              <span class="filter-aside__checkbox-text">{{ gender.label }}</span>
+            </label>
+            }
+          </div>
+        </fieldset>
+
+        <fieldset class="filter-aside__group">
+          <legend class="filter-aside__label">
+            {{ 'language' | translateApi }}
+          </legend>
+          <div class="filter-aside__control-wrapper">
+            @for (lang of languagesList(); track lang.value) {
+            <label class="filter-aside__checkbox-label">
+              <input type="checkbox"
+                [checked]="appointmentForm.get('languages_ids')?.value?.includes(lang.value) || false"
+                (change)="toggleMultiValue('languages_ids', lang.value)" class="filter-aside__checkbox-input"
+                [attr.aria-label]="lang.label" [attr.aria-checked]="
+                  appointmentForm.get('languages_ids')?.value?.includes(lang.value) || false
+                " />
+              <span class="filter-aside__checkbox-text">{{ lang.label }}</span>
+            </label>
+            }
+          </div>
+        </fieldset>
+
+        <fieldset class="filter-aside__group">
+          <legend class="filter-aside__label">
+            <span>
+              {{ 'session_budget' | translateApi }}
+            </span>
+            <span class="grey-text">
+              ({{ 'half_hours' | translateApi }})
+            </span>
+          </legend>
+          <div class="filter-aside__range-group">
+            <input type="number" formControlName="min_price" class="filter-aside__range-input"
+              [attr.min]="priceRange().min" [attr.max]="priceRange().max" placeholder="{{ 'from' | translateApi }}"
+              [attr.aria-label]="'min_price' | translateApi"
+              [attr.aria-describedby]="appointmentForm.get('min_price')?.invalid ? 'min-price-error' : null" />
+            <span class="filter-aside__range-separator"> - </span>
+            <input type="number" formControlName="max_price" class="filter-aside__range-input"
+              [attr.min]="priceRange().min" [attr.max]="priceRange().max" placeholder="{{ 'to' | translateApi }}"
+              [attr.aria-label]="'max_price' | translateApi"
+              [attr.aria-describedby]="appointmentForm.get('max_price')?.invalid ? 'max-price-error' : null" />
+          </div>
+          <!-- @if (appointmentForm.get('min_price')?.invalid && appointmentForm.get('min_price')?.touched) {
+          <div id="min-price-error" class="filter-aside__error-message" role="alert">
+            {{ 'validation.minPriceError' | translate }}
+          </div>
+          } @if (appointmentForm.get('max_price')?.invalid && appointmentForm.get('max_price')?.touched) {
+          <div id="max-price-error" class="filter-aside__error-message" role="alert">
+            {{ 'validation.maxPriceError' | translate }}
+          </div>
+          } -->
+        </fieldset>
+
+        <fieldset class="filter-aside__group">
+          <legend class="filter-aside__label">
+            {{ 'rating' | translateApi }}
+          </legend>
+          <div class="filter-aside__control-wrapper">
+            @for (rate of ratingList; track rate.value) {
+            <label class="filter-aside__checkbox-label filter-aside__checkbox-label--rate">
+              <input type="radio" formControlName="rate" [value]="rate.value" class="filter-aside__checkbox-input"
+                [attr.aria-label]="rate.label"
+                [attr.aria-checked]="appointmentForm.get('rate')?.value === rate.value" />
+              @if (rate?.value !== 'all') {
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M8.00917 2.04754L9.03583 4.10087C9.17583 4.38671 9.54917 4.66087 9.86417 4.71337L11.725 5.02254C12.915 5.22087 13.195 6.08421 12.3375 6.93587L10.8908 8.38254C10.6458 8.62754 10.5117 9.10004 10.5875 9.43837L11.0017 11.2292C11.3283 12.6467 10.5758 13.195 9.32167 12.4542L7.5775 11.4217C7.2625 11.235 6.74333 11.235 6.4225 11.4217L4.67833 12.4542C3.43 13.195 2.67167 12.6409 2.99833 11.2292L3.4125 9.43837C3.48833 9.10004 3.35417 8.62754 3.10917 8.38254L1.6625 6.93587C0.810834 6.08421 1.085 5.22087 2.275 5.02254L4.13583 4.71337C4.445 4.66087 4.81833 4.38671 4.95833 4.10087L5.985 2.04754C6.545 0.933372 7.455 0.933372 8.00917 2.04754Z"
+                    fill="#FFAF44" />
+                </svg>
+              </span>
+              }
+              <span class="filter-aside__checkbox-text">
+                <span>
+                  {{ rate.label }}
+                </span>
+              </span>
+            </label>
+            }
+          </div>
+        </fieldset>
+
+        <fieldset class="filter-aside__group">
+          <legend class="filter-aside__label">
+            {{ 'what_feeling_now' | translateApi }}
+          </legend>
+          <div class="filter-aside__multi-select-group">
+            @for (service of servicesList(); track service.value) {
+            <label class="filter-aside__multi-label">
+              <input type="checkbox"
+                [checked]="appointmentForm.get('services_ids')?.value?.includes(service.value) || false"
+                (change)="toggleMultiValue('services_ids', service.value)" class="filter-aside__multi-input"
+                [attr.aria-label]="service.label" [attr.aria-checked]="
+                  appointmentForm.get('services_ids')?.value?.includes(service.value) || false
+                " />
+              <span class="filter-aside__multi-text">
+                {{ service.label }}
+              </span>
+            </label>
+            }
+          </div>
+        </fieldset>
+
+        <div class="filter-aside__actions">
+          <button type="button" class="filter-aside__reset-button" (click)="resetForm()"
+            [attr.aria-label]="'reset' | translateApi">
+            {{ 'reset' | translateApi }}
+          </button>
+
+          <button type="submit" class="filter-aside__submit-button" [disabled]="appointmentForm.invalid || isLoading()"
+            [attr.aria-label]="'apply' | translateApi">
+            {{ 'apply' | translateApi }}
+            @if (isLoading()) {
+            <span class="filter-aside__loading" role="status" aria-live="polite">
+              {{ 'in_progress' | translateApi }}
+            </span>
+            }
+          </button>
+        </div>
+      </form>
+      }
+      @else{
+      <app-aside-filteration-skeleton></app-aside-filteration-skeleton>
+      }
+    </ng-template>
+  </app-dynamic-accordion-item>
+</section>

@@ -1,0 +1,149 @@
+<div id="login">
+  <div class="login">
+    <div class="login__welcome">
+      <h1 class="login__welcome-title">
+        {{ 'welcome_back' | translateApi }}
+      </h1>
+      <p class="login__welcome-description">
+        {{ 'welcome_safe_space' | translateApi }}
+      </p>
+    </div>
+    @if (formConfigs.length) {
+    <div class="form-box">
+      <form class="general-form-wrapper" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="general-form-wrapper__groups">
+          @for (formItem of formConfigs; track $index) {
+          <div class="general-form-wrapper__field {{formItem.widthClass}}">
+            <div class="general-form-wrapper__label-group">
+              @if (formItem.label) {
+              <label [for]="formItem.name" class="general-form-wrapper__label" [ngClass]="{
+                  'general-form-wrapper__label--error': getError(formItem.name),
+                  'general-form-wrapper__label--clickable': formItem.enableLabelClick
+                }">
+                {{ formItem.label | translateApi }}
+                @if (formItem.isRequired) {
+                <span class="general-form-wrapper__required">*</span>
+                }
+              </label>
+              }
+            </div>
+            @switch(formItem.type) {
+            @case(allInputTypes.COUNTRYCODEINPUT) {
+            <div
+              class="custom-input-wrapper custom-input-wrapper--with-icon custom-input-wrapper--icon-start country-code-input"
+              [class.p-invalid]="getError(formItem.name)">
+              <img src="images/icons/call.svg" [alt]="'mobile_number' | translateApi">
+              <div class="select-wrapper relative">
+                <p-select class="country-code-input-select w-full md:w-56" [options]="allowedCountries()"
+                  [ngModel]="selectedCountryModel()" (ngModelChange)="onCountryChange($event)"
+                  [ngModelOptions]="{ standalone: true }" optionLabel="name" [filter]="true" filterBy="name"
+                  [placeholder]="isLoadingCountries() ? undefined : ('code' | translateApi)" [virtualScroll]="true"
+                  [virtualScrollItemSize]="42" [autoDisplayFirst]="false" appendTo="body"
+                  [attr.aria-label]="('mobile_number' | translateApi)">
+                  @if (!isLoadingCountries()) {
+                  <ng-template #selectedItem let-selectedOption>
+                    <div class="flex items-center gap-2">
+                      <img [src]="selectedOption.flag" [alt]="selectedOption.name"
+                        [class]="'flag flag-' + (selectedOption?.code?.toLowerCase() || '')"
+                        onerror="this.src='images/icons/no-flag.svg'" />
+                      <div>{{ selectedOption.phone_code }}</div>
+                    </div>
+                  </ng-template>
+                  <ng-template let-country #item>
+                    <div class="flex items-center gap-2">
+                      <img [src]="country.flag" [alt]="country.name"
+                        [class]="'flag flag-' + (country?.code?.toLowerCase() || '')" class="flag"
+                        onerror="this.src='images/icons/no-flag.svg'" />
+                      <div>{{ country.name }}</div>
+                    </div>
+                  </ng-template>
+                  }
+                </p-select>
+                <input type="number" class="form-control custom-input-wrapper__input" [id]="formItem.name"
+                  [formControlName]="formItem.name" [placeholder]="
+                    !selectedCountryModel()
+                      ? ('phone_should_select_code' | translateApi)
+                      : ('phone_placeholder' | translateApi)
+                  " autocomplete="tel"
+                  [attr.aria-describedby]="getError(formItem.name) ? formItem.name + '-error' : null"
+                  [attr.aria-invalid]="getError(formItem.name) ? 'true' : 'false'" />
+                @if (isLoadingCountries()) {
+                <div class="dots-loader" role="status" aria-live="polite" aria-label="Loading countries">
+                  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                </div>
+                }
+              </div>
+            </div>
+            }
+            }
+            <div class="form-field__feedback" role="status" aria-live="polite">
+              @if (getError(formItem.name)) {
+              <span class="general-form-wrapper__error-message" role="alert" [id]="formItem.name + '-error'">
+                {{ getValidationErrorMessage(formItem.name, formItem.validation || []) | translateApi }}
+              </span>
+              } @else if (formItem.hint && !getFormControl(formItem.name)?.value && !formItem.fixedHint) {
+              <small class="form-field__hint text-secondary">
+                {{ formItem.hint | translateApi }}
+              </small>
+              }
+            </div>
+          </div>
+          }
+        </div>
+        <div class="general-form-wrapper__actions">
+          <button type="submit" class="btn btn--solid" [disabled]="_LoginFacade.loading() || _AsGuestFacade.loading()">
+            <span class="btn__label">
+              @if (_LoginFacade.loading()) {
+              <span role="status" aria-live="polite" aria-label="Loading, please wait">
+                {{ 'in_progress' | translateApi }}
+              </span>
+              } @else {
+              <span>{{ 'login' | translateApi }}</span>
+              }
+            </span>
+          </button>
+
+          <div class="login__form__divider">
+            <app-svg-icon name="divider-1"></app-svg-icon>
+            <p>
+              {{ "or" | translateApi }}
+            </p>
+            <app-svg-icon name="divider-2"></app-svg-icon>
+          </div>
+
+          <button type="button" class="btn btn--solid-gradient" (click)="LoginAsGuest()"
+            [disabled]="_AsGuestFacade.loading()" [attr.aria-label]="'as_guest' | translateApi">
+            <span class="btn__label">
+              @if (_AsGuestFacade.loading()) {
+              <span role="status" aria-live="polite" aria-label="Loading, please wait">
+                {{ 'in_progress' | translateApi }}
+              </span>
+              } @else {
+              <span>{{ 'as_guest' | translateApi }}</span>
+              }
+            </span>
+          </button>
+
+        </div>
+      </form>
+    </div>
+    }
+    <div class="login__form__divider">
+      <app-svg-icon name="divider-1"></app-svg-icon>
+      <p>
+        {{ "create_account" | translateApi }}
+      </p>
+      <app-svg-icon name="divider-2"></app-svg-icon>
+    </div>
+    <div class="login__form__buttons" role="group" [attr.aria-label]="'roleSelect'">
+      <button id="new-doctor-btn" type="button" class="btn btn--outline" (click)="onRoleSelect('doctor')"
+        [attr.aria-label]="'as_doctor' | translateApi">
+        <span class="btn__label">{{ "as_doctor" | translateApi }}</span>
+      </button>
+      <button id="new-user-btn" type="button" class="btn btn--outline" (click)="onRoleSelect('patient')"
+        [attr.aria-label]="'as_new_user' | translateApi">
+        <span class="btn__label">{{ "as_new_user" | translateApi }}</span>
+      </button>
+    </div>
+  </div>
+</div>

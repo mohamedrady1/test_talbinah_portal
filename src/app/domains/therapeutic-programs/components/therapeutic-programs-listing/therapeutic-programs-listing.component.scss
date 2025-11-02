@@ -1,0 +1,84 @@
+@use "../../../../common/styles/scss/abstracts/mixins" as *;
+@use "../../../../common/styles/scss/utils/helpers" as *;
+
+.therapeutic-programs {
+  &-listing {
+    @include flex-box(row, 0.75rem);
+
+    @include respond(sm) {
+      flex-direction: column;
+    }
+
+    // Segment control for mobile
+    &__segment {
+      display: none;
+
+      @include respond(sm) {
+        display: block;
+        margin-bottom: 0.75rem;
+      }
+    }
+
+    // Hide content based on active tab (mobile only)
+    @include respond(sm) {
+      .therapeutic-programs-listing-layout__left-panel.hidden,
+      .therapeutic-programs-listing__my-programs.hidden {
+        display: none;
+      }
+    }
+    &-layout__left-panel {
+      @include flex-box(column, 0.75rem);
+
+      flex: 1;
+    }
+
+    &__my-programs {
+      @include flex-box(column, 0.75rem);
+      padding: 0.75rem;
+      border-radius: 1rem;
+      background: var(--Dark-WHITE, #fff);
+      min-width: 22.75rem;
+      max-width: 22.75rem;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      overflow-y: visible;
+      position: sticky;
+      top: 0;
+      align-self: flex-start;
+      @include respond(sm) {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      &--list {
+        @include flex-box(column, 0.75rem);
+        margin-top: 0.75rem;
+      }
+    }
+    &-layout {
+      &__program-cards {
+        @include flex-box(column, 0.75rem);
+
+        flex: 1;
+        border-radius: 1rem;
+        background: var(--Dark-WHITE, #fff);
+        padding: 0.75rem;
+        &--list {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.75rem;
+          @include respond(sm) {
+            grid-template-columns: repeat(1, 1fr);
+          }
+          // Uncomment if needed:
+          // > :nth-child(3):last-child,
+          // > :nth-child(1):only-child {
+          //   grid-column: span 2;
+          // }
+        }
+      }
+    }
+  }
+}

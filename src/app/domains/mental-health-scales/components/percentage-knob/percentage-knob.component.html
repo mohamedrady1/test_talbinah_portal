@@ -1,0 +1,14 @@
+<div class="percentage-knob" [ngStyle]="styles()">
+    <svg [ngStyle]="svgStyles()" viewBox="0 0 100 100" class="percentage-knob__svg" role="img"
+        [attr.aria-label]="'Percentage indicator showing ' + percentage() + '%'">
+        <circle cx="50" cy="50" r="42" fill="none" [ngStyle]="backgroundCircleStyles()"
+            class="percentage-knob__background-circle" />
+
+        <circle cx="50" cy="50" r="42" fill="none" [ngStyle]="circleStyles()" class="percentage-knob__progress-circle"
+            transform="rotate(-90 50 50)" />
+    </svg>
+
+    <div class="percentage-knob__text">
+        {{ displayText() }}
+    </div>
+</div>

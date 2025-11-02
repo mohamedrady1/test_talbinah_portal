@@ -1,0 +1,23 @@
+<div class="khawiik-history-skeleton">
+    <!-- Content Section -->
+    <div class="khawiik-history-skeleton__content">
+
+        <!-- Search -->
+        <div class="khawiik-history-skeleton__search">
+            <div class="khawiik-history-skeleton__search-input shimmer-wrapper"></div>
+        </div>
+
+        <!-- Chat List -->
+        <ul class="khawiik-history-skeleton__list">
+            @for (row of _chatRows; track $index) {
+            <li class="khawiik-history-skeleton__item">
+                <div class="khawiik-history-skeleton__info">
+                    <div class="khawiik-history-skeleton__title shimmer-wrapper"></div>
+                    <div class="khawiik-history-skeleton__date shimmer-wrapper"></div>
+                </div>
+                <div class="khawiik-history-skeleton__actions shimmer-wrapper"></div>
+            </li>
+            }
+        </ul>
+    </div>
+</div>

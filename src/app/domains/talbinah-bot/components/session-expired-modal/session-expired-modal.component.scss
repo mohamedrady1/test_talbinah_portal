@@ -1,0 +1,85 @@
+.session-expired-modal {
+    margin: 1rem;
+    padding: 0.75rem;
+    background: var(--Dark-WHITE, #fff);
+    border-radius: 1rem;
+    margin-block-start: 0;
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.5rem;
+        padding: 0.75rem;
+    }
+
+    &__icon {
+        width: 7rem;
+        height: 7rem;
+        object-fit: contain;
+    }
+
+    &__title {
+        color: var(--text-primary, #191614);
+        font-size: 1.5rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin: 0;
+    }
+
+    &__description {
+        color: var(--text-secondary, #6b6b6b);
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    &__button {
+        min-width: 18rem;
+        width: fit-content;
+        display: flex;
+        padding: 0.875rem 2rem;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        border-radius: 1rem;
+        border: 1px solid #5c9dff;
+        background: linear-gradient(
+            103deg,
+            var(--Primary-100, #dbe1f4) -21.22%,
+            var(--Primary-primary, #0e39b6) 118.08%,
+            #3579ff 118.08%
+        );
+        box-shadow:
+            0 4px 4px -2px rgba(255, 250, 247, 0.3) inset,
+            0 12px 32px 3px rgba(11, 96, 255, 0.25);
+        cursor: pointer;
+        transition:
+            transform 140ms ease,
+            box-shadow 140ms ease;
+        color: var(--white-100, #fffaf7);
+        text-shadow: 0 0.5px 0.5px rgba(25, 22, 20, 0.15);
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        outline: none;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 4px 4px -2px rgba(255, 250, 247, 0.3) inset,
+                0 16px 40px 5px rgba(11, 96, 255, 0.35);
+        }
+
+        &:active {
+            transform: translateY(0);
+            box-shadow:
+                0 4px 4px -2px rgba(255, 250, 247, 0.3) inset,
+                0 8px 24px 2px rgba(11, 96, 255, 0.2);
+        }
+    }
+}

@@ -1,0 +1,54 @@
+<div class="emoji-picker">
+    <div class="emoji-picker__search--wrapper">
+        <svg class="emoji-picker__search--icon" width="14" height="14" viewBox="0 0 14 14" fill="none"
+            xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path
+                d="M6.98226 13.2707C3.52893 13.2707 0.711426 10.459 0.711426 6.99984C0.711426 3.54067 3.52893 0.729004 6.98226 0.729004C10.4356 0.729004 13.2531 3.54067 13.2531 6.99984C13.2531 10.459 10.4414 13.2707 6.98226 13.2707ZM6.98226 1.604C4.00726 1.604 1.58643 4.02484 1.58643 6.99984C1.58643 9.97484 4.00726 12.3957 6.98226 12.3957C9.95726 12.3957 12.3781 9.97484 12.3781 6.99984C12.3781 4.02484 9.95726 1.604 6.98226 1.604Z"
+                fill="#47586e"></path>
+            <path
+                d="M6.99977 11.2294C5.7456 11.2294 4.56727 10.6169 3.84977 9.58436C3.70977 9.38603 3.76227 9.11186 3.9606 8.9777C4.15893 8.8377 4.4331 8.8902 4.56727 9.08853C5.12143 9.88186 6.03143 10.3602 6.99977 10.3602C7.9681 10.3602 8.8781 9.8877 9.43227 9.08853C9.57227 8.8902 9.8406 8.84353 10.0389 8.9777C10.2373 9.1177 10.2839 9.38603 10.1498 9.58436C9.43227 10.6169 8.25393 11.2294 6.99977 11.2294Z"
+                fill="#47586e"></path>
+        </svg>
+        <input #searchInput type="text" class="emoji-picker__search" [placeholder]="'EmojiCategory.Search' |translate"
+            (input)="onSearch(searchInput.value)" />
+    </div>
+
+
+    <div class="emoji-picker__categories">
+        @for (category of categories; track category) {
+        <button class="emoji-picker__category"
+            [class.emoji-picker__category--active]="category.key === activeCategory()"
+            (click)="selectCategory(category.key)" type="button">
+            {{ category.text|translate}}
+        </button>
+        }
+    </div>
+
+    <div class="emoji-picker__grid" role="list">
+        @for (emoji of filteredEmojis();track $index) {
+        <button type="button" class="emoji-picker__emoji" [attr.aria-label]="emoji.name" [title]="emoji.name"
+            (click)="emitEmoji(emoji.unified)">
+            {{ getEmojiChar(emoji.unified) }}
+        </button>
+        }
+    </div>
+
+    @if (filteredEmojis().length === 0) {
+    <div class="emoji-picker__no-results">
+        <p>
+            {{ 'EmojiCategory.NoResults' | translate }}
+        </p>
+        <svg width="20" height="20" fill="#47586e" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            data-name="Layer 1">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <path
+                    d="M9,11.71l.29-.3.29.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42l-.3-.29.3-.29A1,1,0,0,0,9.54,8.29l-.29.3L9,8.29A1,1,0,1,0,7.54,9.71l.3.29-.3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0Zm-.6,3.62a1,1,0,0,0-.13,1.4,1,1,0,0,0,1.41.13,3.76,3.76,0,0,1,4.72,0,1,1,0,0,0,1.41-.13,1,1,0,0,0-.13-1.4A5.81,5.81,0,0,0,8.36,15.33ZM12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm0,18a8,8,0,1,1,8-8A8,8,0,0,1,12,20ZM17,8.29a1,1,0,0,0-1.42,0l-.29.3L15,8.29a1,1,0,0,0-1.42,1.42l.3.29-.3.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l.29-.3.29.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42l-.3-.29.3-.29A1,1,0,0,0,17,8.29Z">
+                </path>
+            </g>
+        </svg>
+    </div>
+    }
+
+</div>

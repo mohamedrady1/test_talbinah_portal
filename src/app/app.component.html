@@ -1,0 +1,39 @@
+<main class="main-wrapper" role="main" aria-label="Application Main Content"
+  [class.main-wrapper--ssr-loading]="isServer()">
+  @if (shouldRender()) {
+  <div class="header-wrapper d-none d-xl-block">
+    <!-- <app-site-header></app-site-header> -->
+  </div>
+  }
+
+  @if (shouldRender()) {
+  <div class="header-wrapper d-block d-xl-none">
+    <!-- <navbar-mobile></navbar-mobile> -->
+  </div>
+  }
+
+  <section class="main-wrapper__content">
+    <router-outlet></router-outlet>
+    <app-toast></app-toast>
+  </section>
+
+  @if (shouldRender()) {
+  <app-toast></app-toast>
+  }
+  <app-modal-outlet #modalOutlet></app-modal-outlet>
+
+  <!-- Facebook-style Notifications -->
+  <!-- <app-notification></app-notification> -->
+
+  @if (shouldPodcastAudioPlayer()) {
+  <div class="main-wrapper__podcast-audio-player">
+    <app-podcast-audio-player [podcastDetails]="selectedPodcast()!" [currentTime]="selectedPodcastCurrentTime()" />
+  </div>
+  }
+
+  @if (shouldUrgentAppointmentFloatingWindow()) {
+  <div class="main-wrapper__podcast-audio-player">
+    <app-urgent-appointment-floating-window />
+  </div>
+  }
+</main>

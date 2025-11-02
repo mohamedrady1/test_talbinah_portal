@@ -1,0 +1,60 @@
+.video-card {
+    position: relative; // Needed for overlay positioning
+    border-radius: 0.75rem; // 12px
+    background-color: var(--grey-50, rgba(51, 51, 51, 0.04)); // #3333330a
+    height: 9rem; // Fixed height: 144px
+    overflow: hidden; // Ensures video stays within rounded corners
+    width: 100%;
+    display: flex; // Use flexbox for centering video and overlay
+    justify-content: center;
+    align-items: center;
+    video {
+        height: 100%;
+    }
+}
+
+// Element: Video Tag
+.video-card__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Ensures video covers the area without distortion, cropping if necessary
+    display: block; // Remove extra space below video
+}
+
+// Element: Overlay for Play/Pause button
+.video-card__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3); // Semi-transparent black overlay
+    cursor: pointer;
+    opacity: 1; // Always visible initially
+    transition: opacity 0.3s ease; // Smooth transition for opacity
+}
+
+// Element: Play/Pause control button (wrapper for SVG)
+.video-card__control-button {
+    pointer-events: none;
+    display: flex;
+    padding: 0.375rem;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: var(--Radius-8, 0.5rem);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.31);
+    backdrop-filter: blur(8.399999618530273px);
+}
+
+// Specific styling for the SVG paths (if needed, otherwise default fill/stroke applies)
+// Example if you want to override default SVG colors/strokes
+.video-card__control-button svg {
+    path {
+        // fill: white; // Or other color
+        // stroke: white; // Or other color
+    }
+}

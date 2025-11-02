@@ -1,0 +1,30 @@
+<div class="program-progress">
+    <div class="program-progress__content">
+        <p class="program-progress__content--title">
+            {{'track_progress'|translate}}
+        </p>
+        <p class="program-progress__content--description">
+            {{'track_progressText'|translate}}
+        </p>
+    </div>
+    <div class="circular-progress" [ngStyle]="{ '--progress': rate() + '%' }">
+        <svg class="circular-progress__svg" viewBox="0 0 36 36">
+            <path class="circular-progress__background" d="M18 2.0845
+         a 15.9155 15.9155 0 0 1 0 31.831
+         a 15.9155 15.9155 0 0 1 0 -31.831" />
+            <path class="circular-progress__bar" [ngClass]="{
+        'circular-progress__bar--low': rate() < 50,
+        'circular-progress__bar--high': rate() >= 50
+      }" [attr.stroke-dasharray]="rate() + ', 100'" d="M18 2.0845
+         a 15.9155 15.9155 0 0 1 0 31.831
+         a 15.9155 15.9155 0 0 1 0 -31.831" />
+        </svg>
+        <div class="circular-progress__text">
+            <div class="circular-progress__label">
+                المستوى
+            </div>
+            <div class="circular-progress__value">{{ rate() }}%</div>
+        </div>
+    </div>
+
+</div>

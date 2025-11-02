@@ -1,0 +1,148 @@
+@use "./../../../../common/styles/scss/buttons/button.mixins" as btn;
+.service-modal {
+    display: flex;
+    padding: 0.75rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.75rem;
+    background: var(--Dark-WHITE, #fff);
+    display: flex;
+    padding: 0.75rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.75rem;
+    background: var(--Dark-WHITE, #fff);
+    margin: 1rem;
+    margin-top: 0;
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    &__loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        padding: 2rem 1rem;
+    }
+
+    &__default {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    &__icon {
+        display: flex;
+        width: 4.0625rem;
+        height: 4.0625rem;
+        padding: 0.50781rem;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background: var(--Warning-50, #faf4eb);
+    }
+
+    &__title {
+        color: var(--text-400, #0f0f0f);
+        text-align: center;
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+
+    &__actions {
+        display: flex;
+        padding-top: 1.75rem;
+        align-items: center;
+        gap: 0.625rem;
+        justify-content: flex-end;
+        align-self: stretch;
+    }
+
+    &__btn {
+        @include btn.button-base;
+        @include btn.button-size("medium");
+        @include btn.button-icon-position("left");
+        @include btn.button-icon-size("medium");
+        @include btn.button-color("main");
+        @include btn.button-spinner;
+        width: fit-content;
+        &--cancel {
+            background: var(--Dark-100, #eee);
+            color: var(--text-300, #47586e);
+
+            &:hover {
+                background: var(--Dark-200, #e0e0e0);
+            }
+
+            &:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+        }
+
+        &--confirm {
+            background: var(--Primary-primary, #0e39b6);
+            color: var(--Dark-WHITE, #fff);
+
+            &:hover {
+                background: var(--Primary-600, #0a2b8f);
+            }
+
+            &.service-modal__btn--disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+        }
+
+        &__loading {
+            display: flex;
+            align-items: center;
+        }
+
+        .dot-loader::after {
+            content: "";
+            animation: dots 1.5s steps(4, end) infinite;
+            white-space: pre;
+        }
+
+        @keyframes dots {
+            0% {
+                content: "";
+            }
+
+            25% {
+                content: ".";
+            }
+
+            50% {
+                content: "..";
+            }
+
+            75% {
+                content: "...";
+            }
+
+            100% {
+                content: "";
+            }
+        }
+    }
+    &--disabled {
+        // BEM modifier for disabled state
+        pointer-events: none;
+        cursor: not-allowed;
+        opacity: 0.7; // Visual cue for disabled
+    }
+}

@@ -1,0 +1,26 @@
+/* remote-user.component.scss */
+.remote-user-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .remote-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #c8ddfd;
+    display: block;
+  }
+
+  .user-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.1);
+  }
+}

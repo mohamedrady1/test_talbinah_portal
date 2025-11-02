@@ -1,0 +1,15 @@
+.payment-popup-block {
+  // Use BEM naming for the main block container
+  margin: 0 0.75rem 1rem; // This styling seems to define margin around the popup content itself
+  display: flex; // Ensure it's a flex container for its children
+  flex-direction: column; // Arrange children vertically
+  // Add other common styles for the popup container like padding, background, border-radius etc.,
+  // as was present in the previous example's `.payment-popup-container` if this is meant to style the modal content box.
+  // For example:
+  // padding: 1.5rem;
+  // background-color: var(--Dark-WHITE, #ffffff);
+  // border-radius: 0.75rem;
+  // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  // max-width: 600px;
+  // margin: auto; // To center if it's not a full-screen modal
+}

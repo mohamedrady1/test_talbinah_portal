@@ -1,0 +1,28 @@
+<section class="recall-appointment">
+  <div class="recall-appointment__status" role="status" aria-live="polite">
+    <div class="recall-appointment__status__icon">
+      <img src="images/icons/timeout-icon.png" alt="{{'doctor_search_in_progress' | translateApi }}" width="100"
+        height="100" loading="lazy" />
+    </div>
+    <div class="recall-appointment__status__content">
+      <h2 class="recall-appointment__status__title">
+        {{ title | translateApi }}
+      </h2>
+      <p class="recall-appointment__status__subtitle">
+        {{ 'request_new_appointment' | translateApi }}
+      </p>
+    </div>
+  </div>
+
+  <div class="recall-appointment--actions">
+    <button id="cancel-btn" type="button" class="btn btn--outline" (click)="onCancelButtonClick()">
+      {{ 'back_to_home' | translateApi }}
+    </button>
+    <button [id]="'submitButtonId'" type="button" class="btn btn--solid" (click)="RecallAction()"
+      [disabled]="isSubmitting" [attr.aria-busy]="isSubmitting" [attr.aria-label]="'recall'">
+      <span class="recall-appointment__button__label">
+        {{ 'reorder' | translateApi }}
+      </span>
+    </button>
+  </div>
+</section>

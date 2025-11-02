@@ -1,0 +1,24 @@
+<div class="image-viewer-modal" (mouseenter)="showDownloadButton.set(true)"
+  (mouseleave)="showDownloadButton.set(false)">
+  <div class="image-viewer-modal__body">
+    @if (data?.imgUrl) {
+    <img [src]="data.imgUrl" [alt]="data.title || 'Image'" class="image-viewer-modal__image" />
+    } @else {
+    <div class="image-viewer-modal__placeholder">
+      <p>No image to display.</p>
+    </div>
+    }
+
+    @if (showDownloadButton()) {
+    <div class="image-viewer-modal__actions">
+      <button class="image-viewer-modal__button" (click)="downloadImage($event)">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3V17M12 17L17 12M12 17L7 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+          <path d="M20 21H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+    </div>
+    }
+  </div>
+</div>

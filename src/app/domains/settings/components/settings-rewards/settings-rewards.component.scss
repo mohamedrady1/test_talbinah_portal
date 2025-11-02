@@ -1,0 +1,195 @@
+@use "./../../../../common/styles/scss/abstracts/mixins" as responsive;
+
+.settings-rewards-layout {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+  gap: 1.25rem;
+  margin-inline: 1rem;
+  border-radius: 1rem;
+  background: var(--Dark-WHITE, #fff);
+  margin-inline-end: 0.5rem;
+
+  &-container {
+    padding: 0.75rem;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  &__title {
+    color: var(--text-primary, #000);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  &__description {
+    color: var(--text-300, #47586e);
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+
+    @include responsive.respond(md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    display: flex;
+    height: 5rem;
+    padding: 0.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--Dark-50, #f6f7f8);
+    background: var(--Dark-WHITE, #fff);
+    flex-wrap: wrap;
+  }
+
+  &__card-icon {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.25rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 1rem;
+    background: var(--Warning-50, #faf4eb);
+  }
+
+  &__card-title {
+    color: var(--text-primary, #000);
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.75rem;
+    flex: 1 0 0;
+  }
+
+  &__card-points {
+    color: var(--Primary-primary, #0e39b6);
+    font-weight: 700;
+  }
+
+  &__card-button {
+    display: flex;
+    height: 2rem;
+    padding: var(--Radius-8, 0.5rem) var(--Radius-16, 1rem);
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 0.375rem;
+    background: var(--Primary-50, #e7ebf8);
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background: var(--Primary-100, #d0d8f0);
+    }
+  }
+
+  // Loading State Styles
+  &__loading-state {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+
+    @include responsive.respond(md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__loading-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--Dark-WHITE, #fff);
+    border-radius: 0.75rem;
+    border: 1px solid var(--Dark-50, #f6f7f8);
+    height: 5rem;
+  }
+
+  &__loading-icon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 1rem;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  &__loading-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__loading-title {
+    height: 1rem;
+    width: 60%;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 0.25rem;
+  }
+
+  &__loading-description {
+    height: 0.75rem;
+    width: 80%;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 0.25rem;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+
+
+    &.status--valid {
+      color: var(--Success-primary, #00AF6C);
+      background: rgba(var(--Success-primary, #00AF6C), 0.08);
+      border: 1px solid rgba(var(--Success-primary, #00AF6C), 0.12);
+    }
+
+    &.status--expired {
+      color: var(--Danger-600, #CA4146);
+      background: rgba(var(--Danger-600, #CA4146), 0.06);
+      border: 1px solid rgba(var(--Danger-600, #CA4146), 0.08);
+    }
+  }
+}

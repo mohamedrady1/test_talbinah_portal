@@ -1,0 +1,43 @@
+<div class="mood-statistics">
+    <div class="mood-statistics--today">
+        <p class="mood-statistics--today__title">
+            {{ 'todays_mood_in_our_community' | translateApi }}
+        </p>
+        <div class="mood-statistics--today__statistic">
+            <p><span> {{ config.number }}% {{ 'people_expressed_today' | translateApi }}</span></p>
+            <p>
+                @switch (config.mood.id) {
+                @case (0) {
+                <app-get-mood-svg [mood]="mood.HAPPY"></app-get-mood-svg>
+                }
+                @case (1) {
+                <app-get-mood-svg [mood]="mood.FRIENDLY"></app-get-mood-svg>
+                }
+                @case (2) {
+                <app-get-mood-svg [mood]="mood.LOVING"></app-get-mood-svg>
+                }
+                @case (3) {
+                <app-get-mood-svg [mood]="mood.SAD"></app-get-mood-svg>
+                }
+                @case (4) {
+                <app-get-mood-svg [mood]="mood.TIRED"></app-get-mood-svg>
+                }
+                }
+                <span>{{config.mood.title}}</span>
+            </p>
+        </div>
+    </div>
+    <div class="mood-statistics--support-statistics">
+        <p class="mood-statistics--support-statistics__title">
+            {{ 'support_statistics' | translateApi }}
+        </p>
+        <div class="mood-statistics--support-statistics__statistic">
+            <p><span>
+                    {{ 'you_have_supported_today' | translateApi }}
+                </span></p>
+            <p>
+                {{ config.count }} {{ 'people' | translateApi }}
+            </p>
+        </div>
+    </div>
+</div>

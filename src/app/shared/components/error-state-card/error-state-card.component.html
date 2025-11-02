@@ -1,0 +1,30 @@
+<div class="error-state" [style.background-color]="backgroundColor" [style.gap]="gap">
+
+  <!-- Image -->
+  @if (config.imageUrl) {
+  <img class="error-state__image" [ngClass]="{ 'small': type === 'small' }" [style.width]="imgWidth"
+    [src]="config.imageUrl" alt="Error state" />
+  }
+
+  <!-- Title -->
+  @if (config.title) {
+  <h2 class="error-state__title" [ngClass]="{ 'small': type === 'small' }">
+    {{ config.title | translate }}
+  </h2>
+  }
+
+  <!-- Message -->
+  @if (config.message) {
+  <p class="error-state__message" [ngClass]="{ 'small': type === 'small' }">
+    {{ config.message | translate }}
+  </p>
+  }
+
+  <!-- Retry Button -->
+  @if (config.onRetry) {
+  <button class="error-state__button" type="button" (click)="retry()">
+    {{ retryLabel | translate }}
+  </button>
+  }
+
+</div>

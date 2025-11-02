@@ -1,0 +1,49 @@
+<div class="card-header">
+  <div class="card-header_title">
+    <p>
+      {{config.title |translateApi}}
+    </p>
+  </div>
+  @if (config.isTabsEnabled) {
+  <div class="card-header__tabs">
+    @for (tab of config.tabs; track $index) {
+    <div class="tab" [class.active]="selectedTab() === tab" (click)="selectTab(tab)">
+      {{ tab | translateApi }}
+    </div>
+    }
+  </div>
+  }
+
+  @if (config.isButtonsVisible) {
+  <div class="card-header__controls">
+    <button class="card-header__button card-header__button--prev" (click)="prevClicked.emit()"
+      [class.disabled]="isPrevDisabled" [disabled]="isPrevDisabled" aria-label="Previous">
+      <svg width="20" height="20" class="scaleX-rtl" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M8.80248 12.0575C8.91332 12.0575 9.02415 12.0167 9.11165 11.9292C9.28082 11.76 9.28082 11.48 9.11165 11.3108L5.30832 7.50751C5.02832 7.22751 5.02832 6.77251 5.30832 6.49251L9.11165 2.68918C9.28082 2.52001 9.28082 2.24001 9.11165 2.07084C8.94248 1.90168 8.66248 1.90168 8.49332 2.07084L4.68998 5.87418C4.39248 6.17168 4.22332 6.57418 4.22332 7.00001C4.22332 7.42584 4.38665 7.82834 4.68998 8.12584L8.49332 11.9292C8.58082 12.0108 8.69165 12.0575 8.80248 12.0575Z"
+          fill="#0E39B6" />
+      </svg>
+    </button>
+    <button class="card-header__button card-header__button--next" (click)="nextClicked.emit()"
+      [class.disabled]="isNextDisabled" [disabled]="isNextDisabled" aria-label="Next">
+      <svg width="20" height="20" class="scaleX-rtl" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M5.19752 12.0575C5.08668 12.0575 4.97585 12.0167 4.88835 11.9292C4.71918 11.76 4.71918 11.48 4.88835 11.3108L8.69168 7.50751C8.97168 7.22751 8.97168 6.77251 8.69168 6.49251L4.88835 2.68918C4.71918 2.52001 4.71918 2.24001 4.88835 2.07084C5.05752 1.90168 5.33752 1.90168 5.50668 2.07084L9.31002 5.87418C9.60752 6.17168 9.77668 6.57418 9.77668 7.00001C9.77668 7.42584 9.61335 7.82834 9.31002 8.12584L5.50668 11.9292C5.41918 12.0108 5.30835 12.0575 5.19752 12.0575Z"
+          fill="#0E39B6" />
+      </svg>
+    </button>
+  </div>
+  }
+  @if (config.isAllButtonVisible) {
+  <button class="card-header__all-button" (click)="allClicked.emit()" aria-label="View All">
+    <p>
+      {{"all"|translateApi}}
+    </p>
+    <svg width="14" height="14" class="scaleX-rtl" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M5.1975 12.0574C5.08667 12.0574 4.97583 12.0166 4.88833 11.9291C4.71917 11.7599 4.71917 11.4799 4.88833 11.3107L8.69167 7.50739C8.97167 7.22739 8.97167 6.77239 8.69167 6.49239L4.88833 2.68906C4.71917 2.51989 4.71917 2.23989 4.88833 2.07072C5.0575 1.90156 5.3375 1.90156 5.50667 2.07072L9.31 5.87406C9.6075 6.17156 9.77667 6.57406 9.77667 6.99989C9.77667 7.42572 9.61333 7.82822 9.31 8.12572L5.50667 11.9291C5.41917 12.0107 5.30833 12.0574 5.1975 12.0574Z"
+        fill="#47586E" />
+    </svg>
+  </button>
+  }
+</div>

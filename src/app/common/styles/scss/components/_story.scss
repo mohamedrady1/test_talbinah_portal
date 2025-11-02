@@ -1,0 +1,115 @@
+@use "../abstracts/mixins" as *;
+.story {
+    width: 75%;
+    margin: 0 auto;
+    box-shadow: 0 3rem 6rem rgba($color-black, 0.1);
+    background-color: rgba($color-white, 0.6);
+    border-radius: 3px;
+    padding: 6rem;
+    padding-left: 9rem;
+    // font-size: $default-font-size;
+    transform: skewX(-12deg);
+
+    @include respond(md) {
+        width: 100%;
+        padding: 4rem;
+        padding-left: 7rem;
+    }
+
+    @include respond(sm) {
+        transform: skewX(0);
+    }
+
+    &__shape {
+        width: 15rem;
+        height: 15rem;
+        float: left;
+        transform: translateX(-3rem) skewX(12deg);
+        position: relative;
+        overflow: hidden;
+        border-radius: 50%;
+
+        @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+            // If the browser supports the clip-path property (polygon shape), the following styles are applied:
+            -webkit-clip-path: circle(50% at 50% 50%);
+            clip-path: circle(50% at 50% 50%);
+            -webkit-shape-outside: circle(50% at 50% 50%);
+            shape-outside: circle(50% at 50% 50%);
+            border-radius: none;
+        }
+
+        @include respond(sm) {
+            transform: translateX(-3rem) skewX(0);
+        }
+    }
+
+    &__img {
+        height: 100%;
+        transform: translateX(-4rem) scale(1.4);
+        backface-visibility: hidden;
+        transition: all 0.5s;
+    }
+
+    &__text {
+        transform: skewX(12deg);
+
+        @include respond(sm) {
+            transform: skewX(0);
+        }
+    }
+
+    &__caption {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 20%);
+        color: $color-white;
+        text-transform: uppercase;
+        font-size: 1.7rem;
+        text-align: center;
+        opacity: 0;
+        transition: all 0.5s;
+        backface-visibility: hidden;
+    }
+
+    &:hover &__caption {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    &:hover &__img {
+        transform: translateX(-4rem) scale(1);
+        filter: blur(3px) brightness(80%);
+    }
+}
+
+// This SCSS defines the styling for a "story" component with unique effects, including a skewed container, image transformations, and caption hover effects.
+
+// The `.story` container has a shadow, rounded corners, and a semi-transparent white background. It's skewed on the X-axis by -12 degrees to create a dynamic effect.
+// The width is set to 75% with padding, and responsiveness is handled with media queries for different screen sizes (e.g., `md` and `phone`).
+
+// The `.story__shape` is a circular element on the left of the container, with a special shape using `clip-path` (if supported by the browser) to maintain a circular appearance.
+// On mobile (`phone`), the shape's skew is reset to maintain visual balance.
+
+// The `.story__img` is an image inside the story container. It has a scale and a position transform applied to adjust its placement within the story. A transition is applied for smooth transformations when hovered over.
+// On hover, the image is slightly de-scaled, blurred, and darkened using `filter` properties.
+
+// The `.story__text` is styled to match the skew effect of the container and is also responsive to ensure it displays correctly on mobile screens.
+// The `.story__caption` is an absolutely positioned caption that initially has no opacity. On hover, the caption becomes visible and moves to the center of the container, while its opacity transitions from 0 to 1.
+
+// These hover effects, transitions, and transformations make the component visually dynamic and engaging for the user.
+
+// Example
+
+// <div class="story">
+//     <div class="story__shape">
+//         <img src="https://images.pexels.com/photos/29696169/pexels-photo-29696169/free-photo-of-minimalist-living-room-with-indoor-plants.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Placeholder Image" class="story__img">
+//     </div>
+//     <div class="story__text">
+//         <h2>Story Title</h2>
+//         <p>This is a sample story content. It is skewed initially but the skew effect disappears on smaller screens.</p>
+//     </div>
+//     <div class="story__caption">
+//         <span>Caption Text</span>
+//     </div>
+// </div>
