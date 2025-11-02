@@ -11,10 +11,10 @@
 
             <div class="notifications-settings-modal__texts">
               <span class="notifications-settings-modal__label">
-                {{ method.label  }}
+                {{ translate(method.label) }}
               </span>
               <span class="notifications-settings-modal__description">
-                {{ method.description  }}
+                {{ translate(method.description) }}
               </span>
             </div>
           </div>
@@ -31,7 +31,7 @@
 
     <div class="notifications-settings-modal__actions">
       <button type="submit" class="btn btn--solid" [disabled]="facade.isLoading()"
-        [attr.aria-label]="'save' ">
+        [attr.aria-label]="translate('save') ">
         @if (facade.isLoading()) {
         {{ translate('in_progress') }}
         } @else {

@@ -5,7 +5,7 @@
         <img src="{{internalUserInfo()?.image}}" alt="avatar" onerror="src='images/not-found/talbinah.png'">
       </div>
       <div class="user-info-card__info">
-        <p class="user-info-card__info-welcome">{{'welcome' }}</p>
+        <p class="user-info-card__info-welcome">{{ translate('welcome') }}</p>
         <p class="user-info-card__info-name">
           {{internalUserInfo()?.full_name || internalUserInfo()?.nick_name || ''}}
         </p>
@@ -43,7 +43,7 @@
         {{ translate('userInfo.session') }}
       </p>
       <p class="user-info-card__inforamtion-item-label">
-        {{'userInfo.reservedSessions' }}
+        {{ translate('userInfo.reservedSessions') }}
       </p>
     </div>
     }
@@ -56,7 +56,7 @@
 
       </p>
       <p class="user-info-card__inforamtion-item-label">
-        {{'userInfo.lastPsychologicalScale' }}
+        {{ translate('userInfo.lastPsychologicalScale') }}
 
       </p>
     </div>
@@ -68,7 +68,7 @@
         {{ translate('userInfo.activeTherapeuticPrograms') }}
       </p>
       <p class="user-info-card__inforamtion-item-label">
-        {{'userInfo.joinedPrograms' }}
+        {{ translate('userInfo.joinedPrograms') }}
       </p>
     </div>
     }

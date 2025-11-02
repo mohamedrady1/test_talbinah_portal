@@ -231,7 +231,7 @@ export class NewLoginComponent implements OnDestroy {
     const modalData: NewLoginModalData = {
       image: this.icon,
       title: 'password',
-      description: this.description
+      description: this.translate(this.description)
     };
 
     // Open the password modal first

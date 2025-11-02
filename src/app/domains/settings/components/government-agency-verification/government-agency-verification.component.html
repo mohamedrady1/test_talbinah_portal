@@ -37,7 +37,7 @@
               <div class="government-agency-verification__email-form__inputs">
                 <input id="emailPrefix" type="text" class="government-agency-verification__email-form__input"
                   formControlName="emailPrefix" [attr.aria-invalid]="hasError" aria-describedby="emailError"
-                  [placeholder]="'enter_email' " />
+                  [placeholder]="translate('enter_email') " />
               </div>
               @if (hasError) {
               <div id="emailError" class="government-agency-verification__email-form__error" role="alert"
@@ -55,7 +55,7 @@
       <!-- Submit Button -->
       <div class="government-agency-verification__button-container">
         <button type="submit" class="btn" [disabled]="isLoading()" (click)="submitForm()"
-          [attr.aria-label]="'OtpMethodSelection.Submit' ">
+          [attr.aria-label]="translate('OtpMethodSelection.Submit') ">
           <span class="btn__label">
             @if (isLoading()) {
             <div class="government-agency-verification__button-loading" aria-label="Submit in progress">
@@ -87,13 +87,13 @@
           [ngClass]="{ 'government-agency-verification__otp-input--error': codeNotValid() }">
           <app-code-input [clearInputs]="clearInputsValue" [inputsNumber]="inputsNumber" [typedInput]="'num'"
             (codeChanged)="handleCodeChange($event)" (codeCompleted)="handleCodeCompletion($event)"
-            [attr.aria-label]="'governmentAgency.otpInput' "></app-code-input>
+            [attr.aria-label]="translate('governmentAgency.otpInput') "></app-code-input>
         </div>
 
         @if (codeNotValid()) {
         <div class="government-agency-verification__error">
           <p class="government-agency-verification__error-message">
-            {{ translate('الكود غير صحيح من فضلك اعد المحاولة') }}
+            {{ translate('code_incorrect_please_try_again') }}
           </p>
         </div>
         }

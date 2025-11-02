@@ -1,7 +1,8 @@
 <div class="podcast-card" (click)="openPopup()">
   <div class="podcast-card__details">
     <div class="podcast-card__thumbnail">
-      <img [src]="podcastDetails?.thumbnail_image" [alt]="podcastDetails.title" class="podcast-card__image" />
+      <img [src]="podcastDetails?.thumbnail_image" [alt]="podcastDetails.title" class="podcast-card__image"
+        onerror="this.src='images/icons/logo-2.png'" />
     </div>
     <div class="podcast-card__content">
       <div class="podcast-card__content-header">

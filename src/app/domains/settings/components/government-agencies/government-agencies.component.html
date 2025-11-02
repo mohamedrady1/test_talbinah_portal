@@ -6,12 +6,12 @@
         <img src="images/icons/security.png" alt="security icon" class="government-agencies__cards-banner--icon" />
         <img src="images/icons/security-2.png" alt="security icon" class="government-agencies__cards-banner--icon-2" />
         <p class="title">
-          {{'register_with_affiliated_organization' }}
+          {{ translate('register_with_affiliated_organization') }}
         </p>
         <p class="subtitle">
           <app-svg-icon name="small-info" />
           <span>
-            {{'support_sessions_register_with_affiliation' }}
+            {{ translate('support_sessions_register_with_affiliation') }}
           </span>
         </p>
       </div>
@@ -19,16 +19,16 @@
         <img src="images/icons/security-3.png" alt="security icon" class="government-agencies__cards-banner--icon" />
 
         <p class="title">
-          {{'authority_unavailable' }}
+          {{ translate('authority_unavailable') }}
         </p>
         <p class="subtitle">
           <app-svg-icon name="small-info" />
           <span>
-            {{'request_to_add_organization' }}
+            {{ translate('request_to_add_organization') }}
           </span>
         </p>
         <a class="contact-us__whatsapp-button" [href]="'https://wa.me/966536016067'" target="_blank"
-          rel="noopener noreferrer" [attr.aria-label]="'contact_us' ">
+          rel="noopener noreferrer" [attr.aria-label]="translate('contact_us') ">
           <span class="contact-us__whatsapp-button--text">
             {{ translate('contact_us') }}
           </span>
@@ -40,7 +40,7 @@
     <div class="government-agencies__data-box">
       <div class="government-agencies__header">
         <h4 class="government-agencies__header--label-list">
-          🏫 {{'authorities' }}
+          🏫 {{ translate('authorities') }}
         </h4>
         <div class="government-agencies__header--search">
           <span>
@@ -53,10 +53,10 @@
                 fill="#47586E" />
             </svg>
           </span>
-          <input type="text" class="session-tasks-modal__search-input" placeholder="ابحث" [value]="searchQuery()"
-            (input)="onSearch($any($event.target).value)" />
+          <input type="text" class="session-tasks-modal__search-input" [placeholder]="translate('search')"
+            [value]="searchQuery()" (input)="onSearch($any($event.target).value)" />
           @if (searchQuery()) {
-          <button type="button" class="session-tasks-modal__search-clear" aria-label="مسح البحث"
+          <button type="button" class="session-tasks-modal__search-clear" [attr.aria-label]="translate('clear_search')"
             (click)="clearSearch()">
             <span>
               <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" fill="none">
@@ -96,7 +96,7 @@
           (click)="openGovernmentAgencyVerificationModal(item)">
           <div class="government-agencies__card-logo">
             <img [src]="item?.image || 'assets/images/default-agency-logo.svg'" width="64" height="64"
-              alt="{{ item.name }}" class="image-logo" loading="lazy" />
+              alt="{{ item.name }}" class="image-logo" onerror="this.src='images/icons/logo-2.png';" loading="lazy" />
           </div>
           <div class="government-agencies__card-name">
             {{ item.name || '' }}

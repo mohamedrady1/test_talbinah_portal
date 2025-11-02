@@ -42,15 +42,16 @@
                             </svg>
                         </span>
                         <input id="nationalIdInput" type="text" formControlName="national_id"
-                            class="custom-input-wrapper__input" [placeholder]="'enter_id' " aria-required="true"
+                            class="custom-input-wrapper__input" [placeholder]="translate('enter_id') "
+                            aria-required="true"
                             [attr.aria-invalid]="getFormControl('national_id').invalid && getFormControl('national_id').touched ? 'true' : 'false'"
                             aria-describedby="nationalIdError" autocomplete="one-time-code" />
                     </div>
                     @if (getFormControl('national_id').invalid && getFormControl('national_id').touched) {
                     <small id="nationalIdError" class="general-form-wrapper__error-message" role="alert">
-                        {{ getValidationErrorMessage('national_id', [
+                        {{ translate(getValidationErrorMessage('national_id', [
                         { errorName: 'required', errorMessage: ('national_id_required' ) },
-                        ]) }}
+                        ])) }}
                     </small>
                     }
                 </div>
@@ -104,10 +105,10 @@
                     </div>
                     @if (getFormControl('birth_date').invalid && getFormControl('birth_date').touched) {
                     <small id="birthDateError" class="general-form-wrapper__error-message" role="alert">
-                        {{ getValidationErrorMessage('birth_date', [
+                        {{ translate(getValidationErrorMessage('birth_date', [
                         { errorName: 'required', errorMessage: ('date_of_birth_required' ) },
                         { errorName: 'maxAge', errorMessage: ('birthday_max_age' ) }
-                        ]) }}
+                        ])) }}
                     </small>
                     }
                 </div>
@@ -117,7 +118,7 @@
     </section>
     <div class="general-form-wrapper__actions">
         <button id="submit-verification-btn" (click)="onSubmit()" class="btn btn--solid" [disabled]="isLoading()"
-            [attr.aria-label]="isLoading() ? ('in_progress' ) : ('save' )">
+            [attr.aria-label]="isLoading() ? (translate('in_progress') ) : (translate('save') )">
             <span class="btn__label">
                 @if (isLoading()) {
                 <div class="general-form-wrapper__loading" [attr.aria-label]="'in_progress' ">

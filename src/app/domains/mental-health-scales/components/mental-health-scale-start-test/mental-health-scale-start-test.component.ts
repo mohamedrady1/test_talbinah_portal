@@ -1,5 +1,5 @@
 import { TranslationsFacade } from '../../../../common/core/translations/services';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { IMentalHealthScaleListItemDto } from '../../../../domains';
 import { CardType, Logger } from '../../../../common';
 
@@ -16,6 +16,10 @@ export class MentalHealthScaleStartTestComponent {
   @Output() startQuiz = new EventEmitter<boolean | null>();
   @Input() messageRef!: any;
   cardType = CardType;
+  
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   ngOnInit(): void {
     Logger.debug('MentalHealthScaleStartTestComponent => ngOnInit => Message Ref: ', this.messageRef);
   }

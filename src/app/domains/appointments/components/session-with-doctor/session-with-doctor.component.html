@@ -52,7 +52,7 @@
                 @if(_reservationDetailsFacade.currentReservation()?.doctor?.full_name){
                 {{ _reservationDetailsFacade.currentReservation()?.doctor?.full_name || ''}}
                 }@else{
-                {{'no_name' }}
+                {{ translate('no_name') }}
                 }
               </span>
             </div>
@@ -145,7 +145,7 @@
                 <div class="reply-box__header">
                   <span class="reply-box__content-label">
                     <span>
-                      {{'replying_to' }}:
+                      {{ translate('replying_to') }}:
                     </span>
                     <span>
                       @if (replyingToMessageContent()?.senderId ===
@@ -154,7 +154,7 @@
                       _reservationDetailsFacade.currentReservation()?.doctor?.full_name ?
                       (_reservationDetailsFacade.currentReservation()?.doctor?.full_name || '') : '' }}
                       }@else {
-                      {{'me' }}
+                      {{ translate('me') }}
                       }
                     </span>
                   </span>

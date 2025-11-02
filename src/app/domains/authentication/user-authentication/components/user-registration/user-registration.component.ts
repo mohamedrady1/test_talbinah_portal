@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { registerFormConfig } from '../../configs';
 import { SelectModule } from 'primeng/select';
-
+import { TranslationsFacade } from '../../../../../common/core/translations/services';
 @Component({
   selector: 'app-user-registration',
   standalone: true,
@@ -24,12 +24,15 @@ import { SelectModule } from 'primeng/select';
     SelectModule,
     SvgIconComponent
   ], templateUrl: './user-registration.component.html',
+  providers: [TranslationsFacade],
   styleUrls: ['./user-registration.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserRegistrationComponent {
   private readonly nav = useNavigation();
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
   private readonly modalService = inject(ModalService);
   private readonly userContext = inject(UserContextService);
   private readonly navState = inject(NavigationStateService);

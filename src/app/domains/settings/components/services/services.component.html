@@ -49,7 +49,7 @@
           </div>
           <p class="services-layout__card-title">
             {{ service?.title }} = <span class="services-layout__card-points">{{ service?.points }}</span>
-            {{'point' }}
+            {{ translate('point') }}
           </p>
           <button class="services-layout__card-button" (click)="openServiceModal(service)">
             <app-svg-icon name="send-icon" />

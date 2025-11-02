@@ -42,6 +42,8 @@ export class TimeScaleComponent implements OnDestroy {
   private readonly _UserContextService = inject(UserContextService);
   private readonly _Router = inject(Router);
   private readonly _destroy$ = new Subject<void>();
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
   lastSevenMoodsEmptyState = MoodsEmptyState;
   protected readonly lastSevenMoodsErrorState = getMoodsError(() => this._lastSevenMoodsFacade.getLastSevenUserMoods());
   // SSR-safe browser check

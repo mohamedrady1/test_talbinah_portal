@@ -6,7 +6,7 @@
   <div class="card__add-comment__input-wrapper">
     <div class="card__comment">
       <input #commentInput type="text" class="card__add-comment__input" [ngClass]="{'main-page': type==''}"
-        [placeholder]=" placeholder() " [readonly]="readonlyOnClick() || isLoadingComment()"
+        [placeholder]="  translate(placeholder()) " [readonly]="readonlyOnClick() || isLoadingComment()"
         [value]="comment()" (input)="updateInput(commentInput.value)" (click)="onInputClick()" (focus)="onInputFocus()"
         (blur)="onInputBlur()" [class.card__add-comment__input--clickable]="readonlyOnClick()" />
 

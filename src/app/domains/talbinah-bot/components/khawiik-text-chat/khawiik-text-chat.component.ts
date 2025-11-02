@@ -123,7 +123,7 @@ export class KhawiikTextChatComponent implements OnInit, OnDestroy, AfterViewIni
     const now = new Date();
     const options: Intl.DateTimeFormatOptions = { weekday: 'long', day: 'numeric', month: 'long' };
     const lang = this._localizationService.getCurrentLanguage();
-    return now.toLocaleDateString(lang === 'ar' ? 'ar-SA' : 'en-US', options);
+    return now.toLocaleDateString(lang === 'ar' ? 'ar-EG' : 'en-US', options);
   });
 
   readonly hasActiveBook = computed(() => this.currentBook() !== null);

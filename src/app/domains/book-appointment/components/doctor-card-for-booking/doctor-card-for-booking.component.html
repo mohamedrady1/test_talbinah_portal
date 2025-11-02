@@ -5,7 +5,7 @@
       <img class="doctor-card__image"
         [src]="item?.image ?? (item?.gender === 1 ? 'images/not-found/no-woman-doctor.svg' : 'images/not-found/no-doctor.svg')"
         [width]="49" [height]="49" loading="lazy" fetchpriority="low"
-        [alt]="item?.full_name ? (item.full_name + ' ' + ('general.ProfilePictureAlt' | translate)) : ('general.DoctorProfilePictureAlt' | translate)"
+        [alt]="item?.full_name ? (item.full_name + ' ' + (translate('general.ProfilePictureAlt') )) : (translate('general.DoctorProfilePictureAlt') )"
         (error)="onImageError($event, item?.gender)" />
     </figure>
 
@@ -203,7 +203,7 @@
               <p>
                 {{ HALF_HOUR_MINUTES }} </p>
               <p>
-                {{'min' }}
+                {{ translate('min') }}
               </p>
             </div>
           </div>

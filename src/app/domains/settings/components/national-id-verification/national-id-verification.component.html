@@ -1,4 +1,4 @@
-<main class="national-id-verification" role="main" [attr.aria-label]="'form.verifyNationalIdTitle' | translate">
+<main class="national-id-verification" role="main" [attr.aria-label]="translate('form.verifyNationalIdTitle')">
   <section class="national-id-verification__container">
     <form class="general-form-wrapper" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="general-form-wrapper__groups">
@@ -6,20 +6,20 @@
         <div class="general-form-wrapper__field">
           <div class="general-form-wrapper__label-group">
             <label for="nationalIdInput" class="general-form-wrapper__label">
-              {{ 'form.nationalId.label' | translate }}<span class="general-form-wrapper__required">*</span>
+              {{ translate('form.nationalId.label') }}<span class="general-form-wrapper__required">*</span>
             </label>
           </div>
           <div class="custom-input-wrapper"
             [class.p-invalid]="getFormControl('national_id').invalid && getFormControl('national_id').touched">
             <input id="nationalIdInput" type="text" formControlName="national_id" class="custom-input-wrapper__input"
-              placeholder="{{ 'form.nationalId.placeholder' | translate }}" aria-required="true"
+              placeholder="{{ translate('form.nationalId.placeholder') }}" aria-required="true"
               (input)="onNationalIdInput($event)"
               [attr.aria-invalid]="getFormControl('national_id').invalid && getFormControl('national_id').touched ? 'true' : 'false'"
               aria-describedby="nationalIdError" autocomplete="one-time-code" maxlength="10" />
           </div>
           @if (getFormControl('national_id').invalid && getFormControl('national_id').touched) {
           <small id="nationalIdError" class="general-form-wrapper__error-message" role="alert">
-            {{ getValidationErrorMessage('national_id') | translate }}
+            {{ translate(getValidationErrorMessage('national_id')) }}
           </small>
           }
         </div>
@@ -27,7 +27,7 @@
         <div class="general-form-wrapper__field">
           <div class="general-form-wrapper__label-group">
             <label for="birthDateInput" class="general-form-wrapper__label">
-              {{ 'date_of_birth' | translate }}<span class="general-form-wrapper__required">*</span>
+              {{ translate('date_of_birth') }}<span class="general-form-wrapper__required">*</span>
             </label>
           </div>
           <div class="custom-input-wrapper p-0"
@@ -36,13 +36,13 @@
               dateFormat="yy-mm-dd" [maxDate]="maxBirthDate" [readonlyInput]="true" [showTransitionOptions]="'0ms'"
               [hideTransitionOptions]="'0ms'" appendTo="body"
               class="custom-input-wrapper__input custom-input-wrapper__input--p-datepicker"
-              placeholder="{{ 'choose_your_date_of_birth' | translate }}" aria-required="true"
+              placeholder="{{ translate('choose_your_date_of_birth') }}" aria-required="true"
               [attr.aria-invalid]="getFormControl('birth_date').invalid && getFormControl('birth_date').touched ? 'true' : 'false'"
               aria-describedby="birthDateError"></p-datepicker>
           </div>
           @if (getFormControl('birth_date').invalid && getFormControl('birth_date').touched) {
           <small id="birthDateError" class="general-form-wrapper__error-message" role="alert">
-            {{ getValidationErrorMessage('birth_date') | translate }}
+            {{ translate(getValidationErrorMessage('birth_date')) }}
           </small>
           }
         </div>
@@ -51,17 +51,17 @@
 
       <div class="general-form-wrapper__actions">
         <button id="skip-verification-btn" type="button" class="btn btn--outline" (click)="onSkip()"
-          [disabled]="isLoading()" [attr.aria-label]="'skip' | translate">
+          [disabled]="isLoading()" [attr.aria-label]="translate('skip')">
           <span class="btn__label">
             {{ translate('skip') }}
           </span>
         </button>
 
         <button id="submit-verification-btn" type="submit" class="btn btn--solid" [disabled]="isLoading()"
-          [attr.aria-label]="isLoading() ? ('general.submitting' | translate) : ('form.verifyButtonAriaLabel' | translate)">
+          [attr.aria-label]="isLoading() ? (translate('in_progress')) : (translate('confirm'))">
           <span class="btn__label">
             @if (isLoading()) {
-            <div class="general-form-wrapper__loading" [attr.aria-label]="'in_progress' "></div>
+            <div class="general-form-wrapper__loading" [attr.aria-label]="translate('in_progress') "></div>
             {{ translate('in_progress') }}
             } @else {
             {{ translate('confirm') }}

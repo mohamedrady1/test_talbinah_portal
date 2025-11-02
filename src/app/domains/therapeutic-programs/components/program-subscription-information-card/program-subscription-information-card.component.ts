@@ -4,6 +4,7 @@ import { CardType } from '../../../../common';
 import { ModalService } from '../../../../shared/services/model.service';
 import { ProgramSubscriptionPopupComponent } from '../program-subscription-popup';
 import { TranslateModule } from '@ngx-translate/core';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-program-subscription-information-card',
   standalone: true,
@@ -16,7 +17,9 @@ import { TranslateModule } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProgramSubscriptionInformationCardComponent {
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
   private modalService = inject(ModalService);
   protected cardType = CardType;
 

@@ -4,7 +4,7 @@
             <img src="images/settings/gift/gift-2.png" alt="gift" width="25" height="37" />
         </div>
         <div class="gift-card__content">
-            <div class="gift-card__title">{{ item.sender || ('gift' ) }}</div>
+            <div class="gift-card__title">{{ item.sender || (translate('gift') ) }}</div>
             <div class="gift-card__price">{{ item.amount || '100' }} {{ translate('riyals') }}</div>
             <div class="gift-card__date-time">
                 <div class="gift-card__date">
@@ -60,6 +60,6 @@
     'gift-card__action--accept': type === 'receiver',
     'gift-card__action--cancel': type === 'sender'
   }" (click)="openModal()">
-        {{ type === 'receiver' ? ('accept' ) : ('cancel' ) }}
+        {{ type === 'receiver' ? (translate('accept') ) : (translate('cancel') ) }}
     </button>
 </div>

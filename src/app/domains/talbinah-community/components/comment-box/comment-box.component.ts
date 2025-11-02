@@ -33,13 +33,17 @@ import { TranslationsFacade } from '../../../../common/core/translations/service
     EmojiPickerComponent,
     ClickOutsideDirective,
     TranslateModule,
-    
+
   ],
   templateUrl: './comment-box.component.html',
   styleUrls: ['./comment-box.component.scss'],
 })
 export class CommentBoxComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
   // --- Inputs ---
+
   @Input() userIdentityProfileData = signal<IUserIdentifyProfileData | null>(null);
   @Input() isLoadingComment = signal<boolean>(false); // SSR-safe signal input
   @Input() isActions = signal<boolean>(false); // SSR-safe signal input

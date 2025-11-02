@@ -58,8 +58,9 @@
               <app-svg-icon name="calender-icon" [fillColor]="reward?.expired ? '#CA4146' : '#00AF6C'" />
               <span>
                 {{ reward?.expired
-                ? ('code_expired' )
-                : ('valid_for_duration' ) + ' ' + getRemainingDaysIfCoupon(reward?.gift) + ' ' + translate('day')
+                ? (translate('code_expired') )
+                : (translate('valid_for_duration') ) + ' ' + getRemainingDaysIfCoupon(reward?.gift) + ' ' +
+                translate('day')
                 }}
               </span>
             </span>

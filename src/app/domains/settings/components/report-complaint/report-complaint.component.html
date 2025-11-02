@@ -8,7 +8,7 @@
                     {{ translate('issue_type') }}
                 </label>
                 <p-dropdown formControlName="type" [options]="problems()" optionLabel="problem" optionValue="id"
-                    [placeholder]="'select_issue_type' " class="report-complaint__dropdown"
+                    [placeholder]=" translate('select_issue_type') " class="report-complaint__dropdown"
                     [class.report-complaint__dropdown--error]="isFieldInvalid('type')" [disabled]="isLoadingProblems()">
                     <ng-template pTemplate="footer">
                         @if (!isLoadingProblems()) {
@@ -30,12 +30,12 @@
                 <label class="report-complaint__label">
                     {{ translate('issue_details') }}
                 </label>
-                <textarea formControlName="details" [placeholder]="'enter_issue_details' "
+                <textarea formControlName="details" [placeholder]=" translate('enter_issue_details') "
                     class="report-complaint__textarea"
                     [class.report-complaint__textarea--error]="isFieldInvalid('details')" rows="4"></textarea>
                 @if (isFieldInvalid('details')) {
                 <small class="report-complaint__error">
-                    {{ getDetailsErrorMessage()  }}
+                    {{ translate(getDetailsErrorMessage()) }}
                 </small>
                 }
             </div>
@@ -66,7 +66,7 @@
             <div class="report-complaint__images-list">
                 @for (image of selectedImages; track image; let i = $index) {
                 <div class="report-complaint__image-card">
-                    <img [src]="image" [alt]="'صورة الشكوى'" class="report-complaint__image" />
+                    <img [src]="image" [alt]=" translate('complaint_image') " class="report-complaint__image" />
                     <button type="button" class="report-complaint__remove-image" (click)="removeImage(i)">
                         ×
                     </button>

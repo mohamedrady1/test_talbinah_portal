@@ -8,7 +8,7 @@ import { IFormInputConfig } from '../../models';
 import { CommonModule } from '@angular/common';
 import { SelectModule } from 'primeng/select';
 import { Logger } from '../../../../common';
-
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-country-code-input',
   imports: [
@@ -18,11 +18,15 @@ import { Logger } from '../../../../common';
     SelectModule,
     FormsModule
   ],
+  providers: [TranslationsFacade],
   templateUrl: './country-code-input.component.html',
   styleUrls: ['./country-code-input.component.scss']
 })
 export class CountryCodeInputComponent {
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
   protected readonly countriesService = inject(CountriesLookupService);
 
   readonly countriesLookupsList = this.countriesService.countries;

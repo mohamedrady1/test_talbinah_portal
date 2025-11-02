@@ -25,7 +25,7 @@
   <div class="select-wrapper relative">
     <p-select class="w-full md:w-56" [options]="sortedCountriesList()" [(ngModel)]="selectedCountryModel"
       (ngModelChange)="onCountryChange($event)" optionLabel="name" [filter]="true" filterBy="name" [placeholder]="
-      !isLoadingCountriesLookups()? ('code' | translate):null
+      !isLoadingCountriesLookups()? (translate('code') ) : '' 
     " [disabled]="isLoadingCountriesLookups() || isDisabled" [virtualScroll]="true" [virtualScrollItemSize]="42"
       [autoDisplayFirst]="false" appendTo="body">
 
@@ -55,8 +55,8 @@
 
     <input type="number" [class]="formItem.inputClass ?? 'form-control custom-input-wrapper__input'"
       [ngClass]="{'disbaled':!selectedCountryModel?.code}" [formControl]="control" [id]="formItem.name"
-      [attr.aria-label]="ariaLabel" [attr.title]="(formItem.label ?? '') | translate" [attr.role]="roleAttr"
-      [attr.autocomplete]="autocompleteAttr" [attr.placeholder]="!selectedCountryModel? ('phone_should_select_code'|translate): (placeholderText | translate)
+      [attr.aria-label]="ariaLabel" [attr.title]="(translate(formItem.label ?? '')) " [attr.role]="roleAttr"
+      [attr.autocomplete]="autocompleteAttr" [attr.placeholder]="!selectedCountryModel? (translate('phone_should_select_code')): (translate(placeholderText ?? ''))
   " [disabled]="
     !selectedCountryModel ||
     isDisabled ||

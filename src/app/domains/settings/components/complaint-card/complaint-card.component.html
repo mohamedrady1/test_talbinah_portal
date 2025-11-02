@@ -5,7 +5,7 @@
         </div>
         <div class="complaint-card__status" [class.complaint-card__status--pending]="complaint.status === '-1'"
             [class.complaint-card__status--resolved]="complaint.status !== '-1'">
-            {{ getStatusText() | translate }}
+            {{ translate(getStatusText()) }}
         </div>
     </div>
 

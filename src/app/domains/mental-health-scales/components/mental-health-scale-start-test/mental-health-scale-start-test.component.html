@@ -10,7 +10,7 @@
   </div>
   <div class="quiz__details">
     <p>
-      {{'test_details'}}
+      {{ translate('test_details') }}
     </p>
     <div class="quiz__details--cards">
       <div class="quiz__details--card">
@@ -30,10 +30,10 @@
         <div class="quiz__details--Paragraphs">
           <p>
             {{item.question_number}}
-            {{'items'}}
+            {{ translate('items') }}
           </p>
           <p>
-            {{'number_of_scale_items'}}
+            {{ translate('number_of_scale_items') }}
           </p>
         </div>
       </div>
@@ -50,12 +50,12 @@
         </div>
         <div class="quiz__details--time">
           <p>
-            {{'less_than'}}
+            {{ translate('less_than') }}
             {{item.duration}}
-            {{'minutes'}}
+            {{ translate('minutes') }}
           </p>
           <p>
-            {{'expected_time'}}
+            {{ translate('expected_time') }}
           </p>
         </div>
       </div>
@@ -78,7 +78,7 @@
           fill="#0E39B6" />
       </svg>
       <p>
-        {{'tests_not_diagnostic_tool'}}
+        {{ translate('tests_not_diagnostic_tool') }}
       </p>
     </div>
   </div>
@@ -97,7 +97,7 @@
     </svg>
 
     <p>
-      {{'start_test'}}
+      {{ translate('start_test') }}
     </p>
   </button>
 </div>

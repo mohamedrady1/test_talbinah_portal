@@ -14,7 +14,7 @@ type PreferredChannel = 'both' | 'sms' | 'whatsapp' | null;
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    
+
     CommonModule,
 
     LazyLoadImageDirective
@@ -27,7 +27,7 @@ export class NotificationsSettingsModalComponent {
   private readonly translationsFacade = inject(TranslationsFacade);
   protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
   protected translate(key: string): string { return this.translationsFacade.translate(key); }
-  
+
   @Output() protected closed = new EventEmitter<void>();
 
   private fb = inject(FormBuilder);

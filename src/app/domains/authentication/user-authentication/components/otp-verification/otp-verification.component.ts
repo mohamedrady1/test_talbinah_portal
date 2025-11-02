@@ -7,6 +7,7 @@ import { Component, computed, effect, inject, PLATFORM_ID, signal } from '@angul
 import { LocalizationService, RecaptchaService, ToastService, StorageKeys, MoodModalIntegrationService } from '../../../../../shared';
 import { TranslateModule } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslationsFacade } from '../../../../../common/core/translations/services';
 import { CountdownComponent } from './countdown';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { UserAuthenticationApiClientProvider } from '../../clients';
@@ -56,6 +57,8 @@ export class OtpVerificationComponent {
   private readonly seo = inject(MetadataService);
   private readonly localization = inject(LocalizationService);
   private timerService = inject(TimerService);
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
 
   protected codeNotValid = signal(false);
   protected neededDataToVerify = signal<any | null>(null);

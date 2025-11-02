@@ -2,7 +2,7 @@
   (keyup.enter)="onCardClicked(podcast)" (keyup.space)="onCardClicked(podcast)" [attr.aria-label]="podcast.title">
   <div class="podcast-card__thumbnail">
     <img [src]="podcast.thumbnail_image" width="49" height="49" loading="lazy" [alt]="podcast.title"
-      class="podcast-card__image" />
+      class="podcast-card__image" onerror="this.src='images/icons/logo-2.png'" />
   </div>
 
   <div class="podcast-card__content">
@@ -75,7 +75,7 @@
           @if (!review) {
           {{ podcast.duration }} {{ translate('min') }}
           }@else {
-          {{'play' }}
+          {{ translate('play') }}
           }
         </span>
 

@@ -5,7 +5,7 @@
             <button class="gift-loved-ones-tabs__btn"
                 [ngClass]="{ 'gift-loved-ones-tabs__btn--active': activeTab === tab.key }"
                 (click)="setActiveTab(tab.key)">
-                {{ tab.label  }}
+                {{ translate(tab.label) }}
             </button>
             }
         </div>

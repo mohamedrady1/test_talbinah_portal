@@ -4,7 +4,7 @@
     [ngClass]="{'podcast-details-box-card__container--mobile': isMobile}">
     <div class="podcast-details-box-card__header">
       <h2 class="podcast-details-box-card__title">
-        {{ 'podcast_details'  }}
+        {{ translate('podcast_details') }}
       </h2>
 
       <button type="button" class="podcast-details-box-card__favorite-button" (click)="handleFavouriteToggle($event)"
@@ -45,7 +45,7 @@
         <div>
           @if (item.doctor_name) {
           <p class="podcast-details-box-card__guest">
-            {{ item.doctor_name | translate }}
+            {{ item.doctor_name }}
           </p>
           }
           <div class="podcast-details-box-card__metadata">
@@ -54,14 +54,14 @@
             </time>
             <span class="podcast-details-box-card__duration">
               {{ item.duration }}
-              {{ 'minute'  }}
+              {{ translate('minute') }}
             </span>
           </div>
         </div>
         @if (item.description) {
         <div class="podcast-details-box-card__about">
           <h4 class="podcast-details-box-card__about-title">
-            {{ 'about_podcast'  }}
+            {{ translate('about_podcast') }}
           </h4>
           <p class="podcast-details-box-card__description">
             {{ item.description }}
@@ -85,7 +85,7 @@
         fill="white" mask="url(#path-1-inside-1_2247_99694)" />
     </svg>
     <p>
-      {{ 'play'  }}
+      {{ translate('play') }}
     </p>
   </button>
 </section>

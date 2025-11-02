@@ -15,7 +15,7 @@
             @if(chat?.customer_support_user_id){
             {{chat?.customer_support_user_id?.full_name || ''}}
             }@else {
-            {{'لم يتم التعيين بعد'}}
+            {{ translate('not_assigned_yet') }}
             }
           </span>
           <span class="chat-card__badge">
@@ -31,7 +31,7 @@
       <div class="chat-card__meta">
         <span class="chat-card__status"
           [ngClass]="chat.is_closed ? 'chat-card__status--ended' : 'chat-card__status--active'">
-          {{ chat.is_closed ? 'منتهية' : 'نشطة' }}
+          {{ chat.is_closed ? translate('ended') : translate('active') }}
           <span>
             <app-svg-icon name="dot-status" [fillColor]="chat.is_closed?'#666':'#00AF6C'" />
           </span>

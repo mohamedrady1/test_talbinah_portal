@@ -63,8 +63,8 @@
                   <input [id]="formItem.name" type="number" class="form-control custom-input-wrapper__input"
                     [formControlName]="formItem.name" [placeholder]="
                     !selectedCountryModel()
-                      ? ('phone_should_select_code' | translate)
-                      : ('phone_placeholder' | translate)
+                      ? (translate('phone_should_select_code') )
+                      : (translate('phone_placeholder') )
                   " autocomplete="tel"
                     [attr.aria-describedby]="getError(formItem.name) ? formItem.name + '-error' : null"
                     [attr.aria-invalid]="getError(formItem.name) ? 'true' : 'false'" />
@@ -80,18 +80,18 @@
               <div class="custom-input-wrapper custom-input-wrapper--with-icon custom-input-wrapper--icon-start"
                 [class.p-invalid]="getError(formItem.name)">
 
-                <img [src]="formItem.inputIcon" [alt]="formItem.label  || ''| translate" />
+                <img [src]="formItem.inputIcon" [alt]="translate(formItem.label  || '') " />
                 <p-select [id]="formItem.name" class="w-full form-select" [options]="formItem.listValues || []"
                   [formControlName]="formItem.name" optionLabel="label" optionValue="value"
-                  [placeholder]="(formItem.placeholder || '') | translate" [showClear]="true" appendTo="body"
+                  [placeholder]="(translate(formItem.placeholder || '') ) " [showClear]="true" appendTo="body"
                   [ngClass]="{ 'p-invalid': getError(formItem.name) }"
                   [attr.aria-describedby]="getError(formItem.name) ? formItem.name + '-error' : null"
                   [attr.aria-invalid]="getError(formItem.name) ? 'true' : 'false'">
                   <ng-template #selectedItem let-selectedOption>
-                    <span>{{ (selectedOption?.label || '') | translate }}</span>
+                    <span>{{ (translate(selectedOption?.label || '') ) }}</span>
                   </ng-template>
                   <ng-template #item let-opt>
-                    <span>{{ (opt?.label || '') | translate }}</span>
+                    <span>{{ (translate(opt?.label || '') ) }}</span>
                   </ng-template>
                 </p-select>
               </div>
@@ -100,15 +100,15 @@
               <div class="custom-input-wrapper custom-input-wrapper--with-icon custom-input-wrapper--icon-start"
                 [class.p-invalid]="getError(formItem.name)">
                 <span class="custom-input-wrapper__icon" role="img"
-                  [attr.aria-label]="formItem.label  || ''| translate">
+                  [attr.aria-label]="translate(formItem.label  || '') ">
                   <img [src]="formItem.inputIcon" [alt]="formItem.label  || ''| translate" />
                 </span>
                 <input [id]="formItem.name" [formControlName]="formItem.name" [type]="formItem.type === allInputTypes.DATE
                     ? ((registerForm.get(formItem.name)?.value || isDateActive(formItem.name)) ? 'date' : 'text')
                     : (formItem.type === allInputTypes.EMAIL ? 'email' : 'text')"
                   [attr.max]="formItem.type === allInputTypes.DATE ? maxDate : null" [placeholder]="formItem.type === allInputTypes.DATE
-                    ? ((registerForm.get(formItem.name)?.value ? '' : ('choose_your_date_of_birth' | translate)))
-                    : ((formItem.placeholder || '') | translate)" class="custom-input-wrapper__input"
+                    ? ((registerForm.get(formItem.name)?.value ? '' : (translate('choose_your_date_of_birth') )))
+                    : ((translate(formItem.placeholder || '') ) )" class="custom-input-wrapper__input"
                   [ngClass]="{ 'custom-input-wrapper__input--date': formItem.type === allInputTypes.DATE }"
                   (focus)="formItem.type === allInputTypes.DATE ? onDateFocus($event) : null"
                   (blur)="formItem.type === allInputTypes.DATE ? onDateBlur($event, formItem.name) : null"
@@ -119,11 +119,11 @@
               }
               @if (getError(formItem.name)) {
               <span class="general-form-wrapper__error-message" role="alert" [id]="formItem.name + '-error'">
-                {{ getValidationErrorMessage(formItem.name, formItem.validation || []) | translate }}
+                {{ translate(getValidationErrorMessage(formItem.name, formItem.validation || [])) }}
               </span>
               } @else if (formItem.hint && !registerForm.get(formItem.name)?.value && !formItem.fixedHint) {
               <small class="form-field__hint text-secondary">
-                {{ formItem.hint | translate }}
+                {{ translate(formItem.hint) }}
               </small>
               }
             </div>
@@ -135,10 +135,10 @@
             <span class="btn__label">
               @if (_RegisterFacade.loading()) {
               <span role="status" aria-live="polite" aria-label="Registration in progress">
-                {{ 'in_progress' | translate }}
+                {{ translate('in_progress') }}
               </span>
               } @else {
-              <span>{{ 'create_account' | translate }}</span>
+              <span>{{ translate('create_account') }}</span>
               }
             </span>
           </button>

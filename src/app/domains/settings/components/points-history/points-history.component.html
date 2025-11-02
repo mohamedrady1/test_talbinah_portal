@@ -6,7 +6,7 @@
             <button type="button" class="points-history__filter-btn"
                 [class.points-history__filter-btn--active]="activeFilter() === filter.value"
                 (click)="onFilterChange(filter.value)">
-                {{ filter.label  }}
+                {{ translate(filter.label) }}
             </button>
             }
         </div>

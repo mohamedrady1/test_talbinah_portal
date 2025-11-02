@@ -8,7 +8,7 @@
   <div class="card-header__tabs">
     @for (tab of config.tabs; track $index) {
     <div class="tab" [class.active]="selectedTab()?.id === tab.id" (click)="selectTab(tab)">
-      {{ tab.name }}
+      {{ translate(tab.name) }}
     </div>
     }
   </div>

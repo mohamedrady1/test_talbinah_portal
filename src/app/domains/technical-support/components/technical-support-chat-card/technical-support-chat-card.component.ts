@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core
 import { ITechnicalSupportChatDto } from '../../dtos';
 import { LanguageService } from '../../../../common';
 import { CommonModule } from '@angular/common';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-technical-support-chat-card',
@@ -20,6 +21,8 @@ export class TechnicalSupportChatCardComponent {
 
   protected readonly languageService = inject(LanguageService);
   protected readonly currentLang = this.languageService.getCurrentLanguage();
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
 
   ngOnInit(): void {
     // this.chat?.id == 20 ? this.openSupportConversationModal() : '';

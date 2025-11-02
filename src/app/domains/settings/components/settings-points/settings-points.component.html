@@ -83,7 +83,8 @@
       <div class="service-points-cards-grid">
         @for (item of items(); track $index) {
         <div class="service-points-card">
-          <img [src]="item.image" alt="gift" class="service-points-card__img" />
+          <img [src]="item.image" alt="gift" class="service-points-card__img"
+            onerror="this.src='images/icons/logo-2.png';" />
           <div class="service-points-card__title">{{ item.title }}=<span>{{item.points}}
             </span>{{ translate('point') }}</div>
           <button class="service-points-card__btn" (click)="openServiceModal(item)">{{ translate('follow') }}
@@ -115,7 +116,7 @@
             {{item.service_name}}
           </div>
           <div class="points-layout__points-item--value">
-            {{item.points}} {{'point' }}
+            {{item.points}} {{ translate('point') }}
           </div>
         </div>
         <div class="points-layout__points-item--description">

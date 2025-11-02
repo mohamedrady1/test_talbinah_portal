@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { IDoctorTicketDto } from '../../dtos';
-
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 export interface IComplaint extends IDoctorTicketDto {
     // Extends the original DTO to maintain compatibility
 }
@@ -18,6 +18,9 @@ export interface IComplaint extends IDoctorTicketDto {
 export class ComplaintCardComponent {
     @Input() complaint!: IComplaint;
     @Output() cardClick = new EventEmitter<IComplaint>();
+    private readonly translationsFacade = inject(TranslationsFacade);
+    protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+    protected translate(key: string): string { return this.translationsFacade.translate(key); }
 
     onCardClick(): void {
         this.cardClick.emit(this.complaint);
