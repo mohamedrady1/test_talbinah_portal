@@ -12,14 +12,12 @@ import { StorageKeys } from '../../config/constants/storage.keys';
 import { StorageService } from '../../../common/core/data-access/storages/session-local-storages/session-local-storage.service';
 import { ModalService } from '../../services/model.service';
 import { NewLoginComponent } from '../../../domains';
-import { TranslateApiPipe } from '../../../common/core/translations';
 @Component({
   selector: 'app-compelete-data-and-register-now',
   standalone: true,
   imports: [
     TranslateModule,
     CommonModule,
-    TranslateApiPipe
   ],
   templateUrl: './compelete-data-and-register-now.component.html',
   styleUrls: ['./compelete-data-and-register-now.component.scss'],
