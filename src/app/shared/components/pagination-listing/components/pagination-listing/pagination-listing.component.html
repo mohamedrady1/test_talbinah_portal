@@ -1,6 +1,6 @@
 <nav class="pagination" role="navigation" aria-label="Pagination">
   <button class="pagination__arrow" [disabled]="current() === 1" (click)="goPrev()"
-    [attr.aria-label]="'previous' | translateApi">
+    [attr.aria-label]="translate('previous')">
     <span class="pagination__arrow-icon">
       <!-- Left arrow SVG -->
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -10,7 +10,7 @@
       </svg>
     </span>
     <span class="pagination__arrow-label">
-      {{ 'previous' | translateApi }}
+      {{ translate('previous') }}
     </span>
   </button>
 
@@ -31,9 +31,9 @@
   </ul>
 
   <button class="pagination__arrow" [disabled]="current() === total()" (click)="goNext()"
-    [attr.aria-label]="'next' | translateApi">
+    [attr.aria-label]="translate('next')">
     <span class="pagination__arrow-label">
-      {{ 'next' | translateApi }}
+      {{ translate('next') }}
     </span>
     <span class="pagination__arrow-icon">
       <!-- Right arrow SVG -->

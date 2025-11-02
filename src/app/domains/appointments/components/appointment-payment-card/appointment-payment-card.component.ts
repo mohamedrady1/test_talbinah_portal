@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, signal } from '@angular/core';
 import { IGlobalReservationModel } from '../../models';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-appointment-payment-card',
@@ -10,7 +10,6 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
   imports: [
     CommonModule,
     TranslateModule,
-    TranslateApiPipe
   ],
   templateUrl: './appointment-payment-card.component.html',
   styleUrls: ['./appointment-payment-card.component.scss'],
@@ -18,8 +17,13 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
 })
 export class AppointmentPaymentCardComponent {
   @Input({ required: true }) details!: IGlobalReservationModel;
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
   readonly _details = signal(this.details);
+
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
 
   public ngOnInit(): void {
 

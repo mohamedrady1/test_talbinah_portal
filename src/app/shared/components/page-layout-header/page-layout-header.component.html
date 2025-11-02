@@ -7,14 +7,14 @@
       </svg>
     </button>
     <div class="header-card__icon">
-      <img [src]="config.image" [alt]="(config.title || '') | translateApi">
+      <img [src]="config.image" [alt]="translate(config.title ?? '')">
     </div>
     <div class="header-card__text">
       <h3 class="header-card__title">
-        {{ (config.title || '') | translateApi }}
+        {{ translate(config.title ?? '') }}
       </h3>
       <p class="header-card__subtitle">
-        {{ (config.subtitle || '') | translateApi }}
+        {{ translate(config.subtitle ?? '') }}
       </p>
     </div>
   </div>
@@ -22,7 +22,7 @@
   <div class="header-card__actions">
     <button class="header-card__button header-card__button--full-screen" (click)="toggleFullscreen()"
       [attr.aria-pressed]="isFullscreen() ? 'true' : 'false'"
-      [attr.aria-label]="(isFullscreen() ? 'exitFullscreen' : 'enterFullscreen') | translateApi">
+      [attr.aria-label]="translate(isFullscreen() ? 'exitFullscreen' : 'enterFullscreen')">
       @if (!isFullscreen()) {
       <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path

@@ -5,16 +5,15 @@ import { IMoodItem, MoodsListingFacade, UserMoodStoreFacade } from '../../../dom
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { YourCurrentMoodSkeletonComponent } from '../../skeletons';
 import { ModalService, MoodModalService } from '../../services';
-import { TranslateApiPipe } from '../../../common/core/translations';
 import { SvgIconComponent } from '../svg-icon';
 import { Logger } from '../../../common';
+import { TranslationsFacade } from '../../../common/core/translations/services';
 
 @Component({
   selector: 'app-your-current-mood-today',
   standalone: true,
   imports: [
     CommonModule,
-    TranslateApiPipe,
 
     YourCurrentMoodSkeletonComponent,
     SvgIconComponent
@@ -31,7 +30,8 @@ export class YourCurrentMoodTodayComponent {
   private readonly userMoodStoreFacade = inject(UserMoodStoreFacade);
   private readonly moodsListingFacade = inject(MoodsListingFacade);
   private readonly platformId = inject(PLATFORM_ID);
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
   // --- Platform Awareness (SSR / Browser) ---
   protected isBrowser = isPlatformBrowser(this.platformId);
 
@@ -46,6 +46,9 @@ export class YourCurrentMoodTodayComponent {
     return moods.find((mood) => mood.id === selectedId) || null;
   });
 
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   readonly isStoringMood = computed(() =>
     this.userMoodStoreFacade.isStoringMood()
   );

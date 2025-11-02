@@ -1,15 +1,14 @@
-import { ChangeDetectionStrategy, Component, computed, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, EventEmitter, inject, Input, Output } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IHeaderConfig } from './interfaces';
 import { LazyLoadImageDirective } from '../../../common/core/directives/lazyloading/lazy-load-image.directive';
-import { TranslateApiPipe } from '../../../common/core/translations/pipes/translate-api.pipe';
 import { NgOptimizedImage } from '@angular/common';
+import { TranslationsFacade } from '../../../common/core/translations/services';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [TranslateModule, NgOptimizedImage, LazyLoadImageDirective,
-    TranslateApiPipe
   ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
@@ -20,6 +19,11 @@ export class HeaderComponent {
   @Output() fullscreenRequested = new EventEmitter<void>();
   @Output() closeRequested = new EventEmitter<void>();
   readonly showCloseButton = computed(() => this.config?.showCloseButton ?? true);
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   protected onFullscreenClick() {
     this.fullscreenRequested.emit();
   }

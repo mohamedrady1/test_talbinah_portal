@@ -12,17 +12,22 @@ import {
 import { CommonModule, isPlatformBrowser } from '@angular/common'; // isPlatformBrowser
 import { ILayoutGridHeaderConfig } from '../../interfaces'; // Verify this path
 import { TranslateModule } from '@ngx-translate/core';
-import { TranslateApiPipe } from '../../../common/core/translations/pipes';
+import { TranslationsFacade } from '../../../common/core/translations/services';
 
 @Component({
   selector: 'app-page-layout-header',
   standalone: true,
-  imports: [TranslateModule, CommonModule, TranslateApiPipe],
+  imports: [TranslateModule, CommonModule],
   templateUrl: './page-layout-header.component.html',
   styleUrls: ['./page-layout-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush // Optimized change detection
 })
 export class PageLayoutHeaderComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   // Configuration for the header content (title, subtitle, image)
   // Marking as required for compile-time safety (Angular 16+)
   @Input({ required: true }) config!: ILayoutGridHeaderConfig;

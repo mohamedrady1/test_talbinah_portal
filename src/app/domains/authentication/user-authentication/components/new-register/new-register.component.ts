@@ -34,8 +34,7 @@ import { registerFormConfig } from '../../configs';
 import { IRegisterRequestDto } from '../../dtos';
 import { RegisterFacade } from '../../services';
 import { NewLoginComponent } from '../new-login';
-import { TranslateApiPipe } from '../../../../../common/core/translations/pipes/translate-api.pipe';
-
+import { TranslationsFacade } from '../../../../../common/core/translations/services';
 export interface NewRegisterModalData {
   icon: string;
   title: string;
@@ -53,7 +52,6 @@ export interface NewRegisterModalData {
     SelectModule,
     AutoExactHeightDirective,
     SvgIconComponent,
-    TranslateApiPipe
   ],
   templateUrl: './new-register.component.html',
   styleUrls: ['./new-register.component.scss'],
@@ -68,7 +66,8 @@ export class NewRegisterComponent implements OnInit, OnDestroy {
   private readonly fb = inject(FormBuilder);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly cdr = inject(ChangeDetectorRef);
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
   readonly formConfigs: IFormInputConfig[] = registerFormConfig;
   protected readonly isEditable = signal(true);
   selectedCountryModel = signal<ICountryDto | null>(null);
@@ -82,6 +81,9 @@ export class NewRegisterComponent implements OnInit, OnDestroy {
     password: this.fb.control<string | null>(null, [Validators.required])
   });
 
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   private readonly destroy$ = new Subject<void>();
 
   // Additional properties from user-registration

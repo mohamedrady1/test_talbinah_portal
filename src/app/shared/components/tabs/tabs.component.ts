@@ -1,18 +1,19 @@
-import { Component, Input, Output, EventEmitter, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, signal, ChangeDetectionStrategy, inject } from '@angular/core';
 import { TabItem } from '../../models';
 import { TranslateModule } from '@ngx-translate/core';
 import { ITab } from '../../../domains/talbinah-community/models';
-import { TranslateApiPipe } from '../../../common/core/translations';
-
+import { TranslationsFacade } from '../../../common/core/translations/services';
 @Component({
   selector: 'app-tabs',
   standalone: true,
-  imports: [TranslateModule, TranslateApiPipe],
+  imports: [TranslateModule],
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabsComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
   @Input() tabs: ITab[] = [];
   @Input() multiSelect = false;
   @Output() tabSelected = new EventEmitter<ITab | ITab[]>();
@@ -24,6 +25,9 @@ export class TabsComponent {
       this.selectedTabs.set([this.tabs[0]]);
       this.tabSelected.emit(this.tabs[0]);
     }
+  }
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
   }
 
   selectTab(tab: ITab) {

@@ -1,9 +1,9 @@
-import { Component, Input, signal, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, signal, computed, ChangeDetectionStrategy, inject } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { getPaginationRange } from '../../utils';
 import { PaginationConfig } from '../../model';
 import { CommonModule } from '@angular/common';
-import { TranslateApiPipe } from '../../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-pagination-listing',
@@ -11,13 +11,14 @@ import { TranslateApiPipe } from '../../../../../common/core/translations';
   imports: [
     CommonModule,
     TranslateModule,
-    TranslateApiPipe
   ],
   templateUrl: './pagination-listing.component.html',
   styleUrls: ['./pagination-listing.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginationListingComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
   private config = signal<PaginationConfig>({
     totalPages: 1,
     currentPage: 1,
@@ -44,4 +45,8 @@ export class PaginationListingComponent {
 
   goPrev = () => this.changePage(this.current() - 1);
   goNext = () => this.changePage(this.current() + 1);
+
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
 }

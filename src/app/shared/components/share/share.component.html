@@ -17,23 +17,23 @@
       <h5 class="share-link-header__title">
         @switch (linkType) {
         @case ('doctor') {
-        {{'doctor_link'|translateApi}}
+        {{translate('doctor_link')}}
         }
         @case ('program') {
-        {{'program_link'|translateApi}}
+        {{translate('program_link')}}
         }
         @case ('general') {
-        {{'link'|translateApi}}
+        {{translate('link')}}
         }
         @default {
-        {{'post_link'|translateApi}}
+        {{translate('post_link')}}
         }
         }
       </h5>
       <!-- Display "Copied" message if isCopied is true -->
       @if (isCopied) {
       <span class="share-link-header__message">
-        {{'copied'|translateApi}}
+        {{translate('copied')}}
       </span>
       }
     </div>

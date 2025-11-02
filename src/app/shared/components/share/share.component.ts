@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
 import { ShareButtonComponent } from '../share-button';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { SocialMediaType } from '../../../common';
-import { TranslateApiPipe } from '../../../common/core/translations';
+import { TranslationsFacade } from '../../../common/core/translations/services';
 
 interface SocialButton {
   name: SocialMediaType;
@@ -17,13 +17,14 @@ interface SocialButton {
     ShareButtonComponent,
     TranslateModule,
     CommonModule,
-    TranslateApiPipe
   ],
   templateUrl: './share.component.html',
   styleUrls: ['./share.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShareComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
   @Input() data!: { link: string };
   @Input() linkType: 'post' | 'doctor' | 'program' | 'general' = 'post'; // Type of content being shared
   public link: string = '';
@@ -38,6 +39,10 @@ export class ShareComponent implements OnInit {
     { name: SocialMediaType.DISCORD, icon: 'discord' },
     { name: SocialMediaType.TELEGRAM, icon: 'telegram-plane' }
   ];
+
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
 
   ngOnInit(): void {
     this.link = this.data.link ? this.data.link : '';

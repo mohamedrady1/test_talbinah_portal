@@ -1,24 +1,24 @@
 <article class="appointment-card" aria-labelledby="appointment-details-title">
   <h2 id="appointment-details-title" class="appointment-card__title">
-    {{'appointment_details'| translateApi}}
+    {{translate('appointment_details')}}
   </h2>
 
   <dl class="appointment-card__grid">
     <div class="appointment-card__item">
       <dt class="appointment-card__label">
-        {{'session_status'| translateApi}}
+        {{translate('session_status')}}
       </dt>
       <div [id]="'status-' + (details?.id ?? 'unknown')" class="appointment-card__status-badge"
         [attr.aria-label]="getStatusName(details?.status ?? 0, details.is_start ?? 0, details.is_end ?? 0) + ' status'"
         [ngClass]="getBadgeClass(details.status ?? 0, details.is_start ?? 0, details.is_end ?? 0)">
         <span class="appointment-card__status-text">
-          {{ getStatusName(details.status ?? 0, details.is_start ?? 0, details.is_end ?? 0) | translateApi }}
+          {{ translate(getStatusName(details.status ?? 0, details.is_start ?? 0, details.is_end ?? 0)) }}
         </span>
       </div>
     </div>
     <div class="appointment-card__item">
       <dt class="appointment-card__label">
-        {{'form_date' | translateApi}}
+        {{translate('form_date')}}
       </dt>
       <dd class="appointment-card__value">
         {{ getFormattedDate(details.date, null, 'EEEE - d MMMM') }}
@@ -26,7 +26,7 @@
     </div>
     <div class="appointment-card__item">
       <dt class="appointment-card__label">
-        {{'time' | translateApi}}
+        {{translate('time')}}
       </dt>
       <dd class="appointment-card__value">
         {{ getFormattedDate(details.date, details.start_time, 'h:mm:ss a') }}
@@ -34,7 +34,7 @@
     </div>
     <div class="appointment-card__item">
       <dt class="appointment-card__label">
-        {{'booking_type' | translateApi}}
+        {{translate('booking_type')}}
       </dt>
       <dd class="appointment-card__value">
         {{ details?.communication?.name }}
@@ -42,7 +42,7 @@
     </div>
     <div class="appointment-card__item">
       <dt class="appointment-card__label">
-        {{'patient_name' | translateApi}}
+        {{translate('patient_name')}}
       </dt>
       <dd class="appointment-card__value">
         {{ details?.user?.full_name }}
@@ -50,10 +50,10 @@
     </div>
     <div class="appointment-card__item">
       <dt class="appointment-card__label">
-        {{'booking_duration' | translateApi}}
+        {{translate('booking_duration')}}
       </dt>
       <dd class="appointment-card__value">
-        {{ details?.duration?.duration }} {{'min' | translateApi}}
+        {{ details?.duration?.duration }} {{translate('min')}}
       </dd>
     </div>
   </dl>

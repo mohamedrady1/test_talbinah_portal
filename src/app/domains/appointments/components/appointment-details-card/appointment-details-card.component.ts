@@ -5,7 +5,7 @@ import { LocalizationService } from '../../../../shared';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { LanguageService } from '../../../../common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-appointment-details-card',
@@ -13,7 +13,6 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
   imports: [
     CommonModule,
     TranslateModule,
-    TranslateApiPipe
   ],
   templateUrl: './appointment-details-card.component.html',
   styleUrls: ['./appointment-details-card.component.scss'],
@@ -27,10 +26,15 @@ export class AppointmentDetailsCardComponent {
   protected currentLang: string = 'ar';
 
   private readonly _datePipe = inject(DatePipe); // Inject DatePipe
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
   @Input({ required: true }) details!: IGlobalReservationModel;
 
   readonly _details = signal(this.details);
+
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
 
   public ngOnInit(): void {
     this.currentLang = this._localizationService.getCurrentLanguage();

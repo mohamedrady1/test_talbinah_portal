@@ -3,7 +3,6 @@ import { ModalService, ModalConfig } from '../../services/model.service';
 import { isPlatformBrowser } from '@angular/common';
 import { ModalHostComponent } from '../modal-host/modal-host.component';
 import { Logger } from '../../../common';
-import { TranslateApiPipe } from '../../../common/core/translations';
 
 interface ActiveModal {
   hostRef: ComponentRef<ModalHostComponent>;
@@ -14,7 +13,7 @@ interface ActiveModal {
 @Component({
   selector: 'app-modal-outlet',
   standalone: true,
-  imports: [TranslateApiPipe],
+  imports: [],
   templateUrl: './modal-outlet.component.html',
   styleUrls: ['./modal-outlet.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

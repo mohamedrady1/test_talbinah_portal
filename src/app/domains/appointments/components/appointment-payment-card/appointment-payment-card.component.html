@@ -1,13 +1,13 @@
 <article class="appointment-payment-card" aria-labelledby="appointment-details-title">
   <h2 id="appointment-details-title" class="appointment-payment-card__title">
-    {{'payment_details'| translateApi}}
+    {{translate('payment_details')}}
   </h2>
 
   <dl class="appointment-payment-card__grid">
     @for (item of details?.payments?.payments; track $index) {
     <div class="appointment-payment-card__item">
       <dt class="appointment-payment-card__label">
-        {{(item?.label || '' | translateApi)}}
+        {{translate(item?.label || '')}}
       </dt>
       <dd class="appointment-payment-card__value">
         {{(item?.value!== undefined && item?.value!== 'undefined')?item?.value : '0'}}
@@ -27,7 +27,7 @@
     @if (details?.payments?.total) {
     <div class="appointment-payment-card__item">
       <dt class="appointment-payment-card__label">
-        {{(details?.payments?.total?.label || '')| translateApi}}
+        {{translate(details?.payments?.total?.label || '')}}
       </dt>
       <dd class="appointment-payment-card__value">
         {{ details?.payments?.total?.value}}

@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { ICardHeaderConfig } from '../../interfaces';
 import { CommonModule } from '@angular/common';
-import { TranslateApiPipe } from '../../../common/core/translations/pipes';
+import { TranslationsFacade } from '../../../common/core/translations/services';
 
 @Component({
   selector: 'app-page-layout-card-header',
@@ -10,13 +10,17 @@ import { TranslateApiPipe } from '../../../common/core/translations/pipes';
   imports: [
     CommonModule,
     TranslateModule,
-    TranslateApiPipe
   ],
   templateUrl: './page-layout-card-header.component.html',
   styleUrls: ['./page-layout-card-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageLayoutCardHeaderComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   @Input() config!: ICardHeaderConfig;
   @Input() isPrevDisabled = false;
   @Input() isNextDisabled = false;
