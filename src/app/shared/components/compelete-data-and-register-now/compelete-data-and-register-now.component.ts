@@ -11,7 +11,7 @@ import { LogoutFacade } from '../../../domains/settings/services/logout.facade';
 import { StorageKeys } from '../../config/constants/storage.keys';
 import { StorageService } from '../../../common/core/data-access/storages/session-local-storages/session-local-storage.service';
 import { ModalService } from '../../services/model.service';
-import { NewLoginComponent } from '../../../domains';
+import { NewLoginComponent } from '../../../domains/authentication/user-authentication/components/new-login/new-login.component';
 @Component({
   selector: 'app-compelete-data-and-register-now',
   standalone: true,
