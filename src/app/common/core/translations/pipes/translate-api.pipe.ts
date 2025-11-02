@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform, inject, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { TranslationsFacade } from '../services';
 
 /**
  * TranslateApi Pipe
@@ -23,7 +22,7 @@ import { TranslationsFacade } from '../services';
     pure: false, // Impure pipe to react to language changes
 })
 export class TranslateApiPipe implements PipeTransform, OnDestroy {
-    private readonly facade = inject(TranslationsFacade);
+    // private readonly facade = inject(TranslationsFacade);
     private readonly cdr = inject(ChangeDetectorRef);
     private subscription?: Subscription;
     private lastKey = '';
@@ -32,9 +31,9 @@ export class TranslateApiPipe implements PipeTransform, OnDestroy {
 
     constructor() {
         // Subscribe to translations changes to trigger updates
-        this.subscription = this.facade.translations$.subscribe(() => {
-            this.cdr.markForCheck();
-        });
+        // this.subscription = this.facade.translations$.subscribe(() => {
+        //     this.cdr.markForCheck();
+        // });
     }
 
     /**
@@ -56,7 +55,7 @@ export class TranslateApiPipe implements PipeTransform, OnDestroy {
 
         this.lastKey = key;
         this.lastLang = lang || '';
-        this.lastValue = this.facade.translate(key, lang);
+        // this.lastValue = this.facade.translate(key, lang);
 
         return this.lastValue;
     }
