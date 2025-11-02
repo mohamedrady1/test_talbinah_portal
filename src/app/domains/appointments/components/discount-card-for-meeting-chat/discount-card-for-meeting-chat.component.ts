@@ -3,7 +3,7 @@ import { IGlobalDoctorCopounModel, Position, TriggerTypes, Logger } from '../../
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { SvgIconComponent, TooltipComponent } from '../../../../shared';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-discount-card-for-meeting-chat',
@@ -12,14 +12,21 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     SvgIconComponent,
     TooltipComponent,
     TranslateModule,
-    CommonModule,
-    TranslateApiPipe
+    CommonModule
   ],
   templateUrl: './discount-card-for-meeting-chat.component.html',
   styleUrls: ['./discount-card-for-meeting-chat.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DiscountCardForMeetingChatComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   @Input() item: IGlobalDoctorCopounModel | null = null;
 
   protected readonly Position = Position;

@@ -29,7 +29,7 @@ import { BookUrgentAppointmentComponent } from '../../../urgent-appointment';
 import { UrgentAppointmentHeaderConfig } from '../../../urgent-appointment';
 import { MainPageApiClientProvider } from '../../clients';
 import { IBannerItem } from '../../dtos';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-main-page-layout',
   standalone: true,
@@ -38,13 +38,20 @@ import { TranslateApiPipe } from '../../../../common/core/translations/pipes/tra
     BannerCarouselComponent,
     SiteHeaderComponent,
     TranslateModule,
-    CommentBoxComponent,
-    TranslateApiPipe
+    CommentBoxComponent
   ],
   templateUrl: './main-page-layout.component.html',
   styleUrls: ['./main-page-layout.component.scss'],
 })
 export class MainPageLayoutComponent implements OnInit, OnDestroy {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   // ----- Signals -----
   public userIdentityProfileDataSignal = signal<IUserIdentifyProfileData | null>(null);
   private userIdentityProfileState = signal<{ profileResponse: IUserIdentifyProfileResponseDto | null }>({ profileResponse: null });

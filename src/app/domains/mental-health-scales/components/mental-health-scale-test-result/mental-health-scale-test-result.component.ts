@@ -4,12 +4,12 @@ import { PercentageKnobComponent } from '../percentage-knob';
 import { Logger } from '../../../../common';
 import { EmptyStateCardComponent } from '../../../../shared';
 import { MentalHealthResultEmptyState } from '../../configs';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-mental-health-scale-test-result',
   standalone: true,
-  imports: [SpecialistCardComponent, PercentageKnobComponent, EmptyStateCardComponent, TranslateApiPipe],
+  imports: [SpecialistCardComponent, PercentageKnobComponent, EmptyStateCardComponent, ],
   templateUrl: './mental-health-scale-test-result.component.html',
   styleUrls: ['./mental-health-scale-test-result.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -33,7 +33,7 @@ import { map, Subject, takeUntil } from 'rxjs';
 import { UserContextService } from '../../../authentication';
 import { BookAppointmentRoutesEnum } from '../../constants';
 import { BookApoointmentPopupComponent } from '../book-apoointment-popup';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-doctors-listing-for-booking',
@@ -47,13 +47,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     AsideFilterationComponent,
     DoctorCardForBookingSkeletonComponent,
     ErrorStateCardComponent,
-    TranslateApiPipe
+    
   ],
   templateUrl: './doctors-listing-for-booking.component.html',
   styleUrls: ['./doctors-listing-for-booking.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DoctorsListingForBookingComponent implements OnInit, OnDestroy {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   private platformId = inject(PLATFORM_ID);
   private _ActivatedRoute = inject(ActivatedRoute);
   protected readonly facade = inject(DoctorsListFacade);
@@ -253,3 +257,4 @@ export class DoctorsListingForBookingComponent implements OnInit, OnDestroy {
     this._destroy$.complete();
   }
 }
+

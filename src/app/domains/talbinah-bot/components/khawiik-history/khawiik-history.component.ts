@@ -20,7 +20,7 @@ import { KhawiikRenameComponent } from '../khawiik-rename';
 import { EmptyStateConfig } from '../../../../shared/components/empty-state-card/empty-state-card.component';
 import { ModalService } from '../../../../shared';
 import { ErrorStateConfig } from '../../../../shared/components/error-state-card/error-state-card.component';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 // ====== UI Configs ======
 export const KhawiikHistoryChatEmptyState: EmptyStateConfig = {
@@ -51,14 +51,21 @@ export function getKhawiikHistoryChatsError(onRetry?: () => void): ErrorStateCon
     ErrorStateComponent,
     ChatMenuComponent,
     SvgIconComponent,
-    KhawiikHistorySkeletonComponent,
-    TranslateApiPipe
+    KhawiikHistorySkeletonComponent
   ],
   templateUrl: './khawiik-history.component.html',
   styleUrls: ['./khawiik-history.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KhawiikHistoryComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   @Output() protected closed = new EventEmitter<ChatRecord | null>();
   @Output() protected chatSelected = new EventEmitter<ChatRecord | null>();
   @Output() protected titleUpdated = new EventEmitter<IChatHistoryItemDataDto>();

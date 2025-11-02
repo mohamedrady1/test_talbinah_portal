@@ -7,17 +7,25 @@ import { KhawiikInstructionsComponent } from '../khawiik-instructions';
 import { ModalService, SvgIconComponent } from '../../../../shared';
 import { Logger } from '../../../../common';
 import { ChatTypeEnum } from '../../enums';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-khawiik-chat-types',
   standalone: true,
-  imports: [CommonModule, TranslateModule, SvgIconComponent, TranslateApiPipe],
+  imports: [CommonModule, TranslateModule, SvgIconComponent],
   templateUrl: './khawiik-chat-types.component.html',
   styleUrls: ['./khawiik-chat-types.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KhawiikChatTypesComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   // ====== Dependencies ======
   private readonly _ModalService = inject(ModalService);
 

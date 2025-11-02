@@ -4,7 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 // Assuming TooltipComponent is standalone or part of an NgModule imported higher up
 import { TooltipComponent } from '../../../../shared/components/tooltip/tooltip.component';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 // Assuming these are globally defined or imported from a common library
 import { IGlobalDoctorCopounModel, Logger, Position, TriggerTypes } from '../../../../common';
@@ -15,14 +15,21 @@ import { IGlobalDoctorCopounModel, Logger, Position, TriggerTypes } from '../../
   imports: [
     CommonModule, // Required for ngIf, ngClass etc.
     TranslateModule,
-    TooltipComponent,
-    TranslateApiPipe
+    TooltipComponent
   ],
   templateUrl: './discount-code-card.component.html',
   styleUrls: ['./discount-code-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DiscountCodeCardComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   // Input property for the coupon data. It can be null.
   @Input() item: IGlobalDoctorCopounModel | null = null; // Initialize with null for safety
 

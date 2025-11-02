@@ -1,7 +1,7 @@
 <div class="payment-method-block">
   <div class="payment-method-block__header">
     <p class="payment-method-block__title">
-      {{'confirm_join_selected_support_group'|translateApi}}
+      {{ translate('confirm_join_selected_support_group') }}
     </p>
   </div>
 
@@ -27,7 +27,7 @@
             fill="#47586E" />
         </svg>
         <p>
-          {{'choose_payment_method'|translateApi}}
+          {{translate('choose_payment_method')}}
         </p>
       </div>
     </div>
@@ -49,7 +49,7 @@
     }
     @if (validationError()) {
     <p class="payment-method-block__error-message">
-      {{'please_choose_payment_method' |translateApi}}
+      {{translate('please_choose_payment_method')}}
     </p>
 
     }
@@ -78,7 +78,7 @@
     <button id="cancel-btn" type="button"
       class="payment-method-block__action-button payment-method-block__action-button--cancel" (click)="onCancel()"
       [disabled]="isLoading">
-      {{ 'cancel' | translateApi }}
+      {{ translate('cancel') }}
     </button>
 
     <button id="next-btn" type="button"
@@ -86,11 +86,11 @@
       [disabled]="isLoading">
       @if (isLoading) {
       <div class="payment-method-block__action-button--next__loading">
-        {{ 'in_progress' | translateApi }}
+        {{ translate('in_progress') }}
         <span class="dot-loader"></span>
       </div>
       } @else {
-      {{ 'confirm_subscription' | translateApi }}
+      {{ translate('confirm_subscription') }}
       }
     </button>
   </div>

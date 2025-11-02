@@ -9,7 +9,7 @@ import { StartSessionPayload } from '../../models';
 import { Router } from '@angular/router';
 import { StorageKeys } from '../../../../shared';
 import { UserContextService } from '../../../authentication';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'khawiik-instructions-next',
   standalone: true,
@@ -17,7 +17,6 @@ import { TranslateApiPipe } from '../../../../common/core/translations/pipes/tra
     TranslateModule,
     CommonModule,
     FormsModule,
-    TranslateApiPipe,
     AutoExactHeightDirective
   ],
   templateUrl: './khawiik-instructions-next.component.html',
@@ -25,6 +24,14 @@ import { TranslateApiPipe } from '../../../../common/core/translations/pipes/tra
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class KhawiikInstructionsNextComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   // ====== Dependencies ======
   private readonly platformId = inject(PLATFORM_ID);
   private readonly _storageService = inject(StorageService);

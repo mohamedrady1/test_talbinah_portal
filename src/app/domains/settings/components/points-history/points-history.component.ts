@@ -4,7 +4,7 @@ import { WalletPointsRecordsFacade } from '../../services/wallet-points-records.
 import { AutoExactHeightDirective } from '../../../../common';
 import { EmptyStateCardComponent } from '../../../../shared/components/empty-state-card/empty-state-card.component';
 import { ErrorStateCardComponent } from '../../../../shared/components/error-state-card/error-state-card.component';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 interface FilterOption {
     label: string;
     value: string;
@@ -32,7 +32,7 @@ interface PointsHistoryItem {
     standalone: true,
     imports: [
         CommonModule,
-        TranslateApiPipe,
+        
         EmptyStateCardComponent,
         ErrorStateCardComponent,
         AutoExactHeightDirective
@@ -42,6 +42,10 @@ interface PointsHistoryItem {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PointsHistoryComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
     activeFilter = signal('all');
 
     filters: FilterOption[] = [
@@ -121,3 +125,4 @@ export class PointsHistoryComponent implements OnInit {
         });
     }
 } 
+

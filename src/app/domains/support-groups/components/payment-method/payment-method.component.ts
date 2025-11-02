@@ -6,7 +6,7 @@ import { Logger } from '../../../../common';
 import { CommonModule } from '@angular/common';
 import { EmptyStateConfig, ErrorStateConfig, EmptyStateComponent, ErrorStateComponent } from '../../../../shared';
 // No need for CommonModule here if only using @if, @for, as standalone components have them implicitly
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 export const paymentMethodsEmptyState: EmptyStateConfig = {
   imageUrl: 'images/not-found/paymentMethods/no-payment.svg',
@@ -25,12 +25,16 @@ export function getPaymentMethodsError(onRetry?: () => void): ErrorStateConfig {
 @Component({
   selector: 'app-payment-method',
   standalone: true,
-  imports: [CommonModule, RadioCardComponent, TranslateModule, EmptyStateComponent, ErrorStateComponent, TranslateApiPipe], // Removed CommonModule as it's implicitly available for standalone
+  imports: [CommonModule, RadioCardComponent, TranslateModule, EmptyStateComponent, ErrorStateComponent, ], // Removed CommonModule as it's implicitly available for standalone
   templateUrl: './payment-method.component.html',
   styleUrls: ['./payment-method.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush // Apply OnPush strategy for performance
 })
 export class PaymentMethodComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
 
   @Input() isLoading: boolean = false;
   /**
@@ -163,3 +167,4 @@ export class PaymentMethodComponent implements OnInit {
     Logger.debug('PaymentMethodComponent: Payment method selection cancelled.');
   }
 }
+

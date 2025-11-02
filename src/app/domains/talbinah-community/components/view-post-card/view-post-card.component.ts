@@ -11,14 +11,15 @@ import { TalbinahCommunityRoutesEnum } from '../../constants';
 import { Router } from '@angular/router';
 import { ProfileTriggerService } from '../../services';
 import { RoleGuardService, UserContextService } from '../../../authentication';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
+
 // Define action types for clarity and type safety
 export type PostActionType = 'favourite' | 'comment' | 'bookmark' | 'follow' | 'add'; // 'add' seems to be for bookmark based on your HTML
 
 @Component({
   selector: 'app-view-post-card',
   standalone: true,
-  imports: [CommonModule, CommentBoxComponent, TranslateModule, TranslateApiPipe],
+  imports: [CommonModule, CommentBoxComponent, TranslateModule],
   templateUrl: './view-post-card.component.html',
   styleUrls: ['./view-post-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush, // Use OnPush for better performance
@@ -27,7 +28,11 @@ export class ViewPostCardComponent implements OnInit { // Implement OnInit
   readonly _LanguageService = inject(LanguageService);
   private currentLang = this._LanguageService.getCurrentLanguage();
   private _profileTriggerService = inject(ProfileTriggerService);
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   // Inputs: The component now receives the post data and user profile data.
   // @Input({ required: true }) config!: IPost;
   @Input({ required: true }) config: any;

@@ -19,7 +19,7 @@ import { IUser, RoleGuardService, UserContextService } from '../../../authentica
 import { getKhawiikTextChatErrorConfig } from '../../configs';
 import { KhawiikBooksComponent } from '../khawiik-books';
 import { ChatEventsService } from '../../services/chat-events.service';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'khawiik-text-chat',
@@ -30,14 +30,21 @@ import { TranslateApiPipe } from '../../../../common/core/translations/pipes/tra
     FormsModule,
     ChatMessagesSkeletonComponent,
     SvgIconComponent,
-    ErrorStateCardComponent,
-    TranslateApiPipe
+    ErrorStateCardComponent
   ],
   templateUrl: './khawiik-text-chat.component.html',
   styleUrls: ['./khawiik-text-chat.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class KhawiikTextChatComponent implements OnInit, OnDestroy, AfterViewInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   // ====== Dependencies ======
   private readonly _router = inject(Router);
   private readonly _modalService = inject(ModalService);

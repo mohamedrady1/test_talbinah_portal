@@ -16,7 +16,7 @@ import { PatientDetailsFormComponent } from '../../../urgent-appointment';
 import { ModalService } from '../../../../shared';
 
 import { ReservationPackageItemFormComponent, IReservationStepData } from '../reservation-package-item-form';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 export interface IDisabledMap {
   /** ISO date -> Set of "HH:mm-HH:mm" that are taken */
   timesByDate: Record<string, Set<string>>;
@@ -25,12 +25,20 @@ export interface IDisabledMap {
 @Component({
   selector: 'app-available-packages-storing',
   standalone: true,
-  imports: [ReservationPackageItemFormComponent, TranslateApiPipe],
+  imports: [ReservationPackageItemFormComponent],
   templateUrl: './available-packages-storing.component.html',
   styleUrls: ['./available-packages-storing.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvailablePackagesStoringComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   @Input({ required: true }) data!: IReservationPackageModel | null;
   @Input({ required: true }) public doctor!: IGlobalDoctorContactInfoModel;
   @Input({ required: true }) public reservationFormData!: {

@@ -8,14 +8,14 @@ import { FavoriteDoctorsFacade } from '../../../settings/services';
 import { RoleGuardService } from '../../../authentication';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-doctor-card-for-details',
   standalone: true,
   imports: [
     TranslateModule,
-    TranslateApiPipe,
+    
     ShareSocialComponent
   ],
   templateUrl: './doctor-card-for-details.component.html',
@@ -23,6 +23,10 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DoctorCardForDetailsComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   @Input({ required: false }) item!: IGlobalDoctorContactInfoModel | IDoctorItem | any;
   @Input({ required: false }) type!: string;
   // Inject the ToggleFavoriteDoctorFacade directly, no need for underscore prefix for protected members.
@@ -117,3 +121,4 @@ export class DoctorCardForDetailsComponent {
     });
   }
 }
+

@@ -20,12 +20,12 @@ import { HttpClient } from '@angular/common/http';
 
 import { InputSearchConfig } from '../../model';
 import { UserContextService } from '../../../../../domains';
-import { TranslateApiPipe } from '../../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-global-search-input',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule, TranslateApiPipe],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './global-search-input.component.html',
   styleUrls: ['./global-search-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -37,7 +37,11 @@ export class GlobalSearchInputComponent implements OnInit, OnDestroy {
   private readonly el = inject(ElementRef<HTMLElement>);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly userContext = inject(UserContextService);
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   @Input() showLoadingIndicator = false;
   @Input() inputSearchConfig: InputSearchConfig = {};
   @Output() valueChanged = new EventEmitter<string>();
@@ -120,7 +124,7 @@ export class GlobalSearchInputComponent implements OnInit, OnDestroy {
 
   get config(): Required<InputSearchConfig> {
     return {
-      placeholder: this.inputSearchConfig.placeholder || 'search2',
+      placeholder: this.inputSearchConfig.placeholder || this.translate('search2'),
       debounceMs: this.inputSearchConfig.debounceMs ?? 300,
       persistKey: this.inputSearchConfig.persistKey || 'global-search-input',
       suggestions: this.inputSearchConfig.suggestions || [],

@@ -6,7 +6,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { LocalizationService, ModalService, StorageKeys } from '../../../../shared';
 import { TranslateModule } from '@ngx-translate/core';
 import { RoleGuardService } from '../../../authentication';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-podcast-media-player',
@@ -16,13 +16,21 @@ import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
     CommonModule,
 
     LazyLoadImageDirective,
-    TranslateApiPipe
+    
   ],
   templateUrl: './podcast-media-player.component.html',
   styleUrls: ['./podcast-media-player.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PodcastMediaPlayerComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   private readonly platformId = inject(PLATFORM_ID);
 
   // SSR-safe browser check
@@ -265,3 +273,4 @@ export class PodcastMediaPlayerComponent {
     this.modalService.closeAll();
   }
 }
+

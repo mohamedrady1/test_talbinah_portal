@@ -2,7 +2,7 @@
   <h2 id="card-list-heading" class="sr-only">Manage Your Quick Access Cards</h2>
 
   <h4 class="draggable-card-list__heading-name">
-    {{ 'home_customize_cards_pinned_title' | translateApi }}
+    {{ translate('home_customize_cards_pinned_title') }}
   </h4>
 
   <div class="draggable-card-list__container">
@@ -26,7 +26,7 @@
   </div>
 
   <h4 class="draggable-card-list__heading-name">
-    {{ 'home_customize_cards_hint' | translateApi }}
+    {{ translate('home_customize_cards_hint') }}
   </h4>
 
   <div class="draggable-card-list__container">
@@ -48,10 +48,10 @@
 
   <div class="draggable-card-list__actions">
     <button (click)="onCancel()" class="draggable-card-list__submit-button btn btn--outline">
-      {{ 'cancel' | translateApi }}
+      {{ translate('cancel') }}
     </button>
     <button (click)="onSubmit()" class="draggable-card-list__submit-button btn btn--solid">
-      {{ 'save' | translateApi }}
+      {{ translate('save') }}
     </button>
   </div>
 </section>

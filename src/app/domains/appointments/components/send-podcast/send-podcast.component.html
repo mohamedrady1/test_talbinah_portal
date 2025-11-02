@@ -6,7 +6,7 @@
         <!-- All‑items tab -->
         <button type="button" class="send-podcast-modal__tab"
           [class.send-podcast-modal__tab--active]="selectedCategory() === 'all'" (click)="selectCategory('all')">
-          {{ 'all' | translateApi }}
+          {{ translate('all') }}
         </button>
 
         <!-- Dynamic category tabs -->

@@ -33,7 +33,7 @@ import { SiteHeaderComponent } from '../../../header';
 // User profile interface (likely for display purposes, not direct API DTO)
 import { RoleGuardService, UserContextService } from '../../../authentication';
 import { MainPageRoutesEnum } from '../../../main-page';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 export interface UserProfile {
   name: string;
   followersCount: number;
@@ -95,7 +95,6 @@ const PostsEmptyState: EmptyStateConfig = {
     PsychologicalSocietyCardShemmerComponent,
     EmptyStateComponent,
     ErrorStateComponent,
-    TranslateApiPipe
   ],
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
@@ -123,6 +122,11 @@ export class UserProfileComponent implements AfterViewInit {
   private readonly _RefreshUserPostsService = inject(RefreshUserPostsService);
   private readonly moodModalIntegrationService = inject(MoodModalIntegrationService);
   private readonly seo = inject(MetadataService);
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   // Component state signals
   private readonly userCommunityProfileId = signal<number | null>(null); // ID of the user whose profile is being viewed
   protected readonly isMyCommunityProfile = signal<boolean>(false); // True if the viewed profile belongs to the current user
@@ -382,7 +386,7 @@ export class UserProfileComponent implements AfterViewInit {
     } else {
       this.updateUserCommunityProfileState({
         userCommunityProfileResponse: null,
-        errorMessage: ` 📭 ${this._LocalizationService.translateTextFromJson('messages.noPostsFound')}` // This message might be more suitable for posts
+        errorMessage: ` 📭 ${this.translate('messages.noPostsFound')}` // This message might be more suitable for posts
       });
     }
   }
@@ -469,7 +473,7 @@ export class UserProfileComponent implements AfterViewInit {
       this.updatePsychologicalPostsState({
         allPostsResponse: null,
         totalItems: 0,
-        errorMessage: ` 📭 ${this._LocalizationService.translateTextFromJson('messages.noPostsFound')}`,
+        errorMessage: ` 📭 ${this.translate('messages.noPostsFound')}`,
         status: response.status ?? false // Set status from response, default to false if no data
       });
     }

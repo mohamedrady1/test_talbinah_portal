@@ -16,15 +16,14 @@ import { IGlobalPodcastItemModel, Logger } from '../../../../common';
 import { CameraCaptureComponent, ModalService, SvgIconComponent, ToastService } from '../../../../shared';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { SendPodcastComponent } from '../send-podcast';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-upload-attachments-menu-selector',
   standalone: true,
   imports: [
     SvgIconComponent,
-    CommonModule,
-    TranslateApiPipe
+    CommonModule
   ],
   templateUrl: './upload-attachments-menu-selector.component.html',
   styleUrls: ['./upload-attachments-menu-selector.component.scss'],
@@ -36,6 +35,13 @@ export class UploadAttachmentsMenuSelectorComponent implements OnInit, OnDestroy
   private readonly modalService = inject(ModalService);
   private readonly renderer = inject(Renderer2);
   private readonly toast = inject(ToastService);
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
 
   @Input() showMenu: boolean = false;
   @Input() onlyImage: boolean = false;

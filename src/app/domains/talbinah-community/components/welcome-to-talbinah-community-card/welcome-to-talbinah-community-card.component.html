@@ -1,14 +1,14 @@
 <div class="welcome-to-talbinah-community-card">
     <div class="welcome-to-talbinah-community-card__header">
         <!-- Bind image source and alt text from config -->
-        <img [src]="config.imageUrl" alt="{{ config.titleKey | translateApi }}">
+        <img [src]="config.imageUrl" alt="{{ translate(config.titleKey) }}">
         <!-- Bind title using translation key from config -->
         <p class="welcome-to-talbinah-community-card__header--title">
-            {{ config.titleKey | translateApi }}
+            {{ translate(config.titleKey) }}
         </p>
     </div>
     <!-- Bind subtitle using translation key from config -->
     <p class="welcome-to-talbinah-community-card--subtitle">
-        {{ config.subtitleKey | translateApi }}
+        {{ translate(config.subtitleKey) }}
     </p>
 </div>

@@ -10,12 +10,12 @@
         <div class="card__details--user-info">
           @if(config?.user && config?.user?.id !== undefined){
           <span class="card__name" (click)="config?.user?.id?goToProfile(config?.user?.id ?? 0):null">
-            {{ config?.user?.dummy_name ?? ('unknown_user'|translateApi) }}
+            {{ config?.user?.dummy_name ?? translate('unknown_user') }}
           </span>
           }
           @if (!config?.user || config?.user?.id === undefined) {
           <span class="card__name">
-            {{ config?.user?.dummy_name ?? ('unknown_user'|translateApi) }}
+            {{ config?.user?.dummy_name ?? translate('unknown_user') }}
           </span>
           }
         </div>
@@ -39,7 +39,7 @@
       <button class="card__follow" [disabled]="isLoadingFollow()" (click)="onActionClick('follow')">
         @if (isLoadingFollow()) {
         <div class="button-loading" aria-label="Submit in progress">
-          {{ 'in_progress' | translateApi }}
+          {{ translate('in_progress') }}
           <span class="dot-loader"></span>
         </div>
         } @else {
@@ -53,7 +53,7 @@
             fill="#47586E" />
         </svg>
         <p>
-          {{"follow3"|translateApi}}
+          {{translate("follow3")}}
         </p>
         } @else {
         <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,20 +67,20 @@
           </g>
           <defs>
             <clipPath id="clip0_560_56382">
-              <rect width="12" height="12" fill="white" transform="translateApi(0 0.5)" />
+              <rect width="12" height="12" fill="white" transform="translate(0 0.5)" />
             </clipPath>
           </defs>
         </svg>
 
         <p>
-          {{"following"|translateApi}}
+          {{translate("following")}}
         </p>
         }
         }
       </button>
       } @else {
       <span class="card__follow">
-        ({{"me"|translateApi}})
+        ({{translate("me")}})
       </span>
       }
       }
@@ -100,7 +100,7 @@
     <div class="card__content--watch-post">
       <button>
         <span>
-          {{"view_post"|translateApi}}
+          {{translate("view_post")}}
         </span>
       </button>
     </div>

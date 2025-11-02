@@ -4,7 +4,7 @@ import { ReceivedGiftsListComponent } from '../received-gifts-list';
 import { SentGiftsListComponent } from '../sent-gifts-list';
 import { SendGiftFormComponent } from '../send-gift-form';
 import { AutoExactHeightDirective } from '../../../../common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-gift-to-your-loved-ones',
@@ -15,13 +15,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     SentGiftsListComponent,
     ReceivedGiftsListComponent,
     AutoExactHeightDirective,
-    TranslateApiPipe
+    
   ],
   templateUrl: './gift-to-your-loved-ones.component.html',
   styleUrls: ['./gift-to-your-loved-ones.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GiftToYourLovedOnesComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   protected readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   protected readonly tabs = [
     { key: 'send', label: 'send_gifts' },
@@ -35,3 +39,4 @@ export class GiftToYourLovedOnesComponent {
     this.activeTab = tab;
   }
 }
+

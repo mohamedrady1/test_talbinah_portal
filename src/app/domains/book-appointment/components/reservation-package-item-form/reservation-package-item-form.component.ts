@@ -24,7 +24,7 @@ import { DoctorDaysFacade, DoctorSlotsFacade, NormalPackagesReservationFacade } 
 import { IGlobalDoctorContactInfoModel } from '../../../../common';
 import { ALL_INPUT_TYPES, LocalizationService } from '../../../../shared';
 import { extractDayIdFromDateString } from '../../../payments';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 
 export interface IReservationStepData {
@@ -45,7 +45,7 @@ export interface IReservationStepData {
     TranslateModule,
     CommonModule,
     DatepickerComponent,
-    TranslateApiPipe
+    
   ],
   templateUrl: './reservation-package-item-form.component.html',
   styleUrls: ['./reservation-package-item-form.component.scss'],
@@ -53,6 +53,10 @@ export interface IReservationStepData {
   providers: [DatePipe],
 })
 export class ReservationPackageItemFormComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   // Inputs
   public doctor = input.required<IGlobalDoctorContactInfoModel>();
   public durationId = input.required<number>();
@@ -334,3 +338,4 @@ export class ReservationPackageItemFormComponent implements OnInit {
     return new Date(y, (m - 1), day);
   }
 }
+

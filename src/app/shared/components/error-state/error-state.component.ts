@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core
 import { ErrorStateConfig } from '../error-state-card';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { TranslationsFacade } from '../../../common/core/translations';
+import { TranslationsFacade } from '../../../common/core/translations/services';
 
 @Component({
   selector: 'app-error-state',
@@ -17,13 +17,13 @@ import { TranslationsFacade } from '../../../common/core/translations';
 })
 export class ErrorStateComponent {
   private readonly translationsFacade = inject(TranslationsFacade);
-  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
   @Input({ required: true }) config!: ErrorStateConfig;
-  
+
   protected translate(key: string): string {
     return this.translationsFacade.translate(key);
   }
-  
+
   get backgroundColor(): string {
     return this.config.backgroundColor || '#fff3f3';
   }

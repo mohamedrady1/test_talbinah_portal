@@ -3,16 +3,20 @@ import { ModalService } from '../../../../shared';
 import { VatNationalIdVerificationComponent } from '../vat-national-id-verification';
 import { Logger } from '../../../../common';
 import { ChangePasswordComponent } from '../change-password';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-security-modal',
   standalone: true,
-  imports: [TranslateApiPipe],
+  imports: [],
   templateUrl: './security-modal.component.html',
   styleUrls: ['./security-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SecurityModalComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   private readonly _modalService = inject(ModalService);
   @Output() public closed = new EventEmitter<void>();
 
@@ -52,3 +56,4 @@ export class SecurityModalComponent {
   }
 
 }
+

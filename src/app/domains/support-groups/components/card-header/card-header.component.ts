@@ -1,18 +1,22 @@
 import { TranslateModule } from '@ngx-translate/core';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ICardHeaderConfig } from '../../../../shared';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-card-header',
   standalone: true,
-  imports: [CommonModule, TranslateModule, TranslateApiPipe],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './card-header.component.html',
   styleUrls: ['./card-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardHeaderComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+
   @Input() config!: ICardHeaderConfig;
   @Input() isPrevDisabled = false;
   @Input() isNextDisabled = false;
@@ -44,3 +48,4 @@ export class CardHeaderComponent {
     return (this.config.isAllButtonVisible ?? false) || (this.total > this.count);
   }
 }
+

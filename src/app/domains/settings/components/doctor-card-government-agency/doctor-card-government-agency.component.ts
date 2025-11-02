@@ -5,7 +5,7 @@ import { IGlobalDoctorContactInfoModel, LanguageService, CardType, Logger } from
 import { IDoctorItem, ModalService, HALF_HOUR_MINUTES, DEFAULT_DOCTOR_IMAGE_WOMAN, DEFAULT_DOCTOR_IMAGE_MAN, UploadAppsPopupComponent } from '../../../../shared';
 import { ToggleFavoriteDoctorFacade, BookApoointmentPopupComponent } from '../../../book-appointment';
 import { UploadAppsHeaderConfig } from '../../../urgent-appointment';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-doctor-card-government-agency',
@@ -14,13 +14,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     TranslateModule,
     CommonModule,
     NgOptimizedImage,
-    TranslateApiPipe
+    
   ],
   templateUrl: './doctor-card-government-agency.component.html',
   styleUrls: ['./doctor-card-government-agency.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DoctorCardGovernmentAgencyComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   // Use a union type for item to be explicit about expected types.
   @Input({ required: true }) item!: IGlobalDoctorContactInfoModel | IDoctorItem | any;
   @Input() isUploadApp: boolean = false;
@@ -122,3 +126,4 @@ export class DoctorCardGovernmentAgencyComponent {
     }
   }
 }
+

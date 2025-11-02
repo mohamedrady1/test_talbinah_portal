@@ -5,7 +5,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { IdentityFormFacade } from '../../services';
 import { SvgIconComponent } from "../../../../shared";
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-my-psychological-society',
@@ -16,13 +16,21 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     TalbinahIdentityFormComponent,
     WelcomeToTalbinahComponent,
     SvgIconComponent,
-    TranslateApiPipe
+    
   ],
   templateUrl: './my-psychological-society.component.html',
   styleUrls: ['./my-psychological-society.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MyPsychologicalSocietyComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   @ViewChild(TalbinahIdentityFormComponent)
   identityFormComponent!: TalbinahIdentityFormComponent;
 

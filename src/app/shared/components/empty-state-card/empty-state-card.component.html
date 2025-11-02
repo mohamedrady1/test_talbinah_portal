@@ -7,13 +7,13 @@
 
   @if (hasTitle()) {
   <h2 class="empty-state__title" [ngClass]="{'small': type === 'small'}">
-    {{ (config.title || '')| translateApi }}
+    {{ translate(config.title || '') }}
   </h2>
   }
 
   @if (hasMessage()) {
   <p class="empty-state__message" [ngClass]="{'small': type === 'small'}">
-    {{ (config.message || '') | translate }}
+    {{ translate(config.message || '') }}
   </p>
   }
 
@@ -21,13 +21,13 @@
   <button class="empty-state__add" (click)="onClick()" [disabled]="buttonLoading()">
     @if (buttonLoading()) {
     <div class="general-form-wrapper__actions__loading" aria-label="Submit in progress">
-      {{ 'in_progress' | translateApi }}
+      {{ translate('in_progress') }}
       <span class="dot-loader"></span>
       <span class="dot-loader"></span>
       <span class="dot-loader"></span>
     </div>
     } @else {
-    <p>{{ (config.buttonText || '') | translateApi }}</p>
+    <p>{{ translate(config.buttonText || '') }}</p>
     }
   </button>
   }

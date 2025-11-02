@@ -23,7 +23,7 @@
       <div class="payment-method-block__choose-method-title">
         <app-svg-icon name="discount-icon" />
         <p>
-          {{'discount_code'|translateApi}}
+          {{translate('discount_code')}}
         </p>
       </div>
     </div>
@@ -39,20 +39,20 @@
         <div class="payment-method-block__discount-actions">
           @if (isDiscountApplied()) {
           <button type="button" class="payment-method-block__discount-submit-button" (click)="removeDiscount()"
-            [attr.aria-label]="'cancel' | translateApi">
-            {{ 'cancel' | translateApi }}
+            [attr.aria-label]="translate('cancel')">
+            {{ translate('cancel') }}
           </button>
           } @else {
           <button type="submit" class="payment-method-block__discount-submit-button"
             [disabled]="isLoadingDiscount() || !discountForm.get('code')?.value?.trim()"
-            [attr.aria-label]="'apply' | translateApi">
+            [attr.aria-label]="translate('apply')">
             @if (isLoadingDiscount()) {
             <div class="payment-method-block__discount-button-loading" role="status" aria-live="polite">
-              {{ 'in_progress' | translateApi }}
+              {{ translate('in_progress') }}
               <span class="dot-loader" aria-hidden="true"></span>
             </div>
             } @else {
-            {{ 'apply' | translateApi }}
+            {{ translate('apply') }}
             }
           </button>
           }
@@ -110,7 +110,7 @@
 
   @if (hasError()) {
   <p class="payment-summary__error-message" role="alert">
-    {{ 'error_not_enough_balance' | translateApi }}
+    {{ translate('error_not_enough_balance') }}
   </p>
   }
   }
@@ -128,21 +128,21 @@
 </div>
 <div class="payment-summary__actions">
   <button id="cancel-btn" type="button" class="payment-summary__button payment-summary__button--cancel"
-    (click)="onCancel()" [attr.aria-label]="'back' | translateApi">
-    {{ 'back' | translateApi }}
+    (click)="onCancel()" [attr.aria-label]="translate('back')">
+    {{ translate('back') }}
   </button>
 
   @if (!discountErrorMessage()) {
   <button id="next-btn" type="button" class="payment-summary__button payment-summary__button--confirm"
     [ngClass]="{'disabled': isLoading}" (click)="onNext()" [disabled]="isLoading"
-    [attr.aria-label]="'confirm_subscription' | translateApi">
+    [attr.aria-label]="translate('confirm_subscription')">
     @if (isLoading) {
     <div class="payment-summary__button-loading" role="status" aria-live="polite">
-      {{ 'in_progress' | translateApi }}
+      {{ translate('in_progress') }}
       <span class="dot-loader" aria-hidden="true"></span>
     </div>
     } @else {
-    {{ 'confirm_subscription' | translateApi }}
+    {{ translate('confirm_subscription') }}
     }
   </button>
   }

@@ -38,8 +38,8 @@
 
           <div class="khawiik-activities__card-footer">
             <button type="button" class="khawiik-activities__cta" (click)="onCardSelect(card); $event.stopPropagation()"
-              [attr.aria-label]="card.title + ' - ' + ('start_now' | translateApi)">
-              {{ 'start_now' | translateApi }}
+              [attr.aria-label]="card.title + ' - ' + translate('start_now')">
+              {{ translate('start_now') }}
             </button>
           </div>
         </article>

@@ -12,7 +12,7 @@ import { KhawiikBooksSkeletonComponent } from "../../../../shared/skeletons";
 import { IKhawiikBook } from '../../dtos';
 import { KhawiikBotRoutesEnum } from '../../constants';
 import { MissionDataService } from '../../services';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 import { EmptyStateCardComponent, EmptyStateConfig } from '../../../../shared';
 import { KhawiikBooksEmptyState } from '../../configs/empty-state.config';
 
@@ -22,7 +22,6 @@ import { KhawiikBooksEmptyState } from '../../configs/empty-state.config';
   imports: [
     TranslateModule,
     CommonModule,
-    TranslateApiPipe,
     AutoExactHeightDirective,
 
     KhawiikBooksSkeletonComponent,
@@ -34,6 +33,14 @@ import { KhawiikBooksEmptyState } from '../../configs/empty-state.config';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class KhawiikBooksComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   @Output() protected closed = new EventEmitter<IKhawiikBook | null>();
 
   // ====== Dependencies ======

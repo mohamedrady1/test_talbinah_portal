@@ -24,7 +24,7 @@ import { SelectModule } from "primeng/select";
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { SessionFreeComponent } from '../../../book-appointment';
 import { AppointmentsRoutesEnum, IStoreNormalPackagesReservationRequestDto, NormalPackagesReservationFacade } from '../../../appointments';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-patient-details-form',
@@ -36,7 +36,6 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     SelectModule,
     FormsModule,
     SelectButtonModule,
-    TranslateApiPipe
   ],
   templateUrl: './patient-details-form.component.html',
   styleUrls: ['./patient-details-form.component.scss'],
@@ -52,7 +51,11 @@ export class PatientDetailsFormComponent {
   private readonly _CountriesLookupFacade = inject(CountriesLookupFacade);
   private readonly userContext = inject(UserContextService);
   private readonly nav = inject(NavigationService);
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   // Signals
   readonly isLoading = signal(false);
   readonly isStoringLoading = signal(false);

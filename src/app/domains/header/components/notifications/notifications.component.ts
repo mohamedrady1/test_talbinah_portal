@@ -6,7 +6,7 @@ import { HeaderNotificationCardComponent } from '../header-notification-card';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-notifications',
@@ -17,14 +17,21 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
 
     HeaderNotificationCardComponent,
     ClickOutsideDirective,
-    SvgIconComponent,
-    TranslateApiPipe
+    SvgIconComponent
   ],
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotificationsComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   @Input() type: string = 'default';
   @Output() notificationAction: EventEmitter<string> = new EventEmitter<string>();
 

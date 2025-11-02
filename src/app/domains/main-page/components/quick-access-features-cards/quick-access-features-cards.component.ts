@@ -12,7 +12,7 @@ import { DraggableCardListComponent } from '../draggable-card-list';
 import { BookUrgentAppointmentComponent, SelectAppointmentTypeConfig, UploadAppsHeaderConfig, UrgentAppointmentHeaderConfig } from '../../../urgent-appointment';
 import { SelectAppointmentTypeComponent } from '../../../book-appointment';
 import { RoleGuardService } from '../../../authentication';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-quick-access-features-cards',
@@ -20,13 +20,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations/pipes/tra
   imports: [
     TranslateModule,
     CommonModule,
-    TranslateApiPipe,
+    
     QuickAccessCardComponent
   ],
   templateUrl: './quick-access-features-cards.component.html',
   styleUrls: ['./quick-access-features-cards.component.scss']
 })
 export class QuickAccessFeaturesCardsComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   private readonly router: Router = inject(Router);
   private readonly modalService: ModalService = inject(ModalService);
   private readonly storage = inject(StorageService);
@@ -205,3 +209,4 @@ export class QuickAccessFeaturesCardsComponent {
     });
   }
 }
+

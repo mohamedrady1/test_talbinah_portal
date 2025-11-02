@@ -6,10 +6,10 @@
     </div>
     <div class="session-free__status-content">
       <!-- <p class="session-free__status-title">
-        {{ 'disclaimer' | translateApi }}
+        {{ translate('disclaimer') }}
       </p> -->
       <p class="session-free__status-subtitle">
-        {{ 'this_reservation_is_free_cause_you_subscribed_to_package_already' | translateApi }}
+        {{ translate('this_reservation_is_free_cause_you_subscribed_to_package_already') }}
       </p>
     </div>
   </div>
@@ -17,12 +17,12 @@
   <!-- Actions -->
   <div class="session-free__actions">
     <button id="cancel-btn" type="button" class="btn btn--outline" (click)="handleCancel()">
-      {{ 'cancel' | translateApi }}
+      {{ translate('cancel') }}
     </button>
 
     <button id="confirm-btn" type="button" class="btn btn--solid" (click)="handleConfirm()"
-      [attr.aria-label]="'confirm' | translateApi">
-      {{ 'confirm' | translateApi }}
+      [attr.aria-label]="translate('confirm')">
+      {{ translate('confirm') }}
     </button>
   </div>
 </section>

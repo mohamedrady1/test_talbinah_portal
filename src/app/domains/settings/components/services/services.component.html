@@ -3,10 +3,10 @@
     <!-- Header Section -->
     <div class="services-layout__header">
       <div class="services-layout__title">
-        {{'services'|translateApi}}
+        {{ translate('services') }}
       </div>
       <div class="services-layout__description">
-        {{'redeem_points_for_services'|translateApi}}
+        {{ translate('redeem_points_for_services') }}
       </div>
     </div>
 
@@ -49,7 +49,7 @@
           </div>
           <p class="services-layout__card-title">
             {{ service?.title }} = <span class="services-layout__card-points">{{ service?.points }}</span>
-            {{'point' | translateApi}}
+            {{'point' }}
           </p>
           <button class="services-layout__card-button" (click)="openServiceModal(service)">
             <app-svg-icon name="send-icon" />

@@ -1,13 +1,13 @@
 <div class="update-psychological-society-identity">
   <div class="update-psychological-society-identity__content">
     <div class="update-psychological-society-identity__title">
-      {{'edit_identity' |translateApi}}
+      {{ translate('edit_identity') }}
     </div>
     <form [formGroup]="formGroup" class="update-psychological-society-identity__form">
 
       <div class="update-psychological-society-identity__input-group">
         <label class="input-group__label" for="defaultName">
-          {{'default_name' | translateApi}}
+          {{ translate('default_name') }}
         </label>
         <div class="custom-input-wrapper" [ngClass]="{
             'has-error': formGroup.controls['defaultName'].invalid && formGroup.controls['defaultName'].touched
@@ -21,20 +21,20 @@
           </svg>
 
           <input id="defaultName" type="text" formControlName="defaultName"
-            placeholder="{{'choose_suitable_name' | translateApi}}" class="form-control custom-input-wrapper__input"
+            placeholder="{{ translate('choose_suitable_name') }}" class="form-control custom-input-wrapper__input"
             autocomplete="off" />
         </div>
         @if(formGroup.controls['defaultName'].invalid && formGroup.controls['defaultName'].touched){
         <div class="form-field__error">
           <span>
-            {{"please_choose_a_default_name" | translateApi}}
+            {{ translate("please_choose_a_default_name") }}
           </span>
         </div>}
       </div>
 
       <div class="update-psychological-society-identity__input-group">
         <label class="input-group__label input-group__label--appearance">
-          {{'appearance_preference_talbinah' | translateApi}}
+          {{ translate('appearance_preference_talbinah') }}
         </label>
         @if (isLoadingEmojis(); ) {
         <div class="shimmer__list">
@@ -54,20 +54,20 @@
 
           @if (!isLoadingEmojis() && emojisList().length === 0 && !errorMessageEmojis()) {
           <div>
-            {{ 'No emojis found.' | translateApi }}
+            {{ translate('No emojis found.') }}
           </div>
           }
         </div>
         @if (emojiError()) {
         <small class="error">
-          {{'please_choose_an_avatar_that_represents_you' | translateApi}}
+          {{ translate('please_choose_an_avatar_that_represents_you') }}
         </small>
         }
       </div>
 
       <div class="update-psychological-society-identity__input-group">
         <label class="input-group__label input-group__label--interests">
-          {{'your_interests' | translateApi}}
+          {{ translate('your_interests') }}
         </label>
         @if (isLoadingInterests(); ) {
         <div class="shimmer__list">
@@ -99,7 +99,7 @@
           }
           @if (!isLoadingInterests() && interestsList().length === 0 && !errorMessageInterests()) {
           <div>
-            {{ 'No interests found.' | translateApi }}
+            {{ translate('No interests found.') }}
           </div>
           }
         </div>
@@ -107,12 +107,12 @@
         @if (errorMessageInterests()) {
 
         <div class="error-message">
-          {{ errorMessageInterests() | translateApi }}
+          {{ errorMessageInterests() }}
         </div>
         }
         @if (interestsError()) {
         <small class="error">
-          {{'please_select_at_least_one_interest' | translateApi}}
+          {{ translate('please_select_at_least_one_interest') }}
         </small>
         }
       </div>
@@ -120,10 +120,10 @@
   </div>
   <div class="update-psychological-society-identity--actions">
     <button id="cancel-btn" type="button" class="btn btn--outline" (click)="onCancel()" [disabled]="isLoadingSubmit()">
-      {{ 'cancel' | translateApi }}
+      {{ translate('cancel') }}
     </button>
     <button id="next-btn" type="button" class="btn btn--solid" (click)="onSubmit()" [disabled]="isLoadingSubmit()">
-      {{ 'save' | translateApi }}
+      {{ translate('save') }}
       @if (isLoadingSubmit()) {
       <span class="btn__spinner"></span>
       }

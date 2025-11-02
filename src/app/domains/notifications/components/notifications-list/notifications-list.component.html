@@ -2,7 +2,7 @@
   <div class="notifications">
     <div class="notifications__title">
       <p class="notifications__title--label">
-        {{"notification2"|translateApi}}
+        {{ translate('notification2') }}
       </p>
 
       <div class="notifications__end-actions">
@@ -12,7 +12,7 @@
         <div class="notifications__filter" (click)="openFilterPopup()" appClickOutside
           (clickOutside)="displayFilterPopup = false">
           <div class="filter-button">
-            <p>{{'filter'|translateApi}}</p>
+            <p>{{ translate('filter') }}</p>
             <span [class.rotate-arrow]="displayFilterPopup">
               <app-svg-icon name="arrow-bottom" />
             </span>
@@ -37,7 +37,7 @@
                       }
                     </div>
                     <span class="label-text">
-                      {{ option.label | translateApi }}
+                      {{ option.label }}
                     </span>
                   </label>
                 </div>
@@ -69,11 +69,11 @@
           ngOptimizedImage width="200" height="200" placeholder="images/emptyStates/notifications.svg" />
 
         @if (notificationsEmptyState.title) {
-        <h2 class="empty-state__title">{{ notificationsEmptyState.title | translateApi }}</h2>
+        <h2 class="empty-state__title">{{ translate(notificationsEmptyState.title) }}</h2>
         }
 
         @if (notificationsEmptyState.message) {
-        <p class="empty-state__message">{{ notificationsEmptyState.message | translateApi }}</p>
+        <p class="empty-state__message">{{ translate(notificationsEmptyState.message) }}</p>
         }
       </div>
       }
@@ -83,16 +83,16 @@
           ngOptimizedImage width="200" height="200" placeholder="images/errorStates/notifications.svg" />
 
         @if (notificationsErrorState().title) {
-        <!-- <h2 class="error-state__title">{{ notificationsErrorState().title | translateApi }}</h2> -->
+        <!-- <h2 class="error-state__title">{{ notificationsErrorState().title  }}</h2> -->
         }
 
         @if (notificationsErrorState().message) {
-        <!-- <p class="error-state__message">{{ notificationsErrorState().message | translateApi }}</p> -->
+        <!-- <p class="error-state__message">{{ notificationsErrorState().message  }}</p> -->
         }
 
         @if (notificationsErrorState().onRetry) {
         <button class="error-state__button" type="button" (click)="facade.fetchAllNotifications(1)">
-          {{ notificationsErrorState().retryLabel || ('retry' | translateApi) }}
+          {{ notificationsErrorState().retryLabel || (translate('retry') ) }}
         </button>
         }
       </div>
@@ -110,9 +110,9 @@
           [disabled]="isLoadingMore()">
           @if (isLoadingMore()) {
           <span class="loading-spinner"></span>
-          {{ 'in_progress' | translateApi }}
+          {{ translate('in_progress') }}
           } @else {
-          {{ 'show_more' | translateApi }}
+          {{ translate('show_more') }}
           }
         </button>
       </div>

@@ -8,7 +8,7 @@
             @if (formItem.label) {
             <label [attr.for]="formItem.name" class="general-form-wrapper__label"
               [ngClass]="{'general-form-wrapper__label--error': getError(formItem.name), 'general-form-wrapper__label--clickable': formItem.enableLabelClick}">
-              {{ formItem.label | translateApi }}
+              {{ translateApi(formItem.label) }}
               @if (formItem.isRequired) {
               <span class="general-form-wrapper__required" aria-hidden="true">*</span>
               }
@@ -22,10 +22,10 @@
               <div class="custom-input custom-textarea"
                 [ngClass]="{'p-invalid': getFormControl(formItem.name)?.invalid && (getFormControl(formItem.name)?.touched || getFormControl(formItem.name)?.dirty)}">
                 <textarea [class]="formItem.inputClass ?? 'custom-input__input'" [formControlName]="formItem.name"
-                  [id]="formItem.name" [attr.aria-label]="(formItem.label ?? '') | translateApi"
-                  [attr.title]="(formItem.label ?? '') | translateApi"
+                  [id]="formItem.name" [attr.aria-label]="translateApi(formItem.label ?? '')"
+                  [attr.title]="translateApi(formItem.label ?? '')"
                   [attr.autocomplete]="formItem.name === 'reasonDetails' ? 'off' : null"
-                  [attr.placeholder]="(formItem.placeholder ?? '') | translateApi" [rows]="formItem.rows ?? 5"
+                  [attr.placeholder]="translateApi(formItem.placeholder ?? '')" [rows]="formItem.rows ?? 5"
                   [attr.aria-required]="formItem.isRequired ? 'true' : 'false'"
                   [attr.aria-describedby]="formItem.name + '-hint ' + formItem.name + '-error'"></textarea>
               </div>
@@ -34,7 +34,7 @@
                 @if (!getError(formItem.name) && formItem.hint && !getFormControl(formItem.name)?.value &&
                 !formItem.fixedHint) {
                 <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
-                  {{ formItem.hint | translateApi }}
+                  {{ translateApi(formItem.hint) }}
                 </small>
                 }
 
@@ -42,7 +42,7 @@
                 getFormControl(formItem.name)?.dirty)) {
                 <span id="{{ formItem.name }}-error" class="general-form-wrapper__error-message error-label"
                   role="alert">
-                  {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+                  {{ translateApi(getValidationErrorMessage(formItem.name, formItem.validation ?? [])) }}
                 </span>
                 }
               </div>
@@ -55,24 +55,23 @@
             <div class="form-field">
               <div class="select-wrapper">
                 <p-select [options]="formItem.listValues" [formControlName]="formItem.name"
-                  [loading]="reasonsFacade.isLoading()==true"
-                  [optionLabel]="(formItem.optionLabel || 'label') | translateApi" [showClear]="true"
-                  [readonly]="reasonsFacade.isLoading()==true" [optionValue]="formItem.optionValue || 'value'"
-                  [filter]="formItem.name" [filterBy]="formItem.name"
-                  [placeholder]="(formItem.placeholder ?? '') | translateApi" [id]="formItem.name"
+                  [loading]="reasonsFacade.isLoading()==true" [optionLabel]="formItem.optionLabel || 'label'"
+                  [showClear]="true" [readonly]="reasonsFacade.isLoading()==true"
+                  [optionValue]="formItem.optionValue || 'value'" [filter]="formItem.name" [filterBy]="formItem.name"
+                  [placeholder]="translateApi(formItem.placeholder ?? '')" [id]="formItem.name"
                   [attr.aria-describedby]="formItem.name + '-hint'" [attr.aria-invalid]="!!getError(formItem.name)"
                   [ngClass]="{'p-invalid': getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched}"
                   appendTo="body">
                   <ng-template pTemplate="selectedItem" let-option>
                     <!-- Custom selected item display if needed -->
                     <div class="p-select-item-selected-custom">
-                      {{ option[formItem.optionLabel || 'label'] | translateApi }}
+                      {{ option[formItem.optionLabel || 'label'] }}
                     </div>
                   </ng-template>
                   <ng-template let-option pTemplate="item">
                     <!-- Custom item list display if needed -->
                     <div class="p-select-item-custom">
-                      {{ option[formItem.optionLabel || 'label'] | translateApi}}
+                      {{ option[formItem.optionLabel || 'label'] }}
                     </div>
                   </ng-template>
                 </p-select>
@@ -82,7 +81,7 @@
                 @if (!getError(formItem.name) && formItem.hint && !getFormControl(formItem.name)?.value &&
                 !formItem.fixedHint) {
                 <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
-                  {{ formItem.hint | translateApi }}
+                  {{ translateApi(formItem.hint) }}
                 </small>
                 }
 
@@ -90,7 +89,7 @@
                 getFormControl(formItem.name)?.dirty)) {
                 <span id="{{ formItem.name }}-error" class="general-form-wrapper__error-message error-label"
                   role="alert">
-                  {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+                  {{ translateApi(getValidationErrorMessage(formItem.name, formItem.validation ?? [])) }}
                 </span>
                 }
               </div>
@@ -106,19 +105,19 @@
           [disabled]="this.cancelFacade.isCancelling() && reasonsFacade.isLoading()"
           [ngClass]="{'disabled': this.cancelFacade.isCancelling()}">
           <span class="btn__label">
-            {{ 'cancel' | translateApi }}
+            {{ translateApi('cancel') }}
           </span>
         </button>
         <button id="submit-cancel-appointment-btn" type="submit" class="btn btn--solid"
-          [attr.aria-label]="'confirm' | translateApi"
+          [attr.aria-label]="translateApi('confirm')"
           [disabled]="this.cancelFacade.isCancelling() && reasonsFacade.isLoading()"
           [ngClass]="{'disabled': this.cancelFacade.isCancelling()}">
           <span class="btn__label">
             @if (!this.cancelFacade.isCancelling()) {
-            {{ 'cancel_appointment' | translateApi }}
+            {{ translateApi('cancel_appointment') }}
             } @else {
             <span class="general-form-wrapper__loading" aria-live="polite">
-              {{'in_progress' | translateApi}}
+              {{translateApi('in_progress')}}
               <span class="dot-loader"></span>
             </span>
             }

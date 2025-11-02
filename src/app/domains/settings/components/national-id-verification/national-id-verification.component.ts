@@ -29,7 +29,7 @@ import { NationalIdVerificationFacade } from '../../services';
 import { IVerifyNationalIdRequest } from '../../dtos';
 import { IVerifyNationalIdFormData } from '../../models';
 import { UserContextService } from '../../../authentication';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-national-id-verification',
@@ -40,13 +40,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     FormsModule,
     TranslateModule,
     DatePickerModule,
-    TranslateApiPipe
+    
   ],
   templateUrl: './national-id-verification.component.html',
   styleUrls: ['./national-id-verification.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NationalIdVerificationComponent implements OnInit, OnDestroy {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   private readonly _fb = inject(FormBuilder);
   private readonly _facade = inject(NationalIdVerificationFacade);
   private readonly _destroy$ = new Subject<void>();
@@ -211,3 +215,4 @@ export class NationalIdVerificationComponent implements OnInit, OnDestroy {
     return 'form.errors.generic';
   }
 }
+

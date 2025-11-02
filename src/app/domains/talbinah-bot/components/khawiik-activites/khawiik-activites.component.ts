@@ -9,7 +9,7 @@ import { getKhawiikActivitiesErrorConfig } from './../../configs/error-state.con
 import { KhawiikActivitiesLookupFacade } from './../../services/activites-lookup.facade';
 import { IKhawiikVoiceActivity } from './../../dtos/responses/khawiik-responses.dto';
 import { ErrorStateCardComponent, ErrorStateConfig } from './../../../../shared/components/error-state-card/error-state-card.component';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 import { EmptyStateCardComponent, EmptyStateConfig } from '../../../../shared';
 import { KhawiikActivitiesEmptyState } from '../../configs/empty-state.config';
 
@@ -23,14 +23,21 @@ import { KhawiikActivitiesEmptyState } from '../../configs/empty-state.config';
 
     KhawiikActivitiesSkeletonComponent,
     EmptyStateCardComponent,
-    ErrorStateCardComponent,
-    TranslateApiPipe
+    ErrorStateCardComponent
   ],
   templateUrl: './khawiik-activites.component.html',
   styleUrls: ['./khawiik-activites.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KhawiikActivitesComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   @Output() protected closed = new EventEmitter<IKhawiikVoiceActivity | null>();
 
   // ====== Dependencies ======

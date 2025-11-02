@@ -1,4 +1,4 @@
-import { TranslateApiPipe } from './../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 import { CompeleteDataAndRegisterNowComponent, GlobalSearchInputComponent, ICardHeaderConfig, InputSearchConfig, ModalService, PageLayoutCardHeaderComponent, PaginationConfig, PaginationListingComponent, StorageKeys } from '../../../../shared';
 import { CardType, Logger, StorageService } from '../../../../common';
 import { ArticlesCardSideHeader, ArticlesRoutesEnum, MostFavoriteArticlesSideHeader, MostReadArticlesSideHeader } from '../../constants';
@@ -34,7 +34,7 @@ import { Router } from '@angular/router';
     EmptyStateComponent,
     CompeleteDataAndRegisterNowComponent,
 
-    TranslateApiPipe
+    
   ],
   templateUrl: './articles-listing.component.html',
   styleUrls: ['./articles-listing.component.scss'],
@@ -42,6 +42,10 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticlesListingComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   // ✅ Inject API Clients and dependencies
   private cdr = inject(ChangeDetectorRef); // Still useful for manual change detection if needed
   private platformId = inject(PLATFORM_ID);
@@ -266,3 +270,4 @@ export class ArticlesListingComponent {
     })
   }
 }
+

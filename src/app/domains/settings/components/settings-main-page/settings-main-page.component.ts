@@ -34,7 +34,7 @@ import { ISettingMenuItem } from '../../dtos';
 import { SettingsPointsComponent } from '../settings-points';
 import { SiteHeaderComponent } from '../../../header';
 import { TechnicalSupportChatsListComponent } from '../../../technical-support';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-settings-main-page',
   standalone: true,
@@ -43,7 +43,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     TalbinahCardComponent,
     UserInfoCardComponent,
     HeaderComponent,
-    TranslateApiPipe,
+    
     YourProfileOptionCardComponent,
     GiftCardComponent,
     WalletAndRewardsComponent,
@@ -55,6 +55,10 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsMainPageComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   protected readonly _SettingsFacade = inject(SettingsFacade);
   // --- Dependencies ---
   private readonly _modalService = inject(ModalService);
@@ -426,3 +430,4 @@ export class SettingsMainPageComponent {
     });
   }
 }
+

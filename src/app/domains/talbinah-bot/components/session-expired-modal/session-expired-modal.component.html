@@ -4,15 +4,15 @@
             class="session-expired-modal__icon" />
 
         <h2 class="session-expired-modal__title">
-            {{ 'time_period_ended' | translateApi }}
+            {{ translate('time_period_ended') }}
         </h2>
 
         <p class="session-expired-modal__description">
-            {{ 'session_expired_start_new_period' | translateApi }}
+            {{ translate('session_expired_start_new_period') }}
         </p>
 
         <button class="session-expired-modal__button" (click)="onStartNewSession()">
-            {{ 'start_now' | translateApi }}
+            {{ translate('start_now') }}
         </button>
     </div>
 </div>

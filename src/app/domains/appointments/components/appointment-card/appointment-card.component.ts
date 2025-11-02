@@ -14,7 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { BookApoointmentPopupComponent } from '../../../book-appointment';
 import { CancelReservationFacade } from '../../services';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-appointment-card',
@@ -23,7 +23,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     TranslateModule,
     CommonModule,
     ActionsDropdownMenuComponent,
-    TranslateApiPipe
+    
   ],
   templateUrl: './appointment-card.component.html',
   styleUrls: ['./appointment-card.component.scss'],
@@ -32,6 +32,10 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
 })
 
 export class AppointmentCardComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   /** Exposed CardType enum for template usage. */
   protected readonly cardTypes = CardType;
 
@@ -280,3 +284,4 @@ export class AppointmentCardComponent implements OnInit {
     });
   }
 }
+

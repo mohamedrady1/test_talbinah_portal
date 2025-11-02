@@ -3,14 +3,14 @@
     <form class="form form--reservation" [formGroup]="form" (ngSubmit)="onSubmit()"
       aria-labelledby="reservationFormTitle">
       <h2 id="reservationFormTitle" class="visually-hidden">
-        {{ 'available_appointments ' | translateApi }}
+        {{ translate('available_appointments ') }}
       </h2>
 
       <div class="form__groups">
         <div class="form__group">
           <label for="CommunicationType" class="form__label"
             [ngClass]="{ 'form__label--error': getError('CommunicationType') }">
-            {{ 'session_type' | translateApi }}
+            {{ translate('session_type') }}
             <span class="form__required" aria-hidden="true">*</span>
           </label>
 
@@ -26,7 +26,7 @@
               </label>
               }
               } @else {
-              <div class="form__empty">{{ 'no_data_available' | translateApi }}</div>
+              <div class="form__empty">{{ translate('no_data_available') }}</div>
               }
             </div>
             } @else {
@@ -37,14 +37,14 @@
             </div>
             }
             <div class="form__feedback" *ngIf="getError('CommunicationType')">
-              {{ 'session_type_error' | translateApi }}
+              {{ translate('session_type_error') }}
             </div>
           </div>
         </div>
 
         <div class="form__group">
           <label for="date" class="form__label" [ngClass]="{ 'form__label--error': getError('date') }">
-            <span>🕒</span> {{ 'date' | translateApi }}
+            <span>🕒</span> {{ translate('date') }}
             <span class="form__required" aria-hidden="true">*</span>
           </label>
 
@@ -52,19 +52,19 @@
             <div class="custom-input date-picker" [ngClass]="{ 'custom-input--error': getError('date') }">
               <p-datepicker id="date" formControlName="date" [showIcon]="true" iconDisplay="input" dateFormat="yy-mm-dd"
                 [minDate]="today" [readonlyInput]="true" appendTo="body" class="custom-input__native"
-                [placeholder]="!form.get('date')?.value ? ('date' | translateApi) : ''" aria-required="true"
+                [placeholder]="!form.get('date')?.value ? ('date' ) : ''" aria-required="true"
                 [attr.aria-invalid]="getError('date')" [disabledDays]="disabledWeekDays"
                 (onSelect)="onDateSelect($event)"></p-datepicker>
             </div>
             <div class="form__feedback" *ngIf="getError('date')">
-              {{ 'date_required' | translateApi }}
+              {{ translate('date_required') }}
             </div>
           </div>
         </div>
 
         <div class="form__group">
           <label for="duration_id" class="form__label" [ngClass]="{ 'form__label--error': getError('duration_id') }">
-            <span>🕒</span> {{ 'available_times' | translateApi }}
+            <span>🕒</span> {{ translate('available_times') }}
             <span class="form__required" aria-hidden="true">*</span>
           </label>
 
@@ -76,11 +76,11 @@
                 [class.radio-group__item--active]="form.get('duration_id')?.value === duration.id">
                 <input type="radio" [value]="duration.id" formControlName="duration_id" class="radio-group__input" />
                 <span class="radio-group__text">
-                  {{ duration.duration }} {{ 'min' | translateApi }}
+                  {{ duration.duration }} {{ translate('min') }}
                 </span>
                 @if (duration?.price) {
                 <span class="radio-group__text">
-                  / {{ duration?.price }} {{ 'riyals' | translateApi }}
+                  / {{ duration?.price }} {{ translate('riyals') }}
                 </span>
                 }
               </label>
@@ -94,14 +94,14 @@
             </div>
             }
             <div class="form__feedback" *ngIf="getError('duration_id')">
-              {{ 'appointment_duration_error' | translateApi }}
+              {{ translate('appointment_duration_error') }}
             </div>
           </div>
         </div>
 
         <div class="form__group">
           <label for="time_id" class="form__label" [ngClass]="{ 'form__label--error': getError('time_id') }">
-            <span>🕒</span> {{ 'available_times' | translateApi }}
+            <span>🕒</span> {{ translate('available_times') }}
             <span class="form__required" aria-hidden="true">*</span>
           </label>
 
@@ -121,7 +121,7 @@
               }
             </div>
             } @else {
-            <div class="form__empty">{{ 'no_available_times' | translateApi }}</div>
+            <div class="form__empty">{{ translate('no_available_times') }}</div>
             }
             } @else {
             <div class="form__shimmer">
@@ -131,30 +131,30 @@
             </div>
             }
             <div class="form__feedback" *ngIf="getError('time_id')">
-              {{ 'available_times_error' | translateApi }}
+              {{ translate('available_times_error') }}
             </div>
           </div>
           }
           @else {
-          <p class="SelectDateFirst">{{'available_times_warning'|translateApi}}</p>
+          <p class="SelectDateFirst">{{ translate('available_times_warning') }}</p>
           }
         </div>
       </div>
 
       <div class="form__actions">
         <button type="button" class="btn btn--outline" (click)="onReset()">
-          {{ 'reset' | translateApi }}
+          {{ translate('reset') }}
         </button>
         <button type="submit" class="btn btn--solid"
           [disabled]="_NormalPackagesReservationFacade.isStoring() ||_CheckPackagesReservationFacade.isLoading()">
           @if (!_NormalPackagesReservationFacade.isStoring() &&!_CheckPackagesReservationFacade.isLoading()) {
           <span>
-            {{ 'book_now' | translateApi }}
+            {{ translate('book_now') }}
           </span>
           }
           @if (_NormalPackagesReservationFacade.isStoring() || _CheckPackagesReservationFacade.isLoading()) {
           <span class="form__loading">
-            {{ 'in_progress' | translateApi }}
+            {{ translate('in_progress') }}
             <span class="dot-loader"></span>
           </span>
           }

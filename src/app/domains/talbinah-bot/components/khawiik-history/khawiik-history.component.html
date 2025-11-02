@@ -2,13 +2,13 @@
   <div class="khawiik-history__container" appAutoExactHeight="100" heightMode="max-height">
     <div class="khawiik-history__banner" [attr.aria-label]="'history banner'">
       <h4 class="khawiik-history__banner-title">
-        {{'this_week_statistics' | translateApi}}
+        {{translate('this_week_statistics')}}
       </h4>
 
       <div class="khawiik-history__mood-data">
         <div class="khawiik-history__mood-data-item khawiik-history__mood-data-item--current">
           <span class="khawiik-history__label">
-            {{ 'average_feelings_this_week' | translateApi }}
+            {{ translate('average_feelings_this_week') }}
           </span>
           <span class="khawiik-history__value">
             {{ 'معتدل' }}
@@ -17,7 +17,7 @@
 
         <div class="khawiik-history__mood-data-item khawiik-history__mood-data-item--last-listen">
           <span class="khawiik-history__label">
-            {{ 'last_listened' | translateApi }}
+            {{ translate('last_listened') }}
           </span>
           <span class="khawiik-history__value">
             {{ 'امس' }}
@@ -27,7 +27,7 @@
 
       <div class="khawiik-history__mood-last-subject">
         <span class="khawiik-history__label">
-          {{ 'most_discussed_topic' | translateApi }}
+          {{ translate('most_discussed_topic') }}
         </span>
         <span class="khawiik-history__value">
           {{ 'الغضب' }}
@@ -58,8 +58,8 @@
       @else if (filteredChats().length > 0) {
       <!-- Search -->
       <div class="khawiik-history__search">
-        <input type="text" class="khawiik-history__search-input" [placeholder]="'search2' | translateApi"
-          [(ngModel)]="searchQuery" [attr.aria-label]="'search2' | translateApi" />
+        <input type="text" class="khawiik-history__search-input" [placeholder]="translate('search2')"
+          [(ngModel)]="searchQuery" [attr.aria-label]="translate('search2')" />
       </div>
 
       <ul class="khawiik-history__list" role="list">

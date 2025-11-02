@@ -17,7 +17,7 @@ import { filter, map, Subject, takeUntil } from 'rxjs';
 import { PaymentPageTypeEnum, PaymentStateService, RoutePaymentInfo } from '../../../payments';
 import { ReservationDetailsFacade } from '../../services/reservation-details.facade';
 import { SessionDetailsModalComponent } from '../session-details-modal';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 interface DateRange {
   startDate: Date | null;
@@ -40,13 +40,17 @@ interface DateRange {
     ErrorStateCardComponent,
     EmptyStateCardComponent,
     PageLayoutHeaderComponent,
-    TranslateApiPipe
+    
   ],
   templateUrl: './appointments-listing.component.html',
   styleUrls: ['./appointments-listing.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppointmentsListingComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   private _activatedRoute = inject(ActivatedRoute);
   protected readonly facade = inject(ReservationsListFacade);
   private readonly _router = inject(Router);
@@ -232,3 +236,4 @@ export class AppointmentsListingComponent {
     return `${yyyy}-${mm}-${dd}`;
   }
 }
+

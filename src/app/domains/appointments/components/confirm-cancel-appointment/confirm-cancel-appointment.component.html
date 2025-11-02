@@ -6,12 +6,12 @@
     </div>
     <div class="confirm-cancel-appointment__status__content">
       <h2 class="confirm-cancel-appointment__status__title">
-        {{ 'are_you_sure_you_want_to_cancel_this_appointment' | translateApi }}
+        {{ translate('are_you_sure_you_want_to_cancel_this_appointment') }}
       </h2>
       <p class="confirm-cancel-appointment__status__subtitle">
         @if (this.calcPriceFacade.isCalculating()) {
         <span>
-          {{'loading_calc'|translateApi}}
+          {{translate('loading_calc')}}
         </span>
         <span class="dot-loader"></span>
 
@@ -27,12 +27,12 @@
   <div class="confirm-cancel-appointment--actions">
     <button id="cancel-btn" type="button" class="btn btn--outline" (click)="onCancel()"
       [disabled]="this.calcPriceFacade.isCalculating()">
-      {{ 'close' | translateApi }}
+      {{ translate('close') }}
     </button>
     <button [id]="'item-details'" type="submit" class="btn btn--solid" (click)="onConfirmCancelAppointment()"
-      [attr.aria-label]="'confirm' | translateApi" [disabled]="this.calcPriceFacade.isCalculating()">
+      [attr.aria-label]="translate('confirm')" [disabled]="this.calcPriceFacade.isCalculating()">
       <span class="btn__label">
-        {{ 'confirm' | translateApi }}
+        {{ translate('confirm') }}
       </span>
       @if (this.calcPriceFacade.isCalculating()) {
       <span class="dot-loader"></span>

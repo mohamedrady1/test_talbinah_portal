@@ -10,7 +10,7 @@ import {
 import { FaqDetailsComponent } from '../faq-details';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { IFaqsCategoryDto } from '../../dtos';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-setting-faqs',
   standalone: true,
@@ -22,13 +22,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     EmptyStateCardComponent,
     CommonModule,
     AutoExactHeightDirective,
-    TranslateApiPipe
+    
   ],
   templateUrl: './setting-faqs.component.html',
   styleUrls: ['./setting-faqs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingFaqsComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   private readonly faqsCategoriesFacade = inject(FaqsCategoriesFacade);
   protected readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private _ModalService = inject(ModalService);
@@ -94,3 +98,4 @@ export class SettingFaqsComponent implements OnInit {
   }
 
 }
+

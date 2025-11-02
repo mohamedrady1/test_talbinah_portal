@@ -34,15 +34,15 @@ import {
 } from '../../services';
 
 import { AppointmentCardSkeletonComponent } from '../../../appointments';
-import { AutoExactHeightDirective, Logger, TranslateApiPipe } from '../../../../common';
+import { AutoExactHeightDirective, Logger } from '../../../../common';
 import { ITechnicalSupportChatDto } from '../../dtos';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-transfer-to-department',
   standalone: true,
   imports: [
     TranslateModule,
-    TranslateApiPipe,
     CommonModule,
 
     AutoExactHeightDirective,
@@ -59,6 +59,14 @@ import { ITechnicalSupportChatDto } from '../../dtos';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TransferToDepartmentComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   @Input({ required: true }) data: { chatItem: ITechnicalSupportChatDto | null, isSupport?: boolean } = { chatItem: null };
   @Output() closed = new EventEmitter<{ isRequestSuccessed?: boolean } | void>();
 

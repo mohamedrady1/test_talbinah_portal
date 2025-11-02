@@ -1,17 +1,25 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-session-free',
   standalone: true,
-  imports: [TranslateModule, CommonModule, TranslateApiPipe],
+  imports: [TranslateModule, CommonModule],
   templateUrl: './session-free.component.html',
   styleUrls: ['./session-free.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SessionFreeComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   @Output() closed = new EventEmitter<{ confirmed: boolean } | void>();
 
   /** Handles Cancel button click */

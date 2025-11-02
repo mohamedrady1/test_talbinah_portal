@@ -6,10 +6,10 @@
     </div>
     <div class="confirm-subscription__status__content">
       <h2 class="confirm-subscription__status__title">
-        {{ statusTitleKey | translateApi }}
+        {{ translate(statusTitleKey) }}
       </h2>
       <p class="confirm-subscription__status__subtitle">
-        {{ statusSubtitleKey | translateApi }}
+        {{ translate(statusSubtitleKey) }}
       </p>
     </div>
   </div>
@@ -17,21 +17,21 @@
   <div class="confirm-subscription--actions">
     @if (confirmMode) {
     <button type="button" class="btn btn--outline" (click)="onCancel()" [disabled]="isSubmitting">
-      {{ 'cancel' | translateApi }}
+      {{ translate('cancel') }}
     </button>
     <button type="button" class="btn btn--solid" (click)="onConfirm()" [disabled]="isSubmitting">
-      @if (isSubmitting) { {{ 'in_progress' | translateApi }} } @else { {{ 'confirm' | translateApi }} }
+      @if (isSubmitting) { {{ translate('in_progress') }} } @else { {{ translate('confirm') }} }
     </button>
     } @else {
     <button id="cancel-btn" type="button" class="btn btn--outline" (click)="onCancel()">
-      {{ 'close' | translateApi }}
+      {{ translate('close') }}
     </button>
 
     @if (status && itemId) {
     <button [id]="'item-details'" type="button" class="btn btn--solid" (click)="goToDetails()"
       [attr.aria-busy]="'item-details'" [attr.aria-label]="'item-details'">
       <span class="confirm-subscription__button__label">
-        {{ 'general.statusDetails' | translateApi }}
+        {{ translate('general.statusDetails') }}
       </span>
     </button>
     }
@@ -39,7 +39,7 @@
     <button [id]="'item-details'" type="button" class="btn btn--solid" (click)="openUrgentAppointment()"
       [attr.aria-busy]="'item-details'" [attr.aria-label]="'item-details'">
       <span class="confirm-subscription__button__label">
-        {{ 'general.trackAppointment' | translateApi }}
+        {{ translate('general.trackAppointment') }}
       </span>
     </button>
     }
@@ -48,7 +48,7 @@
     <button [id]="'item-details'" type="button" class="btn btn--solid" (click)="retryPayment($event)"
       [attr.aria-busy]="'item-details'" [attr.aria-label]="'item-details'">
       <span class="confirm-subscription__button__label">
-        {{ 'general.repayButton' | translateApi }}
+        {{ translate('general.repayButton') }}
       </span>
     </button>
     }

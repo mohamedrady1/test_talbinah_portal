@@ -1,19 +1,24 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { IWelcomeCardConfig } from '../../models';
 import { Logger } from '../../../../common';
 import { TranslateModule } from '@ngx-translate/core';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-welcome-to-talbinah-community-card',
   standalone: true,
-  imports: [TranslateModule, TranslateApiPipe],
+  imports: [TranslateModule],
   templateUrl: './welcome-to-talbinah-community-card.component.html',
   styleUrls: ['./welcome-to-talbinah-community-card.component.scss']
 })
 export class WelcomeToTalbinahCommunityCardComponent {
   @Input() config!: IWelcomeCardConfig; // Use '!' for definite assignment, or provide a default
 
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   ngOnInit(): void {
     // Optional: Add a check to ensure config is provided
     if (!this.config) {

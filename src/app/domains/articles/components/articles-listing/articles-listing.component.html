@@ -3,7 +3,7 @@
     <section class="articles-listing-layout__program-cards">
       <header class="articles-listing-layout__header">
         <h2 class="title">
-          {{ headerConfig.title | translateApi }}
+          {{ headerConfig.title  }}
         </h2>
         @if (!isLoading() && !errorMessage()) {
         <div class="search-box-container">
@@ -27,7 +27,7 @@
       <div class="empty-state" aria-live="polite" aria-label="No articles found">
         <app-empty-state [config]="articlesEmptyState"></app-empty-state>
         @if (searchControl.value) {
-        <button (click)="handleClearSearch()">{{ 'delete' | translateApi }}</button>
+        <button (click)="handleClearSearch()">{{ translate('delete') }}</button>
         }
       </div>
       }

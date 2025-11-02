@@ -108,18 +108,18 @@
 
       <div class="general-form-wrapper__actions">
         <button id="schedule-appointment-btn" type="button" class="btn btn--outline" (click)="onCancel()">
-          <span class="btn__label">{{ 'cancel' | translateApi }}</span>
+          <span class="btn__label">{{ translate('cancel') }}</span>
         </button>
 
         <button id="submit-schedule-appointment-btn" type="submit" class="btn btn--solid"
-          [attr.aria-label]="'confirm' | translateApi" [disabled]="_LeaveRatingFacade.isSubmitting()"
+          [attr.aria-label]="translate('confirm')" [disabled]="_LeaveRatingFacade.isSubmitting()"
           [ngClass]="{'disabled': this._LeaveRatingFacade.isSubmitting()}">
           <span class="btn__label">
             @if (!_LeaveRatingFacade.isSubmitting()) {
-            {{ 'confirm' | translateApi }}
+            {{ translate('confirm') }}
             } @else {
             <div class="general-form-wrapper__loading" aria-live="polite">
-              {{ 'in_progress' | translateApi }}
+              {{ translate('in_progress') }}
               <span class="dot-loader"></span>
             </div>
             }

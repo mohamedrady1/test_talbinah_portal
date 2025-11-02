@@ -1,14 +1,14 @@
 <div class="card-header">
   <div class="card-header_title">
     <p>
-      {{config.title |translateApi}}
+      {{ translate(config.title) }}
     </p>
   </div>
   @if (config.isTabsEnabled) {
   <div class="card-header__tabs">
     @for (tab of config.tabs; track $index) {
     <div class="tab" [class.active]="selectedTab()?.id === tab.id" (click)="selectTab(tab)">
-      {{ tab.name | translateApi }}
+      {{ tab.name }}
     </div>
     }
   </div>
@@ -37,7 +37,7 @@
   @if (config.isAllButtonVisible) {
   <button class="card-header__all-button" (click)="allClicked.emit()" aria-label="View All">
     <p>
-      {{"all"|translateApi}}
+      {{ translate('all') }}
     </p>
     <svg width="14" height="14" class="scaleX-rtl" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path

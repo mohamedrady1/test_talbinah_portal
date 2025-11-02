@@ -7,17 +7,21 @@ import { Logger, StorageService } from '../../../../common';
 import { KhawiikBotRoutesEnum } from '../../../talbinah-bot/constants';
 import { ModalService, StorageKeys } from '../../../../shared';
 import { RoleGuardService, UserContextService } from '../../../authentication';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-rate-your-compatibility',
   standalone: true,
-  imports: [TranslateModule, TranslateApiPipe],
+  imports: [TranslateModule, ],
   templateUrl: './rate-your-compatibility.component.html',
   styleUrls: ['./rate-your-compatibility.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RateYourCompatibilityComponent implements OnInit, OnDestroy {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   @Input({ required: true }) doctorId!: number | string;
 
   private readonly platformId = inject(PLATFORM_ID);
@@ -94,3 +98,4 @@ export class RateYourCompatibilityComponent implements OnInit, OnDestroy {
     );
   }
 }
+

@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, inject } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CardLayoutType, IQuickAccessCardConfig } from '../../models';
 import { LazyLoadImageDirective } from '../../../../common/core/directives/lazyloading/lazy-load-image.directive';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-quick-access-card',
@@ -11,14 +11,21 @@ import { TranslateApiPipe } from '../../../../common/core/translations/pipes/tra
   imports: [
     TranslateModule,
     CommonModule,
-    LazyLoadImageDirective,
-    TranslateApiPipe
+    LazyLoadImageDirective
   ],
   templateUrl: './quick-access-card.component.html',
   styleUrls: ['./quick-access-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuickAccessCardComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   @Input({ required: true }) public config!: IQuickAccessCardConfig;
 
   public get cardClass(): string {

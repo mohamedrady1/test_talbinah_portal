@@ -1,6 +1,6 @@
 <form [formGroup]="form" class="send-gift-form" (ngSubmit)="onSubmit()">
   <label class="send-gift-form__label send-gift-form__label--phone" for="phone">
-    {{ 'mobile_number' | translateApi }}
+    {{ translate('mobile_number') }}
   </label>
 
   <div class="custom-input-wrapper custom-input-wrapper--with-icon custom-input-wrapper--icon-start country-code-input"
@@ -8,7 +8,7 @@
     <div class="select-wrapper relative">
       <p-select class="w-full md:w-56" [options]="allowedCountries() ?? []" [ngModel]="selectedCountryModel()"
         (ngModelChange)="selectedCountryModel.set($event)" [ngModelOptions]="{ standalone: true }" optionLabel="name"
-        [filter]="true" filterBy="name" [placeholder]="isLoadingCountries() ? undefined : ('code' | translateApi)"
+        [filter]="true" filterBy="name" [placeholder]="isLoadingCountries() ? undefined : ('code' )"
         [disabled]="isLoadingCountries()" [virtualScroll]="true" [virtualScrollItemSize]="42" [autoDisplayFirst]="false"
         appendTo="body">
         <ng-template #selectedItem let-selectedOption>
@@ -30,8 +30,8 @@
 
       <input type="number" class="form-control custom-input-wrapper__input" [formControlName]="'phone'" [placeholder]="
           !selectedCountryModel()
-            ? ('phone_should_select_code' | translateApi)
-            : ('phone_placeholder' | translateApi)
+            ? ('phone_should_select_code' )
+            : ('phone_placeholder' )
         " [disabled]="
           !selectedCountryModel() || isLoadingCountries() || (allowedCountries()?.length ?? 0) <= 0
         " autocomplete="tel" />
@@ -47,24 +47,24 @@
   @if (submitted && formControls['phone'].invalid) {
   <div class="send-gift-form__error">
     @if (formControls['phone'].hasError('required')) {
-    {{ 'phone_required' | translateApi }}
+    {{ translate('phone_required') }}
     } @else if (formControls['phone'].hasError('pattern')) {
-    {{ 'phone_pattern' | translateApi }}
+    {{ translate('phone_pattern') }}
     }
   </div>
   }
 
   <label class="send-gift-form__label send-gift-form__label--amount" for="amount">
-    <span>{{ 'enter_amount' | translateApi }}</span>
-    <span class="send-gift-form__label-currency">{{ 'amount_in_sar' | translateApi }}</span>
+    <span>{{ translate('enter_amount') }}</span>
+    <span class="send-gift-form__label-currency">{{ translate('amount_in_sar') }}</span>
   </label>
 
   <input id="amount" formControlName="amount" type="number" class="send-gift-form__input send-gift-form__input-cost"
-    placeholder="{{ 'sar_currency2' | translateApi }}" />
+    placeholder="{{ translate('sar_currency2') }}" />
 
   @if (submitted && formControls['amount'].invalid) {
   <div class="send-gift-form__error">
-    {{ 'enter_amount_required' | translateApi }}
+    {{ translate('enter_amount_required') }}
   </div>
   }
 
@@ -72,21 +72,21 @@
     <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="..." fill="#0E39B6" />
     </svg>
-    <span>{{ 'transfer_fee_notice' | translateApi }}</span>
+    <span>{{ translate('transfer_fee_notice') }}</span>
   </div>
 
   <div class="send-gift-form__actions">
     <button id="btn" type="submit" class="btn btn--solid" [disabled]="isLoading()"
-      [attr.aria-label]="'Change' | translateApi">
+      [attr.aria-label]="'Change' ">
       <span class="btn__label">
         @if (isLoading()) {
         <div class="send-gift-form__actions__loading" aria-label="Submit in progress">
-          {{ 'in_progress' | translateApi }}
+          {{ translate('in_progress') }}
           <span class="dot-loader"></span>
         </div>
         }
         @if (!isLoading()) {
-        {{ 'send' | translateApi }}
+        {{ translate('send') }}
         }
       </span>
     </button>

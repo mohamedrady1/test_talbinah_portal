@@ -8,7 +8,7 @@ import { UploadAppsHeaderConfig } from '../../../urgent-appointment';
 import { BookApoointmentPopupComponent, ToggleFavoriteDoctorFacade } from '../../../book-appointment';
 import { FavoriteDoctorsFacade } from '../../services';
 import { RoleGuardService } from '../../../authentication';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-doctor-card-for-favourite',
@@ -17,13 +17,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     TranslateModule,
     CommonModule,
     NgOptimizedImage,
-    TranslateApiPipe
+    
   ],
   templateUrl: './doctor-card-for-favourite.component.html',
   styleUrls: ['./doctor-card-for-favourite.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DoctorCardForFavouriteComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   // Use a union type for item to be explicit about expected types.
   @Input({ required: true }) item!: IGlobalDoctorContactInfoModel | IDoctorItem | any;
   @Input() isUploadApp: boolean = false;
@@ -130,3 +134,4 @@ export class DoctorCardForFavouriteComponent {
     }
   }
 }
+

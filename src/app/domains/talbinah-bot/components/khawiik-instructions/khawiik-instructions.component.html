@@ -3,10 +3,10 @@
         <!-- Header Section -->
         <div class="khawiik-instructions__header">
             <p class="khawiik-instructions__title">
-                {{ keys.INSTRUCTIONS.TITLE | translateApi }}
+                {{ translate(keys.INSTRUCTIONS.TITLE) }}
             </p>
             <p class="khawiik-instructions__subtitle">
-                {{ keys.INSTRUCTIONS.SUBTITLE | translateApi }}
+                {{ translate(keys.INSTRUCTIONS.SUBTITLE) }}
             </p>
         </div>
 
@@ -15,10 +15,10 @@
             @for (card of instructionCards; track card.id) {
             <div class="khawiik-instructions__card">
                 <p class="khawiik-instructions__card-title">
-                    {{ card.titleKey | translateApi }}
+                    {{ translate(card.titleKey) }}
                 </p>
                 <p class="khawiik-instructions__card-subtitle">
-                    {{ card.subtitleKey | translateApi }}
+                    {{ translate(card.subtitleKey) }}
                 </p>
             </div>
             }
@@ -27,8 +27,8 @@
     <!-- Actions Section (Sticky) -->
     <div class="khawiik-instructions__actions khawiik-instructions__actions--sticky">
         <button type="button" class="khawiik-instructions__continue" (click)="onContinue()"
-            [attr.aria-label]="keys.INSTRUCTIONS.CONTINUE | translateApi">
-            {{ keys.INSTRUCTIONS.CONTINUE | translateApi }}
+            [attr.aria-label]="translate(keys.INSTRUCTIONS.CONTINUE)">
+            {{ translate(keys.INSTRUCTIONS.CONTINUE) }}
         </button>
     </div>
 </div>

@@ -1,12 +1,12 @@
 <div class="identity-form">
   <div class="identity-form__content">
-    <div class="identity-form__title">{{'start_with_comfortable_identity' | translateApi}}</div>
+    <div class="identity-form__title">{{ translate('start_with_comfortable_identity') }}</div>
     <form [formGroup]="formGroup" class="identity-form__form">
       <div class="form-shimmer-wrapper" [class.shimmer-active]="isSubmittingWithShimmer()">
 
         <div class="identity-form__input-group">
           <label class="input-group__label" for="defaultName">
-            {{'default_name' | translateApi}}
+            {{ translate('default_name') }}
           </label>
           <div class="custom-input-wrapper" [ngClass]="{
             'has-error': formGroup.controls['defaultName'].invalid && formGroup.controls['defaultName'].touched
@@ -20,20 +20,20 @@
             </svg>
 
             <input id="defaultName" type="text" formControlName="defaultName"
-              placeholder="{{'choose_suitable_name' | translateApi}}" class="form-control custom-input-wrapper__input"
+              placeholder="{{ translate('choose_suitable_name') }}" class="form-control custom-input-wrapper__input"
               autocomplete="off" />
           </div>
           @if(formGroup.controls['defaultName'].invalid && formGroup.controls['defaultName'].touched){
           <div class="form-field__error">
             <span>
-              {{"please_choose_a_default_name" | translateApi}}
+              {{ translate("please_choose_a_default_name") }}
             </span>
           </div>}
         </div>
 
         <div class="identity-form__input-group">
           <label class="input-group__label input-group__label--appearance">
-            {{'appearance_preference_talbinah' | translateApi}}
+            {{ translate('appearance_preference_talbinah') }}
           </label>
           @if(_IdentityFormFacade.isLoadingEmojis()){
           <div class="shimmer__list">
@@ -60,7 +60,7 @@
           }
           @if (emojiError()) {
           <small class="error">
-            {{'please_choose_an_avatar_that_represents_you' | translateApi}}
+            {{ translate('please_choose_an_avatar_that_represents_you') }}
           </small>
           }
         </div>
@@ -68,15 +68,15 @@
         <div class="identity-form__input-group">
           <div class="input-group__interests-header">
             <span class="interests-header__title">
-              {{ 'your_interests' | translateApi }}
+              {{ translate('your_interests') }}
             </span>
             <span class="interests-header__toggle" (click)="toggleSelectAllInterests()">
               <input type="checkbox" [checked]="isAllInterestsSelected()"
-                [attr.aria-label]="isAllInterestsSelected()? ('unselect_all' | translateApi): ('select_all' | translateApi)"
+                [attr.aria-label]="isAllInterestsSelected()? (translate('unselect_all')): (translate('select_all'))"
                 readonly />
               {{ isAllInterestsSelected()
-              ? ('unselect_all' | translateApi)
-              : ('select_all' | translateApi) }}
+              ? (translate('unselect_all'))
+              : (translate('select_all')) }}
             </span>
           </div>
           <div class="input-group__interests">
@@ -117,7 +117,7 @@
           }
           @if (interestsError()) {
           <small class="error">
-            {{'please_select_at_least_one_interest' | translateApi}}
+            {{ translate('please_select_at_least_one_interest') }}
           </small>
           }
         </div>

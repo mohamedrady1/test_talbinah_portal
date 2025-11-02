@@ -37,7 +37,7 @@ import { NewResetPasswordComponent } from '../new-reset-password';
 import { OtpMethodSelectionComponent } from '../otp-method-selection';
 import { NewOtpVerificationComponent } from '../new-otp-verification';
 import { Router } from '@angular/router';
-import { TranslateApiPipe } from '../../../../../common/core/translations/pipes';
+import { TranslationsFacade } from '../../../../../common/core/translations/services';
 
 export interface NewLoginPasswordModalData {
     icon: string;
@@ -53,14 +53,21 @@ export interface NewLoginPasswordModalData {
         FormsModule,
         ReactiveFormsModule,
         TranslateModule,
-        SvgIconComponent,
-        TranslateApiPipe
+        SvgIconComponent
     ],
     templateUrl: './new-login-password.component.html',
     styleUrls: ['./new-login-password.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewLoginPasswordComponent implements OnInit, OnDestroy {
+    private readonly translationsFacade = inject(TranslationsFacade);
+    
+    protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+    
+    protected translate(key: string): string {
+        return this.translationsFacade.translate(key);
+    }
+    
     private readonly _StorageService = inject(StorageService);
     private readonly nav = useNavigation();
     private readonly platformId = inject(PLATFORM_ID);

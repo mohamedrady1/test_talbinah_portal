@@ -8,7 +8,7 @@
                 <button type="button" class="complaints-list__filter-btn"
                     [class.complaints-list__filter-btn--active]="activeFilter() === filter.value"
                     (click)="onFilterChange(filter.value)">
-                    {{ filter.label | translateApi }}
+                    {{ filter.label  }}
                 </button>
                 }
             </div>
@@ -17,8 +17,8 @@
                 <app-local-search [searchTerm]="searchTerm()" (searchChange)="onSearchChange($event)"
                     (search)="onReportClick()"></app-local-search>
                 <button type="button" class="complaints-list__add-complaint-button" (click)="onReportClick()"
-                    [attr.aria-label]="'report_complaint' | translateApi">
-                    {{ 'report_complaint' | translateApi }}
+                    [attr.aria-label]="'report_complaint' ">
+                    {{ translate('report_complaint') }}
                 </button>
             </div>
 

@@ -4,20 +4,24 @@ import { ToggleFavoriteArticleFacade } from '../../../domains/articles/services'
 import { IGlobalDoctorContactInfoModel, Logger, NavigationIntent, useNavigation } from '../../../common';
 import { IDoctorItem } from '../../interfaces';
 import { IGlobalReservationModel } from '../../../domains/appointments/models';
-import { TranslateApiPipe } from '../../../common/core/translations';
+import { TranslationsFacade } from '../../../common/core/translations/services';
 
 @Component({
   selector: 'app-doctor-card-for-details',
   standalone: true,
   imports: [
     TranslateModule,
-    TranslateApiPipe
   ],
   templateUrl: './doctor-card-for-details.component.html',
   styleUrls: ['./doctor-card-for-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DoctorCardForDetailsComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   @Input({ required: false }) item!: IGlobalDoctorContactInfoModel;
   @Input({ required: false }) reservation!: IGlobalReservationModel;
   @Input({ required: false }) type!: string;

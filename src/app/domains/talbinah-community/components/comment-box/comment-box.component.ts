@@ -24,7 +24,7 @@ import { Logger, StorageService } from '../../../../common';
 import { TalbinahCommunityRoutesEnum } from '../../constants';
 import { Router } from '@angular/router';
 import { RoleGuardService, UserContextService } from '../../../authentication';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-comment-box',
   standalone: true,
@@ -33,7 +33,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     EmojiPickerComponent,
     ClickOutsideDirective,
     TranslateModule,
-    TranslateApiPipe
+    
   ],
   templateUrl: './comment-box.component.html',
   styleUrls: ['./comment-box.component.scss'],

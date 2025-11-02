@@ -43,7 +43,7 @@ import { Logger, StorageService, useNavigation } from '../../../../common';
 import { emergencySpecialties } from '../../constants';
 import { Router } from '@angular/router';
 import { RoleGuardService, UserContextService } from '../../../authentication';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 export const ChooseSpecialityEmptyState: EmptyStateConfig = {
   imageUrl: 'images/not-found/UrgentAppointment/specialities.svg',
@@ -109,13 +109,17 @@ export function getSessionTypeError(onRetry?: () => void): ErrorStateConfig {
     AutoExactHeightDirective,
     EmptyStateComponent,
     ErrorStateComponent,
-    TranslateApiPipe
   ],
   templateUrl: './book-urgent-appointment.component.html',
   styleUrls: ['./book-urgent-appointment.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookUrgentAppointmentComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   private readonly nav = useNavigation();
   private readonly _router = inject(Router);
   private readonly fb = inject(FormBuilder);

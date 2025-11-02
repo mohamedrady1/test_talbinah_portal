@@ -5,10 +5,10 @@
       @if (!showIdentityForm()) {
       <div class="psychological-society__banner">
         <div class="psychological-society__banner-title">
-          {{'talbinah_community' | translateApi}}
+          {{'talbinah_community' }}
         </div>
         <div class="psychological-society__banner-subtitle">
-          {{'talbinah_community_description' | translateApi}}
+          {{'talbinah_community_description' }}
         </div>
       </div>
       <div class="psychological-society__form-section">
@@ -26,10 +26,10 @@
       <div class="psychological-society__right-side">
         <div class="psychological-society__banner">
           <div class="psychological-society__banner-title">
-            {{'talbinah_community' | translateApi}}
+            {{'talbinah_community' }}
           </div>
           <div class="psychological-society__banner-subtitle">
-            {{'talbinah_community_description' | translateApi}}
+            {{'talbinah_community_description' }}
           </div>
         </div>
         <app-talbinah-identity-form class="psychological-society__form-container"></app-talbinah-identity-form>
@@ -44,13 +44,13 @@
   <div class="psychological-society__form-actions">
     <button type="submit" class="psychological-society__submit-btn"
       [class.psychological-society__submit-btn--disabled]="_IdentityFormFacade.isLoadingSubmit()" (click)="onSubmit()"
-      [attr.aria-label]="'create_identity' | translateApi" [disabled]="_IdentityFormFacade.isLoadingSubmit()">
+      [attr.aria-label]="'create_identity' " [disabled]="_IdentityFormFacade.isLoadingSubmit()">
       @if (!_IdentityFormFacade.isLoadingSubmit()) {
-      {{'create_identity' | translateApi}}
+      {{'create_identity' }}
       <app-svg-icon name="arrow-right" />
       } @else {
       <div class="psychological-society__form-actions--loading" aria-live="polite">
-        {{ 'in_progress' | translateApi }}
+        {{ translate('in_progress') }}
         <span class="psychological-society__loading-indicator"></span>
       </div>
       }
@@ -61,13 +61,13 @@
   <div class="psychological-society__form-actions">
     <button type="submit" class="psychological-society__submit-btn"
       [class.psychological-society__submit-btn--disabled]="_IdentityFormFacade.isLoadingSubmit()" (click)="onSubmit()"
-      [attr.aria-label]="'create_identity' | translateApi" [disabled]="_IdentityFormFacade.isLoadingSubmit()">
+      [attr.aria-label]="'create_identity' " [disabled]="_IdentityFormFacade.isLoadingSubmit()">
       @if (!_IdentityFormFacade.isLoadingSubmit()) {
-      {{'create_identity' | translateApi}}
+      {{'create_identity' }}
       <app-svg-icon name="arrow-right" />
       } @else {
       <div class="psychological-society__form-actions--loading" aria-live="polite">
-        {{ 'in_progress' | translateApi }}
+        {{ translate('in_progress') }}
         <span class="psychological-society__loading-indicator"></span>
       </div>
       }

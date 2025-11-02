@@ -1,22 +1,25 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { EmptyStateConfig } from '../empty-state-card';
-import { TranslateApiPipe } from '../../../common/core/translations/pipes/translate-api.pipe';
-
+import { TranslationsFacade } from '../../../common/core/translations/services';
 @Component({
   selector: 'app-empty-state',
   standalone: true,
   imports: [
     TranslateModule,
     CommonModule,
-    TranslateApiPipe
   ],
   templateUrl: './empty-state.component.html',
   styleUrls: ['./empty-state.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EmptyStateComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   @Input({ required: true }) config!: EmptyStateConfig;
   @Output() action = new EventEmitter<void>();
 

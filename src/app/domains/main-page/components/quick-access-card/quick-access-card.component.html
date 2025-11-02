@@ -1,14 +1,14 @@
 <div [ngClass]="cardClass">
   <div [ngClass]="contentClass">
     <p class="card__content-title" [ngStyle]="{ color: config.titleColor || '#006a82' }"
-      [attr.aria-label]="config.title | translateApi">
-      {{ config.title | translateApi }}
+      [attr.aria-label]="translate(config.title)">
+      {{ translate(config.title) }}
     </p>
-    <p class="card__content-description" [attr.aria-label]="(config.description ?? '') | translateApi">
-      {{ (config.description ?? '') | translateApi }}
+    <p class="card__content-description" [attr.aria-label]="translate(config.description ?? '')">
+      {{ translate(config.description ?? '') }}
     </p>
   </div>
   <div class="card__image">
-    <img appLazyLoadImage="{{ config.img }}" [alt]="config.title | translateApi" ngOptimizedImage priority />
+    <img appLazyLoadImage="{{ config.img }}" [alt]="translate(config.title)" ngOptimizedImage priority />
   </div>
 </div>

@@ -53,10 +53,10 @@
     }
 
     <p class="podcast-card__meta">
-      {{ 'in' | translateApi }}
+      {{ translate('in') }}
       <span class="podcast-card__name">
-        {{ 'talbinah_podcast' | translateApi }}</span>
-      {{ 'with' | translateApi }}
+        {{ translate('talbinah_podcast') }}</span>
+      {{ translate('with') }}
       <span class="podcast-card__guest">{{ podcast.doctor_name }}</span>
       •
       {{ podcast.created_at | date: 'EEEE - d MMMM' : undefined : currentLang }}
@@ -73,9 +73,9 @@
         </svg>
         <span class="podcast-card__duration">
           @if (!review) {
-          {{ podcast.duration }} {{ 'min' | translateApi }}
+          {{ podcast.duration }} {{ translate('min') }}
           }@else {
-          {{'play' | translateApi}}
+          {{'play' }}
           }
         </span>
 

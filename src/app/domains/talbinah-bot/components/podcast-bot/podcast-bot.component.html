@@ -18,7 +18,7 @@
                 fill="#0E39B6" />
             </svg>
             <span class="podcast-card__duration">{{podcastDetails.duration}}
-              {{'min'|translateApi}}</span>
+              {{ translate('min') }}</span>
           </button>
           }
         </div>
@@ -29,10 +29,10 @@
       </div>
       <div class="podcast-card__content-row">
         <p class="podcast-card__information">
-          {{'in'|translateApi}} <span class="podcast-card__name">{{'talbinah_podcast'|translateApi}}
+          {{ translate('in') }} <span class="podcast-card__name">{{ translate('talbinah_podcast') }}
           </span>
           @if(podcastDetails?.doctor_name){
-          {{'with'|translateApi}} <span class="podcast-card__guest">{{podcastDetails?.doctor_name}}</span>
+          {{ translate('with') }} <span class="podcast-card__guest">{{podcastDetails?.doctor_name}}</span>
           }
           •<br>
           {{podcastDetails.date}}

@@ -12,14 +12,14 @@
                 {{item?.number_of_reservations}}
               </span>
               <span class="label-session">
-                {{'sessions' | translateApi}}
+                {{'sessions' }}
               </span>
             </div>
             <div class="sessions-count">
               <span class="count">
-                {{'discount'|translateApi}}
+                {{ translate('discount') }}
                 {{item?.discount || 0}}
-                {{'riyals' | translateApi}}
+                {{'riyals' }}
               </span>
             </div>
           </div>
@@ -28,7 +28,7 @@
               {{item?.price}}
             </span>
             <span class="label-session">
-              {{'riyals' | translateApi}}
+              {{'riyals' }}
             </span>
           </div>
         </div>
@@ -47,9 +47,9 @@
             </svg>
           </span>
           <span>
-            {{'reservations_validate'|translateApi}}
+            {{ translate('reservations_validate') }}
             {{item?.package_period || 0}}
-            {{'days2' | translateApi}}
+            {{'days2' }}
           </span>
         </div>
       </div>
@@ -59,11 +59,11 @@
 
     <div class="available-packages-selection__actions">
       <button type="button" class="btn btn--outline" (click)="onCloseClick()">
-        {{ 'close' | translateApi }}
+        {{ translate('close') }}
       </button>
       <button type="submit" class="btn" [class.btn--solid]="selectedItem()" [class.btn--ghost]="!selectedItem()"
         (click)="continue()">
-        {{ selectedItem() ? ('confirm' | translateApi) : ('skip' | translateApi) }}
+        {{ selectedItem() ? ('confirm' ) : ('skip' ) }}
       </button>
     </div>
   </div>

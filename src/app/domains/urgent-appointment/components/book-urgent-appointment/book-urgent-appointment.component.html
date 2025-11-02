@@ -16,7 +16,7 @@
               <div class="appointment-form__groups">
                 <div class="appointment-form__group">
                   <label for="Speciality" class="appointment-form__label">
-                    {{ 'select_specialty' | translateApi }}
+                    {{ translate('select_specialty') }}
                   </label>
                   <div class="appointment-form__control-wrapper">
                     @if (!isLoadingEmergencySpecialties()) {
@@ -50,14 +50,14 @@
                   @if (appointmentForm.get('Speciality')?.invalid &&
                   appointmentForm.get('Speciality')?.touched) {
                   <span class="appointment-form__hint" role="alert">
-                    {{ 'speciality_required' | translateApi }}
+                    {{ translate('speciality_required') }}
                   </span>
                   }
                 </div>
 
                 <div class="appointment-form__group">
                   <label for="duration" class="appointment-form__label">
-                    {{ 'appointment_duration' | translateApi }}
+                    {{ translate('appointment_duration') }}
                   </label>
                   <div class="appointment-form__control-wrapper appointment-form__control-wrapper--duration-options">
                     @if(!this.appointmentForm.get('Speciality')?.value){
@@ -78,7 +78,7 @@
                       <input type="radio" [value]="duration.id" formControlName="Duration"
                         [attr.aria-label]="duration.duration" class="appointment-form__radio-input" />
                       <span class="appointment-form__radio-text">
-                        {{ duration.duration }} {{'min' | translateApi}}
+                        {{ duration.duration }} {{translate('min')}}
                       </span>
                     </label>
                     }
@@ -99,14 +99,14 @@
                   </div>
                   @if (appointmentForm.get('Duration')?.invalid && appointmentForm.get('Duration')?.touched) {
                   <span class="appointment-form__error-message" role="alert">
-                    {{ 'please_select_reservation_duration' | translateApi }}
+                    {{ translate('please_select_reservation_duration') }}
                   </span>
                   }
                 </div>
 
                 <div class="appointment-form__group">
                   <label for="problemType" class="appointment-form__label">
-                    {{ 'select_the_problem' | translateApi }}
+                    {{ translate('select_the_problem') }}
                   </label>
                   <div class="appointment-form__control-wrapper appointment-form__control-wrapper--duration-options">
                     @if(!this.appointmentForm.get('Speciality')?.value){
@@ -147,14 +147,14 @@
                   </div>
                   @if (appointmentForm.get('ProblemType')?.invalid && appointmentForm.get('ProblemType')?.touched) {
                   <span class="appointment-form__error-message" role="alert">
-                    {{ 'problem_type_error' | translateApi }}
+                    {{ translate('problem_type_error') }}
                   </span>
                   }
                 </div>
 
                 <div class="appointment-form__group">
                   <label for="CommunicationType" class="appointment-form__label">
-                    {{ 'session_type' | translateApi }}
+                    {{ translate('session_type') }}
                   </label>
                   <div class="appointment-form__control-wrapper">
                     @if (!isLoadingCommunicationTypes()) {
@@ -187,7 +187,7 @@
                   @if (appointmentForm.get('CommunicationType')?.invalid &&
                   appointmentForm.get('CommunicationType')?.touched) {
                   <span class="appointment-form__error-message" role="alert">
-                    {{ 'session_type_error' | translateApi }}
+                    {{ translate('session_type_error') }}
                   </span>
                   }
                 </div>
@@ -196,13 +196,13 @@
               @if(!isCheckingReservation()) {
               <div class="appointment-form__actions">
                 <button type="submit" class="appointment-form__submit-button btn btn--solid" [disabled]="isLoading()"
-                  [attr.aria-label]="'book_now' | translateApi">
+                  [attr.aria-label]="translate('book_now')">
                   <!-- @if (isLoading()) {
                   <div class="appointment-form__loading" aria-label="Booking in progress">
                     {{ 'UrgentAppointment.BookingInProgress' | translate }}
                   </div>
                   }@else { -->
-                  {{ 'book_now' | translateApi }}
+                  {{ translate('book_now') }}
                   <!-- } -->
                 </button>
               </div>
@@ -212,18 +212,18 @@
           <div class="book-urgent-appointment-layout__banner"
             [class.book-urgent-appointment-layout__banner--hidden-on-mobile]="showFormOnMobile">
             <div class="title">
-              {{ 'urgent_appointment_booking_title' | translateApi }}
+              {{ translate('urgent_appointment_booking_title') }}
             </div>
             <div class="description">
-              {{ 'urgent_appointment_booking_subtitle' | translateApi }}
+              {{ translate('urgent_appointment_booking_subtitle') }}
             </div>
             <img [src]="'images/urgent-appointment/young-man.png'" [alt]="'Urgent Appointment Image'" loading="lazy"
               width="100%" height="auto" decoding="async" fetchpriority="low"
               class="book-urgent-appointment-layout__img" />
             @if (!showFormOnMobile) {
             <button type="button" class="book-urgent-appointment-layout__next-button btn btn--solid"
-              (click)="toggleFormVisibility()" [attr.aria-label]="'next' | translateApi">
-              {{ 'next' | translateApi }}
+              (click)="toggleFormVisibility()" [attr.aria-label]="translate('next')">
+              {{ translate('next') }}
             </button>
             }
           </div>

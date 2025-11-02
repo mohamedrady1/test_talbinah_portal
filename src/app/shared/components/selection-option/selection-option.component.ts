@@ -10,7 +10,7 @@ import {
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { Logger } from '../../../common';
-
+import { TranslationsFacade } from '../../../common/core/translations/services';
 export interface ISelectionOptionConfig {
   id: number | string;
   name: string;
@@ -28,6 +28,11 @@ export interface ISelectionOptionConfig {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectionOptionComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   @Input({ required: true }) config!: ISelectionOptionConfig;
   @Input() iconOnly = false;
   @Input() isIconStart = false;

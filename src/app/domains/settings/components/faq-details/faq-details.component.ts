@@ -10,7 +10,7 @@ import {
   FaqsSearchConfig
 } from '../../configs';
 import { IFaqsCategoryDto } from '../../dtos';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-faq-details',
@@ -21,13 +21,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     ErrorStateCardComponent,
     EmptyStateCardComponent,
     AutoExactHeightDirective,
-    TranslateApiPipe
+    
   ],
   templateUrl: './faq-details.component.html',
   styleUrls: ['./faq-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FaqDetailsComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   @Input() item!: IFaqsCategoryDto;
   @Input() categoryId!: number;
 
@@ -91,3 +95,4 @@ export class FaqDetailsComponent implements OnInit {
     return this.selectedFaqId() === faqId;
   }
 }
+

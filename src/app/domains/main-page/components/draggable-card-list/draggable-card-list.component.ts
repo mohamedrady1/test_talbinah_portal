@@ -8,7 +8,7 @@ import { HOME_PAGE_CARD_CONFIGS } from '../../constants';
 import { IQuickAccessCardConfig } from '../../models';
 import { TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 export const PinedEmptyState: EmptyStateConfig = {
   imageUrl: 'images/not-found/home/pined.svg',
@@ -22,7 +22,6 @@ export const PinedEmptyState: EmptyStateConfig = {
   imports: [
     TranslateModule,
     CommonModule,
-    TranslateApiPipe,
     AutoExactHeightDirective,
 
     DraggableCardComponent,
@@ -33,6 +32,14 @@ export const PinedEmptyState: EmptyStateConfig = {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DraggableCardListComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   public pinnedCards: IQuickAccessCardConfig[] = [];
   public availableCards: IQuickAccessCardConfig[] = [];
 

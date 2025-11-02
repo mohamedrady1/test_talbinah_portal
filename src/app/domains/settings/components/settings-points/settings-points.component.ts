@@ -16,13 +16,13 @@ import { SvgIconComponent } from "../../../../shared";
 import { SettingsRewardsComponent } from '../settings-rewards';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-settings-points',
   standalone: true,
   imports: [
-    TranslateApiPipe,
+    
     EmptyStateCardComponent,
     ErrorStateCardComponent,
     LoadingShimmerComponent,
@@ -34,6 +34,10 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsPointsComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   private readonly servicePointsGiftsFacade = inject(ServicePointsGiftsFacade);
   private readonly pointsRecords = inject(WalletPointsRecordsFacade);
   private readonly pointsFacade = inject(PointsFacade);
@@ -141,3 +145,4 @@ export class SettingsPointsComponent {
     }
   }
 }
+

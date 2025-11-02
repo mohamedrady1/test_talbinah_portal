@@ -1,8 +1,8 @@
 <!-- BEM Block: discount-card -->
-<article class="discount-card" role="region" [attr.aria-label]="'bookAppointment.discountCardTitle' | translateApi">
+<article class="discount-card" role="region" [attr.aria-label]="translate('bookAppointment.discountCardTitle')">
   <!-- Element: discount-card__label -->
   <div class="discount-card__label">
-    {{"discount_code2"|translateApi}}
+    {{translate("discount_code2")}}
   </div>
 
   <!-- Element: discount-card__content -->
@@ -17,7 +17,7 @@
 
       <!-- Element: discount-card__code (clickable area for copying) -->
       <!-- Tooltip for feedback on copy -->
-      <app-tooltip [text]="'copied' | translateApi" [position]="Position.TOP" [trigger]="trigger.CLICK">
+      <app-tooltip [text]="translate('copied')" [position]="Position.TOP" [trigger]="trigger.CLICK">
         <div class="discount-card__code" (click)="copyToClipboard()" role="button"
           [attr.aria-label]="'Copy discount code ' + (item?.coupon ?? 'N/A')">
           <!-- Safely display coupon code, default to empty string if null/undefined -->

@@ -12,7 +12,7 @@ import { ModalService, SvgIconComponent } from '../../../../shared';
 import { INotificationDto } from "../../dtos";
 import { NotificationsSettingsModalComponent } from '../notifications-settings-modal';
 import { Router } from '@angular/router';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 interface FilterOption {
   label: string;
@@ -30,12 +30,16 @@ interface FilterOption {
     ClickOutsideDirective,
     MyPsychologicalSocietyNotificationCardComponent,
     SvgIconComponent,
-    TranslateApiPipe
+    
   ],
   templateUrl: './notifications-list.component.html',
   styleUrls: ['./notifications-list.component.scss']
 })
 export class NotificationsListComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   protected readonly facade = inject(NotificationsFacade);
   private readonly _modalService = inject(ModalService);
   private readonly platformId = inject(PLATFORM_ID);
@@ -143,3 +147,4 @@ export class NotificationsListComponent implements OnInit {
     }
   }
 }
+

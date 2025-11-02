@@ -2,27 +2,27 @@
   <div class="draggable-card__content">
     <h3 [id]="generateElementId('title')" class="draggable-card__title"
       [ngStyle]="{ 'color': config.titleColor || '#006a82' }">
-      {{ config.title | translateApi }}
+      {{ translate(config.title) }}
     </h3>
     <!-- @if (config.description) {
     <p class="draggable-card__description" [id]="generateElementId('description')">
-      {{ config.description | translateApi }}
+      {{ translate(config.description) }}
     </p>
     } -->
   </div>
-  <img appLazyLoadImage="{{ config.img }}" [alt]="config.title | translateApi" class="draggable-card__image"
+  <img appLazyLoadImage="{{ config.img }}" [alt]="translate(config.title)" class="draggable-card__image"
     ngOptimizedImage priority />
 
   @if (config.isPinned) {
   @if (enableAllowUnPinning()) {
   <button class="draggable-card__action-button draggable-card__action-button--remove" (click)="onUnpinClick()"
-    [attr.aria-label]="'home.RemoveFromPinned' | translateApi" [title]="'home.RemoveFromPinned' | translateApi">
+    [attr.aria-label]="translate('home.RemoveFromPinned')" [title]="translate('home.RemoveFromPinned')">
     &minus;
   </button>
   }
   } @else {
   <button class="draggable-card__action-button draggable-card__action-button--add" (click)="onPinClick()"
-    [attr.aria-label]="'home.AddToPinned' | translateApi" [title]="'home.AddToPinned' | translateApi"
+    [attr.aria-label]="translate('home.AddToPinned')" [title]="translate('home.AddToPinned')"
     [disabled]="!allowPinning()" [class.draggable-card__action-button--disabled]="!allowPinning()">
     &plus;
   </button>

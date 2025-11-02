@@ -9,15 +9,23 @@ import { ChatHistoryFacade } from '../../services';
 import { ChatEventsService } from '../../services/chat-events.service';
 import { Logger } from '../../../../common';
 import { KhawiikRenameComponent } from '../khawiik-rename';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-chat-menu',
   standalone: true,
-  imports: [CommonModule, ClickOutsideDirective, TranslateModule, SvgIconComponent, FormsModule, TranslateApiPipe],
+  imports: [CommonModule, ClickOutsideDirective, TranslateModule, SvgIconComponent, FormsModule],
   templateUrl: './chat-menu.component.html',
   styleUrls: ['./chat-menu.component.scss']
 })
 export class ChatMenuComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   @Input() chatItem: any;
   @Input() actionIconName!: string;
   @Output() deleteAction: EventEmitter<any> = new EventEmitter();

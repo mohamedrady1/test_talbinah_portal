@@ -13,7 +13,7 @@ import { GovernmentAgenciesDoctorsFacade } from '../../services';
 import { AutoExactHeightDirective, CardType } from '../../../../common';
 import { EmptyStateCardComponent, ErrorStateCardComponent } from '../../../../shared';
 import { governmentAgenciesEmptyConfig, governmentAgenciesErrorConfig } from '../../configs';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-government-agencies-doctors',
@@ -25,13 +25,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     ErrorStateCardComponent,
     EmptyStateCardComponent,
     AutoExactHeightDirective,
-    TranslateApiPipe
+    
   ],
   templateUrl: './government-agencies-doctors.component.html',
   styleUrls: ['./government-agencies-doctors.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GovernmentAgenciesDoctorsComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   readonly facade = inject(GovernmentAgenciesDoctorsFacade);
 
   protected cardTypes = CardType;
@@ -63,3 +67,4 @@ export class GovernmentAgenciesDoctorsComponent {
     this.facade.updateFilters({ search: '' });
   }
 }
+

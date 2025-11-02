@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, PLATFORM_ID, sign
 import { WalletFacade } from '../../../settings/services/wallet.facade';
 import { AutoExactHeightDirective, Logger } from '../../../../common';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 import { MovementsFacade } from '../../../settings/services/movements.facade';
 import { WalletCardComponent } from '../../../settings/components/wallet-card/wallet-card.component';
 import { MovementItem } from '../../../settings';
@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [
     CommonModule,
-    TranslateApiPipe,
+    
     WalletLoadingComponent,
     ErrorStateCardComponent,
     EmptyStateCardComponent,
@@ -36,6 +36,10 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WalletComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   private readonly walletFacade = inject(WalletFacade);
   private readonly movementsFacade = inject(MovementsFacade);
   private readonly modalService = inject(ModalService);
@@ -116,3 +120,4 @@ export class WalletComponent {
     }
   }
 }
+

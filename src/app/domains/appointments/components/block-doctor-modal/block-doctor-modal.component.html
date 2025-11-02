@@ -7,16 +7,16 @@
     <div class="block-doctor-modal__status__content">
       <h2 class="block-doctor-modal__status__title">
         @if (doctor?.is_blocked) {
-        {{ 'block_doctor_confirmation' | translateApi }}
+        {{ translate('block_doctor_confirmation') }}
         }@else {
-        {{ 'block_doctor_confirmation' | translateApi }}
+        {{ translate('block_doctor_confirmation') }}
         }
       </h2>
       <p class="block-doctor-modal__status__subtitle">
         @if (doctor?.is_blocked) {
-        {{ 'unblock_doctor_hint' | translateApi }}
+        {{ translate('unblock_doctor_hint') }}
         }@else {
-        {{ 'block_doctor_hint' | translateApi }}
+        {{ translate('block_doctor_hint') }}
         }
       </p>
     </div>
@@ -24,12 +24,12 @@
 
   <div class="block-doctor-modal--actions">
     <button id="cancel-btn" type="button" class="btn btn--outline" (click)="onCancel()">
-      {{ 'close' | translateApi }}
+      {{ translate('close') }}
     </button>
     <button [id]="'item-details'" type="submit" class="btn btn--solid" (click)="onConfirm()"
-      [attr.aria-label]="'confirm' | translateApi" [disabled]="this._BlockUserFacade.isLoading()">
+      [attr.aria-label]="translate('confirm')" [disabled]="this._BlockUserFacade.isLoading()">
       <span class="btn__label">
-        {{ 'confirm' | translateApi }}
+        {{ translate('confirm') }}
       </span>
     </button>
   </div>

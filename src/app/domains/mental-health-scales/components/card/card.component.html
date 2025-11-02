@@ -62,7 +62,7 @@
             </svg>
             <p>
               {{testDetails.usage_count}}
-              {{'user'|translateApi}}
+              {{ translate('user') }}
             </p>
           </div>
           <div class="test-card__information-period">
@@ -79,7 +79,7 @@
             </svg>
             <p>
               {{testDetails.duration}}
-              {{'minutes'|translateApi}}
+              {{ translate('minutes') }}
             </p>
           </div>
           <div class="test-card__information-questions">
@@ -95,7 +95,7 @@
                 fill="#47586E" />
             </svg>
 
-            <p>{{testDetails.question_number}} {{"questions"|translateApi}}</p>
+            <p>{{testDetails.question_number}} {{ translate('questions') }}</p>
           </div>
         </div>
         @if(!review){
@@ -106,7 +106,7 @@
               fill="#0E39B6" />
           </svg>
           <span class="test-card__duration">
-            {{'start_now'|translateApi}}
+            {{ translate('start_now') }}
           </span>
         </button>
         }
@@ -122,9 +122,9 @@
           </svg>
           <span class="test-card__duration">
             @if(review){
-            {{"mental_health_scale_exam_result" | translateApi}}
+            {{ translate('mental_health_scale_exam_result') }}
             }@else{
-            {{'start_now'|translateApi}}
+            {{ translate('start_now') }}
             }</span>
         </button>
         }

@@ -1,18 +1,22 @@
-import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
 import { Logger } from '../../../../common';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { IPaymentSummary } from '../../../payments';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-wallet-confirmation',
   standalone: true,
-  imports: [TranslateModule, CommonModule, TranslateApiPipe],
+  imports: [TranslateModule, CommonModule,],
   templateUrl: './wallet-confirmation.component.html',
   styleUrls: ['./wallet-confirmation.component.scss']
 })
 export class WalletConfirmationComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+
   @Input() dataSummary = signal<IPaymentSummary>({
     paymentType: null,
     reservationsSummary: null,
@@ -41,3 +45,4 @@ export class WalletConfirmationComponent {
   }
 
 }
+

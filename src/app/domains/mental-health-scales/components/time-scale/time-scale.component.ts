@@ -1,4 +1,4 @@
-import { TranslateApiPipe } from './../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 import { DisplayType, getMoodsError, IMoodItem, LastSevenUserMoodsFacade, MentalHealthScalesRoutesEnum, MoodsEmptyState, SupportGroupsRoutesEnum } from '../../../../domains';
 import { ChangeDetectionStrategy, Component, computed, effect, PLATFORM_ID, Input, signal, inject, OnDestroy } from '@angular/core';
 import { TimeScaleCalenderShimmerComponent } from '../time-scale-calender-shimmer';
@@ -24,7 +24,7 @@ import { Subject, takeUntil } from 'rxjs';
     CompeleteDataAndRegisterNowComponent,
     EmptyStateComponent,
 
-    TranslateApiPipe
+    
   ],
   templateUrl: './time-scale.component.html',
   styleUrls: ['./time-scale.component.scss'],

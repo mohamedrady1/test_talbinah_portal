@@ -13,9 +13,9 @@
       }
     </div>
     <div class="user-info__welcome">
-      <p class="user-info__welcome--text">{{'welcome'|translateApi}}</p>
+      <p class="user-info__welcome--text">{{ translate('welcome') }}</p>
       <p class="user-info__welcome--name">
-        {{ isLoggedIn ? truncateName(internalUserInfo()?.full_name?? '', 14) : 'guest'|translateApi }}
+        {{ isLoggedIn ? truncateName(internalUserInfo()?.full_name?? '', 14) : translate('guest') }}
       </p>
     </div>
     <a class="user-info__logout--link" (click)="isLoggedIn ? logOut() : openLoginModal()" aria-label="Logout Now">

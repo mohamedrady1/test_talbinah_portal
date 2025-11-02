@@ -5,20 +5,27 @@ import { CalcReservationCancelPriceFacade, CancelReservationFacade, Reservations
 import { IGlobalReservationModel } from '../../models';
 import { TranslateModule } from '@ngx-translate/core';
 import { Logger } from '../../../../common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-confirm-cancel-appointment',
   standalone: true,
   imports: [
-    TranslateModule,
-    TranslateApiPipe
+    TranslateModule
   ],
   templateUrl: './confirm-cancel-appointment.component.html',
   styleUrls: ['./confirm-cancel-appointment.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConfirmCancelAppointmentComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   @Input() public item?: IGlobalReservationModel;
 
   @Output() public closed: EventEmitter<{ status?: boolean, response: ICalcReservationCancelPriceData | null } | null> = new EventEmitter<{ status?: boolean, response: ICalcReservationCancelPriceData | null } | null>();

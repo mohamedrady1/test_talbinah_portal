@@ -11,7 +11,7 @@ import { IGlobalReservationModel } from '../../models';
 import { RateDoctorFormConfig } from '../../configs';
 import { LeaveRatingFacade } from '../../services';
 import { ILeaveRatingRequestDto } from '../../dtos';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-leave-rating-modal',
   standalone: true,
@@ -19,14 +19,21 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     AppointmentCardComponent,
     ReactiveFormsModule,
     TranslateModule,
-    CommonModule,
-    TranslateApiPipe
+    CommonModule
   ],
   templateUrl: './leave-rating-modal.component.html',
   styleUrls: ['./leave-rating-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LeaveRatingModalComponent implements OnInit, OnDestroy {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   // --- Inputs/Outputs ---
   @Input({ required: false }) public type!: string;
   @Input() public session: IGlobalReservationModel | null = null;

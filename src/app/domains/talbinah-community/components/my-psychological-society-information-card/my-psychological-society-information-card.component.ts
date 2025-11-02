@@ -6,15 +6,19 @@ import { Router } from '@angular/router';
 import { TalbinahCommunityRoutesEnum } from '../../constants';
 import { UserIdentityStore } from '../../routes/user-identity.service';
 import { ChooseYourMoodComponent } from '../../../mental-health-scales';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-my-psychological-society-information-card',
   standalone: true,
-  imports: [TranslateModule, ChooseYourMoodComponent, TranslateApiPipe],
+  imports: [TranslateModule, ChooseYourMoodComponent],
   templateUrl: './my-psychological-society-information-card.component.html',
   styleUrls: ['./my-psychological-society-information-card.component.scss']
 })
 export class MyPsychologicalSocietyInformationCardComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+
   protected readonly userIdentityStore = inject(UserIdentityStore);
   userIdentityProfileData = this.userIdentityStore.profile;
 

@@ -8,7 +8,7 @@ import { NationalIdVerificationFacade } from '../../services';
 import { IVerifyNationalIdFormData } from '../../models';
 import { DatePickerModule } from 'primeng/datepicker';
 import { IVerifyNationalIdRequest } from '../../dtos';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
     selector: 'app-vat-national-id-verification',
@@ -18,13 +18,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
         ReactiveFormsModule,
         FormsModule,
         DatePickerModule,
-        TranslateApiPipe
+        
     ],
     templateUrl: './vat-national-id-verification.component.html',
     styleUrls: ['./vat-national-id-verification.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VatNationalIdVerificationComponent implements OnInit, OnDestroy {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
     private readonly _fb = inject(FormBuilder);
     private readonly _nationalIdVerificationFacade = inject(NationalIdVerificationFacade);
     private readonly _StorageService = inject(StorageService);
@@ -171,3 +175,4 @@ export class VatNationalIdVerificationComponent implements OnInit, OnDestroy {
         return 'form.genericError';
     }
 } 
+

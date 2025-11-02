@@ -1,4 +1,4 @@
-import { TranslateApiPipe } from './../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 // ... (existing imports)
 import { ITestDetails } from '../../models/test-card.model';
 import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
 
-    TranslateApiPipe
+
   ],
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
@@ -37,7 +37,9 @@ export class CardComponent {
   @Output() favouriteToggled = new EventEmitter<IMentalHealthScaleListItemDto>();
   @Output() startQuiz = new EventEmitter<void>();
   private readonly modalService = inject(ModalService);
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
   openQuiz() {
     this.startQuiz.emit();
     this.openTestPopup(this.testDetails);

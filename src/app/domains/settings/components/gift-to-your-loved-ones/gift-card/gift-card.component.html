@@ -4,8 +4,8 @@
             <img src="images/settings/gift/gift-2.png" alt="gift" width="25" height="37" />
         </div>
         <div class="gift-card__content">
-            <div class="gift-card__title">{{ item.sender || ('gift' | translateApi) }}</div>
-            <div class="gift-card__price">{{ item.amount || '100' }} {{ 'riyals' | translateApi }}</div>
+            <div class="gift-card__title">{{ item.sender || ('gift' ) }}</div>
+            <div class="gift-card__price">{{ item.amount || '100' }} {{ translate('riyals') }}</div>
             <div class="gift-card__date-time">
                 <div class="gift-card__date">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -60,6 +60,6 @@
     'gift-card__action--accept': type === 'receiver',
     'gift-card__action--cancel': type === 'sender'
   }" (click)="openModal()">
-        {{ type === 'receiver' ? ('accept' | translateApi) : ('cancel' | translateApi) }}
+        {{ type === 'receiver' ? ('accept' ) : ('cancel' ) }}
     </button>
 </div>

@@ -32,7 +32,7 @@ import { ApiError, handleApiErrorsMessage, Logger } from '../../../../common';
 import { IEmoijsListingResponseDto, IEmojiItem, IUpdateUserIdentifyProfileRequestDto, IPostInterest, IPostsInterestsListingResponseDto, IUserIdentifyProfileData, TalbinahCommunityApiClientProvider, IUpdateUserIdentifyProfileResponseDto } from '../../../../domains';
 import { ToastService } from '../../../../shared';
 import { finalize, take, catchError, EMPTY, tap } from 'rxjs';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 interface PostInterestsListState {
   interestsResponse: IPostsInterestsListingResponseDto | null;
@@ -49,7 +49,7 @@ interface EmojiListState {
 @Component({
   selector: 'app-update-psychological-society',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TranslateModule, EmojiPickerComponent, ClickOutsideDirective, TranslateApiPipe], // Ensure all used components/directives are imported
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule, EmojiPickerComponent, ClickOutsideDirective], // Ensure all used components/directives are imported
   templateUrl: './update-psychological-society.component.html',
   styleUrls: ['./update-psychological-society.component.scss']
 })
@@ -62,7 +62,11 @@ export class UpdatePsychologicalSocietyComponent implements OnInit, OnChanges {
   private readonly cdr = inject(ChangeDetectorRef); // Still useful for manual change detection if needed, though signals reduce its necessity.
   private readonly _ToastService = inject(ToastService);
   private readonly fb: FormBuilder = inject(FormBuilder); // Inject FormBuilder
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   private postInterestsState = signal<PostInterestsListState>({
     interestsResponse: null,
     isLoading: false,

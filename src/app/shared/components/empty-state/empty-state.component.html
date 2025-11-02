@@ -5,16 +5,16 @@
   }
 
   @if (hasTitle()) {
-  <h2 class="empty-state__title">{{ (config.title || '') | translateApi }}</h2>
+  <h2 class="empty-state__title">{{ translate(config.title || '') }}</h2>
   }
 
   @if (hasMessage()) {
-  <p class="empty-state__message">{{ (config.message || '') | translateApi }}</p>
+  <p class="empty-state__message">{{ translate(config.message || '') }}</p>
   }
 
   @if (hasButton()) {
   <button class="empty-state__add" (click)="onClick()">
-    <p>{{ (config.buttonText || '') | translateApi }}</p>
+    <p>{{ translate(config.buttonText || '') }}</p>
   </button>
   }
 

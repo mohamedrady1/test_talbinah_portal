@@ -19,7 +19,7 @@
         heightMode="max-height">
         <fieldset class="filter-aside__group">
           <legend class="filter-aside__label">
-            {{ 'select_specialty' | translateApi }}
+            {{ translate('select_specialty') }}
           </legend>
           <div class="filter-aside__control-wrapper">
             @for (specialty of specialtiesList(); track specialty.value) {
@@ -40,7 +40,7 @@
 
         <fieldset class="filter-aside__group">
           <legend class="filter-aside__label">
-            {{ 'gender' | translateApi }}
+            {{ translate('gender') }}
           </legend>
           <div class="filter-aside__control-wrapper">
             @for (gender of gendersList(); track gender.value) {
@@ -56,7 +56,7 @@
 
         <fieldset class="filter-aside__group">
           <legend class="filter-aside__label">
-            {{ 'language' | translateApi }}
+            {{ translate('language') }}
           </legend>
           <div class="filter-aside__control-wrapper">
             @for (lang of languagesList(); track lang.value) {
@@ -76,21 +76,21 @@
         <fieldset class="filter-aside__group">
           <legend class="filter-aside__label">
             <span>
-              {{ 'session_budget' | translateApi }}
+              {{ translate('session_budget') }}
             </span>
             <span class="grey-text">
-              ({{ 'half_hours' | translateApi }})
+              ({{ translate('half_hours') }})
             </span>
           </legend>
           <div class="filter-aside__range-group">
             <input type="number" formControlName="min_price" class="filter-aside__range-input"
-              [attr.min]="priceRange().min" [attr.max]="priceRange().max" placeholder="{{ 'from' | translateApi }}"
-              [attr.aria-label]="'min_price' | translateApi"
+              [attr.min]="priceRange().min" [attr.max]="priceRange().max" placeholder="{{ translate('from') }}"
+              [attr.aria-label]="'min_price' "
               [attr.aria-describedby]="appointmentForm.get('min_price')?.invalid ? 'min-price-error' : null" />
             <span class="filter-aside__range-separator"> - </span>
             <input type="number" formControlName="max_price" class="filter-aside__range-input"
-              [attr.min]="priceRange().min" [attr.max]="priceRange().max" placeholder="{{ 'to' | translateApi }}"
-              [attr.aria-label]="'max_price' | translateApi"
+              [attr.min]="priceRange().min" [attr.max]="priceRange().max" placeholder="{{ translate('to') }}"
+              [attr.aria-label]="'max_price' "
               [attr.aria-describedby]="appointmentForm.get('max_price')?.invalid ? 'max-price-error' : null" />
           </div>
           <!-- @if (appointmentForm.get('min_price')?.invalid && appointmentForm.get('min_price')?.touched) {
@@ -106,7 +106,7 @@
 
         <fieldset class="filter-aside__group">
           <legend class="filter-aside__label">
-            {{ 'rating' | translateApi }}
+            {{ translate('rating') }}
           </legend>
           <div class="filter-aside__control-wrapper">
             @for (rate of ratingList; track rate.value) {
@@ -135,7 +135,7 @@
 
         <fieldset class="filter-aside__group">
           <legend class="filter-aside__label">
-            {{ 'what_feeling_now' | translateApi }}
+            {{ translate('what_feeling_now') }}
           </legend>
           <div class="filter-aside__multi-select-group">
             @for (service of servicesList(); track service.value) {
@@ -156,16 +156,16 @@
 
         <div class="filter-aside__actions">
           <button type="button" class="filter-aside__reset-button" (click)="resetForm()"
-            [attr.aria-label]="'reset' | translateApi">
-            {{ 'reset' | translateApi }}
+            [attr.aria-label]="'reset' ">
+            {{ translate('reset') }}
           </button>
 
           <button type="submit" class="filter-aside__submit-button" [disabled]="appointmentForm.invalid || isLoading()"
-            [attr.aria-label]="'apply' | translateApi">
-            {{ 'apply' | translateApi }}
+            [attr.aria-label]="'apply' ">
+            {{ translate('apply') }}
             @if (isLoading()) {
             <span class="filter-aside__loading" role="status" aria-live="polite">
-              {{ 'in_progress' | translateApi }}
+              {{ translate('in_progress') }}
             </span>
             }
           </button>

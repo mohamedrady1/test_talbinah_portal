@@ -14,7 +14,7 @@
     <section class="doctors-listing-for-booking-layout__cards-section">
       <header class="doctors-listing-for-booking-layout__header">
         <h2 class="doctors-listing-for-booking-layout__title">
-          {{ 'available_doctors_for_you' | translateApi }}
+          {{ translate('available_doctors_for_you') }}
         </h2>
 
         <div class="doctors-listing-for-booking-layout__search-box">
@@ -31,7 +31,7 @@
         @if (totalDoctors != 0 ) {
         <p class="doctors-listing-for-booking-layout__filter-header">
           <span class="doctors-listing-for-booking-layout__filter-count">
-            {{ 'book_appointment_page_list_filiter_label_1' | translateApi }}
+            {{ translate('book_appointment_page_list_filiter_label_1') }}
           </span>
           <span class="doctors-listing-for-booking-layout__filter-count">
             @if (isLoading || isFiltering) {
@@ -43,7 +43,7 @@
             }
           </span>
           <span class="doctors-listing-for-booking-layout__filter-count">
-            {{ 'book_appointment_page_list_filiter_label_2' | translateApi }}
+            {{ translate('book_appointment_page_list_filiter_label_2') }}
           </span>
         </p>
         }
@@ -76,13 +76,13 @@
           <div class="doctors-listing-for-booking-layout__no-results-message" role="status">
             <p class="doctors-listing-for-booking-layout__no-results-text">
               @if (searching) {
-              {{ 'no_results_found' | translateApi }}
+              {{ translate('no_results_found') }}
               } @else {
-              {{ 'no_doctors_available_with_filters' | translateApi }}
+              {{ translate('no_doctors_available_with_filters') }}
               }
             </p>
             <p class="doctors-listing-for-booking-layout__suggestions-title">
-              {{ 'suggested_doctors' | translateApi }}
+              {{ translate('suggested_doctors') }}
             </p>
           </div>
           <div class="doctors-listing-for-booking-layout__cards-list" role="list" aria-live="polite">

@@ -1,18 +1,16 @@
-import { TranslateApiPipe } from './../../../../common/core/translations/pipes/translate-api.pipe';
 import { ProgramSubscriptionPopupComponent } from '../program-subscription-popup';
 import { ModalService } from '../../../../shared/services/model.service';
 import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 import { ITherapeuticProgram } from '../../models';
 import { CommonModule } from '@angular/common';
 import { CardType, IGlobalDoctorProgrammeModel, Logger } from '../../../../common';
 import { DetailsHeaderConfig } from '../../configs';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-therapeutic-program-card',
   standalone: true,
   imports: [
-    CommonModule,
-    TranslateApiPipe
+    CommonModule
   ],
   templateUrl: './therapeutic-program-card.component.html',
   styleUrls: ['./therapeutic-program-card.component.scss'],
@@ -22,7 +20,11 @@ import { DetailsHeaderConfig } from '../../configs';
 export class TherapeuticProgramCardComponent {
   private modalService = inject(ModalService);
   protected cardType = CardType;
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   @Input() item!: ITherapeuticProgram | IGlobalDoctorProgrammeModel;
   @Input() type: CardType = CardType.SUMMARY;
 

@@ -1,18 +1,23 @@
-import { Component, Input, signal, computed, ElementRef, ViewChild, AfterViewInit, OnDestroy, HostListener, SimpleChanges, Output, EventEmitter, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, Input, signal, computed, ElementRef, ViewChild, AfterViewInit, OnDestroy, HostListener, SimpleChanges, Output, EventEmitter, PLATFORM_ID, Inject, inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { MediaType, Reel } from '../../models';
 import { ReelActionsComponent } from '../reel-actions';
 import { ShareSocialComponent } from '../../../../shared';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-reels',
   standalone: true,
-  imports: [CommonModule, TranslateModule, ReelActionsComponent, ShareSocialComponent, TranslateApiPipe],
+  imports: [CommonModule, TranslateModule, ReelActionsComponent, ShareSocialComponent],
   templateUrl: './reels.component.html',
   styleUrls: ['./reels.component.scss'],
 })
 export class ReelsComponent implements AfterViewInit, OnDestroy {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   @Input() reels: Reel[] = [];
   @Input() isActive: boolean = false;
 

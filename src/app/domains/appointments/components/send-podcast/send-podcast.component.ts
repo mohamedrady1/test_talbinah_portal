@@ -15,7 +15,6 @@ import {
   IGlobalDoctorContactInfoModel,
   IGlobalPodcastItemModel,
   Logger,
-  TranslateApiPipe,
 } from '../../../../common';
 import {
   PodcastCategoriesFacade,
@@ -31,6 +30,7 @@ import {
 } from '../../../../shared';
 import { TranslateModule } from '@ngx-translate/core';
 import { PodcastCardForMeetingChatComponent } from '../podcast-card-for-meeting-chat';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-send-podcast',
@@ -42,14 +42,21 @@ import { PodcastCardForMeetingChatComponent } from '../podcast-card-for-meeting-
     ErrorStateCardComponent,
     TranslateModule,
     SvgIconComponent,
-    EmptyStateCardComponent,
-    TranslateApiPipe
+    EmptyStateCardComponent
   ],
   templateUrl: './send-podcast.component.html',
   styleUrls: ['./send-podcast.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SendPodcastComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   // ───────────────────── Inputs / Outputs ─────────────────────
   @Input({ required: false }) protected type!: string;
   @Input() protected doctor: IGlobalDoctorContactInfoModel | null = null;

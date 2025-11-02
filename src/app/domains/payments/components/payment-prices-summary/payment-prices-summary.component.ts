@@ -8,7 +8,7 @@ import { IPaymentSummary } from '../../interfaces';
 import { CommonModule } from '@angular/common';
 import { Logger } from '../../../../common';
 import { getDiscountErrorConfig } from '../../configs/discount-error-state.config';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-payment-prices-summary',
@@ -18,14 +18,21 @@ import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
     CommonModule,
     SvgIconComponent,
     ReactiveFormsModule,
-    ErrorStateCardComponent,
-    TranslateApiPipe
+    ErrorStateCardComponent
   ],
   templateUrl: './payment-prices-summary.component.html',
   styleUrls: ['./payment-prices-summary.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaymentPricesSummaryComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   private readonly paymentFlowService = inject(PaymentFlowService);
   private readonly _CalculateReservationPriceFacade = inject(CalculateReservationPriceFacade);
   private readonly toastService = inject(ToastService);

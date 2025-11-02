@@ -6,7 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ModalService } from '../../../../shared';
 import { RouterModule } from '@angular/router';
 import { Logger } from '../../../../common';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-khawiik-welcome',
@@ -14,15 +14,21 @@ import { TranslateApiPipe } from '../../../../common/core/translations/pipes/tra
   imports: [
     TranslateModule,
     CommonModule,
-    RouterModule,
-
-    TranslateApiPipe
+    RouterModule
   ],
   templateUrl: './khawiik-welcome.component.html',
   styleUrls: ['./khawiik-welcome.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class KhawiikWelcomeComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   readonly content = signal<KhawiikContent | null>(KHAWIIK_WELCOME_FEATURES);
   readonly labelTitle = computed(() => this.content()?.welcomePage?.labelTitle ?? '');
   readonly pageTitle = computed(() => this.content()?.welcomePage?.title ?? '');

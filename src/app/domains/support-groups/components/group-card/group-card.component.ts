@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output
 import { CardType, LanguageService } from '../../../../common';
 import { ISeminarItemDto } from '../../../../domains';
 import { TranslateModule } from '@ngx-translate/core';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-group-card',
@@ -11,13 +11,21 @@ import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
   imports: [
     CommonModule,
     TranslateModule,
-    TranslateApiPipe
+    
   ],
   templateUrl: './group-card.component.html',
   styleUrls: ['./group-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GroupCardComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   protected cardType = CardType;
   @Input() type: CardType = CardType.SUMMARY;
 

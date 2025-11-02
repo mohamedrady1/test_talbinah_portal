@@ -14,17 +14,21 @@ import { StorageService } from '../../../../common';
 import { StorageKeys } from '../../../../shared';
 import { AuthenticationRoutesEnum } from '../../../authentication/user-authentication/constants/auth-routes.enum';
 import { Router } from '@angular/router';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-change-password',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TranslateApiPipe],
+  imports: [CommonModule, ReactiveFormsModule, ],
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChangePasswordComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   private readonly _formBuilder = inject(FormBuilder);
   private readonly _modalService = inject(ModalService);
   private readonly _changePasswordFacade = inject(ChangeUserPasswordFacade);
@@ -252,3 +256,4 @@ export class ChangePasswordComponent {
     });
   }
 }
+

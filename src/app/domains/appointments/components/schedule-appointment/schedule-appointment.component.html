@@ -10,7 +10,7 @@
             @if (formItem.label) {
             <label [attr.for]="formItem.name" class="general-form-wrapper__label"
               [ngClass]="{'general-form-wrapper__label--error': getError(formItem.name), 'general-form-wrapper__label--clickable': formItem.enableLabelClick}">
-              {{ formItem.label | translateApi }}
+              {{ formItem.label  }}
               @if (formItem.isRequired) {
               <span class="general-form-wrapper__required" aria-hidden="true">*</span>
               }
@@ -24,7 +24,7 @@
             @if (formItem.label) {
             <label [attr.for]="formItem.name" class="general-form-wrapper__label"
               [ngClass]="{'general-form-wrapper__label--error': getError(formItem.name), 'general-form-wrapper__label--clickable': formItem.enableLabelClick}">
-              {{ formItem.label | translateApi }}
+              {{ formItem.label  }}
               @if (formItem.isRequired) {
               <span class="general-form-wrapper__required" aria-hidden="true">*</span>
               }
@@ -39,10 +39,10 @@
               <div class="custom-input custom-textarea"
                 [ngClass]="{'p-invalid': getFormControl(formItem.name)?.invalid && (getFormControl(formItem.name)?.touched || getFormControl(formItem.name)?.dirty)}">
                 <textarea [class]="formItem.inputClass ?? 'custom-input__input'" [formControlName]="formItem.name"
-                  [id]="formItem.name" [attr.aria-label]="(formItem.label ?? '') | translateApi"
-                  [attr.title]="(formItem.label ?? '') | translateApi"
+                  [id]="formItem.name" [attr.aria-label]="(formItem.label ?? '') "
+                  [attr.title]="(formItem.label ?? '') "
                   [attr.autocomplete]="formItem.name === 'reasonDetails' ? 'off' : null"
-                  [attr.placeholder]="(formItem.placeholder ?? '') | translateApi" [rows]="formItem.rows ?? 5"
+                  [attr.placeholder]="(formItem.placeholder ?? '') " [rows]="formItem.rows ?? 5"
                   [attr.aria-required]="formItem.isRequired ? 'true' : 'false'"
                   [attr.aria-describedby]="formItem.name + '-hint ' + formItem.name + '-error'"></textarea>
               </div>
@@ -51,7 +51,7 @@
                 @if (!getError(formItem.name) && formItem.hint && !getFormControl(formItem.name)?.value &&
                 !formItem.fixedHint) {
                 <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
-                  {{ formItem.hint | translateApi }}
+                  {{ formItem.hint  }}
                 </small>
                 }
 
@@ -59,7 +59,7 @@
                 getFormControl(formItem.name)?.dirty)) {
                 <span id="{{ formItem.name }}-error" class="general-form-wrapper__error-message error-label"
                   role="alert">
-                  {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+                  {{ getValidationErrorMessage(formItem.name, formItem.validation ?? [])  }}
                 </span>
                 }
               </div>
@@ -73,23 +73,23 @@
               <div class="select-wrapper">
                 <p-select [options]="formItem.listValues" [formControlName]="formItem.name"
                   [loading]="reasonsFacade.isLoading()==true"
-                  [optionLabel]="(formItem.optionLabel || 'label') | translateApi" [showClear]="true"
+                  [optionLabel]="(formItem.optionLabel || 'label') " [showClear]="true"
                   [readonly]="reasonsFacade.isLoading()==true" [optionValue]="formItem.optionValue || 'value'"
                   [filter]="formItem.name" [filterBy]="formItem.name"
-                  [placeholder]="(formItem.placeholder ?? '') | translateApi" [id]="formItem.name"
+                  [placeholder]="(formItem.placeholder ?? '') " [id]="formItem.name"
                   [attr.aria-describedby]="formItem.name + '-hint'" [attr.aria-invalid]="!!getError(formItem.name)"
                   [ngClass]="{'p-invalid': getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched}"
                   appendTo="body" appPrimeSelectFilterFocus>
                   <ng-template pTemplate="selectedItem" let-option>
                     <!-- Custom selected item display if needed -->
                     <div class="p-select-item-selected-custom">
-                      {{ option[formItem.optionLabel || 'label'] | translateApi }}
+                      {{ option[formItem.optionLabel || 'label']  }}
                     </div>
                   </ng-template>
                   <ng-template let-option pTemplate="item">
                     <!-- Custom item list display if needed -->
                     <div class="p-select-item-custom">
-                      {{ option[formItem.optionLabel || 'label'] | translateApi}}
+                      {{ option[formItem.optionLabel || 'label'] }}
                     </div>
                   </ng-template>
                 </p-select>
@@ -99,7 +99,7 @@
                 @if (!getError(formItem.name) && formItem.hint && !getFormControl(formItem.name)?.value &&
                 !formItem.fixedHint) {
                 <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
-                  {{ formItem.hint | translateApi }}
+                  {{ formItem.hint  }}
                 </small>
                 }
 
@@ -107,7 +107,7 @@
                 getFormControl(formItem.name)?.dirty)) {
                 <span id="{{ formItem.name }}-error" class="general-form-wrapper__error-message error-label"
                   role="alert">
-                  {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+                  {{ getValidationErrorMessage(formItem.name, formItem.validation ?? [])  }}
                 </span>
                 }
               </div>
@@ -123,7 +123,7 @@
                 dateFormat="yy-mm-dd" [minDate]="today" [readonlyInput]="true" [showTransitionOptions]="'0ms'"
                 [hideTransitionOptions]="'0ms'" appendTo="body"
                 class="custom-input-wrapper__input custom-input-wrapper__input--p-datepicker w-100"
-                placeholder="{{ (formItem.placeholder ?? '') | translateApi }}" aria-required="true"
+                placeholder="{{ (formItem.placeholder ?? '')  }}" aria-required="true"
                 [attr.aria-invalid]="getFormControl('date')?.invalid && getFormControl('date')?.touched ? 'true' : 'false'"
                 [disabledDays]="disabledWeekDays" (onSelect)="onDateSelect($event)"
                 aria-describedby="dateError"></p-datepicker>
@@ -133,14 +133,14 @@
               @if (!getError(formItem.name) && formItem.hint && !getFormControl(formItem.name)?.value &&
               !formItem.fixedHint) {
               <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
-                {{ formItem.hint | translateApi }}
+                {{ formItem.hint  }}
               </small>
               }
 
               @if (getFormControl(formItem.name)?.invalid && (getFormControl(formItem.name)?.touched ||
               getFormControl(formItem.name)?.dirty)) {
               <span id="{{ formItem.name }}-error" class="general-form-wrapper__error-message error-label" role="alert">
-                {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+                {{ getValidationErrorMessage(formItem.name, formItem.validation ?? [])  }}
               </span>
               }
             </div>
@@ -182,14 +182,14 @@
               @if (!getError(formItem.name) && formItem.hint && !getFormControl(formItem.name)?.value &&
               !formItem.fixedHint) {
               <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
-                {{ formItem.hint | translateApi}}
+                {{ formItem.hint }}
               </small>
               }
 
               @if (getFormControl(formItem.name)?.invalid && (getFormControl(formItem.name)?.touched ||
               getFormControl(formItem.name)?.dirty)) {
               <span id="{{ formItem.name }}-error" class="general-form-wrapper__error-message error-label" role="alert">
-                {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+                {{ getValidationErrorMessage(formItem.name, formItem.validation ?? [])  }}
               </span>
               }
             </div>
@@ -202,27 +202,27 @@
       <div class="general-form-wrapper__actions">
         @if (!showNextStep()) {
         <button id="schedule-appointment-btn" type="button" class="btn btn--outline" (click)="onCancel()">
-          <span class="btn__label">{{ 'cancel' | translateApi }}</span>
+          <span class="btn__label">{{ translate('cancel') }}</span>
         </button>
 
         <button type="button" class="btn btn--solid" (click)="onNextStep()">
-          <span class="btn__label">{{ 'next' | translateApi }}</span>
+          <span class="btn__label">{{ translate('next') }}</span>
         </button>
         } @else {
         <button id="schedule-appointment-btn" type="button" class="btn btn--outline" (click)="onPreviousStep()"
           [disabled]="_ScheduleReservationFacade.isScheduling()">
-          <span class="btn__label">{{ 'previous' | translateApi }}</span>
+          <span class="btn__label">{{ translate('previous') }}</span>
         </button>
         <button id="submit-schedule-appointment-btn" type="submit" class="btn btn--solid"
-          [attr.aria-label]="'confirm' | translateApi"
+          [attr.aria-label]="'confirm' "
           [disabled]="_ScheduleReservationFacade.isScheduling() && reasonsFacade.isLoading()"
           [ngClass]="{'disabled': this._ScheduleReservationFacade.isScheduling()}">
           <span class="btn__label">
             @if (!_ScheduleReservationFacade.isScheduling()) {
-            {{ 'confirm' | translateApi }}
+            {{ translate('confirm') }}
             } @else {
             <div class="general-form-wrapper__loading" aria-live="polite">
-              {{ 'in_progress' | translateApi }}
+              {{ translate('in_progress') }}
               <span class="dot-loader"></span>
             </div>
             }

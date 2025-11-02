@@ -2,7 +2,7 @@
   <section class="khawiik-welcome__hero" aria-labelledby="welcome-label welcome-title">
     @if (labelTitle()) {
     <p id="welcome-label" class="khawiik-welcome__label">
-      {{ labelTitle() | translateApi}}
+      {{ translate(labelTitle()) }}
     </p>
     }
     <div class="khawiik-welcome__avatar" aria-hidden="true">
@@ -11,7 +11,7 @@
     </div>
     @if (pageTitle()) {
     <h3 id="welcome-title" class="khawiik-welcome__hero-title">
-      {{ pageTitle()| translateApi }}
+      {{ translate(pageTitle()) }}
     </h3>
     }
   </section>
@@ -27,10 +27,10 @@
         </span>
         <span class="khawiik-welcome__content">
           <span class="khawiik-welcome__item-title">
-            {{ item.title| translateApi }}
+            {{ translate(item.title) }}
           </span>
           <span id="item-sub-{{item?.title}}" class="khawiik-welcome__item-subtitle">
-            {{ item.subtitle | translateApi}}
+            {{ translate(item.subtitle) }}
           </span>
         </span>
       </li>
@@ -41,7 +41,7 @@
 
   <footer class="khawiik-welcome__footer">
     <button type="button" class="khawiik-welcome__start" (click)="onStart()" aria-label="ابدأ الآن">
-      {{'start_now' | translateApi}}
+      {{translate('start_now')}}
     </button>
   </footer>
 </main>

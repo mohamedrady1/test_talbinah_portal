@@ -14,17 +14,25 @@ import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { IAppointmentTypeSelectionItem } from '../../dtos';
 import { AppointmentsRoutesEnum } from '../../../appointments';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-select-appointment-type',
   standalone: true,
-  imports: [TranslateModule, TranslateApiPipe],
+  imports: [TranslateModule],
   templateUrl: './select-appointment-type.component.html',
   styleUrls: ['./select-appointment-type.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectAppointmentTypeComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   @Output() protected closed = new EventEmitter<void>();
   @Input() type: string = 'BookAppointment';
 

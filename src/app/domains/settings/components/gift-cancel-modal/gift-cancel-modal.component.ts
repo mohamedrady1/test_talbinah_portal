@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, inject, effect, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 import { GiftsFacade } from '../../services/gifts.facade';
 import { ModalService } from '../../../../shared';
 import { StatusInfoComponent } from '../../../payments/components';
@@ -8,12 +8,16 @@ import { StatusInfoComponent } from '../../../payments/components';
 @Component({
     selector: 'app-gift-cancel-modal',
     standalone: true,
-    imports: [CommonModule, TranslateApiPipe],
+    imports: [CommonModule, ],
     templateUrl: './gift-cancel-modal.component.html',
     styleUrls: ['./gift-cancel-modal.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GiftCancelModalComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
     @Input() item: any;
     @Output() closed = new EventEmitter<boolean>();
     private giftsFacade = inject(GiftsFacade);
@@ -121,3 +125,4 @@ export class GiftCancelModalComponent {
         this.closed.emit(success);
     }
 } 
+

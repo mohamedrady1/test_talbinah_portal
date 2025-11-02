@@ -8,10 +8,10 @@
     <!-- Title and Subtitle -->
     <div class="khawiik-chat-types__content">
         <p id="chat-types-heading" class="khawiik-chat-types__title">
-            {{ 'communication_preference' | translateApi }}
+            {{ translate('communication_preference') }}
         </p>
         <p class="khawiik-chat-types__subtitle">
-            {{ 'choose_communication_style' | translateApi }}
+            {{ translate('choose_communication_style') }}
         </p>
     </div>
 
@@ -31,7 +31,7 @@
 
             <!-- Title -->
             <span [class]="getTitleClasses(option.id)">
-                {{ option.label | translateApi }}
+                {{ translate(option.label) }}
             </span>
         </button>
         }
@@ -40,8 +40,8 @@
     <!-- Footer with Continue Button -->
     <footer class="khawiik-chat-types__footer">
         <button type="button" class="khawiik-chat-types__continue-button" (click)="onContinue()"
-            [attr.aria-label]="'continue' | translateApi">
-            {{ 'continue' | translateApi }}
+            [attr.aria-label]="translate('continue')">
+            {{ translate('continue') }}
         </button>
     </footer>
 </main>

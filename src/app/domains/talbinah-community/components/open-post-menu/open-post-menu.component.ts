@@ -6,16 +6,21 @@ import { DeletePopupComponent, ModalService, PublicService } from '../../../../s
 import { menuConfig } from '../../configs'
 import { IPost, IUserIdentifyProfileData } from '../../dtos'
 import { Logger } from '../../../../common'
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-open-post-menu',
   standalone: true,
-  imports: [CommonModule, ClickOutsideDirective, TranslateModule, TranslateApiPipe],
+  imports: [CommonModule, ClickOutsideDirective, TranslateModule],
   templateUrl: './open-post-menu.component.html',
   styleUrls: ['./open-post-menu.component.scss']
 })
 export class OpenPostMenuComponent {
   private modalService = inject(ModalService)
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   @Output() action: EventEmitter<void> = new EventEmitter();
   @Output() viewPostAction: EventEmitter<void> = new EventEmitter();
   @Output() deletePostAction: EventEmitter<IPost> = new EventEmitter();

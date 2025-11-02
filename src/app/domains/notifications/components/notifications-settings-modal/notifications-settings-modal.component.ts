@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { IGlobalUserContactInfoModel, Logger } from '../../../../common';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { PreferredMsgChannelFacade } from '../../services';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 import { StorageKeys } from '../../../../shared';
 
 type PreferredChannel = 'both' | 'sms' | 'whatsapp' | null;
@@ -14,7 +14,7 @@ type PreferredChannel = 'both' | 'sms' | 'whatsapp' | null;
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    TranslateApiPipe,
+    
     CommonModule,
 
     LazyLoadImageDirective
@@ -24,6 +24,10 @@ type PreferredChannel = 'both' | 'sms' | 'whatsapp' | null;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotificationsSettingsModalComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   @Output() protected closed = new EventEmitter<void>();
 
   private fb = inject(FormBuilder);
@@ -130,3 +134,4 @@ export class NotificationsSettingsModalComponent {
     this.facade.resetPreferredMsgChannel();
   }
 }
+

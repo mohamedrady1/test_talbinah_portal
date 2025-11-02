@@ -9,18 +9,23 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { ClickOutsideDirective } from '../../../common/core/directives';
-import { TranslateApiPipe } from '../../../common/core/translations';
+import { TranslationsFacade } from '../../../common/core/translations/services';
 import { IActionDropdownMenuItem } from '../../interfaces';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-actions-dropdown-menu',
   standalone: true,
-  imports: [CommonModule, ClickOutsideDirective, TranslateApiPipe],
+  imports: [CommonModule, ClickOutsideDirective],
   templateUrl: './actions-dropdown-menu.component.html',
   styleUrls: ['./actions-dropdown-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionsDropdownMenuComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   @Input() menuItems: IActionDropdownMenuItem[] = [];
   @Input() isArrow: boolean = false;
   @Output() itemClicked = new EventEmitter<IActionDropdownMenuItem>();

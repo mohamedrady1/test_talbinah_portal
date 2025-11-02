@@ -8,16 +8,20 @@ import { AutoExactHeightDirective } from '../../../../common';
 import { ServiceModalComponent } from '../service-modal';
 import { ModalService } from '../../../../shared/services/model.service';
 import { SvgIconComponent } from "../../../../shared";
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-services',
   standalone: true,
-  imports: [CommonModule, AutoExactHeightDirective, EmptyStateCardComponent, ErrorStateCardComponent, SvgIconComponent, TranslateApiPipe],
+  imports: [CommonModule, AutoExactHeightDirective, EmptyStateCardComponent, ErrorStateCardComponent, SvgIconComponent, ],
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ServicesComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   private readonly _modalService = inject(ModalService);
   private readonly _servicePointsGiftsFacade = inject(ServicePointsGiftsFacade);
 
@@ -72,3 +76,4 @@ export class ServicesComponent implements OnInit {
   readonly hasError = () => this.errorMessage() !== null;
   readonly isEmpty = () => this.items().length === 0;
 } 
+

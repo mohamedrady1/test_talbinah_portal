@@ -1,7 +1,7 @@
 <div class="post-classification">
   <div class="post-classification__title">
-    <p>{{'category'|translateApi}}</p>
-    <p>{{'optional'|translateApi}}</p>
+    <p>{{ translate('category') }}</p>
+    <p>{{ translate('optional') }}</p>
   </div>
   <app-tab-switcher [tabs]="tabs" [selectedTabId]="selectedTabId" (tabSelected)="selectTab($event)">
   </app-tab-switcher>

@@ -4,7 +4,7 @@
   <div class="quick-access-cards__container">
     @for (cardData of pinnedCards; track cardData.id) {
     <div [ngClass]="['quick-access-cards__item', 'quick-access-cards__item--' + (cardData.id - 1)]"
-      (click)="navigateToPage(cardData)" tabindex="0" role="link" [attr.aria-label]="cardData.title | translateApi">
+      (click)="navigateToPage(cardData)" tabindex="0" role="link" [attr.aria-label]="cardData.title ">
       <app-quick-access-card [config]="cardData" />
     </div>
     }
@@ -12,9 +12,9 @@
   <div class="quick-access-cards__load-more">
     <button (click)="editMenuItemsCards()" class="quick-access-cards__load-more-button btn btn--outline">
       @if (pinnedCards !== cardsData) {
-      {{ 'home_button_add_more' | translateApi }}
+      {{ translate('home_button_add_more') }}
       }@else {
-      {{ 'home_button_view_less' | translateApi }}
+      {{ translate('home_button_view_less') }}
       }
     </button>
   </div>

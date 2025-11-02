@@ -5,7 +5,7 @@ import { BookApoointmentPopupComponent } from '../../../book-appointment';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { UploadAppsHeaderConfig } from '../../../urgent-appointment';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-chat-doctor-card',
@@ -13,14 +13,21 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
   imports: [
     TranslateModule,
     NgOptimizedImage,
-    CommonModule,
-    TranslateApiPipe
+    CommonModule
   ],
   templateUrl: './chat-doctor-card.component.html',
   styleUrls: ['./chat-doctor-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatDoctorCardComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   // Use a union type for item to be explicit about expected types.
   @Input({ required: true }) item!: IGlobalDoctorContactInfoModel | IDoctorItem | any;
   @Input() isUploadApp: boolean = false;

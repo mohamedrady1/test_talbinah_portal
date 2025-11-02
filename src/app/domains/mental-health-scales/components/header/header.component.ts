@@ -4,13 +4,13 @@ import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import { headerConfig } from '../../models';
 import { LazyLoadImageDirective } from '../../../../common/core/directives/lazyloading/lazy-load-image.directive';
 import { Router } from '@angular/router';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [TranslateModule, NgOptimizedImage, LazyLoadImageDirective,
-    TranslateApiPipe
+    
   ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],

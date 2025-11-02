@@ -2,7 +2,7 @@
   <div class="reservation-package-item-form__container">
     <form class="reservation-package-item-form__form" [formGroup]="formPackage" aria-labelledby="reservationFormTitle">
       <h2 id="reservationFormTitle" class="visually-hidden">
-        {{ 'available_appointments ' | translateApi }}
+        {{ translate('available_appointments ') }}
       </h2>
 
       <div class="reservation-package-item-form__groups">
@@ -10,7 +10,7 @@
         <div class="reservation-package-item-form__group">
           <label for="date" class="reservation-package-item-form__label"
             [ngClass]="{ 'reservation-package-item-form__label--error': getError('date') }">
-            {{ 'form_date' | translateApi }}
+            {{ translate('form_date') }}
             <span class="reservation-package-item-form__required" aria-hidden="true">*</span>
           </label>
 
@@ -25,7 +25,7 @@
             <div class="reservation-package-item-form__feedback" role="status" aria-live="polite">
               @if (getError('date')) {
               <span class="reservation-package-item-form__error-message" role="alert">
-                {{ 'date_required' | translateApi }}
+                {{ translate('date_required') }}
               </span>
               }
             </div>
@@ -37,7 +37,7 @@
         <div class="reservation-package-item-form__group">
           <label for="time_id" class="reservation-package-item-form__label"
             [ngClass]="{ 'reservation-package-item-form__label--error': getError('time_id') }">
-            {{ 'available_times' | translateApi }}
+            {{ translate('available_times') }}
             <span class="reservation-package-item-form__required" aria-hidden="true">*</span>
           </label>
 
@@ -61,10 +61,10 @@
               }
             </div>
             } @else {
-            <div class="reservation-package-item-form__empty">{{ 'no_available_times' | translateApi }}</div>
+            <div class="reservation-package-item-form__empty">{{ translate('no_available_times') }}</div>
             }
             } @else {
-            <div class="reservation-package-item-form__shimmer" [attr.aria-label]="'loading_times' | translateApi">
+            <div class="reservation-package-item-form__shimmer" [attr.aria-label]="'loading_times' ">
               @for (i of [].constructor(4); track i) {
               <div class="reservation-package-item-form__shimmer-box" aria-hidden="true"></div>
               }
@@ -73,7 +73,7 @@
             <div class="reservation-package-item-form__feedback" role="status" aria-live="polite">
               @if (getError('time_id')) {
               <span class="reservation-package-item-form__error-message" role="alert">
-                {{ 'available_times_error' | translateApi }}
+                {{ translate('available_times_error') }}
               </span>
               }
             </div>
@@ -86,5 +86,5 @@
 </section>
 
 <div class="visually-hidden">
-  <p id="reservationFormTitle">{{ 'available_appointments ' | translateApi }}</p>
+  <p id="reservationFormTitle">{{ translate('available_appointments ') }}</p>
 </div>

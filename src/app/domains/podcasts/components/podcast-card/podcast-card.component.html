@@ -55,12 +55,12 @@
     @if (!hideButtonAction) {
     <div class="podcast-card__meta">
       <p class="podcast-card__meta-container">
-        {{ 'in' | translateApi }}
+        {{ 'in'  }}
         <span class="podcast-card__name">
-          {{ 'talbinah_podcast' | translateApi }}
+          {{ 'talbinah_podcast'  }}
         </span>
         @if (podcast.doctor_name) {
-        {{ 'with' | translateApi }}
+        {{ 'with'  }}
         <span class="podcast-card__guest">{{ podcast.doctor_name }}</span>
         }
         •
@@ -78,9 +78,9 @@
           </svg>
           <span class="podcast-card__duration">
             @if (!isTask) {
-            {{ podcast.duration }} {{ 'min' | translateApi }}
+            {{ podcast.duration }} {{ 'min'  }}
             }@else {
-            {{'play' | translateApi}}
+            {{'play' }}
             }
           </span>
 

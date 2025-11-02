@@ -83,12 +83,12 @@
 
             @if(item?.msgType === MeetingChatItemsTypes.RECOMMEND){
             <div class="recommend">
-              {{ 'chat_recommend' | translateApi }}
+              {{ translate('chat_recommend') }}
             </div>
             }
             @if(item?.msgType === MeetingChatItemsTypes.TRANSFERRED){
             <div class="transferred">
-              {{ 'chat_transferred' | translateApi }}
+              {{ translate('chat_transferred') }}
             </div>
             }
 
@@ -96,7 +96,7 @@
             <div class="homework">
               <div class="homework__label">
                 <span class="homework__text">
-                  {{ 'mission' | translateApi }}
+                  {{ translate('mission') }}
                 </span>
               </div>
 
@@ -192,10 +192,10 @@
                 </span>
                 <span>
                   @if (item.senderId == this.currentReservationData?.user?.id) {
-                  {{ 'deleted_by_me' | translateApi}}
+                  {{ translate('deleted_by_me') }}
                   }
                   @else if (item.senderId == this.currentReservationData?.doctor?.id) {
-                  {{ 'deleted_by_doctor' | translateApi}}
+                  {{ translate('deleted_by_doctor') }}
                   {{ currentReservationData?.doctor?.full_name ?? '' }}
                   }
                 </span>

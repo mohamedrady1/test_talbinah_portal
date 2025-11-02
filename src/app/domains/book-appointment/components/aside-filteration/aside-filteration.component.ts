@@ -32,7 +32,7 @@ import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { AppointmentType, appointmentTypesConfig } from '../../configs';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 export interface AsideFilterationFormModel {
   specialty: number | null;
@@ -55,13 +55,17 @@ export interface AsideFilterationFormModel {
     DynamicAccordionItemComponent,
     AsideFilterationSkeletonComponent,
     AutoExactHeightDirective,
-    TranslateApiPipe
+    
   ],
   templateUrl: './aside-filteration.component.html',
   styleUrls: ['./aside-filteration.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AsideFilterationComponent implements OnInit, AfterViewInit, OnChanges {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   private _ActivatedRoute = inject(ActivatedRoute);
 
   // Signal for query param value
@@ -234,3 +238,4 @@ export class AsideFilterationComponent implements OnInit, AfterViewInit, OnChang
     document.body.style.overflow = this.isFilterDrawerOpen() ? 'hidden' : '';
   }
 }
+

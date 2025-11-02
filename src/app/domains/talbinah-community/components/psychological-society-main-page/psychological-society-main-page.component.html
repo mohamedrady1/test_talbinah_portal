@@ -54,9 +54,9 @@
           </span>
           <span class="button-text">
             @if (isLoadingMorePosts()) {
-            {{'in_progress' | translateApi}}
+            {{ translate('in_progress') }}
             } @else {
-            {{'load_more' | translateApi}}
+            {{ translate('load_more') }}
             }
           </span>
         </button>
@@ -64,7 +64,7 @@
       }
       <div class="my-psychological-society--posts__recommended" style="display: none;">
         <p>
-          {{"people_with_your_condition_also_read_this"|translateApi}}
+          {{ translate("people_with_your_condition_also_read_this") }}
         </p>
         <div class="my-psychological-society--posts__recommended--list">
           @for (postItem of allPostsList(); track postItem.id) { <app-psychological-society-card
@@ -95,7 +95,7 @@
     <div class="notification">
       <div class="notification__title">
         <p>
-          {{"notification2"|translateApi}}
+          {{ translate("notification2") }}
         </p>
       </div>
       <div class="notification__list">
@@ -114,7 +114,7 @@
         }
         @if (notificationsList().length > 5) {
         <button class="notification__show-more" (click)="showAllNotifications()">
-          {{"show_more"|translateApi}}
+          {{ translate("show_more") }}
         </button>
         }
         }

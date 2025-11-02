@@ -16,7 +16,7 @@ import { IGlobalReservationModel } from '../../models';
 import { DatePickerModule } from 'primeng/datepicker';
 import { extractDayIdFromDateString } from '../../../payments';
 import { PrimeSelectFilterFocusDirective } from '../../../../common/core/directives/prime-select-filter-focus.directive';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 // Import the new utility function
 
@@ -49,7 +49,7 @@ export const ChooseDateEmptyState: EmptyStateConfig = {
     EmptyStateCardComponent,
     ErrorStateCardComponent,
     PrimeSelectFilterFocusDirective,
-    TranslateApiPipe
+    
   ],
   templateUrl: './schedule-appointment.component.html',
   styleUrls: ['./schedule-appointment.component.scss'],
@@ -57,6 +57,10 @@ export const ChooseDateEmptyState: EmptyStateConfig = {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScheduleAppointmentComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   // Initialize with an empty array. It will be populated dynamically.
   protected disabledWeekDays: number[] = [];
 
@@ -382,3 +386,4 @@ export class ScheduleAppointmentComponent {
     return control?.invalid && (control?.touched || control?.dirty) ? control.errors : null;
   }
 }
+

@@ -20,11 +20,11 @@
           </div>
           <button (click)="likePostComment(comment)">
             {{ (comment.is_liked?.id == 1 ? 'unlike' :
-            'like2') | translateApi }}
+            'like2') }}
           </button>
           @if (false) {
           <button (click)="toggleReplyBox()">
-            {{"replay"|translateApi}}
+            {{ translate("replay") }}
           </button>
           }
         </div>
@@ -43,8 +43,8 @@
       </div>
       @if (comment.replies && comment.replies.length) {
       <button class="toggle-replies-btn" (click)="toggleReplies()">
-        {{ showReplies() ? ('hide_replies' | translateApi) :
-        ('show_all_replies' | translateApi) }}
+        {{ showReplies() ? ('hide_replies' ) :
+        ('show_all_replies' ) }}
       </button>
       }
 

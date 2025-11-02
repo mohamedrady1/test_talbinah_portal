@@ -16,16 +16,16 @@
           </svg>
         </span>
         <span>
-          {{ 'select_package_session_appointments' | translateApi }}
+          {{ translate('select_package_session_appointments') }}
           <span class="available-packages-storing__number">{{ currentStep() }}</span>
-          {{ 'from' | translateApi }}
+          {{ translate('from') }}
           <span class="available-packages-storing__number">{{ data?.number_of_reservations }}</span>
-          {{ 'sessions_can_be_modified_later' | translateApi }}
+          {{ translate('sessions_can_be_modified_later') }}
         </span>
       </div>
 
       <!-- <div class="available-packages-storing__steps-label">
-        {{ 'you_can_edit_appointments_later' | translateApi }}
+        {{ translate('you_can_edit_appointments_later') }}
       </div> -->
     </div>
 
@@ -38,10 +38,10 @@
 
     <div class="available-packages-storing__actions">
       <button type="button" class="btn btn--outline" (click)="isFirstStep() ? onCloseClick() : back()">
-        {{ isFirstStep() ? ('close' | translateApi) : ('back' | translateApi) }}
+        {{ isFirstStep() ? translate('close') : translate('back') }}
       </button>
       <button type="button" class="btn btn--solid" (click)="continue()">
-        {{ isFinalStep() ? ('confirm' | translateApi) : ('next' | translateApi) }}
+        {{ isFinalStep() ? translate('confirm') : translate('next') }}
       </button>
     </div>
   </div>

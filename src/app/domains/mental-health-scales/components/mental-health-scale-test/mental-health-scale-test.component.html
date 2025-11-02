@@ -12,17 +12,17 @@
       </p>
       <div class="quiz__length">
         <p>
-          {{ 'finished' | translateApi }}
+          {{ translate('finished') }}
           <span>
             {{ currentIndex() }}
-            {{ 'test' | translateApi }}
+            {{ translate('test') }}
           </span>
-          {{ 'From' | translateApi }}
+          {{ translate('From') }}
           <span>
             {{ questions().length - 1 }}
-            {{ 'tests' | translateApi }}
+            {{ translate('tests') }}
           </span>
-          {{ 'remaining_to_complete_journey' | translateApi }}
+          {{ translate('remaining_to_complete_journey') }}
           🌿
         </p>
       </div>
@@ -62,23 +62,23 @@
       </li>
       }
       @if(validationError()) {
-      <div class="quiz__error">{{ validationError() | translateApi }}</div>
+      <div class="quiz__error">{{ validationError() }}</div>
       }
     </ul>
 
     <div class="quiz__navigation">
       @if (currentIndex() > 0) {
       <button class="quiz__btn outline" type="button" (click)="goPrevious()">
-        {{'previous'|translateApi}}
+        {{ translate('previous') }}
       </button>
       }
       @if (currentIndex() < questions().length - 1) { <button class="quiz__btn" type="button" (click)="goNext()">
-        {{'next'|translateApi}}
+        {{ translate('next') }}
         </button>
         } @else {
         <button class="quiz__btn" type="button" (click)="goNext()"
           [disabled]="_CreateMentalHealthScaleFacade.isCreatingScale()">
-          {{'confirm'|translateApi}}
+          {{ translate('confirm') }}
         </button>
         }
     </div>

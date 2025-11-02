@@ -7,7 +7,7 @@ import { ChatAppointmentMenuItemActionsConfig, SessionDetailsModalComponent, APP
 import { IGlobalReservationModel, IAppointmentCategory } from '../../../appointments/models';
 import { BookApoointmentPopupComponent } from '../../../book-appointment';
 import { Router } from '@angular/router';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-visit-report-card',
   standalone: true,
@@ -15,7 +15,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     TranslateModule,
     CommonModule,
     ActionsDropdownMenuComponent,
-    TranslateApiPipe
+    
   ],
   templateUrl: './visit-report-card.component.html',
   styleUrls: ['./visit-report-card.component.scss'],
@@ -23,6 +23,10 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VisitReportCardComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   /** Exposed CardType enum for template usage. */
   protected readonly cardTypes = CardType;
 
@@ -270,3 +274,4 @@ export class VisitReportCardComponent {
     });
   }
 }
+

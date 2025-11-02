@@ -18,16 +18,24 @@ import { UrgentAppointmentOpenService } from '../../../urgent-appointment/servic
 import { SeminarItemFacade } from '../../../../domains/support-groups/services/seminar-item.facade'
 import { TherapeuticProgramItemFacade } from '../../../../domains/therapeutic-programs/services/therapeutic-program-item.facade';
 import { ReservationDetailsFacade } from '../../../../domains/appointments/services/reservation-details.facade';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-status-info',
   standalone: true,
-  imports: [TranslateModule, CommonModule, TranslateApiPipe],
+  imports: [TranslateModule, CommonModule],
   templateUrl: './status-info.component.html',
   styleUrls: ['./status-info.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatusInfoComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   private readonly nav = useNavigation();
   private readonly modalService = inject(ModalService);
   protected readonly seminarFacade = inject(SeminarItemFacade);

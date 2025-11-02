@@ -24,7 +24,7 @@
           </div>
           <div class="treatment-program-information--cards__card--content">
             <p class="treatment-program-information--cards__card--content--title">
-              {{ 'sessions' | translateApi }}
+              {{ translate('sessions') }}
             </p>
             <p class="treatment-program-information--cards__card--content--description">
               {{ programItem()?.data?.sessions_count }}
@@ -50,7 +50,7 @@
           @if (programItem()?.data?.seats_label) {
           <div class="treatment-program-information--cards__card--content">
             <p class="treatment-program-information--cards__card--content--title">
-              {{ 'reminder_seats' | translateApi }}
+              {{ translate('reminder_seats') }}
             </p>
             <p class="treatment-program-information--cards__card--content--description"
               style="color: var(--Success-primary);">
@@ -85,7 +85,7 @@
           </div>
           <div class="treatment-program-information--cards__card--content">
             <p class="treatment-program-information--cards__card--content--title">
-              {{ 'registered' | translateApi }}
+              {{ translate('registered') }}
             </p>
             <p class="treatment-program-information--cards__card--content--description"
               style=" color: var(--Warning-primary);">
@@ -100,18 +100,18 @@
           <div class="treatment-program-details__about-program--content">
             <div class="treatment-program-details__about-program--content__header">
               <p class="treatment-program-details__about-program--content__header--title">
-                {{ 'about_program' | translateApi }}
+                {{ translate('about_program') }}
               </p>
               <div class="treatment-program-details__about-program--content__header--period">
                 <p>
                   <span>
-                    {{ 'program_duration' | translateApi }}
+                    {{ translate('program_duration') }}
                   </span>
                   <span>
                     {{ programItem()?.data?.programme_period }}
                   </span>
                   <span>
-                    {{'day' | translateApi}}
+                    {{translate('day')}}
                   </span>
                 </p>
               </div>
@@ -143,11 +143,10 @@
       <div class="treatment-program-details__program-stages">
         <div class="treatment-program-details__program-stages__header">
           <p class="treatment-program-details__program-stages__header--title">
-            {{'therapeuticPrograms.programPhases' | translate}}
+            {{translate('therapeuticPrograms.programPhases')}}
           </p>
           <p class="treatment-program-details__program-stages__header--description">
-            {{ 'therapeuticPrograms.program_phases_description' | translate:{ phasesCount:
-            programItem()?.data?.phases_count || 0} }}
+            {{ translate('therapeuticPrograms.program_phases_description') }}
           </p>
         </div>
 
@@ -169,7 +168,7 @@
             <div class="treatment-program-details__program-stages__card--content">
               <p class="treatment-program-details__program-stages__card--content--title">
                 <span>
-                  {{'phase' | translateApi}}
+                  {{translate('phase')}}
                 </span>
                 <span>
                   {{ i + 1 }} :
@@ -193,13 +192,13 @@
         @if ( programItem()?.data?.is_purchased && programItem()?.data?.url) {
         <button (click)="openSubscriptionModal()" class="btn"
           [ngClass]="{'btn--outline': data?.item?.is_purchased,'btn--solid':!data?.item?.is_purchased}">
-          {{'supportGroups.programLink' | translateApi}}
+          {{ translate('supportGroups.programLink') }}
         </button>
         }
         @else if(!programItem()?.data?.is_purchased ) {
         <button (click)="openSubscriptionModal()" class="btn btn--sticy"
           [ngClass]="{'btn--outline': data?.item?.is_purchased,'btn--solid':!data?.item?.is_purchased}">
-          {{'program_subscription' | translateApi}}
+          {{translate('program_subscription')}}
         </button>
         }
       </div>
@@ -220,13 +219,13 @@
           @if (programItem()?.data?.is_purchased && programItem()?.data?.url) {
           <button (click)="openSubscriptionModal()" class="btn"
             [ngClass]="{'btn--outline': data?.item?.is_purchased,'btn--solid':!data?.item?.is_purchased}">
-            {{'supportGroups.programLink' | translateApi}}
+            {{translate('supportGroups.programLink')}}
           </button>
           }
           @else if(!programItem()?.data?.is_purchased ) {
           <button (click)="openSubscriptionModal()" class="btn"
             [ngClass]="{'btn--outline': data?.item?.is_purchased,'btn--solid':!data?.item?.is_purchased}">
-            {{'program_subscription' | translateApi}}
+            {{translate('program_subscription')}}
           </button>
           }
         </div>

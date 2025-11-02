@@ -1,4 +1,4 @@
-import { TranslateApiPipe } from './../../../../common/core/translations/pipes/translate-api.pipe';
+
 import { Component, inject, Input, OnInit, OnDestroy, signal, effect, ChangeDetectionStrategy, PLATFORM_ID, computed } from '@angular/core';
 import { ProgramSubscriptionInformationCardComponent } from '../program-subscription-information-card';
 import { TherapeuticProgramItemFacade, TherapeuticProgramsFacade } from '../../services';
@@ -12,10 +12,10 @@ import { NationalIdVerificationComponent } from '../../../settings';
 import { TherapeuticProgramsRoutesEnum } from '../../constants';
 import { getErrorForProgramSubscription } from '../../configs';
 import { PaymentPopupComponent } from '../../../payments';
-import { TranslateModule } from '@ngx-translate/core';
 import { AllDoctorsComponent } from '../all-doctors';
 import { ITherapeuticProgram } from '../../models';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 import { Router } from '@angular/router';
 
 export const DoctorsHeader: ICardHeaderConfig = {
@@ -28,15 +28,12 @@ export const DoctorsHeader: ICardHeaderConfig = {
   selector: 'app-program-subscription-popup',
   standalone: true,
   imports: [
-    TranslateModule,
     CommonModule,
     AutoExactHeightDirective,
     ProgramSubscriptionInformationCardComponent,
     DoctorCardForBookingComponent,
     CardHeaderComponent,
     ErrorStateCardComponent,
-
-    TranslateApiPipe
   ],
   templateUrl: './program-subscription-popup.component.html',
   styleUrls: ['./program-subscription-popup.component.scss'],
@@ -54,6 +51,11 @@ export class ProgramSubscriptionPopupComponent implements OnInit, OnDestroy {
   private readonly _programItemFacade = inject(TherapeuticProgramItemFacade);
   private readonly userContext = inject(UserContextService);
   private readonly roleGuardService = inject(RoleGuardService);
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
 
   // --- Inputs as Signals ---
   @Input() set data(value: { item?: ITherapeuticProgram, paymentStatus?: boolean | null } | undefined) {

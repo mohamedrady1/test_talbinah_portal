@@ -5,17 +5,21 @@ import { ModalService } from '../../../../../shared';
 import { GiftAcceptModalComponent } from '../../gift-accept-modal';
 import { GiftCancelModalComponent } from '../../gift-cancel-modal';
 import { IGiftSenderDto } from '../../../dtos';
-import { TranslateApiPipe } from '../../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../../common/core/translations/services';
 
 @Component({
     selector: 'app-gift-card',
     standalone: true,
-    imports: [CommonModule, TranslateModule, TranslateApiPipe],
+    imports: [CommonModule, TranslateModule,],
     templateUrl: './gift-card.component.html',
     styleUrls: ['./gift-card.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GiftCardComponent {
+    private readonly translationsFacade = inject(TranslationsFacade);
+    protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+    protected translate(key: string): string { return this.translationsFacade.translate(key); }
+
     @Input() item!: IGiftSenderDto;
     @Input() type: 'receiver' | 'sender' = 'receiver';
     private modalService = inject(ModalService);
@@ -64,4 +68,5 @@ export class GiftCardComponent {
         });
     }
 
-} 
+}
+

@@ -1,10 +1,10 @@
 <main class="vat-national-id-verification" role="main">
     <section class="vat-national-id-verification__container">
         <div class="vat-national-id-verification__header">
-            ❤️ {{ 'your_id_number' | translateApi }}
+            ❤️ {{ translate('your_id_number') }}
         </div>
         <div class="vat-national-id-verification__description">
-            {{ 'enter_nationalId_for_vat' | translateApi }}
+            {{ translate('enter_nationalId_for_vat') }}
         </div>
         <form class="general-form-wrapper" [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="general-form-wrapper__groups">
@@ -12,7 +12,7 @@
                     <div class="general-form-wrapper__label-group">
                         <label for="nationalIdInput" class="general-form-wrapper__label"
                             style="color: var(--Dark-DARK, #1D1F1F); font-size: 0.875rem; font-weight: 400;">
-                            {{'ID_number'|translateApi}}
+                            {{ translate('ID_number') }}
                             <span class="general-form-wrapper__required" aria-hidden="true">*</span>
                         </label>
                     </div>
@@ -42,15 +42,14 @@
                             </svg>
                         </span>
                         <input id="nationalIdInput" type="text" formControlName="national_id"
-                            class="custom-input-wrapper__input" [placeholder]="'enter_id' | translateApi"
-                            aria-required="true"
+                            class="custom-input-wrapper__input" [placeholder]="'enter_id' " aria-required="true"
                             [attr.aria-invalid]="getFormControl('national_id').invalid && getFormControl('national_id').touched ? 'true' : 'false'"
                             aria-describedby="nationalIdError" autocomplete="one-time-code" />
                     </div>
                     @if (getFormControl('national_id').invalid && getFormControl('national_id').touched) {
                     <small id="nationalIdError" class="general-form-wrapper__error-message" role="alert">
                         {{ getValidationErrorMessage('national_id', [
-                        { errorName: 'required', errorMessage: ('national_id_required' | translateApi) },
+                        { errorName: 'required', errorMessage: ('national_id_required' ) },
                         ]) }}
                     </small>
                     }
@@ -60,7 +59,7 @@
                     <div class="general-form-wrapper__label-group">
                         <label for="birthDateInput" class="general-form-wrapper__label"
                             style="color: var(--Dark-DARK, #1D1F1F); font-size: 0.875rem; font-weight: 400;">
-                            {{ 'date_of_birth' | translateApi }}<span class="general-form-wrapper__required"
+                            {{ translate('date_of_birth') }}<span class="general-form-wrapper__required"
                                 aria-hidden="true">*</span>
                         </label>
                     </div>
@@ -99,15 +98,15 @@
                             iconDisplay="input" dateFormat="yy-mm-dd" [maxDate]="maxBirthDate" [readonlyInput]="true"
                             [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" appendTo="body"
                             class="custom-input-wrapper__input custom-input-wrapper__input--p-datepicker"
-                            [placeholder]="'choose_your_date_of_birth' | translateApi" aria-required="true"
+                            [placeholder]="'choose_your_date_of_birth' " aria-required="true"
                             [attr.aria-invalid]="getFormControl('birth_date').invalid && getFormControl('birth_date').touched ? 'true' : 'false'"
                             aria-describedby="birthDateError"></p-datepicker>
                     </div>
                     @if (getFormControl('birth_date').invalid && getFormControl('birth_date').touched) {
                     <small id="birthDateError" class="general-form-wrapper__error-message" role="alert">
                         {{ getValidationErrorMessage('birth_date', [
-                        { errorName: 'required', errorMessage: ('date_of_birth_required' | translateApi) },
-                        { errorName: 'maxAge', errorMessage: ('birthday_max_age' | translateApi) }
+                        { errorName: 'required', errorMessage: ('date_of_birth_required' ) },
+                        { errorName: 'maxAge', errorMessage: ('birthday_max_age' ) }
                         ]) }}
                     </small>
                     }
@@ -118,14 +117,14 @@
     </section>
     <div class="general-form-wrapper__actions">
         <button id="submit-verification-btn" (click)="onSubmit()" class="btn btn--solid" [disabled]="isLoading()"
-            [attr.aria-label]="isLoading() ? ('in_progress' | translateApi) : ('save' | translateApi)">
+            [attr.aria-label]="isLoading() ? ('in_progress' ) : ('save' )">
             <span class="btn__label">
                 @if (isLoading()) {
-                <div class="general-form-wrapper__loading" [attr.aria-label]="'in_progress' | translateApi">
+                <div class="general-form-wrapper__loading" [attr.aria-label]="'in_progress' ">
                 </div>
-                {{ 'in_progress' | translateApi }}
+                {{ translate('in_progress') }}
                 } @else {
-                {{ 'save' | translateApi }}
+                {{ translate('save') }}
                 }
             </span>
         </button>

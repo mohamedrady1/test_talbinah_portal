@@ -23,7 +23,7 @@ import { FirestoreService, ReservationModel } from "../../../../common/core/serv
 import { generateInitials, shouldShowImage, getAvatarBackgroundColor } from '../../../../shared';
 import { PodcastCardForMeetingChatComponent } from '../podcast-card-for-meeting-chat';
 import { ChatMessageVideoComponent } from '../../../talbinah-bot/components/chat-message-video';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-chat-meeting-messages',
@@ -49,13 +49,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     ChatMessageTextComponent,
     EmptyStateCardComponent,
     PodcastCardForMeetingChatComponent,
-    TranslateApiPipe
+    
   ],
   templateUrl: './chat-meeting-messages.component.html',
   styleUrls: ['./chat-meeting-messages.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatMeetingMessagesComponent implements AfterViewInit, OnDestroy {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   private readonly _modalService = inject(ModalService);
@@ -432,3 +436,4 @@ export class ChatMeetingMessagesComponent implements AfterViewInit, OnDestroy {
     img.src = fallbackSrc;
   }
 }
+

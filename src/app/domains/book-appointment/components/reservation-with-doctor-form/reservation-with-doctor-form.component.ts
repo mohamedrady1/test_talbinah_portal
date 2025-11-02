@@ -52,7 +52,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { SelectModule } from 'primeng/select';
 import { RoleGuardService } from '../../../authentication';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 export const DoctorReservationSlotsEmptyState: EmptyStateConfig = {
   imageUrl: null,
@@ -80,13 +80,17 @@ export const ChooseDateReservationEmptyState: EmptyStateConfig = {
     TranslateModule,
     SelectModule,
     DatePickerModule,
-    TranslateApiPipe
+    
   ],
   styleUrls: ['./reservation-with-doctor-form.component.scss'],
   templateUrl: './reservation-with-doctor-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReservationWithDoctorFormComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   @Input({ required: true }) doctor!: IGlobalDoctorContactInfoModel;
 
   private readonly _ModalService = inject(ModalService);
@@ -586,3 +590,4 @@ export class ReservationWithDoctorFormComponent {
     return 'form.genericError';
   }
 }
+

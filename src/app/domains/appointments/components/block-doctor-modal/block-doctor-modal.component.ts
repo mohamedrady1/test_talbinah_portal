@@ -4,14 +4,13 @@ import { IBlockUserActionData, ICalcReservationCancelPriceData } from '../../dto
 import { IGlobalReservationModel } from '../../models';
 import { TranslateModule } from '@ngx-translate/core';
 import { IGlobalDoctorContactInfoModel, Logger } from '../../../../common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-block-doctor-modal',
   standalone: true,
   imports: [
-    TranslateModule,
-    TranslateApiPipe
+    TranslateModule
   ],
   templateUrl: './block-doctor-modal.component.html',
   styleUrls: ['./block-doctor-modal.component.scss'],
@@ -24,6 +23,14 @@ export class BlockDoctorModalComponent {
   @Input() protected doctor: IGlobalDoctorContactInfoModel | null = null;
 
   @Output() protected closed = new EventEmitter<IBlockUserActionData | null>();
+
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
 
   public readonly _BlockUserFacade = inject(BlockUserFacade);
   constructor() {

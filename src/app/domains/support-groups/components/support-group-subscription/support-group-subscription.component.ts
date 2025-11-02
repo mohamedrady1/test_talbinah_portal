@@ -9,7 +9,7 @@ import { getErrorTherapeuticPrograms } from '../../configs/error-state.config';
 import { ModalService } from '../../../../shared/services/model.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs'; // ⬅️ Import Subscription for cleanup
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-support-group-subscription',
@@ -18,7 +18,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
     CommonModule,
     TranslateModule,
     ErrorStateCardComponent,
-    TranslateApiPipe
+    
   ],
   templateUrl: './support-group-subscription.component.html',
   styleUrls: ['./support-group-subscription.component.scss'],
@@ -27,6 +27,10 @@ import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
 })
 // ⬅️ Add lifecycle interfaces
 export class SupportGroupSubscriptionComponent implements OnDestroy {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   private readonly datePipe = inject(DatePipe);
   private readonly _modalService = inject(ModalService);
   private readonly _SeminarItemFacade = inject(SeminarItemFacade);
@@ -246,3 +250,4 @@ export class SupportGroupSubscriptionComponent implements OnDestroy {
     return rawTime ? this.datePipe.transform(new Date(`1970-01-01T${rawTime}`), 'hh:mm a', undefined, this.currentLanguage) : null;
   }
 }
+

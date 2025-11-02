@@ -14,7 +14,7 @@ import { FirestoreService, IGlobalPodcastItemModel, Logger, ReservationModel } f
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { ReservationHomeworkFacade } from '../../services';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-podcast-card-for-meeting-chat',
@@ -22,13 +22,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
   imports: [
     TranslateModule,
     CommonModule,
-    TranslateApiPipe
+    
   ],
   templateUrl: './podcast-card-for-meeting-chat.component.html',
   styleUrls: ['./podcast-card-for-meeting-chat.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PodcastCardForMeetingChatComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   @Input({ required: true }) item!: IGlobalPodcastItemModel | null;
 
   @Input() isTask!: { status: boolean } | null;
@@ -160,3 +164,4 @@ export class PodcastCardForMeetingChatComponent {
     Logger.debug('PodcastCardForMeetingChatComponent => isTask: ', { isTask: this.isTask, item: this.item });
   }
 }
+

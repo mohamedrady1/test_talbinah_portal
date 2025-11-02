@@ -13,7 +13,7 @@ import { UserIdentityStore } from '../../routes/user-identity.service';
 import { Router } from '@angular/router';
 import { TalbinahCommunityRoutesEnum } from '../../constants';
 import { finalize, take } from 'rxjs';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 // --- Helper interfaces for Empty/Error States ---
 
@@ -41,7 +41,6 @@ export const getUsersIFollowError = (retryAction: () => void): ErrorStateConfig 
     EmptyStateComponent,
     ErrorStateComponent,
     PaginationListingComponent,
-    TranslateApiPipe
   ],
   templateUrl: './users-follow.component.html',
   styleUrls: ['./users-follow.component.scss'],
@@ -56,7 +55,11 @@ export class UsersFollowComponent implements OnInit {
   private readonly _ToastService = inject(ToastService);
   private _profileTriggerService = inject(ProfileTriggerService);
   private readonly _Router = inject(Router);
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   protected isBrowser(): boolean {
     return isPlatformBrowser(this.platformId);
   }

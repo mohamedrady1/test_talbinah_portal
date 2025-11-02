@@ -52,7 +52,7 @@ import { UserIdentityStore } from '../../routes/user-identity.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { RoleGuardService, UserContextService } from '../../../authentication';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-psychological-society-main-page',
   standalone: true,
@@ -68,8 +68,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     PsychologicalSocietyCardShemmerComponent,
     EmptyStateComponent,
     ErrorStateComponent,
-    NotificationSkeletonComponent,
-    TranslateApiPipe
+    NotificationSkeletonComponent
   ],
   templateUrl: './psychological-society-main-page.component.html',
   styleUrls: ['./psychological-society-main-page.component.scss']
@@ -84,7 +83,11 @@ export class PsychologicalSocietyMainPageComponent implements OnInit, OnDestroy 
   // SSR-safe browser check
   protected isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private readonly _RoleGuardService = inject(RoleGuardService);
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   // ----- Injected services -----
   private readonly _StorageService = inject(StorageService);
   private readonly _UserContextService = inject(UserContextService);

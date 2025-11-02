@@ -41,12 +41,12 @@ import { UserAuthenticationApiClientProvider } from '../../clients';
 import { IResetPasswordRequestDto, IResetPasswordResponseDto } from '../../dtos';
 import { MainPageRoutesEnum } from '../../../../main-page';
 import { RoleGuardService, UserContextService } from '../../services';
-import { TranslateApiPipe } from '../../../../../common/core/translations/pipes';
+import { TranslationsFacade } from '../../../../../common/core/translations/services';
 
 @Component({
     selector: 'app-new-reset-password',
     standalone: true,
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule, SvgIconComponent, TranslateApiPipe],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule, SvgIconComponent],
     templateUrl: './new-reset-password.component.html',
     styleUrls: ['./new-reset-password.component.scss']
 })
@@ -62,7 +62,11 @@ export class NewResetPasswordComponent implements OnInit { // Implement OnInit
     protected readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
     private readonly _router = inject(Router);
 
-
+    private readonly translationsFacade = inject(TranslationsFacade);
+    protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+    protected translate(key: string): string {
+        return this.translationsFacade.translate(key);
+    }
     private readonly modalService = inject(ModalService);
 
     private readonly fb = inject(FormBuilder);

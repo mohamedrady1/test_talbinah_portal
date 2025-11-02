@@ -1,17 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, effect, EventEmitter, inject, Input, Output, signal } from '@angular/core';
-import { AutoExactHeightDirective, FirestoreService, IGlobalUserContactInfoModel, Logger, TranslateApiPipe } from '../../../../common';
+import { AutoExactHeightDirective, FirestoreService, IGlobalUserContactInfoModel, Logger } from '../../../../common';
 import { PaginationListingComponent, SelectionOptionComponent, ErrorStateCardComponent, EmptyStateCardComponent, LocalSearchComponent, ISelectionOptionConfig } from '../../../../shared';
 import { AppointmentCardSkeletonComponent } from '../../../appointments';
 import { VisitsReportsListFacade, visitReportsEmptyConfig, visitReportsErrorConfig } from '../../../settings';
 import { ITechnicalSupportChatDto } from '../../dtos';
 import { CustomersSupportFacade, AssignToCustomerSupportFacade } from '../../services';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-assign-to-customer-support',
   standalone: true,
   imports: [
-    TranslateApiPipe,
     CommonModule,
 
     AutoExactHeightDirective,
@@ -28,6 +28,14 @@ import { CustomersSupportFacade, AssignToCustomerSupportFacade } from '../../ser
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AssignToCustomerSupportComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   @Input({ required: true }) data: { chatItem: ITechnicalSupportChatDto | null, isSupport?: boolean } = { chatItem: null };
   @Output() closed = new EventEmitter<{ isRequestSuccessed?: boolean } | void>();
 

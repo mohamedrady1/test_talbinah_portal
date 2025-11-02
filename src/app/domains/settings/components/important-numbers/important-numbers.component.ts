@@ -12,7 +12,7 @@ import { ImportantNumbersFacade } from '../../services';
 import { ImportantNumberItem } from '../../dtos/responses/important-numbers-response.dto';
 import { AutoExactHeightDirective, Logger } from '../../../../common';
 import { getImportantNumbersErrorConfig, ImportantNumbersEmptyConfig } from '../../configs';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-important-numbers',
@@ -26,13 +26,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     EmptyStateCardComponent,
     LocalSearchComponent,
     AutoExactHeightDirective,
-    TranslateApiPipe
+    
   ],
   templateUrl: './important-numbers.component.html',
   styleUrls: ['./important-numbers.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ImportantNumbersComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   protected readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private readonly importantNumbersFacade = inject(ImportantNumbersFacade);
 
@@ -78,3 +82,4 @@ export class ImportantNumbersComponent implements OnInit {
     this._localSearchTerm.set(searchTerm);
   }
 }
+

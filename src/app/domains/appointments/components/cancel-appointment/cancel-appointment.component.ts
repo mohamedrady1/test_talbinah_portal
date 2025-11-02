@@ -11,7 +11,7 @@ import { ALL_INPUT_TYPES, IFormInputConfig } from '../../../../shared';
 import { CancelAppoitmentFormConfig } from '../../configs';
 import { IGlobalReservationModel } from '../../models';
 import { Logger } from '../../../../common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 // --- Interfaces for better type safety ---
 
@@ -34,8 +34,7 @@ export const CANCEL_APPOINTMENT_FORM_CONFIG: IFormInputConfig[] = CancelAppoitme
     TranslateModule,
     CommonModule,
     SelectModule,
-    FormsModule,
-    TranslateApiPipe
+    FormsModule
   ],
   templateUrl: './cancel-appointment.component.html',
   styleUrls: ['./cancel-appointment.component.scss'],
@@ -44,6 +43,13 @@ export const CANCEL_APPOINTMENT_FORM_CONFIG: IFormInputConfig[] = CancelAppoitme
 export class CancelAppointmentComponent implements OnInit {
   private readonly fb: FormBuilder = inject(FormBuilder);
   protected readonly cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
+  private readonly translationsFacade = inject(TranslationsFacade);
+
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
 
   @Input() public data?: { item: IGlobalReservationModel, responseCancel: { status?: boolean, response: ICalcReservationCancelPriceData | null } } | null;
 

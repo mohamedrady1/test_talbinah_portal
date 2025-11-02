@@ -59,7 +59,7 @@
           fill="#47586E" />
       </svg>
       <span>{{ item.sessions_count }}</span>
-      <span class="sr-only">sessions</span> <span>{{ 'sessions' | translateApi }}</span>
+      <span class="sr-only">sessions</span> <span>{{ translate('sessions') }}</span>
     </div>
 
     @if (item?.seats_label) {
@@ -77,7 +77,7 @@
           fill="#47586E" />
       </svg>
       <span>{{ item?.seats_label || '' }}</span>
-      <!-- <span class="sr-only">seats remaining</span> <span>{{ 'reminder_seats' | translateApi }}</span> -->
+      <!-- <span class="sr-only">seats remaining</span> <span>{{ translate('reminder_seats') }}</span> -->
     </div>
     }
 
@@ -104,7 +104,7 @@
           fill="#47586E" />
       </svg>
       <span>{{ item.usage_number }}</span>
-      <span class="sr-only">people registered</span> <span>{{ 'registered' | translateApi }}</span>
+      <span class="sr-only">people registered</span> <span>{{ translate('registered') }}</span>
     </div>
   </div>
 </div>

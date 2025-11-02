@@ -53,7 +53,7 @@
         <button id="skip-verification-btn" type="button" class="btn btn--outline" (click)="onSkip()"
           [disabled]="isLoading()" [attr.aria-label]="'skip' | translate">
           <span class="btn__label">
-            {{ 'skip' | translateApi }}
+            {{ translate('skip') }}
           </span>
         </button>
 
@@ -61,10 +61,10 @@
           [attr.aria-label]="isLoading() ? ('general.submitting' | translate) : ('form.verifyButtonAriaLabel' | translate)">
           <span class="btn__label">
             @if (isLoading()) {
-            <div class="general-form-wrapper__loading" [attr.aria-label]="'in_progress' | translateApi"></div>
-            {{ 'in_progress' | translateApi }}
+            <div class="general-form-wrapper__loading" [attr.aria-label]="'in_progress' "></div>
+            {{ translate('in_progress') }}
             } @else {
-            {{ 'confirm' | translateApi }}
+            {{ translate('confirm') }}
             }
           </span>
         </button>

@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, inject, effect, EffectRef, Chan
 import { StatusInfoComponent } from '../../../payments/components/status-info/status-info.component';
 import { WalletPointsToCouponFacade } from '../../services/wallet-points-to-coupon.facade';
 import { ModalService } from '../../../../shared/services/model.service';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 import { CommonModule } from '@angular/common';
 import { Logger } from '../../../../common';
 
@@ -11,13 +11,17 @@ import { Logger } from '../../../../common';
   standalone: true,
   imports: [
     CommonModule,
-    TranslateApiPipe
+    
   ],
   templateUrl: './service-modal.component.html',
   styleUrls: ['./service-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ServiceModalComponent implements OnDestroy {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   @Input() service: any;
   @Output() closed = new EventEmitter<{ status: boolean, data: any }>();
 
@@ -142,3 +146,4 @@ export class ServiceModalComponent implements OnDestroy {
     this.closed.unsubscribe();
   }
 }
+

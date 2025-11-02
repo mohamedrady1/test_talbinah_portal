@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { AutoExactHeightDirective, Logger } from '../../../../common';
 import { governmentAgenciesEmptyConfig, governmentAgenciesErrorConfig } from '../../configs';
 import { Router } from '@angular/router';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-government-agencies',
@@ -20,13 +20,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     ErrorStateCardComponent,
     EmptyStateCardComponent,
     AutoExactHeightDirective,
-    TranslateApiPipe
+    
   ],
   templateUrl: './government-agencies.component.html',
   styleUrls: ['./government-agencies.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GovernmentAgenciesComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   @Input() config!: ISettingMenuItem;
   private readonly _modalService = inject(ModalService);
   private readonly _router = inject(Router);
@@ -84,3 +88,4 @@ export class GovernmentAgenciesComponent {
     }
   }
 }
+

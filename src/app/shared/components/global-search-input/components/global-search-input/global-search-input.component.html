@@ -12,8 +12,8 @@
     </svg>
   </span>
 
-  <input type="text" [value]="inputValue()" (input)="onInput($event)" [placeholder]="config.placeholder | translateApi"
-    [attr.aria-label]="config.placeholder | translate" [disabled]="config.disabled" [autofocus]="config.autoFocus"
+  <input type="text" [value]="inputValue()" (input)="onInput($event)" [placeholder]="translate(config.placeholder)"
+    [attr.aria-label]="translate(config.placeholder)" [disabled]="config.disabled" [autofocus]="config.autoFocus"
     autocomplete="off" role="searchbox" aria-autocomplete="list" aria-controls="search-list"
     [attr.aria-activedescendant]="
       highlightedIndex() >= 0 ? 'suggestion-' + highlightedIndex() : null

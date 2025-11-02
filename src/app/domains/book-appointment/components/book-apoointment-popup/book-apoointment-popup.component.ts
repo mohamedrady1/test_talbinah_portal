@@ -49,7 +49,7 @@ import { Router } from '@angular/router';
 import { UserContextService } from '../../../authentication/user-authentication/services';
 import { RoleGuardService } from '../../../authentication/user-authentication/services';
 import { BookAppointmentRoutesEnum } from '../../constants';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-book-apoointment-popup',
   standalone: true,
@@ -69,7 +69,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     BookApoointmentPopupSkeletonComponent,
     EmptyStateCardComponent,
     SvgIconComponent,
-    TranslateApiPipe,
+    
     CommonModule
   ],
   templateUrl: './book-apoointment-popup.component.html',
@@ -90,6 +90,10 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
 })
 // ⬅️ Implement OnInit and OnDestroy
 export class BookApoointmentPopupComponent implements OnInit, OnDestroy {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   @Input({ required: false }) item!: IGlobalReservationModel;
   @Input({ required: true }) doctorId!: number | string;
 
@@ -308,3 +312,4 @@ export class BookApoointmentPopupComponent implements OnInit, OnDestroy {
       });
   }
 }
+

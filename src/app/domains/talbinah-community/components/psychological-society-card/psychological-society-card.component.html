@@ -9,7 +9,7 @@
       <div class="card__details">
         <div class="card__details--user-info">
           <span class="card__name" (click)="config?.user?.id?goToProfile(config?.user?.id ?? 0):null">
-            {{ config?.user?.dummy_name ?? ('unknown_user'|translateApi) }}
+            {{ config?.user?.dummy_name ?? translate('unknown_user') }}
           </span>
         </div>
         <div class="card__time">
@@ -33,7 +33,7 @@
         [class.disabled]="isLoadingFollow()">
         @if (isLoadingFollow()) {
         <div class="card__follow--loading" aria-label="Submit in progress">
-          {{ 'in_progress' | translateApi }}
+          {{ translate('in_progress') }}
           <span class="dot-loader"></span>
         </div>
         }
@@ -47,7 +47,7 @@
             fill="#47586E" />
         </svg>
         <p>
-          {{"follow3"|translateApi}}
+          {{ translate("follow3") }}
         </p>
         }
         @else {
@@ -68,7 +68,7 @@
         </svg>
 
         <p>
-          {{"following"|translateApi}}
+          {{ translate("following") }}
         </p>
         }
       </span>
@@ -76,7 +76,7 @@
       }
       @else if(userIdentityProfileData()?.id == config?.user?.id) {
       <span class="card__follow">
-        ({{"me"|translateApi}})
+        ({{ translate("me") }})
       </span>
       }
       }
@@ -102,7 +102,7 @@
     <div class="card__content--watch-post">
       <button (click)="emitInputClicked(config)">
         <span>
-          {{"view_post"|translateApi}}
+          {{ translate("view_post") }}
         </span>
       </button>
     </div>

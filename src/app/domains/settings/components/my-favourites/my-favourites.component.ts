@@ -11,7 +11,7 @@ import { MyFavouritesArticlesEmptyState, MyFavouritesDoctorsEmptyState, MyFavour
 import { DoctorCardForFavouriteComponent } from '../doctor-card-for-favourite';
 import { ArticleCardComponent, FavoriteArticlesFacade } from '../../../articles';
 import { PodcastCardForFavouriteComponent } from '../podcast-card-for-favourite';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-my-favourites',
@@ -27,13 +27,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     DoctorCardForFavouriteComponent,
     PodcastCardForFavouriteComponent,
     ArticleCardComponent,
-    TranslateApiPipe
+    
   ],
   templateUrl: './my-favourites.component.html',
   styleUrls: ['./my-favourites.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MyFavouritesComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   protected readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   protected readonly _FavoritePodcastsFacade = inject(FavoritePodcastsFacade);
   protected readonly _FavoriteDoctorsFacade = inject(FavoriteDoctorsFacade);
@@ -137,3 +141,4 @@ export class MyFavouritesComponent {
     return [];
   });
 }
+

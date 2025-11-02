@@ -41,7 +41,7 @@ import { RefreshUserPostsService } from '../../services';
 import { Router } from '@angular/router';
 import { MainPageRoutesEnum } from '../../../main-page';
 import { TalbinahCommunityRoutesEnum } from '../../constants';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 export interface ButtonConfig {
   id: string; // Unique identifier for the button
@@ -66,12 +66,16 @@ export interface ButtonConfig {
     VideoViewComponent,
     CreatePostButtonComponent,
     CreateReelsComponent,
-    TranslateApiPipe
+
   ],
   templateUrl: './create-psychological-society-post.component.html',
   styleUrls: ['./create-psychological-society-post.component.scss']
 })
 export class CreatePsychologicalSocietyPostComponent implements OnInit, OnDestroy {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+
   buttonConfigs: ButtonConfig[] = [
     {
       id: 'post',

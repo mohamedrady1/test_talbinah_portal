@@ -6,7 +6,7 @@ import { DoctorTicketsFacade } from '../../services/doctor-tickets.facade';
 import { StatusInfoComponent } from '../../../payments/components/status-info';
 import { ModalService } from '../../../../shared/services/model.service';
 import { ITicketCreateRequestDto } from '../../dtos/requests';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 interface ComplaintType {
     label: string;
@@ -16,12 +16,16 @@ interface ComplaintType {
 @Component({
     selector: 'app-report-complaint',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, TranslateApiPipe, DropdownModule],
+    imports: [CommonModule, ReactiveFormsModule, DropdownModule],
     templateUrl: './report-complaint.component.html',
     styleUrls: ['./report-complaint.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReportComplaintComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
     @Output() submitComplaint = new EventEmitter<any>();
     @Output() closed = new EventEmitter<void>();
 
@@ -156,3 +160,4 @@ export class ReportComplaintComponent implements OnInit {
         }
     }
 } 
+

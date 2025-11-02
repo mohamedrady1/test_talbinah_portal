@@ -5,7 +5,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { Logger } from '../../../../common';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 export const paymentMethodsEmptyState: EmptyStateConfig = {
   imageUrl: 'images/not-found/paymentMethods/no-payment.svg',
@@ -32,14 +32,20 @@ export function getPaymentMethodsError(onRetry?: () => void): ErrorStateConfig {
     ReactiveFormsModule,
     TranslateModule,
     CommonModule,
-    SvgIconComponent,
-    TranslateApiPipe
+    SvgIconComponent
   ],
   templateUrl: './payment-method.component.html',
   styleUrls: ['./payment-method.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaymentMethodComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
 
   @Input() isLoading: boolean = false;
   @Input() type: string = '';

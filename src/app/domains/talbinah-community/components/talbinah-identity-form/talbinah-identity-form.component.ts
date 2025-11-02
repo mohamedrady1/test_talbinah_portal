@@ -7,7 +7,7 @@ import { AvatarsEmptyState, IdentityFormFacade, InterestsEmptyState } from '../.
 import { getAvatarsError, getInterestsError } from '../../configs';
 import { IEmojiItem, IPostInterest } from '../../dtos';
 import { Logger } from '../../../../common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-talbinah-identity-form',
@@ -18,7 +18,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     CommonModule,
     ErrorStateComponent,
     EmptyStateComponent,
-    TranslateApiPipe
+
   ],
   templateUrl: './talbinah-identity-form.component.html',
   styleUrls: ['./talbinah-identity-form.component.scss'],
@@ -28,7 +28,11 @@ export class TalbinahIdentityFormComponent {
   private readonly fb = inject(FormBuilder);
   protected readonly _IdentityFormFacade = inject(IdentityFormFacade);
   private readonly toastService = inject(ToastService);
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   protected readonly avatarsEmptyState = AvatarsEmptyState;
   protected readonly interestsEmptyState = InterestsEmptyState;
 

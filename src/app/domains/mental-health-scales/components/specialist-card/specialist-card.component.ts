@@ -6,12 +6,12 @@ import { IDoctorItem, LocalizationService, ModalService, UploadAppsPopupComponen
 import { IGlobalDoctorContactInfoModel, Logger } from '../../../../common';
 import { BookApoointmentPopupComponent, ToggleFavoriteDoctorFacade, UploadAppsHeaderConfig } from '../../../../domains';
 import { LazyLoadImageDirective } from '../../../../common/core/directives/lazyloading/lazy-load-image.directive';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-specialist-card',
   standalone: true,
-  imports: [TranslateModule, CommonModule, NgOptimizedImage, LazyLoadImageDirective, TranslateApiPipe],
+  imports: [TranslateModule, CommonModule, NgOptimizedImage, LazyLoadImageDirective,],
   templateUrl: './specialist-card.component.html',
   styleUrls: ['./specialist-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -21,7 +21,9 @@ export class SpecialistCardComponent {
   @Input() isUploadApp: boolean = false;
   @Output() favouriteToggled = new EventEmitter<any>();
   @Output() openPopupAction = new EventEmitter<void>();
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
   protected readonly localization = inject(LocalizationService);
   protected readonly currentLang = this.localization.getCurrentLanguage();
   private readonly _ModalService = inject(ModalService);

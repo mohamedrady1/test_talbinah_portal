@@ -58,7 +58,7 @@
     </div>
     <div class="support-groups__details">
       <p>
-        {{'group_details_label2' | translateApi}}
+        {{'group_details_label2' }}
       </p>
       <div class="support-groups__details--cards">
         <div class="support-groups__details--card">
@@ -77,7 +77,7 @@
           </div>
           <div>
             <p>
-              {{'support_groups_presenter' | translateApi}}
+              {{'support_groups_presenter' }}
             </p>
             <p>
               {{ seminarItem()?.data?.doctor?.full_name}}
@@ -97,7 +97,7 @@
           </div>
           <div>
             <p>
-              {{'available_seats' | translateApi}}
+              {{'available_seats' }}
             </p>
             <p>
               {{seminarItem()?.data?.users_remaining_count}}
@@ -118,7 +118,7 @@
           </div>
           <div>
             <p>
-              {{'support_groups_date' | translateApi}}
+              {{'support_groups_date' }}
             </p>
             <p>
               {{ formattedSeminarDate }} - {{ formattedSeminarTime }}
@@ -138,10 +138,10 @@
           </div>
           <div>
             <p>
-              {{'support_groups_duration' | translateApi}}
+              {{'support_groups_duration' }}
             </p>
             <p>
-              {{seminarItem()?.data?.duration}} {{'minute' | translateApi}}
+              {{seminarItem()?.data?.duration}} {{'minute' }}
             </p>
           </div>
         </div>
@@ -152,11 +152,11 @@
     <div class="support-groups__actions">
       @if (seminarItem()?.data?.is_purchased && seminarItem()?.data?.link) {
       <button (click)="openLink()" class="btn btn--outline">
-        {{'support_groups_link' | translateApi}}
+        {{'support_groups_link' }}
       </button>
       } @else if(!seminarItem()?.data?.is_purchased) {
       <button (click)="openSubscriptionModal()" class="btn btn--solid">
-        {{'support_groups_subscription' | translateApi}}
+        {{'support_groups_subscription' }}
       </button>
       }
     </div>

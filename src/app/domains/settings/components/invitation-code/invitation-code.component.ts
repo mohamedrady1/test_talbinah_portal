@@ -9,7 +9,7 @@ import {
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ToastService, PublicService, ShareSocialComponent } from '../../../../shared';
 import { Logger } from '../../../../common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-invitation-code',
@@ -17,13 +17,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
   imports: [
     CommonModule,
     ShareSocialComponent,
-    TranslateApiPipe
+    
   ],
   styleUrls: ['./invitation-code.component.scss'],
   templateUrl: './invitation-code.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InvitationCodeComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   @Input({ required: true }) invitationCode!: string;
 
   private readonly platformId = inject(PLATFORM_ID);
@@ -58,3 +62,4 @@ export class InvitationCodeComponent {
       });
   }
 }
+

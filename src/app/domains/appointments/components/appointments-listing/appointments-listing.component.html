@@ -15,7 +15,7 @@
             <button class="reservation-listing__tabs__tab" [class.reservation-listing__tabs__tab--active]="selectedTab()?.id === tab.id
                   " (click)="onTabCategorySelected(tab)" role="tab"
               [attr.aria-selected]="selectedTab()?.id === tab.id">
-              {{ tab.name | translateApi }}
+              {{ tab.name  }}
             </button>
             }
           </nav>
@@ -64,7 +64,7 @@
         <div class="reservation-listing__sidebar__section-wrapper">
           <div class="reservation-listing__sidebar__column reservation-listing__sidebar__column--current-appointments">
             <h3 class="reservation-listing__sidebar__title">
-              {{ 'current_appointments_title' | translateApi }}
+              {{ translate('current_appointments_title') }}
             </h3>
 
             @if (isLoadingTodayCurrentAppointments()) {
@@ -97,12 +97,12 @@
             <section class="reservation-listing__sidebar__section reservation-listing__sidebar__section--calendar">
               <div class="reservation-listing__sidebar__calender-range-header">
                 <h3 class="reservation-listing__sidebar__title">
-                  {{ 'calendar_title' | translateApi }}
+                  {{ translate('calendar_title') }}
                 </h3>
                 @if (dateRange) {
                 <div class="reservation-listing__sidebar__calendar-reset">
                   <button type="button" class="btn-reset-calendar" (click)="handleRangeReset()">
-                    {{ 'reset_calendar' | translateApi }}
+                    {{ translate('reset_calendar') }}
                   </button>
                 </div>
                 }
@@ -118,7 +118,7 @@
             <section style="display: none;"
               class="reservation-listing__sidebar__section reservation-listing__sidebar__section--weekly-sessions">
               <h3 class="reservation-listing__sidebar__title">
-                {{ 'top_sessions_of_this_week' | translateApi }}
+                {{ translate('top_sessions_of_this_week') }}
               </h3>
               @for (item of appointmentsResponse()?.data?.reservations?.data?.slice(0,2); track item.id) {
               <article class="reservation-listing__card" role="listitem">

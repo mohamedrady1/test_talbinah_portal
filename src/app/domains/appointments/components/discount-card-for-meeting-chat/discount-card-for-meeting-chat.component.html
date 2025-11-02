@@ -1,7 +1,7 @@
-<article class="discount-card-for-meeting-chat" role="region" [attr.aria-label]="'discount_card_title2' | translateApi">
+<article class="discount-card-for-meeting-chat" role="region" [attr.aria-label]="translate('discount_card_title2')">
 
   <div class="discount-card-for-meeting-chat__label">
-    {{"discount_code2"|translateApi}}
+    {{translate("discount_code2")}}
   </div>
 
   <div class="discount-card-for-meeting-chat__content">
@@ -10,7 +10,7 @@
         {{ item?.discount ?? 0 }}%
       </div>
 
-      <app-tooltip [text]="'copied' | translateApi" [position]="Position.TOP" [trigger]="trigger.CLICK">
+      <app-tooltip [text]="translate('copied')" [position]="Position.TOP" [trigger]="trigger.CLICK">
         <div class="discount-card-for-meeting-chat__code" (click)="copyToClipboard()" role="button"
           [attr.aria-label]="'Copy discount code ' + (item?.coupon ?? 'N/A')">
           <span>{{ item?.coupon ?? '' }}</span>

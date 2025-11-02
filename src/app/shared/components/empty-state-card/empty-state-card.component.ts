@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { TranslateApiPipe } from '../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../common/core/translations/services';
 
 export interface EmptyStateConfig {
   imageUrl?: string | null;
@@ -18,13 +18,17 @@ export interface EmptyStateConfig {
 @Component({
   selector: 'app-empty-state-card',
   standalone: true,
-  imports: [CommonModule, TranslateModule, TranslateApiPipe],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './empty-state-card.component.html',
   styleUrls: ['./empty-state-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EmptyStateCardComponent {
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   @Input() type?: 'small' | 'large';
   @Input({ required: true }) config!: EmptyStateConfig;
   @Input() isLoading?: boolean;

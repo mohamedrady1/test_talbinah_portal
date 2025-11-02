@@ -1,4 +1,4 @@
-import { TranslateApiPipe } from './../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 import { Component, EventEmitter, Input, Output, inject, PLATFORM_ID } from '@angular/core';
 import { ILayoutGridHeaderConfig } from '../../../../shared';
 import { isPlatformBrowser } from '@angular/common';
@@ -8,12 +8,16 @@ import { Router } from '@angular/router';
   selector: 'app-session-with-doctor-header',
   standalone: true,
   imports: [
-    TranslateApiPipe
+    
   ],
   templateUrl: './session-with-doctor-header.component.html',
   styleUrls: ['./session-with-doctor-header.component.scss']
 })
 export class SessionWithDoctorHeaderComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   @Input() config!: ILayoutGridHeaderConfig;
   @Output() fullscreenRequested = new EventEmitter<void>();
   @Output() closeRequested = new EventEmitter<void>();
@@ -32,3 +36,4 @@ export class SessionWithDoctorHeaderComponent {
 
   }
 }
+

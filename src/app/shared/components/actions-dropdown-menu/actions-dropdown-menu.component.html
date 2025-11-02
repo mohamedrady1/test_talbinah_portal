@@ -42,10 +42,10 @@
     <ul class="actions-dropdown-menu__list-items">
       @for (item of menuItems; track item) {
       <li class="actions-dropdown-menu__item" role="menuitem" tabindex="0" (click)="onMenuItemClick(item, $event)">
-        <img class="actions-dropdown-menu__item-icon" [src]="item.icon" [alt]="item.text | translateApi" loading="lazy"
-          decoding="async" fetchpriority="low" (error)="onImageError($event)" />
+        <img class="actions-dropdown-menu__item-icon" [src]="item.icon" [alt]="translate(item.text || '')"
+          loading="lazy" decoding="async" fetchpriority="low" (error)="onImageError($event)" />
         <span class="actions-dropdown-menu__item-text" [ngClass]="{'cancel': item.type=='cancel'}">
-          {{ item.text | translateApi }}
+          {{ translate(item.text || '') }}
         </span>
       </li>
       }

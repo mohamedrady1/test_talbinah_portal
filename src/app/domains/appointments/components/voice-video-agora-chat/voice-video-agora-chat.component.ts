@@ -24,7 +24,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { IGlobalReservationModel } from '../../models';
 import { AgoraRtcService, Logger } from '../../../../common';
 import { Subject } from 'rxjs';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-voice-video-agora-chat',
@@ -34,13 +34,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     SvgIconComponent,
     MediaControlsComponent,
     RemoteStreamComponent,
-    TranslateApiPipe
+    
   ],
   templateUrl: './voice-video-agora-chat.component.html',
   styleUrls: ['./voice-video-agora-chat.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VoiceVideoAgoraChatComponent implements OnInit, OnDestroy, OnChanges {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   @Input() currentReservationData: IGlobalReservationModel | null = null;
   @Output() expandChatPanel = new EventEmitter<void>();
 
@@ -242,3 +246,4 @@ export class VoiceVideoAgoraChatComponent implements OnInit, OnDestroy, OnChange
     this.expandChatPanel.emit();
   }
 }
+

@@ -42,7 +42,7 @@ import {
 } from '@angular/common';
 import { prescriptionsEmptyConfig } from '../../configs/settings-empty-state.config';
 import { prescriptionsErrorConfig } from '../../configs';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-prescriptions',
   standalone: true,
@@ -55,13 +55,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     EmptyStateCardComponent,
     FileViewerComponent,
     PaginationListingComponent,
-    TranslateApiPipe
+    
   ],
   templateUrl: './prescriptions.component.html',
   styleUrls: ['./prescriptions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PrescriptionsComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   protected readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private readonly visitsReportsFacade = inject(VisitsReportsListFacade);
 
@@ -202,3 +206,4 @@ export class PrescriptionsComponent {
   }
 
 }
+

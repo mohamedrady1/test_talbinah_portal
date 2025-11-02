@@ -1,20 +1,27 @@
 import { Component, ChangeDetectionStrategy, Input, Output, inject, effect, EventEmitter } from "@angular/core";
 import { CloseSupportConversationFacade } from "../../services";
 import { ITechnicalSupportChatDto } from "../../dtos";
-import { TranslateApiPipe } from "../../../../common/core/translations";
+import { TranslationsFacade } from "../../../../common/core/translations/services";
 import { Logger } from "../../../../common";
 
 @Component({
   selector: 'app-close-support-conversation',
   standalone: true,
   imports: [
-    TranslateApiPipe,
   ],
   templateUrl: './close-support-conversation.component.html',
   styleUrls: ['./close-support-conversation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CloseSupportConversationComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   @Input({ required: true }) data: { chatItem: ITechnicalSupportChatDto | null, isSupport?: boolean } = { chatItem: null };
   @Output() closed = new EventEmitter<{ isRequestSuccessed?: boolean } | void>();
 

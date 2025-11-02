@@ -22,7 +22,7 @@ import { IOtpVerificationRequestDto, IOtpVerificationResponseDto } from '../../.
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { GovernmentAgenciesEmailVerificationFacade, GovernmentAgenciesVerifyOtpFacade } from '../../services';
 import { GovernmentAgenciesDoctorsComponent } from '../government-agencies-doctors';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-government-agency-verification',
   standalone: true,
@@ -31,13 +31,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     CommonModule,
     TranslateModule,
     CodeInputComponent,
-    TranslateApiPipe
+    
   ],
   templateUrl: './government-agency-verification.component.html',
   styleUrls: ['./government-agency-verification.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GovernmentAgencyVerificationComponent implements OnInit, OnDestroy {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   @Output() public closed = new EventEmitter<{ status: boolean, data: any } | void>();
 
   readonly isCodeSent = signal<boolean | null>(null);
@@ -211,3 +215,4 @@ export class GovernmentAgencyVerificationComponent implements OnInit, OnDestroy 
     });
   }
 }
+

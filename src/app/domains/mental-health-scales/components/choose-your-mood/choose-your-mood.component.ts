@@ -1,4 +1,4 @@
-import { TranslateApiPipe } from './../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 import { getMoodsError, IMoodItem, LastSevenUserMoodsFacade, MoodsEmptyState, MoodsListingFacade, UserMoodStoreFacade } from '../../../../domains';
 import { Component, OnInit, inject, effect, Input, ChangeDetectionStrategy, PLATFORM_ID, computed, signal } from '@angular/core'; // Import 'effect'
 import { Logger, StorageService } from '../../../../common'; // Adjust path if needed
@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
     ErrorStateComponent,
     EmptyStateComponent,
 
-    TranslateApiPipe
+
   ],
   templateUrl: './choose-your-mood.component.html',
   styleUrls: ['./choose-your-mood.component.scss'],
@@ -33,7 +33,9 @@ export class ChooseYourMoodComponent implements OnInit {
   protected readonly _userMoodStoreFacade = inject(UserMoodStoreFacade);
   chooseMoodEmptyState = MoodsEmptyState;
   protected readonly chooseMoodErrorState = getMoodsError(() => this._moodsFacade.getMoodsListing());
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
   // SSR-safe browser check
   protected isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private readonly _RoleGuardService = inject(RoleGuardService);

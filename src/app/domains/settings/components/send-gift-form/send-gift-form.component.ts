@@ -16,7 +16,7 @@ import {
   Validators
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 import { GiftsFacade } from '../../services/gifts.facade';
 import { CountriesLookupFacade, ICountryDto } from '../../../lookups';
 import { SelectModule } from 'primeng/select';
@@ -32,13 +32,17 @@ import { ModalService } from '../../../../shared';
     SelectModule,
     FormsModule,
     ReactiveFormsModule,
-    TranslateApiPipe
+    
   ],
   templateUrl: './send-gift-form.component.html',
   styleUrls: ['./send-gift-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SendGiftFormComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   @Output() public closed = new EventEmitter<void>();
 
   private fb = inject(FormBuilder);
@@ -205,3 +209,4 @@ export class SendGiftFormComponent {
     this.giftsFacade.resetSendState();
   }
 }
+

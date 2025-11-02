@@ -1,19 +1,22 @@
 import { TranslateModule } from '@ngx-translate/core';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, signal, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ICardHeaderConfig } from '../../../../models';
-import { TranslateApiPipe } from '../../../../../../common/core/translations/pipes';
+import { TranslationsFacade } from '../../../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-card-header',
   standalone: true,
-  imports: [CommonModule, TranslateModule, TranslateApiPipe],
+  imports: [CommonModule, TranslateModule,],
   templateUrl: './card-header.component.html',
   styleUrls: ['./card-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardHeaderComponent {
   @Input() config!: ICardHeaderConfig;
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
   @Input() isPrevDisabled = false;
   @Input() isNextDisabled = false;
   @Input() total: number = 0;

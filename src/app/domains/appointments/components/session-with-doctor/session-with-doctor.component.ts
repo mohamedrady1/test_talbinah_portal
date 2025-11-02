@@ -37,7 +37,7 @@ import { ReportIssueModalComponent } from '../report-issue-modal';
 
 // Facades/Services
 import { ChatMeetingMessagesSkeletonComponent } from "../chat-meeting-messages-skeleton";
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-session-with-doctor',
@@ -58,13 +58,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     SvgIconComponent,
     ChatMeetingMessagesSkeletonComponent,
     ErrorStateCardComponent,
-    TranslateApiPipe
+    
   ],
   templateUrl: './session-with-doctor.component.html',
   styleUrls: ['./session-with-doctor.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SessionWithDoctorComponent implements OnInit, OnDestroy {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   @ViewChild('card') cardRef!: ElementRef;
   @ViewChild(ChatMeetingMessagesComponent) private chatMessagesCmp?: ChatMeetingMessagesComponent;
 
@@ -365,3 +369,4 @@ export class SessionWithDoctorComponent implements OnInit, OnDestroy {
     this.scheduleScrollToBottom();
   }
 }
+

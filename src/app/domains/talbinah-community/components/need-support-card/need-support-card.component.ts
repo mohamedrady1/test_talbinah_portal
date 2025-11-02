@@ -7,11 +7,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Logger } from '../../../../common';
 import { Router } from '@angular/router';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
+
 @Component({
   selector: 'app-need-support-card',
   standalone: true,
-  imports: [TranslateModule, SvgIconComponent, TranslateApiPipe],
+  imports: [TranslateModule, SvgIconComponent],
   templateUrl: './need-support-card.component.html',
   styleUrls: ['./need-support-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -20,7 +21,11 @@ export class NeedSupportCardComponent {
   private router = inject(Router);
   private modalService = inject(ModalService);
   private platformId = inject(PLATFORM_ID);
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   protected goToTalbinahBot(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.router.navigateByUrl(KhawiikBotRoutesEnum.KHAWIIK_MAIN_PAGE);

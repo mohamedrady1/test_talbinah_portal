@@ -1,21 +1,25 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
 import { ICheckPackagesReservationData, IReservationPackageModel } from '../../../appointments';
 import { TranslateModule } from '@ngx-translate/core';
 import { Logger } from '../../../../common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-available-packages-selection',
   standalone: true,
   imports: [
     TranslateModule,
-    TranslateApiPipe
+
   ],
   templateUrl: './available-packages-selection.component.html',
   styleUrls: ['./available-packages-selection.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvailablePackagesSelectionComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+
   @Input({ required: true }) data!: ICheckPackagesReservationData | null;
 
   @Output() closed = new EventEmitter<IReservationPackageModel | null>();
@@ -43,3 +47,4 @@ export class AvailablePackagesSelectionComponent {
     return this.selectedItem()?.id === item.id;
   }
 }
+

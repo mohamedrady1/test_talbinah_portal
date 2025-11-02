@@ -5,20 +5,24 @@ import { LocalizationService, StorageKeys } from '../../../../shared';
 import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { IGlobalUserContactInfoModel, Logger } from '../../../../common';
 import { UserContextService } from '../../../authentication';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-user-info-card',
   standalone: true,
   imports: [
     DatePipe,
-    TranslateApiPipe
+    
   ],
   templateUrl: './user-info-card.component.html',
   styleUrls: ['./user-info-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserInfoCardComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   private readonly modalService = inject(ModalService);
   private readonly localizationService = inject(LocalizationService);
   protected readonly currentLang !: string;
@@ -81,3 +85,4 @@ export class UserInfoCardComponent {
     }
   }
 }
+

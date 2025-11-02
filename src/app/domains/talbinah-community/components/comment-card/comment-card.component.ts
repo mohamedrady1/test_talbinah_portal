@@ -10,11 +10,11 @@ import { finalize, take } from 'rxjs';
 import { ICommentPost, IReactCommentResponseDto, IReactPostCommentRequestDto, IUserIdentifyProfileData } from '../../dtos';
 import { Router } from '@angular/router';
 import { TalbinahCommunityRoutesEnum } from '../../constants';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-comment-card',
   templateUrl: './comment-card.component.html',
-  imports: [CommonModule, CommentBoxComponent, TranslateModule, TranslateApiPipe],
+  imports: [CommonModule, CommentBoxComponent, TranslateModule,],
   styleUrls: ['./comment-card.component.scss'],
   standalone: true,
   animations: [
@@ -30,6 +30,10 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
   ]
 })
 export class CommentCardComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+
   @Input({ required: true }) comment!: ICommentPost;
 
   readonly _LanguageService = inject(LanguageService);

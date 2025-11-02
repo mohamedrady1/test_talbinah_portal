@@ -26,7 +26,7 @@
     <div class="notifications__list" role="presentation">
       <div class="notifications__title">
         <p>
-          {{'notification2'|translateApi}}
+          {{translate('notification2')}}
         </p>
       </div>
       <ul class="notifications__list-items">
@@ -47,7 +47,7 @@
     <div class="notifications__list" role="presentation">
       <div class="notifications__title">
         <p>
-          {{'notification2'|translateApi}}
+          {{translate('notification2')}}
         </p>
       </div>
       <ul class="notifications__list-items">
@@ -58,17 +58,17 @@
           <img class="error-state__image" [src]="notificationsErrorState.imageUrl" alt="Error state" />
 
           @if (notificationsErrorState.title) {
-          <h2 class="error-state__title">{{ notificationsErrorState.title | translateApi }}</h2>
+          <h2 class="error-state__title">{{ translate(notificationsErrorState.title) }}</h2>
           }
 
           @if (notificationsErrorState.message) {
-          <p class="error-state__message">{{ notificationsErrorState.message | translateApi }}</p>
+          <p class="error-state__message">{{ translate(notificationsErrorState.message) }}</p>
           }
 
           @if (notificationsErrorState.onRetry) {
           <button class="error-state__button" type="button"
             (click)="this._NotificationsFacade.fetchAllNotifications(1)">
-            {{ notificationsErrorState.retryLabel || ('retry' | translateApi) }}
+            {{ notificationsErrorState.retryLabel || translate('retry') }}
           </button>
           }
         </div>
@@ -78,10 +78,10 @@
         <div class="empty-state">
           <img class="empty-state__image" [src]="notificationsEmptyState.imageUrl" alt="Empty state" />
           @if (notificationsEmptyState.title) {
-          <h2 class="empty-state__title">{{ notificationsEmptyState.title |translateApi }}</h2>
+          <h2 class="empty-state__title">{{ translate(notificationsEmptyState.title) }}</h2>
           }
           @if (notificationsEmptyState.message) {
-          <p class="empty-state__message">{{ notificationsEmptyState.message |translateApi }}</p>
+          <p class="empty-state__message">{{ translate(notificationsEmptyState.message) }}</p>
           }
         </div>
         }
@@ -102,17 +102,17 @@
     <div class="notifications__list" role="presentation">
       <div class="notifications__title">
         <p>
-          {{'notification2'|translateApi}}
+          {{translate('notification2')}}
         </p>
       </div>
       <ul class="notifications__list-items">
         <div class="empty-state">
           <img class="empty-state__image" [src]="notificationsEmptyState.imageUrl" alt="Empty state" />
           @if (notificationsEmptyState.title) {
-          <h2 class="empty-state__title">{{ notificationsEmptyState.title |translateApi }}</h2>
+          <h2 class="empty-state__title">{{ translate(notificationsEmptyState.title) }}</h2>
           }
           @if (notificationsEmptyState.message) {
-          <p class="empty-state__message">{{ notificationsEmptyState.message |translateApi }}</p>
+          <p class="empty-state__message">{{ translate(notificationsEmptyState.message) }}</p>
           }
         </div>
       </ul>
@@ -121,7 +121,7 @@
     @if(this._NotificationsFacade.totalAllNotificationsItems()>5){
     <div class="notifications__actions">
       <button (click)="viewAllNotifications()" class="notifications-dropdown__submit-button btn btn--ghost">
-        {{ 'show_more' | translateApi }}
+        {{ translate('show_more') }}
       </button>
     </div>
     }

@@ -17,14 +17,14 @@ import { ComplaintsListComponent } from '../complaints-list';
 import { PrescriptionsComponent } from '../prescriptions';
 import { SettingsPointsComponent } from '../settings-points';
 import { TechnicalSupportChatsListComponent } from '../../../technical-support';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 import { LocalizationService } from '../../../../shared/localization';
 
 @Component({
   selector: 'app-your-profile-option-card',
   standalone: true,
   imports: [
-    TranslateApiPipe,
+    
     NgClass
   ],
   templateUrl: './your-profile-option-card.component.html',
@@ -32,6 +32,10 @@ import { LocalizationService } from '../../../../shared/localization';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YourProfileOptionCardComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   @Input() config!: ISettingMenuItem;
   private readonly _modalService = inject(ModalService);
   private readonly _platformId = inject(PLATFORM_ID);
@@ -334,3 +338,4 @@ export class YourProfileOptionCardComponent {
     });
   }
 }
+

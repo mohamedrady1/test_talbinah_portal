@@ -56,7 +56,7 @@
                 </svg>
               </span>
               <span class="appointment-card__info-text">
-                {{ 'today' | translateApi }}
+                {{ translate('today') }}
               </span>
             </div>
             }
@@ -66,7 +66,7 @@
               [attr.aria-label]="getStatusName(item.status, item.is_start, item.is_end) + ' status'"
               [ngClass]="getBadgeClass(item.status, item.is_start, item.is_end)">
               <span class="appointment-card__status-text">
-                {{ getStatusName(item.status, item.is_start, item.is_end) | translateApi }}
+                {{ getStatusName(item.status, item.is_start, item.is_end)  }}
               </span>
             </div>
             }
@@ -104,7 +104,7 @@
                 @if (item?.doctor?.specialties?.length) {
                 {{ item?.doctor?.specialties?.[0]?.name }}
                 } @else {
-                {{ 'no_specialty' | translateApi }}
+                {{ translate('no_specialty') }}
                 }
               </p>
             </div>
@@ -193,7 +193,7 @@
           <button id="appointment-card-form-btn" type="button" class="btn btn--solid"
             (click)="$event.stopPropagation(); createNewReservation()">
             <span class="btn__label">
-              {{ 'reschedule_appointment' | translateApi }}
+              {{ translate('reschedule_appointment') }}
             </span>
           </button>
           }
@@ -201,7 +201,7 @@
           <button id="appointment-card-form-btn" type="button" class="btn btn--outline"
             (click)="$event.stopPropagation(); onJoinAppointment()">
             <span class="btn__label">
-              {{ 'join' | translateApi }}
+              {{ translate('join') }}
             </span>
           </button>
           }

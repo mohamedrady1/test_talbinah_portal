@@ -10,12 +10,12 @@ import { CommonModule } from '@angular/common';
 import { Logger } from '../../../../common';
 import { getRemainingDays } from '../../../../shared/utils/date-format.util';
 import { RewardsCoupon, RewardsAppointment, RewardItem } from '../../dtos';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-settings-rewards',
   standalone: true,
   imports: [
-    TranslateApiPipe,
+    
     CommonModule,
 
     AutoExactHeightDirective,
@@ -29,6 +29,10 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsRewardsComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   private readonly _modalService = inject(ModalService);
   private readonly _RewardsFacade = inject(RewardsFacade);
 
@@ -99,3 +103,4 @@ export class SettingsRewardsComponent {
     return 0;
   }
 }
+

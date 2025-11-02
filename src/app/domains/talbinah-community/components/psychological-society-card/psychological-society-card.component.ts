@@ -16,7 +16,7 @@ import { EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize, take } from 'rxjs';
 import { RoleGuardService } from '../../../authentication';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-psychological-society-card',
   standalone: true,
@@ -29,12 +29,15 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     OpenPostMenuComponent,
     ShareSocialComponent,
     CommentBoxComponent,
-    TranslateApiPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PsychologicalSocietyCardComponent implements OnInit {
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   protected readonly _LanguageService = inject(LanguageService);
   private currentLang = this._LanguageService.getCurrentLanguage();
 

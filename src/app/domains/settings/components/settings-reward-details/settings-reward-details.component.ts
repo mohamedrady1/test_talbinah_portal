@@ -11,16 +11,20 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { SvgIconComponent, ToastService, PublicService } from '../../../../shared';
 import { Logger } from '../../../../common';
 import { RewardItem, RewardsAppointment, RewardsCoupon } from '../../dtos';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-settings-reward-details',
   standalone: true,
-  imports: [TranslateApiPipe, CommonModule, SvgIconComponent],
+  imports: [CommonModule, SvgIconComponent],
   templateUrl: './settings-reward-details.component.html',
   styleUrls: ['./settings-reward-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsRewardDetailsComponent implements OnDestroy {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   @Input({ required: true }) rewardItem!: RewardItem;
 
   private readonly platformId = inject(PLATFORM_ID);
@@ -96,3 +100,4 @@ export class SettingsRewardDetailsComponent implements OnDestroy {
     return this.isCoupon(this.rewardItem?.gift) ? this.rewardItem.gift.coupon : null;
   }
 }
+

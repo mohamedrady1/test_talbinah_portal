@@ -8,7 +8,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { userConfig } from '../../configs';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-user-info',
   standalone: true,
@@ -16,14 +16,21 @@ import { TranslateApiPipe } from '../../../../common/core/translations/pipes/tra
     CommonModule,
     RouterModule,
     TranslateModule,
-    SvgIconComponent,
-    TranslateApiPipe
+    SvgIconComponent
   ],
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserInfoComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   private readonly _ModalService = inject(ModalService);
   private readonly _Router = inject(Router);
   protected readonly _PublicService = inject(PublicService);

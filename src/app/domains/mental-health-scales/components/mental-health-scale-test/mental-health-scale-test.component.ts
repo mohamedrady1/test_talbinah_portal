@@ -1,4 +1,4 @@
-import { TranslateApiPipe } from './../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 import { IMentalHealthAnswerDto, IMentalHealthQuestionDto, IMentalHealthReportItemDto, IMentalHealthScaleListItemDto, RoleGuardService, UserContextService } from '../../../../domains';
 import { CreateMentalHealthScaleFacade } from '../../../../domains/mental-health-scales/services/create-mental-health-scale.facade';
 import { ChangeDetectionStrategy, Component, computed, effect, inject, Input, Output, EventEmitter, PLATFORM_ID, signal } from '@angular/core';
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-mental-health-scale-test',
   standalone: true,
-  imports: [CommonModule, TranslateApiPipe, MentalHealthScaleStartTestComponent, MentalHealthScaleTestResultComponent, AutoExactHeightDirective, EmptyStateCardComponent],
+  imports: [CommonModule, MentalHealthScaleStartTestComponent, MentalHealthScaleTestResultComponent, AutoExactHeightDirective, EmptyStateCardComponent],
   templateUrl: './mental-health-scale-test.component.html',
   styleUrls: ['./mental-health-scale-test.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -35,6 +35,9 @@ export class MentalHealthScaleTestComponent {
   private readonly token = signal<string | null>(
     this._StorageService.getItem<string>(StorageKeys.TOKEN) ?? null
   );
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
 
   protected readonly isLoggedIn = computed(() => !!this.token());
 
@@ -241,7 +244,7 @@ export class MentalHealthScaleTestComponent {
         });
       } else {
         Logger.error('category_id is undefined. Cannot create mental health scale.');
-        this.validationError.set('فشل: بيانات الاختبار غير مكتملة.'); // Error message for incomplete test data
+        this.validationError.set(this.translate('test_data_incomplete')); // Error message for incomplete test data
       }
     }
   }

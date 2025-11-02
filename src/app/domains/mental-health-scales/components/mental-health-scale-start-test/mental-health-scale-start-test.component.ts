@@ -1,4 +1,4 @@
-import { TranslateApiPipe } from './../../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { IMentalHealthScaleListItemDto } from '../../../../domains';
 import { CardType, Logger } from '../../../../common';
@@ -6,7 +6,7 @@ import { CardType, Logger } from '../../../../common';
 @Component({
   selector: 'app-mental-health-scale-start-test',
   standalone: true,
-  imports: [TranslateApiPipe],
+  imports: [],
   templateUrl: './mental-health-scale-start-test.component.html',
   styleUrls: ['./mental-health-scale-start-test.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

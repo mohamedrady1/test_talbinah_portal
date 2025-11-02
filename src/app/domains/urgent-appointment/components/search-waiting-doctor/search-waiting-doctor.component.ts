@@ -9,12 +9,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ModalService } from '../../../../shared';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-search-waiting-doctor',
   standalone: true,
-  imports: [TranslateModule, CommonModule, TranslateApiPipe],
+  imports: [TranslateModule, CommonModule],
   templateUrl: './search-waiting-doctor.component.html',
   styleUrls: ['./search-waiting-doctor.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -29,7 +29,11 @@ export class SearchWaitingDoctorComponent implements OnInit, OnDestroy {
   private readonly _cancelEmergencyAppointmentFacade = inject(CancelEmergencyAppointmentFacade);
   private readonly _ModalService = inject(ModalService);
   private readonly _router = inject(Router);
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   public isCancelling = signal(false);
   private recallOpened = signal(false);
 

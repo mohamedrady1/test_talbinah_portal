@@ -10,7 +10,7 @@ import { DoctorTicketsFacade } from '../../services/doctor-tickets.facade';
 import { EmptyStateCardComponent, ErrorStateCardComponent } from '../../../../shared';
 import { ComplaintCardSkeletonComponent } from '../complaint-card-skeleton/complaint-card-skeleton.component';
 import { complaintsEmptyState, complaintsErrorState } from '../../configs/complaints.config';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 interface FilterOption {
   label: string;
@@ -22,7 +22,7 @@ interface FilterOption {
   standalone: true,
   imports: [
     CommonModule,
-    TranslateApiPipe,
+    
     LocalSearchComponent,
     ComplaintCardComponent,
     EmptyStateCardComponent,
@@ -35,6 +35,10 @@ interface FilterOption {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComplaintsListComponent implements OnInit {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   searchTerm = signal('');
   activeFilter = signal('all');
 
@@ -131,3 +135,4 @@ export class ComplaintsListComponent implements OnInit {
     this.doctorTicketsFacade.fetchDoctorTickets();
   }
 }
+

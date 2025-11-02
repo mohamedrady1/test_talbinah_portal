@@ -8,7 +8,7 @@
             @if (formItem.label) {
             <label [attr.for]="formItem.name" class="general-form-wrapper__label"
               [ngClass]="{'general-form-wrapper__label--error': getError(formItem.name),'general-form-wrapper__label--clickable': formItem.enableLabelClick}">
-              {{ formItem.label |translateApi}}
+              {{ translate(formItem.label || '') }}
               @if (formItem.isRequired) {
               <span class="general-form-wrapper__required">*</span>
               }
@@ -23,9 +23,9 @@
                 [ngClass]="{'p-invalid': getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched}">
                 <input type="text" [class]="formItem.inputClass ?? 'form-control custom-input-wrapper__input'"
                   [formControlName]="formItem.name" [id]="formItem.name" [attr.aria-label]="'ariaLabel'+formItem.name"
-                  [attr.title]="(formItem.label ?? '')| translateApi" [attr.role]="'roleAttr'+formItem.name"
+                  [attr.title]="translate(formItem.label ?? '')" [attr.role]="'roleAttr'+formItem.name"
                   [attr.autocomplete]="'autocompleteAttr'+formItem.name"
-                  [attr.placeholder]="(formItem.placeholder ?? '') | translateApi" [attr.autocomplete]="'off'">
+                  [attr.placeholder]="translate(formItem.placeholder ?? '')" [attr.autocomplete]="'off'">
               </div>
 
               <!-- ✅ Semantic Error and Hint Section -->
@@ -34,13 +34,13 @@
                 !getFormControl(formItem.name)?.value &&
                 !formItem.fixedHint) {
                 <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
-                  {{ formItem.hint | translateApi }}
+                  {{ translate(formItem.hint || '') }}
                 </small>
                 }
 
                 @if (getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched) {
                 <span class="general-form-wrapper__error-message error-label" role="alert">
-                  {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+                  {{ translate(getValidationErrorMessage(formItem.name, formItem.validation ?? [])) }}
                 </span>
                 }
               </div>
@@ -55,8 +55,8 @@
                 [ngClass]="{'p-invalid': getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched}">
                 <textarea [class]="formItem.inputClass ?? 'custom-input-wrapper__input'"
                   [formControlName]="formItem.name" [id]="formItem.name" [attr.aria-label]="'ariaLabel'+formItem.name"
-                  [attr.title]="(formItem.label ?? '') | translateApi" [attr.role]="'roleAttr'+formItem.name"
-                  [attr.autocomplete]="'off'" [attr.placeholder]="(formItem.placeholder ?? '') | translateApi"
+                  [attr.title]="translate(formItem.label ?? '')" [attr.role]="'roleAttr'+formItem.name"
+                  [attr.autocomplete]="'off'" [attr.placeholder]="translate(formItem.placeholder ?? '')"
                   [rows]="formItem.rows ?? 5"></textarea>
               </div>
 
@@ -65,13 +65,13 @@
                 !getFormControl(formItem.name)?.value &&
                 !formItem.fixedHint) {
                 <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
-                  {{ formItem.hint | translateApi }}
+                  {{ translate(formItem.hint || '') }}
                 </small>
                 }
 
                 @if (getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched) {
                 <span class="general-form-wrapper__error-message error-label" role="alert">
-                  {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+                  {{ translate(getValidationErrorMessage(formItem.name, formItem.validation ?? [])) }}
                 </span>
                 }
               </div>
@@ -83,22 +83,22 @@
           <div class="form-group-wrapper">
             <div class="form-field">
               <p-select [options]="formItem.listValues" [formControlName]="formItem.name"
-                [optionLabel]="(formItem.optionLabel || 'label') | translateApi" [showClear]="true"
+                [optionLabel]="translate(formItem.optionLabel || 'label')" [showClear]="true"
                 [optionValue]="formItem.optionValue || 'value'" [filter]="formItem.name" [filterBy]="formItem.name"
-                [placeholder]="(formItem.placeholder ?? '') | translateApi" [id]="formItem.name"
+                [placeholder]="translate(formItem.placeholder ?? '')" [id]="formItem.name"
                 [attr.aria-describedby]="formItem.name + '-hint'" [attr.aria-invalid]="!!getError(formItem.name)"
                 [ngClass]="{'p-invalid': getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched}"
                 appendTo="body">
                 <ng-template pTemplate="selectedItem" let-option>
                   <!-- Custom selected item display if needed -->
                   <div class="p-select-item-selected-custom">
-                    {{ option[formItem.optionLabel || 'label'] | translateApi }}
+                    {{ translate(option[formItem.optionLabel || 'label']) }}
                   </div>
                 </ng-template>
                 <ng-template let-option pTemplate="item">
                   <!-- Custom item list display if needed -->
                   <div class="p-select-item-custom">
-                    {{ option[formItem.optionLabel || 'label'] | translateApi}}
+                    {{ translate(option[formItem.optionLabel || 'label']) }}
                   </div>
                 </ng-template>
               </p-select>
@@ -109,13 +109,13 @@
                 !getFormControl(formItem.name)?.value &&
                 !formItem.fixedHint) {
                 <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
-                  {{ formItem.hint | translateApi }}
+                  {{ translate(formItem.hint || '') }}
                 </small>
                 }
 
                 @if (getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched) {
                 <span class="general-form-wrapper__error-message error-label" role="alert">
-                  {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+                  {{ translate(getValidationErrorMessage(formItem.name, formItem.validation ?? [])) }}
                 </span>
                 }
               </div>
@@ -130,9 +130,9 @@
                 [ngClass]="{'p-invalid': getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched}">
                 <input type="email" [class]="formItem.inputClass ?? 'form-control custom-input-wrapper__input'"
                   [formControlName]="formItem.name" [id]="formItem.name" [attr.aria-label]="'ariaLabel'+formItem.name"
-                  [attr.title]="(formItem.label ?? '')| translateApi" [attr.role]="'roleAttr'+formItem.name"
+                  [attr.title]="translate(formItem.label ?? '')" [attr.role]="'roleAttr'+formItem.name"
                   [attr.autocomplete]="'autocompleteAttr'+formItem.name"
-                  [attr.placeholder]="(formItem.placeholder ?? '') | translateApi   " [attr.autocomplete]="'off'">
+                  [attr.placeholder]="translate(formItem.placeholder ?? '')" [attr.autocomplete]="'off'">
               </div>
 
               <!-- ✅ Semantic Error and Hint Section -->
@@ -141,13 +141,13 @@
                 !getFormControl(formItem.name)?.value &&
                 !formItem.fixedHint) {
                 <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
-                  {{ formItem.hint | translateApi }}
+                  {{ translate(formItem.hint || '') }}
                 </small>
                 }
 
                 @if (getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched) {
                 <span class="general-form-wrapper__error-message error-label" role="alert">
-                  {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+                  {{ translate(getValidationErrorMessage(formItem.name, formItem.validation ?? [])) }}
                 </span>
                 }
               </div>
@@ -162,8 +162,8 @@
                 [ngClass]="{'p-invalid': getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched}">
                 <input type="number" [class]="formItem.inputClass ?? 'form-control custom-input-wrapper__input'"
                   [formControlName]="formItem.name" [id]="formItem.name" [attr.aria-label]="'ariaLabel'+formItem.name"
-                  [attr.title]="(formItem.label ?? '')| translateApi" [attr.role]="'roleAttr'+formItem.name"
-                  [attr.autocomplete]="'off'" [attr.placeholder]="(formItem.placeholder ?? '') | translateApi">
+                  [attr.title]="translate(formItem.label ?? '')" [attr.role]="'roleAttr'+formItem.name"
+                  [attr.autocomplete]="'off'" [attr.placeholder]="translate(formItem.placeholder ?? '')">
               </div>
 
               <!-- ✅ Semantic Error and Hint Section -->
@@ -172,13 +172,13 @@
                 !getFormControl(formItem.name)?.value &&
                 !formItem.fixedHint) {
                 <small id="{{ formItem.name }}-hint" class="form-field__hint text-secondary">
-                  {{ formItem.hint | translateApi }}
+                  {{ translate(formItem.hint || '') }}
                 </small>
                 }
 
                 @if (getFormControl(formItem.name)?.invalid && getFormControl(formItem.name)?.touched) {
                 <span class="general-form-wrapper__error-message error-label" role="alert">
-                  {{ getValidationErrorMessage(formItem.name, formItem.validation ?? []) | translateApi }}
+                  {{ translate(getValidationErrorMessage(formItem.name, formItem.validation ?? [])) }}
                 </span>
                 }
               </div>
@@ -192,20 +192,20 @@
       <div class="general-form-wrapper__actions">
         <button id="reset-dynamic-form-btn" type="button" class="btn btn--outline" (click)="closed.emit()">
           <span class="btn__label">
-            {{ 'cancel' | translateApi }}
+            {{ translate('cancel') }}
           </span>
         </button>
         <button id="submit-dynamic-form-btn" type="submit" class="btn btn--solid"
           [disabled]="isLoading() || _NormalPackagesReservationFacade.isStoring()"
-          [attr.aria-label]="'confirm' | translateApi">
+          [attr.aria-label]="translate('confirm')">
           <span class="btn__label">
             @if (isLoading() || _NormalPackagesReservationFacade.isStoring()) {
             <div class="general-form-wrapper__loading" aria-label="Submit in progress">
-              {{ 'in_progress' | translateApi }}
+              {{ translate('in_progress') }}
             </div>
             }
             @if (!isLoading() || !_NormalPackagesReservationFacade.isStoring()) {
-            {{ 'confirm' | translateApi }}
+            {{ translate('confirm') }}
             }
           </span>
         </button>

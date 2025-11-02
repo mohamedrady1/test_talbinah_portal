@@ -13,7 +13,7 @@ import { LocalizationService, ModalService } from '../../../../shared';
 import { IGlobalPodcastItemModel, Logger } from '../../../../common';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-podcast-card-for-favourite',
@@ -21,13 +21,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
   imports: [
     TranslateModule,
     CommonModule,
-    TranslateApiPipe
+    
   ],
   templateUrl: './podcast-card-for-favourite.component.html',
   styleUrls: ['./podcast-card-for-favourite.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PodcastCardForFavouriteComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+  
   @Input({ required: true }) item!: IGlobalPodcastItemModel | null;
 
   @Input() isTask!: { status: boolean } | null;
@@ -137,3 +141,4 @@ export class PodcastCardForFavouriteComponent {
     Logger.debug('PodcastCardForMeetingChatComponent => isTask: ', { isTask: this.isTask, item: this.item });
   }
 }
+

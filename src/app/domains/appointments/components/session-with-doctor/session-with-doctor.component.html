@@ -52,7 +52,7 @@
                 @if(_reservationDetailsFacade.currentReservation()?.doctor?.full_name){
                 {{ _reservationDetailsFacade.currentReservation()?.doctor?.full_name || ''}}
                 }@else{
-                {{'no_name' | translateApi}}
+                {{'no_name' }}
                 }
               </span>
             </div>
@@ -69,7 +69,7 @@
               </time> -->
 
               @if(_reservationDetailsFacade.currentReservation()?.id){
-              <app-tooltip class="session-doctor__copy-tooltip" [text]="'copied' | translateApi"
+              <app-tooltip class="session-doctor__copy-tooltip" [text]="'copied' "
                 [position]="Position.TOP" [trigger]="Trigger.CLICK">
                 <button type="button" class="session-doctor__copy-button" (click)="copyToClipboard()"
                   [attr.aria-label]="'Copy reservation code ' + (_reservationDetailsFacade.currentReservation()?.id || 'CODE-101096')">
@@ -145,7 +145,7 @@
                 <div class="reply-box__header">
                   <span class="reply-box__content-label">
                     <span>
-                      {{'replying_to' | translateApi}}:
+                      {{'replying_to' }}:
                     </span>
                     <span>
                       @if (replyingToMessageContent()?.senderId ===
@@ -154,7 +154,7 @@
                       _reservationDetailsFacade.currentReservation()?.doctor?.full_name ?
                       (_reservationDetailsFacade.currentReservation()?.doctor?.full_name || '') : '' }}
                       }@else {
-                      {{'me' | translateApi}}
+                      {{'me' }}
                       }
                     </span>
                   </span>

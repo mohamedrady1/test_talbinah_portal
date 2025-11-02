@@ -5,23 +5,23 @@
       <div class="notifications-settings-modal__group">
         <label class="notifications-settings-modal__option" [for]="method.name">
           <div class="notifications-settings-modal__icon-label">
-            <img appLazyLoadImage="{{ method.icon }}" [alt]="method.label | translateApi" loading="lazy"
+            <img appLazyLoadImage="{{ method.icon }}" [alt]="method.label " loading="lazy"
               class="notifications-settings-modal__icon" width="24" height="24"
               placeholder="images/icons/message-text.svg" />
 
             <div class="notifications-settings-modal__texts">
               <span class="notifications-settings-modal__label">
-                {{ method.label | translateApi }}
+                {{ method.label  }}
               </span>
               <span class="notifications-settings-modal__description">
-                {{ method.description | translateApi }}
+                {{ method.description  }}
               </span>
             </div>
           </div>
 
           <div class="notifications-settings-modal__toggle">
             <input type="checkbox" class="notifications-settings-modal__checkbox" [formControlName]="method.name"
-              [id]="method.name" [attr.aria-label]="method.label | translateApi" />
+              [id]="method.name" [attr.aria-label]="method.label " />
             <span class="notifications-settings-modal__switch" aria-hidden="true"></span>
           </div>
         </label>
@@ -31,11 +31,11 @@
 
     <div class="notifications-settings-modal__actions">
       <button type="submit" class="btn btn--solid" [disabled]="facade.isLoading()"
-        [attr.aria-label]="'save' | translateApi">
+        [attr.aria-label]="'save' ">
         @if (facade.isLoading()) {
-        {{ 'in_progress' | translateApi }}
+        {{ translate('in_progress') }}
         } @else {
-        {{ 'save' | translateApi }}
+        {{ translate('save') }}
         }
       </button>
     </div>

@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { MentalHealthScaleTestComponent } from '../mental-health-scale-test';
 import { ModalService } from '../../../../shared';
 import { LazyLoadImageDirective } from '../../../../common/core/directives/lazyloading/lazy-load-image.directive';
-
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-depressive-disorder-scale-card',
   standalone: true,
@@ -22,6 +22,9 @@ import { LazyLoadImageDirective } from '../../../../common/core/directives/lazyl
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DepressiveDisorderScaleCardComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
   @Input() item!: IMentalHealthScaleListItemDto;
   @Output() watchDetails = new EventEmitter<IMentalHealthScaleListItemDto>();
 

@@ -4,6 +4,7 @@ import { FirestoreService, IGlobalMentalHealthScaleModel, Logger, ReservationMod
 import { TranslateModule } from '@ngx-translate/core';
 import { ModalService } from '../../../../shared';
 import { CommonModule } from '@angular/common';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-mental-health-scale-card',
@@ -17,6 +18,10 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MentalHealthScaleCardComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string { return this.translationsFacade.translate(key); }
+
   @Input() isTask!: { status: boolean } | null;
   @Input() hideFavouriteAction!: boolean | null;
   @Input() hideDescription!: boolean | null;
@@ -111,3 +116,4 @@ export class MentalHealthScaleCardComponent {
     Logger.debug('MentalHealthScaleDetailsComponent => isTask: ', { isTask: this.isTask, item: this.item });
   }
 }
+

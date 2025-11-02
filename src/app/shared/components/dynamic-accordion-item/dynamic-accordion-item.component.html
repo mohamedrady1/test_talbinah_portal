@@ -10,7 +10,7 @@
           </span>
           @if (itemValue.title) {
           <span class="accordion-menu__username">
-            {{ itemValue.title | translateApi }}
+            {{ translate(itemValue.title || '') }}
           </span>
           } @else {
           {{ itemValue.username }}

@@ -19,7 +19,7 @@ import {
   PLATFORM_ID,
 } from '@angular/core';
 import { RoleGuardService } from '../../../authentication';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 
 @Component({
   selector: 'app-podcast-details-box-card',
@@ -29,13 +29,21 @@ import { TranslateApiPipe } from '../../../../common/core/translations/pipes';
     TranslateModule,
 
     LazyLoadImageDirective,
-    TranslateApiPipe
+    
   ],
   templateUrl: './podcast-details-box-card.component.html',
   styleUrls: ['./podcast-details-box-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PodcastDetailsBoxCardComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   @Input({ required: true }) item!: IGlobalPodcastItemModel;
   @Input() isBookMarked = signal<boolean>(false);
   @Input() isloadingFavourite = false;
@@ -126,3 +134,4 @@ export class PodcastDetailsBoxCardComponent {
     this.playPodcast.emit();
   }
 }
+

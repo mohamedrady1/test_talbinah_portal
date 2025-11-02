@@ -12,16 +12,24 @@ import {
 import { LanguageService } from '../../../../common';
 import { DownloadableFile } from '../../models';
 import { FileType } from '../../enums';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslationsFacade } from '../../../../common/core/translations/services';
 @Component({
   selector: 'app-file-viewer',
   standalone: true,
-  imports: [CommonModule, TranslateApiPipe],
+  imports: [CommonModule],
   templateUrl: './file-viewer.component.html',
   styleUrls: ['./file-viewer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileViewerComponent {
+  private readonly translationsFacade = inject(TranslationsFacade);
+  
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
+  
   private readonly platformId = inject(PLATFORM_ID);
   protected readonly languageService = inject(LanguageService);
   protected readonly currentLang = this.languageService.getCurrentLanguage();

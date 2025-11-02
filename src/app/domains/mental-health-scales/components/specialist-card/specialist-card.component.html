@@ -29,7 +29,7 @@
                   fill="#0E39B6" />
               </svg>
               <p>
-                {{ 'recommended' | translateApi }}
+                {{ translate('recommended') }}
               </p>
             </div>
             }
@@ -76,7 +76,7 @@
               @if (specialistDetails?.specialties?.length) {
               {{ specialistDetails.specialties[0].name }}
               } @else {
-              {{ 'no_specialty' | translateApi }}
+              {{ translate('no_specialty') }}
               }
             </div>
             <div class="specialist-card__description--features--feature">
@@ -97,9 +97,9 @@
               <p>
                 @if (specialistDetails?.years_experience !== undefined &&
                 specialistDetails.years_experience !== null) {
-                {{ specialistDetails.years_experience }} {{ 'years_of_experience' | translateApi }}
+                {{ specialistDetails.years_experience }} {{ translate('years_of_experience') }}
                 } @else {
-                {{ '--' }}
+                {{ translate('--') }}
                 }
               </p>
             </div>
@@ -114,7 +114,7 @@
             <p>
               <span>({{ specialistDetails.reviews_avg }})</span> {{ specialistDetails.reservations_count
               }}
-              {{ 'review' | translateApi }}
+              {{ translate('review') }}
             </p>
           </div>
         </div>
@@ -182,7 +182,7 @@
                 fill="#0E39B6" />
             </svg>
           </div>
-          <p>30 {{ 'min' | translateApi }}</p>
+          <p>30 {{ translate('min') }}</p>
         </div>
       </div>
     </div>
