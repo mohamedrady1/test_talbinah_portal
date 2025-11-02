@@ -37,7 +37,6 @@ import { NewResetPasswordComponent } from '../new-reset-password';
 import { OtpMethodSelectionComponent } from '../otp-method-selection';
 import { NewOtpVerificationComponent } from '../new-otp-verification';
 import { Router } from '@angular/router';
-import { TranslateApiPipe } from '../../../../../common/core/translations/pipes';
 
 export interface NewLoginPasswordModalData {
     icon: string;
@@ -53,8 +52,7 @@ export interface NewLoginPasswordModalData {
         FormsModule,
         ReactiveFormsModule,
         TranslateModule,
-        SvgIconComponent,
-        TranslateApiPipe
+        SvgIconComponent
     ],
     templateUrl: './new-login-password.component.html',
     styleUrls: ['./new-login-password.component.scss'],
@@ -82,7 +80,7 @@ export class NewLoginPasswordComponent implements OnInit, OnDestroy {
 
     // Modal data inputs
     @Input() icon: string = 'images/logos/icon.png';
-    @Input() title: string = 'enter_password';
+    @Input() title: string = 'form.password.placeholder';
     @Input() description: string = 'welcome_safe_space';
 
     // Output for refresh signaling
@@ -316,7 +314,7 @@ export class NewLoginPasswordComponent implements OnInit, OnDestroy {
         this.modalService.open(OtpMethodSelectionComponent, {
             inputs: {
                 image: 'images/auth/icons/talbinah.png',
-                title: 'choose_verification_method',
+                title: 'OtpMethodSelection.Title',
                 data: {
                     payploadCheckNumber: this.neededDataToVerify(),
                     fromURL: AuthenticationRoutesEnum.PASSWORD

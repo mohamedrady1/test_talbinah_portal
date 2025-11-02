@@ -1,6 +1,4 @@
-import { ALL_INPUT_TYPES, IFormInputConfig } from "../../../shared/forms";
-import { InputIconPosition } from "../../../shared/forms/enums/input-icon-position.enum";
-import { InputIconType } from "../../../shared/forms/enums/input-icon-type.enum";
+import { ALL_INPUT_TYPES, IFormInputConfig, InputIconPosition, InputIconType } from "../../../shared";
 import { Validators } from "@angular/forms";
 
 export const RateDoctorFormConfig: IFormInputConfig[] = [

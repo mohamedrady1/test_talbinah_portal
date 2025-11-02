@@ -4,7 +4,7 @@ import { AutoExactHeightDirective } from '../../../../common/core/directives';
 import { TranslateModule } from '@ngx-translate/core';
 import { ICommunityNotification } from '../../dtos';
 import { CardType } from '../../../../common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+
 @Component({
   selector: 'app-society-notifications',
   standalone: true,
@@ -14,8 +14,6 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     AutoExactHeightDirective,
 
     MyPsychologicalSocietyNotificationCardComponent,
-
-    TranslateApiPipe
   ],
   templateUrl: './society-notifications.component.html',
   styleUrls: ['./society-notifications.component.scss'],

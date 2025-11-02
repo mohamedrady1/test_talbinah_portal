@@ -41,7 +41,6 @@ import { RefreshUserPostsService } from '../../services';
 import { Router } from '@angular/router';
 import { MainPageRoutesEnum } from '../../../main-page';
 import { TalbinahCommunityRoutesEnum } from '../../constants';
-import { TranslateApiPipe } from '../../../../common/core/translations';
 
 export interface ButtonConfig {
   id: string; // Unique identifier for the button
@@ -65,8 +64,7 @@ export interface ButtonConfig {
     ImageViewComponent,
     VideoViewComponent,
     CreatePostButtonComponent,
-    CreateReelsComponent,
-    TranslateApiPipe
+    CreateReelsComponent
   ],
   templateUrl: './create-psychological-society-post.component.html',
   styleUrls: ['./create-psychological-society-post.component.scss']
@@ -75,7 +73,7 @@ export class CreatePsychologicalSocietyPostComponent implements OnInit, OnDestro
   buttonConfigs: ButtonConfig[] = [
     {
       id: 'post',
-      text: 'status',
+      text: 'talbinahCommunity.status',
       imageSrc: 'images/community/create/messages.svg', // Ensure these paths are correct
       activeImageSrc: 'images/community/create/messages-active.svg',
       action: (id: string) => this.performButtonAction(id)
@@ -141,7 +139,7 @@ export class CreatePsychologicalSocietyPostComponent implements OnInit, OnDestro
   get validationError(): string | null {
     if (this.contentControl?.invalid && (this.contentControl.dirty || this.contentControl.touched)) {
       if (this.contentControl.errors?.['required']) {
-        return 'must_write_status_first';
+        return 'talbinahCommunity.textArea.required';
       }
     }
     return null;

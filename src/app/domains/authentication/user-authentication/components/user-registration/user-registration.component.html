@@ -107,7 +107,7 @@
                     ? ((registerForm.get(formItem.name)?.value || isDateActive(formItem.name)) ? 'date' : 'text')
                     : (formItem.type === allInputTypes.EMAIL ? 'email' : 'text')"
                   [attr.max]="formItem.type === allInputTypes.DATE ? maxDate : null" [placeholder]="formItem.type === allInputTypes.DATE
-                    ? ((registerForm.get(formItem.name)?.value ? '' : ('choose_your_date_of_birth' | translate)))
+                    ? ((registerForm.get(formItem.name)?.value ? '' : ('form.birthDate.placeholder' | translate)))
                     : ((formItem.placeholder || '') | translate)" class="custom-input-wrapper__input"
                   [ngClass]="{ 'custom-input-wrapper__input--date': formItem.type === allInputTypes.DATE }"
                   (focus)="formItem.type === allInputTypes.DATE ? onDateFocus($event) : null"

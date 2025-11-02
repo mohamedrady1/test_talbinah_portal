@@ -1,10 +1,10 @@
 <div class="mood-statistics">
     <div class="mood-statistics--today">
         <p class="mood-statistics--today__title">
-            {{ 'todays_mood_in_our_community' | translateApi }}
+            {{ 'talbinahCommunity.mood.todayMoodInCommunity' | translate }}
         </p>
         <div class="mood-statistics--today__statistic">
-            <p><span> {{ config.number }}% {{ 'people_expressed_today' | translateApi }}</span></p>
+            <p><span> {{ config.number }}% {{ 'talbinahCommunity.mood.peopleExpressedMood' | translate }}</span></p>
             <p>
                 @switch (config.mood.id) {
                 @case (0) {
@@ -29,14 +29,14 @@
     </div>
     <div class="mood-statistics--support-statistics">
         <p class="mood-statistics--support-statistics__title">
-            {{ 'support_statistics' | translateApi }}
+            {{ 'talbinahCommunity.supportStats.title' | translate }}
         </p>
         <div class="mood-statistics--support-statistics__statistic">
             <p><span>
-                    {{ 'you_have_supported_today' | translateApi }}
+                    {{ 'talbinahCommunity.supportStats.youSupportedToday' | translate }}
                 </span></p>
             <p>
-                {{ config.count }} {{ 'people' | translateApi }}
+                {{ config.count }} {{ 'talbinahCommunity.supportStats.people' | translate }}
             </p>
         </div>
     </div>

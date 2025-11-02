@@ -135,7 +135,7 @@
       </p>
       <app-svg-icon name="divider-2"></app-svg-icon>
     </div>
-    <div class="login__form__buttons" role="group" [attr.aria-label]="'roleSelect'">
+    <div class="login__form__buttons" role="group" [attr.aria-label]="'login.form.roleSelect' | translateApi">
       <button id="new-doctor-btn" type="button" class="btn btn--outline" (click)="onRoleSelect('doctor')"
         [attr.aria-label]="'as_doctor' | translateApi">
         <span class="btn__label">{{ "as_doctor" | translateApi }}</span>

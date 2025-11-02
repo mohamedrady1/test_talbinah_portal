@@ -41,44 +41,44 @@ export const WEEK_DAYS: readonly WeekDay[] = (() => {
 
 export const CHAT_KEYS = {
   TEXT_CHAT: {
-    TITLE: 'text_conversation',
-    SUBTITLE: 'chat_with_talbinah_bot_via_text',
-    PLACEHOLDER: 'write_your_message',
-    SEND: 'send',
-    VOICE_BUTTON: 'switch_to_voice',
-    NEW_CHAT: 'new_conversation',
+    TITLE: 'khawiik.textChat.title',
+    SUBTITLE: 'khawiik.textChat.subtitle',
+    PLACEHOLDER: 'khawiik.textChatPage.input.placeholder',
+    SEND: 'khawiik.textChatPage.input.sendButton',
+    VOICE_BUTTON: 'khawiik.textChatPage.input.voiceButton',
+    NEW_CHAT: 'khawiik.textChatPage.header.actions.newChat',
     ZOOM_IN: 'khawiik.textChatPage.header.actions.zoomIn',
     ZOOM_OUT: 'khawiik.textChatPage.header.actions.zoomOut'
   },
   VOICE_CHAT: {
-    TITLE: 'voice_conversation',
-    SUBTITLE: 'chat_with_talbinah_bot_via_voice',
-    PLACEHOLDER: 'press_to_talk',
-    SEND: 'send',
-    TEXT_BUTTON: 'convert_to_text',
-    NEW_CHAT: 'new_conversation',
+    TITLE: 'khawiik.voiceChat.title',
+    SUBTITLE: 'khawiik.voiceChat.subtitle',
+    PLACEHOLDER: 'khawiik.voiceChat.placeholder',
+    SEND: 'khawiik.voiceChat.send',
+    TEXT_BUTTON: 'khawiik.voiceChat.textButton',
+    NEW_CHAT: 'khawiik.voiceChat.newChat',
     ZOOM_IN: 'khawiik.voiceChat.zoomIn',
     ZOOM_OUT: 'khawiik.voiceChat.zoomOut',
     WELCOME: {
-      ICON: 'talbinah_welcome_icon',
-      WELCOME: 'talbinah_greeting_1',
-      SUBTITLE: 'talbinah_greeting_2'
+      ICON: 'khawiik.voiceChat.welcome.icon',
+      WELCOME: 'khawiik.voiceChat.welcome.welcome',
+      SUBTITLE: 'khawiik.voiceChat.welcome.subtitle'
     }
 
   },
   COMMON: {
-    WELCOME_ICON: 'talbinah_welcome_icon',
+    WELCOME_ICON: 'khawiik.textChatPage.welcome.icon',
     WELCOME: 'khawiik.textChatPage.welcome.welcome',
     SUBTITLE: 'khawiik.textChatPage.welcome.subtitle',
-    WHATS_ON_MIND: 'whats_on_your_mind_today',
+    WHATS_ON_MIND: 'khawiik.textChat.whatsOnMind',
     WEEK_DAYS: {
-      WEDNESDAY: 'wednesday',
-      THURSDAY: 'thursday',
-      FRIDAY: 'friday',
-      SATURDAY: 'saturday',
-      SUNDAY: 'sunday',
-      MONDAY: 'monday',
-      TUESDAY: 'tuesday'
+      WEDNESDAY: 'khawiik.weekDays.wednesday',
+      THURSDAY: 'khawiik.weekDays.thursday',
+      FRIDAY: 'khawiik.weekDays.friday',
+      SATURDAY: 'khawiik.weekDays.saturday',
+      SUNDAY: 'khawiik.weekDays.sunday',
+      MONDAY: 'khawiik.weekDays.monday',
+      TUESDAY: 'khawiik.weekDays.tuesday'
     }
   }
 } as const;

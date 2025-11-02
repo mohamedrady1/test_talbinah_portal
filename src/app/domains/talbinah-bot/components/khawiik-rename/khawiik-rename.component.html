@@ -5,7 +5,7 @@
       <div class="khawiik-rename__form-label-group">
         <label for="khawiik-title" class="khawiik-rename__label"
           [class.khawiik-rename__label--required]="!editableTitle().trim()">
-          {{ 'rename' | translateApi }}
+          {{ 'khawiik.rename.title' | translate }}
           <span class="khawiik-rename__required">*</span>
         </label>
       </div>
@@ -13,12 +13,12 @@
       <div
         class="khawiik-rename__input-wrapper khawiik-rename__input-wrapper--with-icon khawiik-rename__input-wrapper--icon-start"
         [class.khawiiik-rename__input-wrapper--error]="!editableTitle().trim() && isEditMode()">
-        <img src="images/icons/report.png" [alt]="'rename' | translateApi" class="khawiik-rename__input-icon">
+        <img src="images/icons/report.png" [alt]="'khawiik.rename.title' | translate"
+          class="khawiik-rename__input-icon">
         <input id="khawiik-title" type="text" class="khawiik-rename__input" [(ngModel)]="editableTitle"
           (keydown)="onInputKeydown($event)" (ngModelChange)="onTitleInputChange()"
           [class.khawiik-rename__input--required]="!editableTitle().trim()"
-          [placeholder]="'enter_new_conversation_name' | translateApi" [readonly]="!isEditMode()"
-          (click)="startEditing()"
+          [placeholder]="'khawiik.rename.placeholder' | translate" [readonly]="!isEditMode()" (click)="startEditing()"
           [attr.aria-describedby]="(!editableTitle().trim() && isEditMode()) ? 'khawiik-title-error' : null"
           [attr.aria-invalid]="(!editableTitle().trim() && isEditMode()) ? 'true' : 'false'"
           aria-label="Chat title input" />
@@ -27,7 +27,7 @@
       @if (!editableTitle().trim() && isEditMode()) {
       <div class="khawiik-rename__form-feedback" role="status" aria-live="polite">
         <span class="khawiik-rename__form-error" role="alert" id="khawiik-title-error">
-          {{ 'conversation_title_required' | translateApi }}
+          {{ 'form.khawiikTitle.errors.required' | translate }}
         </span>
       </div>
       }
@@ -36,7 +36,7 @@
   <div class="khawiik-rename__actions">
     <button type="button" class="khawiik-rename__cancel-btn" (click)="cancelEdit()" [disabled]="isSaving()"
       aria-label="Cancel editing">
-      {{ 'cancel' | translateApi }}
+      {{ 'general.cancel' | translate }}
     </button>
 
     <button type="button" class="khawiik-rename__save-btn" (click)="saveTitle()"
@@ -44,9 +44,9 @@
       [class.loading]="isSaving()" aria-label="Save title">
       @if (isSaving()) {
       <span class="khawiik-rename__loading-spinner"></span>
-      {{ 'in_progress' | translateApi }}
+      {{ 'in_progress' | translate }}
       } @else {
-      {{ 'edit' | translateApi }}
+      {{ 'general.edit' | translate }}
       }
     </button>
   </div>

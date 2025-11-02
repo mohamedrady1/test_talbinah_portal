@@ -74,10 +74,10 @@ export class PaymentStateService {
     if (type === PaymentPageTypeEnum.RESERVATION) {
       statusLabelsTexts = {
         buttonText: 'back_to_home',
-        successTitle: 'reservation_reserved_successfully',
-        successSubTitle: 'meet_at_selected_appointment',
-        errorTitle: 'something_want_wrong_try_again',
-        errorSubTitle: 'book_appointment_error_details_note',
+        successTitle: 'NormalAppointment.appointmentSuccess',
+        successSubTitle: 'NormalAppointment.appointmentSuccessText',
+        errorTitle: 'NormalAppointment.appointmentError',
+        errorSubTitle: 'NormalAppointment.appointmentErrorText',
       };
     }
 

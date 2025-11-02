@@ -18,9 +18,9 @@
                 <li class="post-menu__list-item" (click)="triggerAction(item.action, postItem)"
                     [ngClass]="{'delete': item.action == 'delete'}">
                     <div class="post-menu__list-item-image">
-                        <img [src]="item.icon" [alt]="'item.text' | translateApi" />
+                        <img [src]="item.icon" [alt]="'item.text' | translate" />
                     </div>
-                    <p class="post-menu__list-item-text">{{ item.text | translateApi }}</p>
+                    <p class="post-menu__list-item-text">{{ item.text | translate }}</p>
                 </li>
                 }
                 }

@@ -12,9 +12,7 @@
     @else if (errorMessage() && status() === false) {
     <app-error-state-card [config]="errorState"></app-error-state-card>
     }
-    @else if (activityCards().length === 0) {
-    <app-empty-state-card [config]="emptyState" style="width: 100%;"></app-empty-state-card>
-    }
+
     <!-- Activities Grid -->
     @else {
     <ul class="khawiik-activities__grid" role="list">
@@ -39,8 +37,8 @@
 
           <div class="khawiik-activities__card-footer">
             <button type="button" class="khawiik-activities__cta" (click)="onCardSelect(card); $event.stopPropagation()"
-              [attr.aria-label]="card.title + ' - ' + ('start_now' | translateApi)">
-              {{ 'start_now' | translateApi }}
+              [attr.aria-label]="card.title + ' - ' + ('khawiik.activities.cta' | translate)">
+              {{ 'khawiik.activities.cta' | translate }}
             </button>
           </div>
         </article>

@@ -7,9 +7,9 @@ export const registerFormConfig: IFormInputConfig[] = [
     id: 'registerFullName',
     type: ALL_INPUT_TYPES.TEXT,
     name: 'fullName',
-    label: 'full_name',
+    label: 'login.full_name',
     isRequired: true,
-    placeholder: 'full_name_placeholder',
+    placeholder: 'login.full_name_placeholder',
     defaultValue: null,
     isDisabled: false,
     widthClass: 'w-full',
@@ -20,10 +20,10 @@ export const registerFormConfig: IFormInputConfig[] = [
     globalClass: 'custom-input-wrapper',
     inputClass: 'form-control',
     validation: [
-      { function: Validators.required, errorMessage: 'full_name_required' },
+      { function: Validators.required, errorMessage: 'login.full_name_required' },
       {
         function: Validators.pattern(/^[\u0600-\u06FFa-zA-Z\s]+$/)
-        , errorMessage: 'full_name_pattern', errorName: 'pattern'
+        , errorMessage: 'login.full_name_pattern', errorName: 'pattern'
       }
     ],
     enableLabelClick: true,
@@ -58,9 +58,9 @@ export const registerFormConfig: IFormInputConfig[] = [
     id: 'registerBirthDate',
     type: ALL_INPUT_TYPES.DATE,
     name: 'birth_date',
-    label: 'date_of_birth',
+    label: 'form.birthDate.label',
     isRequired: true,
-    placeholder: 'choose_your_date_of_birth',
+    placeholder: 'form.birthDate.placeholder',
     defaultValue: null,
     isDisabled: false,
     widthClass: 'w-full',
@@ -71,7 +71,7 @@ export const registerFormConfig: IFormInputConfig[] = [
     globalClass: 'custom-input-wrapper',
     inputClass: 'form-control',
     validation: [
-      { function: Validators.required, errorMessage: 'date_of_birth_required' }
+      { function: Validators.required, errorMessage: 'form.birthDate.errors.required' }
     ],
     maxValue: 18, // age limit, not year
     enableLabelClick: true,
@@ -105,9 +105,9 @@ export const registerFormConfig: IFormInputConfig[] = [
     id: 'registerEmail',
     type: ALL_INPUT_TYPES.EMAIL,
     name: 'email',
-    label: 'email',
+    label: 'login.form.email.label',
     isRequired: false,
-    placeholder: 'enter_email',
+    placeholder: 'login.form.email.placeholder',
     defaultValue: null,
     isDisabled: false,
     widthClass: 'w-full',
@@ -118,8 +118,8 @@ export const registerFormConfig: IFormInputConfig[] = [
     globalClass: 'custom-input-wrapper',
     inputClass: 'form-control',
     validation: [
-      // { function: Validators.required, errorMessage: 'login.email_required' },
-      { function: Validators.email, errorMessage: 'invalid_email', errorName: 'email' },
+      // { function: Validators.required, errorMessage: 'login.form.email.errors.required' },
+      { function: Validators.email, errorMessage: 'form.email.errors.email', errorName: 'email' },
     ],
     enableLabelClick: true,
     stopPaste: true,
@@ -128,9 +128,9 @@ export const registerFormConfig: IFormInputConfig[] = [
     id: 'registerPassword',
     type: ALL_INPUT_TYPES.PASSWORD,
     name: 'password',
-    label: 'password',
+    label: 'login.form.password.label',
     isRequired: true,
-    placeholder: 'enter_password',
+    placeholder: 'login.form.password.placeholder',
     defaultValue: null,
     isDisabled: false,
     widthClass: 'w-full',
@@ -142,7 +142,7 @@ export const registerFormConfig: IFormInputConfig[] = [
     inputClass: 'form-control',
     showConfirm: true,
     validation: [
-      { function: Validators.required, errorMessage: 'enter_confirm_password' },
+      { function: Validators.required, errorMessage: 'login.form.password.errors.required' },
     ],
     enableLabelClick: true,
     stopPaste: true,
@@ -152,9 +152,9 @@ export const registerFormConfig: IFormInputConfig[] = [
   //   id: 'registerConfirmPassword',
   //   type: ALL_INPUT_TYPES.PASSWORD,
   //   name: 'confirmPassword',
-  //   label: 're_write_confirm_password',
+  //   label: 'login.form.confirmPassword.label',
   //   isRequired: true,
-  //   placeholder: 'enter_password_again',
+  //   placeholder: 'login.form.confirmPassword.placeholder',
   //   defaultValue: null,
   //   isDisabled: false,
   //   widthClass: 'w-full',
@@ -166,7 +166,7 @@ export const registerFormConfig: IFormInputConfig[] = [
   //   inputClass: 'form-control',
   //   showConfirm: true,
   //   validation: [
-  //     { function: Validators.required, errorMessage: 'confirmPassword_required' },
+  //     { function: Validators.required, errorMessage: 'login.form.confirmPassword.errors.required' },
   //   ],
   //   enableLabelClick: true,
   //   stopPaste: true,

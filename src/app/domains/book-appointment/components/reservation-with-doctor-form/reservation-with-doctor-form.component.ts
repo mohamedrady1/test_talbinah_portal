@@ -56,7 +56,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
 
 export const DoctorReservationSlotsEmptyState: EmptyStateConfig = {
   imageUrl: null,
-  title: 'no_available_time',
+  title: 'AvailableTimes.NoAvailableTimes',
   gap: '.5rem'
 };
 export const DoctorReservationSlotsErrorState: EmptyStateConfig = {
@@ -66,7 +66,7 @@ export const DoctorReservationSlotsErrorState: EmptyStateConfig = {
 };
 export const ChooseDateReservationEmptyState: EmptyStateConfig = {
   imageUrl: null,
-  title: 'choose_date_first',
+  title: 'AvailableTimes.ChooseDateFirst',
   gap: '.5rem'
 };
 
@@ -527,8 +527,8 @@ export class ReservationWithDoctorFormComponent {
     this._ModalService.open(AvailablePackagesStoringComponent, {
       inputs: {
         image: 'images/urgent-appointment/calender-2.png',
-        title: 'available_packages_storing_title',
-        subtitle: 'available_packages_storing_subtitle',
+        title: 'AvailablePackagesStoring.Title',
+        subtitle: 'AvailablePackagesStoring.Subtitle',
         data: packageData,
         doctor: this.doctor,
         reservationFormData: this.latestReservationPayload,

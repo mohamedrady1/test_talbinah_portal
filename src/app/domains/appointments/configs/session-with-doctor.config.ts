@@ -20,8 +20,8 @@ export const SESSION_WITH_DOCTOR_SEO_CONFIG = {
 
 export const SessionWithDoctorHeaderConfig: ILayoutGridHeaderConfig = {
   image: 'images/home/icons/date.png',
-  title: 'appointments_list_page_title',
-  subtitle: 'appointments_list_page_subtitle'
+  title: 'sessionWithDoctor.title',
+  subtitle: 'sessionWithDoctor.subtitle'
 };
 
 export const ChatActionsMenuItemsConfig: IActionDropdownMenuItem[] = [

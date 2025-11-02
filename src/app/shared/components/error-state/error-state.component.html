@@ -2,16 +2,16 @@
     <img class="error-state__image" [src]="config.imageUrl" alt="Error state" />
 
     @if (config.title) {
-    <h2 class="error-state__title">{{ config.title | translateApi }}</h2>
+    <h2 class="error-state__title">{{ config.title | translate }}</h2>
     }
 
     @if (config.message) {
-    <p class="error-state__message">{{ config.message | translateApi }}</p>
+    <p class="error-state__message">{{ config.message | translate }}</p>
     }
 
     @if (config.onRetry) {
     <button class="error-state__button" type="button" (click)="retry()">
-        {{ config.retryLabel || ('retry' | translateApi) }}
+        {{ config.retryLabel || ('general.retry' | translate) }}
     </button>
     }
 </div>

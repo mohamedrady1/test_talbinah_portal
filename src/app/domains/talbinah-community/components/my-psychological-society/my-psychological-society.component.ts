@@ -5,7 +5,6 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { IdentityFormFacade } from '../../services';
 import { SvgIconComponent } from "../../../../shared";
-import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-my-psychological-society',
@@ -15,8 +14,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     CommonModule,
     TalbinahIdentityFormComponent,
     WelcomeToTalbinahComponent,
-    SvgIconComponent,
-    TranslateApiPipe
+    SvgIconComponent
   ],
   templateUrl: './my-psychological-society.component.html',
   styleUrls: ['./my-psychological-society.component.scss'],

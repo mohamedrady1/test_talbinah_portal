@@ -107,13 +107,13 @@
           </p>
           <app-svg-icon name="divider-2"></app-svg-icon>
         </div>
-        <div class="new-login__form__buttons" role="group" [attr.aria-label]="'roleSelect'">
+        <div class="new-login__form__buttons" role="group" [attr.aria-label]="'login.form.roleSelect' | translateApi">
           <button id="new-doctor-btn" type="button" class="btn btn--outline" (click)="onRoleSelect('doctor')"
-            [attr.aria-label]="'as_doctor' | translateApi">
+            [attr.aria-label]="'login.form.registerAsDoctor' | translateApi">
             <span class="btn__label">{{ "as_doctor" | translateApi }}</span>
           </button>
           <button id="new-user-btn" type="button" class="btn btn--outline" (click)="onRoleSelect('patient')"
-            [attr.aria-label]="'as_new_user' | translateApi">
+            [attr.aria-label]="'login.form.registerAsUser' | translateApi">
             <span class="btn__label">{{ "as_new_user" | translateApi }}</span>
           </button>
         </div>

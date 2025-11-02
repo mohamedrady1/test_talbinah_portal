@@ -7,11 +7,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Logger } from '../../../../common';
 import { Router } from '@angular/router';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+
 @Component({
   selector: 'app-need-support-card',
   standalone: true,
-  imports: [TranslateModule, SvgIconComponent, TranslateApiPipe],
+  imports: [TranslateModule, SvgIconComponent],
   templateUrl: './need-support-card.component.html',
   styleUrls: ['./need-support-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -2,15 +2,13 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ErrorStateConfig } from '../error-state-card';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
-import { TranslateApiPipe } from '../../../common/core/translations';
 
 @Component({
   selector: 'app-error-state',
   standalone: true,
   imports: [
     TranslateModule,
-    CommonModule,
-    TranslateApiPipe
+    CommonModule
   ],
   templateUrl: './error-state.component.html',
   styleUrls: ['./error-state.component.scss'],

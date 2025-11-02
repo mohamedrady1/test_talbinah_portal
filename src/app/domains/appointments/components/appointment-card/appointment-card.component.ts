@@ -239,7 +239,7 @@ export class AppointmentCardComponent implements OnInit {
     let modalWidth: string = '40%'; // Default width
     modalInputs = {
       image: 'images/mentalHealthScale/icons/talbinah.png',
-      title: 'cancel_appointment',
+      title: 'reservationsList.cancelAppointmentModal.modalTitle',
       data: {
         item: item,
         responseCancel: responseCancel

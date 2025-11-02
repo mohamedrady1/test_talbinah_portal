@@ -7,15 +7,14 @@ import { ChatHistoryFacade, ConversationFacade } from '../../services';
 import { ChatEventsService } from '../../services/chat-events.service';
 import { IChatHistoryItemDataDto } from '../../dtos';
 import { Logger } from '../../../../common';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
+
 @Component({
   selector: 'app-khawiik-rename',
   standalone: true,
   imports: [
     TranslateModule,
     CommonModule,
-    FormsModule,
-    TranslateApiPipe
+    FormsModule
   ],
   templateUrl: './khawiik-rename.component.html',
   styleUrls: ['./khawiik-rename.component.scss'],

@@ -12,9 +12,7 @@
     @else if (errorMessage() && status() === false) {
     <app-error-state-card [config]="errorState"></app-error-state-card>
     }
-    @else if (activityCards().length === 0) {
-    <app-empty-state-card [config]="emptyState" style="width: 100%;"></app-empty-state-card>
-    }
+
     <!-- Khawiik Book Grid -->
     @else {
     <ul class="khawiik-books__grid" role="list">
@@ -34,7 +32,7 @@
                   {{ card.progress.days_done }} / {{ card.progress.days_total }}
                 </div>
                 <div class="khawiik-books__days-label">
-                  {{ 'days ' | translateApi }}
+                  {{ 'khawiik.books.days' | translate }}
                 </div>
               </div>
               } @else if (getBookType(card) === 'voice') {
@@ -91,14 +89,13 @@
               [class.khawiik-books__cta--loading]="isStartingMission() && getBookType(card) === 'text'"
               [disabled]="card.progress.completed || (isStartingMission() && getBookType(card) === 'text')"
               (click)="onCardSelect(card); $event.stopPropagation()"
-              [attr.aria-label]="card.title + ' - ' + (card.progress.completed ? ('completed_successfully' | translateApi) : ('start_conversation_now' | translateApi))">
+              [attr.aria-label]="card.title + ' - ' + (card.progress.completed ? ('khawiik.books.completed' | translate) : ('khawiik.books.cta' | translate))">
               @if (isStartingMission() && getBookType(card) === 'text') {
               <span class="khawiik-books__cta-loading">
-                {{ 'in_progress' | translateApi }}
+                {{ 'in_progress' | translate }}
               </span>
               } @else {
-              {{ card.progress.completed ? ('completed_successfully' | translateApi) : ('start_conversation_now' |
-              translateApi)
+              {{ card.progress.completed ? ('khawiik.books.completed' | translate) : ('khawiik.books.cta' | translate)
               }}
               }
             </button>

@@ -17,7 +17,7 @@
               d="M6.99989 10.2999C6.59156 10.2999 6.18322 10.1424 5.87406 9.83321L2.07072 6.02988C1.90156 5.86071 1.90156 5.58071 2.07072 5.41154C2.23989 5.24238 2.51989 5.24238 2.68906 5.41154L6.49239 9.21488C6.77239 9.49488 7.22739 9.49488 7.50739 9.21488L11.3107 5.41154C11.4799 5.24238 11.7599 5.24238 11.9291 5.41154C12.0982 5.58071 12.0982 5.86071 11.9291 6.02988L8.12572 9.83321C7.81656 10.1424 7.40822 10.2999 6.99989 10.2999Z"
               fill="#47586E" />
           </svg>
-          <p>{{ 'now' | translateApi }}</p>
+          <p>{{ 'general.now' | translate }}</p>
         </div>
       </div>
     </div>
@@ -36,8 +36,9 @@
     <div class="create-psychological-society-post__mood-input">
       <div class="p-relative">
         <textarea #textareaRef class="create-psychological-society-post__mood-input__textarea"
-          [attr.placeholder]="'express_your_mood_today' | translateApi" [ngClass]="{ 'has-error': validationError }"
-          formControlName="content" [disabled]="isLoading()" (input)="onInput($event)"></textarea>
+          [attr.placeholder]="'talbinahCommunity.textArea.shareMood' | translate"
+          [ngClass]="{ 'has-error': validationError }" formControlName="content" [disabled]="isLoading()"
+          (input)="onInput($event)"></textarea>
         <!-- formControlName="content" is now bound to the 'content' control -->
 
         <div class="create-psychological-society-post__inputs">
@@ -85,7 +86,7 @@
         }
       </div>
       @if (validationError) {
-      <p class="create-psychological-society-post__mood-input__error">{{ validationError | translateApi }}</p>
+      <p class="create-psychological-society-post__mood-input__error">{{ validationError | translate }}</p>
       }
 
       <!-- <p class="create-psychological-society-post__mood-input--media-hint">
@@ -120,16 +121,16 @@
 
     <div class="create-psychological-society-post--actions">
       <button id="cancel-btn" type="button" class="btn btn--outline" (click)="onCancel()" [disabled]="isLoading()">
-        {{ 'cancel' | translateApi }}
+        {{ 'talbinahCommunity.cancel' | translate }}
       </button>
       <button id="next-btn" type="submit" class="btn btn--solid" (click)="onSubmit()" [disabled]="isLoading()">
         <!-- Disable based on form validity (isPostValid()) and loading state -->
         @if(data?.itemToEdit){
-        {{'edit' | translateApi }}
+        {{'general.edit' | translate }}
 
         }
         @else{
-        {{'share' | translateApi }}
+        {{'talbinahCommunity.shareNow' | translate }}
         }
         @if (isLoading()) {
         <span class="btn__spinner"></span>

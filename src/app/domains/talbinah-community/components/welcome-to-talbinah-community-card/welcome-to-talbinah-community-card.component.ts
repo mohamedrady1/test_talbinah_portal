@@ -2,12 +2,12 @@ import { Component, Input } from '@angular/core';
 import { IWelcomeCardConfig } from '../../models';
 import { Logger } from '../../../../common';
 import { TranslateModule } from '@ngx-translate/core';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+
 
 @Component({
   selector: 'app-welcome-to-talbinah-community-card',
   standalone: true,
-  imports: [TranslateModule, TranslateApiPipe],
+  imports: [TranslateModule],
   templateUrl: './welcome-to-talbinah-community-card.component.html',
   styleUrls: ['./welcome-to-talbinah-community-card.component.scss']
 })

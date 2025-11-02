@@ -12,9 +12,6 @@ import { KhawiikBooksSkeletonComponent } from "../../../../shared/skeletons";
 import { IKhawiikBook } from '../../dtos';
 import { KhawiikBotRoutesEnum } from '../../constants';
 import { MissionDataService } from '../../services';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
-import { EmptyStateCardComponent, EmptyStateConfig } from '../../../../shared';
-import { KhawiikBooksEmptyState } from '../../configs/empty-state.config';
 
 @Component({
   selector: 'app-khawiik-books',
@@ -22,12 +19,11 @@ import { KhawiikBooksEmptyState } from '../../configs/empty-state.config';
   imports: [
     TranslateModule,
     CommonModule,
-    TranslateApiPipe,
+
     AutoExactHeightDirective,
 
     KhawiikBooksSkeletonComponent,
-    ErrorStateCardComponent,
-    EmptyStateCardComponent
+    ErrorStateCardComponent
   ],
   templateUrl: './khawiik-books.component.html',
   styleUrls: ['./khawiik-books.component.scss'],
@@ -49,7 +45,7 @@ export class KhawiikBooksComponent {
   protected readonly errorState: ErrorStateConfig = getKhawiikBooksErrorConfig(() =>
     this.facade.fetchKhawiikBooks(),
   );
-  protected readonly emptyState: EmptyStateConfig = KhawiikBooksEmptyState;
+
   // ====== Facade state ======
   readonly isLoading = this.facade.isLoading;
   readonly isStartingMission = this.facade.isStartingMission;

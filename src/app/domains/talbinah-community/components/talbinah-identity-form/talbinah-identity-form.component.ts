@@ -7,7 +7,6 @@ import { AvatarsEmptyState, IdentityFormFacade, InterestsEmptyState } from '../.
 import { getAvatarsError, getInterestsError } from '../../configs';
 import { IEmojiItem, IPostInterest } from '../../dtos';
 import { Logger } from '../../../../common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-talbinah-identity-form',
@@ -17,8 +16,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     TranslateModule,
     CommonModule,
     ErrorStateComponent,
-    EmptyStateComponent,
-    TranslateApiPipe
+    EmptyStateComponent
   ],
   templateUrl: './talbinah-identity-form.component.html',
   styleUrls: ['./talbinah-identity-form.component.scss'],

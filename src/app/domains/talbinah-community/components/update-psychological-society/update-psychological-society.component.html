@@ -1,13 +1,13 @@
 <div class="update-psychological-society-identity">
   <div class="update-psychological-society-identity__content">
     <div class="update-psychological-society-identity__title">
-      {{'edit_identity' |translateApi}}
+      {{'talbinahCommunity.updateIdentity.title' |translate}}
     </div>
     <form [formGroup]="formGroup" class="update-psychological-society-identity__form">
 
       <div class="update-psychological-society-identity__input-group">
         <label class="input-group__label" for="defaultName">
-          {{'default_name' | translateApi}}
+          {{'talbinahCommunity.MyCommunityForm.DefaultName.Label' | translate}}
         </label>
         <div class="custom-input-wrapper" [ngClass]="{
             'has-error': formGroup.controls['defaultName'].invalid && formGroup.controls['defaultName'].touched
@@ -21,20 +21,20 @@
           </svg>
 
           <input id="defaultName" type="text" formControlName="defaultName"
-            placeholder="{{'choose_suitable_name' | translateApi}}" class="form-control custom-input-wrapper__input"
-            autocomplete="off" />
+            placeholder="{{'talbinahCommunity.MyCommunityForm.DefaultName.placeholder' | translate}}"
+            class="form-control custom-input-wrapper__input" autocomplete="off" />
         </div>
         @if(formGroup.controls['defaultName'].invalid && formGroup.controls['defaultName'].touched){
         <div class="form-field__error">
           <span>
-            {{"please_choose_a_default_name" | translateApi}}
+            {{"talbinahCommunity.MyCommunityForm.DefaultName.Error.Required" | translate}}
           </span>
         </div>}
       </div>
 
       <div class="update-psychological-society-identity__input-group">
         <label class="input-group__label input-group__label--appearance">
-          {{'appearance_preference_talbinah' | translateApi}}
+          {{'talbinahCommunity.MyCommunityForm.Emoji.Label' | translate}}
         </label>
         @if (isLoadingEmojis(); ) {
         <div class="shimmer__list">
@@ -54,20 +54,20 @@
 
           @if (!isLoadingEmojis() && emojisList().length === 0 && !errorMessageEmojis()) {
           <div>
-            {{ 'No emojis found.' | translateApi }}
+            {{ 'No emojis found.' | translate }}
           </div>
           }
         </div>
         @if (emojiError()) {
         <small class="error">
-          {{'please_choose_an_avatar_that_represents_you' | translateApi}}
+          {{'talbinahCommunity.MyCommunityForm.Emoji.Error.Required' | translate}}
         </small>
         }
       </div>
 
       <div class="update-psychological-society-identity__input-group">
         <label class="input-group__label input-group__label--interests">
-          {{'your_interests' | translateApi}}
+          {{'talbinahCommunity.MyCommunityForm.Interest.Label' | translate}}
         </label>
         @if (isLoadingInterests(); ) {
         <div class="shimmer__list">
@@ -99,23 +99,23 @@
           }
           @if (!isLoadingInterests() && interestsList().length === 0 && !errorMessageInterests()) {
           <div>
-            {{ 'No interests found.' | translateApi }}
+            {{ 'No interests found.' | translate }}
           </div>
           }
         </div>
 
         @if (isLoadingInterests()) {
-        <div>{{ 'Loading interests...' | translateApi }}</div>
+        <div>{{ 'Loading interests...' | translate }}</div>
         }
         @if (errorMessageInterests()) {
 
         <div class="error-message">
-          {{ errorMessageInterests() | translateApi }}
+          {{ errorMessageInterests() | translate }}
         </div>
         }
         @if (interestsError()) {
         <small class="error">
-          {{'please_select_at_least_one_interest' | translateApi}}
+          {{'talbinahCommunity.MyCommunityForm.Interest.Error.Required' | translate}}
         </small>
         }
       </div>
@@ -123,10 +123,10 @@
   </div>
   <div class="update-psychological-society-identity--actions">
     <button id="cancel-btn" type="button" class="btn btn--outline" (click)="onCancel()" [disabled]="isLoadingSubmit()">
-      {{ 'cancel' | translateApi }}
+      {{ 'general.cancel' | translate }}
     </button>
     <button id="next-btn" type="button" class="btn btn--solid" (click)="onSubmit()" [disabled]="isLoadingSubmit()">
-      {{ 'save' | translateApi }}
+      {{ 'general.save' | translate }}
       @if (isLoadingSubmit()) {
       <span class="btn__spinner"></span>
       }

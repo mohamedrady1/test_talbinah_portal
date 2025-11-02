@@ -8,14 +8,15 @@ import {
   signal,
   ChangeDetectionStrategy,
 } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ClickOutsideDirective } from '../../../common/core/directives';
-import { TranslateApiPipe } from '../../../common/core/translations';
+import { TranslateModule } from '@ngx-translate/core';
 import { IActionDropdownMenuItem } from '../../interfaces';
-import { CommonModule } from '@angular/common';
+import { TranslateApiPipe } from '../../../common/core/translations';
 @Component({
   selector: 'app-actions-dropdown-menu',
   standalone: true,
-  imports: [CommonModule, ClickOutsideDirective, TranslateApiPipe],
+  imports: [CommonModule, TranslateModule, ClickOutsideDirective, TranslateApiPipe],
   templateUrl: './actions-dropdown-menu.component.html',
   styleUrls: ['./actions-dropdown-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

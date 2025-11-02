@@ -11,7 +11,7 @@
             {{ day.dayDate | date:'d' }}
           </span>
           <span class="khawiik-voice-chat__day-name">
-            {{ getDayName(day) | translateApi }}
+            {{ getDayName(day) | translate }}
           </span>
         </div>
         }
@@ -69,10 +69,10 @@
             class="khawiik-voice-chat__welcome-icon" />
           <div class="khawiik-voice-chat__content">
             <p class="khawiik-voice-chat__welcome-title">
-              {{ keys.VOICE_CHAT.WELCOME.WELCOME | translateApi }}
+              {{ keys.VOICE_CHAT.WELCOME.WELCOME | translate }}
             </p>
             <p class="khawiik-voice-chat__welcome-subtitle">
-              {{ keys.VOICE_CHAT.WELCOME.SUBTITLE | translateApi }}
+              {{ keys.VOICE_CHAT.WELCOME.SUBTITLE | translate }}
             </p>
           </div>
         </div>

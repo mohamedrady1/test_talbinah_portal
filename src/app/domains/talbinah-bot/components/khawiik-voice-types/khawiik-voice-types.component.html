@@ -9,10 +9,10 @@
     @if (pageTitle()) {
     <div class="khawiik-voice-types__hero-aduio-titles">
       <h3 id="welcome-title" class="khawiik-voice-types__hero-aduio-title">
-        {{ pageTitle() | translateApi }}
+        {{ pageTitle() | translate }}
       </h3>
       <p id="welcome-subtitle" class="khawiik-voice-types__hero-aduio-subtitle">
-        {{ pageSubtitle() | translateApi }}
+        {{ pageSubtitle() | translate }}
       </p>
     </div>
     }
@@ -52,7 +52,7 @@
 
       <span class="khawiik-voice-types__items--item-voice-name"
         [ngClass]="{'khawiik-voice-types__items--item-voice-name--active':voice.name === activeVoice()?.name}">
-        {{ voice.name | translateApi }}
+        {{ voice.name | translate }}
       </span>
     </div>
     }
@@ -63,20 +63,20 @@
   <footer class="khawiik-voice-types__footer">
     <button type="button" class="khawiik-voice-types__start" [disabled]="!activeVoice() || isSaving() || isLoading()"
       [ngClass]="{'khawiik-voice-types__start--disabled': isLoading()}" (click)="onSaveVoice()"
-      [attr.aria-label]="'continue'| translateApi">
+      [attr.aria-label]="'khawiik.khawiikVoiceTypes.actionBtn'| translate">
       @if(isLoading()){
-      {{ 'please_wait' | translateApi }}
+      {{ 'khawiik.khawiikVoiceTypes.pleaseWait' | translate }}
       }
       @else{
       @if (!isSaving()) {
       @if (from === 'chat') {
-      {{ 'confirm' | translateApi }}
+      {{ 'khawiik.khawiikVoiceTypes.confirm' | translate }}
       }
       @else{
-      {{ 'continue' | translateApi }}
+      {{ 'khawiik.khawiikVoiceTypes.actionBtn' | translate }}
       }
       }@else {
-      {{ 'in_progress' | translateApi }}
+      {{ 'in_progress' | translate }}
       }
       }
     </button>

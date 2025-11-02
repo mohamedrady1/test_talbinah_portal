@@ -22,7 +22,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
 
 export const DoctorSlotsEmptyState: EmptyStateConfig = {
   imageUrl: 'images/emptyStates/appointments.svg',
-  title: 'no_available_time',
+  title: 'AvailableTimes.NoAvailableTimes',
   gap: '.5rem'
 };
 export const DoctorSlotsErrorState: EmptyStateConfig = {
@@ -32,7 +32,7 @@ export const DoctorSlotsErrorState: EmptyStateConfig = {
 };
 export const ChooseDateEmptyState: EmptyStateConfig = {
   imageUrl: 'images/emptyStates/appointments.svg',
-  title: 'choose_date_first',
+  title: 'AvailableTimes.ChooseDateFirst',
 };
 
 @Component({

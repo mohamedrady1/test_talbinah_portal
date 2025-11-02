@@ -227,7 +227,7 @@ export class NewLoginComponent implements OnDestroy {
   private openPasswordModal(): void {
     const modalData: NewLoginModalData = {
       image: this.icon,
-      title: 'password',
+      title: 'form.password.label',
       description: this.description
     };
 
@@ -276,8 +276,8 @@ export class NewLoginComponent implements OnDestroy {
   private openRegisterModal(prefill?: { phone_no: string; country_id: number | string }): void {
     const modalData = {
       image: 'images/icons/logo-2.png',
-      title: 'create_new_account',
-      description: 'join_talbinah_start_journey_towards_mental_health'
+      title: 'general.createNewAccount',
+      description: 'general.joinTalbinah'
 
     };
 

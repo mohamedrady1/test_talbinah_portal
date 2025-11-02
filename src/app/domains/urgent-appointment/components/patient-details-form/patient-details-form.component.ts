@@ -266,10 +266,10 @@ export class PatientDetailsFormComponent {
   private openPaymentStatusInfo(item: any, type: 'normal'): void {
     const statusLabelsTexts = {
       buttonText: 'back_to_home',
-      successTitle: 'reservation_reserved_successfully',
-      successSubTitle: this._NormalPackagesReservationFacade?.successMessage() ?? 'meet_at_selected_appointment',
-      errorTitle: 'something_want_wrong_try_again',
-      errorSubTitle: this.error() ?? 'book_appointment_error_details_note'
+      successTitle: 'NormalAppointment.appointmentSuccess',
+      successSubTitle: this._NormalPackagesReservationFacade?.successMessage() ?? 'NormalAppointment.appointmentSuccessText',
+      errorTitle: 'NormalAppointment.appointmentError',
+      errorSubTitle: this.error() ?? 'NormalAppointment.appointmentErrorText'
     };
 
     this._ModalService.open(StatusInfoComponent, {

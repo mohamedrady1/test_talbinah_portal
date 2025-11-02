@@ -6,9 +6,9 @@ export const resetPasswordFormConfig: IFormInputConfig[] = [
     {
         type: ALL_INPUT_TYPES.PASSWORD,
         name: 'password',
-        label: 'password',
+        label: 'form.password.label',
         isRequired: true,
-        placeholder: 'enter_password',
+        placeholder: 'form.password.placeholder',
         defaultValue: '',
         isDisabled: false,
         widthClass: 'w-full',
@@ -22,7 +22,7 @@ export const resetPasswordFormConfig: IFormInputConfig[] = [
         validation: [
             {
                 errorName: 'required',
-                errorMessage: 'enter_confirm_password',
+                errorMessage: 'form.password.errors.required',
                 function: Validators.required
             },
             {
@@ -39,9 +39,9 @@ export const resetPasswordFormConfig: IFormInputConfig[] = [
         id: 'registerConfirmPassword',
         type: ALL_INPUT_TYPES.PASSWORD,
         name: 'confirmPassword',
-        label: 'form.re_write_confirm_password',
+        label: 'form.confirmPassword.label',
         isRequired: true,
-        placeholder: 'form.enter_password_again',
+        placeholder: 'form.confirmPassword.placeholder',
         defaultValue: null,
         isDisabled: false,
         widthClass: 'w-full',
@@ -59,7 +59,7 @@ export const resetPasswordFormConfig: IFormInputConfig[] = [
             },
             {
                 errorName: 'passwordMismatch',
-                errorMessage: 'form.passwords_do_not_match',
+                errorMessage: 'form.confirmPassword.errors.mismatch',
                 function: PasswordMatchValidator('password', 'confirmPassword')
             }
         ],

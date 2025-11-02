@@ -209,8 +209,8 @@ export class ReelsFeedComponent implements AfterViewInit, OnDestroy {
     this.modalService.open(CreatePsychologicalSocietyPostComponent, {
       inputs: {
         image: 'images/community/icons/header-icon.png',
-        title: 'new_post',
-        subtitle: 'your_posts_help_others_feel_not_alone',
+        title: 'talbinahCommunity.newShare',
+        subtitle: 'talbinahCommunity.shareText',
         selectedButtonId: 'reels', // Ensure the correct button is selected
         data: {
           // Pass the @Input property to the child component

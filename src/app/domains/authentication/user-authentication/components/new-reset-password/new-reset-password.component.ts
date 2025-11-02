@@ -41,12 +41,11 @@ import { UserAuthenticationApiClientProvider } from '../../clients';
 import { IResetPasswordRequestDto, IResetPasswordResponseDto } from '../../dtos';
 import { MainPageRoutesEnum } from '../../../../main-page';
 import { RoleGuardService, UserContextService } from '../../services';
-import { TranslateApiPipe } from '../../../../../common/core/translations/pipes';
 
 @Component({
     selector: 'app-new-reset-password',
     standalone: true,
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule, SvgIconComponent, TranslateApiPipe],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule, SvgIconComponent],
     templateUrl: './new-reset-password.component.html',
     styleUrls: ['./new-reset-password.component.scss']
 })
@@ -87,9 +86,9 @@ export class NewResetPasswordComponent implements OnInit { // Implement OnInit
         {
             type: ALL_INPUT_TYPES.PASSWORD,
             name: 'password',
-            label: 'password',
+            label: 'form.password.label',
             isRequired: true,
-            placeholder: 'enter_password',
+            placeholder: 'form.password.placeholder',
             defaultValue: '',
             isDisabled: false,
             widthClass: 'w-full',
@@ -103,9 +102,15 @@ export class NewResetPasswordComponent implements OnInit { // Implement OnInit
             validation: [
                 {
                     errorName: 'required', // Use errorName for specific validation type
-                    errorMessage: 'enter_confirm_password',
+                    errorMessage: 'form.password.errors.required',
                     function: Validators.required
                 },
+                // Add minLength validation if needed
+                {
+                    errorName: 'minlength',
+                    errorMessage: 'form.password.errors.minLength', // Example message
+                    function: Validators.minLength(8)
+                }
             ],
             enableLabelClick: true,
             stopPaste: true,
@@ -115,9 +120,9 @@ export class NewResetPasswordComponent implements OnInit { // Implement OnInit
             id: 'registerConfirmPassword',
             type: ALL_INPUT_TYPES.PASSWORD,
             name: 'confirmPassword',
-            label: 're_write_confirm_password',
+            label: 'form.confirmPassword.label',
             isRequired: true,
-            placeholder: 'enter_password_again',
+            placeholder: 'form.confirmPassword.placeholder',
             defaultValue: null,
             isDisabled: false,
             widthClass: 'w-full',
@@ -130,12 +135,12 @@ export class NewResetPasswordComponent implements OnInit { // Implement OnInit
             validation:
                 [{
                     errorName: 'required',
-                    errorMessage: 'confirmPassword_required',
+                    errorMessage: 'form.confirmPassword.errors.required',
                     function: Validators.required
                 },
                 {
                     errorName: 'passwordMismatch',
-                    errorMessage: 'passwords_do_not_match',
+                    errorMessage: 'form.confirmPassword.errors.mismatch',
                     function: PasswordMatchValidator('password', 'confirmPassword')
                 }
                 ],
@@ -363,8 +368,8 @@ export class NewResetPasswordComponent implements OnInit { // Implement OnInit
         this.modalService.open(OtpMethodSelectionComponent, {
             inputs: {
                 image: 'images/auth/icons/talbinah.png',
-                title: 'choose_verification_method',
-                // subtitle: 'choose_verification_method',
+                title: 'OtpMethodSelection.Title',
+                // subtitle: 'OtpMethodSelection.Subtitle',
                 data: {
                     payploadCheckNumber: this.neededDataToVerify(),
                     fromURL: AuthenticationRoutesEnum.PASSWORD

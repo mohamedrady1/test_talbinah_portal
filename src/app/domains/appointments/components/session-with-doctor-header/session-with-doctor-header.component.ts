@@ -1,14 +1,14 @@
-import { TranslateApiPipe } from './../../../../common/core/translations/pipes/translate-api.pipe';
 import { Component, EventEmitter, Input, Output, inject, PLATFORM_ID } from '@angular/core';
 import { ILayoutGridHeaderConfig } from '../../../../shared';
-import { isPlatformBrowser } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-session-with-doctor-header',
   standalone: true,
   imports: [
-    TranslateApiPipe
+    TranslateModule
   ],
   templateUrl: './session-with-doctor-header.component.html',
   styleUrls: ['./session-with-doctor-header.component.scss']

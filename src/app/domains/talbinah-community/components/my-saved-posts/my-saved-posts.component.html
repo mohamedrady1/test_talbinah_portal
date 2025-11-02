@@ -9,7 +9,7 @@
             <div class="posts-loading-state">
                 <!-- <app-main-page-shemmer></app-main-page-shemmer> -->
                 <app-psychological-society-card-shemmer class="w-100"></app-psychological-society-card-shemmer>
-                <!-- <p>{{ 'loading_posts' | translateApi }}</p> -->
+                <!-- <p>{{ 'talbinahCommunity.loadingPosts' | translate }}</p> -->
             </div>
             } @else if (allPostsResponse()?.data?.data?.length) {
             @for (postItem of allPostsResponse()?.data?.data; track postItem.id) {
@@ -21,10 +21,10 @@
             }@else {
             @if (selectedTab() && selectedTab()?.id !== 0) {
             <app-empty-state [config]="postsEmptyState" class="w-100"></app-empty-state>
-            <!-- {{'no_posts_found_for_this_interest' | translateApi }} "{{ selectedTab()?.title}}" -->
+            <!-- {{'talbinahCommunity.noPostsForInterest' | translate }} "{{ selectedTab()?.title}}" -->
             } @else {
             <app-error-state [config]="postsErrorState" class="w-100"></app-error-state>
-            <!-- <p>{{'no_posts_available_at_the_moment' | translateApi}}</p> -->
+            <!-- <p>{{'talbinahCommunity.noPostsAvailable' | translate}}</p> -->
             }
             }
         </div>

@@ -289,8 +289,8 @@ export class MainPageLayoutComponent implements OnInit, OnDestroy {
     this._ModalService.open(CreatePsychologicalSocietyPostComponent, {
       inputs: {
         image: 'images/community/icons/header-icon.png',
-        title: 'new_post',
-        subtitle: 'your_posts_help_others_feel_not_alone',
+        title: 'talbinahCommunity.newShare',
+        subtitle: 'talbinahCommunity.shareText',
         data: {
           interests: this.tabs(),
           itemToEdit: postItem,

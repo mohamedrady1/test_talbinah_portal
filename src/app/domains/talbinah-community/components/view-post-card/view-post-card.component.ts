@@ -11,14 +11,14 @@ import { TalbinahCommunityRoutesEnum } from '../../constants';
 import { Router } from '@angular/router';
 import { ProfileTriggerService } from '../../services';
 import { RoleGuardService, UserContextService } from '../../../authentication';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+
 // Define action types for clarity and type safety
 export type PostActionType = 'favourite' | 'comment' | 'bookmark' | 'follow' | 'add'; // 'add' seems to be for bookmark based on your HTML
 
 @Component({
   selector: 'app-view-post-card',
   standalone: true,
-  imports: [CommonModule, CommentBoxComponent, TranslateModule, TranslateApiPipe],
+  imports: [CommonModule, CommentBoxComponent, TranslateModule],
   templateUrl: './view-post-card.component.html',
   styleUrls: ['./view-post-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush, // Use OnPush for better performance

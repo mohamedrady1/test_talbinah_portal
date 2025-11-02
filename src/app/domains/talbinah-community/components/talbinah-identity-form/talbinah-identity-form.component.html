@@ -1,12 +1,12 @@
 <div class="identity-form">
   <div class="identity-form__content">
-    <div class="identity-form__title">{{'start_with_comfortable_identity' | translateApi}}</div>
+    <div class="identity-form__title">{{'talbinahCommunity.MyCommunityForm.PageTiltle' | translate}}</div>
     <form [formGroup]="formGroup" class="identity-form__form">
       <div class="form-shimmer-wrapper" [class.shimmer-active]="isSubmittingWithShimmer()">
 
         <div class="identity-form__input-group">
           <label class="input-group__label" for="defaultName">
-            {{'default_name' | translateApi}}
+            {{'talbinahCommunity.MyCommunityForm.DefaultName.Label' | translate}}
           </label>
           <div class="custom-input-wrapper" [ngClass]="{
             'has-error': formGroup.controls['defaultName'].invalid && formGroup.controls['defaultName'].touched
@@ -20,20 +20,20 @@
             </svg>
 
             <input id="defaultName" type="text" formControlName="defaultName"
-              placeholder="{{'choose_suitable_name' | translateApi}}" class="form-control custom-input-wrapper__input"
-              autocomplete="off" />
+              placeholder="{{'talbinahCommunity.MyCommunityForm.DefaultName.placeholder' | translate}}"
+              class="form-control custom-input-wrapper__input" autocomplete="off" />
           </div>
           @if(formGroup.controls['defaultName'].invalid && formGroup.controls['defaultName'].touched){
           <div class="form-field__error">
             <span>
-              {{"please_choose_a_default_name" | translateApi}}
+              {{"talbinahCommunity.MyCommunityForm.DefaultName.Error.Required" | translate}}
             </span>
           </div>}
         </div>
 
         <div class="identity-form__input-group">
           <label class="input-group__label input-group__label--appearance">
-            {{'appearance_preference_talbinah' | translateApi}}
+            {{'talbinahCommunity.MyCommunityForm.Emoji.Label' | translate}}
           </label>
           @if(_IdentityFormFacade.isLoadingEmojis()){
           <div class="shimmer__list">
@@ -60,7 +60,7 @@
           }
           @if (emojiError()) {
           <small class="error">
-            {{'please_choose_an_avatar_that_represents_you' | translateApi}}
+            {{'talbinahCommunity.MyCommunityForm.Emoji.Error.Required' | translate}}
           </small>
           }
         </div>
@@ -68,15 +68,15 @@
         <div class="identity-form__input-group">
           <div class="input-group__interests-header">
             <span class="interests-header__title">
-              {{ 'your_interests' | translateApi }}
+              {{ 'talbinahCommunity.MyCommunityForm.Interest.Label' | translate }}
             </span>
             <span class="interests-header__toggle" (click)="toggleSelectAllInterests()">
               <input type="checkbox" [checked]="isAllInterestsSelected()"
-                [attr.aria-label]="isAllInterestsSelected()? ('unselect_all' | translateApi): ('select_all' | translateApi)"
+                [attr.aria-label]="isAllInterestsSelected()? ('general.UnselectAll' | translate): ('general.SelectAll' | translate)"
                 readonly />
               {{ isAllInterestsSelected()
-              ? ('unselect_all' | translateApi)
-              : ('select_all' | translateApi) }}
+              ? ('general.UnselectAll' | translate)
+              : ('general.SelectAll' | translate) }}
             </span>
           </div>
           <div class="input-group__interests">
@@ -117,7 +117,7 @@
           }
           @if (interestsError()) {
           <small class="error">
-            {{'please_select_at_least_one_interest' | translateApi}}
+            {{'talbinahCommunity.MyCommunityForm.Interest.Error.Required' | translate}}
           </small>
           }
         </div>

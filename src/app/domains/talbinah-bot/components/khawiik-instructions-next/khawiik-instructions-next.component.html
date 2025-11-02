@@ -4,15 +4,15 @@
     <div class="khawiik-instructions-next__decor">
         <!-- Mini Cards -->
         <div class="khawiik-instructions-next__mini-card">
-            {{ keys.START.CARD_LINE_1 | translateApi }}
+            {{ keys.START.CARD_LINE_1 | translate }}
         </div>
         <div class="khawiik-instructions-next__mini-card">
-            {{ keys.START.CARD_LINE_2 | translateApi }}
+            {{ keys.START.CARD_LINE_2 | translate }}
         </div>
 
         <!-- Center Card -->
         <div class="khawiik-instructions-next__center-card">
-            {{ keys.START.CENTER_CARD | translateApi }}
+            {{ keys.START.CENTER_CARD | translate }}
         </div>
     </div>
 
@@ -21,24 +21,24 @@
         <!-- Heading -->
         <div class="khawiik-instructions-next__prompt-heading">
             <p class="khawiik-instructions-next__prompt-title">
-                {{ keys.START.PROMPT.TITLE | translateApi }}
+                {{ keys.START.PROMPT.TITLE | translate }}
             </p>
             <p class="khawiik-instructions-next__prompt-subtitle">
-                {{ keys.START.PROMPT.SUBTITLE | translateApi }}
+                {{ keys.START.PROMPT.SUBTITLE | translate }}
             </p>
         </div>
 
         <!-- Input Area -->
         <div class="khawiik-instructions-next__input">
             <textarea class="khawiik-instructions-next__textarea" [value]="draftText()" (input)="onTextChange($event)"
-                (keydown)="onKeyDown($event)" [placeholder]="keys.START.PROMPT.PLACEHOLDER | translateApi"
-                [attr.aria-label]="keys.START.PROMPT.PLACEHOLDER | translateApi" rows="3" maxlength="1000"></textarea>
+                (keydown)="onKeyDown($event)" [placeholder]="keys.START.PROMPT.PLACEHOLDER | translate"
+                [attr.aria-label]="keys.START.PROMPT.PLACEHOLDER | translate" rows="3" maxlength="1000"></textarea>
         </div>
 
         <!-- Continue Button -->
         <button type="button" class="khawiik-instructions-next__continue" (click)="onSubmit()"
-            [attr.aria-label]="keys.START.CONTINUE | translateApi">
-            {{ keys.START.CONTINUE | translateApi }}
+            [attr.aria-label]="keys.START.CONTINUE | translate">
+            {{ keys.START.CONTINUE | translate }}
         </button>
     </div>
 </div>

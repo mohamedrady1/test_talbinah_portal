@@ -33,7 +33,7 @@ import { SiteHeaderComponent } from '../../../header';
 // User profile interface (likely for display purposes, not direct API DTO)
 import { RoleGuardService, UserContextService } from '../../../authentication';
 import { MainPageRoutesEnum } from '../../../main-page';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+
 export interface UserProfile {
   name: string;
   followersCount: number;
@@ -75,7 +75,7 @@ interface UserIdentityProfileState {
 }
 const PostsEmptyState: EmptyStateConfig = {
   imageUrl: 'images/not-found/community/no-data-icon.svg',
-  title: 'no_posts_found_for_this_interest',
+  title: 'talbinahCommunity.noPostsForInterest',
   gap: '1rem',
 };
 @Component({
@@ -94,8 +94,7 @@ const PostsEmptyState: EmptyStateConfig = {
     TabsShemmerComponent,
     PsychologicalSocietyCardShemmerComponent,
     EmptyStateComponent,
-    ErrorStateComponent,
-    TranslateApiPipe
+    ErrorStateComponent
   ],
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
@@ -177,7 +176,7 @@ export class UserProfileComponent implements AfterViewInit {
     errorMessage: ''
   });
 
-  @Input() placeholderHeader = signal<string>('how_do_you_feel_today'); // SSR-safe signal input
+  @Input() placeholderHeader = signal<string>('talbinahCommunity.commentInputPlaceholderHeader'); // SSR-safe signal input
 
   // Expose state properties as computed signals for easy access in template
   readonly userCommunityProfileResponse = computed(() => this.UserCommunityProfileState().userCommunityProfileResponse);
@@ -695,8 +694,8 @@ export class UserProfileComponent implements AfterViewInit {
     this.modalService.open(MySavedPostsComponent, {
       inputs: {
         image: 'images/community/icons/header-icon.png',
-        title: 'saved_posts',
-        subtitle: 'share_experiences_with_safe_supportive_community',
+        title: 'talbinahCommunity.savedPosts',
+        subtitle: 'talbinahCommunity.subtitle',
         data: {
           userIdentityProfileData: this.userIdentityProfileDataSignal(),
         }
@@ -872,7 +871,7 @@ export class UserProfileComponent implements AfterViewInit {
     this.modalService.open(UsersFollowComponent, {
       inputs: {
         image: 'images/not-found/talbinah-2.png',
-        title: 'follow3'
+        title: 'talbinahCommunity.Follow'
       },
       width: '60%'
     });

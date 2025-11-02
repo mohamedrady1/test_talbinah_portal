@@ -1,15 +1,13 @@
-import { ALL_INPUT_TYPES, IFormInputConfig } from "../../../../shared/forms";
-import { InputIconPosition } from "../../../../shared/forms/enums/input-icon-position.enum";
-import { InputIconType } from "../../../../shared/forms/enums/input-icon-type.enum";
+import { ALL_INPUT_TYPES, IFormInputConfig, InputIconPosition, InputIconType } from "../../../../shared";
 import { Validators } from "@angular/forms";
 
 export const loginPasswordFormConfig: IFormInputConfig[] = [
     {
         type: ALL_INPUT_TYPES.PASSWORD,
         name: 'password',
-        label: 'password',
+        label: 'form.password.label',
         isRequired: true,
-        placeholder: 'enter_password',
+        placeholder: 'form.password.placeholder',
         defaultValue: '',
         isDisabled: false,
         widthClass: 'w-full',
@@ -23,7 +21,7 @@ export const loginPasswordFormConfig: IFormInputConfig[] = [
         validation: [
             {
                 function: Validators.required,
-                errorMessage: 'enter_confirm_password',
+                errorMessage: 'form.password.errors.required',
             },
         ],
         enableLabelClick: true,

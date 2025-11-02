@@ -16,17 +16,17 @@
           </svg>
         </span>
         <span>
-          {{ 'select_package_session_appointments' | translate }}
+          {{ 'AvailablePackagesStoring.SelectSessionReminder.prefix' | translate }}
           <span class="available-packages-storing__number">{{ currentStep() }}</span>
-          {{ 'from' | translate }}
+          {{ 'AvailablePackagesStoring.SelectSessionReminder.connector' | translate }}
           <span class="available-packages-storing__number">{{ data?.number_of_reservations }}</span>
-          {{ 'sessions_can_be_modified_later' | translate }}
+          {{ 'AvailablePackagesStoring.SelectSessionReminder.suffix' | translate }}
         </span>
       </div>
 
-      <!-- <div class="available-packages-storing__steps-label">
+      <div class="available-packages-storing__steps-label">
         {{ 'AvailablePackagesStoring.AvailableToEdit' | translate }}
-      </div> -->
+      </div>
     </div>
 
     <div class="steps">

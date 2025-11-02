@@ -9,7 +9,7 @@ import { StartSessionPayload } from '../../models';
 import { Router } from '@angular/router';
 import { StorageKeys } from '../../../../shared';
 import { UserContextService } from '../../../authentication';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
+
 @Component({
   selector: 'khawiik-instructions-next',
   standalone: true,
@@ -17,7 +17,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations/pipes/tra
     TranslateModule,
     CommonModule,
     FormsModule,
-    TranslateApiPipe,
+
     AutoExactHeightDirective
   ],
   templateUrl: './khawiik-instructions-next.component.html',

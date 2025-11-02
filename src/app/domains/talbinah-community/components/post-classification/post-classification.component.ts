@@ -2,12 +2,11 @@ import { Component, Input, Output, EventEmitter, signal } from '@angular/core';
 import { ITab } from '../../models';
 import { TranslateModule } from '@ngx-translate/core';
 import { TabSwitcherComponent } from "../tab-switcher/tab-switcher.component";
-import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-post-classification',
   standalone: true,
-  imports: [TranslateModule, TabSwitcherComponent, TranslateApiPipe],
+  imports: [TranslateModule, TabSwitcherComponent],
   templateUrl: './post-classification.component.html',
   styleUrls: ['./post-classification.component.scss']
 })

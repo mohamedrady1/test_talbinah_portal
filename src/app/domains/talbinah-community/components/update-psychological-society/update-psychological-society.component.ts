@@ -32,7 +32,6 @@ import { ApiError, handleApiErrorsMessage, Logger } from '../../../../common';
 import { IEmoijsListingResponseDto, IEmojiItem, IUpdateUserIdentifyProfileRequestDto, IPostInterest, IPostsInterestsListingResponseDto, IUserIdentifyProfileData, TalbinahCommunityApiClientProvider, IUpdateUserIdentifyProfileResponseDto } from '../../../../domains';
 import { ToastService } from '../../../../shared';
 import { finalize, take, catchError, EMPTY, tap } from 'rxjs';
-import { TranslateApiPipe } from '../../../../common/core/translations';
 
 interface PostInterestsListState {
   interestsResponse: IPostsInterestsListingResponseDto | null;
@@ -49,7 +48,7 @@ interface EmojiListState {
 @Component({
   selector: 'app-update-psychological-society',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TranslateModule, EmojiPickerComponent, ClickOutsideDirective, TranslateApiPipe], // Ensure all used components/directives are imported
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule, EmojiPickerComponent, ClickOutsideDirective], // Ensure all used components/directives are imported
   templateUrl: './update-psychological-society.component.html',
   styleUrls: ['./update-psychological-society.component.scss']
 })

@@ -8,7 +8,6 @@ import { KhawiikInstructionsNextComponent } from '../khawiik-instructions-next';
 import { ModalService } from '../../../../shared';
 
 import { AutoExactHeightDirective, Logger } from '../../../../common';
-import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
 
 @Component({
   selector: 'khawiik-instructions',
@@ -17,8 +16,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations/pipes/tra
     TranslateModule,
     CommonModule,
 
-    AutoExactHeightDirective,
-    TranslateApiPipe
+    AutoExactHeightDirective
   ],
   templateUrl: './khawiik-instructions.component.html',
   styleUrls: ['./khawiik-instructions.component.scss'],
@@ -79,8 +77,8 @@ export class KhawiikInstructionsComponent implements OnInit {
     this._ModalService.open(KhawiikInstructionsNextComponent, {
       inputs: {
         image: 'images/khawiik/khawiik-header-icon.png',
-        title: 'home_card_khawiik_title',
-        subtitle: 'home_card_khawiik_description',
+        title: 'khawiik.header.title',
+        subtitle: 'khawiik.header.subtitle',
         chatType: this.selectedChatType,
       },
       outputs: {

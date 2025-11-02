@@ -44,7 +44,7 @@ export class CommentBoxComponent {
   @Input() isLoadingComment = signal<boolean>(false); // SSR-safe signal input
   @Input() isActions = signal<boolean>(false); // SSR-safe signal input
   @Input() readonlyOnClick = signal<boolean>(false); // SSR-safe signal input
-  @Input() placeholder = signal<string>('write_a_kind_word'); // SSR-safe signal input
+  @Input() placeholder = signal<string>('talbinahCommunity.commentInputPlaceHolder'); // SSR-safe signal input
   @Input() type!: string;
   // --- Outputs ---
   @Output() inputChanged = new EventEmitter<string>();

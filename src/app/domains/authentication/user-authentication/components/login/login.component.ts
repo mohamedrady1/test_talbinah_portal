@@ -226,7 +226,7 @@ export class LoginComponent {
     this.modalService.open(OtpMethodSelectionComponent, {
       inputs: {
         image: 'images/auth/icons/talbinah.png',
-        title: 'choose_verification_method',
+        title: 'OtpMethodSelection.Title',
         data: {
           payploadCheckNumber: this._LoginFacade.checkNumberRequest(),
           fromURL: AuthenticationRoutesEnum.LOGIN

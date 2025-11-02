@@ -27,7 +27,7 @@
         <div class="general-form-wrapper__field">
           <div class="general-form-wrapper__label-group">
             <label for="birthDateInput" class="general-form-wrapper__label">
-              {{ 'date_of_birth' | translate }}<span class="general-form-wrapper__required">*</span>
+              {{ 'form.birthDate.label' | translate }}<span class="general-form-wrapper__required">*</span>
             </label>
           </div>
           <div class="custom-input-wrapper p-0"
@@ -36,7 +36,7 @@
               dateFormat="yy-mm-dd" [maxDate]="maxBirthDate" [readonlyInput]="true" [showTransitionOptions]="'0ms'"
               [hideTransitionOptions]="'0ms'" appendTo="body"
               class="custom-input-wrapper__input custom-input-wrapper__input--p-datepicker"
-              placeholder="{{ 'choose_your_date_of_birth' | translate }}" aria-required="true"
+              placeholder="{{ 'form.birthDate.placeholder' | translate }}" aria-required="true"
               [attr.aria-invalid]="getFormControl('birth_date').invalid && getFormControl('birth_date').touched ? 'true' : 'false'"
               aria-describedby="birthDateError"></p-datepicker>
           </div>
@@ -51,7 +51,7 @@
 
       <div class="general-form-wrapper__actions">
         <button id="skip-verification-btn" type="button" class="btn btn--outline" (click)="onSkip()"
-          [disabled]="isLoading()" [attr.aria-label]="'skip' | translate">
+          [disabled]="isLoading()" [attr.aria-label]="'general.Skip' | translate">
           <span class="btn__label">
             {{ 'skip' | translateApi }}
           </span>

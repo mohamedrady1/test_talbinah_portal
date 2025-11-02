@@ -2,7 +2,7 @@ import { ErrorStateConfig } from '../../../shared';
 
 export function getKhawiikVoiceTypesErrorConfig(onRetry?: () => void): ErrorStateConfig {
   return {
-    title: 'error_loading_sounds',
+    title: 'khawiik.khawiikVoiceTypes.error.title',
     imgWidth: '30%',
     onRetry: onRetry
   };
@@ -20,7 +20,7 @@ export function getKhawiikActivitiesErrorConfig(onRetry?: () => void): ErrorStat
 export function getKhawiikBooksErrorConfig(onRetry?: () => void): ErrorStateConfig {
   return {
     imageUrl: 'images/emptyStates/image-6.svg',
-    title: 'error_loading_books',
+    title: 'khawiik.books.error.title',
     gap: '1rem',
     onRetry,
   };
@@ -30,7 +30,7 @@ export function getKhawiikBooksErrorConfig(onRetry?: () => void): ErrorStateConf
 export function getKhawiikVoiceChatErrorConfig(onRetry?: () => void): ErrorStateConfig {
   return {
     imageUrl: null,
-    message: 'an_error_has_occurred',
+    message: 'khawiik.voiceChat.error.message',
     gap: '0.5rem',
     onRetry,
   };

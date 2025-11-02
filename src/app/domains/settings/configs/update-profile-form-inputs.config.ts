@@ -1,9 +1,5 @@
+import { ALL_INPUT_TYPES, IFormInputConfig, InputIconPosition, InputIconType } from "../../../shared";
 import { Validators } from "@angular/forms";
-import { ALL_INPUT_TYPES } from "../../../shared/forms/enums/input-types.enum";
-import { IFormInputConfig } from "../../../shared/forms/models";
-import { InputIconPosition } from "../../../shared/forms/enums/input-icon-position.enum";
-import { InputIconType } from "../../../shared/forms/enums/input-icon-type.enum";
-
 
 export const updateProfileConfig: IFormInputConfig[] = [
   {

@@ -241,8 +241,8 @@ export class SessionWithDoctorComponent implements OnInit, OnDestroy {
         componentToOpen = LeaveRatingModalComponent;
         modalInputs = {
           image: 'images/mentalHealthScale/icons/talbinah.png',
-          title: 'session_review_modal_title',
-          subtitle: 'session_review_modal_subtitle',
+          title: 'sessionWithDoctor.LeaveRatingModalTitle',
+          subtitle: 'sessionWithDoctor.LeaveRatingModalSubtitle',
           doctor: currentReservationData?.doctor,
           session: currentReservationData,
           type: 'session'
@@ -262,8 +262,8 @@ export class SessionWithDoctorComponent implements OnInit, OnDestroy {
         componentToOpen = BlockDoctorModalComponent;
         modalInputs = {
           image: 'images/mentalHealthScale/icons/talbinah.png',
-          title: 'block_doctor',
-          subtitle: 'block_doctor_modal_subtitle',
+          title: 'sessionWithDoctor.BlockDoctorModalTitle',
+          subtitle: 'sessionWithDoctor.BlockDoctorModalSubtitle',
           doctor: currentReservationData?.doctor,
           session: currentReservationData,
           type: 'session'
@@ -281,8 +281,8 @@ export class SessionWithDoctorComponent implements OnInit, OnDestroy {
         componentToOpen = ReportIssueModalComponent;
         modalInputs = {
           image: 'images/mentalHealthScale/icons/talbinah.png',
-          title: 'report_issue',
-          subtitle: 'Review the details of your session with the doctor.',
+          title: 'sessionWithDoctor.ReportIssueModalTitle',
+          subtitle: 'sessionWithDoctor.ReportIssueModalSubtitle',
           doctor: currentReservationData?.doctor,
           session: currentReservationData,
           type: 'session'

@@ -32,17 +32,17 @@
             <div
               class="government-agency-verification__email-form__form-group government-agency-verification__email-form__form-group--email">
               <label for="emailPrefix" class="government-agency-verification__email-form__label">
-                {{ 'email' | translate }}
+                {{ 'form.email.label' | translate }}
               </label>
               <div class="government-agency-verification__email-form__inputs">
                 <input id="emailPrefix" type="text" class="government-agency-verification__email-form__input"
                   formControlName="emailPrefix" [attr.aria-invalid]="hasError" aria-describedby="emailError"
-                  [placeholder]="'enter_email' | translate" />
+                  [placeholder]="'form.email.placeholder' | translate" />
               </div>
               @if (hasError) {
               <div id="emailError" class="government-agency-verification__email-form__error" role="alert"
                 aria-live="polite">
-                {{ 'email_required' | translate }}
+                {{ 'form.email.errors.required' | translate }}
               </div>
               }
             </div>
@@ -63,7 +63,7 @@
               <span class="dot-loader"></span>
             </div>
             } @else {
-            {{ 'verify_the_code' | translate }}
+            {{ 'opt.checkCode' | translate }}
             }
           </span>
         </button>

@@ -3,11 +3,11 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IWelcomeCardConfig } from '../../models';
 import { welcomeCardConfig } from '../../configs';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+
 @Component({
   selector: 'app-welcome-to-talbinah',
   standalone: true,
-  imports: [TranslateModule, WelcomeToTalbinahCommunityCardComponent, TranslateApiPipe],
+  imports: [TranslateModule, WelcomeToTalbinahCommunityCardComponent],
   templateUrl: './welcome-to-talbinah.component.html',
   styleUrls: ['./welcome-to-talbinah.component.scss']
 })

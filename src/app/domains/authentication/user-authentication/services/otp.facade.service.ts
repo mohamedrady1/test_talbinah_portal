@@ -119,6 +119,12 @@ export class OtpVerificationFacade {
             tap((response: IMethodSelectionResponseDto) => {
                 if (response.status) {
                     Logger.info('✅ Resend code successful:', response);
+                    this._toastService.add({
+                        severity: 'success',
+                        summary: this._localizationService.translateTextFromJson('general.success'),
+                        detail: 'OtpMethodSelection.codeResentSuccessfully',
+                        life: 3000,
+                    });
                     this._otpVerificationResultState.set({
                         ...this._otpVerificationResultState(),
                         methodSelectionResponse: response,
@@ -131,7 +137,7 @@ export class OtpVerificationFacade {
                     this._toastService.add({
                         severity: 'error',
                         summary: this._localizationService.translateTextFromJson('general.error'),
-                        detail: 'failed_to_resend_verification_code',
+                        detail: 'OtpMethodSelection.codeResendFailed',
                         life: 5000,
                     });
                     this._otpVerificationResultState.set({
@@ -148,7 +154,7 @@ export class OtpVerificationFacade {
                 this._toastService.add({
                     severity: 'error',
                     summary: this._localizationService.translateTextFromJson('general.error'),
-                    detail: 'failed_to_resend_verification_code',
+                    detail: 'OtpMethodSelection.codeResendFailed',
                     life: 5000,
                 });
                 this._otpVerificationResultState.set({

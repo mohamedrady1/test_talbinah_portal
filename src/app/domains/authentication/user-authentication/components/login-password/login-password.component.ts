@@ -225,7 +225,7 @@ export class LoginPasswordComponent implements OnInit {
     this.modalService.open(OtpMethodSelectionComponent, {
       inputs: {
         image: 'images/auth/icons/talbinah.png',
-        title: 'choose_verification_method',
+        title: 'OtpMethodSelection.Title',
         data: {
           payploadCheckNumber: this.neededDataToVerify(),
           fromURL: AuthenticationRoutesEnum.PASSWORD

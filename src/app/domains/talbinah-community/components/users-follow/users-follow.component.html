@@ -27,8 +27,8 @@
                         class="users-follow__card--profile--img--avatar"
                         (error)="$any($event.target).src='/images/logos/logo-2.png'">
                 </div>
-                <p class="users-follow__card--profile--name">{{ user.name || ('unknown_user' |
-                    translateApi) }}</p>
+                <p class="users-follow__card--profile--name">{{ user.name || ('general.unknownUser' |
+                    translate) }}</p>
             </div>
             @if(!isUnfollowingUser(user.id)){
 
@@ -39,13 +39,13 @@
                         fill="#47586E" />
                 </svg>
                 <p class="users-follow__card--action--text">
-                    {{ 'unfollow' | translateApi }}
+                    {{ 'talbinahCommunity.unfollow' | translate }}
                 </p>
             </div>
             }@else{
             <div class="users-follow__card--action loading" aria-label="Submit in progress">
                 <p class="users-follow__card--action--text">
-                    {{ 'in_progress' | translateApi }}
+                    {{ 'in_progress' | translate }}
                 </p>
                 <span class="dot-loader"></span>
             </div>
