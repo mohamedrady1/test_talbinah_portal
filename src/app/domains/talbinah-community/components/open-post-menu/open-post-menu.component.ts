@@ -6,10 +6,11 @@ import { DeletePopupComponent, ModalService, PublicService } from '../../../../s
 import { menuConfig } from '../../configs'
 import { IPost, IUserIdentifyProfileData } from '../../dtos'
 import { Logger } from '../../../../common'
+import { TranslateApiPipe } from '../../../../common/core/translations';
 @Component({
   selector: 'app-open-post-menu',
   standalone: true,
-  imports: [CommonModule, ClickOutsideDirective, TranslateModule],
+  imports: [CommonModule, ClickOutsideDirective, TranslateModule, TranslateApiPipe],
   templateUrl: './open-post-menu.component.html',
   styleUrls: ['./open-post-menu.component.scss']
 })

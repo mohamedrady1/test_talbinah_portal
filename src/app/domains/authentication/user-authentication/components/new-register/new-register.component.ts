@@ -34,7 +34,7 @@ import { registerFormConfig } from '../../configs';
 import { IRegisterRequestDto } from '../../dtos';
 import { RegisterFacade } from '../../services';
 import { NewLoginComponent } from '../new-login';
-
+import { TranslateApiPipe } from '../../../../../common/core/translations/pipes';
 
 export interface NewRegisterModalData {
   icon: string;
@@ -52,7 +52,8 @@ export interface NewRegisterModalData {
     TranslateModule,
     SelectModule,
     AutoExactHeightDirective,
-    SvgIconComponent
+    SvgIconComponent,
+    TranslateApiPipe
   ],
   templateUrl: './new-register.component.html',
   styleUrls: ['./new-register.component.scss'],
@@ -268,8 +269,8 @@ export class NewRegisterComponent implements OnInit, OnDestroy {
     this.modalService.open(NewOtpVerificationComponent, {
       inputs: {
         image: 'images/icons/logo-2.png',
-        title: 'OtpVerification.Title',
-        description: 'OtpVerification.Subtitle'
+        title: 'verify_the_code',
+        description: 'enter_the_code_sent_to_your_phone'
       },
       outputs: {
         closed: (data: any): void => {
@@ -286,7 +287,7 @@ export class NewRegisterComponent implements OnInit, OnDestroy {
     this.modalService.open(OtpMethodSelectionComponent, {
       inputs: {
         icon: 'images/auth/icons/talbinah.png',
-        title: 'OtpMethodSelection.Title',
+        title: 'choose_verification_method',
         data: {
           payploadCheckNumber: this._RegisterFacade.registerRequest()
         }

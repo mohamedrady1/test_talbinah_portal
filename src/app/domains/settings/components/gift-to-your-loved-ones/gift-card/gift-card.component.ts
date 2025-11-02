@@ -25,7 +25,7 @@ export class GiftCardComponent {
             this.modalService.open(GiftAcceptModalComponent, {
                 inputs: {
                     image: 'images/logos/icon.png',
-                    title: 'gift.acceptModalTitle',
+                    title: 'accept_gift',
                     item: this.item
                 },
                 outputs: {
@@ -37,7 +37,7 @@ export class GiftCardComponent {
             });
         } else {
             this.modalService.open(GiftCancelModalComponent, {
-                inputs: { image: 'images/logos/icon.png', title: 'gift.cancelModalTitle', item: this.item },
+                inputs: { image: 'images/logos/icon.png', title: 'cancel_sent_gift_confirmation', item: this.item },
                 outputs: {
                     closed: (cancelled: boolean) => {
                     }

@@ -93,22 +93,22 @@
             </div>
 
             <div class="service-modal__title">
-                {{ service?.title }} {{'general.for' | translate}} {{ service?.points }} {{'general.point' | translate}}
+                {{ service?.title }} {{'for' | translateApi}} {{ service?.points }} {{'point' | translateApi}}
             </div>
         </div>
     </div>
     <div class="service-modal__actions">
         <button class="service-modal__btn service-modal__btn--cancel" (click)="onCancel()" [disabled]="isLoading()">
-            {{ 'general.cancel' | translate }}
+            {{ 'cancel' | translateApi }}
         </button>
         <button class="service-modal__btn service-modal__btn--confirm" (click)="onConfirm()"
             [class.service-modal__btn--disabled]="isLoading()">
             @if (!isLoading()) {
-            {{ 'general.changePoints' | translate }}
+            {{ 'redeem' | translateApi }}
             }
             @if (isLoading()) {
             <div class="service-modal__btn service-modal__btn--loading" aria-label="Submit in progress">
-                {{ 'in_progress' | translate }}
+                {{ 'in_progress' | translateApi }}
                 <span class="dot-loader"></span>
             </div>
             }

@@ -6,17 +6,16 @@ import { ModalService } from '../../../../shared/services/model.service';
 import { RewardsFacade } from './../../services/rewards.facade';
 import { AutoExactHeightDirective } from '../../../../common';
 import { SvgIconComponent } from "../../../../shared";
-import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { Logger } from '../../../../common';
 import { getRemainingDays } from '../../../../shared/utils/date-format.util';
 import { RewardsCoupon, RewardsAppointment, RewardItem } from '../../dtos';
-
+import { TranslateApiPipe } from '../../../../common/core/translations';
 @Component({
   selector: 'app-settings-rewards',
   standalone: true,
   imports: [
-    TranslateModule,
+    TranslateApiPipe,
     CommonModule,
 
     AutoExactHeightDirective,
@@ -40,12 +39,12 @@ export class SettingsRewardsComponent {
   // State configurations
   protected readonly emptyStateConfig = {
     imageUrl: 'images/emptyStates/image-12.svg',
-    title: 'settings.rewards.emptyTitle',
+    title: 'no_rewards',
   };
 
   protected readonly errorStateConfig = {
     imageUrl: 'images/emptyStates/image-12.svg',
-    title: this.errorMessage() || 'settings.rewards.errorTitle',
+    title: this.errorMessage() || 'rewards_loading_error',
     onRetry: () => this.loadRewardsList()
   };
 
@@ -66,7 +65,7 @@ export class SettingsRewardsComponent {
     this._modalService.open(SettingsRewardDetailsComponent, {
       inputs: {
         image: 'images/logos/icon.png',
-        title: 'userInfo.changePoints',
+        title: 'points_redemption',
         rewardItem: reward
       },
       outputs: {
@@ -77,6 +76,7 @@ export class SettingsRewardsComponent {
       width: "40%",
       isPhoneFromDown: true,
       maxHeight: "10rem",
+      minHeight: "20rem",
       maxWidth: "50rem"
     });
   }

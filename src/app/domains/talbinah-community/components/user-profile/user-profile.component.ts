@@ -1,12 +1,12 @@
 import { Component, computed, effect, ElementRef, inject, Input, PLATFORM_ID, signal, ViewChild, WritableSignal } from '@angular/core';
 import { PageLayoutHeaderComponent } from "../../../../shared/components/page-layout-header/page-layout-header.component";
 import { EmptyStateComponent, EmptyStateConfig, ErrorStateComponent, ILayoutGridHeaderConfig, LOCALIZATION_SERVICE, LocalizationService, MoodModalIntegrationService, ModalService, StorageKeys, ToastService } from '../../../../shared';
-import { CommunityProfileHeaderConfig, TalbinahCommunityHeaderConfig, TalbinahCommunityRoutesEnum } from '../../constants';
+import { CommunityProfileHeaderConfig, TalbinahCommunityHeaderConfig, TalbinahCommunityRoutesEnum, TalbinahCommunityRouteData } from '../../constants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AutoExactHeightDirective } from '../../../../common/core/directives';
 import { AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { ApiError, CardType, defaultPaginationParameters, handleApiErrors, handleApiErrorsMessage, IPaginationParameters, Logger, StorageService } from '../../../../common';
+import { ApiError, CardType, defaultPaginationParameters, handleApiErrors, handleApiErrorsMessage, IPaginationParameters, Logger, MetadataService, StorageService } from '../../../../common';
 import { catchError, EMPTY, filter, finalize, Subscription, take, tap } from 'rxjs';
 import { IAllPostsResponseDto, ICreatePostResponseDto, IDeletePostResponseDto, IPost, IPostInterest, IPostsInterestsListingResponseDto, IUpdateFollowResponseDto, IUserCommunityProfileResponseDto, IUserIdentifyProfileData, IUserIdentifyProfileResponseDto } from '../../dtos';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
@@ -33,7 +33,7 @@ import { SiteHeaderComponent } from '../../../header';
 // User profile interface (likely for display purposes, not direct API DTO)
 import { RoleGuardService, UserContextService } from '../../../authentication';
 import { MainPageRoutesEnum } from '../../../main-page';
-
+import { TranslateApiPipe } from '../../../../common/core/translations';
 export interface UserProfile {
   name: string;
   followersCount: number;
@@ -75,7 +75,7 @@ interface UserIdentityProfileState {
 }
 const PostsEmptyState: EmptyStateConfig = {
   imageUrl: 'images/not-found/community/no-data-icon.svg',
-  title: 'talbinahCommunity.noPostsForInterest',
+  title: 'no_posts_found_for_this_interest',
   gap: '1rem',
 };
 @Component({
@@ -94,7 +94,8 @@ const PostsEmptyState: EmptyStateConfig = {
     TabsShemmerComponent,
     PsychologicalSocietyCardShemmerComponent,
     EmptyStateComponent,
-    ErrorStateComponent
+    ErrorStateComponent,
+    TranslateApiPipe
   ],
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
@@ -121,6 +122,7 @@ export class UserProfileComponent implements AfterViewInit {
   private readonly _ProfileTriggerService = inject(ProfileTriggerService);
   private readonly _RefreshUserPostsService = inject(RefreshUserPostsService);
   private readonly moodModalIntegrationService = inject(MoodModalIntegrationService);
+  private readonly seo = inject(MetadataService);
   // Component state signals
   private readonly userCommunityProfileId = signal<number | null>(null); // ID of the user whose profile is being viewed
   protected readonly isMyCommunityProfile = signal<boolean>(false); // True if the viewed profile belongs to the current user
@@ -176,7 +178,7 @@ export class UserProfileComponent implements AfterViewInit {
     errorMessage: ''
   });
 
-  @Input() placeholderHeader = signal<string>('talbinahCommunity.commentInputPlaceholderHeader'); // SSR-safe signal input
+  @Input() placeholderHeader = signal<string>('how_do_you_feel_today'); // SSR-safe signal input
 
   // Expose state properties as computed signals for easy access in template
   readonly userCommunityProfileResponse = computed(() => this.UserCommunityProfileState().userCommunityProfileResponse);
@@ -374,6 +376,9 @@ export class UserProfileComponent implements AfterViewInit {
       const profileData = this.userCommunityProfileResponse()?.data?.profileData;
       this.userProfileSignal.set(profileData ?? null); // Store profile data
       Logger.debug('User Community Profile fetched successfully:', response);
+
+      // Setup SEO with user name
+      this.setupSEO(profileData?.dummy_name);
     } else {
       this.updateUserCommunityProfileState({
         userCommunityProfileResponse: null,
@@ -694,8 +699,8 @@ export class UserProfileComponent implements AfterViewInit {
     this.modalService.open(MySavedPostsComponent, {
       inputs: {
         image: 'images/community/icons/header-icon.png',
-        title: 'talbinahCommunity.savedPosts',
-        subtitle: 'talbinahCommunity.subtitle',
+        title: 'saved_posts',
+        subtitle: 'share_experiences_with_safe_supportive_community',
         data: {
           userIdentityProfileData: this.userIdentityProfileDataSignal(),
         }
@@ -871,11 +876,41 @@ export class UserProfileComponent implements AfterViewInit {
     this.modalService.open(UsersFollowComponent, {
       inputs: {
         image: 'images/not-found/talbinah-2.png',
-        title: 'talbinahCommunity.Follow'
+        title: 'follow3'
       },
       width: '60%'
     });
   }
   // --- End: Following List ---
+
+  // --- Start: SEO Setup ---
+  private setupSEO(userName?: string): void {
+    const lang = this._LocalizationService.getCurrentLanguage();
+    const routeData = TalbinahCommunityRouteData.TalbinahCommunityMainPage;
+
+    // Build title with user name if available
+    let title: string;
+    if (userName) {
+      title = lang === 'ar'
+        ? `${userName} | مجتمع تلبينة`
+        : `${userName} | Talbinah Community`;
+    } else {
+      title = lang === 'ar' ? routeData.title.ar : routeData.title.en;
+    }
+
+    const description = lang === 'ar' ? routeData.meta.description.ar : routeData.meta.description.en;
+
+    this.seo.setMetaTags({
+      title,
+      description,
+      keywords: 'user profile, community, talbinah, مجتمع, ملف شخصي, تلبينة',
+      image: 'https://talbinah.net/dashboard_assets/Talbinah.png',
+      url: `https://talbinah.net/khawiik/user-profile/${this.userCommunityProfileId() || ''}`,
+      robots: 'index, follow',
+      locale: lang === 'ar' ? 'ar_SA' : 'en_US',
+      canonical: `https://talbinah.net/khawiik/user-profile/${this.userCommunityProfileId() || ''}`
+    });
+  }
+  // --- End: SEO Setup ---
 
 }

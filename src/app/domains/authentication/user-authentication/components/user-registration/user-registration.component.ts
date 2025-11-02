@@ -191,7 +191,7 @@ export class UserRegistrationComponent {
         return v.errorMessage;
       }
     }
-    return 'form.email.errors.email';
+    return 'invalid_email';
   }
 
   private setupFacadeEffect(): void {
@@ -223,7 +223,7 @@ export class UserRegistrationComponent {
     this.modalService.open(OtpMethodSelectionComponent, {
       inputs: {
         image: 'images/auth/icons/talbinah.png',
-        title: 'OtpMethodSelection.Title',
+        title: 'choose_verification_method',
         data: {
           payploadCheckNumber: this.checkNumberRequest(),
           fromURL: AuthenticationRoutesEnum.REGISTER,

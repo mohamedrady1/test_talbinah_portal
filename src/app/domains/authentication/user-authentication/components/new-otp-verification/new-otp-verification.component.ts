@@ -15,7 +15,7 @@ import { NewRegisterComponent } from "../new-register";
 import { NewResetPasswordComponent } from "../new-reset-password";
 import { MainPageRoutesEnum } from "../../../../main-page/constants/main-page-routes.enum";
 import { RoleGuardService, UserContextService } from "../../services";
-
+import { TranslateApiPipe } from "../../../../../common/core/translations/pipes";
 export interface NewOtpVerificationModalData {
   icon: string;
   title: string;
@@ -30,6 +30,7 @@ export interface NewOtpVerificationModalData {
     TranslateModule,
     CodeInputComponent,
     CountdownComponent,
+    TranslateApiPipe
   ],
   templateUrl: './new-otp-verification.component.html',
   styleUrls: ['./new-otp-verification.component.scss'],
@@ -80,7 +81,7 @@ export class NewOtpVerificationComponent {
   private backURL = signal<number | string | null>(null);
 
   // Dynamic title key based on source (password reset vs general)
-  protected titleKey = signal<string>('OtpVerification.Title');
+  protected titleKey = signal<string>('verify_the_code');
 
   // Output for modal closing
   @Output() closed = new EventEmitter<void>();
@@ -110,7 +111,7 @@ export class NewOtpVerificationComponent {
       // Adjust title for password reset flow
       if (typeof fromUrlPayload === 'string' && fromUrlPayload.includes(AuthenticationRoutesEnum.PASSWORD)) {
         // Use a more specific title if available, else fallback to generic
-        this.titleKey.set('general.resetPassword');
+        this.titleKey.set('reset_password');
       }
     }
 
@@ -119,8 +120,8 @@ export class NewOtpVerificationComponent {
       Logger.warn('Missing auth data payload in localStorage. Redirecting to login...');
       this._ToastService.add({
         severity: 'error',
-        summary: 'general.error',
-        detail: 'general.missingData',
+        summary: 'error',
+        detail: 'missing_data',
         life: 5000,
       });
       return;
@@ -135,8 +136,8 @@ export class NewOtpVerificationComponent {
       Logger.error('Invalid auth data payload in localStorage. Redirecting to login...');
       this._ToastService.add({
         severity: 'error',
-        summary: 'general.error',
-        detail: 'general.missingData',
+        summary: 'error',
+        detail: 'missing_data',
         life: 5000,
       });
       if (isPlatformBrowser(this.platformId)) {
@@ -209,7 +210,7 @@ export class NewOtpVerificationComponent {
           this.verifyCodeError.set(error);
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
+            summary: 'error',
             detail: String(error?.message ?? 'Unknown error'),
             life: 5000,
           });
@@ -301,7 +302,7 @@ export class NewOtpVerificationComponent {
     this.closed.emit();
     const modalData = {
       image: 'images/icons/logo-2.png',
-      title: 'general.ChangePassword',
+      title: 'reset_password',
       description: 'welcome_safe_space',
     };
 
@@ -340,8 +341,8 @@ export class NewOtpVerificationComponent {
       this.isWaiting.set(true);
       this._ToastService.add({
         severity: 'error',
-        summary: 'general.error',
-        detail: 'OtpMethodSelection.codeResendFailed',
+        summary: 'error',
+        detail: 'failed_to_resend_verification_code',
         life: 5000,
       });
       return;
@@ -378,7 +379,7 @@ export class NewOtpVerificationComponent {
           this.methodSelectionError.set(error);
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
+            summary: 'error',
             detail: String(error?.message ?? 'Unknown error'),
             life: 5000,
           });
@@ -386,8 +387,8 @@ export class NewOtpVerificationComponent {
           this.isWaiting.set(true);
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
-            detail: 'OtpMethodSelection.codeResendFailed',
+            summary: 'error',
+            detail: 'failed_to_resend_verification_code',
             life: 5000,
           });
         }
@@ -398,19 +399,13 @@ export class NewOtpVerificationComponent {
     if (res.status) {
       Logger.debug('OtpVerificationComponent | Method Selection successful, starting new countdown');
       this.preformResendCode();
-      this._ToastService.add({
-        severity: 'success',
-        summary: 'general.success',
-        detail: 'OtpMethodSelection.codeResentSuccessfully',
-        life: 3000,
-      });
     } else {
       Logger.warn('Method Selection failed');
       this.isWaiting.set(true);
       this._ToastService.add({
         severity: 'error',
-        summary: 'general.error',
-        detail: 'OtpMethodSelection.codeResendFailed',
+        summary: 'error',
+        detail: 'failed_to_resend_verification_code',
         life: 5000,
       });
     }
@@ -432,8 +427,8 @@ export class NewOtpVerificationComponent {
   protected backToRegister(): void {
     const modalData = {
       image: 'images/icons/logo-2.png',
-      title: 'general.createNewAccount',
-      description: 'general.joinTalbinah',
+      title: 'create_new_account',
+      description: 'join_talbinah_start_journey_towards_mental_health',
       number: this.neededDataToVerify()?.payploadCheckNumber?.phone_no,
       country_id: this.neededDataToVerify()?.payploadCheckNumber?.country_id,
     };

@@ -166,59 +166,59 @@ export class SupportGroupsLayoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (!this.isBrowser) return;
+
     // Check if mobile view
-    if (this.isBrowser) {
+    this.isMobileView.set(window.innerWidth < 768);
+    // Listen for window resize
+    window.addEventListener('resize', () => {
       this.isMobileView.set(window.innerWidth < 768);
-      // Listen for window resize
-      window.addEventListener('resize', () => {
-        this.isMobileView.set(window.innerWidth < 768);
+    });
+
+    this._paymentStateService.routePaymentInfo$
+      .pipe(takeUntil(this._destroy$))
+      .subscribe((data: RoutePaymentInfo | null) => {
+        Logger.debug('TherapeuticProgramsListingComponent: RoutePaymentInfo received:', data);
+
+        if (data && (data.itemId != null || data.status === false)) {
+          Logger.debug(
+            'TherapeuticProgramsListingComponent: handling payment result',
+            data
+          );
+
+          // ✅ 1. Open Status Info popup automatically
+          this._paymentStateService.openPaymentStatusInfo(
+            { ...data },
+            PaymentPageTypeEnum.SEMINAR
+          );
+
+          // ✅ 2. Clear query params from URL (SSR-safe)
+          this.router.navigate([], {
+            relativeTo: this._activatedRoute,
+            queryParams: {},
+            replaceUrl: true,
+          });
+
+          // ✅ 3. Clear in-memory payment state so it doesn't reopen
+          this._paymentStateService.clearRoutePaymentInfo();
+        }
+
       });
 
-      this._paymentStateService.routePaymentInfo$
-        .pipe(takeUntil(this._destroy$))
-        .subscribe((data: RoutePaymentInfo | null) => {
-          Logger.debug('TherapeuticProgramsListingComponent: RoutePaymentInfo received:', data);
-
-          if (data && (data.itemId != null || data.status === false)) {
-            Logger.debug(
-              'TherapeuticProgramsListingComponent: handling payment result',
-              data
-            );
-
-            // ✅ 1. Open Status Info popup automatically
-            this._paymentStateService.openPaymentStatusInfo(
-              { ...data },
-              PaymentPageTypeEnum.SEMINAR
-            );
-
-            // ✅ 2. Clear query params from URL (SSR-safe)
-            this.router.navigate([], {
-              relativeTo: this._activatedRoute,
-              queryParams: {},
-              replaceUrl: true,
-            });
-
-            // ✅ 3. Clear in-memory payment state so it doesn't reopen
-            this._paymentStateService.clearRoutePaymentInfo();
-          }
-
-        });
-
-      this._seminarItemFacade.openSeminarDetails
-        .pipe(
-          takeUntil(this._destroy$),
-          filter((details: { id: number } | null) => !!details)
-        )
-        .subscribe(details => {
-          Logger.debug('TherapeuticProgramsListingComponent: Opening program details modal for id:', details.id);
-          if (details?.id) {
-            const itemToOpen: any = this.findSeminarById(details.id) || { id: details.id };
-            this.openSeminarSubscription(itemToOpen, null);
-            this._seminarItemFacade.openSeminarDetails.next(null);
-          }
-        });
-      // this.moodModalIntegrationService.checkMoodModal();
-    }
+    this._seminarItemFacade.openSeminarDetails
+      .pipe(
+        takeUntil(this._destroy$),
+        filter((details: { id: number } | null) => !!details)
+      )
+      .subscribe(details => {
+        Logger.debug('TherapeuticProgramsListingComponent: Opening program details modal for id:', details.id);
+        if (details?.id) {
+          const itemToOpen: any = this.findSeminarById(details.id) || { id: details.id };
+          this.openSeminarSubscription(itemToOpen, null);
+          this._seminarItemFacade.openSeminarDetails.next(null);
+        }
+      });
+    // this.moodModalIntegrationService.checkMoodModal();
 
     this.setUpFetchDataAfterLogin();
   }

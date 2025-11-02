@@ -49,8 +49,8 @@ export class TechnicalSupportChatCardComponent {
 
       inputs: {
         image: 'images/settings/modal-icons/support-icon.jpg',
-        title: 'Technical_Support.title',
-        subtitle: 'Technical_Support.subtitle',
+        title: 'support',
+        subtitle: 'faq_intro',
         data: {
           chatItem: this.chat
         }

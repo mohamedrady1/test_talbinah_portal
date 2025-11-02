@@ -177,8 +177,8 @@ export class ProgramSubscriptionPopupComponent implements OnInit, OnDestroy {
       this._modalService.open(NationalIdVerificationComponent, {
         inputs: {
           image: 'images/home/icons/quick-appointemnt.png',
-          title: 'settings.nationalIdVerification.title',
-          subtitle: 'settings.nationalIdVerification.subtitle',
+          title: 'security',
+          subtitle: 'verify_national_identity_description',
           data: {
             item: programData,
             paymentStatus: this.queryStatus()

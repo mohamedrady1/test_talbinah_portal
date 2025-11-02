@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject, signal, computed } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit, inject, signal, computed, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   ErrorStateCardComponent,
@@ -12,6 +12,7 @@ import { ImportantNumbersFacade } from '../../services';
 import { ImportantNumberItem } from '../../dtos/responses/important-numbers-response.dto';
 import { AutoExactHeightDirective, Logger } from '../../../../common';
 import { getImportantNumbersErrorConfig, ImportantNumbersEmptyConfig } from '../../configs';
+import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-important-numbers',
@@ -24,13 +25,15 @@ import { getImportantNumbersErrorConfig, ImportantNumbersEmptyConfig } from '../
     ErrorStateCardComponent,
     EmptyStateCardComponent,
     LocalSearchComponent,
-    AutoExactHeightDirective
+    AutoExactHeightDirective,
+    TranslateApiPipe
   ],
   templateUrl: './important-numbers.component.html',
   styleUrls: ['./important-numbers.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ImportantNumbersComponent implements OnInit {
+  protected readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private readonly importantNumbersFacade = inject(ImportantNumbersFacade);
 
   // Signals for reactive state
@@ -57,6 +60,7 @@ export class ImportantNumbersComponent implements OnInit {
   readonly emptyStateConfig = ImportantNumbersEmptyConfig;
 
   ngOnInit(): void {
+    if (!this.isBrowser) return;
     Logger.debug('ImportantNumbersComponent: Initializing component');
     this.loadImportantNumbers();
   }

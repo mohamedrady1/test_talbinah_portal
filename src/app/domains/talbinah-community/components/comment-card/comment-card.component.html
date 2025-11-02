@@ -19,12 +19,12 @@
             {{ returnItemTimeAgo(comment.id, getCreatedAtDate()) }}
           </div>
           <button (click)="likePostComment(comment)">
-            {{ (comment.is_liked?.id == 1 ? 'talbinahCommunity.post.actions.unlike' :
-            'talbinahCommunity.post.actions.like') | translate }}
+            {{ (comment.is_liked?.id == 1 ? 'unlike' :
+            'like2') | translateApi }}
           </button>
           @if (false) {
           <button (click)="toggleReplyBox()">
-            {{"talbinahCommunity.post.answer"|translate}}
+            {{"replay"|translateApi}}
           </button>
           }
         </div>
@@ -43,8 +43,8 @@
       </div>
       @if (comment.replies && comment.replies.length) {
       <button class="toggle-replies-btn" (click)="toggleReplies()">
-        {{ showReplies() ? ('talbinahCommunity.post.actions.hideReplies' | translate) :
-        ('talbinahCommunity.post.actions.showAllReplies' | translate:{count: comment.replies.length}) }}
+        {{ showReplies() ? ('hide_replies' | translateApi) :
+        ('show_all_replies' | translateApi) }}
       </button>
       }
 

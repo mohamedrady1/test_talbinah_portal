@@ -3,20 +3,20 @@
   <div class="invitation-code-modal__container">
 
     <img [src]="'images/settings/invitation-code/invitation-code-content.png'"
-      alt="{{ 'invitationCode.imageAlt' | translate }}" class="invitation-code-modal__image" loading="lazy" width="129"
-      height="129" />
+      alt="{{ 'invitationCode.imageAlt' | translateApi }}" class="invitation-code-modal__image" loading="lazy"
+      width="129" height="129" />
 
     <h3 id="invitation-code-modal__title" class="invitation-code-modal__title">
-      {{ 'settings.invitationCode.titleModalContent' | translate }}
+      {{ 'share_code_bonus_points' | translateApi }}
     </h3>
 
     <p id="invitation-code-modal__subtitle" class="invitation-code-modal__subtitle">
-      {{ 'settings.invitationCode.subtitleModalContent' | translate }}
+      {{ 'referral_description' | translateApi }}
     </p>
 
     <main class="invitation-code-modal__content">
       <p class="invitation-code-modal__code-label">
-        {{ 'settings.invitationCode.codeLabel' | translate }}
+        {{ 'your_personal_code' | translateApi }}
       </p>
 
       <button class="btn btn--solid invitation-code-modal__copy-btn" type="button" (click)="copyCodeToClipboard()">

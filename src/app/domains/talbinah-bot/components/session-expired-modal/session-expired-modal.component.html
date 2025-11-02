@@ -4,15 +4,15 @@
             class="session-expired-modal__icon" />
 
         <h2 class="session-expired-modal__title">
-            {{ 'khawiik.sessionExpired.title' | translate }}
+            {{ 'time_period_ended' | translateApi }}
         </h2>
 
         <p class="session-expired-modal__description">
-            {{ 'khawiik.sessionExpired.description' | translate }}
+            {{ 'session_expired_start_new_period' | translateApi }}
         </p>
 
         <button class="session-expired-modal__button" (click)="onStartNewSession()">
-            {{ 'khawiik.sessionExpired.startNew' | translate }}
+            {{ 'start_now' | translateApi }}
         </button>
     </div>
 </div>

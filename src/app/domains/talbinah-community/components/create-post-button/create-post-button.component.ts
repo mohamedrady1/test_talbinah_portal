@@ -1,6 +1,6 @@
 import { Component, computed, EventEmitter, Input, Output, signal, WritableSignal } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { TranslateApiPipe } from '../../../../common/core/translations';
 export interface ButtonConfig {
   id: string; // Unique identifier for the button
   text: string;
@@ -12,7 +12,7 @@ export interface ButtonConfig {
 @Component({
   selector: 'app-create-post-button',
   standalone: true,
-  imports: [TranslateModule],
+  imports: [TranslateModule, TranslateApiPipe],
   templateUrl: './create-post-button.component.html',
   styleUrls: ['./create-post-button.component.scss']
 })

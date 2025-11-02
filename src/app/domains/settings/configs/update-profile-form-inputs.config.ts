@@ -1,5 +1,9 @@
-import { ALL_INPUT_TYPES, IFormInputConfig, InputIconPosition, InputIconType } from "../../../shared";
 import { Validators } from "@angular/forms";
+import { ALL_INPUT_TYPES } from "../../../shared/forms/enums/input-types.enum";
+import { IFormInputConfig } from "../../../shared/forms/models";
+import { InputIconPosition } from "../../../shared/forms/enums/input-icon-position.enum";
+import { InputIconType } from "../../../shared/forms/enums/input-icon-type.enum";
+
 
 export const updateProfileConfig: IFormInputConfig[] = [
   {
@@ -76,9 +80,9 @@ export const updateProfileConfig: IFormInputConfig[] = [
     id: 'updateProfileEmail',
     type: ALL_INPUT_TYPES.EMAIL,
     name: 'email',
-    label: 'form.email.label',
+    label: 'email',
     isRequired: true,
-    placeholder: 'form.email.placeholder',
+    placeholder: 'enter_email',
     defaultValue: null,
     isDisabled: false,
     widthClass: 'w-half',
@@ -89,8 +93,8 @@ export const updateProfileConfig: IFormInputConfig[] = [
     globalClass: 'custom-input-wrapper',
     inputClass: 'form-control',
     validation: [
-      { function: Validators.required, errorMessage: 'form.email.errors.required' },
-      { function: Validators.email, errorMessage: 'form.email.errors.email', errorName: 'email' }
+      { function: Validators.required, errorMessage: 'email_required' },
+      { function: Validators.email, errorMessage: 'invalid_email', errorName: 'email' }
     ],
     enableLabelClick: true,
     stopPaste: true,
@@ -99,9 +103,9 @@ export const updateProfileConfig: IFormInputConfig[] = [
     id: 'updateProfileIdentifyNumber',
     type: ALL_INPUT_TYPES.TEXT,
     name: 'identifyNumber',
-    label: 'form.IdentifyNumber.label',
+    label: 'ID_number',
     isRequired: false,
-    placeholder: 'form.IdentifyNumber.placeholder',
+    placeholder: 'enter_id',
     defaultValue: null,
     isDisabled: false,
     widthClass: 'w-half',
@@ -112,7 +116,7 @@ export const updateProfileConfig: IFormInputConfig[] = [
     globalClass: 'custom-input-wrapper',
     inputClass: 'form-control',
     validation: [
-      { function: Validators.required, errorMessage: 'form.IdentifyNumber.errors.required' }
+      { function: Validators.required, errorMessage: 'enter_correct_id_number' }
     ],
     enableLabelClick: true,
     stopPaste: true,

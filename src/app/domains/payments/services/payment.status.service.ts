@@ -74,10 +74,10 @@ export class PaymentStateService {
     if (type === PaymentPageTypeEnum.RESERVATION) {
       statusLabelsTexts = {
         buttonText: 'back_to_home',
-        successTitle: 'NormalAppointment.appointmentSuccess',
-        successSubTitle: 'NormalAppointment.appointmentSuccessText',
-        errorTitle: 'NormalAppointment.appointmentError',
-        errorSubTitle: 'NormalAppointment.appointmentErrorText',
+        successTitle: 'reservation_reserved_successfully',
+        successSubTitle: 'meet_at_selected_appointment',
+        errorTitle: 'something_want_wrong_try_again',
+        errorSubTitle: 'book_appointment_error_details_note',
       };
     }
 
@@ -94,10 +94,10 @@ export class PaymentStateService {
     if (type === PaymentPageTypeEnum.CHARGE_WALLET) {
       statusLabelsTexts = {
         buttonText: 'back_to_home',
-        successTitle: 'ChargeWallet.chargeSuccess',
-        successSubTitle: 'ChargeWallet.chargeSuccessText',
-        errorTitle: 'ChargeWallet.chargeError',
-        errorSubTitle: 'ChargeWallet.chargeErrorText',
+        successTitle: 'deposit_successful',
+        successSubTitle: 'deposit_successful_details',
+        errorTitle: 'deposit_error',
+        errorSubTitle: 'deposit_error_details',
       };
     }
 
@@ -115,8 +115,8 @@ export class PaymentStateService {
       inputs: {
         image: 'images/icons/logo-2.png',
         title: info.status
-          ? 'general.subscriptionConfirmed'
-          : 'general.subscriptionFaild',
+          ? 'subscription_confirmed'
+          : 'subscription_faild',
         data: {
           item: dataInput,
           statusLabels: statusLabelsTexts

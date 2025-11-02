@@ -186,7 +186,7 @@ export class GiftsFacade {
           this._errorMessageSend.set(err.message ?? 'حدث خطأ أثناء إرسال الهدية');
           // this.toastService.add({
           //   severity: 'error',
-          //   summary: 'gift.sendErrorToast',
+          //   summary: 'gift_sending_error_retry',
           //   detail: '',
           // });
           return EMPTY;

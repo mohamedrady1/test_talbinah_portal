@@ -9,15 +9,14 @@ import {
   CommonModule,
   isPlatformBrowser
 } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
 import { LanguageService } from '../../../../common';
 import { DownloadableFile } from '../../models';
 import { FileType } from '../../enums';
-
+import { TranslateApiPipe } from '../../../../common/core/translations';
 @Component({
   selector: 'app-file-viewer',
   standalone: true,
-  imports: [TranslateModule, CommonModule],
+  imports: [CommonModule, TranslateApiPipe],
   templateUrl: './file-viewer.component.html',
   styleUrls: ['./file-viewer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -52,10 +51,10 @@ export class FileViewerComponent {
   }
 
   protected formatFileSize(bytes: number): { value: string; key: string } {
-    if (bytes === 0) return { value: '0', key: 'file.size.bytes' };
+    if (bytes === 0) return { value: '0', key: 'bytes' };
 
     const k = 1024;
-    const keys = ['file.size.bytes', 'file.size.kb', 'file.size.mb', 'file.size.gb', 'file.size.tb'];
+    const keys = ['bytes', 'kb', 'mb', 'gb', 'tb'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     const value = (bytes / Math.pow(k, i)).toFixed(2);
 

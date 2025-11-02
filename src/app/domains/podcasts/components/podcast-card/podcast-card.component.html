@@ -3,7 +3,7 @@
   [ngClass]="{'podcast-card--mobile': isMobile}" [ngClass]="{'podcast-card--border': isborder}">
   <div class="podcast-card__thumbnail">
     <img [appLazyLoadImage]="podcast.thumbnail_image || ''" [alt]="podcast.title || ''" width="49" height="49"
-      class="podcast-card__image" ngOptimizedImage />
+      class="podcast-card__image" ngOptimizedImage onerror="this.src='images/icons/logo-2.png'" />
   </div>
   <div class="podcast-card__container">
     <div class="podcast-card__content">

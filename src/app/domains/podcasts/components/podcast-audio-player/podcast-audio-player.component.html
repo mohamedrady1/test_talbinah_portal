@@ -6,7 +6,8 @@
   <div class="podcast-audio-player__info-container">
     <div class="podcast-audio-player__info">
       <img class="podcast-audio-player__thumbnail" [appLazyLoadImage]="podcastDetails.thumbnail_image || ''"
-        [alt]="podcastDetails.title || ''" ngOptimizedImage width="60" height="60" priority>
+        [alt]="podcastDetails.title || ''" ngOptimizedImage width="60" height="60" priority
+        onerror="this.src='images/icons/logo-2.png'">
       <div class="podcast-audio-player__text">
         <div class="podcast-audio-player__title">{{podcastDetails.title}}</div>
         <div class="podcast-audio-player__subtitle text-truncate-2">

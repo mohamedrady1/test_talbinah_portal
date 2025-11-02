@@ -1,6 +1,5 @@
-import { Component, OnInit, signal, computed, inject, ChangeDetectionStrategy } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { Component, OnInit, signal, computed, inject, ChangeDetectionStrategy, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { LocalSearchComponent } from '../../../../shared/components/local-search/local-search.component';
 import { ComplaintCardComponent, IComplaint } from '../complaint-card/complaint-card.component';
 import { ComplaintDetailsComponent } from '../complaint-details/complaint-details.component';
@@ -11,6 +10,7 @@ import { DoctorTicketsFacade } from '../../services/doctor-tickets.facade';
 import { EmptyStateCardComponent, ErrorStateCardComponent } from '../../../../shared';
 import { ComplaintCardSkeletonComponent } from '../complaint-card-skeleton/complaint-card-skeleton.component';
 import { complaintsEmptyState, complaintsErrorState } from '../../configs/complaints.config';
+import { TranslateApiPipe } from '../../../../common/core/translations';
 
 interface FilterOption {
   label: string;
@@ -22,7 +22,7 @@ interface FilterOption {
   standalone: true,
   imports: [
     CommonModule,
-    TranslateModule,
+    TranslateApiPipe,
     LocalSearchComponent,
     ComplaintCardComponent,
     EmptyStateCardComponent,
@@ -39,13 +39,14 @@ export class ComplaintsListComponent implements OnInit {
   activeFilter = signal('all');
 
   filters: FilterOption[] = [
-    { label: 'complaints.filters.all', value: 'all' },
-    { label: 'complaints.filters.pending', value: 'pending' },
-    { label: 'complaints.filters.resolved', value: 'resolved' }
+    { label: 'all', value: 'all' },
+    { label: 'pending', value: 'pending' },
+    { label: 'resolved', value: 'resolved' }
   ];
 
   private readonly modalService = inject(ModalService);
   private readonly doctorTicketsFacade = inject(DoctorTicketsFacade);
+  protected readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   // Use facade signals
   readonly tickets = this.doctorTicketsFacade.tickets;
@@ -82,6 +83,7 @@ export class ComplaintsListComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    if (!this.isBrowser) return;
     this.loadComplaints();
   }
 
@@ -94,10 +96,11 @@ export class ComplaintsListComponent implements OnInit {
   }
 
   onComplaintClick(complaint: IComplaint): void {
+    if (!this.isBrowser) return;
     this.modalService.open(ComplaintDetailsComponent, {
       inputs: {
         image: 'images/settings/modal-icons/complaints.png',
-        title: 'complaints.details.title',
+        title: 'complaint_details',
         item: complaint
       },
       width: '40%',
@@ -106,10 +109,11 @@ export class ComplaintsListComponent implements OnInit {
   }
 
   onReportClick(): void {
+    if (!this.isBrowser) return;
     this.modalService.open(ReportComplaintComponent, {
       inputs: {
         image: 'images/settings/modal-icons/complaints.png',
-        title: 'complaints.report.title'
+        title: 'report_issue2'
       },
       outputs: {
         closed: (data: any): void => {

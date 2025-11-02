@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ModalService } from '../../../../shared';
 import { RouterModule } from '@angular/router';
 import { Logger } from '../../../../common';
+import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
 
 @Component({
   selector: 'app-khawiik-welcome',
@@ -14,6 +15,8 @@ import { Logger } from '../../../../common';
     TranslateModule,
     CommonModule,
     RouterModule,
+
+    TranslateApiPipe
   ],
   templateUrl: './khawiik-welcome.component.html',
   styleUrls: ['./khawiik-welcome.component.scss'],
@@ -44,8 +47,8 @@ export class KhawiikWelcomeComponent {
       this._ModalService.open(KhawiikVoiceTypesComponent, {
         inputs: {
           image: 'images/khawiik/khawiik-header-icon.png',
-          title: 'khawiik.header.title',
-          subtitle: 'khawiik.header.subtitle',
+          title: 'home_card_khawiik_title',
+          subtitle: 'home_card_khawiik_description',
         },
         outputs: {
           closed: () => Logger.debug('KhawiikWelcomeComponent | The modal is closed')

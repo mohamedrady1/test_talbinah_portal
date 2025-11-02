@@ -13,7 +13,7 @@
       @if (doctor()?.packages && (doctor()?.packages?.length || 0) > 0) {
       <div class="book-appointment--packages">
         <h4 class="book-appointment--packages-title">
-          {{ 'packages.AvailablePackages' | translate }}
+          {{ 'subscribed_offers' | translateApi }}
         </h4>
 
         <div class="book-appointment--packages-list">
@@ -31,22 +31,22 @@
                     {{ item?.reminder_reservation || 0 }}
                   </span>
                   <label>
-                    {{ 'packages.RemainingSessions' | translate }}
+                    {{ 'remaining_sessions' | translateApi }}
                   </label>
                 </div>
 
                 <div class="book-appointment--packages-details-texts-item">
                   <label>
-                    {{ 'packages.SessionDuration' | translate }}:
+                    {{ 'appointment_duration' | translateApi }}:
                   </label>
                   <span>
-                    {{item?.duration || 0}} {{ 'packages.Minutes' | translate }}
+                    {{item?.duration || 0}} {{ 'minute' | translateApi }}
                   </span>
                 </div>
 
                 <div class="book-appointment--packages-details-texts-item">
                   <label>
-                    {{ 'packages.ValidUntil' | translate }}:
+                    {{ 'valid_until2' | translateApi }}:
                   </label>
                   <span>
                     {{ item.end_at | date: 'd/M/yyyy' : undefined : currentLang }}
@@ -60,7 +60,7 @@
                 <app-svg-icon name="package-remainig-days"></app-svg-icon>
               </span>
               <span class="book-appointment--packages-remaining-label">
-                {{ 'packages.RemainingDays' | translate:{ count: item?.end_in_days} }}
+                {{'remaining_days'|translateApi}} {{item?.end_in_days}}
               </span>
             </div>
           </div>
@@ -152,7 +152,7 @@
     <div class="book-appointment__left-side">
       <app-rate-your-compatibility class="w-100" [doctorId]="doctorId"></app-rate-your-compatibility>
       <div class="book-appointment__left-side--new-reservation">
-        <h4 class="title">{{ 'general.AvailabilityTime' | translate }}</h4>
+        <h4 class="title">{{ 'available_appointments' | translateApi }}</h4>
         <div class="reservation-form">
           @if (doctor()) {
           <app-reservation-with-doctor-form [doctor]="doctor()!"></app-reservation-with-doctor-form>

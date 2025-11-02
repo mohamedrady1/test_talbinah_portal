@@ -104,7 +104,7 @@ export class CreateReelsComponent implements OnInit {
     if (this.contentControl?.invalid && (this.contentControl.dirty || this.contentControl.touched)) {
       // The 'required' check is no longer relevant if it's not a required validator
       if (this.contentControl.errors?.['minlength']) {
-        return 'talbinahCommunity.textArea.minLength';
+        return 'status_must_contain_at_least_12_characters';
       }
     }
     return null;

@@ -9,7 +9,9 @@ import { getKhawiikActivitiesErrorConfig } from './../../configs/error-state.con
 import { KhawiikActivitiesLookupFacade } from './../../services/activites-lookup.facade';
 import { IKhawiikVoiceActivity } from './../../dtos/responses/khawiik-responses.dto';
 import { ErrorStateCardComponent, ErrorStateConfig } from './../../../../shared/components/error-state-card/error-state-card.component';
-
+import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
+import { EmptyStateCardComponent, EmptyStateConfig } from '../../../../shared';
+import { KhawiikActivitiesEmptyState } from '../../configs/empty-state.config';
 
 @Component({
   selector: 'app-khawiik-activities',
@@ -20,7 +22,9 @@ import { ErrorStateCardComponent, ErrorStateConfig } from './../../../../shared/
     AutoExactHeightDirective,
 
     KhawiikActivitiesSkeletonComponent,
-    ErrorStateCardComponent
+    EmptyStateCardComponent,
+    ErrorStateCardComponent,
+    TranslateApiPipe
   ],
   templateUrl: './khawiik-activites.component.html',
   styleUrls: ['./khawiik-activites.component.scss'],
@@ -40,6 +44,7 @@ export class KhawiikActivitesComponent implements OnInit {
   protected readonly errorState: ErrorStateConfig = getKhawiikActivitiesErrorConfig(() =>
     this.facade.fetchActivities(),
   );
+  protected readonly emptyState: EmptyStateConfig = KhawiikActivitiesEmptyState;
 
   // ====== Facade state ======
   readonly isLoading = this.facade.isLoading;

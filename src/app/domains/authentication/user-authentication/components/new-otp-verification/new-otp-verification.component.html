@@ -1,14 +1,15 @@
 <div class="new-otp-verification">
     <div class="new-otp-verification__content">
         <div class="new-otp-verification__header">
-            <h2 class="new-otp-verification__title">{{ titleKey() | translate }}</h2>
-            <p class="new-otp-verification__description">{{ 'OtpVerification.Subtitle' | translate }}</p>
+            <h2 class="new-otp-verification__title">{{ titleKey() | translateApi }}</h2>
+            <p class="new-otp-verification__description">{{ 'enter_verification_code_sent_to_your_number' | translateApi
+                }}</p>
         </div>
 
         <div class="new-otp-verification__code-section">
             <div class="new-otp-verification__code-text">
                 <p class="new-otp-verification__code-text-message">
-                    {{ 'opt.verificationCode' | translate }}
+                    {{ 'enter_code_sent_to_you' | translateApi }}
                     <span class="new-otp-verification__code-phone-number">
                         <span class="country-code">{{(neededDataToVerify()?.payploadCheckNumber?.country_code ||
                             '+966').replace('+', '')}}+</span>
@@ -30,7 +31,7 @@
                 @if (codeNotValid()) {
             <div class="error">
                 <p class="error__message">
-                    {{ 'الكود غير صحيح من فضلك اعد المحاولة' }}
+                    {{ 'code_incorrect_please_try_again' | translateApi }}
                 </p>
             </div>
             }
@@ -42,9 +43,9 @@
                     (click)="isWaitingValue && !isLoadingResend() && resendCode(true)"
                     [class.disabled]="!isWaitingValue || isLoadingResend()">
                     @if (isLoadingResend()) {
-                    {{ 'in_progress' | translate }}
+                    {{ 'in_progress' | translateApi }}
                     } @else {
-                    {{ 'form.resend' | translate }}
+                    {{ 'resend' | translateApi }}
                     }
                 </span>
                 @if (!isWaitingValue && !isLoadingResend()) {
@@ -55,16 +56,16 @@
 
             <div class="new-otp-verification__button-container">
                 <button id="submit-dynamic-form-btn" type="button" class="btn btn--solid" (click)="checkCode()"
-                    [disabled]="isLoading()" [attr.aria-label]="'OtpMethodSelection.Submit' | translate">
+                    [disabled]="isLoading()" [attr.aria-label]="'verify_the_code' | translateApi">
                     <span class="btn__label">
                         @if (isLoading()) {
                         <div class="new-otp-verification-loading" aria-label="Submit in progress">
-                            {{ 'in_progress' | translate }}
+                            {{ 'in_progress' | translateApi }}
                             <span class="dot-loader"></span>
                         </div>
                         }
                         @if (!isLoading()) {
-                        {{ 'opt.checkCode' | translate }}
+                        {{ 'verify_the_code' | translateApi }}
                         }
                     </span>
                 </button>

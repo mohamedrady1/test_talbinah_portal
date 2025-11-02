@@ -1,4 +1,6 @@
-import { ALL_INPUT_TYPES, IFormInputConfig, InputIconPosition, InputIconType } from "../../../../shared";
+import { ALL_INPUT_TYPES, IFormInputConfig } from "../../../../shared/forms";
+import { InputIconPosition } from "../../../../shared/forms/enums/input-icon-position.enum";
+import { InputIconType } from "../../../../shared/forms/enums/input-icon-type.enum";
 import { defaultCountryCode } from "./default-country-code";
 import { Validators } from "@angular/forms";
 
@@ -48,9 +50,9 @@ export const checkNumberFormConfig: IFormInputConfig[] = [
   //   id: 'loginPassword',
   //   type: ALL_INPUT_TYPES.PASSWORD,
   //   name: 'password',
-  //   label: 'login.form.password.label',
+  //   label: 'login.password',
   //   isRequired: true,
-  //   placeholder: 'login.form.password.placeholder',
+  //   placeholder: 'login.enter_password',
   //   defaultValue: null,
   //   isDisabled: false,
   //   widthClass: 'w-full',
@@ -62,7 +64,7 @@ export const checkNumberFormConfig: IFormInputConfig[] = [
   //   inputClass: 'form-control',
   //   showConfirm: true,
   //   validation: [
-  //     { function: Validators.required, errorMessage: 'login.form.password.errors.required' },
+  //     { function: Validators.required, errorMessage: 'login.enter_confirm_password' },
   //   ],
   //   enableLabelClick: true,
   //   stopPaste: true,

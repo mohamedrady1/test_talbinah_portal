@@ -16,7 +16,7 @@ import { EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { finalize, take } from 'rxjs';
 import { RoleGuardService } from '../../../authentication';
-
+import { TranslateApiPipe } from '../../../../common/core/translations';
 @Component({
   selector: 'app-psychological-society-card',
   standalone: true,
@@ -28,7 +28,8 @@ import { RoleGuardService } from '../../../authentication';
 
     OpenPostMenuComponent,
     ShareSocialComponent,
-    CommentBoxComponent
+    CommentBoxComponent,
+    TranslateApiPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -501,7 +502,7 @@ export class PsychologicalSocietyCardComponent implements OnInit {
     this.modalService.open(ViewPsychologicalSocietyPostComponent, {
       inputs: {
         image: 'images/community/icons/header-icon.png',
-        title: 'talbinahCommunity.viewPost',
+        title: 'view_post',
         config: {
           post: config,
           userIdentityProfileData: this.userIdentityProfileData()

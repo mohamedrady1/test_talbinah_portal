@@ -22,17 +22,17 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
 
 export const DoctorSlotsEmptyState: EmptyStateConfig = {
   imageUrl: 'images/emptyStates/appointments.svg',
-  title: 'AvailableTimes.NoAvailableTimes',
+  title: 'no_available_time',
   gap: '.5rem'
 };
 export const DoctorSlotsErrorState: EmptyStateConfig = {
   imageUrl: 'images/emptyStates/appointments.svg',
-  title: 'AvailableTimes.AvailableTimesErrorState',
+  title: 'an_error_has_occurred',
   gap: '.5rem'
 };
 export const ChooseDateEmptyState: EmptyStateConfig = {
   imageUrl: 'images/emptyStates/appointments.svg',
-  title: 'AvailableTimes.ChooseDateFirst',
+  title: 'choose_date_first',
 };
 
 @Component({

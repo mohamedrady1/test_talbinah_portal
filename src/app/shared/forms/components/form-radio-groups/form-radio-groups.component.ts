@@ -3,7 +3,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { IFormInputConfig } from '../../models';
 import { CommonModule } from '@angular/common';
-
 @Component({
   selector: 'app-form-radio-groups',
   standalone: true,
@@ -17,12 +16,18 @@ import { CommonModule } from '@angular/common';
 })
 export class FormRadioGroupsComponent implements OnInit {
   @Input() control!: FormControl;
+  @Input() whatsappLabel!: string;
+  @Input() smsLabel!: string;
+
   @Input() formItem!: IFormInputConfig;
 
   ngOnInit(): void {
     if (!this.formItem || !this.formItem.radioGroups || !this.control) {
       throw new Error('Missing formItem.radioGroups or FormControl input.');
     }
+    this.formItem.radioGroups.forEach(radioGroup => {
+      radioGroup.label = radioGroup.value === 'whatsapp' ? this.whatsappLabel : this.smsLabel;
+    });
   }
 
   onSelect(value: string): void {

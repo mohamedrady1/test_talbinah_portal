@@ -5,10 +5,10 @@ import { Router } from '@angular/router';
 import { PLATFORM_ID } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { IUser, UserContextService } from '../../../authentication';
-import { ModalService, StorageKeys } from '../../../../shared';
+import { LocalizationService, ModalService, StorageKeys } from '../../../../shared';
 import { ComplaintsListComponent } from '../complaints-list';
 import { ChangePasswordComponent } from '../change-password';
-import { AutoExactHeightDirective, IGlobalUserContactInfoModel, Logger, StorageService } from '../../../../common';
+import { AutoExactHeightDirective, IGlobalUserContactInfoModel, Logger, MetadataService, StorageService } from '../../../../common';
 import { SecurityModalComponent } from '../security-modal';
 import { MyFavouritesComponent } from '../my-favourites';
 import { SettingFaqsComponent } from '../setting-faqs';
@@ -20,9 +20,9 @@ import { TalbinahCardComponent } from '../talbinah-card';
 import { UserInfoCardComponent } from '../user-info-card';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
 import { HeaderConfig } from '../../configs';
+import { SettingsRouteData } from '../../constants';
 import { isPlatformBrowser } from '@angular/common';
 import { MainPageRoutesEnum } from '../../../main-page';
-import { TranslateModule } from '@ngx-translate/core';
 import { GiftCardComponent } from '../gift-card';
 import { IProfileOptions } from '../../models';
 import { SettingsSections } from '../../constants/settings-sections.enum';
@@ -34,7 +34,7 @@ import { ISettingMenuItem } from '../../dtos';
 import { SettingsPointsComponent } from '../settings-points';
 import { SiteHeaderComponent } from '../../../header';
 import { TechnicalSupportChatsListComponent } from '../../../technical-support';
-
+import { TranslateApiPipe } from '../../../../common/core/translations';
 @Component({
   selector: 'app-settings-main-page',
   standalone: true,
@@ -43,7 +43,7 @@ import { TechnicalSupportChatsListComponent } from '../../../technical-support';
     TalbinahCardComponent,
     UserInfoCardComponent,
     HeaderComponent,
-    TranslateModule,
+    TranslateApiPipe,
     YourProfileOptionCardComponent,
     GiftCardComponent,
     WalletAndRewardsComponent,
@@ -62,6 +62,9 @@ export class SettingsMainPageComponent {
   protected readonly headerConfig = HeaderConfig;
   private readonly router = inject(Router);
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly seo = inject(MetadataService);
+  private readonly localization = inject(LocalizationService);
+  protected readonly isBrowser = isPlatformBrowser(this.platformId);
   @ViewChild('card') cardRef!: ElementRef;
   isFullscreen: boolean = false;
   private _StorageService = inject(StorageService);
@@ -122,6 +125,10 @@ export class SettingsMainPageComponent {
     }
   ];
 
+  constructor() {
+    this.setupSEO();
+  }
+
   openFaqModal() { }
   openContactUsModal() {
     if (isPlatformBrowser(this.platformId)) {
@@ -129,6 +136,8 @@ export class SettingsMainPageComponent {
     }
   }
   ngOnInit(): void {
+    if (!this.isBrowser) return;
+
     this._SettingsFacade.fetchSettings();
     this.cards = this._SettingsFacade.headerItems();
     const storedUserInfo: any = this._StorageService.getItem(StorageKeys.CURRENT_USER_INFO) as { user?: IUser } | null;
@@ -159,11 +168,12 @@ export class SettingsMainPageComponent {
   }
 
   protected openNationalIdVerificationModal(): void {
+    if (!this.isBrowser) return;
     this._modalService.open(NationalIdVerificationComponent, {
       inputs: {
         image: 'images/settings/modal-icons/security.png',
-        title: 'settings.nationalIdVerification.title',
-        subtitle: 'settings.nationalIdVerification.subtitle',
+        title: 'security',
+        subtitle: 'verify_national_identity_description',
         data: {}
       },
       outputs: {
@@ -176,11 +186,12 @@ export class SettingsMainPageComponent {
   }
 
   protected openSecurityModal(): void {
+    if (!this.isBrowser) return;
     this._modalService.open(SecurityModalComponent, {
       inputs: {
         image: 'images/settings/modal-icons/security.png',
-        title: 'settings.security.title',
-        subtitle: 'settings.security.subtitle',
+        title: 'security',
+        subtitle: 'manage_security_and_devices_preferences',
         data: {}
       },
       outputs: {
@@ -193,11 +204,12 @@ export class SettingsMainPageComponent {
   }
 
   protected openChangePasswordModal(): void {
+    if (!this.isBrowser) return;
     this._modalService.open(ChangePasswordComponent, {
       inputs: {
         image: 'images/settings/modal-icons/security.png',
-        title: 'settings.changePassword.title',
-        subtitle: 'settings.changePassword.subtitle',
+        title: 'security',
+        subtitle: 'update_account_password_for_security',
         data: {}
       },
       outputs: {
@@ -210,11 +222,12 @@ export class SettingsMainPageComponent {
   }
 
   protected openUpdatePersonalProfileInfoModal(): void {
+    if (!this.isBrowser) return;
     this._modalService.open(UpdatePersonalProfileInfoComponent, {
       inputs: {
         image: 'images/settings/modal-icons/personal-info.png',
-        title: 'settings.updatePersonalInfo.title',
-        subtitle: 'settings.updatePersonalInfo.subtitle',
+        title: 'profile',
+        subtitle: 'settings_page_subtitle',
         data: {}
       },
       outputs: {
@@ -227,11 +240,12 @@ export class SettingsMainPageComponent {
   }
 
   protected openComplaintsListModal(): void {
+    if (!this.isBrowser) return;
     this._modalService.open(ComplaintsListComponent, {
       inputs: {
         image: 'images/settings/modal-icons/complaints.png',
-        title: 'settings.complaintsList.title',
-        subtitle: 'settings.complaintsList.subtitle',
+        title: 'complaints',
+        subtitle: 'your_voice_matters_description',
         data: {}
       },
       outputs: {
@@ -244,11 +258,12 @@ export class SettingsMainPageComponent {
   }
 
   protected openMyFavouritesModal(): void {
+    if (!this.isBrowser) return;
     this._modalService.open(MyFavouritesComponent, {
       inputs: {
         image: 'images/settings/modal-icons/my-favourites.png',
-        title: 'settings.myFavourites.title',
-        subtitle: 'settings.myFavourites.subtitle',
+        title: 'Favorite',
+        subtitle: 'favorites_overview',
         data: {}
       },
       outputs: {
@@ -261,11 +276,12 @@ export class SettingsMainPageComponent {
   }
 
   protected openSettingFAQsModal(): void {
+    if (!this.isBrowser) return;
     this._modalService.open(SettingFaqsComponent, {
       inputs: {
         image: 'images/settings/modal-icons/faqs.png',
-        title: 'settings.settingFaqs.title',
-        subtitle: 'settings.settingFaqs.subtitle',
+        title: 'faqs',
+        subtitle: 'faq_intro',
         data: {}
       },
       outputs: {
@@ -278,11 +294,12 @@ export class SettingsMainPageComponent {
   }
 
   protected openImportantNumbersModal(): void {
+    if (!this.isBrowser) return;
     this._modalService.open(ImportantNumbersComponent, {
       inputs: {
         image: 'images/settings/modal-icons/important-numbers.png',
-        title: 'settings.importantNumbers.title',
-        subtitle: 'settings.importantNumbers.subtitle',
+        title: 'important_numbers',
+        subtitle: 'important_numbers_intro',
         data: {}
       },
       outputs: {
@@ -296,11 +313,12 @@ export class SettingsMainPageComponent {
 
 
   protected openWalletModal(): void {
+    if (!this.isBrowser) return;
     this._modalService.open(WalletComponent, {
       inputs: {
         image: 'images/settings/modal-icons/wallet.png',
-        title: 'settings.wallet.title',
-        subtitle: 'settings.wallet.subtitle',
+        title: 'your_wallet',
+        subtitle: 'wallet_description',
         data: {}
       },
       outputs: {
@@ -314,11 +332,12 @@ export class SettingsMainPageComponent {
   }
 
   protected openGiftToYourLovedOnesModal(): void {
+    if (!this.isBrowser) return;
     this._modalService.open(GiftToYourLovedOnesComponent, {
       inputs: {
         image: 'images/settings/modal-icons/gift-loved-ones.png',
-        title: 'settings.giftLovedOnes.title',
-        subtitle: 'settings.giftLovedOnes.subtitle',
+        title: 'gift_someone_you_love',
+        subtitle: 'quick_gift_intro',
         data: {}
       },
       outputs: {
@@ -332,11 +351,12 @@ export class SettingsMainPageComponent {
   }
 
   protected openPointsModal(): void {
+    if (!this.isBrowser) return;
     this._modalService.open(SettingsPointsComponent, {
       inputs: {
         image: 'images/settings/modal-icons/points.png',
-        title: 'settings.points.title',
-        subtitle: 'settings.points.subtitle',
+        title: 'my_points',
+        subtitle: 'redeem_points_for_services',
         data: {}
       },
       outputs: {
@@ -348,7 +368,24 @@ export class SettingsMainPageComponent {
     });
   }
 
+  private setupSEO(): void {
+    const { title, meta } = SettingsRouteData.SettingsMainPage;
+    const lang = this.localization.getCurrentLanguage() as keyof typeof title;
+
+    this.seo.setMetaTags({
+      title: title[lang],
+      description: meta.description[lang],
+      keywords: 'settings, profile, talbinah, إعدادات, الملف الشخصي, تلبينة',
+      image: 'https://talbinah.net/dashboard_assets/Talbinah.png',
+      url: 'https://talbinah.com/settings',
+      robots: 'index, follow',
+      locale: lang === 'ar' ? 'ar_SA' : 'en_US',
+      canonical: 'https://talbinah.com/settings',
+    });
+  }
+
   protected goHome(): void {
+    if (!this.isBrowser) return;
     this.router.navigate([MainPageRoutesEnum.MAINPAGE]);
   }
 
@@ -371,12 +408,13 @@ export class SettingsMainPageComponent {
   }
 
   protected openTechnicalSupportModal(): void {
+    if (!this.isBrowser) return;
     this._modalService.open(TechnicalSupportChatsListComponent, {
 
       inputs: {
         image: 'images/settings/modal-icons/support-icon.jpg',
-        title: 'Technical_Support.title',
-        subtitle: 'Technical_Support.subtitle',
+        title: 'support',
+        subtitle: 'faq_intro',
         data: {}
       },
       outputs: {

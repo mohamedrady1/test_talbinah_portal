@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { TranslateApiPipe } from '../../../common/core/translations';
 
 export interface SegmentOption {
     id: string | number;
@@ -10,7 +11,11 @@ export interface SegmentOption {
 @Component({
     selector: 'app-segment-control',
     standalone: true,
-    imports: [CommonModule, TranslateModule],
+    imports: [
+        CommonModule,
+        TranslateApiPipe
+
+    ],
     templateUrl: './segment-control.component.html',
     styleUrls: ['./segment-control.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

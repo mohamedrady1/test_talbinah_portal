@@ -5,7 +5,7 @@
             <button class="gift-loved-ones-tabs__btn"
                 [ngClass]="{ 'gift-loved-ones-tabs__btn--active': activeTab === tab.key }"
                 (click)="setActiveTab(tab.key)">
-                {{ tab.label | translate }}
+                {{ tab.label | translateApi }}
             </button>
             }
         </div>
@@ -25,8 +25,8 @@
     <div class="gift-loved-ones-layout__banner">
         <div class="gift-banner">
             <div class="gift-banner__content">
-                <div class="gift-banner__title">🎁 {{ 'gift.bannerTitle' | translate }}</div>
-                <div class="gift-banner__desc">{{ 'gift.bannerDesc' | translate }}</div>
+                <div class="gift-banner__title">🎁 {{ 'gift_your_loved_ones' | translateApi }}</div>
+                <div class="gift-banner__desc">{{ 'surprise_loved_ones_with_gift' | translateApi }}</div>
             </div>
             <img class="gift-banner__img" src="images/settings/gift/gift-3.png" alt="gift" />
         </div>

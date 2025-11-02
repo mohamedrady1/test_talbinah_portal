@@ -1,3 +1,7 @@
+@if (isTranslationsLoading()) {
+<app-translation-loading-screen></app-translation-loading-screen>
+}
+@else {
 <main class="main-wrapper" role="main" aria-label="Application Main Content"
   [class.main-wrapper--ssr-loading]="isServer()">
   @if (shouldRender()) {
@@ -37,3 +41,4 @@
   </div>
   }
 </main>
+}

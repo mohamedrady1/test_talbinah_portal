@@ -6,22 +6,22 @@
     </div>
     <div class="close-support-conversation__status__content">
       <h2 class="close-support-conversation__status__title">
-        {{ 'CloseSupportConversation.confirmationLabel' | translate }}
+        {{ 'confirm_end_support_chat' | translateApi }}
       </h2>
       <p class="close-support-conversation__status__subtitle">
-        {{ 'CloseSupportConversation.confirmationSublabel' | translate }}
+        {{ 'CloseSupportConversation.confirmationSublabel' | translateApi }}
       </p>
     </div>
   </div>
 
   <div class="close-support-conversation--actions">
     <button id="cancel-btn" type="button" class="btn btn--outline" (click)="onCancel()">
-      {{ 'general.close' | translate }}
+      {{ 'close' | translateApi }}
     </button>
     <button [id]="'item-details'" type="submit" class="btn btn--solid" (click)="onConfirmCloseConversation()"
-      [attr.aria-label]="'general.confirm' | translate" [disabled]="_CloseSupportConversationFacade?.isClosing()">
+      [attr.aria-label]="'confirm' | translateApi" [disabled]="_CloseSupportConversationFacade?.isClosing()">
       <span class="btn__label">
-        {{ 'general.confirm' | translate }}
+        {{ 'confirm' | translateApi }}
       </span>
     </button>
   </div>

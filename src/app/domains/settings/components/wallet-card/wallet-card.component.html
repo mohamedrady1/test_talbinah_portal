@@ -11,10 +11,10 @@
           : 'var(--Sacondry-Color-primary, #B80924)'
       }">
       @if (cardConfig.type === 1) {
-      {{ 'settings.wallet.walletCard.status.shipping' | translate }}
+      {{ 'recharge' | translateApi }}
       }
       @else if (cardConfig.type === -1) {
-      {{ 'settings.wallet.walletCard.status.withdrawal' | translate }}
+      {{ 'withdraw' | translateApi }}
       }
     </div>
 
@@ -28,7 +28,7 @@
 
       @if (tooltipVisible()) {
       <div class="wallet-card__tooltip">
-        {{ 'general.copied' | translate }}
+        {{ 'copied' | translateApi }}
       </div>
       }
     </div>
@@ -47,7 +47,7 @@
           'wallet-card__price-section-amount--withdrawal': cardConfig.type !== 1
         }">
         {{ cardConfig?.original_value || '' }}
-        <span>{{ 'griyals' | translateApi }}</span>
+        <span>{{ 'riyals' | translateApi }}</span>
       </span>
     </div>
   </div>

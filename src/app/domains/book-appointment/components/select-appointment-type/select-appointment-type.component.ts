@@ -14,11 +14,12 @@ import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { IAppointmentTypeSelectionItem } from '../../dtos';
 import { AppointmentsRoutesEnum } from '../../../appointments';
+import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-select-appointment-type',
   standalone: true,
-  imports: [TranslateModule],
+  imports: [TranslateModule, TranslateApiPipe],
   templateUrl: './select-appointment-type.component.html',
   styleUrls: ['./select-appointment-type.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

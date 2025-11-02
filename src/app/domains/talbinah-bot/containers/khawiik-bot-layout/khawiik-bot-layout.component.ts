@@ -110,10 +110,11 @@ export class KhawiikBotLayoutComponent implements OnInit, AfterViewInit {
 
   constructor() {
     this.isBrowser = isPlatformBrowser(this.platformId);
+    this.setupSEO();
+    
     if (this.isBrowser) {
       this.screenWidth.set(window.innerWidth);
-    }
-    if (this.isBrowser) {
+      
       effect(() => {
         const newTitle = this.chatSelectedItem()?.name ?? 'عنوان الشات';
         if (this.chatTitle() !== newTitle) {
@@ -124,27 +125,57 @@ export class KhawiikBotLayoutComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    if (this.isBrowser) {
-      // this.chatHistoryFacade.fetchChatHistory();
-      this.router.events
-        .pipe(filter((event) => event instanceof NavigationEnd))
-        .subscribe((event: NavigationEnd) => {
-          const url = event.urlAfterRedirects;
-          const shouldHaveBg =
-            url.includes(KhawiikBotRoutesEnum.VOICE_CHAT) || url.includes(KhawiikBotRoutesEnum.TEXT_CHAT);
-          this.hasChatBackground.set(shouldHaveBg);
-        });
+    if (!this.isBrowser) return;
 
-      const currentUrl = this.router.url;
-      const shouldHaveBg =
-        currentUrl.includes(KhawiikBotRoutesEnum.VOICE_CHAT) || currentUrl.includes(KhawiikBotRoutesEnum.TEXT_CHAT);
-      this.hasChatBackground.set(shouldHaveBg);
+    // this.chatHistoryFacade.fetchChatHistory();
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        const url = event.urlAfterRedirects;
+        const shouldHaveBg =
+          url.includes(KhawiikBotRoutesEnum.VOICE_CHAT) || url.includes(KhawiikBotRoutesEnum.TEXT_CHAT);
+        this.hasChatBackground.set(shouldHaveBg);
 
-      // this.moodModalIntegrationService.checkMoodModal();
+        // Update SEO on route change
+        this.setupSEO();
+      });
 
-      // ✅ Subscribe to user data changes (refresh userId)
-      this.setUpUserIdRefresh();
+    const currentUrl = this.router.url;
+    const shouldHaveBg =
+      currentUrl.includes(KhawiikBotRoutesEnum.VOICE_CHAT) || currentUrl.includes(KhawiikBotRoutesEnum.TEXT_CHAT);
+    this.hasChatBackground.set(shouldHaveBg);
+
+    // this.moodModalIntegrationService.checkMoodModal();
+
+    // ✅ Subscribe to user data changes (refresh userId)
+    this.setUpUserIdRefresh();
+  }
+
+  private setupSEO(): void {
+    const currentUrl = this.isBrowser ? this.router.url : '/khawiik';
+    const lang = this.localization.getCurrentLanguage();
+    let routeData = KhawiikBotRouteData.KHAWIIK_MAIN_PAGE;
+
+    // Determine which route data to use based on URL
+    if (currentUrl.includes(KhawiikBotRoutesEnum.TEXT_CHAT)) {
+      routeData = KhawiikBotRouteData.TextChat;
+    } else if (currentUrl.includes(KhawiikBotRoutesEnum.VOICE_CHAT)) {
+      routeData = KhawiikBotRouteData.VoiceChat;
     }
+
+    const title = lang === 'ar' ? routeData.title.ar : routeData.title.en;
+    const description = lang === 'ar' ? routeData.meta.description.ar : routeData.meta.description.en;
+
+    this.seo.setMetaTags({
+      title,
+      description,
+      keywords: 'khawiik, chat, voice, bot, تلبينة, خويك',
+      image: 'https://talbinah.net/dashboard_assets/Talbinah.png',
+      url: 'https://talbinah.com/khawiik',
+      robots: 'index, follow',
+      locale: lang === 'ar' ? 'ar_SA' : 'en_US',
+      canonical: 'https://talbinah.com/khawiik',
+    });
   }
 
   private setUpUserIdRefresh(): void {

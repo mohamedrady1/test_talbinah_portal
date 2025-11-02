@@ -1,4 +1,3 @@
-@if (isBrowser) {
 <div class="chat-layout__container">
   <div class="khawiik-text-chat">
     <!-- Header with week view and actions -->
@@ -61,7 +60,7 @@
 
           <!-- show translated day name -->
           <span class="khawiik-text-chat__day-name">
-            {{ getDayName(day) | translate }}
+            {{ getDayName(day) | translateApi }}
           </span>
         </div>
         }
@@ -79,18 +78,18 @@
         </div>
         } @else {
         <button type="button" class="khawiik-text-chat__action" (click)="_openKhawiikActivitesModal()"
-          [attr.aria-label]="keys.TEXT_CHAT.NEW_CHAT | translate">
+          [attr.aria-label]="keys.TEXT_CHAT.NEW_CHAT | translateApi">
           <!-- SVG icon placeholder -->
           <app-svg-icon name="khawiik-star"></app-svg-icon>
         </button>
 
         <button type="button" class="khawiik-text-chat__action" (click)="_openKhawiikHistoryModal()"
-          [attr.aria-label]="keys.TEXT_CHAT.ZOOM_IN | translate">
+          [attr.aria-label]="keys.TEXT_CHAT.ZOOM_IN | translateApi">
           <app-svg-icon name="khawiik-folder"></app-svg-icon>
         </button>
 
         <button type="button" (click)="_openKhawiikBooksModal()" class="khawiik-text-chat__action"
-          [class.active]="currentBook()" [attr.aria-label]="keys.TEXT_CHAT.ZOOM_OUT | translate">
+          [class.active]="currentBook()" [attr.aria-label]="keys.TEXT_CHAT.ZOOM_OUT | translateApi">
           @if (currentBook()) {
           <app-svg-icon name="khawiik-book-active"></app-svg-icon>
           }
@@ -113,9 +112,9 @@
         <img src="images/khawiik/khawiik-welcome-mian-icon.png" alt="Khawiik Welcome Icon"
           class="khawiik-text-chat__welcome-icon" />
         <p class="khawiik-text-chat__welcome-date">{{ currentDate() }}</p>
-        <p class="khawiik-text-chat__welcome-title">{{ keys.COMMON.WHATS_ON_MIND | translate }}</p>
+        <p class="khawiik-text-chat__welcome-title">{{ keys.COMMON.WHATS_ON_MIND | translateApi }}</p>
         <button class="btn btn--solid" (click)="onNewChatClick()">
-          {{keys.TEXT_CHAT.NEW_CHAT | translate }}
+          {{keys.TEXT_CHAT.NEW_CHAT | translateApi }}
         </button>
       </div>
       } @else {
@@ -182,20 +181,20 @@
 
             <input #messageInput type="text" class="khawiik-text-chat__input-field" [value]="messageText()"
               (input)="onMessageChange($event)" (keydown)="onKeyDown($event)"
-              [placeholder]="keys.TEXT_CHAT.PLACEHOLDER | translate"
-              [attr.aria-label]="keys.TEXT_CHAT.PLACEHOLDER | translate" />
+              [placeholder]="keys.TEXT_CHAT.PLACEHOLDER | translateApi"
+              [attr.aria-label]="keys.TEXT_CHAT.PLACEHOLDER | translateApi" />
           </div>
 
           <div class="khawiik-text-chat__input-right">
             <button type="button" class="khawiik-text-chat__voice-btn" (click)="onVoiceClick()"
-              [attr.aria-label]="keys.TEXT_CHAT.VOICE_BUTTON | translate">
+              [attr.aria-label]="keys.TEXT_CHAT.VOICE_BUTTON | translateApi">
               <!-- SVG icon placeholder -->
               <app-svg-icon name="khawiik-voice" />
 
             </button>
 
             <button type="button" class="khawiik-text-chat__send-btn" [disabled]="!isSubmitEnabled() || isSending()"
-              (click)="onSubmit()" [attr.aria-label]="keys.TEXT_CHAT.SEND | translate">
+              (click)="onSubmit()" [attr.aria-label]="keys.TEXT_CHAT.SEND | translateApi">
               <!-- SVG icon placeholder -->
               <app-svg-icon name="khawiik-send-icon" />
             </button>
@@ -207,4 +206,3 @@
     }
   </div>
 </div>
-}

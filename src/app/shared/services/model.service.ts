@@ -1,5 +1,5 @@
-// modal.service.ts
-import { Injectable, OnDestroy } from '@angular/core';
+/* ---------- Angular Core ---------- */
+import { Injectable, OnDestroy, Type } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 export interface ModalConfig {
@@ -32,41 +32,55 @@ export interface ModalConfig {
 
 @Injectable({ providedIn: 'root' })
 export class ModalService implements OnDestroy {
-  private openModalSubject = new Subject<{ component: any; config?: ModalConfig }>();
+  private openModalSubject = new Subject<{ component: Type<any>; config?: ModalConfig }>();
   private closeAllModalsSubject = new Subject<void>();
+
   closeAllModals$: Observable<void> = this.closeAllModalsSubject.asObservable();
   openModal$ = this.openModalSubject.asObservable();
 
-  // You can add a Subject for closing if you want to close the modal from the service
-  // private closeModalSubject = new Subject<void>();
-  // closeModal$ = this.closeModalSubject.asObservable();
+  /**
+   * Open a modal with the specified component and configuration
+   * @param component - The component class (Type) to render in the modal
+   * @param config - Modal configuration options
+   */
+  open(component: Type<any>, config?: ModalConfig): void {
+    if (!component) {
+      console.error('ModalService: Component is undefined or null');
+      return;
+    }
 
-  open(component: any, config?: ModalConfig) {
     this.openModalSubject.next({ component, config });
   }
 
-
-  openFullscreen(component: any, config?: ModalConfig) {
+  /**
+   * Open a fullscreen modal
+   * @param component - The component class to render
+   * @param config - Additional modal configuration
+   */
+  openFullscreen(component: Type<any>, config?: ModalConfig): void {
     const fullscreenConfig: ModalConfig = {
       ...config,
       isFullscreen: true
     };
-    this.openModalSubject.next({ component, config: fullscreenConfig });
+    this.open(component, fullscreenConfig);
   }
 
-  openPhone(component: any, config?: ModalConfig) {
+  /**
+   * Open a phone-optimized modal
+   * @param component - The component class to render
+   * @param config - Additional modal configuration
+   */
+  openPhone(component: Type<any>, config?: ModalConfig): void {
     const phoneConfig: ModalConfig = {
       ...config,
       isPhone: true
     };
-    this.openModalSubject.next({ component, config: phoneConfig });
+    this.open(component, phoneConfig);
   }
 
-  // You can call this function from anywhere to close the top-most modal
-  // close() {
-  //   // ModalOutletComponent will need to subscribe to this and determine which modal to close
-  //   this.closeModalSubject.next();
-  // }
+  /**
+   * Close all currently open modals
+   */
   closeAll(): void {
     this.closeAllModalsSubject.next();
   }

@@ -93,6 +93,8 @@ export class MainPageLayoutComponent implements OnInit, OnDestroy {
 
 
   constructor() {
+    this.setSeoMeta();
+
     // keep userIdentityProfileDataSignal in sync
     effect(() => {
       this.userIdentityProfileDataSignal.set(
@@ -117,7 +119,6 @@ export class MainPageLayoutComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (!this.isBrowser) return;
 
-    this.setSeoMeta();
     this.setBodyOverflow(); // Set body overflow-y to empty string for main page
 
     // Fetch interests to align tabs with other modules (e.g., MySavedPosts)
@@ -223,12 +224,12 @@ export class MainPageLayoutComponent implements OnInit, OnDestroy {
     this.seo.setMetaTags({
       title: title[lang],
       description: meta.description[lang],
-      keywords: 'main-page, home, talbinah',
+      keywords: 'main-page, home, talbinah, الصفحة الرئيسية, تلبينة',
       image: 'https://talbinah.net/dashboard_assets/Talbinah.png',
-      url: 'https://talbinah.com/main-page',
+      url: 'https://talbinah.com/',
       robots: 'index, follow',
-      locale: 'en_US',
-      canonical: 'https://talbinah.com/main-page',
+      locale: lang === 'ar' ? 'ar_SA' : 'en_US',
+      canonical: 'https://talbinah.com/',
     });
   }
 
@@ -289,8 +290,8 @@ export class MainPageLayoutComponent implements OnInit, OnDestroy {
     this._ModalService.open(CreatePsychologicalSocietyPostComponent, {
       inputs: {
         image: 'images/community/icons/header-icon.png',
-        title: 'talbinahCommunity.newShare',
-        subtitle: 'talbinahCommunity.shareText',
+        title: 'new_post',
+        subtitle: 'your_posts_help_others_feel_not_alone',
         data: {
           interests: this.tabs(),
           itemToEdit: postItem,

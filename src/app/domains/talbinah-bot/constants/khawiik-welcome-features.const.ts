@@ -24,21 +24,21 @@ export interface KhawiikContent {
 
 export const KHAWIIK_WELCOME_FEATURES: KhawiikContent = {
   header: {
-    title: 'khawiik.header.title',
-    subtitle: 'khawiik.header.subtitle'
+    title: 'home_card_khawiik_title',
+    subtitle: 'home_card_khawiik_description'
   },
   welcomePage: {
-    labelTitle: 'khawiik.welcomePage.labelTitle',
-    title: 'khawiik.welcomePage.title',
+    labelTitle: 'welcome_to_talbinah2',
+    title: 'start_journey_talbinah',
     list: [
       {
-        title: 'khawiik.welcomePage.list.item1Title',
-        subtitle: 'khawiik.welcomePage.list.item1Subtitle',
+        title: 'built_on_science_designed_for_comfort',
+        subtitle: 'simplified_psychological_experience_human_touch',
         icon: 'images/khawiik/book.png'
       },
       {
-        title: 'khawiik.welcomePage.list.item2Title',
-        subtitle: 'khawiik.welcomePage.list.item2Subtitle',
+        title: 'express_without_judgments',
+        subtitle: 'speak_freely_without_judgment',
         icon: 'images/khawiik/award.png'
       }
     ]

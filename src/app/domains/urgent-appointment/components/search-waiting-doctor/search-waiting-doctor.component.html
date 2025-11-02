@@ -1,7 +1,7 @@
 <div class="search-waiting-doctor">
   <div class="search-waiting-doctor__content">
     <div class="search-waiting-doctor__image-spinner-container" role="status" aria-live="polite">
-      <img src="images/icons/loading-waiting-icon.png" alt="{{ 'searchWaitingDoctor.loadingAltText' | translate }}"
+      <img src="images/icons/loading-waiting-icon.png" alt="{{ 'doctor_search_in_progress' | translateApi }}"
         width="100" height="100" loading="lazy" />
     </div>
 
@@ -11,11 +11,11 @@
       </h3>
       <p class="search-waiting-doctor__subtitle">
         @if(!isInitialLoading()) {
-        {{ 'searchWaitingDoctor.cancellationMessage' | translate: { duration: padZero(remainingTimeMinutes()) + ':' +
-        padZero(remainingTimeSeconds()) } }}
+        {{'no_doctor_available_notice'|translateApi}} {{remainingTimeMinutes()}} {{':'}}
+        {{padZero(remainingTimeSeconds())}} {{'minute' | translateApi}}
         } @else {
         <span class="cancel-dots" aria-live="polite" aria-label="loading">
-          {{ 'waiting_doctor_modal_warning_label' |translate}} <span class="dot-loader"></span>
+          {{ 'waiting_doctor_modal_warning_label' |translateApi}} <span class="dot-loader"></span>
           {{'minute' | translateApi}}
         </span>
         }
@@ -24,14 +24,14 @@
   </div>
 
   <div class="search-waiting-doctor__actions">
-    <button type="button" class="btn btn--outline" (click)="cancelRequest()"
-      [attr.aria-label]="'general.cancel' | translate" [disabled]="isCancelling()">
+    <button type="button" class="btn btn--outline" (click)="cancelRequest()" [attr.aria-label]="'cancel' | translateApi"
+      [disabled]="isCancelling()">
       <ng-container *ngIf="!isCancelling(); else loading">
-        <span class="btn__label">{{ 'general.cancelSearch' | translate }}</span>
+        <span class="btn__label">{{ 'cancel_search' | translateApi }}</span>
       </ng-container>
       <ng-template #loading>
         <div class="search-waiting-doctor__actions__loading" aria-label="Submit in progress">
-          {{ 'in_progress' | translate }}
+          {{ 'in_progress' | translateApi }}
           <span class="dot-loader"></span>
         </div>
       </ng-template>

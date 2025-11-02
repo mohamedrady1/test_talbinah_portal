@@ -1,4 +1,3 @@
-@if (isBrowser) {
 <section class="khawiik-activities" [attr.aria-labelledby]="'khawiik-activities-heading'">
   <div class="khawiik-activities__container" role="region" [attr.aria-live]="'polite'" appAutoExactHeight="50"
     heightMode="max-height">
@@ -12,7 +11,9 @@
     @else if (errorMessage() && status() === false) {
     <app-error-state-card [config]="errorState"></app-error-state-card>
     }
-
+    @else if (activityCards().length === 0) {
+    <app-empty-state-card [config]="emptyState" style="width: 100%;"></app-empty-state-card>
+    }
     <!-- Activities Grid -->
     @else {
     <ul class="khawiik-activities__grid" role="list">
@@ -37,8 +38,8 @@
 
           <div class="khawiik-activities__card-footer">
             <button type="button" class="khawiik-activities__cta" (click)="onCardSelect(card); $event.stopPropagation()"
-              [attr.aria-label]="card.title + ' - ' + ('khawiik.activities.cta' | translate)">
-              {{ 'khawiik.activities.cta' | translate }}
+              [attr.aria-label]="card.title + ' - ' + ('start_now' | translateApi)">
+              {{ 'start_now' | translateApi }}
             </button>
           </div>
         </article>
@@ -48,4 +49,3 @@
     }
   </div>
 </section>
-}

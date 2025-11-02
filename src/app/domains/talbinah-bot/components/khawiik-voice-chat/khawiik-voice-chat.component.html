@@ -1,4 +1,3 @@
-@if (isBrowser) {
 <div class="chat-layout__container">
   <div class="khawiik-voice-chat">
     <!-- Header -->
@@ -11,7 +10,7 @@
             {{ day.dayDate | date:'d' }}
           </span>
           <span class="khawiik-voice-chat__day-name">
-            {{ getDayName(day) | translate }}
+            {{ getDayName(day) | translateApi }}
           </span>
         </div>
         }
@@ -69,10 +68,10 @@
             class="khawiik-voice-chat__welcome-icon" />
           <div class="khawiik-voice-chat__content">
             <p class="khawiik-voice-chat__welcome-title">
-              {{ keys.VOICE_CHAT.WELCOME.WELCOME | translate }}
+              {{ keys.VOICE_CHAT.WELCOME.WELCOME | translateApi }}
             </p>
             <p class="khawiik-voice-chat__welcome-subtitle">
-              {{ keys.VOICE_CHAT.WELCOME.SUBTITLE | translate }}
+              {{ keys.VOICE_CHAT.WELCOME.SUBTITLE | translateApi }}
             </p>
           </div>
         </div>
@@ -114,4 +113,3 @@
     }
   </div>
 </div>
-}

@@ -103,18 +103,17 @@
           </app-card-header>
           @if(isLoggedIn()){
           @if (!this.facade.isLoadingFavouritePodcasts()) {
-          @if ((this.facade.favouritePodcastsResponse()?.data?.length ?? 0) > 0) {
+          @if (this.facade.errorMessageFavouritePodcasts() &&
+          !this.facade.statusRequestFavouritePodcasts()) {
+          <app-error-state-card [config]="favoritePodcastsError" [type]="'small'"></app-error-state-card>
+          } @else if ((this.facade.favouritePodcastsResponse()?.data?.length ?? 0) > 0) {
           <div class="podcast__list">
             @for (podcast of this.facade.favouritePodcastsResponse()?.data.slice(0,
             favoritesDisplayLimit()); track $index) {
             <app-podcast-card [item]="podcast" [hideDescription]="true"></app-podcast-card>
             }
           </div>
-          } @else if (this.facade.errorMessageFavouritePodcasts() &&
-          !this.facade.statusRequestFavouritePodcasts()) {
-          <app-error-state-card [config]="favoritePodcastsError" [type]="'small'"></app-error-state-card>
-          }
-          @else if(this.facade.favouritePodcastsResponse()?.data?.length === 0) {
+          } @else {
           <app-empty-state-card [config]="noFavoritePodcasts" [type]="'small'"></app-empty-state-card>
           }
           }@else {
@@ -124,6 +123,7 @@
           @else{
           <app-compelete-data-and-register-now [isEmptyState]="true"></app-compelete-data-and-register-now>
           }
+
         </div>
 
       </div>

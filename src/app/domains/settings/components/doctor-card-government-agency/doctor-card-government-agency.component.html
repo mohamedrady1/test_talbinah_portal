@@ -1,11 +1,11 @@
 <article class="doctor-card-government-agency" (click)="cardClicked()" role="button" tabindex="0"
-  [attr.aria-label]="item?.full_name ? (item.full_name + ' ' + ('general.DoctorCardDescription' | translate: { specialty: item.specialties?.[0]?.name, years: item.years_experience })) : ('general.DoctorCardGenericDescription' | translate)">
+  [attr.aria-label]="'doctor'">
   <div class="doctor-card-government-agency__details">
     <figure class="doctor-card-government-agency__thumbnail">
       <img class="doctor-card-government-agency__image"
         [src]="item?.image ?? (item?.gender === 1 ? 'images/not-found/no-woman-doctor.svg' : 'images/not-found/no-doctor.svg')"
         [width]="49" [height]="49" loading="lazy" fetchpriority="low"
-        [alt]="item?.full_name ? (item.full_name + ' ' + ('general.ProfilePictureAlt' | translate)) : ('general.DoctorProfilePictureAlt' | translate)"
+        [alt]="item?.full_name ? (item.full_name + ' ' + 'profile_picture_alt') : ('doctor_profile_picture_alt')"
         (error)="onImageError($event, item?.gender)" />
     </figure>
 
@@ -30,12 +30,12 @@
                   d="M7.00002 1.87402C4.74252 1.87402 2.91669 3.69986 2.91669 5.95736C2.91669 6.80319 3.16752 7.57902 3.59919 8.22652C4.22919 9.15986 5.22669 9.81902 6.38752 9.98819C6.58585 10.0232 6.79002 10.0407 7.00002 10.0407C7.21002 10.0407 7.41419 10.0232 7.61252 9.98819C8.77335 9.81902 9.77085 9.15986 10.4009 8.22652C10.8325 7.57902 11.0834 6.80319 11.0834 5.95736C11.0834 3.69986 9.25752 1.87402 7.00002 1.87402ZM8.78502 5.82902L8.30085 6.31319C8.21919 6.39486 8.17252 6.55236 8.20169 6.66902L8.34169 7.26986C8.45252 7.74236 8.20169 7.92902 7.78169 7.67819L7.19835 7.33402C7.09335 7.26986 6.91835 7.26986 6.81335 7.33402L6.23002 7.67819C5.81002 7.92319 5.55919 7.74236 5.67002 7.26986L5.81002 6.66902C5.83335 6.55819 5.79252 6.39486 5.71085 6.31319L5.21502 5.82902C4.92919 5.54319 5.02252 5.25736 5.41919 5.19319L6.04335 5.08819C6.14835 5.07069 6.27085 4.97736 6.31752 4.88402L6.66169 4.19569C6.84835 3.82236 7.15169 3.82236 7.33835 4.19569L7.68252 4.88402C7.72919 4.97736 7.85169 5.07069 7.96252 5.08819L8.58669 5.19319C8.97752 5.25736 9.07085 5.54319 8.78502 5.82902Z"
                   fill="#0E39B6" />
               </svg>
-              <p>{{ 'general.Recommended' | translate }}</p>
+              <p>{{ 'recommended' | translateApi }}</p>
             </div>
             }
             <button type="button" class="doctor-card-government-agency__like-button"
               (click)="handleFavouriteToggle($event)"
-              [attr.aria-label]="item?.is_fav ? ('general.RemoveFromFavorites' | translate) : ('general.AddToFavorites' | translate)"
+              [attr.aria-label]="item?.is_fav ? ('remove_from_favorites' | translateApi) : ('add_to_favorites' | translateApi)"
               [disabled]="isToggleLoading()">
               @if(isToggleLoading()){
               <div class="shimmer-circle"></div>
@@ -106,7 +106,7 @@
                 @if (item?.years_experience !== undefined && item.years_experience !== null) {
                 {{ item.years_experience }} {{ 'years_of_experience' | translateApi }}
                 } @else {
-                {{ 'general.ExperienceNotAvailable' | translate }}
+                {{ '--' }}
                 }
               </p>
             </div>
@@ -123,7 +123,7 @@
               <span>({{ item.reviews_avg | number : '1.1-1' }})</span>
               {{ item.reviews_count }} {{ 'review' | translateApi }}
               } @else {
-              {{ 'general.NoReviewsYet' | translate }}
+              {{ 'no_reviews_yet' | translateApi }}
               }
             </p>
           </div>

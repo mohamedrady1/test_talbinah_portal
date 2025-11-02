@@ -160,7 +160,7 @@ export class PatientDetailsFormComponent {
       inputs: {
         image: 'images/urgent-appointment/calender-2.png',
         title: 'disclaimer',
-        // subtitle: 'SessionFree.Subtitle'
+        // subtitle: 'this_reservation_is_free_cause_you_subscribed_to_package_already'
       },
       outputs: {
         closed: (data: { confirmed: boolean } | void) => {
@@ -231,8 +231,8 @@ export class PatientDetailsFormComponent {
       this._ModalService.open(NationalIdVerificationComponent, {
         inputs: {
           image: 'images/home/icons/quick-appointemnt.png',
-          title: 'settings.nationalIdVerification.title',
-          subtitle: 'settings.nationalIdVerification.subtitle',
+          title: 'security',
+          subtitle: 'verify_national_identity_description',
           data: { item: { AppointmentData }, is_emergency: true, paymentStatus: false }
         },
         outputs: {
@@ -266,10 +266,10 @@ export class PatientDetailsFormComponent {
   private openPaymentStatusInfo(item: any, type: 'normal'): void {
     const statusLabelsTexts = {
       buttonText: 'back_to_home',
-      successTitle: 'NormalAppointment.appointmentSuccess',
-      successSubTitle: this._NormalPackagesReservationFacade?.successMessage() ?? 'NormalAppointment.appointmentSuccessText',
-      errorTitle: 'NormalAppointment.appointmentError',
-      errorSubTitle: this.error() ?? 'NormalAppointment.appointmentErrorText'
+      successTitle: 'reservation_reserved_successfully',
+      successSubTitle: this._NormalPackagesReservationFacade?.successMessage() ?? 'meet_at_selected_appointment',
+      errorTitle: 'something_want_wrong_try_again',
+      errorSubTitle: this.error() ?? 'book_appointment_error_details_note'
     };
 
     this._ModalService.open(StatusInfoComponent, {

@@ -13,6 +13,7 @@ import { KhawiikChatTypesComponent } from '../khawiik-chat-types';
 import { getKhawiikVoiceTypesErrorConfig } from '../../configs';
 import { SwipeEvent } from '../../interfaces';
 import { IKhawiikVoice } from '../../dtos';
+import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
 
 @Component({
   selector: 'app-khawiik-voice-types',
@@ -24,7 +25,7 @@ import { IKhawiikVoice } from '../../dtos';
 
     KhawiikVoiceTypesSkeletonComponent,
     ErrorStateCardComponent,
-
+    TranslateApiPipe,
     AutoExactHeightDirective
   ],
   templateUrl: './khawiik-voice-types.component.html',
@@ -148,8 +149,8 @@ export class KhawiikVoiceTypesComponent
     this._modalService.open(KhawiikChatTypesComponent, {
       inputs: {
         image: 'images/khawiik/khawiik-header-icon.png',
-        title: 'khawiik.header.title',
-        subtitle: 'khawiik.header.subtitle',
+        title: 'home_card_khawiik_title',
+        subtitle: 'home_card_khawiik_description',
       },
       outputs: {
         closed: () =>

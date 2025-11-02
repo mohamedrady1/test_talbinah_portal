@@ -2,13 +2,15 @@ import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core
 import { IGlobalReservationModel } from '../../models';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
+import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
 
 @Component({
   selector: 'app-appointment-cancellation-card',
   standalone: true,
   imports: [
     CommonModule,
-    TranslateModule
+    TranslateModule,
+    TranslateApiPipe
   ],
   templateUrl: './appointment-cancellation-card.component.html',
   styleUrls: ['./appointment-cancellation-card.component.scss'],

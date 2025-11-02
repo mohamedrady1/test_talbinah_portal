@@ -2,25 +2,25 @@ import { ChangeDetectionStrategy, Component, inject, signal, computed, Input, PL
 import { GovernmentAgencyVerificationComponent } from '../government-agency-verification';
 import { EmptyStateCardComponent, ErrorStateCardComponent, ModalService, SvgIconComponent } from '../../../../shared';
 import { GovernmentAgenciesFacade } from '../../services';
-import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { IGovernmentAgencyItemdDto, ISettingMenuItem } from '../../dtos';
 import { FormsModule } from '@angular/forms';
 import { AutoExactHeightDirective, Logger } from '../../../../common';
 import { governmentAgenciesEmptyConfig, governmentAgenciesErrorConfig } from '../../configs';
 import { Router } from '@angular/router';
+import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-government-agencies',
   standalone: true,
   imports: [
     SvgIconComponent,
-    TranslateModule,
     CommonModule,
     FormsModule,
     ErrorStateCardComponent,
     EmptyStateCardComponent,
-    AutoExactHeightDirective
+    AutoExactHeightDirective,
+    TranslateApiPipe
   ],
   templateUrl: './government-agencies.component.html',
   styleUrls: ['./government-agencies.component.scss'],
@@ -63,8 +63,8 @@ export class GovernmentAgenciesComponent {
     this._modalService.open(GovernmentAgencyVerificationComponent, {
       inputs: {
         image: 'images/settings/modal-icons/government-agencies.png',
-        title: 'general.emailVerifiction',
-        // subtitle: 'settings.governmentAgencies.subtitle',
+        title: 'verify_email',
+        // subtitle: 'link_government_account',
         config: item
       },
       outputs: {

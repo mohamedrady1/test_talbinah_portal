@@ -1,6 +1,5 @@
 import { Component, Input, inject, OnInit, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
 import { ErrorStateCardComponent, EmptyStateCardComponent, FaqDetailsLoadingComponent } from '../../../../shared';
 import { FaqsFacade } from '../../services';
 import { FaqItem } from '../../dtos/responses/faqs-response.dto';
@@ -11,17 +10,18 @@ import {
   FaqsSearchConfig
 } from '../../configs';
 import { IFaqsCategoryDto } from '../../dtos';
+import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-faq-details',
   standalone: true,
   imports: [
     CommonModule,
-    TranslateModule,
     FaqDetailsLoadingComponent,
     ErrorStateCardComponent,
     EmptyStateCardComponent,
-    AutoExactHeightDirective
+    AutoExactHeightDirective,
+    TranslateApiPipe
   ],
   templateUrl: './faq-details.component.html',
   styleUrls: ['./faq-details.component.scss'],

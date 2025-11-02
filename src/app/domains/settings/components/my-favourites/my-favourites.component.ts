@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, inject, signal, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { AppointmentCardSkeletonComponent } from '../../../appointments';
 import { ErrorStateCardComponent, EmptyStateCardComponent } from "../../../../shared";
 import { VisitReportCardComponent } from "../visit-report-card";
@@ -12,12 +11,12 @@ import { MyFavouritesArticlesEmptyState, MyFavouritesDoctorsEmptyState, MyFavour
 import { DoctorCardForFavouriteComponent } from '../doctor-card-for-favourite';
 import { ArticleCardComponent, FavoriteArticlesFacade } from '../../../articles';
 import { PodcastCardForFavouriteComponent } from '../podcast-card-for-favourite';
+import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-my-favourites',
   standalone: true,
   imports: [
-    TranslateModule,
     CommonModule,
     AppointmentCardSkeletonComponent,
     ErrorStateCardComponent,
@@ -27,13 +26,15 @@ import { PodcastCardForFavouriteComponent } from '../podcast-card-for-favourite'
     EmptyStateCardComponent,
     DoctorCardForFavouriteComponent,
     PodcastCardForFavouriteComponent,
-    ArticleCardComponent
+    ArticleCardComponent,
+    TranslateApiPipe
   ],
   templateUrl: './my-favourites.component.html',
   styleUrls: ['./my-favourites.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MyFavouritesComponent {
+  protected readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   protected readonly _FavoritePodcastsFacade = inject(FavoritePodcastsFacade);
   protected readonly _FavoriteDoctorsFacade = inject(FavoriteDoctorsFacade);
   protected readonly _FavoriteArticlesFacade = inject(FavoriteArticlesFacade);
@@ -76,12 +77,14 @@ export class MyFavouritesComponent {
   }));
 
   protected selectTab(tab: 'doctors' | 'podcasts' | 'articles'): void {
+    if (!this.isBrowser) return;
     this.selected.set(tab);
     this.currentPage.set(1); // Reset page on tab change
     this.fetchFavourites(tab);
   }
 
   protected ngOnInit(): void {
+    if (!this.isBrowser) return;
     this.fetchFavourites(this.selected());
   }
 

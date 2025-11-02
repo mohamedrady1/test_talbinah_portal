@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output, OnInit, OnDestroy } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
 import { Subject, takeUntil } from 'rxjs';
 import { IGlobalUserContactInfoModel, Logger, StorageService } from '../../../../common';
 import { StorageKeys } from '../../../../shared';
@@ -9,6 +8,7 @@ import { NationalIdVerificationFacade } from '../../services';
 import { IVerifyNationalIdFormData } from '../../models';
 import { DatePickerModule } from 'primeng/datepicker';
 import { IVerifyNationalIdRequest } from '../../dtos';
+import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
     selector: 'app-vat-national-id-verification',
@@ -17,8 +17,8 @@ import { IVerifyNationalIdRequest } from '../../dtos';
         CommonModule,
         ReactiveFormsModule,
         FormsModule,
-        TranslateModule,
-        DatePickerModule
+        DatePickerModule,
+        TranslateApiPipe
     ],
     templateUrl: './vat-national-id-verification.component.html',
     styleUrls: ['./vat-national-id-verification.component.scss'],

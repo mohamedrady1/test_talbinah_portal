@@ -4,11 +4,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MediaType, Reel } from '../../models';
 import { ReelActionsComponent } from '../reel-actions';
 import { ShareSocialComponent } from '../../../../shared';
-
+import { TranslateApiPipe } from '../../../../common/core/translations';
 @Component({
   selector: 'app-reels',
   standalone: true,
-  imports: [CommonModule, TranslateModule, ReelActionsComponent, ShareSocialComponent],
+  imports: [CommonModule, TranslateModule, ReelActionsComponent, ShareSocialComponent, TranslateApiPipe],
   templateUrl: './reels.component.html',
   styleUrls: ['./reels.component.scss'],
 })

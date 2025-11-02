@@ -2,7 +2,8 @@
   @if (item) {
   <div class="podcast-media-player__image-container">
     <img class="podcast-media-player__image-container--img" [appLazyLoadImage]="item?.thumbnail_image || ''"
-      [alt]="item?.title || ''" ngOptimizedImage width="300" height="300" priority>
+      [alt]="item?.title || ''" ngOptimizedImage width="300" height="300" priority
+      onerror="this.src='images/emptyStates/podcast.svg'">
     <div class="podcast-media-player__overlay">
       <button class="podcast-media-player__fullscreen-btn" aria-label="Minimize player" (click)="minimize()">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

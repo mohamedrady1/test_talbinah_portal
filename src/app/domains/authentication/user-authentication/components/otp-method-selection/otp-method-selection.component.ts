@@ -10,6 +10,7 @@ import { UserAuthenticationApiClientProvider } from '../../clients';
 import { OtpMethodsFormConfig } from '../../configs';
 import { finalize, take } from 'rxjs';
 import { Router } from '@angular/router';
+import { TranslateApiPipe } from '../../../../../common/core/translations/pipes/translate-api.pipe';
 
 @Component({
   selector: 'app-otp-method-selection',
@@ -18,7 +19,8 @@ import { Router } from '@angular/router';
     ReactiveFormsModule,
     TranslateModule,
     FormRadioGroupsComponent,
-    CommonModule
+    CommonModule,
+    TranslateApiPipe
   ],
   templateUrl: './otp-method-selection.component.html',
   styleUrls: ['./otp-method-selection.component.scss'],

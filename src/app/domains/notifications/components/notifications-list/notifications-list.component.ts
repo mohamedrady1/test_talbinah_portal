@@ -124,7 +124,7 @@ export class NotificationsListComponent implements OnInit {
       inputs: {
         image: 'images/notifications/notifications.png',
         title: 'notification_settings',
-        // subtitle: 'settings.notifications.subtitle'
+        // subtitle: 'enable_notifications'
       },
       outputs: {
         closed: () => {

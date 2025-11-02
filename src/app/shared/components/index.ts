@@ -45,3 +45,4 @@ export * from './local-search';
 export * from './details-for-mobile';
 export * from './your-current-mood-today';
 export * from './segment-control';
+export * from './translation-loading-screen';

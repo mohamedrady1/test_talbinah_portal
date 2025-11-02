@@ -67,16 +67,16 @@ export class TranslationsService {
         }
 
         // 2. Try to get from localStorage (browser cache)
-        if (this.isBrowser && this.config.useLocalStorage) {
-            const cachedData = this.getFromCache(lang);
-            if (cachedData) {
-                Logger.debug(`[TranslationsService] ✅ Loaded ${lang} from localStorage cache`, {
-                    keysCount: Object.keys(cachedData).length
-                });
-                return of(cachedData);
-            }
-            Logger.debug(`[TranslationsService] ❌ Not found in localStorage for ${lang}`);
-        }
+        // if (this.isBrowser && this.config.useLocalStorage) {
+        //     const cachedData = this.getFromCache(lang);
+        //     if (cachedData) {
+        //         Logger.debug(`[TranslationsService] ✅ Loaded ${lang} from localStorage cache`, {
+        //             keysCount: Object.keys(cachedData).length
+        //         });
+        //         return of(cachedData);
+        //     }
+        //     Logger.debug(`[TranslationsService] ❌ Not found in localStorage for ${lang}`);
+        // }
 
         // 3. Fetch from API
         Logger.debug(`[TranslationsService] 🌐 Fetching ${lang} from API`);

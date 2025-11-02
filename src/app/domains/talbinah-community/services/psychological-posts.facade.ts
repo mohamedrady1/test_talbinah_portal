@@ -166,7 +166,7 @@ export class PsychologicalPostsFacade {
             this.toast.add({
               severity: 'error',
               summary: this.i18n.translateTextFromJson('general.error'),
-              detail: res?.message ?? this.i18n.translateTextFromJson('general.errorToDeletePost'),
+              detail: res?.message ?? this.i18n.translateTextFromJson('error_to_delete_post'),
               life: 5000
             });
           }

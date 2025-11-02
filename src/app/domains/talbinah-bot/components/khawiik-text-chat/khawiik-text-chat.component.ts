@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { CHAT_KEYS, KhawiikBotRoutesEnum, WEEK_DAYS } from '../../constants';
-import { ModalService, MoodModalIntegrationService, SvgIconComponent, StorageKeys, ErrorStateCardComponent } from '../../../../shared';
+import { ModalService, MoodModalIntegrationService, SvgIconComponent, StorageKeys, ErrorStateCardComponent, LocalizationService } from '../../../../shared';
 import { KhawiikVoiceTypesComponent } from '../khawiik-voice-types';
 import { KhawiikActivitesComponent } from '../khawiik-activites';
 import { ChatMessagesSkeletonComponent } from '../../skeletons';
@@ -19,6 +19,7 @@ import { IUser, RoleGuardService, UserContextService } from '../../../authentica
 import { getKhawiikTextChatErrorConfig } from '../../configs';
 import { KhawiikBooksComponent } from '../khawiik-books';
 import { ChatEventsService } from '../../services/chat-events.service';
+import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
 
 @Component({
   selector: 'khawiik-text-chat',
@@ -29,7 +30,8 @@ import { ChatEventsService } from '../../services/chat-events.service';
     FormsModule,
     ChatMessagesSkeletonComponent,
     SvgIconComponent,
-    ErrorStateCardComponent
+    ErrorStateCardComponent,
+    TranslateApiPipe
   ],
   templateUrl: './khawiik-text-chat.component.html',
   styleUrls: ['./khawiik-text-chat.component.scss'],
@@ -40,6 +42,7 @@ export class KhawiikTextChatComponent implements OnInit, OnDestroy, AfterViewIni
   private readonly _router = inject(Router);
   private readonly _modalService = inject(ModalService);
   private readonly _storageService = inject(StorageService);
+  private readonly _localizationService = inject(LocalizationService);
   protected readonly _conversationFacade = inject(ConversationFacade);
   protected readonly _chatHistoryFacade = inject(ChatHistoryFacade);
   private readonly moodModalIntegrationService = inject(MoodModalIntegrationService);
@@ -112,7 +115,8 @@ export class KhawiikTextChatComponent implements OnInit, OnDestroy, AfterViewIni
     if (!this.isBrowser) return '';
     const now = new Date();
     const options: Intl.DateTimeFormatOptions = { weekday: 'long', day: 'numeric', month: 'long' };
-    return now.toLocaleDateString('ar', options);
+    const lang = this._localizationService.getCurrentLanguage();
+    return now.toLocaleDateString(lang === 'ar' ? 'ar-SA' : 'en-US', options);
   });
 
   readonly hasActiveBook = computed(() => this.currentBook() !== null);
@@ -455,8 +459,8 @@ export class KhawiikTextChatComponent implements OnInit, OnDestroy, AfterViewIni
     this._modalService.open(KhawiikVoiceTypesComponent, {
       inputs: {
         image: 'images/khawiik/khawiik-header-icon.png',
-        title: 'khawiik.header.title',
-        subtitle: 'khawiik.header.subtitle',
+        title: 'home_card_khawiik_title',
+        subtitle: 'home_card_khawiik_description',
         from: 'chat'
       },
       outputs: {
@@ -565,8 +569,8 @@ export class KhawiikTextChatComponent implements OnInit, OnDestroy, AfterViewIni
     this._modalService.open(KhawiikActivitesComponent, {
       inputs: {
         image: 'images/khawiik/khawiik-header-icon.png',
-        title: 'khawiik.header.title',
-        subtitle: 'khawiik.header.subtitle',
+        title: 'home_card_khawiik_title',
+        subtitle: 'home_card_khawiik_description',
       },
       outputs: {
         closed: (item: IKhawiikVoiceActivity | null) => {
@@ -600,8 +604,8 @@ export class KhawiikTextChatComponent implements OnInit, OnDestroy, AfterViewIni
     const modalRef = this._modalService.open(KhawiikHistoryComponent, {
       inputs: {
         image: 'images/khawiik/khawiik-header-icon.png',
-        title: 'khawiik.header.title',
-        subtitle: 'khawiik.header.subtitle',
+        title: 'home_card_khawiik_title',
+        subtitle: 'home_card_khawiik_description',
       },
       outputs: {
         chatSelected: (item: ChatRecord | null) => {
@@ -650,8 +654,8 @@ export class KhawiikTextChatComponent implements OnInit, OnDestroy, AfterViewIni
     const modalRef = this._modalService.open(KhawiikBooksComponent, {
       inputs: {
         image: 'images/khawiik/khawiik-header-icon.png',
-        title: 'khawiik.header.title',
-        subtitle: 'khawiik.header.subtitle',
+        title: 'home_card_khawiik_title',
+        subtitle: 'home_card_khawiik_description',
       },
       outputs: {
         closed: (card: IKhawiikBook | null) => {

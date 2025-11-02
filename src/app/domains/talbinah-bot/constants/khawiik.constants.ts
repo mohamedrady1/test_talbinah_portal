@@ -6,28 +6,28 @@ import { InstructionCard } from "../models";
 export const INSTRUCTION_CARDS: readonly InstructionCard[] = [
     {
         id: 'medical-disclaimer',
-        titleKey: 'khawiik.instructions.card1.title',
-        subtitleKey: 'khawiik.instructions.card1.subtitle'
+        titleKey: 'talbinah_bot_does_not_provide_direct_medical_treatment',
+        subtitleKey: 'assistant_provides_support_but_not_replace_professional_care'
     },
     {
         id: 'emergency-disclaimer',
-        titleKey: 'khawiik.instructions.card2.title',
-        subtitleKey: 'khawiik.instructions.card2.subtitle'
+        titleKey: 'talbinah_bot_not_for_emergencies_or_critical_cases',
+        subtitleKey: 'contact_emergency_if_experiencing_crisis_or_self_harm_thoughts'
     },
     {
         id: 'age-restriction',
-        titleKey: 'khawiik.instructions.card3.title',
-        subtitleKey: 'khawiik.instructions.card3.subtitle'
+        titleKey: 'user_ages',
+        subtitleKey: 'service_for_18_and_above_with_respectful_communication'
     },
     {
         id: 'privacy-safety',
-        titleKey: 'khawiik.instructions.card4.title',
-        subtitleKey: 'khawiik.instructions.card4.subtitle'
+        titleKey: 'privacy_and_confidentiality',
+        subtitleKey: 'conversations_private_and_secure_with_industry_encryption'
     },
     {
         id: 'professional-conduct',
-        titleKey: 'khawiik.instructions.card5.title',
-        subtitleKey: 'khawiik.instructions.card5.subtitle'
+        titleKey: 'service_limitations',
+        subtitleKey: 'ai_support_has_limits_consult_qualified_professional_for_complex_issues'
     }
 ] as const;
 
@@ -37,20 +37,20 @@ export const INSTRUCTION_CARDS: readonly InstructionCard[] = [
 export const KHAWIIK_KEYS = {
     // Instructions component
     INSTRUCTIONS: {
-        TITLE: 'khawiik.instructions.title',
-        SUBTITLE: 'khawiik.instructions.subtitle',
-        CONTINUE: 'khawiik.instructions.continue'
+        TITLE: 'before_you_start',
+        SUBTITLE: 'read_guidelines_for_best_psychological_support_experience',
+        CONTINUE: 'continue'
     },
     // Start session component
     START: {
-        CARD_LINE_1: 'khawiik.start.cardLine1',
-        CARD_LINE_2: 'khawiik.start.cardLine2',
-        CENTER_CARD: 'khawiik.start.centerCard',
+        CARD_LINE_1: 'peace_of_mind_starts_here',
+        CARD_LINE_2: 'your_private_space',
+        CENTER_CARD: 'write_inside_step_by_step',
         PROMPT: {
-            TITLE: 'khawiik.start.prompt.title',
-            SUBTITLE: 'khawiik.start.prompt.subtitle',
-            PLACEHOLDER: 'khawiik.start.prompt.placeholder'
+            TITLE: 'whats_on_your_mind',
+            SUBTITLE: 'write_anything_on_mind',
+            PLACEHOLDER: 'thinking_lately_about'
         },
-        CONTINUE: 'khawiik.start.continue'
+        CONTINUE: 'continue'
     }
 } as const;

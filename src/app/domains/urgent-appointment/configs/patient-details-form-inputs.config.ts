@@ -100,9 +100,9 @@ export const PatientDetailsConfig: IFormInputConfig[] = [
   //   id: 'patientDetailsEmail',
   //   type: ALL_INPUT_TYPES.EMAIL,
   //   name: 'email',
-  //   label: 'form.email.label',
+  //   label: 'email',
   //   isRequired: true,
-  //   placeholder: 'form.email.placeholder',
+  //   placeholder: 'enter_email',
   //   defaultValue: null,
   //   isDisabled: false,
   //   widthClass: 'w-half',
@@ -113,8 +113,8 @@ export const PatientDetailsConfig: IFormInputConfig[] = [
   //   globalClass: 'custom-input-wrapper',
   //   inputClass: 'form-control',
   //   validation: [
-  //     { function: Validators.required, errorMessage: 'form.email.errors.required' },
-  //     { function: Validators.email, errorMessage: 'form.email.errors.email', errorName: 'email' }
+  //     { function: Validators.required, errorMessage: 'email_required' },
+  //     { function: Validators.email, errorMessage: 'invalid_email', errorName: 'email' }
   //   ],
   //   enableLabelClick: true,
   //   stopPaste: true,
@@ -123,7 +123,7 @@ export const PatientDetailsConfig: IFormInputConfig[] = [
   //   id: 'patientDetailsIdentifyNumber',
   //   type: ALL_INPUT_TYPES.TEXT,
   //   name: 'identifyNumber',
-  //   label: 'form.IdentifyNumber.label',
+  //   label: 'ID_number',
   //   isRequired: true,
   //   placeholder: 'form.IdentifyNumber.placeholder',
   //   defaultValue: null,

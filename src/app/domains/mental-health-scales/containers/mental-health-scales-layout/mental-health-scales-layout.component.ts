@@ -137,6 +137,7 @@ export class MentalHealthScalesLayoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (!this.isBrowser) return;
     this.setUpFetchDataAfterLogin();
   }
 

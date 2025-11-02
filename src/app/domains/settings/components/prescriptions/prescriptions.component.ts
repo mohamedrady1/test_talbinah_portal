@@ -14,7 +14,8 @@ import {
   inject,
   signal,
   computed,
-  effect
+  effect,
+  PLATFORM_ID
 } from '@angular/core';
 import {
   IGlobalReservationModel
@@ -36,11 +37,12 @@ import {
   TranslateModule
 } from '@ngx-translate/core';
 import {
-  CommonModule
+  CommonModule,
+  isPlatformBrowser
 } from '@angular/common';
 import { prescriptionsEmptyConfig } from '../../configs/settings-empty-state.config';
 import { prescriptionsErrorConfig } from '../../configs';
-
+import { TranslateApiPipe } from '../../../../common/core/translations';
 @Component({
   selector: 'app-prescriptions',
   standalone: true,
@@ -52,13 +54,15 @@ import { prescriptionsErrorConfig } from '../../configs';
     ErrorStateCardComponent,
     EmptyStateCardComponent,
     FileViewerComponent,
-    PaginationListingComponent
+    PaginationListingComponent,
+    TranslateApiPipe
   ],
   templateUrl: './prescriptions.component.html',
   styleUrls: ['./prescriptions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PrescriptionsComponent {
+  protected readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private readonly visitsReportsFacade = inject(VisitsReportsListFacade);
 
   readonly appointmentsResponse = this.visitsReportsFacade.appointmentsResponse;
@@ -144,6 +148,7 @@ export class PrescriptionsComponent {
   }
 
   ngOnInit(): void {
+    if (!this.isBrowser) return;
     console.log('PrescriptionsComponent ngOnInit');
     this.visitsReportsFacade.fetchVisitsReports();
   }

@@ -5,7 +5,7 @@
         <img src="{{internalUserInfo()?.image}}" alt="avatar" onerror="src='images/not-found/talbinah.png'">
       </div>
       <div class="user-info-card__info">
-        <p class="user-info-card__info-welcome">{{'userInfo.welcome' | translate}}</p>
+        <p class="user-info-card__info-welcome">{{'welcome' | translateApi}}</p>
         <p class="user-info-card__info-name">
           {{internalUserInfo()?.full_name || internalUserInfo()?.nick_name || ''}}
         </p>
@@ -40,10 +40,10 @@
     <div class="user-info-card__inforamtion-item">
       <p class="user-info-card__inforamtion-item-value">
         {{userInfo?.sessions || 0}}
-        {{ 'userInfo.session' | translate }}
+        {{ 'userInfo.session' | translateApi }}
       </p>
       <p class="user-info-card__inforamtion-item-label">
-        {{'userInfo.reservedSessions' | translate}}
+        {{'userInfo.reservedSessions' | translateApi}}
       </p>
     </div>
     }
@@ -51,12 +51,12 @@
     <div class="user-info-card__inforamtion-item">
       <p class="user-info-card__inforamtion-item-value">
         {{userInfo?.lastPsychologicalScale}}
-        - {{ 'userInfo.atDate' | translate }}
+        - {{ 'userInfo.atDate' | translateApi }}
         {{ userInfo?.lastPsychologicalScaleDate | date: 'EEEE - d MMMM' : undefined : currentLang }}
 
       </p>
       <p class="user-info-card__inforamtion-item-label">
-        {{'userInfo.lastPsychologicalScale' | translate}}
+        {{'userInfo.lastPsychologicalScale' | translateApi}}
 
       </p>
     </div>
@@ -65,10 +65,10 @@
     <div class="user-info-card__inforamtion-item">
       <p class="user-info-card__inforamtion-item-value">
         {{userInfo?.joinedPrograms}}
-        {{ 'userInfo.activeTherapeuticPrograms' | translate }}
+        {{ 'userInfo.activeTherapeuticPrograms' | translateApi }}
       </p>
       <p class="user-info-card__inforamtion-item-label">
-        {{'userInfo.joinedPrograms' | translate}}
+        {{'userInfo.joinedPrograms' | translateApi}}
       </p>
     </div>
     }

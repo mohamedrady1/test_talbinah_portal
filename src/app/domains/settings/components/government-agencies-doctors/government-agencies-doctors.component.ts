@@ -5,7 +5,6 @@ import {
   inject,
   signal
 } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -14,18 +13,19 @@ import { GovernmentAgenciesDoctorsFacade } from '../../services';
 import { AutoExactHeightDirective, CardType } from '../../../../common';
 import { EmptyStateCardComponent, ErrorStateCardComponent } from '../../../../shared';
 import { governmentAgenciesEmptyConfig, governmentAgenciesErrorConfig } from '../../configs';
+import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-government-agencies-doctors',
   standalone: true,
   imports: [
     DoctorCardGovernmentAgencyComponent,
-    TranslateModule,
     CommonModule,
     FormsModule,
     ErrorStateCardComponent,
     EmptyStateCardComponent,
-    AutoExactHeightDirective
+    AutoExactHeightDirective,
+    TranslateApiPipe
   ],
   templateUrl: './government-agencies-doctors.component.html',
   styleUrls: ['./government-agencies-doctors.component.scss'],

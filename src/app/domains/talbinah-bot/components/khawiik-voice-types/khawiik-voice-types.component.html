@@ -1,4 +1,3 @@
-@if (isBrowser) {
 <main class="khawiik-voice-types" role="main" aria-labelledby="khawiik-heading" appAutoExactHeight
   heightMode="max-height">
   <section class="khawiik-voice-types__hero-aduio" aria-labelledby="welcome-title">
@@ -9,10 +8,10 @@
     @if (pageTitle()) {
     <div class="khawiik-voice-types__hero-aduio-titles">
       <h3 id="welcome-title" class="khawiik-voice-types__hero-aduio-title">
-        {{ pageTitle() | translate }}
+        {{ pageTitle() | translateApi }}
       </h3>
       <p id="welcome-subtitle" class="khawiik-voice-types__hero-aduio-subtitle">
-        {{ pageSubtitle() | translate }}
+        {{ pageSubtitle() | translateApi }}
       </p>
     </div>
     }
@@ -52,7 +51,7 @@
 
       <span class="khawiik-voice-types__items--item-voice-name"
         [ngClass]="{'khawiik-voice-types__items--item-voice-name--active':voice.name === activeVoice()?.name}">
-        {{ voice.name | translate }}
+        {{ voice.name | translateApi }}
       </span>
     </div>
     }
@@ -63,23 +62,22 @@
   <footer class="khawiik-voice-types__footer">
     <button type="button" class="khawiik-voice-types__start" [disabled]="!activeVoice() || isSaving() || isLoading()"
       [ngClass]="{'khawiik-voice-types__start--disabled': isLoading()}" (click)="onSaveVoice()"
-      [attr.aria-label]="'khawiik.khawiikVoiceTypes.actionBtn'| translate">
+      [attr.aria-label]="'continue'| translateApi">
       @if(isLoading()){
-      {{ 'khawiik.khawiikVoiceTypes.pleaseWait' | translate }}
+      {{ 'please_wait' | translateApi }}
       }
       @else{
       @if (!isSaving()) {
       @if (from === 'chat') {
-      {{ 'khawiik.khawiikVoiceTypes.confirm' | translate }}
+      {{ 'confirm' | translateApi }}
       }
       @else{
-      {{ 'khawiik.khawiikVoiceTypes.actionBtn' | translate }}
+      {{ 'continue' | translateApi }}
       }
       }@else {
-      {{ 'in_progress' | translate }}
+      {{ 'in_progress' | translateApi }}
       }
       }
     </button>
   </footer>
 </main>
-}

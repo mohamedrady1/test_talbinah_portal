@@ -1,5 +1,3 @@
-// domains/book-appointment-management/application/doctors-filtration-parameters.facade.ts
-
 import {
   inject,
   Injectable,
@@ -47,12 +45,12 @@ export class DoctorsFitrationParametersFacade {
 
   constructor() {
     if (isPlatformBrowser(this._platformId)) {
-      const cached = this._transferState.get(STATE_KEY, null);
-      if (cached) {
-        // Set loading to false when using cached data
-        this._state.set({ ...cached, isLoading: false });
-        this._transferState.remove(STATE_KEY);
-      }
+      // const cached = this._transferState.get(STATE_KEY, null);
+      // if (cached) {
+      //   // Set loading to false when using cached data
+      //   this._state.set({ ...cached, isLoading: false });
+      //   this._transferState.remove(STATE_KEY);
+      // }
     }
   }
 
@@ -62,19 +60,71 @@ export class DoctorsFitrationParametersFacade {
     const startTime = Date.now();
     const minimumLoadingTime = 1000; // 1 second minimum loading
 
-    this._apiClient.DoctorsFitrationParameters({ parent_id: parent_id })
+    this._apiClient.DoctorsFitrationParameters({ parent_id })
       .pipe(
         tap((res: IDoctorsFitrationParametersResponseDto) => {
           this._state.update(s => ({ ...s, status: res.status }));
 
           if (res.status && res.data) {
-            this._state.update(s => ({ ...s, parameters: res.data, error: null }));
+            /** 🔽 Transform specialties data */
+            const specialties = res.data.specialties?.data ?? [];
+
+            // Remove items with ids 1,3,4,5
+            const filtered = specialties.filter(
+              (item) => ![1, 3, 4, 5].includes(item.id)
+            );
+
+            // Create merged replacements (composite ids are strings)
+            const mergedSpecialties = [
+              {
+                id: '1,4',
+                name: 'طبيب',
+                description: 'طبيب متخصص في التشخيص والعلاج الطبي للاضطرابات النفسية',
+                image:
+                  'https://talbinahprod.s3.eu-central-1.amazonaws.com/specialties-images/JAjviULnGIvkv2hKjYkabA5123RcTXOHsR5KO8i5.png',
+                color: '#f2e3e9',
+                is_report: 1,
+                active: 1,
+                original_active: 'فعال',
+              },
+              {
+                id: '3,5',
+                name: 'أخصائي اجتماعي وأسري',
+                description:
+                  'أخصائي متخصص في تقديم الدعم والاستشارات الاجتماعية والأسرية',
+                image:
+                  'https://talbinahprod.s3.eu-central-1.amazonaws.com/specialties-images/mt866VhJm6XwhMvROgIg3Mb7tNH6XgxmQpJ5zNVR.png',
+                color: '#d6f6ff',
+                is_report: 0,
+                active: 1,
+                original_active: 'فعال',
+              },
+            ];
+
+            // ✅ Push merged items at the top (first)
+            const updatedSpecialties = [...mergedSpecialties, ...filtered];
+
+            // Cast to expected DTO
+            const updatedData = {
+              ...res.data,
+              specialties: {
+                ...res.data.specialties,
+                data: updatedSpecialties,
+              },
+            } as unknown as IDoctorsFitrationParameters;
+
+            this._state.update(s => ({
+              ...s,
+              parameters: updatedData,
+              error: null,
+            }));
 
             // TransferState only on server
             if (!isPlatformBrowser(this._platformId)) {
               this._transferState.set(STATE_KEY, this._state());
             }
-          } else {
+          }
+          else {
             this._state.update(s => ({
               ...s,
               error: res.message ?? 'Failed to load doctors filtration parameters',
@@ -93,8 +143,6 @@ export class DoctorsFitrationParametersFacade {
         finalize(() => {
           const elapsedTime = Date.now() - startTime;
           const remainingTime = Math.max(0, minimumLoadingTime - elapsedTime);
-
-          // Ensure loading shows for at least 1 second
           setTimeout(() => {
             this._state.update(s => ({ ...s, isLoading: false }));
           }, remainingTime);

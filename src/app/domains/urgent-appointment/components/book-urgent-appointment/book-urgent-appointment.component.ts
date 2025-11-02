@@ -342,7 +342,7 @@ export class BookUrgentAppointmentComponent {
     this.modalService.open(SearchWaitingDoctorComponent, {
       inputs: {
         image: 'images/urgent-appointment/calender.png',
-        title: 'waitingDoctorTitle',
+        title: 'waiting_doctor_modal_title',
         subtitle: 'waiting_doctor_modal_subtitle',
         data: dataInput
       },

@@ -20,11 +20,12 @@ import { KhawiikRenameComponent } from '../khawiik-rename';
 import { EmptyStateConfig } from '../../../../shared/components/empty-state-card/empty-state-card.component';
 import { ModalService } from '../../../../shared';
 import { ErrorStateConfig } from '../../../../shared/components/error-state-card/error-state-card.component';
+import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
 
 // ====== UI Configs ======
 export const KhawiikHistoryChatEmptyState: EmptyStateConfig = {
   imageUrl: 'images/not-found/bot/no-chats.svg',
-  title: 'khawiik.history.empty',
+  title: 'no_conversations_available',
   gap: '1rem',
 };
 
@@ -50,7 +51,8 @@ export function getKhawiikHistoryChatsError(onRetry?: () => void): ErrorStateCon
     ErrorStateComponent,
     ChatMenuComponent,
     SvgIconComponent,
-    KhawiikHistorySkeletonComponent
+    KhawiikHistorySkeletonComponent,
+    TranslateApiPipe
   ],
   templateUrl: './khawiik-history.component.html',
   styleUrls: ['./khawiik-history.component.scss'],
@@ -160,7 +162,7 @@ export class KhawiikHistoryComponent implements OnInit {
     this.modalService.open(KhawiikRenameComponent, {
       inputs: {
         image: 'images/icons/logo-2.png',
-        title: 'khawiik.rename.chatTitle',
+        title: 'conversation_name',
         chatItem: chatData
       },
       outputs: {

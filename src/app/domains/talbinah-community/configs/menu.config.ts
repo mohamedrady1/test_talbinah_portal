@@ -2,17 +2,17 @@
 export const menuConfig = {
     list: [
         {
-            text: "menu.view",
+            text: "show",
             icon: "images/community/icons/view.svg",
             action: "view"
         },
         {
-            text: "menu.edit",
+            text: "edit",
             icon: "images/community/icons/edit.svg",
             action: "edit"
         },
         {
-            text: "menu.delete",
+            text: "delete",
             icon: "images/community/icons/delete.svg",
             action: "delete"
 

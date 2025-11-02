@@ -49,7 +49,7 @@ import { Router } from '@angular/router';
 import { UserContextService } from '../../../authentication/user-authentication/services';
 import { RoleGuardService } from '../../../authentication/user-authentication/services';
 import { BookAppointmentRoutesEnum } from '../../constants';
-
+import { TranslateApiPipe } from '../../../../common/core/translations';
 @Component({
   selector: 'app-book-apoointment-popup',
   standalone: true,
@@ -69,6 +69,7 @@ import { BookAppointmentRoutesEnum } from '../../constants';
     BookApoointmentPopupSkeletonComponent,
     EmptyStateCardComponent,
     SvgIconComponent,
+    TranslateApiPipe,
     CommonModule
   ],
   templateUrl: './book-apoointment-popup.component.html',

@@ -31,10 +31,10 @@
   <div class="my-psychological-society-information-card__mood">
     <div class="my-psychological-society-information-card__mood--header">
       <p>
-        {{"talbinahCommunity.expressYourMood"|translate}}
+        {{"express_your_mood_today"|translateApi}}
       </p>
       <p>
-        {{"talbinahCommunity.changeMoodHelpText"|translate}}
+        {{"change_status_improves_experience"|translateApi}}
       </p>
     </div>
     <div class="my-psychological-society-information-card__mood--choose">
@@ -47,7 +47,7 @@
         {{userIdentityProfileData()?.my_post_count || 0}}
       </p>
       <p>
-        {{ 'talbinahCommunity.yourPost' | translate }}
+        {{ 'your_post' | translateApi }}
       </p>
     </div>
     <div class="my-psychological-society-information-card__info--followers">
@@ -55,7 +55,7 @@
         {{userIdentityProfileData()?.my_followers_count || 0}}
       </p>
       <p>
-        {{ 'talbinahCommunity.followMe' | translate }}
+        {{ 'followers' | translateApi }}
       </p>
     </div>
     <div class="my-psychological-society-information-card__info--following">
@@ -63,7 +63,7 @@
         {{userIdentityProfileData()?.my_following_count || 0}}
       </p>
       <p>
-        {{ 'talbinahCommunity.iFollowThem' | translate }}
+        {{ 'i_follow_them' | translateApi }}
       </p>
     </div>
   </div>

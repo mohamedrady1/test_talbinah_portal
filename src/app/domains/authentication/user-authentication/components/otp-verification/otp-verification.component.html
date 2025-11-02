@@ -12,7 +12,7 @@
     <div class="verification__code-section">
       <div class="verification__code-text">
         <p class="verification__code-text-message">
-          {{ 'opt.verificationCode' | translate }}
+          {{ 'enter_code_sent_to_you' | translate }}
           <span class="verification__code-phone-number">
             <!-- {{neededDataToVerify()?.data?.country_id || ''}} -->
             {{neededDataToVerify()?.data?.phone_no || ''}}
@@ -47,7 +47,7 @@
           @if (isLoadingResend()) {
           {{ 'in_progress' | translate }}
           } @else {
-          {{ 'form.resend' | translate }}
+          {{ 'resend' | translate }}
           }
         </span>
         @if (!isWaitingValue && !isLoadingResend()) {
@@ -67,7 +67,7 @@
             </div>
             }
             @if (!isLoading()) {
-            {{ 'opt.checkCode' | translate }}
+            {{ 'verify_the_code' | translate }}
             }
           </span>
         </button>

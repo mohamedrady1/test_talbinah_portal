@@ -2,7 +2,6 @@ import { Component, Input, signal, computed, inject, ChangeDetectionStrategy, Si
 import { CommonModule, NgIf, NgStyle, NgClass, formatDate } from '@angular/common';
 import { ClipboardService } from '../../../../shared/services';
 import { SvgIconComponent } from '../../../../shared/components/svg-icon/svg-icon.component';
-import { TranslateModule } from '@ngx-translate/core';
 import { MovementItem } from '../../dtos/responses/movements-response.dto';
 import { LocalizationService } from '../../../../shared';
 import { TranslateApiPipe } from '../../../../common/core/translations';
@@ -25,7 +24,6 @@ export interface CardConfig {
   imports: [
     CommonModule,
     SvgIconComponent,
-    TranslateModule,
     TranslateApiPipe
   ],
   templateUrl: './wallet-card.component.html',

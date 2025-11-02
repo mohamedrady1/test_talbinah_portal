@@ -54,7 +54,7 @@
                         @if (isMyCommunityProfile()) {
                         <div>
                             <p>
-                                {{'talbinahCommunity.posts'|translate}}
+                                {{'posts'|translateApi}}
                             </p>
                             <span>
                                 {{userCommunityProfileResponse()?.data?.profileData?.my_post_count}}
@@ -62,7 +62,7 @@
                         </div>
                         <div>
                             <p>
-                                {{'talbinahCommunity.followMe'|translate}}
+                                {{'followers'|translateApi}}
                             </p>
                             <span>
                                 {{userCommunityProfileResponse()?.data?.profileData?.my_followers_count}}
@@ -70,7 +70,7 @@
                         </div>
                         <div class="profile__information--content--info--i-follow-them" (click)="openFollowingList()">
                             <p>
-                                {{'talbinahCommunity.iFollowThem'|translate}}
+                                {{'i_follow_them'|translateApi}}
                             </p>
                             <span>
                                 {{userCommunityProfileResponse()?.data?.profileData?.my_following_count}}
@@ -80,7 +80,7 @@
                         @else{
                         <p>
                             {{ userCommunityProfileResponse()?.data?.profileData?.my_followers_count | number }}
-                            {{'talbinahCommunity.followersCount'|translate}}
+                            {{'from_followers'|translateApi}}
                         </p>
                         <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -107,7 +107,7 @@
                         [class.disabled]="isLoadingFollow()">
                         @if (isLoadingFollow()) {
                         <div class="profile__information--action--follow__loading" aria-label="Submit in progress">
-                            {{ 'in_progress' | translate }}
+                            {{ 'in_progress' | translateApi }}
                             <span class="dot-loader"></span>
                         </div> } @else if (!userCommunityProfileResponse()?.data?.is_followd) {
                         <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -119,7 +119,7 @@
                                 fill="#0E39B6" />
                         </svg>
                         <p>
-                            {{"talbinahCommunity.follow"|translate}}
+                            {{"follow3"|translateApi}}
                         </p>
                         } @else {
                         <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -128,7 +128,7 @@
                                 fill="#0E39B6" />
                         </svg>
                         <p>
-                            {{"talbinahCommunity.following"|translate}}
+                            {{"following"|translateApi}}
                         </p>
                         }
                     </span>
@@ -150,7 +150,7 @@
                         </svg>
 
                         <p>
-                            {{"talbinahCommunity.savedPosts"|translate}}
+                            {{"saved_posts"|translateApi}}
                         </p>
 
                     </span>

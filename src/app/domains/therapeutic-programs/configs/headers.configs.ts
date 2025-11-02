@@ -4,7 +4,7 @@ import { IHeaderConfig } from "../models";
 export const DetailsHeaderConfig: IHeaderConfig = {
   image: 'images/mentalHealthScale/icons/talbinah.png',
   title: 'confirm_subscription',
-  // subtitle: 'talbinahCommunity.shareText'
+  // subtitle: 'your_posts_help_others_feel_not_alone'
 }
 
 export const exploreTherapyProgramsHeader: ICardHeaderConfig = {

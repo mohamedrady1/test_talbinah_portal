@@ -15,7 +15,7 @@
         <div class="wallet-card">
             <div class="wallet-card__info">
                 <div class="wallet-card__title-group">
-                    <span class="wallet-card__title">{{ 'settings.wallet.currentBalance' | translate }}</span>
+                    <span class="wallet-card__title">{{ 'your_current_wallet_balance' | translateApi }}</span>
                     <div class="wallet-card__points-group">
                         <span class="wallet-card__points">{{ points() | number:'1.0-0' }}</span>
                         <app-svg-icon name="wallet-badge" type="wallet-badge" class="wallet-card__svg" width="61"
@@ -25,7 +25,7 @@
             </div>
             <button class="wallet-card__btn" type="button" (click)="onChargeWallet()">
                 <app-svg-icon name="add-balance" type="add-balance"></app-svg-icon>
-                <span>{{ 'settings.wallet.chargeWallet' | translate }}</span>
+                <span>{{ 'top_up_wallet' | translateApi }}</span>
             </button>
         </div>
         }

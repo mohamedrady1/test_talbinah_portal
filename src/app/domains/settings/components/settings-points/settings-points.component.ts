@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, inject, PLATFORM_ID } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 // import { Logger } from '../../../../common';
 import { WalletPointsRecordsFacade } from '../../services/wallet-points-records.facade';
 import { PointsFacade } from '../../services/wallet-points-welcome-page.facade';
@@ -17,12 +16,13 @@ import { SvgIconComponent } from "../../../../shared";
 import { SettingsRewardsComponent } from '../settings-rewards';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
+import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-settings-points',
   standalone: true,
   imports: [
-    TranslateModule,
+    TranslateApiPipe,
     EmptyStateCardComponent,
     ErrorStateCardComponent,
     LoadingShimmerComponent,
@@ -38,7 +38,7 @@ export class SettingsPointsComponent {
   private readonly pointsRecords = inject(WalletPointsRecordsFacade);
   private readonly pointsFacade = inject(PointsFacade);
   private readonly _modalService = inject(ModalService);
-  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+  protected readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private readonly _router = inject(Router);
   readonly services = this.pointsFacade.services;
   readonly isLoadingServices = this.pointsFacade.isLoading;
@@ -61,16 +61,18 @@ export class SettingsPointsComponent {
   readonly isEmpty = () => this.items().length === 0;
 
   ngOnInit(): void {
+    if (!this.isBrowser) return;
     this.pointsFacade.fetchPoints();
     this.servicePointsGiftsFacade.fetchServicePointsGifts();
     this.pointsRecords.fetchWalletPoints();
   }
   openPointsHistory() {
+    if (!this.isBrowser) return;
     this._modalService.open(PointsHistoryComponent, {
       inputs: {
         image: 'images/settings/modal-icons/points.png',
-        title: 'settings.points.title',
-        subtitle: 'settings.points.subtitle',
+        title: 'my_points',
+        subtitle: 'redeem_points_for_services',
         data: {}
       },
       outputs: {
@@ -82,11 +84,12 @@ export class SettingsPointsComponent {
     });
   }
   openServices(): void {
+    if (!this.isBrowser) return;
     this._modalService.open(ServicesComponent, {
       inputs: {
         image: 'images/settings/modal-icons/points.png',
-        title: 'settings.points.title',
-        subtitle: 'settings.points.subtitle'
+        title: 'my_points',
+        subtitle: 'redeem_points_for_services'
       },
       width: "60%"
     });
@@ -96,10 +99,11 @@ export class SettingsPointsComponent {
   }
 
   openServiceModal(service: any): void {
+    if (!this.isBrowser) return;
     this._modalService.open(ServiceModalComponent, {
       inputs: {
         image: 'images/logos/icon.png',
-        title: 'userInfo.changePoints',
+        title: 'points_redemption',
         service: service
       },
       outputs: {
@@ -112,11 +116,12 @@ export class SettingsPointsComponent {
   }
 
   protected openRewards(): void {
+    if (!this.isBrowser) return;
     this._modalService.open(SettingsRewardsComponent, {
       inputs: {
         image: 'images/settings/gift/settings-reward.png',
-        title: 'settings.rewards.title',
-        subtitle: 'settings.rewards.subtitle',
+        title: 'rewards',
+        subtitle: 'your_rewards_have_arrived',
         data: {}
       },
       outputs: {

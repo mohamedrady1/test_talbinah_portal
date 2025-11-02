@@ -6,11 +6,11 @@ import { Router } from '@angular/router';
 import { TalbinahCommunityRoutesEnum } from '../../constants';
 import { UserIdentityStore } from '../../routes/user-identity.service';
 import { ChooseYourMoodComponent } from '../../../mental-health-scales';
-
+import { TranslateApiPipe } from '../../../../common/core/translations';
 @Component({
   selector: 'app-my-psychological-society-information-card',
   standalone: true,
-  imports: [TranslateModule, ChooseYourMoodComponent],
+  imports: [TranslateModule, ChooseYourMoodComponent, TranslateApiPipe],
   templateUrl: './my-psychological-society-information-card.component.html',
   styleUrls: ['./my-psychological-society-information-card.component.scss']
 })

@@ -13,19 +13,19 @@ import { UserIdentityStore } from '../../routes/user-identity.service';
 import { Router } from '@angular/router';
 import { TalbinahCommunityRoutesEnum } from '../../constants';
 import { finalize, take } from 'rxjs';
-
+import { TranslateApiPipe } from '../../../../common/core/translations';
 
 // --- Helper interfaces for Empty/Error States ---
 
 export const UsersIFollowEmptyState: EmptyStateConfig = {
   imageUrl: 'images/not-found/community/avatars/no-avatar.svg', // Replace with an actual asset path
-  title: 'talbinahCommunity.usersFollow.emptyState.title', // Translate key
+  title: 'not_following_any_users_yet', // Translate key
   gap: '.5rem'
 };
 
 export const getUsersIFollowError = (retryAction: () => void): ErrorStateConfig => ({
   imageUrl: 'images/not-found/community/avatars/no-avatar-error.svg', // Replace with an actual asset path
-  title: 'talbinahCommunity.usersFollow.errorState.title', // Translate key
+  title: 'an_error_has_occurred', // Translate key
   onRetry: retryAction,
 });
 
@@ -41,6 +41,7 @@ export const getUsersIFollowError = (retryAction: () => void): ErrorStateConfig 
     EmptyStateComponent,
     ErrorStateComponent,
     PaginationListingComponent,
+    TranslateApiPipe
   ],
   templateUrl: './users-follow.component.html',
   styleUrls: ['./users-follow.component.scss'],

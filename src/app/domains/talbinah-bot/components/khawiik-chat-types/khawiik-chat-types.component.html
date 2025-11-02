@@ -1,18 +1,17 @@
-@if (isBrowser) {
 <main class="khawiik-chat-types" role="main" aria-labelledby="chat-types-heading">
     <!-- Main Icon -->
     <div class="khawiik-chat-types__icon-wrapper">
-        <img class="khawiik-chat-types__main-icon" [src]="mainIcon" [alt]="'khawiik.chatTypes.mainIcon' | translate"
+        <img class="khawiik-chat-types__main-icon" [src]="mainIcon" [alt]="'khawiik chat types main icon'"
             loading="lazy" />
     </div>
 
     <!-- Title and Subtitle -->
     <div class="khawiik-chat-types__content">
         <p id="chat-types-heading" class="khawiik-chat-types__title">
-            {{ 'khawiik.chatTypes.title' | translate }}
+            {{ 'communication_preference' | translateApi }}
         </p>
         <p class="khawiik-chat-types__subtitle">
-            {{ 'khawiik.chatTypes.subtitle' | translate }}
+            {{ 'choose_communication_style' | translateApi }}
         </p>
     </div>
 
@@ -32,7 +31,7 @@
 
             <!-- Title -->
             <span [class]="getTitleClasses(option.id)">
-                {{ option.label | translate }}
+                {{ option.label | translateApi }}
             </span>
         </button>
         }
@@ -41,9 +40,8 @@
     <!-- Footer with Continue Button -->
     <footer class="khawiik-chat-types__footer">
         <button type="button" class="khawiik-chat-types__continue-button" (click)="onContinue()"
-            [attr.aria-label]="'khawiik.chatTypes.continue' | translate">
-            {{ 'khawiik.chatTypes.continue' | translate }}
+            [attr.aria-label]="'continue' | translateApi">
+            {{ 'continue' | translateApi }}
         </button>
     </footer>
 </main>
-}

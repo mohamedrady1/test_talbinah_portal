@@ -14,12 +14,12 @@ export const NotificationsEmptyState: EmptyStateConfig = {
 
 export const InterestsEmptyState: EmptyStateConfig = {
     imageUrl: 'images/not-found/community/interests/no-interests.svg',
-    title: 'talbinahCommunity.noInterests',
+    title: 'no_interests_found',
     gap: '1rem'
 };
 
 export const AvatarsEmptyState: EmptyStateConfig = {
     imageUrl: 'images/not-found/community/avatars/no-avatar.svg',
-    title: 'talbinahCommunity.noAvatars',
+    title: 'no_avatars_found',
     gap: '1rem'
 };

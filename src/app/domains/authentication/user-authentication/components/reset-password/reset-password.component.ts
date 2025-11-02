@@ -79,9 +79,9 @@ export class ResetPasswordComponent implements OnInit { // Implement OnInit
     {
       type: ALL_INPUT_TYPES.PASSWORD,
       name: 'password',
-      label: 'form.password.label',
+      label: 'password',
       isRequired: true,
-      placeholder: 'form.password.placeholder',
+      placeholder: 'enter_password',
       defaultValue: '',
       isDisabled: false,
       widthClass: 'w-full',
@@ -95,7 +95,7 @@ export class ResetPasswordComponent implements OnInit { // Implement OnInit
       validation: [
         {
           errorName: 'required', // Use errorName for specific validation type
-          errorMessage: 'form.password.errors.required',
+          errorMessage: 'enter_confirm_password',
           function: Validators.required
         },
         // Add minLength validation if needed
@@ -113,9 +113,9 @@ export class ResetPasswordComponent implements OnInit { // Implement OnInit
       id: 'registerConfirmPassword',
       type: ALL_INPUT_TYPES.PASSWORD,
       name: 'confirmPassword',
-      label: 'form.confirmPassword.label',
+      label: 're_write_confirm_password',
       isRequired: true,
-      placeholder: 'form.confirmPassword.placeholder',
+      placeholder: 'form.enter_password_again',
       defaultValue: null,
       isDisabled: false,
       widthClass: 'w-full',
@@ -133,7 +133,7 @@ export class ResetPasswordComponent implements OnInit { // Implement OnInit
         },
         {
           errorName: 'passwordMismatch',
-          errorMessage: 'form.confirmPassword.errors.mismatch',
+          errorMessage: 'form.passwords_do_not_match',
           function: PasswordMatchValidator('password', 'confirmPassword')
         }
         ],
@@ -357,8 +357,8 @@ export class ResetPasswordComponent implements OnInit { // Implement OnInit
     this.modalService.open(OtpMethodSelectionComponent, {
       inputs: {
         image: 'images/auth/icons/talbinah.png',
-        title: 'OtpMethodSelection.Title',
-        // subtitle: 'OtpMethodSelection.Subtitle',
+        title: 'choose_verification_method',
+        // subtitle: 'choose_verification_method',
         data: {
           payploadCheckNumber: this.neededDataToVerify(),
           fromURL: AuthenticationRoutesEnum.PASSWORD

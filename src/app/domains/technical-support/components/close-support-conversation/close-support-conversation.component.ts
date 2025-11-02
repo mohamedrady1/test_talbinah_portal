@@ -1,14 +1,14 @@
 import { Component, ChangeDetectionStrategy, Input, Output, inject, effect, EventEmitter } from "@angular/core";
 import { CloseSupportConversationFacade } from "../../services";
 import { ITechnicalSupportChatDto } from "../../dtos";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslateApiPipe } from "../../../../common/core/translations";
 import { Logger } from "../../../../common";
 
 @Component({
   selector: 'app-close-support-conversation',
   standalone: true,
   imports: [
-    TranslateModule
+    TranslateApiPipe,
   ],
   templateUrl: './close-support-conversation.component.html',
   styleUrls: ['./close-support-conversation.component.scss'],

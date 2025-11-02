@@ -21,6 +21,7 @@ import { RoleGuardService, UserContextService } from '../../../authentication';
 import { MissionDataService } from '../../services';
 import { getKhawiikVoiceChatErrorConfig } from '../../configs';
 import { SessionExpiredModalComponent } from '../session-expired-modal';
+import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
 
 @Component({
   selector: 'khawiik-voice-chat',
@@ -32,7 +33,8 @@ import { SessionExpiredModalComponent } from '../session-expired-modal';
 
     KhawiikVoiceChatSkeletonComponent,
     SvgIconComponent,
-    ErrorStateCardComponent
+    ErrorStateCardComponent,
+    TranslateApiPipe
   ],
   templateUrl: './khawiik-voice-chat.component.html',
   styleUrls: ['./khawiik-voice-chat.component.scss'],
@@ -276,8 +278,8 @@ export class KhawiikVoiceChatComponent implements OnInit, AfterViewInit, OnDestr
     this._modalService.open(KhawiikVoiceTypesComponent, {
       inputs: {
         image: 'images/khawiik/khawiik-header-icon.png',
-        title: 'khawiik.header.title',
-        subtitle: 'khawiik.header.subtitle',
+        title: 'home_card_khawiik_title',
+        subtitle: 'home_card_khawiik_description',
         from: 'chat',
       },
       outputs: { closed: () => Logger.debug('KhawiikVoiceChatComponent | Settings modal closed') },
@@ -295,8 +297,8 @@ export class KhawiikVoiceChatComponent implements OnInit, AfterViewInit, OnDestr
     this._modalService.open(KhawiikActivitesComponent, {
       inputs: {
         image: 'images/khawiik/khawiik-header-icon.png',
-        title: 'khawiik.header.title',
-        subtitle: 'khawiik.header.subtitle',
+        title: 'home_card_khawiik_title',
+        subtitle: 'home_card_khawiik_description',
       },
       outputs: {
         closed: (item: IKhawiikVoiceActivity | null) => {
@@ -333,8 +335,8 @@ export class KhawiikVoiceChatComponent implements OnInit, AfterViewInit, OnDestr
     this._modalService.open(KhawiikHistoryComponent, {
       inputs: {
         image: 'images/khawiik/khawiik-header-icon.png',
-        title: 'khawiik.header.title',
-        subtitle: 'khawiik.header.subtitle',
+        title: 'home_card_khawiik_title',
+        subtitle: 'home_card_khawiik_description',
       },
       outputs: {
         chatSelected: (item: ChatRecord | null) => {
@@ -377,8 +379,8 @@ export class KhawiikVoiceChatComponent implements OnInit, AfterViewInit, OnDestr
     const modalRef = this._modalService.open(KhawiikBooksComponent, {
       inputs: {
         image: 'images/khawiik/khawiik-header-icon.png',
-        title: 'khawiik.header.title',
-        subtitle: 'khawiik.header.subtitle',
+        title: 'home_card_khawiik_title',
+        subtitle: 'home_card_khawiik_description',
       },
       outputs: {
         closed: (card: IKhawiikBook | null) => {
@@ -812,7 +814,7 @@ export class KhawiikVoiceChatComponent implements OnInit, AfterViewInit, OnDestr
     this._modalService.open(SessionExpiredModalComponent, {
       inputs: {
         image: 'images/icons/logo-2.png',
-        title: 'khawiik.sessionExpired.title'
+        title: 'time_period_ended'
       },
       outputs: {
 

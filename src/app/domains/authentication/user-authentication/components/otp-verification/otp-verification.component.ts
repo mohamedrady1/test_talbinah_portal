@@ -263,7 +263,7 @@ export class OtpVerificationComponent {
       this._ToastService.add({
         severity: 'error',
         summary: 'general.error',
-        detail: 'OtpMethodSelection.codeResendFailed',
+        detail: 'failed_to_resend_verification_code',
         life: 5000,
       });
       return;
@@ -309,7 +309,7 @@ export class OtpVerificationComponent {
             this._ToastService.add({
               severity: 'error',
               summary: 'general.error',
-              detail: 'OtpMethodSelection.codeResendFailed',
+              detail: 'failed_to_resend_verification_code',
               life: 5000,
             });
           }
@@ -321,19 +321,14 @@ export class OtpVerificationComponent {
     if (res.status) {
       Logger.debug('OtpVerificationComponent | Method Selection successful, starting new countdown');
       this.preformResendCode();
-      this._ToastService.add({
-        severity: 'success',
-        summary: 'general.success',
-        detail: 'OtpMethodSelection.codeResentSuccessfully',
-        life: 3000,
-      });
+
     } else {
       Logger.warn('Method Selection failed');
       this.isWaiting.set(true);
       this._ToastService.add({
         severity: 'error',
         summary: 'general.error',
-        detail: 'OtpMethodSelection.codeResendFailed',
+        detail: 'failed_to_resend_verification_code',
         life: 5000,
       });
     }

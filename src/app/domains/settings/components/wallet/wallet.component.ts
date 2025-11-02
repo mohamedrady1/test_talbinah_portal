@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, PLATFORM_ID, sign
 import { WalletFacade } from '../../../settings/services/wallet.facade';
 import { AutoExactHeightDirective, Logger } from '../../../../common';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateApiPipe } from '../../../../common/core/translations';
 import { MovementsFacade } from '../../../settings/services/movements.facade';
 import { WalletCardComponent } from '../../../settings/components/wallet-card/wallet-card.component';
 import { MovementItem } from '../../../settings';
@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [
     CommonModule,
-    TranslateModule,
+    TranslateApiPipe,
     WalletLoadingComponent,
     ErrorStateCardComponent,
     EmptyStateCardComponent,
@@ -40,7 +40,7 @@ export class WalletComponent {
   private readonly movementsFacade = inject(MovementsFacade);
   private readonly modalService = inject(ModalService);
   private readonly _router = inject(Router);
-  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+  protected readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   // Signals for reactive state
   readonly isLoading = computed(() => this.walletFacade.isLoading() || this.movementsFacade.isLoading());
   readonly errorMessage = computed(() => this.walletFacade.errorMessage() || this.movementsFacade.errorMessage());
@@ -79,6 +79,7 @@ export class WalletComponent {
   readonly searchConfig = WalletSearchConfig;
 
   ngOnInit(): void {
+    if (!this.isBrowser) return;
     Logger.debug('WalletComponent: Initializing component');
     this.loadData();
   }
@@ -95,10 +96,11 @@ export class WalletComponent {
   }
 
   onChargeWallet(): void {
+    if (!this.isBrowser) return;
     this.modalService.open(ChargeWalletComponent, {
       inputs: {
         image: 'images/logos/icon.png',
-        title: 'PaymentMethods.depositAmount',
+        title: 'deposit_amount',
         walletId: this.walletData()?.id
       },
       width: '40%',

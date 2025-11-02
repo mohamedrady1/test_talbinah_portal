@@ -34,7 +34,8 @@
       @if(!isMobile){
       <div class="podcast-details-box-card__image-wrapper">
         <img [appLazyLoadImage]="item.thumbnail_image || ''" [alt]="item.title || 'Podcast thumbnail'"
-          class="podcast-details-box-card__image" ngOptimizedImage width="200" height="200" priority />
+          class="podcast-details-box-card__image" ngOptimizedImage width="200" height="200" priority
+          onerror="this.src='images/emptyStates/podcast.svg'" />
       </div>
       }
       <div class="podcast-details-box-card__info">

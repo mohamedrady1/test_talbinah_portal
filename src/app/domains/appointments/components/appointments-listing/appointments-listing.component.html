@@ -118,7 +118,7 @@
             <section style="display: none;"
               class="reservation-listing__sidebar__section reservation-listing__sidebar__section--weekly-sessions">
               <h3 class="reservation-listing__sidebar__title">
-                {{ 'Appointments.Aside.ThisWeeksSessionsTitle' | translate }}
+                {{ 'top_sessions_of_this_week' | translateApi }}
               </h3>
               @for (item of appointmentsResponse()?.data?.reservations?.data?.slice(0,2); track item.id) {
               <article class="reservation-listing__card" role="listitem">

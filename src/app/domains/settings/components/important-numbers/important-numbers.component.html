@@ -3,7 +3,7 @@
         <!-- Header -->
         <div class="important-numbers__header">
             <p class="important-numbers__header--title">
-                {{ 'settings.importantNumbers.exploreImportantNumbersWithHeart' | translate }}
+                {{ 'explore_important_numbers_heart' | translateApi }}
             </p>
             <app-local-search [searchTerm]="localSearchTerm()" (searchChange)="onLocalSearchChange($event)" />
         </div>

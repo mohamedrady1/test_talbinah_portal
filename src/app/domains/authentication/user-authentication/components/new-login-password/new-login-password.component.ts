@@ -37,6 +37,7 @@ import { NewResetPasswordComponent } from '../new-reset-password';
 import { OtpMethodSelectionComponent } from '../otp-method-selection';
 import { NewOtpVerificationComponent } from '../new-otp-verification';
 import { Router } from '@angular/router';
+import { TranslateApiPipe } from '../../../../../common/core/translations/pipes';
 
 export interface NewLoginPasswordModalData {
     icon: string;
@@ -52,7 +53,8 @@ export interface NewLoginPasswordModalData {
         FormsModule,
         ReactiveFormsModule,
         TranslateModule,
-        SvgIconComponent
+        SvgIconComponent,
+        TranslateApiPipe
     ],
     templateUrl: './new-login-password.component.html',
     styleUrls: ['./new-login-password.component.scss'],
@@ -80,7 +82,7 @@ export class NewLoginPasswordComponent implements OnInit, OnDestroy {
 
     // Modal data inputs
     @Input() icon: string = 'images/logos/icon.png';
-    @Input() title: string = 'form.password.placeholder';
+    @Input() title: string = 'enter_password';
     @Input() description: string = 'welcome_safe_space';
 
     // Output for refresh signaling
@@ -314,7 +316,7 @@ export class NewLoginPasswordComponent implements OnInit, OnDestroy {
         this.modalService.open(OtpMethodSelectionComponent, {
             inputs: {
                 image: 'images/auth/icons/talbinah.png',
-                title: 'OtpMethodSelection.Title',
+                title: 'choose_verification_method',
                 data: {
                     payploadCheckNumber: this.neededDataToVerify(),
                     fromURL: AuthenticationRoutesEnum.PASSWORD
@@ -341,8 +343,8 @@ export class NewLoginPasswordComponent implements OnInit, OnDestroy {
         this.modalService.open(NewOtpVerificationComponent, {
             inputs: {
                 image: 'images/icons/logo-2.png',
-                title: 'form.password.verify',
-                description: 'OtpVerification.Subtitle',
+                title: 'verify_the_code',
+                description: 'enter_the_code_sent_to_your_phone',
                 fromURL: AuthenticationRoutesEnum.PASSWORD
             },
             outputs: {

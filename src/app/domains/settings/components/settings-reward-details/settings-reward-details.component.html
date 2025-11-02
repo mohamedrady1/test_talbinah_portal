@@ -8,14 +8,14 @@
         {{ rewardItem.name || '' }}
       </h3>
       <p id="settings-reward-details__subtitle" class="settings-reward-details__subtitle">
-        {{ 'settings.rewards.detailsModalSubtitle' | translate }}
+        {{ 'use_code_for_any_talbinah_service' | translateApi }}
       </p>
     </header>
 
     <main class="settings-reward-details__content">
       <!-- Code label -->
       <p class="settings-reward-details__code-label">
-        {{ 'general.code' | translate }}
+        {{ 'code' | translateApi }}
       </p>
 
       <!-- Copy button + tooltip -->
@@ -53,7 +53,7 @@
 
         <div *ngIf="activeTooltip === 'copy'" [id]="tooltipId" class="settings-reward-details__tooltip" role="status"
           aria-live="polite">
-          {{ 'general.copied' | translate }}
+          {{ 'copied' | translateApi }}
         </div>
       </div>
 
@@ -70,12 +70,12 @@
   <div class="settings-reward-details__tooltip-wrapper">
     <button class="btn btn--solid settings-reward-details__action-btn" type="button" (click)="showTooltipFor('action')"
       [attr.aria-describedby]="activeTooltip === 'action' ? tooltipId : null">
-      {{ 'general.copyCode' | translate }}
+      {{ 'copy_code' | translateApi }}
     </button>
 
     <div *ngIf="activeTooltip === 'action'" [id]="tooltipId" class="settings-reward-details__tooltip" role="status"
       aria-live="polite">
-      {{ 'general.copied' | translate }}
+      {{ 'copied' | translateApi }}
     </div>
   </div>
   <!-- Screen-reader only -->

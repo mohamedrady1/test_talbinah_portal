@@ -96,6 +96,7 @@ export class AppointmentsListingComponent {
   private readonly _ModalService = inject(ModalService);
 
   ngOnInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
     const typeId = this.appointmentTypeId();
     if (typeId) {
       this.facade.resetFilters(typeId);
@@ -206,6 +207,7 @@ export class AppointmentsListingComponent {
   }
 
   protected navigateToHomePage(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
     this._router.navigate([MainPageRoutesEnum.MAINPAGE]);
   }
 

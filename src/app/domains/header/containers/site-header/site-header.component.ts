@@ -114,8 +114,8 @@ export class SiteHeaderComponent {
     this.modalService.open(SettingsPointsComponent, {
       inputs: {
         image: 'images/settings/modal-icons/points.png',
-        title: 'settings.points.title',
-        subtitle: 'settings.points.subtitle',
+        title: 'my_points',
+        subtitle: 'redeem_points_for_services',
         data: {},
       },
       outputs: {
@@ -134,8 +134,8 @@ export class SiteHeaderComponent {
     this.modalService.open(WalletComponent, {
       inputs: {
         image: 'images/settings/modal-icons/wallet.png',
-        title: 'settings.wallet.title',
-        subtitle: 'settings.wallet.subtitle',
+        title: 'your_wallet',
+        subtitle: 'wallet_description',
         data: {},
       },
       outputs: {

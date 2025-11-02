@@ -104,7 +104,7 @@ export class UrgentAppointmentFloatingWindowComponent implements OnInit, OnDestr
         this.isCancelling.set(false);
         setTimeout(() => {
           this.closeWindow();
-          this.openRecallAndClose('RecallAppointment.searchCancelled');
+          this.openRecallAndClose('urgent_search_cancelled');
         }, 0);
       } else if (this._cancelEmergencyAppointmentFacade.cancelError()) {
         this.isCancelling.set(false);
@@ -159,7 +159,7 @@ export class UrgentAppointmentFloatingWindowComponent implements OnInit, OnDestr
     if (!id) {
       this.isCancelling.set(false);
       this.closeWindow();
-      this.openRecallAndClose('RecallAppointment.timeExpired');
+      this.openRecallAndClose('urgent_search_time_ended');
       return;
     }
     this._cancelEmergencyAppointmentFacade.cancelEmergencyAppointment(payload, id);
@@ -171,7 +171,7 @@ export class UrgentAppointmentFloatingWindowComponent implements OnInit, OnDestr
     this._modalService.open(SearchWaitingDoctorComponent, {
       inputs: {
         image: 'images/urgent-appointment/calender.png',
-        title: 'waitingDoctorTitle',
+        title: 'waiting_doctor_modal_title',
         subtitle: 'waiting_doctor_modal_subtitle',
         data: { before_request: false }
       },
@@ -188,7 +188,7 @@ export class UrgentAppointmentFloatingWindowComponent implements OnInit, OnDestr
     this._modalService.open(RecallNewAppointementComponent, {
       inputs: {
         config: DetailsHeaderConfig,
-        title: 'RecallAppointment.timeExpired', // Default title for cancelled search
+        title: 'urgent_search_time_ended', // Default title for cancelled search
         data: null // No specific data needed for cancelled search
       },
       outputs: {

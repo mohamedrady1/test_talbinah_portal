@@ -26,7 +26,7 @@ export class ShareSocialComponent {
     this.modalService.open(ShareComponent, {
       inputs: {
         image: 'images/community/icons/header-icon.png',
-        title: 'talbinahCommunity.share',
+        title: 'share',
         data: {
           link: this.fullUrl,
         },

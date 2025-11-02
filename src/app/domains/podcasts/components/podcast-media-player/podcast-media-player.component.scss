@@ -22,7 +22,7 @@
   &__image-container {
     @include abs-logical(absolute, 0, null, 0, null, 0);
     @include img-cover(1rem);
-
+    background: linear-gradient(270deg, var(--color-icon, #c3ece0) 0%, var(--color-icon-2, #ffefd4) 100%);
     &--img {
       @include img-cover(null);
     }

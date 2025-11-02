@@ -16,7 +16,7 @@ import {
   Validators
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateApiPipe } from '../../../../common/core/translations';
 import { GiftsFacade } from '../../services/gifts.facade';
 import { CountriesLookupFacade, ICountryDto } from '../../../lookups';
 import { SelectModule } from 'primeng/select';
@@ -32,7 +32,7 @@ import { ModalService } from '../../../../shared';
     SelectModule,
     FormsModule,
     ReactiveFormsModule,
-    TranslateModule
+    TranslateApiPipe
   ],
   templateUrl: './send-gift-form.component.html',
   styleUrls: ['./send-gift-form.component.scss'],
@@ -141,9 +141,9 @@ export class SendGiftFormComponent {
     this.modalService.open(StatusInfoComponent, {
       inputs: {
         image: 'images/mentalHealthScale/icons/talbinah.png',
-        title: 'settings.giftLovedOnes.seConfirmed',
-        statusTitleKey: 'gift.sendSuccessTitle',
-        statusSubtitleKey: 'gift.sendSuccessSubtitle',
+        title: 'gift_sent_successfully',
+        statusTitleKey: 'gift_sent_success',
+        statusSubtitleKey: 'gift_sent_success_details',
         data: {
           item: {
             storeSuccess: true,
@@ -172,9 +172,9 @@ export class SendGiftFormComponent {
     this.modalService.open(StatusInfoComponent, {
       inputs: {
         image: 'images/mentalHealthScale/icons/talbinah.png',
-        title: 'settings.giftLovedOnes.seError',
+        title: 'gift_sending_failed',
         statusTitleKey: errorMessage,
-        statusSubtitleKey: 'gift.sendErrorSubtitle',
+        statusSubtitleKey: 'gift_sending_failed_retry',
         data: {
           item: {
             storeSuccess: false,

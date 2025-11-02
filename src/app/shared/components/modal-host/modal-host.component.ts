@@ -22,11 +22,12 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HeaderComponent } from '../header';
 import { TranslateModule } from '@ngx-translate/core';
 import { SiteHeaderComponent } from '../../../domains';
+import { TranslateApiPipe } from '../../../common/core/translations';
 
 @Component({
   selector: 'app-modal-host',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, TranslateModule, SiteHeaderComponent],
+  imports: [CommonModule, HeaderComponent, TranslateModule, SiteHeaderComponent, TranslateApiPipe],
   templateUrl: './modal-host.component.html',
   styleUrls: ['./modal-host.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

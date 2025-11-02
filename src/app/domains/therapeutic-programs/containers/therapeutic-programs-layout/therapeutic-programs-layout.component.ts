@@ -24,10 +24,12 @@ export class TherapeuticProgramsLayoutComponent {
   headerConfig: IHeaderConfig = HeaderConfig;
   private readonly router = inject(Router);
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly isBrowser = isPlatformBrowser(this.platformId);
   @ViewChild('card') cardRef!: ElementRef;
   isFullscreen: boolean = false;
 
   protected goHome(): void {
+    if (!this.isBrowser) return;
     this.router.navigate([MainPageRoutesEnum.MAINPAGE]);
   }
 

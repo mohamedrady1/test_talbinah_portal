@@ -52,7 +52,7 @@ import { UserIdentityStore } from '../../routes/user-identity.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { RoleGuardService, UserContextService } from '../../../authentication';
-
+import { TranslateApiPipe } from '../../../../common/core/translations';
 @Component({
   selector: 'app-psychological-society-main-page',
   standalone: true,
@@ -69,6 +69,7 @@ import { RoleGuardService, UserContextService } from '../../../authentication';
     EmptyStateComponent,
     ErrorStateComponent,
     NotificationSkeletonComponent,
+    TranslateApiPipe
   ],
   templateUrl: './psychological-society-main-page.component.html',
   styleUrls: ['./psychological-society-main-page.component.scss']
@@ -103,7 +104,7 @@ export class PsychologicalSocietyMainPageComponent implements OnInit, OnDestroy 
 
   cardType = CardType;
   @Input() readonlyOnClick = signal<boolean>(true);
-  @Input() placeholderHeader = signal<string>('talbinahCommunity.commentInputPlaceholderHeader');
+  @Input() placeholderHeader = signal<string>('how_do_you_feel_today');
 
   protected moodStatistics: MoodStatisticsConfig = { number: 30, mood: { id: 2, title: 'سعيد' }, count: 20 };
 
@@ -139,7 +140,7 @@ export class PsychologicalSocietyMainPageComponent implements OnInit, OnDestroy 
   }));
 
   protected showAll = signal(false);
-  readonly selectedTab = signal<ITab | null>({ id: 0, title: 'general.all' } as ITab);
+  readonly selectedTab = signal<ITab | null>({ id: 0, title: 'all' } as ITab);
 
   protected readonly postsEmptyState = PostsEmptyState;
   protected readonly postsErrorState = getCardsError(() => this.psychologicalPostsFacade.fetchPosts());

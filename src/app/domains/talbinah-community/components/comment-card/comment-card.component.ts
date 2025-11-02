@@ -10,11 +10,11 @@ import { finalize, take } from 'rxjs';
 import { ICommentPost, IReactCommentResponseDto, IReactPostCommentRequestDto, IUserIdentifyProfileData } from '../../dtos';
 import { Router } from '@angular/router';
 import { TalbinahCommunityRoutesEnum } from '../../constants';
-
+import { TranslateApiPipe } from '../../../../common/core/translations';
 @Component({
   selector: 'app-comment-card',
   templateUrl: './comment-card.component.html',
-  imports: [CommonModule, CommentBoxComponent, TranslateModule],
+  imports: [CommonModule, CommentBoxComponent, TranslateModule, TranslateApiPipe],
   styleUrls: ['./comment-card.component.scss'],
   standalone: true,
   animations: [

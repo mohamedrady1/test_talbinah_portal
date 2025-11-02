@@ -9,11 +9,11 @@ import { ChatHistoryFacade } from '../../services';
 import { ChatEventsService } from '../../services/chat-events.service';
 import { Logger } from '../../../../common';
 import { KhawiikRenameComponent } from '../khawiik-rename';
-
+import { TranslateApiPipe } from '../../../../common/core/translations';
 @Component({
   selector: 'app-chat-menu',
   standalone: true,
-  imports: [CommonModule, ClickOutsideDirective, TranslateModule, SvgIconComponent, FormsModule],
+  imports: [CommonModule, ClickOutsideDirective, TranslateModule, SvgIconComponent, FormsModule, TranslateApiPipe],
   templateUrl: './chat-menu.component.html',
   styleUrls: ['./chat-menu.component.scss']
 })
@@ -51,12 +51,12 @@ export class ChatMenuComponent {
     this.modalService.open(StatusInfoComponent, {
       inputs: {
         image: 'images/mentalHealthScale/icons/talbinah.png',
-        title: 'khawiik.chat.deleteConfirm',
+        title: 'confirm_delete_conversation',
         data: {
           item: { storeSuccess: false },
           statusLabels: {
-            errorTitle: 'khawiik.chat.deleteConfirmTitle',
-            errorSubTitle: 'khawiik.chat.deleteConfirmSubtitle'
+            errorTitle: 'delete_conversation_confirmation',
+            errorSubTitle: 'confirm_delete_action_irreversible'
           }
         },
         confirmMode: true,
@@ -99,7 +99,7 @@ export class ChatMenuComponent {
     this.modalService.open(KhawiikRenameComponent, {
       inputs: {
         image: 'images/icons/logo-2.png',
-        title: 'khawiik.rename.chatTitle',
+        title: 'conversation_name',
         chatItem: this.chatItem
       },
       outputs: {

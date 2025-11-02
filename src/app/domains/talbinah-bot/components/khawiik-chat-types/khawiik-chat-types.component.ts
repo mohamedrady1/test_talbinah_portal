@@ -7,11 +7,12 @@ import { KhawiikInstructionsComponent } from '../khawiik-instructions';
 import { ModalService, SvgIconComponent } from '../../../../shared';
 import { Logger } from '../../../../common';
 import { ChatTypeEnum } from '../../enums';
+import { TranslateApiPipe } from '../../../../common/core/translations/pipes/translate-api.pipe';
 
 @Component({
   selector: 'app-khawiik-chat-types',
   standalone: true,
-  imports: [CommonModule, TranslateModule, SvgIconComponent],
+  imports: [CommonModule, TranslateModule, SvgIconComponent, TranslateApiPipe],
   templateUrl: './khawiik-chat-types.component.html',
   styleUrls: ['./khawiik-chat-types.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -91,8 +92,8 @@ export class KhawiikChatTypesComponent implements OnInit {
     this._ModalService.open(KhawiikInstructionsComponent, {
       inputs: {
         image: 'images/khawiik/khawiik-header-icon.png',
-        title: 'khawiik.header.title',
-        subtitle: 'khawiik.header.subtitle',
+        title: 'home_card_khawiik_title',
+        subtitle: 'home_card_khawiik_description',
         selectedChatType: this.selectedType(),
       },
       outputs: {

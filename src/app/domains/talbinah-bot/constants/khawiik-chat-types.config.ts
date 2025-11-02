@@ -2,11 +2,11 @@ import { IChatType, IChatTypeConfig } from "../interfaces";
 
 // Translation keys for chat types
 export const KHAWIIK_CHAT_TYPES_KEYS = {
-  TITLE: 'khawiik.chatTypes.title',
-  SUBTITLE: 'khawiik.chatTypes.subtitle',
-  VOICE: 'khawiik.chatTypes.voice',
-  TEXT: 'khawiik.chatTypes.text',
-  CONTINUE: 'khawiik.chatTypes.continue'
+  TITLE: 'communication_preference',
+  SUBTITLE: 'choose_communication_style',
+  VOICE: 'voice_best_experience',
+  TEXT: 'typing',
+  CONTINUE: 'continue'
 } as const;
 
 // Image paths
@@ -24,13 +24,13 @@ export enum ChatTypeEnumKeys {
 export const CHAT_TYPE_OPTIONS: readonly IChatType[] = [
   {
     id: ChatTypeEnumKeys.VOICE,
-    label: 'khawiik.chatTypes.voice',
+    label: 'voice_best_experience',
     icon: ChatTypeEnumKeys.VOICE,
     isActive: true
   },
   {
     id: ChatTypeEnumKeys.TEXT,
-    label: 'khawiik.chatTypes.text',
+    label: 'typing',
     icon: ChatTypeEnumKeys.TEXT,
     isActive: false
   }

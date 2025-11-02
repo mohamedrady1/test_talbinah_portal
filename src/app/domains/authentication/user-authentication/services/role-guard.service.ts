@@ -94,8 +94,8 @@ export class RoleGuardService {
       this.modalService.open(CompeleteDataAndRegisterNowComponent, {
         inputs: {
           image: 'images/icons/logo-2.png',
-          title: 'completeData.title',
-          subtitle: 'completeData.subtitle',
+          title: 'complete_your_registration',
+          subtitle: 'provide_your_data',
         },
         outputs: {
           closed: () => {
@@ -125,8 +125,8 @@ export class RoleGuardService {
     this.modalService.open(CompeleteDataAndRegisterNowComponent, {
       inputs: {
         image: 'images/icons/logo-2.png',
-        title: 'completeData.title',
-        subtitle: 'completeData.subtitle',
+        title: 'complete_your_registration',
+        subtitle: 'provide_your_data',
       },
       outputs: {
         closed: () => {

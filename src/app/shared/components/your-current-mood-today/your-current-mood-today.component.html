@@ -2,7 +2,7 @@
 <section class="your-current-mood">
     <!-- Part 1: Heading -->
     <header class="your-current-mood__heading">
-        {{ "what_is_your_mood_today" | translate }}
+        {{ "what_is_your_mood_today" | translateApi }}
     </header>
 
     <!-- Part 2: Active Mood Display -->
@@ -42,11 +42,11 @@
             (click)="onSubmitMood()">
             @if (isStoringMood()) {
             <span>
-                {{ "yourCurrentMoodToday.sending" | translate }}
+                {{ "in_progress" | translateApi }}
             </span>
             } @else {
             <span>
-                {{ "yourCurrentMoodToday.submit" | translate }}
+                {{ "send" | translateApi }}
             </span>
             }
         </button>

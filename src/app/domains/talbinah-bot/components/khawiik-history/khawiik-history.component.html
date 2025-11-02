@@ -1,15 +1,14 @@
-@if (isBrowser) {
-<section class="khawiik-history" role="region" [attr.aria-label]="'khawiik.history.section' | translate">
+<section class="khawiik-history" role="region" [attr.aria-label]="'section'">
   <div class="khawiik-history__container" appAutoExactHeight="100" heightMode="max-height">
     <div class="khawiik-history__banner" [attr.aria-label]="'history banner'">
       <h4 class="khawiik-history__banner-title">
-        {{ 'احصائيات هذا الاسبوع ' }}
+        {{'this_week_statistics' | translateApi}}
       </h4>
 
       <div class="khawiik-history__mood-data">
         <div class="khawiik-history__mood-data-item khawiik-history__mood-data-item--current">
           <span class="khawiik-history__label">
-            {{ 'متوسط مشاعرك هذا الأسبوع: ' }}
+            {{ 'average_feelings_this_week' | translateApi }}
           </span>
           <span class="khawiik-history__value">
             {{ 'معتدل' }}
@@ -18,7 +17,7 @@
 
         <div class="khawiik-history__mood-data-item khawiik-history__mood-data-item--last-listen">
           <span class="khawiik-history__label">
-            {{ 'اخر استماع:' }}
+            {{ 'last_listened' | translateApi }}
           </span>
           <span class="khawiik-history__value">
             {{ 'امس' }}
@@ -28,7 +27,7 @@
 
       <div class="khawiik-history__mood-last-subject">
         <span class="khawiik-history__label">
-          {{ 'أكثر موضوع اتكلمت عن: ' }}
+          {{ 'most_discussed_topic' | translateApi }}
         </span>
         <span class="khawiik-history__value">
           {{ 'الغضب' }}
@@ -59,8 +58,8 @@
       @else if (filteredChats().length > 0) {
       <!-- Search -->
       <div class="khawiik-history__search">
-        <input type="text" class="khawiik-history__search-input" [placeholder]="'search2' | translate"
-          [(ngModel)]="searchQuery" [attr.aria-label]="'search2' | translate" />
+        <input type="text" class="khawiik-history__search-input" [placeholder]="'search2' | translateApi"
+          [(ngModel)]="searchQuery" [attr.aria-label]="'search2' | translateApi" />
       </div>
 
       <ul class="khawiik-history__list" role="list">
@@ -96,4 +95,3 @@
     </div>
   </div>
 </section>
-}

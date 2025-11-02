@@ -12,7 +12,7 @@ import {
 } from './common';
 import { OpenPodcastAudioPlayerState, PodcastAudioPlayerComponent, PodcastsListFacade, SiteHeaderComponent, UrgentAppointmentFloatingWindowComponent, checkReservationRequestFacade } from './domains';
 import { UserContextService } from './domains/authentication/user-authentication/services/user-context.service';
-import { ModalOutletComponent, StorageKeys, ToastService, MoodModalIntegrationService, NotificationSoundService } from './shared';
+import { ModalOutletComponent, StorageKeys, ToastService, MoodModalIntegrationService, NotificationSoundService, TranslationLoadingScreenComponent } from './shared';
 // import { NotificationService } from './shared/services/notification.service';
 // import { NotificationTypeEnum } from './shared/enums/notification-type.enum';
 import { Component, OnInit, DoCheck, inject, signal, PLATFORM_ID, computed, effect } from '@angular/core';
@@ -37,6 +37,7 @@ import { ToastModule } from 'primeng/toast';
     ModalOutletComponent,
     SiteHeaderComponent,
     ToastComponent,
+    TranslationLoadingScreenComponent,
     // NotificationComponent,
   ],
   templateUrl: './app.component.html',
@@ -60,6 +61,9 @@ export class AppComponent implements OnInit, DoCheck {
   readonly shouldUrgentAppointmentFloatingWindow = signal<boolean>(true);
   protected selectedPodcast = signal<IGlobalPodcastItemModel | null>(null);
   protected selectedPodcastCurrentTime = signal<number>(0);
+
+  // Translation loading state
+  protected readonly isTranslationsLoading = computed(() => this._TranslationsFacade.isLoading());
 
   // ----- Auth / Guest Computed -----
   private readonly token = signal<string | null>(

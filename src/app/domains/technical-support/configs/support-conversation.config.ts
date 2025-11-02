@@ -25,7 +25,7 @@ export const ChatSupportActionsMenuItemsConfig: IActionDropdownMenuItem[] = [
 
 export const SupportChatMessagesEmptyState: EmptyStateConfig = {
   imageUrl: 'images/emptyStates/image-11.svg',
-  title: 'Technical_Support.chat.welcomeMessage',
+  title: 'start_conversation_now2',
   imgWidth: '38%'
 };
 

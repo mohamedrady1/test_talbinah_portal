@@ -6,10 +6,10 @@
     </div>
     <div class="confirm-subscription__status__content">
       <h2 class="confirm-subscription__status__title">
-        {{ statusTitleKey | translate }}
+        {{ statusTitleKey | translateApi }}
       </h2>
       <p class="confirm-subscription__status__subtitle">
-        {{ statusSubtitleKey | translate }}
+        {{ statusSubtitleKey | translateApi }}
       </p>
     </div>
   </div>
@@ -31,7 +31,7 @@
     <button [id]="'item-details'" type="button" class="btn btn--solid" (click)="goToDetails()"
       [attr.aria-busy]="'item-details'" [attr.aria-label]="'item-details'">
       <span class="confirm-subscription__button__label">
-        {{ 'general.statusDetails' | translate }}
+        {{ 'general.statusDetails' | translateApi }}
       </span>
     </button>
     }
@@ -39,7 +39,7 @@
     <button [id]="'item-details'" type="button" class="btn btn--solid" (click)="openUrgentAppointment()"
       [attr.aria-busy]="'item-details'" [attr.aria-label]="'item-details'">
       <span class="confirm-subscription__button__label">
-        {{ 'general.trackAppointment' | translate }}
+        {{ 'general.trackAppointment' | translateApi }}
       </span>
     </button>
     }
@@ -48,7 +48,7 @@
     <button [id]="'item-details'" type="button" class="btn btn--solid" (click)="retryPayment($event)"
       [attr.aria-busy]="'item-details'" [attr.aria-label]="'item-details'">
       <span class="confirm-subscription__button__label">
-        {{ 'general.repayButton' | translate }}
+        {{ 'general.repayButton' | translateApi }}
       </span>
     </button>
     }

@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 import { ModalService } from '../../../../shared';
 import { VatNationalIdVerificationComponent } from '../vat-national-id-verification';
 import { Logger } from '../../../../common';
 import { ChangePasswordComponent } from '../change-password';
-
+import { TranslateApiPipe } from '../../../../common/core/translations';
 @Component({
   selector: 'app-security-modal',
   standalone: true,
-  imports: [TranslateModule],
+  imports: [TranslateApiPipe],
   templateUrl: './security-modal.component.html',
   styleUrls: ['./security-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -22,8 +21,8 @@ export class SecurityModalComponent {
     this._modalService.open(VatNationalIdVerificationComponent, {
       inputs: {
         image: 'images/settings/modal-icons/security.png',
-        title: 'settings.security.title',
-        subtitle: 'settings.security.subtitle',
+        title: 'security',
+        subtitle: 'manage_security_and_devices_preferences',
         data: {}
       },
       width: "40%",
@@ -37,8 +36,8 @@ export class SecurityModalComponent {
     this._modalService.open(ChangePasswordComponent, {
       inputs: {
         image: 'images/settings/modal-icons/security.png',
-        title: 'settings.changePassword.title',
-        subtitle: 'settings.changePassword.subtitle',
+        title: 'security',
+        subtitle: 'update_account_password_for_security',
         data: {}
       },
       outputs: {

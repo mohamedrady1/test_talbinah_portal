@@ -3,27 +3,27 @@
     <button type="button" class="attachment-menu__item attachment-menu__item--audio"
       (click)="onSelectFileType('audio')">
       <app-svg-icon name="microphone-icon" />
-      <span>{{ 'attachmentMenu.podcast' | translate }}</span>
+      <span>{{ 'podcast' | translateApi }}</span>
     </button>
     <button type="button" class="attachment-menu__item attachment-menu__item--document"
       (click)="onSelectFileType('document')">
       <app-svg-icon name="file-icon" />
-      <span>{{ 'attachmentMenu.files' | translate }}</span>
+      <span>{{ 'attachments' | translateApi }}</span>
     </button>
     <button type="button" class="attachment-menu__item attachment-menu__item--video"
       (click)="onSelectFileType('video')">
       <app-svg-icon name="video-icon" />
-      <span>{{ 'attachmentMenu.videos' | translate }}</span>
+      <span>{{ 'videos' | translateApi }}</span>
     </button>
     <button type="button" class="attachment-menu__item attachment-menu__item--image"
       (click)="onSelectFileType('image')">
       <app-svg-icon name="image-gallery-icon" />
-      <span>{{ 'attachmentMenu.images' | translate }}</span>
+      <span>{{ 'images' | translateApi }}</span>
     </button>
     <button type="button" class="attachment-menu__item attachment-menu__item--camera"
       (click)="onSelectFileType('camera')">
       <app-svg-icon name="camera-icon" />
-      <span>{{ 'attachmentMenu.camera' | translate }}</span>
+      <span>{{ 'camera' | translateApi }}</span>
     </button>
   </div>
 </div>

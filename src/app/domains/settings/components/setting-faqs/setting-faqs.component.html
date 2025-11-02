@@ -4,7 +4,7 @@
     @if (!selectedCategoryId()) {
     <div class="setting-faqs__container--header">
       <p class="setting-faqs__container--header--title">
-        {{ 'settings.settingFaqs.exploreQuestionsWithHeart' | translate }}
+        {{ 'explore_faq_heart' | translateApi }}
       </p>
       <app-local-search [searchTerm]="localSearchTerm()" (searchChange)="onLocalSearchChange($event)" />
     </div>

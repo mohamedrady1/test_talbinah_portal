@@ -148,6 +148,7 @@ export class ArticlesListingComponent {
     this.favouriteArticlesErrorState.set(getmyFavouriteArticlesError(() => this.favoriteArticlesFacade.fetchFavoriteArticles()));
   }
   ngOnInit(): void {
+    if (!this.isBrowser()) return;
     this.setUpFetchDataAfterLogin();
 
   }
@@ -251,6 +252,7 @@ export class ArticlesListingComponent {
       });
   }
   protected openFavouriteArticlesPopup(): void {
+    if (!this.isBrowser()) return;
     this.modalService.open(ArticlesFavouriteListComponent, {
       inputs: {
         image: 'images/home/icons/articles.png',

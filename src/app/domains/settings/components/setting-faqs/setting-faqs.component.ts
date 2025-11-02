@@ -1,5 +1,4 @@
-import { Component, inject, OnInit, signal, computed, ChangeDetectionStrategy } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { Component, inject, OnInit, signal, computed, ChangeDetectionStrategy, PLATFORM_ID } from '@angular/core';
 import { LocalSearchComponent, LoadingShimmerComponent, ErrorStateCardComponent, EmptyStateCardComponent, ModalService } from '../../../../shared';
 import { FaqCardComponent } from '../faq-card';
 import { FaqsCategoriesFacade } from '../../services';
@@ -7,24 +6,23 @@ import { AutoExactHeightDirective, Logger } from '../../../../common';
 import {
   getFaqsCategoriesErrorConfig,
   FaqsCategoriesEmptyConfig,
-  FaqsCategoriesSearchConfig
 } from '../../configs';
 import { FaqDetailsComponent } from '../faq-details';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { IFaqsCategoryDto } from '../../dtos';
-
+import { TranslateApiPipe } from '../../../../common/core/translations';
 @Component({
   selector: 'app-setting-faqs',
   standalone: true,
   imports: [
     LocalSearchComponent,
-    TranslateModule,
     FaqCardComponent,
     LoadingShimmerComponent,
     ErrorStateCardComponent,
     EmptyStateCardComponent,
     CommonModule,
-    AutoExactHeightDirective
+    AutoExactHeightDirective,
+    TranslateApiPipe
   ],
   templateUrl: './setting-faqs.component.html',
   styleUrls: ['./setting-faqs.component.scss'],
@@ -32,7 +30,7 @@ import { IFaqsCategoryDto } from '../../dtos';
 })
 export class SettingFaqsComponent implements OnInit {
   private readonly faqsCategoriesFacade = inject(FaqsCategoriesFacade);
-
+  protected readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private _ModalService = inject(ModalService);
 
   // Signals for reactive state
@@ -62,6 +60,7 @@ export class SettingFaqsComponent implements OnInit {
   readonly emptyStateConfig = FaqsCategoriesEmptyConfig;
 
   ngOnInit(): void {
+    if (!this.isBrowser) return;
     Logger.debug('SettingFaqsComponent: Initializing component');
     this.loadFaqsCategories();
   }
@@ -77,11 +76,12 @@ export class SettingFaqsComponent implements OnInit {
   }
 
   protected onCategoryClick(category: IFaqsCategoryDto): void {
+    if (!this.isBrowser) return;
     this._ModalService.open(FaqDetailsComponent, {
       inputs: {
         image: 'images/settings/modal-icons/faqs.png',
-        title: 'settings.settingFaqs.title',
-        subtitle: 'settings.settingFaqs.subtitle',
+        title: 'faqs',
+        subtitle: 'faq_intro',
         item: category,
       },
       outputs: {
