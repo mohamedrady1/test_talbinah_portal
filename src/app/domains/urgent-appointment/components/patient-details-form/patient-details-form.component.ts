@@ -160,7 +160,7 @@ export class PatientDetailsFormComponent {
       inputs: {
         image: 'images/urgent-appointment/calender-2.png',
         title: 'disclaimer',
-        // subtitle: 'this_reservation_is_free_cause_you_subscribed_to_package_already'
+        // subtitle: 'SessionFree.Subtitle'
       },
       outputs: {
         closed: (data: { confirmed: boolean } | void) => {
@@ -231,8 +231,8 @@ export class PatientDetailsFormComponent {
       this._ModalService.open(NationalIdVerificationComponent, {
         inputs: {
           image: 'images/home/icons/quick-appointemnt.png',
-          title: 'security',
-          subtitle: 'verify_national_identity_description',
+          title: 'settings.nationalIdVerification.title',
+          subtitle: 'settings.nationalIdVerification.subtitle',
           data: { item: { AppointmentData }, is_emergency: true, paymentStatus: false }
         },
         outputs: {

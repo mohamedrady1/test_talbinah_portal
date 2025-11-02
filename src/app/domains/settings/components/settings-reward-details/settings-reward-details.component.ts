@@ -8,14 +8,15 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { SvgIconComponent, ToastService, PublicService } from '../../../../shared';
 import { Logger } from '../../../../common';
 import { RewardItem, RewardsAppointment, RewardsCoupon } from '../../dtos';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+
 @Component({
   selector: 'app-settings-reward-details',
   standalone: true,
-  imports: [TranslateApiPipe, CommonModule, SvgIconComponent],
+  imports: [TranslateModule, CommonModule, SvgIconComponent],
   templateUrl: './settings-reward-details.component.html',
   styleUrls: ['./settings-reward-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

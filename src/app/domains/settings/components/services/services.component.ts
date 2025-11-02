@@ -2,17 +2,18 @@ import { EmptyStateCardComponent } from '../../../../shared/components/empty-sta
 import { ErrorStateCardComponent } from '../../../../shared/components/error-state-card/error-state-card.component';
 import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { ServicePointsGiftsFacade } from '../../services/service-points-gifts.facade';
 import { Logger } from '../../../../common';
 import { AutoExactHeightDirective } from '../../../../common';
 import { ServiceModalComponent } from '../service-modal';
 import { ModalService } from '../../../../shared/services/model.service';
 import { SvgIconComponent } from "../../../../shared";
-import { TranslateApiPipe } from '../../../../common/core/translations';
+
 @Component({
   selector: 'app-services',
   standalone: true,
-  imports: [CommonModule, AutoExactHeightDirective, EmptyStateCardComponent, ErrorStateCardComponent, SvgIconComponent, TranslateApiPipe],
+  imports: [CommonModule, TranslateModule, AutoExactHeightDirective, EmptyStateCardComponent, ErrorStateCardComponent, SvgIconComponent],
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -28,14 +29,14 @@ export class ServicesComponent implements OnInit {
   // State configurations
   readonly emptyStateConfig = {
     imageUrl: '/images/emptyStates/services.svg',
-    title: 'no_services_available',
-    message: 'no_services_found_yet'
+    title: 'services.emptyState.title',
+    message: 'services.emptyState.message'
   };
 
   readonly errorStateConfig = {
     imageUrl: '/images/errorStates/services.svg',
-    title: 'services_loading_error',
-    message: 'services_loading_error_retry',
+    title: 'services.errorState.title',
+    message: 'services.errorState.message',
     retryLabel: 'common.retry',
     onRetry: () => this.loadServices()
   };
@@ -56,7 +57,7 @@ export class ServicesComponent implements OnInit {
     this._modalService.open(ServiceModalComponent, {
       inputs: {
         image: 'images/logos/icon.png',
-        title: 'points_redemption',
+        title: 'userInfo.changePoints',
         service: service
       },
       outputs: {

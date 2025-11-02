@@ -125,9 +125,6 @@ export class KhawiikBotLayoutComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     if (this.isBrowser) {
-      // Setup SEO metadata
-      this.setupSEO();
-
       // this.chatHistoryFacade.fetchChatHistory();
       this.router.events
         .pipe(filter((event) => event instanceof NavigationEnd))
@@ -136,9 +133,6 @@ export class KhawiikBotLayoutComponent implements OnInit, AfterViewInit {
           const shouldHaveBg =
             url.includes(KhawiikBotRoutesEnum.VOICE_CHAT) || url.includes(KhawiikBotRoutesEnum.TEXT_CHAT);
           this.hasChatBackground.set(shouldHaveBg);
-
-          // Update SEO on route change
-          this.setupSEO();
         });
 
       const currentUrl = this.router.url;
@@ -151,30 +145,6 @@ export class KhawiikBotLayoutComponent implements OnInit, AfterViewInit {
       // ✅ Subscribe to user data changes (refresh userId)
       this.setUpUserIdRefresh();
     }
-  }
-
-  private setupSEO(): void {
-    if (!this.isBrowser) return;
-
-    const currentUrl = this.router.url;
-    const lang = this.localization.getCurrentLanguage();
-    let routeData = KhawiikBotRouteData.KHAWIIK_MAIN_PAGE;
-
-    // Determine which route data to use based on URL
-    if (currentUrl.includes(KhawiikBotRoutesEnum.TEXT_CHAT)) {
-      routeData = KhawiikBotRouteData.TextChat;
-    } else if (currentUrl.includes(KhawiikBotRoutesEnum.VOICE_CHAT)) {
-      routeData = KhawiikBotRouteData.VoiceChat;
-    }
-
-    const title = lang === 'ar' ? routeData.title.ar : routeData.title.en;
-    const description = lang === 'ar' ? routeData.meta.description.ar : routeData.meta.description.en;
-
-    this.seo.setMetaTags({
-      title,
-      description,
-      locale: lang === 'ar' ? 'ar_SA' : 'en_US'
-    });
   }
 
   private setUpUserIdRefresh(): void {

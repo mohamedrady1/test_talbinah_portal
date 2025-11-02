@@ -2,7 +2,6 @@ import { Component, ChangeDetectionStrategy, EventEmitter, Output, Input } from 
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { SvgIconComponent } from '../../../../shared';
-import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-attachment-menu',
@@ -10,8 +9,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
   imports: [
     SvgIconComponent,
     TranslateModule,
-    CommonModule,
-    TranslateApiPipe
+    CommonModule
   ],
   templateUrl: './attachment-menu.component.html',
   styleUrls: ['./attachment-menu.component.scss'],

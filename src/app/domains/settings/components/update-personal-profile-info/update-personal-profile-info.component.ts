@@ -28,7 +28,7 @@ import { CountriesLookupFacade, ICountryDto } from '../../../lookups';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { UpdateUserProfileFacade } from '../../services';
 import { TranslateModule } from '@ngx-translate/core';
-import { StorageService, TranslateApiPipe } from '../../../../common';
+import { StorageService } from '../../../../common';
 import { CommonModule } from '@angular/common';
 import { SelectModule } from 'primeng/select';
 
@@ -38,10 +38,10 @@ import { SelectModule } from 'primeng/select';
   imports: [
     ReactiveFormsModule,
     SelectButtonModule,
+    TranslateModule,
     CommonModule,
     SelectModule,
-    FormsModule,
-    TranslateApiPipe
+    FormsModule
   ],
   templateUrl: './update-personal-profile-info.component.html',
   styleUrls: ['./update-personal-profile-info.component.scss'],

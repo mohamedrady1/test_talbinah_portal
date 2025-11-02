@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { DoctorTicketsFacade } from '../../services/doctor-tickets.facade';
 import { StatusInfoComponent } from '../../../payments/components/status-info';
 import { ModalService } from '../../../../shared/services/model.service';
 import { ITicketCreateRequestDto } from '../../dtos/requests';
-import { TranslateApiPipe } from '../../../../common/core/translations';
 
 interface ComplaintType {
     label: string;
@@ -16,7 +16,7 @@ interface ComplaintType {
 @Component({
     selector: 'app-report-complaint',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, TranslateApiPipe, DropdownModule],
+    imports: [CommonModule, ReactiveFormsModule, TranslateModule, DropdownModule],
     templateUrl: './report-complaint.component.html',
     styleUrls: ['./report-complaint.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -58,10 +58,10 @@ export class ReportComplaintComponent implements OnInit {
     getDetailsErrorMessage(): string {
         const detailsControl = this.complaintForm.get('details');
         if (detailsControl?.errors?.['required']) {
-            return 'issue_details_required';
+            return 'complaints.report.errors.detailsRequired';
         }
         if (detailsControl?.errors?.['minlength']) {
-            return 'issue_details_min_length';
+            return 'complaints.report.errors.detailsMinLength';
         }
         return '';
     }
@@ -114,10 +114,10 @@ export class ReportComplaintComponent implements OnInit {
                             data: {
                                 item: { storeSuccess: true },
                                 statusLabels: {
-                                    successTitle: 'complaint_sent_successfully',
-                                    successSubTitle: 'complaint_received',
-                                    errorTitle: 'complaint_send_failed',
-                                    errorSubTitle: 'complaint_send_error',
+                                    successTitle: 'complaints.report.status.successTitle',
+                                    successSubTitle: 'complaints.report.status.successSubTitle',
+                                    errorTitle: 'complaints.report.status.errorTitle',
+                                    errorSubTitle: 'complaints.report.status.errorSubTitle',
                                 }
                             }
                         },
@@ -137,12 +137,12 @@ export class ReportComplaintComponent implements OnInit {
                     this.modalService.open(StatusInfoComponent, {
                         inputs: {
                             data: {
-                                item: { storeSuccess: false, storeError: 'complaint_send_error' },
+                                item: { storeSuccess: false, storeError: 'complaints.report.status.errorSubTitle' },
                                 statusLabels: {
-                                    successTitle: 'complaint_sent_successfully',
-                                    successSubTitle: 'complaint_received',
-                                    errorTitle: 'complaint_send_failed',
-                                    errorSubTitle: 'complaint_send_error',
+                                    successTitle: 'complaints.report.status.successTitle',
+                                    successSubTitle: 'complaints.report.status.successSubTitle',
+                                    errorTitle: 'complaints.report.status.errorTitle',
+                                    errorSubTitle: 'complaints.report.status.errorSubTitle',
                                 }
                             }
                         },

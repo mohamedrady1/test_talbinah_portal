@@ -12,10 +12,10 @@
         </div>
         <div class="points-layout__right-side--cards-item--content">
           <div class="points-layout__right-side--cards-item--content--title">
-            {{ 'services' | translateApi }}
+            {{ 'userInfo.services' | translate }}
           </div>
           <div class="points-layout__right-side--cards-item--content--description">
-            {{ 'earn_talbinah_points' | translateApi }}
+            {{ 'userInfo.earnPointsDescription' | translate }}
           </div>
         </div>
       </div>
@@ -26,9 +26,9 @@
 
         <div class="points-layout__right-side--cards-item--content">
           <div class="points-layout__right-side--cards-item--content--title">
-            {{ 'points_history' | translateApi }} </div>
+            {{ 'userInfo.pointsHistory' | translate }} </div>
           <div class="points-layout__right-side--cards-item--content--description points">
-            {{pointsRecordsBalance()}} {{ 'point' | translateApi }}
+            {{pointsRecordsBalance()}} {{ 'general.point' | translate }}
           </div>
         </div>
       </div>
@@ -43,20 +43,20 @@
 
         <div class="points-layout__right-side--cards-item--content">
           <div class="points-layout__right-side--cards-item--content--title">
-            {{ 'rewards' | translateApi }}
+            {{ 'settings.rewards.cardPointsTitle' | translate }}
           </div>
           <div class="points-layout__right-side--cards-item--content--description">
-            {{ 'points_converted_to_reward' | translateApi }}
+            {{ 'settings.rewards.cardPointsSubtitle' | translate }}
           </div>
         </div>
       </div>
     </div>
     <div class="points-layout__right-side--content">
       <div class="points-layout__right-side--content--title">
-        {{ 'gifts' | translateApi }}
+        {{ 'userInfo.gifts' | translate }}
       </div>
       <div class="points-layout__right-side--content--description">
-        {{ 'earn_talbinah_points' | translateApi }}
+        {{ 'userInfo.earnPointsDescription' | translate }}
       </div>
     </div>
 
@@ -85,9 +85,9 @@
         <div class="service-points-card">
           <img [src]="item.image" alt="gift" class="service-points-card__img" />
           <div class="service-points-card__title">{{ item.title }}=<span>{{item.points}}
-            </span>{{'point'|translateApi}}</div>
-          <button class="service-points-card__btn" (click)="openServiceModal(item)">{{ 'follow' |
-            translateApi }}</button>
+            </span>{{'general.point'|translate}}</div>
+          <button class="service-points-card__btn" (click)="openServiceModal(item)">{{ 'general.follow' |
+            translate }}</button>
         </div>
         }
       </div>
@@ -115,7 +115,7 @@
             {{item.service_name}}
           </div>
           <div class="points-layout__points-item--value">
-            {{item.points}} {{'point' | translateApi}}
+            {{item.points}} {{'general.point' | translate}}
           </div>
         </div>
         <div class="points-layout__points-item--description">

@@ -18,8 +18,9 @@
       </div>
       <div class="settings-layout__profile">
         <p class="settings-layout__profile--title">
+          <span>🧍‍</span>
           <span>
-            {{'your_profile' | translateApi}}
+            {{'settings.profile' | translate}}
           </span>
         </p>
         <div class="settings-layout__profile--content">
@@ -46,8 +47,9 @@
                 </div>
                 <div class="settings-layout__container-help">
                   <p class="settings-layout__container-help--title">
+                    <span>💰‍</span>
                     <span>
-                      {{'support_and_help' | translateApi}}
+                      {{'settings.supportAndHelp' | translate}}
                     </span>
                   </p>
                   <div class="settings-layout__container-help--options">
@@ -72,7 +74,7 @@
           <div class="settings-layout__profile--left-side">
             <div class="settings-layout__profile--left-side--wallet-and-rewards">
               <p class="settings-layout__profile--left-side--wallet-and-rewards--title">
-                {{ 'wallet_and_rewards' | translateApi }}
+                {{ 'userInfo.walletAndRewardsTitle' | translate }}
               </p>
               @if (this._SettingsFacade.isLoading()) {
               @for (i of [1,2,3,4]; track $index) {

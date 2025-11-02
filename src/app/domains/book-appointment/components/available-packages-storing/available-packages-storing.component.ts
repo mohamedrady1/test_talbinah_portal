@@ -10,6 +10,8 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+
 import { IGlobalDoctorContactInfoModel, Logger } from '../../../../common';
 import { IReservationPackageModel } from '../../../appointments';
 import { PatientDetailsFormComponent } from '../../../urgent-appointment';
@@ -25,7 +27,7 @@ export interface IDisabledMap {
 @Component({
   selector: 'app-available-packages-storing',
   standalone: true,
-  imports: [ReservationPackageItemFormComponent, TranslateApiPipe],
+  imports: [ReservationPackageItemFormComponent, TranslateModule, TranslateApiPipe],
   templateUrl: './available-packages-storing.component.html',
   styleUrls: ['./available-packages-storing.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

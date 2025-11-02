@@ -6,7 +6,7 @@
             <button type="button" class="points-history__filter-btn"
                 [class.points-history__filter-btn--active]="activeFilter() === filter.value"
                 (click)="onFilterChange(filter.value)">
-                {{ filter.label | translateApi }}
+                {{ filter.label | translate }}
             </button>
             }
         </div>
@@ -62,7 +62,7 @@
                     <!-- Title and Points -->
                     <div class="points-history__card-header">
                         <span class="points-history__card-points" [style.color]="getPointsColor(movement)">
-                            {{ getPointsDisplay(movement) }} {{ 'point' | translateApi }}
+                            {{ getPointsDisplay(movement) }} {{ 'general.point' | translate }}
                         </span>
                         |
                         <span class="points-history__card-title">

@@ -19,7 +19,7 @@
                     </svg>
                     }
                     @else {
-                    {{'point'|translateApi}}
+                    {{'general.point'|translate}}
                     }
                 </span>
             </div>
@@ -31,10 +31,10 @@
     <button class="wallet-and-rewards__button"
         (click)="userInfo.page=='wallet' ? openWalletPaymentModal($event) : openPointsServicesModal($event)">
         @if (userInfo.page=='wallet') {
-        {{ 'top_up_wallet' | translateApi }}
+        {{ 'userInfo.walletButton' | translate }}
         }
         @else {
-        {{ 'redeem_your_points' | translateApi }}
+        {{ 'userInfo.rewardsButton' | translate }}
         }
     </button>
 

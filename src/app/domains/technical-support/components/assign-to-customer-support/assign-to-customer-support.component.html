@@ -67,20 +67,20 @@
     <div class="general-form-wrapper__actions">
       <button id="transfer-btn" type="button" class="btn btn--outline" (click)="onCancel()">
         <span class="btn__label">
-          {{ 'cancel' | translateApi }}
+          {{ 'general.cancel' | translate }}
         </span>
       </button>
 
       <button id="submit-transfer-btn" type="submit" class="btn btn--solid" (click)="assignNow()"
-        [attr.aria-label]="'assign' | translateApi"
+        [attr.aria-label]="'general.assign' | translate"
         [disabled]="_CustomersSupportFacade.isLoading()|| _AssignToCustomerSupportFacade.loading()|| !selectedOption()"
         [ngClass]="{'disabled': _CustomersSupportFacade.isLoading()|| _AssignToCustomerSupportFacade.loading()|| !selectedOption()}">
         <span class="btn__label">
           @if (!_AssignToCustomerSupportFacade.loading()) {
-          {{ 'assign' | translateApi }}
+          {{ 'general.assign' | translate }}
           } @else {
           <span class="general-form-wrapper__loading" aria-live="polite">
-            {{ 'in_progress' | translateApi }}
+            {{ 'in_progress' | translate }}
             <span class="dot-loader"></span>
           </span>
           }

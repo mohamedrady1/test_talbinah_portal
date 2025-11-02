@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, PLATFORM_ID } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 // import { Logger } from '../../../../common';
 import { WalletPointsRecordsFacade } from '../../services/wallet-points-records.facade';
 import { PointsFacade } from '../../services/wallet-points-welcome-page.facade';
@@ -16,13 +17,12 @@ import { SvgIconComponent } from "../../../../shared";
 import { SettingsRewardsComponent } from '../settings-rewards';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-settings-points',
   standalone: true,
   imports: [
-    TranslateApiPipe,
+    TranslateModule,
     EmptyStateCardComponent,
     ErrorStateCardComponent,
     LoadingShimmerComponent,
@@ -69,8 +69,8 @@ export class SettingsPointsComponent {
     this._modalService.open(PointsHistoryComponent, {
       inputs: {
         image: 'images/settings/modal-icons/points.png',
-        title: 'my_points',
-        subtitle: 'redeem_points_for_services',
+        title: 'settings.points.title',
+        subtitle: 'settings.points.subtitle',
         data: {}
       },
       outputs: {
@@ -85,8 +85,8 @@ export class SettingsPointsComponent {
     this._modalService.open(ServicesComponent, {
       inputs: {
         image: 'images/settings/modal-icons/points.png',
-        title: 'my_points',
-        subtitle: 'redeem_points_for_services'
+        title: 'settings.points.title',
+        subtitle: 'settings.points.subtitle'
       },
       width: "60%"
     });
@@ -99,7 +99,7 @@ export class SettingsPointsComponent {
     this._modalService.open(ServiceModalComponent, {
       inputs: {
         image: 'images/logos/icon.png',
-        title: 'points_redemption',
+        title: 'userInfo.changePoints',
         service: service
       },
       outputs: {
@@ -115,8 +115,8 @@ export class SettingsPointsComponent {
     this._modalService.open(SettingsRewardsComponent, {
       inputs: {
         image: 'images/settings/gift/settings-reward.png',
-        title: 'rewards',
-        subtitle: 'your_rewards_have_arrived',
+        title: 'settings.rewards.title',
+        subtitle: 'settings.rewards.subtitle',
         data: {}
       },
       outputs: {

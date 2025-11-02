@@ -93,8 +93,8 @@ export class SupportOptionsComponent implements OnInit, OnDestroy {
     this._modalService.open(TechnicalSupportConversationComponent, {
       inputs: {
         image: 'images/settings/modal-icons/support-icon.jpg',
-        title: 'support',
-        subtitle: 'faq_intro',
+        title: 'Technical_Support.title',
+        subtitle: 'Technical_Support.subtitle',
         data: {
           chatItem: this.activeCreateConversation()
         }

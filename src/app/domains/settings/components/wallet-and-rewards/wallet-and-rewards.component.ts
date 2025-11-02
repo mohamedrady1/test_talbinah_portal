@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { ModalService } from '../../../../shared/services/model.service';
 import { Logger } from '../../../../common/core/utilities/logging/logger';
 import { WalletComponent } from '../wallet';
@@ -7,12 +8,11 @@ import { ISettingMenuItem } from '../../dtos';
 import { ChargeWalletComponent } from '../charge-wallet';
 import { ServicesComponent } from '../services';
 import { SettingsPointsComponent } from '../settings-points';
-import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-wallet-and-rewards',
   standalone: true,
-  imports: [CommonModule, TranslateApiPipe],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './wallet-and-rewards.component.html',
   styleUrls: ['./wallet-and-rewards.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -28,7 +28,7 @@ export class WalletAndRewardsComponent {
     this._modalService.open(ChargeWalletComponent, {
       inputs: {
         image: 'images/logos/icon.png',
-        title: 'deposit_amount',
+        title: 'PaymentMethods.depositAmount',
       },
       width: '40%',
       isPhoneFromDown: true
@@ -39,8 +39,8 @@ export class WalletAndRewardsComponent {
     this._modalService.open(ServicesComponent, {
       inputs: {
         image: 'images/settings/modal-icons/points.png',
-        title: 'my_points',
-        subtitle: 'redeem_points_for_services'
+        title: 'settings.points.title',
+        subtitle: 'settings.points.subtitle'
       },
       width: "60%"
     });
@@ -49,8 +49,8 @@ export class WalletAndRewardsComponent {
     this._modalService.open(WalletComponent, {
       inputs: {
         image: 'images/settings/modal-icons/wallet.png',
-        title: 'your_wallet',
-        subtitle: 'wallet_description',
+        title: 'settings.wallet.title',
+        subtitle: 'settings.wallet.subtitle',
         data: {}
       },
       outputs: {
@@ -66,8 +66,8 @@ export class WalletAndRewardsComponent {
     this._modalService.open(SettingsPointsComponent, {
       inputs: {
         image: 'images/settings/modal-icons/points.png',
-        title: 'my_points',
-        subtitle: 'redeem_points_for_services',
+        title: 'settings.points.title',
+        subtitle: 'settings.points.subtitle',
         data: {}
       },
       outputs: {

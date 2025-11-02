@@ -25,8 +25,8 @@ export class ComplaintCardComponent {
 
     getStatusText(): string {
         return this.complaint.status === '-1'
-            ? 'pending'
-            : 'resolved';
+            ? 'complaints.filters.pending'
+            : 'complaints.filters.resolved';
     }
 
     getTitle(): string {

@@ -8,7 +8,7 @@
       <div class="government-agency-verification__code-section">
         <div class="government-agency-verification__code-section--label">
           <span class="text">
-            {{ 'enter_org_email_to_activate_support' | translateApi }}
+            {{ 'settings.governmentAgencies.governmentAgencyEmailInstruction' | translate }}
           </span>
         </div>
 
@@ -19,7 +19,7 @@
             <div
               class="government-agency-verification__email-form__form-group government-agency-verification__email-form__form-group--domain">
               <label for="gov-domain" class="government-agency-verification__email-form__label">
-                {{ 'form.domain.label' | translateApi }}
+                {{ 'form.domain.label' | translate }}
               </label>
               <div class="government-agency-verification__email-form__inputs">
                 <span id="gov-domain" class="government-agency-verification__email-form__domain">
@@ -32,17 +32,17 @@
             <div
               class="government-agency-verification__email-form__form-group government-agency-verification__email-form__form-group--email">
               <label for="emailPrefix" class="government-agency-verification__email-form__label">
-                {{ 'email' | translateApi }}
+                {{ 'email' | translate }}
               </label>
               <div class="government-agency-verification__email-form__inputs">
                 <input id="emailPrefix" type="text" class="government-agency-verification__email-form__input"
                   formControlName="emailPrefix" [attr.aria-invalid]="hasError" aria-describedby="emailError"
-                  [placeholder]="'enter_email' | translateApi" />
+                  [placeholder]="'enter_email' | translate" />
               </div>
               @if (hasError) {
               <div id="emailError" class="government-agency-verification__email-form__error" role="alert"
                 aria-live="polite">
-                {{ 'email_required' | translateApi }}
+                {{ 'email_required' | translate }}
               </div>
               }
             </div>
@@ -55,15 +55,15 @@
       <!-- Submit Button -->
       <div class="government-agency-verification__button-container">
         <button type="submit" class="btn" [disabled]="isLoading()" (click)="submitForm()"
-          [attr.aria-label]="'OtpMethodSelection.Submit' | translateApi">
+          [attr.aria-label]="'OtpMethodSelection.Submit' | translate">
           <span class="btn__label">
             @if (isLoading()) {
             <div class="government-agency-verification__button-loading" aria-label="Submit in progress">
-              {{ 'in_progress' | translateApi }}
+              {{ 'in_progress' | translate }}
               <span class="dot-loader"></span>
             </div>
             } @else {
-            {{ 'verify_the_code' | translateApi }}
+            {{ 'verify_the_code' | translate }}
             }
           </span>
         </button>
@@ -76,7 +76,7 @@
       <div class="government-agency-verification__code-section">
         <div class="government-agency-verification__code-section--label">
           <span class="text">
-            {{ 'enter_verification_code_email' | translateApi }}
+            {{ 'settings.governmentAgencies.governmentAgencyVerificationCodeLabel' | translate }}
           </span>
           <span class="value">
             {{ EmailSent() || '' }}
@@ -87,7 +87,7 @@
           [ngClass]="{ 'government-agency-verification__otp-input--error': codeNotValid() }">
           <app-code-input [clearInputs]="clearInputsValue" [inputsNumber]="inputsNumber" [typedInput]="'num'"
             (codeChanged)="handleCodeChange($event)" (codeCompleted)="handleCodeCompletion($event)"
-            [attr.aria-label]="'governmentAgency.otpInput' | translateApi"></app-code-input>
+            [attr.aria-label]="'governmentAgency.otpInput' | translate"></app-code-input>
         </div>
 
         @if (codeNotValid()) {

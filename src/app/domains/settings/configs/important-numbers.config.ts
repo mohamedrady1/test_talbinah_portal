@@ -3,19 +3,19 @@ import { InputSearchConfig } from '../../../shared/components/global-search-inpu
 
 export const getImportantNumbersErrorConfig = (onRetry: () => void): ErrorStateConfig => ({
     imageUrl: 'images/emptyStates/image 230.svg',
-    title: 'important_numbers_loading_error',
+    title: 'settings.importantNumbers.errorTitle',
     onRetry,
     imgWidth: '25%'
 });
 
 export const ImportantNumbersEmptyConfig: EmptyStateConfig = {
     imageUrl: 'images/emptyStates/image 230.svg',
-    title: 'no_important_numbers_available',
+    title: 'settings.importantNumbers.emptyTitle',
     imgWidth: '25%'
 };
 
 export const ImportantNumbersSearchConfig: InputSearchConfig = {
-    placeholder: 'search_important_numbers_placeholder',
+    placeholder: 'settings.importantNumbers.searchPlaceholder',
     debounceMs: 300,
     persistKey: 'important-numbers-search',
     suggestions: [],

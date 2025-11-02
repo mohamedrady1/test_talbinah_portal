@@ -3,22 +3,22 @@
 
     <div class="my-favourites__modal-filterations">
       <h4 class="my-favourites__label-list">
-        ❤️ {{'explore_favorites' | translateApi}}
+        ❤️ {{'settings.myFavourites.myFavouritesExplore' | translate}}
       </h4>
       <div class="my-favourites__modal-filterations--tabs">
         <button type="button" class="my-favourites__tab" [class.my-favourites__tab--active]="selected() === 'doctors'"
           (click)="selectTab('doctors')">
-          {{ 'doctors' | translateApi }}
+          {{ 'general.doctors' | translate }}
         </button>
 
         <button type="button" class="my-favourites__tab" [class.my-favourites__tab--active]="selected() === 'podcasts'"
           (click)="selectTab('podcasts')">
-          {{ 'podcast' | translateApi }}
+          {{ 'podcast.title' | translate }}
         </button>
 
         <button type="button" class="my-favourites__tab" [class.my-favourites__tab--active]="selected() === 'articles'"
           (click)="selectTab('articles')">
-          {{ 'home_card_articles_title' | translateApi }}
+          {{ 'home_card_articles_title' | translate }}
         </button>
       </div>
 

@@ -140,7 +140,7 @@ export class PsychologicalSocietyMainPageComponent implements OnInit, OnDestroy 
   }));
 
   protected showAll = signal(false);
-  readonly selectedTab = signal<ITab | null>({ id: 0, title: 'all' } as ITab);
+  readonly selectedTab = signal<ITab | null>({ id: 0, title: 'general.all' } as ITab);
 
   protected readonly postsEmptyState = PostsEmptyState;
   protected readonly postsErrorState = getCardsError(() => this.psychologicalPostsFacade.fetchPosts());

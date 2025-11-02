@@ -3,19 +3,19 @@ import { InputSearchConfig } from '../../../shared/components/global-search-inpu
 
 export const getWalletErrorConfig = (onRetry: () => void): ErrorStateConfig => ({
     imageUrl: 'images/emptyStates/image 230.svg',
-    title: 'wallet_loading_error',
+    title: 'settings.wallet.walletCard.errorTitle',
     onRetry,
     imgWidth: '25%'
 });
 
 export const WalletEmptyConfig: EmptyStateConfig = {
     imageUrl: 'images/emptyStates/image 230.svg',
-    title: 'no_wallet_data',
+    title: 'settings.wallet.walletCard.emptyTitle',
     imgWidth: '25%'
 };
 
 export const WalletSearchConfig: InputSearchConfig = {
-    placeholder: 'search_transactions_placeholder',
+    placeholder: 'settings.wallet.walletCard.searchPlaceholder',
     debounceMs: 300,
     persistKey: 'wallet-search',
     suggestions: [],

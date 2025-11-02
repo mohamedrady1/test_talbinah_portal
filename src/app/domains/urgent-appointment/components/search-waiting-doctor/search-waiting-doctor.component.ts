@@ -88,7 +88,7 @@ export class SearchWaitingDoctorComponent implements OnInit, OnDestroy {
         this.cancelRequested.emit();
         setTimeout(() => {
           this._ModalService.closeAll();
-          this.openRecallAndClose('urgent_search_cancelled');
+          this.openRecallAndClose('RecallAppointment.cancelled');
         }, 0);
       } else if (this._cancelEmergencyAppointmentFacade.cancelError()) {
         this.isCancelling.set(false);

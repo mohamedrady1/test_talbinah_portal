@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TranslateApiPipe } from '../../../common/core/translations';
+import { TranslateModule } from '@ngx-translate/core';
 import { SvgIconComponent } from "../svg-icon";
 
 @Component({
   selector: 'app-local-search',
   standalone: true,
-  imports: [CommonModule, FormsModule, TranslateApiPipe, SvgIconComponent],
+  imports: [CommonModule, FormsModule, TranslateModule, SvgIconComponent],
   templateUrl: './local-search.component.html',
   styleUrls: ['./local-search.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

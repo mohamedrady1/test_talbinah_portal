@@ -1,12 +1,12 @@
 import { Component, computed, effect, ElementRef, inject, Input, PLATFORM_ID, signal, ViewChild, WritableSignal } from '@angular/core';
 import { PageLayoutHeaderComponent } from "../../../../shared/components/page-layout-header/page-layout-header.component";
 import { EmptyStateComponent, EmptyStateConfig, ErrorStateComponent, ILayoutGridHeaderConfig, LOCALIZATION_SERVICE, LocalizationService, MoodModalIntegrationService, ModalService, StorageKeys, ToastService } from '../../../../shared';
-import { CommunityProfileHeaderConfig, TalbinahCommunityHeaderConfig, TalbinahCommunityRoutesEnum, TalbinahCommunityRouteData } from '../../constants';
+import { CommunityProfileHeaderConfig, TalbinahCommunityHeaderConfig, TalbinahCommunityRoutesEnum } from '../../constants';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AutoExactHeightDirective } from '../../../../common/core/directives';
 import { AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { ApiError, CardType, defaultPaginationParameters, handleApiErrors, handleApiErrorsMessage, IPaginationParameters, Logger, MetadataService, StorageService } from '../../../../common';
+import { ApiError, CardType, defaultPaginationParameters, handleApiErrors, handleApiErrorsMessage, IPaginationParameters, Logger, StorageService } from '../../../../common';
 import { catchError, EMPTY, filter, finalize, Subscription, take, tap } from 'rxjs';
 import { IAllPostsResponseDto, ICreatePostResponseDto, IDeletePostResponseDto, IPost, IPostInterest, IPostsInterestsListingResponseDto, IUpdateFollowResponseDto, IUserCommunityProfileResponseDto, IUserIdentifyProfileData, IUserIdentifyProfileResponseDto } from '../../dtos';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
@@ -122,7 +122,6 @@ export class UserProfileComponent implements AfterViewInit {
   private readonly _ProfileTriggerService = inject(ProfileTriggerService);
   private readonly _RefreshUserPostsService = inject(RefreshUserPostsService);
   private readonly moodModalIntegrationService = inject(MoodModalIntegrationService);
-  private readonly seo = inject(MetadataService);
   // Component state signals
   private readonly userCommunityProfileId = signal<number | null>(null); // ID of the user whose profile is being viewed
   protected readonly isMyCommunityProfile = signal<boolean>(false); // True if the viewed profile belongs to the current user
@@ -376,11 +375,6 @@ export class UserProfileComponent implements AfterViewInit {
       const profileData = this.userCommunityProfileResponse()?.data?.profileData;
       this.userProfileSignal.set(profileData ?? null); // Store profile data
       Logger.debug('User Community Profile fetched successfully:', response);
-
-      // Setup SEO with user name
-      if (this.isBrowser) {
-        this.setupSEO(profileData?.dummy_name);
-      }
     } else {
       this.updateUserCommunityProfileState({
         userCommunityProfileResponse: null,
@@ -884,32 +878,5 @@ export class UserProfileComponent implements AfterViewInit {
     });
   }
   // --- End: Following List ---
-
-  // --- Start: SEO Setup ---
-  private setupSEO(userName?: string): void {
-    if (!this.isBrowser) return;
-
-    const lang = this._LocalizationService.getCurrentLanguage();
-    const routeData = TalbinahCommunityRouteData.TalbinahCommunityMainPage;
-
-    // Build title with user name if available
-    let title: string;
-    if (userName) {
-      title = lang === 'ar'
-        ? `${userName} | مجتمع تلبينة`
-        : `${userName} | Talbinah Community`;
-    } else {
-      title = lang === 'ar' ? routeData.title.ar : routeData.title.en;
-    }
-
-    const description = lang === 'ar' ? routeData.meta.description.ar : routeData.meta.description.en;
-
-    this.seo.setMetaTags({
-      title,
-      description,
-      locale: lang === 'ar' ? 'ar_SA' : 'en_US'
-    });
-  }
-  // --- End: SEO Setup ---
 
 }

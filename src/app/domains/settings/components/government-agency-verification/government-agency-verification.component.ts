@@ -197,8 +197,8 @@ export class GovernmentAgencyVerificationComponent implements OnInit, OnDestroy 
     this._modalService.open(GovernmentAgenciesDoctorsComponent, {
       inputs: {
         image: 'images/settings/modal-icons/government-agencies.png',
-        title: 'government_entities',
-        subtitle: 'link_government_account',
+        title: 'settings.governmentAgencies.title',
+        subtitle: 'settings.governmentAgencies.subtitle',
         data: {}
       },
       outputs: {

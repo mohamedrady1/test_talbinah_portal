@@ -82,7 +82,7 @@ export class SeminarStoreService {
     this.modalService.open(StatusInfoComponent, {
       inputs: {
         image: 'images/icons/logo-2.png',
-        title: dataInput?.item?.storeSuccess ? 'subscription_confirmed' : 'subscription_faild',
+        title: dataInput?.item?.storeSuccess ? 'general.subscriptionConfirmed' : 'general.subscriptionFaild',
         data: dataInput
       },
       outputs: {

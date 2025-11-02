@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslateModule } from '@ngx-translate/core';
 import { Logger, useNavigation } from '../../../../common';
 import { ModalService } from '../../../../shared';
 import { BookUrgentAppointmentComponent } from '../book-urgent-appointment';
@@ -9,14 +9,14 @@ import { UrgentAppointmentHeaderConfig } from '../../constants';
 @Component({
   selector: 'app-recall-new-appointement',
   standalone: true,
-  imports: [CommonModule, TranslateApiPipe],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './recall-new-appointement.component.html',
   styleUrls: ['./recall-new-appointement.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RecallNewAppointementComponent {
   private readonly _modalService = inject(ModalService);
-  @Input() title: string = 'request_expired_urgent_appointment_canceled';
+  @Input() title: string = 'RecallAppointment.TimeExpiredTitle';
 
   // --- Properties for HTML bindings ---
   isSubmitting: boolean = false;

@@ -3,7 +3,7 @@ import { InputSearchConfig } from '../../../shared/components/global-search-inpu
 
 // Search Config
 export const FaqsSearchConfig: InputSearchConfig = {
-    placeholder: 'search_faq_placeholder',
+    placeholder: 'settings.settingFaqs.searchFaqsPlaceholder',
     debounceMs: 300,
     persistKey: 'faqs-search',
     suggestions: [],
@@ -17,7 +17,7 @@ export const FaqsSearchConfig: InputSearchConfig = {
 // Error State Config Factory
 export const getFaqsErrorConfig = (onRetry: () => void): ErrorStateConfig => ({
     imageUrl: 'images/emptyStates/image-13.svg',
-    title: 'faq_loading_error',
+    title: 'settings.settingFaqs.errorTitle',
     onRetry,
     imgWidth: '38%'
 });
@@ -25,6 +25,7 @@ export const getFaqsErrorConfig = (onRetry: () => void): ErrorStateConfig => ({
 // Empty State Config
 export const FaqsEmptyConfig: EmptyStateConfig = {
     imageUrl: 'images/emptyStates/image-13.svg',
-    title: 'no_faqs_available',
+    title: 'settings.settingFaqs.emptyFaqsTitle',
+    message: 'settings.settingFaqs.emptyFaqsMessage',
     imgWidth: '38%'
 }; 

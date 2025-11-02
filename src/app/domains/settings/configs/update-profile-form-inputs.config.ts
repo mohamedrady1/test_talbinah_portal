@@ -80,9 +80,9 @@ export const updateProfileConfig: IFormInputConfig[] = [
     id: 'updateProfileEmail',
     type: ALL_INPUT_TYPES.EMAIL,
     name: 'email',
-    label: 'email',
+    label: 'form.email.label',
     isRequired: true,
-    placeholder: 'enter_email',
+    placeholder: 'form.email.placeholder',
     defaultValue: null,
     isDisabled: false,
     widthClass: 'w-half',
@@ -93,8 +93,8 @@ export const updateProfileConfig: IFormInputConfig[] = [
     globalClass: 'custom-input-wrapper',
     inputClass: 'form-control',
     validation: [
-      { function: Validators.required, errorMessage: 'email_required' },
-      { function: Validators.email, errorMessage: 'invalid_email', errorName: 'email' }
+      { function: Validators.required, errorMessage: 'form.email.errors.required' },
+      { function: Validators.email, errorMessage: 'form.email.errors.email', errorName: 'email' }
     ],
     enableLabelClick: true,
     stopPaste: true,
@@ -103,9 +103,9 @@ export const updateProfileConfig: IFormInputConfig[] = [
     id: 'updateProfileIdentifyNumber',
     type: ALL_INPUT_TYPES.TEXT,
     name: 'identifyNumber',
-    label: 'ID_number',
+    label: 'form.IdentifyNumber.label',
     isRequired: false,
-    placeholder: 'enter_id',
+    placeholder: 'form.IdentifyNumber.placeholder',
     defaultValue: null,
     isDisabled: false,
     widthClass: 'w-half',
@@ -116,7 +116,7 @@ export const updateProfileConfig: IFormInputConfig[] = [
     globalClass: 'custom-input-wrapper',
     inputClass: 'form-control',
     validation: [
-      { function: Validators.required, errorMessage: 'enter_correct_id_number' }
+      { function: Validators.required, errorMessage: 'form.IdentifyNumber.errors.required' }
     ],
     enableLabelClick: true,
     stopPaste: true,

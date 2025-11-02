@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 import { WalletPointsRecordsFacade } from '../../services/wallet-points-records.facade';
 import { AutoExactHeightDirective } from '../../../../common';
 import { EmptyStateCardComponent } from '../../../../shared/components/empty-state-card/empty-state-card.component';
 import { ErrorStateCardComponent } from '../../../../shared/components/error-state-card/error-state-card.component';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+
 interface FilterOption {
     label: string;
     value: string;
@@ -32,7 +33,7 @@ interface PointsHistoryItem {
     standalone: true,
     imports: [
         CommonModule,
-        TranslateApiPipe,
+        TranslateModule,
         EmptyStateCardComponent,
         ErrorStateCardComponent,
         AutoExactHeightDirective
@@ -45,9 +46,9 @@ export class PointsHistoryComponent implements OnInit {
     activeFilter = signal('all');
 
     filters: FilterOption[] = [
-        { label: 'all', value: 'all' },
-        { label: 'earned_points', value: 'earned' },
-        { label: 'used_points', value: 'used' }
+        { label: 'settings.pointsHistory.filters.all', value: 'all' },
+        { label: 'settings.pointsHistory.filters.earned', value: 'earned' },
+        { label: 'settings.pointsHistory.filters.used', value: 'used' }
     ];
 
     private readonly walletPointsRecordsFacade = inject(WalletPointsRecordsFacade);
@@ -61,14 +62,14 @@ export class PointsHistoryComponent implements OnInit {
     // Empty state configuration
     readonly pointsHistoryEmptyState = {
         imageUrl: 'images/emptyStates/image-6.svg',
-        title: 'no_points_logs',
+        title: 'settings.pointsHistory.emptyState.title',
         imgWidth: '25%'
     };
 
     // Error state configuration
     readonly pointsHistoryErrorState = {
         imageUrl: 'images/emptyStates/image-6.svg',
-        title: 'points_log_error',
+        title: 'settings.pointsHistory.errorState.title',
         onRetry: () => this.loadPointsHistory(),
         imgWidth: '25%'
     };

@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, inject, effect, EffectRef, Chan
 import { StatusInfoComponent } from '../../../payments/components/status-info/status-info.component';
 import { WalletPointsToCouponFacade } from '../../services/wallet-points-to-coupon.facade';
 import { ModalService } from '../../../../shared/services/model.service';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { Logger } from '../../../../common';
 
@@ -11,7 +11,7 @@ import { Logger } from '../../../../common';
   standalone: true,
   imports: [
     CommonModule,
-    TranslateApiPipe
+    TranslateModule
   ],
   templateUrl: './service-modal.component.html',
   styleUrls: ['./service-modal.component.scss'],
@@ -77,11 +77,11 @@ export class ServiceModalComponent implements OnDestroy {
     this._modalService.open(StatusInfoComponent, {
       inputs: {
         image: 'images/mentalHealthScale/icons/talbinah.png',
-        title: 'redeemed_successfully',
-        statusTitleKey: 'redeemed_successfully',
+        title: 'general.pointsConvertedSuccessfully',
+        statusTitleKey: 'general.pointsConvertedSuccessfully',
         data: {
           statusLabels: {
-            successTitle: 'redeemed_successfully',
+            successTitle: 'general.pointsConvertedSuccessfully',
           },
           item: {
             storeSuccess: true,
@@ -107,11 +107,11 @@ export class ServiceModalComponent implements OnDestroy {
     this._modalService.open(StatusInfoComponent, {
       inputs: {
         image: 'images/mentalHealthScale/icons/talbinah.png',
-        title: 'redemption_failed',
-        statusTitleKey: 'redemption_failed',
+        title: 'general.pointsConversionFailed',
+        statusTitleKey: 'general.pointsConversionFailed',
         data: {
           statusLabels: {
-            successTitle: 'redemption_failed',
+            successTitle: 'general.pointsConversionFailed',
           },
           item: {
             storeSuccess: false,

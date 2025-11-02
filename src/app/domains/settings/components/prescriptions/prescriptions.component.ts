@@ -40,7 +40,7 @@ import {
 } from '@angular/common';
 import { prescriptionsEmptyConfig } from '../../configs/settings-empty-state.config';
 import { prescriptionsErrorConfig } from '../../configs';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+
 @Component({
   selector: 'app-prescriptions',
   standalone: true,
@@ -52,8 +52,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     ErrorStateCardComponent,
     EmptyStateCardComponent,
     FileViewerComponent,
-    PaginationListingComponent,
-    TranslateApiPipe
+    PaginationListingComponent
   ],
   templateUrl: './prescriptions.component.html',
   styleUrls: ['./prescriptions.component.scss'],

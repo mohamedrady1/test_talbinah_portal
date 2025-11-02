@@ -23,8 +23,10 @@ import { RemoteStreamComponent } from "../remote-stream";
 import { Meta, Title } from '@angular/platform-browser';
 import { IGlobalReservationModel } from '../../models';
 import { AgoraRtcService, Logger } from '../../../../common';
+import { HttpClient } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject } from 'rxjs';
-import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-voice-video-agora-chat',
@@ -32,9 +34,9 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
   imports: [
     CommonModule,
     SvgIconComponent,
+    TranslateModule,
     MediaControlsComponent,
-    RemoteStreamComponent,
-    TranslateApiPipe
+    RemoteStreamComponent
   ],
   templateUrl: './voice-video-agora-chat.component.html',
   styleUrls: ['./voice-video-agora-chat.component.scss'],

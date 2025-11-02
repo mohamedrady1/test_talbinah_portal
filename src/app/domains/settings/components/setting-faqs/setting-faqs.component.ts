@@ -1,4 +1,5 @@
 import { Component, inject, OnInit, signal, computed, ChangeDetectionStrategy } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { LocalSearchComponent, LoadingShimmerComponent, ErrorStateCardComponent, EmptyStateCardComponent, ModalService } from '../../../../shared';
 import { FaqCardComponent } from '../faq-card';
 import { FaqsCategoriesFacade } from '../../services';
@@ -6,23 +7,24 @@ import { AutoExactHeightDirective, Logger } from '../../../../common';
 import {
   getFaqsCategoriesErrorConfig,
   FaqsCategoriesEmptyConfig,
+  FaqsCategoriesSearchConfig
 } from '../../configs';
 import { FaqDetailsComponent } from '../faq-details';
 import { CommonModule } from '@angular/common';
 import { IFaqsCategoryDto } from '../../dtos';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+
 @Component({
   selector: 'app-setting-faqs',
   standalone: true,
   imports: [
     LocalSearchComponent,
+    TranslateModule,
     FaqCardComponent,
     LoadingShimmerComponent,
     ErrorStateCardComponent,
     EmptyStateCardComponent,
     CommonModule,
-    AutoExactHeightDirective,
-    TranslateApiPipe
+    AutoExactHeightDirective
   ],
   templateUrl: './setting-faqs.component.html',
   styleUrls: ['./setting-faqs.component.scss'],
@@ -78,8 +80,8 @@ export class SettingFaqsComponent implements OnInit {
     this._ModalService.open(FaqDetailsComponent, {
       inputs: {
         image: 'images/settings/modal-icons/faqs.png',
-        title: 'faqs',
-        subtitle: 'faq_intro',
+        title: 'settings.settingFaqs.title',
+        subtitle: 'settings.settingFaqs.subtitle',
         item: category,
       },
       outputs: {

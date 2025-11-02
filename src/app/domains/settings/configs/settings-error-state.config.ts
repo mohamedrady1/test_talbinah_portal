@@ -28,7 +28,7 @@ export function getmyFavouriteSettingsError(onRetry?: () => void): ErrorStateCon
 export const sentGiftsErrorConfig = (onRetry: () => void): ErrorStateConfig => {
   return {
     imageUrl: 'images/emptyStates/image-10.svg',
-    title: 'sent_gifts_error',
+    title: 'gift.sentErrorTitle',
     retryLabel: 'general.retry',
     onRetry
   };
@@ -37,7 +37,7 @@ export const sentGiftsErrorConfig = (onRetry: () => void): ErrorStateConfig => {
 export const receivedGiftsErrorConfig = (onRetry: () => void): ErrorStateConfig => {
   return {
     imageUrl: 'images/emptyStates/image-10.svg',
-    title: 'received_gifts_error',
+    title: 'gift.receivedErrorTitle',
     retryLabel: 'general.retry',
     onRetry
   };
@@ -47,7 +47,7 @@ export const receivedGiftsErrorConfig = (onRetry: () => void): ErrorStateConfig 
 export const MyFavouritesDoctorsErrorState = (onRetry: () => void): ErrorStateConfig => {
   return {
     imageUrl: 'images/emptyStates/image-4.svg',
-    title: 'favorites_loading_error',
+    title: 'settings.myFavourites.errorState.error_loading_favourites',
     retryLabel: 'general.retry',
     onRetry
   };
@@ -56,7 +56,7 @@ export const MyFavouritesDoctorsErrorState = (onRetry: () => void): ErrorStateCo
 export const MyFavouritesPodcastsErrorState = (onRetry: () => void): ErrorStateConfig => {
   return {
     imageUrl: 'images/emptyStates/image-4.svg',
-    title: 'favorites_loading_error',
+    title: 'settings.myFavourites.errorState.error_loading_favourites',
     retryLabel: 'general.retry',
     onRetry
   };
@@ -65,7 +65,7 @@ export const MyFavouritesPodcastsErrorState = (onRetry: () => void): ErrorStateC
 export const MyFavouritesArticlesErrorState = (onRetry: () => void): ErrorStateConfig => {
   return {
     imageUrl: 'images/emptyStates/image-4.svg',
-    title: 'favorites_loading_error',
+    title: 'settings.myFavourites.errorState.error_loading_favourites',
     retryLabel: 'general.retry',
     onRetry
   };
@@ -74,7 +74,7 @@ export const MyFavouritesArticlesErrorState = (onRetry: () => void): ErrorStateC
 export const prescriptionsErrorConfig = (onRetry: () => void): ErrorStateConfig => {
   return {
     imageUrl: 'images/emptyStates/image-4.svg',
-    title: 'error_loading_medical_prescriptions',
+    title: 'settings.prescription.errorTitle',
     retryLabel: 'general.retry',
     onRetry,
     imgWidth: '30%'
@@ -85,7 +85,7 @@ export const prescriptionsErrorConfig = (onRetry: () => void): ErrorStateConfig 
 export const visitReportsErrorConfig = (onRetry: () => void): ErrorStateConfig => {
   return {
     imageUrl: 'images/emptyStates/image-6.svg',
-    title: 'visit_reports_loading_error',
+    title: 'settings.visitReports.errorTitle',
     retryLabel: 'general.retry',
     onRetry,
     imgWidth: '30%'
@@ -95,7 +95,7 @@ export const visitReportsErrorConfig = (onRetry: () => void): ErrorStateConfig =
 export const governmentAgenciesErrorConfig = (onRetry: () => void): ErrorStateConfig => {
   return {
     imageUrl: 'images/emptyStates/image-10.svg',
-    title: 'government_authorities_loading_error',
+    title: 'settings.governmentAgencies.errorTitle',
     retryLabel: 'general.retry',
     onRetry,
     imgWidth: '30%'
@@ -105,7 +105,7 @@ export const governmentAgenciesErrorConfig = (onRetry: () => void): ErrorStateCo
 export const technicalSupportChatsErrorConfig = (onRetry: () => void): ErrorStateConfig => {
   return {
     imageUrl: 'images/emptyStates/image-11.svg',
-    title: 'conversations_loading_error',
+    title: 'settings.technicalSupportChats.errorTitle',
     retryLabel: 'general.retry',
     onRetry,
     imgWidth: '30%'

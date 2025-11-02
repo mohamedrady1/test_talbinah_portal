@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, ElementRef, inject, PLATFORM_ID, signal, ViewChild } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { ILayoutGridHeaderConfig, LocalizationService, MoodModalIntegrationService, PageLayoutHeaderComponent } from '../../../../shared';
-import { ArticlesHeaderConfig, ArticlesRouteData } from '../../constants';
-import { AutoExactHeightDirective, MetadataService } from '../../../../common';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
+import { ILayoutGridHeaderConfig, MoodModalIntegrationService, PageLayoutHeaderComponent } from '../../../../shared';
+import { ArticlesHeaderConfig } from '../../constants/articles-header.config';
+import { AutoExactHeightDirective } from '../../../../common/core/directives';
 import { MainPageRoutesEnum } from '../../../main-page';
 import { Router, RouterModule } from '@angular/router';
 import { SiteHeaderComponent } from '../../../header';
@@ -27,40 +26,13 @@ export class ArticlesLayoutComponent {
 
   private readonly router = inject(Router);
   private readonly moodModalIntegrationService = inject(MoodModalIntegrationService);
-  private readonly seo = inject(MetadataService);
-  private readonly localization = inject(LocalizationService);
-  private readonly platformId = inject(PLATFORM_ID);
-  private readonly isBrowser = isPlatformBrowser(this.platformId);
   @ViewChild('card') cardRef!: ElementRef<HTMLElement>;
 
-  ngOnInit(): void {
-    // Setup SEO metadata
-    if (this.isBrowser) {
-      this.setupSEO();
-    }
+  protected onCloseRequested(): void {
+    this.router.navigate([`/${MainPageRoutesEnum.MAINPAGE}`]);
   }
 
   ngAfterViewInit(): void {
     // this.moodModalIntegrationService.checkMoodModal();
-  }
-
-  private setupSEO(): void {
-    if (!this.isBrowser) return;
-
-    const lang = this.localization.getCurrentLanguage();
-    const routeData = ArticlesRouteData.ArticlesMainPage;
-
-    const title = lang === 'ar' ? routeData.title.ar : routeData.title.en;
-    const description = lang === 'ar' ? routeData.meta.description.ar : routeData.meta.description.en;
-
-    this.seo.setMetaTags({
-      title,
-      description,
-      locale: lang === 'ar' ? 'ar_SA' : 'en_US'
-    });
-  }
-
-  protected onCloseRequested(): void {
-    this.router.navigate([`/${MainPageRoutesEnum.MAINPAGE}`]);
   }
 }

@@ -1,7 +1,7 @@
 <main class="update-personal-profile-info" role="main">
   <section class="update-personal-profile-info__container">
     <h4 class="update-personal-profile-info__box-label">
-      {{ 'personal_details' | translateApi }}
+      ❤️ {{ 'general.personalDetails' | translate }}
     </h4>
 
     <form class="general-form-wrapper" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
@@ -14,7 +14,7 @@
                     'general-form-wrapper__label--error': getError(formItem.name),
                     'general-form-wrapper__label--clickable': formItem.enableLabelClick
                   }">
-              {{ formItem.label | translateApi }}
+              {{ formItem.label | translate }}
               @if (formItem.isRequired) {
               <span class="general-form-wrapper__required">*</span>
               }
@@ -26,7 +26,7 @@
           @case(allInputTypes.TEXT) {
           <div class="custom-input-wrapper" [ngClass]="{ 'disabled-input': !isEditable() }">
             <input type="text" class="form-control custom-input-wrapper__input" [id]="formItem.name"
-              [formControlName]="formItem.name" [placeholder]="(formItem.placeholder ?? '') | translateApi"
+              [formControlName]="formItem.name" [placeholder]="(formItem.placeholder ?? '') | translate"
               autocomplete="off" />
           </div>
           }
@@ -34,7 +34,7 @@
           @case(allInputTypes.EMAIL) {
           <div class="custom-input-wrapper" [ngClass]="{ 'disabled-input': !isEditable() }">
             <input type="email" class="form-control custom-input-wrapper__input" [id]="formItem.name"
-              [formControlName]="formItem.name" [placeholder]="(formItem.placeholder ?? '') | translateApi"
+              [formControlName]="formItem.name" [placeholder]="(formItem.placeholder ?? '') | translate"
               autocomplete="off" />
           </div>
           }
@@ -42,7 +42,7 @@
           @case(allInputTypes.NUMBER) {
           <div class="custom-input-wrapper" [ngClass]="{ 'disabled-input': !isEditable() }">
             <input type="number" class="form-control custom-input-wrapper__input" [id]="formItem.name"
-              [formControlName]="formItem.name" [placeholder]="(formItem.placeholder ?? '') | translateApi"
+              [formControlName]="formItem.name" [placeholder]="(formItem.placeholder ?? '') | translate"
               autocomplete="off" />
           </div>
           }
@@ -51,12 +51,12 @@
           <div class="select-wrapper" [ngClass]="{ 'disabled-input': !isEditable() }">
             <p-select [options]="formItem.listValues" [formControlName]="formItem.name"
               [optionLabel]="formItem.optionLabel || 'label'" [optionValue]="formItem.optionValue || 'value'"
-              [placeholder]="(formItem.placeholder ?? '') | translateApi  " [filter]="true" appendTo="body">
+              [placeholder]="(formItem.placeholder ?? '') | translate" [filter]="true" appendTo="body">
               <ng-template let-option pTemplate="item">
-                {{ option[formItem.optionLabel || 'label'] | translateApi }}
+                {{ option[formItem.optionLabel || 'label'] | translate }}
               </ng-template>
               <ng-template let-selectedOption pTemplate="selectedItem">
-                {{ selectedOption[formItem.optionLabel || 'label'] | translateApi }}
+                {{ selectedOption[formItem.optionLabel || 'label'] | translate }}
               </ng-template>
             </p-select>
           </div>
@@ -70,7 +70,7 @@
               <p-select class="country-code-input-select w-full md:w-56" [options]="allowedCountries() ?? []"
                 [ngModel]="selectedCountryModel()" (ngModelChange)="onCountryChange($event)"
                 [ngModelOptions]="{ standalone: true }" optionLabel="name" [filter]="true" filterBy="name"
-                [placeholder]="isLoadingCountries() ? undefined : ('code' | translateApi)" [virtualScroll]="true"
+                [placeholder]="isLoadingCountries() ? null : ('code' | translate)" [virtualScroll]="true"
                 [virtualScrollItemSize]="42" [autoDisplayFirst]="false" appendTo="body">
                 <ng-template #selectedItem let-selectedOption>
                   <div class="flex items-center gap-2">
@@ -92,8 +92,8 @@
               <input type="number" class="form-control custom-input-wrapper__input" [formControlName]="'phoneNumber'"
                 [placeholder]="
                         !selectedCountryModel()
-                          ? ('phone_should_select_code' | translateApi)
-                          : ('phone_placeholder' | translateApi)
+                          ? ('phone_should_select_code' | translate)
+                          : ('phone_placeholder' | translate)
                       " autocomplete="tel" />
 
               @if (isLoadingCountries()) {
@@ -107,11 +107,11 @@
           <div class="form-field__feedback" role="status" aria-live="polite">
             @if (getError(formItem.name)) {
             <span class="error-label" role="alert">
-              {{ getValidationErrorMessage(formItem.name, formItem.validation || []) | translateApi }}
+              {{ getValidationErrorMessage(formItem.name, formItem.validation || []) | translate }}
             </span>
             } @else if (formItem.hint && !getFormControl(formItem.name)?.value && !formItem.fixedHint) {
             <small class="form-field__hint text-secondary">
-              {{ formItem.hint | translateApi }}
+              {{ formItem.hint | translate }}
             </small>
             }
           </div>
@@ -122,16 +122,16 @@
       <div class="general-form-wrapper__actions">
         @if (!isEditable()) {
         <button type="button" class="btn btn--outline" (click)="isEditable.set(true)">
-          <span class="btn__label">{{ 'edit' | translateApi }}</span>
+          <span class="btn__label">{{ 'general.edit' | translate }}</span>
         </button>
         }
         @if (isEditable()) {
         <button type="submit" class="btn btn--solid" [disabled]="_UpdateUserProfileFacade.loading()">
           <span class="btn__label">
             @if (_UpdateUserProfileFacade.loading()) {
-            <span>{{ 'in_progress' | translateApi }}</span>
+            <span>{{ 'in_progress' | translate }}</span>
             } @else {
-            <span>{{ 'save' | translateApi }}</span>
+            <span>{{ 'general.save' | translate }}</span>
             }
           </span>
         </button>

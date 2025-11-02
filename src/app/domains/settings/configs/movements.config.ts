@@ -3,14 +3,14 @@ import { InputSearchConfig } from '../../../shared/components/global-search-inpu
 
 export const getMovementsErrorConfig = (onRetry: () => void): ErrorStateConfig => ({
     imageUrl: 'images/emptyStates/image 230.svg',
-    title: 'transactions_loading_error',
+    title: 'settings.wallet.movements.errorTitle',
     onRetry,
     imgWidth: '25%'
 });
 
 export const MovementsEmptyConfig: EmptyStateConfig = {
     imageUrl: 'images/emptyStates/image 230.svg',
-    title: 'no_transactions_available',
+    title: 'settings.wallet.movements.emptyTitle',
     imgWidth: '25%'
 };
 

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, Input, PLATFORM_ID } from '@angular/core';
 import { GovernmentAgenciesComponent } from '../government-agencies';
 import { SettingMenuItemsPages } from '../../configs';
+import { TranslateModule } from '@ngx-translate/core';
 import { ModalService } from '../../../../shared';
 import { ISettingMenuItem } from '../../dtos';
 import { Logger } from '../../../../common';
@@ -10,22 +11,19 @@ import { SettingFaqsComponent } from '../setting-faqs';
 import { ImportantNumbersComponent } from '../important-numbers';
 import { WalletComponent } from '../wallet';
 import { GiftToYourLovedOnesComponent } from '../gift-to-your-loved-ones';
-import { isPlatformBrowser, NgClass } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { SecurityModalComponent } from '../security-modal';
 import { MyFavouritesComponent } from '../my-favourites';
 import { ComplaintsListComponent } from '../complaints-list';
 import { PrescriptionsComponent } from '../prescriptions';
 import { SettingsPointsComponent } from '../settings-points';
 import { TechnicalSupportChatsListComponent } from '../../../technical-support';
-import { TranslateApiPipe } from '../../../../common/core/translations';
-import { LocalizationService } from '../../../../shared/localization';
 
 @Component({
   selector: 'app-your-profile-option-card',
   standalone: true,
   imports: [
-    TranslateApiPipe,
-    NgClass
+    TranslateModule
   ],
   templateUrl: './your-profile-option-card.component.html',
   styleUrls: ['./your-profile-option-card.component.scss'],
@@ -35,11 +33,6 @@ export class YourProfileOptionCardComponent {
   @Input() config!: ISettingMenuItem;
   private readonly _modalService = inject(ModalService);
   private readonly _platformId = inject(PLATFORM_ID);
-  protected readonly _localizationService = inject(LocalizationService);
-
-  get isArabic(): boolean {
-    return this._localizationService.getCurrentLanguage() === 'ar';
-  }
 
 
   ngOnInit(): void {
@@ -121,8 +114,8 @@ export class YourProfileOptionCardComponent {
     this._modalService.open(PrescriptionsComponent, {
       inputs: {
         image: 'images/settings/modal-icons/security.png',
-        title: 'prescriptions',
-        subtitle: 'manage_medical_prescriptions',
+        title: 'settings.prescription.title',
+        subtitle: 'settings.prescription.subtitle',
         data: {}
       },
       outputs: {
@@ -138,8 +131,8 @@ export class YourProfileOptionCardComponent {
     this._modalService.open(MyFavouritesComponent, {
       inputs: {
         image: 'images/settings/modal-icons/my-favourites.png',
-        title: 'Favorite',
-        subtitle: 'favorites_overview',
+        title: 'settings.myFavourites.title',
+        subtitle: 'settings.myFavourites.subtitle',
         data: {}
       },
       outputs: {
@@ -157,8 +150,8 @@ export class YourProfileOptionCardComponent {
     this._modalService.open(SecurityModalComponent, {
       inputs: {
         image: 'images/settings/modal-icons/security.png',
-        title: 'security',
-        subtitle: 'manage_security_and_devices_preferences',
+        title: 'settings.security.title',
+        subtitle: 'settings.security.subtitle',
         data: {}
       },
       outputs: {
@@ -170,8 +163,8 @@ export class YourProfileOptionCardComponent {
     this._modalService.open(GovernmentAgenciesComponent, {
       inputs: {
         image: 'images/settings/modal-icons/government-agencies.png',
-        title: 'government_entities',
-        subtitle: 'link_government_account',
+        title: 'settings.governmentAgencies.title',
+        subtitle: 'settings.governmentAgencies.subtitle',
         data: {}
       },
       outputs: {
@@ -188,8 +181,8 @@ export class YourProfileOptionCardComponent {
     this._modalService.open(ComplaintsListComponent, {
       inputs: {
         image: 'images/settings/modal-icons/complaints.png',
-        title: 'complaints',
-        subtitle: 'your_voice_matters_description',
+        title: 'settings.complaintsList.title',
+        subtitle: 'settings.complaintsList.subtitle',
         data: {}
       },
       outputs: {
@@ -204,8 +197,8 @@ export class YourProfileOptionCardComponent {
     this._modalService.open(VisitReportsComponent, {
       inputs: {
         image: 'images/settings/modal-icons/visit-reports.png',
-        title: 'visit_reports',
-        subtitle: 'visit_reports_intro',
+        title: 'settings.visitReports.title',
+        subtitle: 'settings.visitReports.subtitle',
         data: {}
       },
       outputs: {
@@ -221,8 +214,8 @@ export class YourProfileOptionCardComponent {
     this._modalService.open(InvitationCodeComponent, {
       inputs: {
         image: 'images/settings/modal-icons/invitation-code.png',
-        title: 'invitation_code',
-        subtitle: 'referral_intro',
+        title: 'settings.invitationCode.title',
+        subtitle: 'settings.invitationCode.subtitle',
         invitationCode: 'TALBINAH-12523'
       },
       outputs: {
@@ -239,8 +232,8 @@ export class YourProfileOptionCardComponent {
     this._modalService.open(SettingFaqsComponent, {
       inputs: {
         image: 'images/settings/modal-icons/faqs.png',
-        title: 'faqs',
-        subtitle: 'faq_intro',
+        title: 'settings.settingFaqs.title',
+        subtitle: 'settings.settingFaqs.subtitle',
         data: {}
       },
       outputs: {
@@ -256,8 +249,8 @@ export class YourProfileOptionCardComponent {
     this._modalService.open(ImportantNumbersComponent, {
       inputs: {
         image: 'images/settings/modal-icons/important-numbers.png',
-        title: 'important_numbers',
-        subtitle: 'important_numbers_intro',
+        title: 'settings.importantNumbers.title',
+        subtitle: 'settings.importantNumbers.subtitle',
         data: {}
       },
       outputs: {
@@ -273,8 +266,8 @@ export class YourProfileOptionCardComponent {
     this._modalService.open(WalletComponent, {
       inputs: {
         image: 'images/settings/modal-icons/wallet.png',
-        title: 'your_wallet',
-        subtitle: 'wallet_description',
+        title: 'settings.wallet.title',
+        subtitle: 'settings.wallet.subtitle',
         data: {}
       },
       outputs: {
@@ -291,8 +284,8 @@ export class YourProfileOptionCardComponent {
     this._modalService.open(GiftToYourLovedOnesComponent, {
       inputs: {
         image: 'images/settings/modal-icons/gift-loved-ones.png',
-        title: 'gift_someone_you_love',
-        subtitle: 'quick_gift_intro',
+        title: 'settings.giftLovedOnes.title',
+        subtitle: 'settings.giftLovedOnes.subtitle',
         data: {}
       },
       outputs: {
@@ -309,8 +302,8 @@ export class YourProfileOptionCardComponent {
     this._modalService.open(SettingsPointsComponent, {
       inputs: {
         image: 'images/settings/modal-icons/points.png',
-        title: 'my_points',
-        subtitle: 'redeem_points_for_services',
+        title: 'settings.points.title',
+        subtitle: 'settings.points.subtitle',
         data: {}
       },
       outputs: {
@@ -326,8 +319,8 @@ export class YourProfileOptionCardComponent {
 
       inputs: {
         image: 'images/settings/modal-icons/support-icon.jpg',
-        title: 'support',
-        subtitle: 'faq_intro',
+        title: 'Technical_Support.title',
+        subtitle: 'Technical_Support.subtitle',
         data: {}
       },
       width: "60%"

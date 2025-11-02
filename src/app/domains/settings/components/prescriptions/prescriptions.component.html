@@ -2,7 +2,7 @@
   <section class="prescriptions__container" appAutoExactHeight heightMode="max-height">
     <div class="prescriptions__header">
       <p class="prescriptions__header--title">
-        👨🏻‍⚕️ {{ 'prescriptions' | translateApi }}
+        👨🏻‍⚕️ {{ 'settings.prescription.title' | translate }}
       </p>
 
       <app-local-search [searchTerm]="searchTerm()" (searchChange)="handleSearch($event)" />
@@ -28,7 +28,7 @@
         <div class="prescription-card">
           <div class="label">
             <span class="text">
-              {{'prescription_for_session_number' | translateApi}}
+              {{'settings.prescription.cardLabel' | translate}}
             </span>
             <span class="value">
               {{prescription?.id || '--'}}

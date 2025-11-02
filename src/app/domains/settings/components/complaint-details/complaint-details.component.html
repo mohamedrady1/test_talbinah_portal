@@ -6,11 +6,11 @@
         <!-- Details Section -->
         <div class="complaint-details__section">
             <h3 class="complaint-details__title">
-                {{ 'complaint_details' | translateApi }}
+                {{ 'complaints.details.title' | translate }}
             </h3>
 
             <div class="complaint-details__content">
-                {{ item.description || ('no_details_available' | translateApi) }}
+                {{ item.description || ('complaints.details.noDetailsAvailable' | translate) }}
             </div>
         </div>
 

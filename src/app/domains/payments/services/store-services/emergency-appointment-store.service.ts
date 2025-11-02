@@ -84,7 +84,7 @@ export class EmergencyAppointmentStoreService {
     this.modalService.open(SearchWaitingDoctorComponent, {
       inputs: {
         image: 'images/urgent-appointment/calender.png',
-        title: 'waiting_doctor_modal_title',
+        title: 'waitingDoctorTitle',
         subtitle: 'waiting_doctor_modal_subtitle',
         data: dataInput
       },

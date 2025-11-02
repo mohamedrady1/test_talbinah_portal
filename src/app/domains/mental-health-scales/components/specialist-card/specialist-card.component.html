@@ -29,7 +29,7 @@
                   fill="#0E39B6" />
               </svg>
               <p>
-                {{ 'recommended' | translateApi }}
+                {{ 'general.Recommended ' | translate }}
               </p>
             </div>
             }
@@ -99,7 +99,7 @@
                 specialistDetails.years_experience !== null) {
                 {{ specialistDetails.years_experience }} {{ 'years_of_experience' | translateApi }}
                 } @else {
-                {{ '--' }}
+                {{ 'general.ExperienceNotAvailable' | translate }}
                 }
               </p>
             </div>

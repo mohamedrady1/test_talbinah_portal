@@ -2,18 +2,18 @@
 
     <div class="gift-accept-modal">
         <img class="gift-accept-modal__img" src="images/settings/gift/gift-2.png" alt="gift" />
-        <div class="gift-accept-modal__title">{{ 'accept_gift' | translateApi }}</div>
-        <div class="gift-accept-modal__desc">{{ 'accept_gift_confirmation' | translateApi }}</div>
+        <div class="gift-accept-modal__title">{{ 'gift.acceptModalTitle' | translate }}</div>
+        <div class="gift-accept-modal__desc">{{ 'gift.acceptModalDesc' | translate }}</div>
     </div>
     <button class="gift-accept-modal__accept" (click)="onAccept()" [ngClass]="{'disabled': isLoading()}">
         @if (isLoading()) {
         <div class="gift-accept-modal__loading" aria-live="polite">
-            {{ 'in_progress' | translateApi }}
+            {{ 'in_progress' | translate }}
             <span class="dot-loader"></span>
         </div>
         }
         @else {
-        {{ 'accept' | translateApi }}
+        {{ 'gift.accept' | translate }}
         }
     </button>
 </div>

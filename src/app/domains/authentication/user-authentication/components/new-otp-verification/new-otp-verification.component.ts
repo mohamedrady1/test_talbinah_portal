@@ -302,7 +302,7 @@ export class NewOtpVerificationComponent {
     this.closed.emit();
     const modalData = {
       image: 'images/icons/logo-2.png',
-      title: 'reset_password',
+      title: 'general.ChangePassword',
       description: 'welcome_safe_space',
     };
 

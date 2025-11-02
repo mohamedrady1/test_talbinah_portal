@@ -355,8 +355,8 @@ export class BannerCarouselComponent implements OnInit, OnDestroy {
             this.modalService.open(WalletComponent, {
                 inputs: {
                     image: 'images/settings/modal-icons/wallet.png',
-                    title: 'your_wallet',
-                    subtitle: 'wallet_description',
+                    title: 'settings.wallet.title',
+                    subtitle: 'settings.wallet.subtitle',
                     data: {},
                 },
                 outputs: {
@@ -376,8 +376,8 @@ export class BannerCarouselComponent implements OnInit, OnDestroy {
             this.modalService.open(GovernmentAgenciesComponent, {
                 inputs: {
                     image: 'images/settings/modal-icons/government-agencies.png',
-                    title: 'government_entities',
-                    subtitle: 'link_government_account',
+                    title: 'settings.governmentAgencies.title',
+                    subtitle: 'settings.governmentAgencies.subtitle',
                     data: {}
                 },
                 outputs: {
@@ -419,8 +419,8 @@ export class BannerCarouselComponent implements OnInit, OnDestroy {
             this.modalService.open(SettingsPointsComponent, {
                 inputs: {
                     image: 'images/settings/modal-icons/points.png',
-                    title: 'my_points',
-                    subtitle: 'redeem_points_for_services',
+                    title: 'settings.points.title',
+                    subtitle: 'settings.points.subtitle',
                     data: {}
                 },
                 outputs: {
@@ -439,8 +439,8 @@ export class BannerCarouselComponent implements OnInit, OnDestroy {
             this.modalService.open(MyFavouritesComponent, {
                 inputs: {
                     image: 'images/settings/modal-icons/my-favourites.png',
-                    title: 'Favorite',
-                    subtitle: 'favorites_overview',
+                    title: 'settings.myFavourites.title',
+                    subtitle: 'settings.myFavourites.subtitle',
                     data: {}
                 },
                 outputs: {
@@ -461,8 +461,8 @@ export class BannerCarouselComponent implements OnInit, OnDestroy {
             this.modalService.open(SettingFaqsComponent, {
                 inputs: {
                     image: 'images/settings/modal-icons/faqs.png',
-                    title: 'faqs',
-                    subtitle: 'faq_intro',
+                    title: 'settings.settingFaqs.title',
+                    subtitle: 'settings.settingFaqs.subtitle',
                     data: {}
                 },
                 outputs: {
@@ -481,8 +481,8 @@ export class BannerCarouselComponent implements OnInit, OnDestroy {
             this.modalService.open(ImportantNumbersComponent, {
                 inputs: {
                     image: 'images/settings/modal-icons/important-numbers.png',
-                    title: 'important_numbers',
-                    subtitle: 'important_numbers_intro',
+                    title: 'settings.importantNumbers.title',
+                    subtitle: 'settings.importantNumbers.subtitle',
                     data: {}
                 },
                 outputs: {
@@ -501,8 +501,8 @@ export class BannerCarouselComponent implements OnInit, OnDestroy {
             this.modalService.open(ComplaintsListComponent, {
                 inputs: {
                     image: 'images/settings/modal-icons/complaints.png',
-                    title: 'complaints',
-                    subtitle: 'your_voice_matters_description',
+                    title: 'settings.complaintsList.title',
+                    subtitle: 'settings.complaintsList.subtitle',
                     data: {}
                 },
                 outputs: {

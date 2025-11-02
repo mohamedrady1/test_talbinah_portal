@@ -16,15 +16,15 @@ import { IGlobalPodcastItemModel, Logger } from '../../../../common';
 import { CameraCaptureComponent, ModalService, SvgIconComponent, ToastService } from '../../../../shared';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { SendPodcastComponent } from '../send-podcast';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-upload-attachments-menu-selector',
   standalone: true,
   imports: [
     SvgIconComponent,
-    CommonModule,
-    TranslateApiPipe
+    TranslateModule,
+    CommonModule
   ],
   templateUrl: './upload-attachments-menu-selector.component.html',
   styleUrls: ['./upload-attachments-menu-selector.component.scss'],
@@ -96,8 +96,8 @@ export class UploadAttachmentsMenuSelectorComponent implements OnInit, OnDestroy
       if (validImages.length === 0) {
         this.toast.add({
           severity: 'error',
-          summary: 'error',
-          detail: 'error_to_delete_post',
+          summary: 'general.error',
+          detail: 'general.errorToDeletePost',
           life: 3000
         }); this.clearFileInputs();
         return;
@@ -140,7 +140,7 @@ export class UploadAttachmentsMenuSelectorComponent implements OnInit, OnDestroy
   protected async openDeviceCamera(): Promise<void> {
     if (!isPlatformBrowser(this.platformId)) return;
     this.modalService.open(CameraCaptureComponent, {
-      inputs: { title: 'camera' },
+      inputs: { title: 'general.cameraTitle' },
       outputs: {
         closed: (res: { status?: boolean, item: FileList | null } | null) => {
           if (res?.status) {
@@ -176,8 +176,8 @@ export class UploadAttachmentsMenuSelectorComponent implements OnInit, OnDestroy
     this._ModalService.open(SendPodcastComponent, {
       inputs: {
         image: 'images/podcast/icons/mic.png',
-        title: 'send_podcast',
-        subtitle: 'share_podcast_with_doctor2'
+        title: 'attachmentMenu.sendPodcastTitle',
+        subtitle: 'attachmentMenu.sendPodcastSubtitle'
       },
       width: '50%',
       outputs: {

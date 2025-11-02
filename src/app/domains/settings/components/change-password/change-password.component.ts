@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { ModalService } from '../../../../shared/services/model.service';
 import { StatusInfoComponent } from '../../../payments/components/status-info/status-info.component';
 import { Logger } from '../../../../common';
@@ -14,12 +15,11 @@ import { StorageService } from '../../../../common';
 import { StorageKeys } from '../../../../shared';
 import { AuthenticationRoutesEnum } from '../../../authentication/user-authentication/constants/auth-routes.enum';
 import { Router } from '@angular/router';
-import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-change-password',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TranslateApiPipe],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -154,15 +154,15 @@ export class ChangePasswordComponent {
     if (!field || !field.errors) return '';
 
     if (field.errors['required']) {
-      return `changePassword_${fieldName}Required`;
+      return `settings.changePassword.validation.${fieldName}Required`;
     }
 
     if (field.errors['minlength']) {
-      return 'new_password_min_length';
+      return 'settings.changePassword.validation.newPasswordMinLength';
     }
 
     if (field.errors['passwordMismatch']) {
-      return 'change_password_mismatch';
+      return 'settings.changePassword.validation.passwordsNotMatch';
     }
 
     return '';
@@ -200,11 +200,11 @@ export class ChangePasswordComponent {
     this._modalService.open(StatusInfoComponent, {
       inputs: {
         image: 'images/settings/modal-icons/security.png',
-        title: 'change_password_successed',
-        subtitle: 'change_password_successed2',
+        title: 'settings.changePassword.successTitle',
+        subtitle: 'settings.changePassword.successMessage',
         data: {
           statusLabels: {
-            successTitle: 'change_password_successed',
+            successTitle: 'settings.changePassword.successTitle',
           },
           item: {
             storeSuccess: true
@@ -228,11 +228,11 @@ export class ChangePasswordComponent {
     this._modalService.open(StatusInfoComponent, {
       inputs: {
         image: 'images/settings/modal-icons/security.png',
-        title: 'change_password_failed2',
-        subtitle: 'change_password_error',
+        title: 'settings.changePassword.errorTitle',
+        subtitle: 'settings.changePassword.errorMessage',
         data: {
           statusLabels: {
-            errorSubTitle: errorMessage ?? 'change_password_failed2',
+            errorSubTitle: errorMessage ?? 'settings.changePassword.errorTitle',
           },
           item: {
             storeSuccess: false,

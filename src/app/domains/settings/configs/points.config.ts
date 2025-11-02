@@ -21,14 +21,14 @@ export interface ErrorStateConfig {
 }
 
 export const POINTS_EMPTY_STATE_CONFIG: EmptyStateConfig = {
-    title: 'no_gifts_available',
-    message: 'no_gifts_available_detailed',
+    title: 'points.emptyState.title',
+    message: 'points.emptyState.message',
     imageUrl: 'images/emptyStates/image 230.svg'
 };
 
 export const POINTS_ERROR_STATE_CONFIG: ErrorStateConfig = {
-    title: 'gifts_loading_error',
-    message: 'gifts_loading_error_detailed',
+    title: 'points.errorState.title',
+    message: 'points.errorState.message',
     imageUrl: 'images/emptyStates/image 230.svg',
     retryLabel: 'general.retry',
     onRetry: () => {

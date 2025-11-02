@@ -123,7 +123,7 @@ export const PatientDetailsConfig: IFormInputConfig[] = [
   //   id: 'patientDetailsIdentifyNumber',
   //   type: ALL_INPUT_TYPES.TEXT,
   //   name: 'identifyNumber',
-  //   label: 'ID_number',
+  //   label: 'form.IdentifyNumber.label',
   //   isRequired: true,
   //   placeholder: 'form.IdentifyNumber.placeholder',
   //   defaultValue: null,

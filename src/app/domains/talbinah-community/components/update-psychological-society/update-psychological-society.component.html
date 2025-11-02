@@ -104,6 +104,9 @@
           }
         </div>
 
+        @if (isLoadingInterests()) {
+        <div>{{ 'Loading interests...' | translateApi }}</div>
+        }
         @if (errorMessageInterests()) {
 
         <div class="error-message">

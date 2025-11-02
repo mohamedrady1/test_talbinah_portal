@@ -61,7 +61,7 @@ export const DoctorReservationSlotsEmptyState: EmptyStateConfig = {
 };
 export const DoctorReservationSlotsErrorState: EmptyStateConfig = {
   imageUrl: null,
-  title: 'an_error_has_occurred',
+  title: 'AvailableTimes.AvailableTimesErrorState',
   gap: '.5rem'
 };
 export const ChooseDateReservationEmptyState: EmptyStateConfig = {

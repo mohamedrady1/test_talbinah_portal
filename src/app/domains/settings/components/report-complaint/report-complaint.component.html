@@ -5,10 +5,11 @@
             <!-- Complaint Type -->
             <div class="report-complaint__field">
                 <label class="report-complaint__label">
-                    {{ 'issue_type' | translateApi }}
+                    {{ 'complaints.report.form.typeLabel' | translate }}
                 </label>
                 <p-dropdown formControlName="type" [options]="problems()" optionLabel="problem" optionValue="id"
-                    [placeholder]="'select_issue_type' | translateApi" class="report-complaint__dropdown"
+                    [placeholder]="'complaints.report.form.typePlaceholder' | translate"
+                    class="report-complaint__dropdown"
                     [class.report-complaint__dropdown--error]="isFieldInvalid('type')" [disabled]="isLoadingProblems()">
                     <ng-template pTemplate="footer">
                         @if (!isLoadingProblems()) {
@@ -20,7 +21,7 @@
                 </p-dropdown>
                 @if (isFieldInvalid('type')) {
                 <small class="report-complaint__error">
-                    {{ 'issue_type_required' | translateApi }}
+                    {{ 'complaints.report.errors.typeRequired' | translate }}
                 </small>
                 }
             </div>
@@ -28,14 +29,15 @@
             <!-- Complaint Details -->
             <div class="report-complaint__field">
                 <label class="report-complaint__label">
-                    {{ 'issue_details' | translateApi }}
+                    {{ 'complaints.report.form.detailsLabel' | translate }}
                 </label>
-                <textarea formControlName="details" [placeholder]="'enter_issue_details' | translateApi"
+                <textarea formControlName="details"
+                    [placeholder]="'complaints.report.form.detailsPlaceholder' | translate"
                     class="report-complaint__textarea"
                     [class.report-complaint__textarea--error]="isFieldInvalid('details')" rows="4"></textarea>
                 @if (isFieldInvalid('details')) {
                 <small class="report-complaint__error">
-                    {{ getDetailsErrorMessage() | translateApi }}
+                    {{ getDetailsErrorMessage() | translate }}
                 </small>
                 }
             </div>
@@ -54,7 +56,7 @@
                         </svg>
                     </div>
                     <span class="report-complaint__upload-text">
-                        {{ 'upload_complaint_images' | translateApi }}
+                        {{ 'complaints.report.form.uploadImages' | translate }}
                     </span>
                 </div>
                 <input #fileInput type="file" multiple accept="image/*" (change)="onFileSelected($event)"
@@ -80,11 +82,11 @@
             [disabled]="isLoadingCreateTicket()">
             @if (isLoadingCreateTicket()) {
             <span class="report-complaint__loading" role="status" aria-live="polite">
-                {{ 'in_progress' | translateApi }}
+                {{ 'in_progress' | translate }}
             </span>
             }
             @else {
-            {{ 'send' | translateApi }}
+            {{ 'complaints.report.form.submit' | translate }}
             }
         </button>
     </div>

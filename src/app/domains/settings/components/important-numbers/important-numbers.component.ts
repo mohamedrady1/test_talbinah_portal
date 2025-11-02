@@ -12,7 +12,6 @@ import { ImportantNumbersFacade } from '../../services';
 import { ImportantNumberItem } from '../../dtos/responses/important-numbers-response.dto';
 import { AutoExactHeightDirective, Logger } from '../../../../common';
 import { getImportantNumbersErrorConfig, ImportantNumbersEmptyConfig } from '../../configs';
-import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-important-numbers',
@@ -25,8 +24,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     ErrorStateCardComponent,
     EmptyStateCardComponent,
     LocalSearchComponent,
-    AutoExactHeightDirective,
-    TranslateApiPipe
+    AutoExactHeightDirective
   ],
   templateUrl: './important-numbers.component.html',
   styleUrls: ['./important-numbers.component.scss'],

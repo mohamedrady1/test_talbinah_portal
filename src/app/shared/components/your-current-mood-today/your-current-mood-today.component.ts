@@ -5,7 +5,7 @@ import { IMoodItem, MoodsListingFacade, UserMoodStoreFacade } from '../../../dom
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { YourCurrentMoodSkeletonComponent } from '../../skeletons';
 import { ModalService, MoodModalService } from '../../services';
-import { TranslateApiPipe } from '../../../common/core/translations';
+import { TranslateModule } from '@ngx-translate/core';
 import { SvgIconComponent } from '../svg-icon';
 import { Logger } from '../../../common';
 
@@ -14,7 +14,7 @@ import { Logger } from '../../../common';
   standalone: true,
   imports: [
     CommonModule,
-    TranslateApiPipe,
+    TranslateModule,
 
     YourCurrentMoodSkeletonComponent,
     SvgIconComponent

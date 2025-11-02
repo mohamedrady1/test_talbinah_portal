@@ -343,8 +343,8 @@ export class NewLoginPasswordComponent implements OnInit, OnDestroy {
         this.modalService.open(NewOtpVerificationComponent, {
             inputs: {
                 image: 'images/icons/logo-2.png',
-                title: 'verify_the_code',
-                description: 'enter_the_code_sent_to_your_phone',
+                title: 'form.password.verify',
+                description: 'OtpVerification.Subtitle',
                 fromURL: AuthenticationRoutesEnum.PASSWORD
             },
             outputs: {

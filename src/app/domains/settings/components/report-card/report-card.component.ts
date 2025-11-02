@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { ComplaintsListComponent } from '../complaints-list';
 import { ModalService } from '../../../../shared';
 import { Logger } from '../../../../common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+
 @Component({
   selector: 'app-report-card',
   standalone: true,
-  imports: [TranslateApiPipe],
+  imports: [TranslateModule],
   templateUrl: './report-card.component.html',
   styleUrls: ['./report-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -17,8 +18,8 @@ export class ReportCardComponent {
     this._modalService.open(ComplaintsListComponent, {
       inputs: {
         image: 'images/settings/modal-icons/complaints.png',
-        title: 'complaints',
-        subtitle: 'your_voice_matters_description',
+        title: 'settings.complaintsList.title',
+        subtitle: 'settings.complaintsList.subtitle',
         data: {}
       },
       outputs: {

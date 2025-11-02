@@ -5,10 +5,10 @@ import { Router } from '@angular/router';
 import { PLATFORM_ID } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { IUser, UserContextService } from '../../../authentication';
-import { LocalizationService, ModalService, StorageKeys } from '../../../../shared';
+import { ModalService, StorageKeys } from '../../../../shared';
 import { ComplaintsListComponent } from '../complaints-list';
 import { ChangePasswordComponent } from '../change-password';
-import { AutoExactHeightDirective, IGlobalUserContactInfoModel, Logger, MetadataService, StorageService } from '../../../../common';
+import { AutoExactHeightDirective, IGlobalUserContactInfoModel, Logger, StorageService } from '../../../../common';
 import { SecurityModalComponent } from '../security-modal';
 import { MyFavouritesComponent } from '../my-favourites';
 import { SettingFaqsComponent } from '../setting-faqs';
@@ -20,9 +20,9 @@ import { TalbinahCardComponent } from '../talbinah-card';
 import { UserInfoCardComponent } from '../user-info-card';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
 import { HeaderConfig } from '../../configs';
-import { SettingsRouteData } from '../../constants';
 import { isPlatformBrowser } from '@angular/common';
 import { MainPageRoutesEnum } from '../../../main-page';
+import { TranslateModule } from '@ngx-translate/core';
 import { GiftCardComponent } from '../gift-card';
 import { IProfileOptions } from '../../models';
 import { SettingsSections } from '../../constants/settings-sections.enum';
@@ -34,7 +34,7 @@ import { ISettingMenuItem } from '../../dtos';
 import { SettingsPointsComponent } from '../settings-points';
 import { SiteHeaderComponent } from '../../../header';
 import { TechnicalSupportChatsListComponent } from '../../../technical-support';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+
 @Component({
   selector: 'app-settings-main-page',
   standalone: true,
@@ -43,7 +43,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     TalbinahCardComponent,
     UserInfoCardComponent,
     HeaderComponent,
-    TranslateApiPipe,
+    TranslateModule,
     YourProfileOptionCardComponent,
     GiftCardComponent,
     WalletAndRewardsComponent,
@@ -62,9 +62,6 @@ export class SettingsMainPageComponent {
   protected readonly headerConfig = HeaderConfig;
   private readonly router = inject(Router);
   private readonly platformId = inject(PLATFORM_ID);
-  private readonly seo = inject(MetadataService);
-  private readonly localization = inject(LocalizationService);
-  private readonly isBrowser = isPlatformBrowser(this.platformId);
   @ViewChild('card') cardRef!: ElementRef;
   isFullscreen: boolean = false;
   private _StorageService = inject(StorageService);
@@ -132,11 +129,6 @@ export class SettingsMainPageComponent {
     }
   }
   ngOnInit(): void {
-    // Setup SEO metadata
-    if (this.isBrowser) {
-      this.setupSEO();
-    }
-
     this._SettingsFacade.fetchSettings();
     this.cards = this._SettingsFacade.headerItems();
     const storedUserInfo: any = this._StorageService.getItem(StorageKeys.CURRENT_USER_INFO) as { user?: IUser } | null;
@@ -170,8 +162,8 @@ export class SettingsMainPageComponent {
     this._modalService.open(NationalIdVerificationComponent, {
       inputs: {
         image: 'images/settings/modal-icons/security.png',
-        title: 'security',
-        subtitle: 'verify_national_identity_description',
+        title: 'settings.nationalIdVerification.title',
+        subtitle: 'settings.nationalIdVerification.subtitle',
         data: {}
       },
       outputs: {
@@ -187,8 +179,8 @@ export class SettingsMainPageComponent {
     this._modalService.open(SecurityModalComponent, {
       inputs: {
         image: 'images/settings/modal-icons/security.png',
-        title: 'security',
-        subtitle: 'manage_security_and_devices_preferences',
+        title: 'settings.security.title',
+        subtitle: 'settings.security.subtitle',
         data: {}
       },
       outputs: {
@@ -204,8 +196,8 @@ export class SettingsMainPageComponent {
     this._modalService.open(ChangePasswordComponent, {
       inputs: {
         image: 'images/settings/modal-icons/security.png',
-        title: 'security',
-        subtitle: 'update_account_password_for_security',
+        title: 'settings.changePassword.title',
+        subtitle: 'settings.changePassword.subtitle',
         data: {}
       },
       outputs: {
@@ -221,8 +213,8 @@ export class SettingsMainPageComponent {
     this._modalService.open(UpdatePersonalProfileInfoComponent, {
       inputs: {
         image: 'images/settings/modal-icons/personal-info.png',
-        title: 'profile',
-        subtitle: 'settings_page_subtitle',
+        title: 'settings.updatePersonalInfo.title',
+        subtitle: 'settings.updatePersonalInfo.subtitle',
         data: {}
       },
       outputs: {
@@ -238,8 +230,8 @@ export class SettingsMainPageComponent {
     this._modalService.open(ComplaintsListComponent, {
       inputs: {
         image: 'images/settings/modal-icons/complaints.png',
-        title: 'complaints',
-        subtitle: 'your_voice_matters_description',
+        title: 'settings.complaintsList.title',
+        subtitle: 'settings.complaintsList.subtitle',
         data: {}
       },
       outputs: {
@@ -255,8 +247,8 @@ export class SettingsMainPageComponent {
     this._modalService.open(MyFavouritesComponent, {
       inputs: {
         image: 'images/settings/modal-icons/my-favourites.png',
-        title: 'Favorite',
-        subtitle: 'favorites_overview',
+        title: 'settings.myFavourites.title',
+        subtitle: 'settings.myFavourites.subtitle',
         data: {}
       },
       outputs: {
@@ -272,8 +264,8 @@ export class SettingsMainPageComponent {
     this._modalService.open(SettingFaqsComponent, {
       inputs: {
         image: 'images/settings/modal-icons/faqs.png',
-        title: 'faqs',
-        subtitle: 'faq_intro',
+        title: 'settings.settingFaqs.title',
+        subtitle: 'settings.settingFaqs.subtitle',
         data: {}
       },
       outputs: {
@@ -289,8 +281,8 @@ export class SettingsMainPageComponent {
     this._modalService.open(ImportantNumbersComponent, {
       inputs: {
         image: 'images/settings/modal-icons/important-numbers.png',
-        title: 'important_numbers',
-        subtitle: 'important_numbers_intro',
+        title: 'settings.importantNumbers.title',
+        subtitle: 'settings.importantNumbers.subtitle',
         data: {}
       },
       outputs: {
@@ -307,8 +299,8 @@ export class SettingsMainPageComponent {
     this._modalService.open(WalletComponent, {
       inputs: {
         image: 'images/settings/modal-icons/wallet.png',
-        title: 'your_wallet',
-        subtitle: 'wallet_description',
+        title: 'settings.wallet.title',
+        subtitle: 'settings.wallet.subtitle',
         data: {}
       },
       outputs: {
@@ -325,8 +317,8 @@ export class SettingsMainPageComponent {
     this._modalService.open(GiftToYourLovedOnesComponent, {
       inputs: {
         image: 'images/settings/modal-icons/gift-loved-ones.png',
-        title: 'gift_someone_you_love',
-        subtitle: 'quick_gift_intro',
+        title: 'settings.giftLovedOnes.title',
+        subtitle: 'settings.giftLovedOnes.subtitle',
         data: {}
       },
       outputs: {
@@ -343,8 +335,8 @@ export class SettingsMainPageComponent {
     this._modalService.open(SettingsPointsComponent, {
       inputs: {
         image: 'images/settings/modal-icons/points.png',
-        title: 'my_points',
-        subtitle: 'redeem_points_for_services',
+        title: 'settings.points.title',
+        subtitle: 'settings.points.subtitle',
         data: {}
       },
       outputs: {
@@ -353,22 +345,6 @@ export class SettingsMainPageComponent {
         }
       },
       width: "60%"
-    });
-  }
-
-  private setupSEO(): void {
-    if (!this.isBrowser) return;
-
-    const lang = this.localization.getCurrentLanguage();
-    const routeData = SettingsRouteData.SettingsMainPage;
-
-    const title = lang === 'ar' ? routeData.title.ar : routeData.title.en;
-    const description = lang === 'ar' ? routeData.meta.description.ar : routeData.meta.description.en;
-
-    this.seo.setMetaTags({
-      title,
-      description,
-      locale: lang === 'ar' ? 'ar_SA' : 'en_US'
     });
   }
 
@@ -399,8 +375,8 @@ export class SettingsMainPageComponent {
 
       inputs: {
         image: 'images/settings/modal-icons/support-icon.jpg',
-        title: 'support',
-        subtitle: 'faq_intro',
+        title: 'Technical_Support.title',
+        subtitle: 'Technical_Support.subtitle',
         data: {}
       },
       outputs: {

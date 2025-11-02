@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, PLATFORM_ID, sign
 import { WalletFacade } from '../../../settings/services/wallet.facade';
 import { AutoExactHeightDirective, Logger } from '../../../../common';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslateModule } from '@ngx-translate/core';
 import { MovementsFacade } from '../../../settings/services/movements.facade';
 import { WalletCardComponent } from '../../../settings/components/wallet-card/wallet-card.component';
 import { MovementItem } from '../../../settings';
@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [
     CommonModule,
-    TranslateApiPipe,
+    TranslateModule,
     WalletLoadingComponent,
     ErrorStateCardComponent,
     EmptyStateCardComponent,
@@ -98,7 +98,7 @@ export class WalletComponent {
     this.modalService.open(ChargeWalletComponent, {
       inputs: {
         image: 'images/logos/icon.png',
-        title: 'deposit_amount',
+        title: 'PaymentMethods.depositAmount',
         walletId: this.walletData()?.id
       },
       width: '40%',

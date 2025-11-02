@@ -13,7 +13,7 @@ import { FirestoreService } from '../../../common/core/services/firestore.servic
 })
 export class CameraCaptureComponent implements OnInit, OnDestroy {
   @ViewChild('videoStream') videoElement!: ElementRef<HTMLVideoElement>;
-  @Input() title: string = 'camera';
+  @Input() title: string = 'general.cameraTitle';
   @Output() onImageCaptured = new EventEmitter<string>();
   @Output() onVideoCaptured = new EventEmitter<Blob>();
   @Output() protected closed = new EventEmitter<{ status?: boolean, item: FileList | null }>(); // تم تعديل نوع الـ item

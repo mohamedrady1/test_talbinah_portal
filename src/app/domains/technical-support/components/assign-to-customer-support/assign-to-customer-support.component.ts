@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, effect, EventEmitter, inject, Input, Output, signal } from '@angular/core';
-import { AutoExactHeightDirective, FirestoreService, IGlobalUserContactInfoModel, Logger, TranslateApiPipe } from '../../../../common';
+import { TranslateModule } from '@ngx-translate/core';
+import { AutoExactHeightDirective, FirestoreService, IGlobalUserContactInfoModel, Logger } from '../../../../common';
 import { PaginationListingComponent, SelectionOptionComponent, ErrorStateCardComponent, EmptyStateCardComponent, LocalSearchComponent, ISelectionOptionConfig } from '../../../../shared';
 import { AppointmentCardSkeletonComponent } from '../../../appointments';
 import { VisitsReportsListFacade, visitReportsEmptyConfig, visitReportsErrorConfig } from '../../../settings';
@@ -11,7 +12,7 @@ import { CustomersSupportFacade, AssignToCustomerSupportFacade } from '../../ser
   selector: 'app-assign-to-customer-support',
   standalone: true,
   imports: [
-    TranslateApiPipe,
+    TranslateModule,
     CommonModule,
 
     AutoExactHeightDirective,

@@ -1,9 +1,9 @@
 // talbinah-community-layout.component.ts
 import { Component, inject, signal, ChangeDetectionStrategy, ViewChild, ElementRef, OnInit, effect, PLATFORM_ID, computed } from '@angular/core';
-import { ILayoutGridHeaderConfig, PageLayoutHeaderComponent, ErrorStateCardComponent, MoodModalIntegrationService, StorageKeys, LocalizationService } from '../../../../shared';
+import { ILayoutGridHeaderConfig, PageLayoutHeaderComponent, ErrorStateCardComponent, MoodModalIntegrationService, StorageKeys } from '../../../../shared';
 import { AutoExactHeightDirective } from '../../../../common/core/directives';
 import { MainPageShemmerComponent, MyPsychologicalSocietyComponent, PsychologicalSocietyMainPageComponent } from '../../components';
-import { TalbinahCommunityHeaderConfig, TalbinahCommunityRoutesEnum, TalbinahCommunityRouteData } from '../../constants';
+import { TalbinahCommunityHeaderConfig, TalbinahCommunityRoutesEnum } from '../../constants';
 import { MainPageRoutesEnum } from '../../../main-page';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { UserIdentityProfileFacade, CommunityPostsFacade, CommunityNotifications
 import { IUserIdentifyProfileData } from '../../dtos';
 import { SiteHeaderComponent } from '../../../header';
 import { RoleGuardService, UserContextService } from '../../../authentication';
-import { Logger, StorageService, MetadataService } from '../../../../common';
+import { Logger, StorageService } from '../../../../common';
 
 @Component({
   selector: 'app-talbinah-community-layout',
@@ -34,8 +34,6 @@ import { Logger, StorageService, MetadataService } from '../../../../common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TalbinahCommunityLayoutComponent implements OnInit {
-  private readonly seo = inject(MetadataService);
-  private readonly localization = inject(LocalizationService);
   protected readonly _UserIdentityProfileFacade = inject(UserIdentityProfileFacade);
   private readonly _CommunityPostsFacade = inject(CommunityPostsFacade);
   private readonly _CommunityNotificationsFacade = inject(CommunityNotificationsFacade);
@@ -83,8 +81,6 @@ export class TalbinahCommunityLayoutComponent implements OnInit {
   }
 
   constructor() {
-    this.setSeoMeta();
-
     // Reactively track user identity profile loading state
     effect(() => {
       const userIdentityProfile = this._UserIdentityProfileFacade.userIdentityProfile();
@@ -184,20 +180,5 @@ export class TalbinahCommunityLayoutComponent implements OnInit {
       // Optional: Re-fetch to ensure sync with backend
       this._UserIdentityProfileFacade.fetchUserIdentifyProfile();
     }
-  }
-
-  private setSeoMeta(): void {
-    const { title, meta } = TalbinahCommunityRouteData.TalbinahCommunityMainPage;
-    const lang = this.localization.getCurrentLanguage() as keyof typeof title;
-    this.seo.setMetaTags({
-      title: title[lang],
-      description: meta.description[lang],
-      keywords: 'talbinah, community, psychological society, mental health',
-      image: 'https://portal.dev.talbinah.net/images/community/Container.png',
-      url: 'https://talbinah.com/talbinah-community',
-      robots: 'index, follow',
-      locale: lang === 'en' ? 'en_US' : 'ar_SA',
-      canonical: 'https://talbinah.com/talbinah-community',
-    });
   }
 }

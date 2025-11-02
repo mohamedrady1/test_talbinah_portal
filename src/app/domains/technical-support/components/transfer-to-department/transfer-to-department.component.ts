@@ -34,7 +34,7 @@ import {
 } from '../../services';
 
 import { AppointmentCardSkeletonComponent } from '../../../appointments';
-import { AutoExactHeightDirective, Logger, TranslateApiPipe } from '../../../../common';
+import { AutoExactHeightDirective, Logger } from '../../../../common';
 import { ITechnicalSupportChatDto } from '../../dtos';
 
 @Component({
@@ -42,7 +42,6 @@ import { ITechnicalSupportChatDto } from '../../dtos';
   standalone: true,
   imports: [
     TranslateModule,
-    TranslateApiPipe,
     CommonModule,
 
     AutoExactHeightDirective,

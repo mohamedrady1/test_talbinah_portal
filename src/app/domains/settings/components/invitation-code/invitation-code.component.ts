@@ -8,16 +8,16 @@ import {
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ToastService, PublicService, ShareSocialComponent } from '../../../../shared';
+import { TranslateModule } from '@ngx-translate/core';
 import { Logger } from '../../../../common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-invitation-code',
   standalone: true,
   imports: [
+    TranslateModule,
     CommonModule,
-    ShareSocialComponent,
-    TranslateApiPipe
+    ShareSocialComponent
   ],
   styleUrls: ['./invitation-code.component.scss'],
   templateUrl: './invitation-code.component.html',
@@ -42,7 +42,7 @@ export class InvitationCodeComponent {
         this.toast.add({
           severity: 'success',
           summary: this.i18n.translateTextFromJson('general.success'),
-          detail: this.i18n.translateTextFromJson('referral_code_copied_success'),
+          detail: this.i18n.translateTextFromJson('settings.invitationCode.copySuccess'),
           life: 3000
         });
         Logger.info('[InvitationCode] Copied to clipboard.');
@@ -51,7 +51,7 @@ export class InvitationCodeComponent {
         this.toast.add({
           severity: 'error',
           summary: this.i18n.translateTextFromJson('general.error'),
-          detail: this.i18n.translateTextFromJson('referral_code_copy_failed'),
+          detail: this.i18n.translateTextFromJson('settings.invitationCode.copyFailed'),
           life: 3000
         });
         Logger.error('[InvitationCode] Failed to copy:', err);

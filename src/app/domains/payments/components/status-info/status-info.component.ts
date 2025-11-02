@@ -73,12 +73,12 @@ export class StatusInfoComponent implements OnInit {
     this.fromSuccessSite = this.data?.item?.fromSuccessSite === true || this.data?.item?.fromSuccessSite === 'true';
     Logger.debug('StatusInfoComponent => processStatusInfo => fromSuccessSite:', this.fromSuccessSite);
     this.statusTitleKey = this.status
-      ? this.data?.statusLabels?.successTitle ?? 'operation_successful'
-      : this.data?.statusLabels?.errorTitle ?? 'operation_failed'
+      ? this.data?.statusLabels?.successTitle ?? 'general.statusSuccess'
+      : this.data?.statusLabels?.errorTitle ?? 'general.statusError';
 
     this.statusSubtitleKey = this.status
-      ? this.data?.statusLabels?.successSubTitle
-      : this.data?.item?.storeError || this.data?.statusLabels?.errorSubTitle
+      ? this.data?.statusLabels?.successSubTitle ?? 'general.statusSuccessText'
+      : this.data?.item?.storeError || this.data?.statusLabels?.errorSubTitle || 'general.statusErrorText';
   }
 
   protected goToDetails(): void {

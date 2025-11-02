@@ -52,7 +52,7 @@ export class ChatMessageImageComponent {
     if (this.imageUrl) {
       this.modalService.open(ImageViewerModalComponent, {
         inputs: {
-          title: 'view_image',
+          title: 'general.image',
           data: {
             imgUrl: this.imageUrl
           }

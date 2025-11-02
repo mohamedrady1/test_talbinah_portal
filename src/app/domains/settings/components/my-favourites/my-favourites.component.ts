@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { AppointmentCardSkeletonComponent } from '../../../appointments';
 import { ErrorStateCardComponent, EmptyStateCardComponent } from "../../../../shared";
@@ -11,12 +12,12 @@ import { MyFavouritesArticlesEmptyState, MyFavouritesDoctorsEmptyState, MyFavour
 import { DoctorCardForFavouriteComponent } from '../doctor-card-for-favourite';
 import { ArticleCardComponent, FavoriteArticlesFacade } from '../../../articles';
 import { PodcastCardForFavouriteComponent } from '../podcast-card-for-favourite';
-import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-my-favourites',
   standalone: true,
   imports: [
+    TranslateModule,
     CommonModule,
     AppointmentCardSkeletonComponent,
     ErrorStateCardComponent,
@@ -26,8 +27,7 @@ import { TranslateApiPipe } from '../../../../common/core/translations';
     EmptyStateCardComponent,
     DoctorCardForFavouriteComponent,
     PodcastCardForFavouriteComponent,
-    ArticleCardComponent,
-    TranslateApiPipe
+    ArticleCardComponent
   ],
   templateUrl: './my-favourites.component.html',
   styleUrls: ['./my-favourites.component.scss'],

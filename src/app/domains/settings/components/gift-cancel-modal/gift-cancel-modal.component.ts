@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, inject, effect, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslateModule } from '@ngx-translate/core';
 import { GiftsFacade } from '../../services/gifts.facade';
 import { ModalService } from '../../../../shared';
 import { StatusInfoComponent } from '../../../payments/components';
@@ -8,7 +8,7 @@ import { StatusInfoComponent } from '../../../payments/components';
 @Component({
     selector: 'app-gift-cancel-modal',
     standalone: true,
-    imports: [CommonModule, TranslateApiPipe],
+    imports: [CommonModule, TranslateModule],
     templateUrl: './gift-cancel-modal.component.html',
     styleUrls: ['./gift-cancel-modal.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -58,9 +58,9 @@ export class GiftCancelModalComponent {
         this.modalService.open(StatusInfoComponent, {
             inputs: {
                 image: 'images/mentalHealthScale/icons/talbinah.png',
-                title: 'gift_canceled_successfully',
-                statusTitleKey: message || 'gift_canceled_successfully',
-                statusSubtitleKey: 'gift_balance_added',
+                title: 'settings.giftLovedOnes.cancelSuccessTitle',
+                statusTitleKey: message || 'gift.cancelSuccessTitle',
+                statusSubtitleKey: 'gift.cancelSuccessSubtitle',
                 data: {
                     item: {
                         storeSuccess: true,
@@ -90,9 +90,9 @@ export class GiftCancelModalComponent {
         this.modalService.open(StatusInfoComponent, {
             inputs: {
                 image: 'images/mentalHealthScale/icons/talbinah.png',
-                title: 'gift_cancel_failed',
+                title: 'settings.giftLovedOnes.cancelErrorTitle',
                 statusTitleKey: errorMessage,
-                statusSubtitleKey: 'gift_cancel_error',
+                statusSubtitleKey: 'gift.cancelErrorSubtitle',
                 data: {
                     item: {
                         storeSuccess: false,

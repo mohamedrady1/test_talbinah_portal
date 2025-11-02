@@ -19,7 +19,7 @@
   <div class="error">
     <p>{{ error() }}</p>
     <button (click)="retry()">
-      {{ 'retry' | translateApi }}
+      {{ 'retry' | translate }}
     </button>
   </div>
   } @else {
@@ -42,7 +42,7 @@
 
       <div class="select-appointment-type__card--actions">
         <button class="btn btn--alt" (click)="onSelect(type)" (keyup.enter)="onSelect(type)">
-          {{ type?.action_text || ('follow' | translateApi) }}
+          {{ type?.action_text || ('general.follow' | translate) }}
         </button>
       </div>
     </article>

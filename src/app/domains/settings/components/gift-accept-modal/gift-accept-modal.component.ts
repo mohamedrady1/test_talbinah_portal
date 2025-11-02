@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, inject, effect, ChangeDetectionStrategy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateApiPipe } from '../../../../common/core/translations';
+import { TranslateModule } from '@ngx-translate/core';
 import { GiftsFacade } from '../../services/gifts.facade';
 import { ModalService } from '../../../../shared';
 import { StatusInfoComponent } from '../../../payments/components';
@@ -8,7 +8,7 @@ import { StatusInfoComponent } from '../../../payments/components';
 @Component({
     selector: 'app-gift-accept-modal',
     standalone: true,
-    imports: [CommonModule, TranslateApiPipe],
+    imports: [CommonModule, TranslateModule],
     templateUrl: './gift-accept-modal.component.html',
     styleUrls: ['./gift-accept-modal.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -59,9 +59,9 @@ export class GiftAcceptModalComponent {
         this.modalService.open(StatusInfoComponent, {
             inputs: {
                 image: 'images/mentalHealthScale/icons/talbinah.png',
-                title: 'gift_accepted_successfully',
-                statusTitleKey: message || 'gift_accepted_successfully',
-                statusSubtitleKey: 'gift_balance_added',
+                title: 'settings.giftLovedOnes.acceptSuccessTitle',
+                statusTitleKey: message || 'gift.acceptSuccessTitle',
+                statusSubtitleKey: 'gift.acceptSuccessSubtitle',
                 data: {
                     item: {
                         storeSuccess: true,
@@ -91,9 +91,9 @@ export class GiftAcceptModalComponent {
         this.modalService.open(StatusInfoComponent, {
             inputs: {
                 image: 'images/mentalHealthScale/icons/talbinah.png',
-                title: 'gift_accept_failed',
+                title: 'settings.giftLovedOnes.acceptErrorTitle',
                 statusTitleKey: errorMessage,
-                statusSubtitleKey: 'gift_accept_error',
+                statusSubtitleKey: 'gift.acceptErrorSubtitle',
                 data: {
                     item: {
                         storeSuccess: false,

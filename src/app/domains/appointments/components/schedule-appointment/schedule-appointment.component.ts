@@ -27,7 +27,7 @@ export const DoctorSlotsEmptyState: EmptyStateConfig = {
 };
 export const DoctorSlotsErrorState: EmptyStateConfig = {
   imageUrl: 'images/emptyStates/appointments.svg',
-  title: 'an_error_has_occurred',
+  title: 'AvailableTimes.AvailableTimesErrorState',
   gap: '.5rem'
 };
 export const ChooseDateEmptyState: EmptyStateConfig = {

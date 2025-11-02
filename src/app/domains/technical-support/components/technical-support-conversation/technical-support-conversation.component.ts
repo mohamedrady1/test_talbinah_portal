@@ -120,7 +120,7 @@ export class TechnicalSupportConversationComponent implements OnInit, OnDestroy 
     this._modalService.open(AssignToCustomerSupportComponent, {
       inputs: {
         image: 'images/icons/logo-2.png',
-        title: 'assign_to',
+        title: 'AssignToCustomerSupport.title',
         data: { chatItem: this.details(), isSupport: this.isSupport() }
       },
       outputs: {
@@ -166,7 +166,7 @@ export class TechnicalSupportConversationComponent implements OnInit, OnDestroy 
     this._modalService.open(TransferToDepartmentComponent, {
       inputs: {
         image: 'images/icons/logo-2.png',
-        title: 'transfer_to',
+        title: 'TransferToDepartment.title',
         data: { chatItem: this.details(), isSupport: this.isSupport() }
       },
       outputs: {
@@ -212,7 +212,7 @@ export class TechnicalSupportConversationComponent implements OnInit, OnDestroy 
     this._modalService.open(CloseSupportConversationComponent, {
       inputs: {
         image: 'images/icons/logo-2.png',
-        title: 'end_conversation',
+        title: 'CloseSupportConversation.title',
         data: { chatItem: this.details(), isSupport: this.isSupport() }
       },
       outputs: {

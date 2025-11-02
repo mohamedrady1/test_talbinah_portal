@@ -94,10 +94,10 @@ export class PaymentStateService {
     if (type === PaymentPageTypeEnum.CHARGE_WALLET) {
       statusLabelsTexts = {
         buttonText: 'back_to_home',
-        successTitle: 'deposit_successful',
-        successSubTitle: 'deposit_successful_details',
-        errorTitle: 'deposit_error',
-        errorSubTitle: 'deposit_error_details',
+        successTitle: 'ChargeWallet.chargeSuccess',
+        successSubTitle: 'ChargeWallet.chargeSuccessText',
+        errorTitle: 'ChargeWallet.chargeError',
+        errorSubTitle: 'ChargeWallet.chargeErrorText',
       };
     }
 
@@ -115,8 +115,8 @@ export class PaymentStateService {
       inputs: {
         image: 'images/icons/logo-2.png',
         title: info.status
-          ? 'subscription_confirmed'
-          : 'subscription_faild',
+          ? 'general.subscriptionConfirmed'
+          : 'general.subscriptionFaild',
         data: {
           item: dataInput,
           statusLabels: statusLabelsTexts

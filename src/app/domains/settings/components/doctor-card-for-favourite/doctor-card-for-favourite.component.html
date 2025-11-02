@@ -1,10 +1,11 @@
-<article class="doctor-card" (click)="cardClicked()" role="button" tabindex="0" [attr.aria-label]="'doctor'">
+<article class="doctor-card" (click)="cardClicked()" role="button" tabindex="0"
+    [attr.aria-label]="item?.full_name ? (item.full_name + ' ' + ('general.DoctorCardDescription' | translate: { specialty: item.specialties?.[0]?.name, years: item.years_experience })) : ('general.DoctorCardGenericDescription' | translate)">
     <div class="doctor-card__details">
         <figure class="doctor-card__thumbnail">
             <img class="doctor-card__image"
                 [src]="item?.image ?? (item?.gender === 1 ? 'images/not-found/no-woman-doctor.svg' : 'images/not-found/no-doctor.svg')"
                 [width]="49" [height]="49" loading="lazy" fetchpriority="low"
-                [alt]="item?.full_name ? (item.full_name + ' ' + 'profile_picture_alt') : ('doctor_profile_picture_alt')"
+                [alt]="item?.full_name ? (item.full_name + ' ' + ('general.ProfilePictureAlt' | translate)) : ('general.DoctorProfilePictureAlt' | translate)"
                 (error)="onImageError($event, item?.gender)" />
         </figure>
 
@@ -33,7 +34,7 @@
                         </div>
                         }
                         <button type="button" class="doctor-card__like-button" (click)="handleFavouriteToggle($event)"
-                            [attr.aria-label]="item?.is_fav ? ('remove_from_favorites' | translateApi) : ('add_to_favorites' | translateApi)"
+                            [attr.aria-label]="item?.is_fav ? ('general.RemoveFromFavorites' | translate) : ('general.AddToFavorites' | translate)"
                             [disabled]="isToggleLoading()">
                             @if(isToggleLoading()){
                             <div class="shimmer-circle"></div>
@@ -104,7 +105,7 @@
                                 @if (item?.years_experience !== undefined && item.years_experience !== null) {
                                 {{ item.years_experience }} {{ 'years_of_experience' | translateApi }}
                                 } @else {
-                                {{ '--' }}
+                                {{ 'general.ExperienceNotAvailable' | translate }}
                                 }
                             </p>
                         </div>
@@ -121,7 +122,7 @@
                             <span>({{ item.reviews_avg | number : '1.1-1' }})</span>
                             {{ item.reviews_count }} {{ 'review' | translateApi }}
                             } @else {
-                            {{ 'no_reviews_yet' | translateApi }}
+                            {{ 'general.NoReviewsYet' | translate }}
                             }
                         </p>
                     </div>

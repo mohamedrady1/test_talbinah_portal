@@ -5,13 +5,12 @@
         onerror="src='images/not-found/talbinah.png'">
     </div>
     <p class="option-card__content--title">
-      {{config.title | translateApi}}
+      {{config.title | translate}}
     </p>
   </div>
   <div class="option-card__actions">
     <button class="option-card__actions--button">
-      <svg [ngClass]="{'rtl-flip': !isArabic}" width="14" height="14" viewBox="0 0 14 14" fill="none"
-        xmlns="http://www.w3.org/2000/svg">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M8.80248 12.0574C8.91332 12.0574 9.02415 12.0166 9.11165 11.9291C9.28082 11.7599 9.28082 11.4799 9.11165 11.3107L5.30832 7.50739C5.02832 7.22739 5.02832 6.77239 5.30832 6.49239L9.11165 2.68906C9.28082 2.51989 9.28082 2.23989 9.11165 2.07072C8.94248 1.90156 8.66248 1.90156 8.49332 2.07072L4.68998 5.87406C4.39248 6.17156 4.22332 6.57406 4.22332 6.99989C4.22332 7.42572 4.38665 7.82822 4.68998 8.12572L8.49332 11.9291C8.58082 12.0107 8.69165 12.0574 8.80248 12.0574Z"
           fill="#47586E" />

@@ -51,6 +51,6 @@ export const NoMentalHealthTasksEmptyState: EmptyStateConfig = {
 
 export const NoTasksEmptyState: EmptyStateConfig = {
   imageUrl: 'images/emptyStates/appointments.svg',
-  title: 'no_tasks_available',
+  title: 'sessionTasks.noTasksAvailable',
   imgWidth: '30%'
 };

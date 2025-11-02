@@ -159,8 +159,8 @@ export class TechnicalSupportChatsListComponent {
 
       inputs: {
         image: 'images/settings/modal-icons/support-icon.jpg',
-        title: 'support',
-        subtitle: 'faq_intro',
+        title: 'Technical_Support.title',
+        subtitle: 'Technical_Support.subtitle',
         data: {}
       },
       outputs: {

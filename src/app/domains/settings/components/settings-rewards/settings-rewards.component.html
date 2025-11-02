@@ -3,10 +3,10 @@
     <!-- Header Section -->
     <div class="settings-rewards-layout__header">
       <div class="settings-rewards-layout__title">
-        {{'rewards'|translateApi}}
+        {{'settings.rewards.cardPointsTitle'|translate}}
       </div>
       <div class="settings-rewards-layout__description">
-        {{'points_converted_to_reward'|translateApi}}
+        {{'settings.rewards.cardPointsSubtitle'|translate}}
       </div>
     </div>
 
@@ -58,10 +58,10 @@
               <app-svg-icon name="calender-icon" [fillColor]="reward?.expired ? '#CA4146' : '#00AF6C'" />
               <span>
                 {{ reward?.expired
-                ? ('code_expired' | translateApi)
-                : ('valid_for_duration' | translateApi) + ' ' + getRemainingDaysIfCoupon(reward?.gift) + ' ' + ('day' |
-                translateApi)
-                }}
+                ? ('settings.rewards.codeExpired' | translate)
+                : ('settings.rewards.validFor' | translate: {
+                days: getRemainingDaysIfCoupon(reward?.gift)
+                }) }}
               </span>
             </span>
           </p>

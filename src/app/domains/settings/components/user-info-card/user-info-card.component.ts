@@ -2,17 +2,17 @@ import { UpdatePersonalProfileInfoComponent } from '../update-personal-profile-i
 import { ChangeDetectionStrategy, Component, inject, Input, PLATFORM_ID, signal } from '@angular/core';
 import { ModalService } from '../../../../shared/services/model.service';
 import { LocalizationService, StorageKeys } from '../../../../shared';
+import { TranslateModule } from '@ngx-translate/core';
 import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { IGlobalUserContactInfoModel, Logger } from '../../../../common';
 import { UserContextService } from '../../../authentication';
-import { TranslateApiPipe } from '../../../../common/core/translations';
 
 @Component({
   selector: 'app-user-info-card',
   standalone: true,
   imports: [
-    DatePipe,
-    TranslateApiPipe
+    TranslateModule,
+    DatePipe
   ],
   templateUrl: './user-info-card.component.html',
   styleUrls: ['./user-info-card.component.scss'],
@@ -58,8 +58,8 @@ export class UserInfoCardComponent {
     this.modalService.open(UpdatePersonalProfileInfoComponent, {
       inputs: {
         image: 'images/articles/calender-2.png',
-        title: 'profile',
-        subtitle: 'settings_page_subtitle',
+        title: 'settings.updatePersonalInfo.title',
+        subtitle: 'settings.updatePersonalInfo.subtitle',
         data: {
           config: this.userInfo
         }

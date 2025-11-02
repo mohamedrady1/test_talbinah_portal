@@ -7,16 +7,16 @@
     <div class="block-doctor-modal__status__content">
       <h2 class="block-doctor-modal__status__title">
         @if (doctor?.is_blocked) {
-        {{ 'block_doctor_confirmation' | translateApi }}
+        {{ 'block_doctor_confirmation' | translate }}
         }@else {
-        {{ 'block_doctor_confirmation' | translateApi }}
+        {{ 'block_doctor_confirmation' | translate }}
         }
       </h2>
       <p class="block-doctor-modal__status__subtitle">
         @if (doctor?.is_blocked) {
-        {{ 'unblock_doctor_hint' | translateApi }}
+        {{ 'unblock_doctor_hint' | translate }}
         }@else {
-        {{ 'block_doctor_hint' | translateApi }}
+        {{ 'block_doctor_hint' | translate }}
         }
       </p>
     </div>

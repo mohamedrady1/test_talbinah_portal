@@ -8,39 +8,39 @@ export const SettingsEmptyState: EmptyStateConfig = {
 
 export const sentGiftsEmptyConfig: EmptyStateConfig = {
   imageUrl: 'images/emptyStates/image-10.svg',
-  title: 'no_sent_gifts_yet',
+  title: 'gift.sentEmptyTitle',
 
 };
 
 
 export const receivedGiftsEmptyConfig: EmptyStateConfig = {
   imageUrl: 'images/emptyStates/image-10.svg',
-  title: 'no_received_gifts',
+  title: 'gift.receivedEmptyTitle',
 
 };
 
 export const prescriptionsEmptyConfig: EmptyStateConfig = {
   imageUrl: 'images/emptyStates/image-4.svg',
-  title: 'no_medical_prescriptions_available',
+  title: 'settings.prescription.emptyTitle',
   imgWidth: '30%'
 
 };
 
 export const visitReportsEmptyConfig: EmptyStateConfig = {
   imageUrl: 'images/emptyStates/image-6.svg',
-  title: 'no_visit_reports_available',
+  title: 'settings.visitReports.emptyTitle',
   imgWidth: '30%'
 };
 
 export const governmentAgenciesEmptyConfig: EmptyStateConfig = {
   imageUrl: 'images/emptyStates/image-10.svg',
-  title: 'no_government_authorities_available',
+  title: 'settings.governmentAgencies.emptyTitle',
   imgWidth: '30%'
 };
 
 export const technicalSupportChatsEmptyConfig: EmptyStateConfig = {
   imageUrl: 'images/emptyStates/image-11.svg',
-  title: 'no_conversations_available',
+  title: 'settings.technicalSupportChats.emptyTitle',
   imgWidth: '30%'
 };
 
