@@ -1,7 +1,7 @@
 <article class="global-therapeutic-program-card" [ngClass]="{
     'global-therapeutic-program-card--details': type === cardType.DETAILS
   }" (click)="openProgramSubscription()" role="link"
-  [attr.aria-label]="'View details for ' + (item.title || 'this program')">
+  [attr.aria-label]="'View details for ' + (item.title ?? 'this program')">
   <div class="global-therapeutic-program-card__content" [ngClass]="{
       'global-therapeutic-program-card__content--details': type === cardType.DETAILS
     }">
@@ -19,25 +19,25 @@
         <span [ngClass]="{
             'global-therapeutic-program-card__title--details': type === cardType.DETAILS
           }">
-          {{ item.title || '' }}
+          {{ item.title ?? '' }}
         </span>
 
         <div class="global-therapeutic-program-card__price" role="status" aria-live="polite">
           @if (!item.is_purchased) {
           <div class="cost">
-            <p>{{ item.price }}</p>
+            <p>{{ item.price ?? '' }}</p>
             <app-svg-icon name="saudia-price-icon" [fillColor]="'#0E39B6'" />
           </div>
           } @else {
           <div class="subscriber">
-            <p>{{ 'general.subscriber' | translateApi }}</p>
+            <p>{{ translate('general.subscriber') }}</p>
           </div>
           }
         </div>
       </h3>
 
       <p class="global-therapeutic-program-card__description text-truncate-2">
-        {{ item.description }}
+        {{ item.description ?? '' }}
       </p>
     </div>
   </div>
@@ -47,24 +47,24 @@
     }">
     <div class="global-therapeutic-program-card__details__sessions">
       <app-svg-icon name="sessions-count" [fillColor]="'#47586E'" />
-      <span>{{ item.sessions_count }}</span>
-      <span class="sr-only">{{ 'sessions' | translateApi }}</span>
-      <span>{{ 'sessions' | translateApi }}</span>
+      <span>{{ item.sessions_count ?? '' }}</span>
+      <span class="sr-only">{{ translate('sessions') }}</span>
+      <span>{{ translate('sessions') }}</span>
     </div>
 
     @if (item.seats_label) {
     <div class="global-therapeutic-program-card__details__seats">
       <app-svg-icon name="seats-label" [fillColor]="'#47586E'" />
-      <span>{{ item.seats_label }}</span>
-      <span class="sr-only">{{ 'reminder_seatsRemaining' | translateApi }}</span>
+      <span>{{ item.seats_label ?? '' }}</span>
+      <span class="sr-only">{{ translate('reminder_seatsRemaining') }}</span>
     </div>
     }
 
     <div class="global-therapeutic-program-card__details__usage">
       <app-svg-icon name="usage-number" [fillColor]="'#47586E'" />
-      <span>{{ item.usage_number }}</span>
-      <span class="sr-only">{{ 'therapeuticPrograms.peopleRegistered' | translateApi }}</span>
-      <span>{{ 'registered' | translateApi }}</span>
+      <span>{{ item.usage_number ?? '' }}</span>
+      <span class="sr-only">{{ translate('therapeuticPrograms.peopleRegistered') }}</span>
+      <span>{{ translate('registered') }}</span>
     </div>
   </div>
 </article>

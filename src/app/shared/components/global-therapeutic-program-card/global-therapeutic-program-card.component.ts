@@ -1,4 +1,4 @@
-import { TranslateApiPipe } from './../../../common/core/translations/pipes/translate-api.pipe';
+import { TranslationsFacade } from '../../../common/core/translations/services';
 import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
@@ -17,13 +17,18 @@ export interface IProgramSubscriptionPopupInputs {
 @Component({
   selector: 'app-global-therapeutic-program-card',
   standalone: true,
-  imports: [CommonModule, TranslateApiPipe, SvgIconComponent],
+  imports: [CommonModule, SvgIconComponent],
   templateUrl: './global-therapeutic-program-card.component.html',
   styleUrls: ['./global-therapeutic-program-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GlobalTherapeuticProgramCardComponent implements OnInit {
   private readonly modalService = inject(ModalService);
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   protected readonly cardType = CardType;
 
   @Input({ required: true }) item!: IGlobalDoctorProgrammeModel;

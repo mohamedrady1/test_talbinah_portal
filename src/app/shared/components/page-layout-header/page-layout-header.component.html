@@ -22,7 +22,7 @@
   <div class="header-card__actions">
     <button class="header-card__button header-card__button--full-screen" (click)="toggleFullscreen()"
       [attr.aria-pressed]="isFullscreen() ? 'true' : 'false'"
-      [attr.aria-label]="translate(isFullscreen() ? 'exitFullscreen' : 'enterFullscreen')">
+      [attr.aria-label]="translate(isFullscreen() ? 'exitFullscreen' : 'enterFullscreen') ?? ''">
       @if (!isFullscreen()) {
       <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -55,8 +55,8 @@
       </svg>
       }
     </button>
-    <button class="header-card__button header-card__button--close" [attr.aria-label]="'close' | translateApi"
-      (click)="onCloseClick()">
+    <button class="header-card__button header-card__button--close" [attr.aria-label]="translate('close')"
+      (click)="onCloseClick()" [attr.aria-label]="translate('close') ?? ''">
       <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd"
           d="M4.97977 5.4797C5.17504 5.28444 5.49162 5.28444 5.68688 5.4797L7.99999 7.79281L10.3131 5.4797C10.5084 5.28444 10.825 5.28444 11.0202 5.4797C11.2155 5.67496 11.2155 5.99154 11.0202 6.18681L8.7071 8.49992L11.0202 10.813C11.2155 11.0083 11.2155 11.3249 11.0202 11.5201C10.825 11.7154 10.5084 11.7154 10.3131 11.5201L7.99999 9.20703L5.68688 11.5201C5.49162 11.7154 5.17504 11.7154 4.97977 11.5201C4.78451 11.3249 4.78451 11.0083 4.97977 10.813L7.29289 8.49992L4.97977 6.18681C4.78451 5.99154 4.78451 5.67496 4.97977 5.4797Z"
