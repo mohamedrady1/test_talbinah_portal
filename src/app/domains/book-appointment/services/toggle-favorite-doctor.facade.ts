@@ -76,7 +76,7 @@ export class ToggleFavoriteDoctorFacade {
 
           this._toastService.add({
             severity: 'error',
-            summary: this._localizationService.translateTextFromJson('general.error'),
+            summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
             detail: message,
             life: 5000,
           });
@@ -92,13 +92,13 @@ export class ToggleFavoriteDoctorFacade {
         }
       }),
       catchError((error: ApiError) => {
-        const message = error?.message || this._localizationService.translateTextFromJson('general.errorUpdatingFavoriteStatus');
+        const message = error?.message || this._localizationService.translateTextFromJson('an_error_has_occurredUpdatingFavoriteStatus');
         Logger.error(`Toggle favorite failed for doctor ID ${doctorId}`, error);
         handleApiErrors(error);
 
         this._toastService.add({
           severity: 'error',
-          summary: this._localizationService.translateTextFromJson('general.error'),
+          summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
           detail: message,
           life: 5000,
         });

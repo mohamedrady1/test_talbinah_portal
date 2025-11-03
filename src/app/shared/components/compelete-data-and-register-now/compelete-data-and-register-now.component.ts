@@ -11,8 +11,8 @@ import { LogoutFacade } from '../../../domains/settings/services/logout.facade';
 import { StorageKeys } from '../../config/constants/storage.keys';
 import { StorageService } from '../../../common/core/data-access/storages/session-local-storages/session-local-storage.service';
 import { TranslationsFacade } from '../../../common/core/translations';
-// import { ModalService } from '../../services/model.service';
-// import { NewLoginComponent } from '../../../domains/authentication/user-authentication/components/new-login/new-login.component';
+import { ModalService } from '../../services';
+import { NewLoginComponent } from '../../../domains';
 @Component({
   selector: 'app-compelete-data-and-register-now',
   standalone: true,
@@ -40,7 +40,7 @@ export class CompeleteDataAndRegisterNowComponent implements OnDestroy {
   private readonly storage = inject(StorageService);
   private readonly userContext = inject(UserContextService);
   private readonly userIdentityStore = inject(UserIdentityStore);
-  // private readonly modalService = inject(ModalService);
+  private readonly modalService = inject(ModalService);
   protected readonly logoutFacade = inject(LogoutFacade);
 
   private hasLoggedOut = false;
@@ -98,16 +98,16 @@ export class CompeleteDataAndRegisterNowComponent implements OnDestroy {
       description: 'welcome_safe_space',
     };
 
-    // this.modalService.open(NewLoginComponent, {
-    //   inputs: modalData,
-    //   minWidth: '70vh',
-    //   maxWidth: '70vh',
-    //   minHeight: '50vh',
-    //   outputs: {
-    //     closed: (data: any): void => {
-    //     }
-    //   },
-    // });
+    this.modalService.open(NewLoginComponent, {
+      inputs: modalData,
+      minWidth: '70vh',
+      maxWidth: '70vh',
+      minHeight: '50vh',
+      outputs: {
+        closed: (data: any): void => {
+        }
+      },
+    });
   }
 
   // ====== Helpers ======

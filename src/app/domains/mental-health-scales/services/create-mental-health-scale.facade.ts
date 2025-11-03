@@ -88,7 +88,7 @@ export class CreateMentalHealthScaleFacade {
           }
         }),
         catchError((error: ApiError) => {
-          this.handleError(error, 'general.errorCreatingScale'); // New translation key
+          this.handleError(error, 'an_error_has_occurredCreatingScale'); // New translation key
           return EMPTY; // Prevent stream from completing on error
         }),
         finalize(() => {

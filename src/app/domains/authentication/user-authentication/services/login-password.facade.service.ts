@@ -62,7 +62,7 @@ export class LoginPasswordFacade {
                     Logger.warn('⚠️ Login password failed:', message);
                     this._toastService.add({
                         severity: 'error',
-                        summary: this._localizationService.translateTextFromJson('general.error'),
+                        summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
                         detail: message,
                         life: 5000
                     });
@@ -80,7 +80,7 @@ export class LoginPasswordFacade {
                 handleApiErrorsMessage(error);
                 this._toastService.add({
                     severity: 'error',
-                    summary: this._localizationService.translateTextFromJson('general.error'),
+                    summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
                     detail: message,
                     life: 5000
                 });
@@ -103,7 +103,7 @@ export class LoginPasswordFacade {
     setError(message: string): void {
         this._toastService.add({
             severity: 'error',
-            summary: this._localizationService.translateTextFromJson('general.error'),
+            summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
             detail: message,
             life: 5000
         });

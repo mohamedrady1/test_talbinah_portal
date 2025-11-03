@@ -72,7 +72,7 @@ export class OtpVerificationFacade {
                     Logger.warn('⚠️ Verify code failed:', message);
                     this._toastService.add({
                         severity: 'error',
-                        summary: this._localizationService.translateTextFromJson('general.error'),
+                        summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
                         detail: message,
                         life: 5000,
                     });
@@ -89,7 +89,7 @@ export class OtpVerificationFacade {
                 handleApiErrorsMessage(error);
                 this._toastService.add({
                     severity: 'error',
-                    summary: this._localizationService.translateTextFromJson('general.error'),
+                    summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
                     detail: error?.message || 'خطأ في الاتصال بالسيرفر',
                     life: 5000,
                 });
@@ -130,7 +130,7 @@ export class OtpVerificationFacade {
                     Logger.warn('⚠️ Resend code failed:', message);
                     this._toastService.add({
                         severity: 'error',
-                        summary: this._localizationService.translateTextFromJson('general.error'),
+                        summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
                         detail: 'failed_to_resend_verification_code',
                         life: 5000,
                     });
@@ -147,7 +147,7 @@ export class OtpVerificationFacade {
                 handleApiErrorsMessage(error);
                 this._toastService.add({
                     severity: 'error',
-                    summary: this._localizationService.translateTextFromJson('general.error'),
+                    summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
                     detail: 'failed_to_resend_verification_code',
                     life: 5000,
                 });
@@ -197,7 +197,7 @@ export class OtpVerificationFacade {
                     Logger.warn('⚠️ Login failed:', message);
                     this._toastService.add({
                         severity: 'error',
-                        summary: this._localizationService.translateTextFromJson('general.error'),
+                        summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
                         detail: message,
                         life: 5000,
                     });
@@ -215,7 +215,7 @@ export class OtpVerificationFacade {
                 handleApiErrorsMessage(error);
                 this._toastService.add({
                     severity: 'error',
-                    summary: this._localizationService.translateTextFromJson('general.error'),
+                    summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
                     detail: error?.message || 'خطأ في الاتصال بالسيرفر',
                     life: 5000,
                 });

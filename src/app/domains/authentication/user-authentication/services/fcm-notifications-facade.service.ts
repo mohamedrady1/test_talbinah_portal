@@ -63,7 +63,7 @@ export class FcmNotificationsFacade {
 
           this._toastService.add({
             severity: 'error',
-            summary: this._localizationService.translateTextFromJson('general.error'),
+            summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
             detail: message,
             life: 5000,
           });
@@ -78,13 +78,13 @@ export class FcmNotificationsFacade {
         }
       }),
       catchError((error: ApiError) => {
-        const message = error?.message || this._localizationService.translateTextFromJson('general.errorUpdatingFcm');
+        const message = error?.message || this._localizationService.translateTextFromJson('an_error_has_occurredUpdatingFcm');
         Logger.error('FcmNotificationsFacade: Error updating FCM notifications', error);
         handleApiErrors(error);
 
         this._toastService.add({
           severity: 'error',
-          summary: this._localizationService.translateTextFromJson('general.error'),
+          summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
           detail: message,
           life: 5000,
         });

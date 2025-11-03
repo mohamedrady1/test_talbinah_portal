@@ -64,7 +64,7 @@ export class VoicesLookupFacade {
         }
       }),
       catchError((error: ApiError) => {
-        const localizedError = this._localizationService.translateTextFromJson('general.errorOccurred');
+        const localizedError = this._localizationService.translateTextFromJson('an_error_has_occurredOccurred');
         this._updateVoicesState({
           status: false,
           errorMessage: localizedError

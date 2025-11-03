@@ -72,7 +72,7 @@ export class LastSevenUserMoodsFacade {
           }
         }),
         catchError((error: ApiError) => {
-          this.handleError(error, 'general.errorLoadingHistoricalMoods');
+          this.handleError(error, 'an_error_has_occurredLoadingHistoricalMoods');
           return EMPTY;
         }),
         finalize(() => {

@@ -240,7 +240,7 @@ export class MeetingChatInputComponent {
 
       this._toastService.add({
         severity: 'error',
-        summary: this._localizationService.translateTextFromJson('general.error'),
+        summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
         detail: 'message_too_long',
         life: 5000
       });
@@ -334,7 +334,7 @@ export class MeetingChatInputComponent {
       Logger.error('Error accessing microphone:', err);
       this._toastService.add({
         severity: 'error',
-        summary: this._localizationService.translateTextFromJson('general.error'),
+        summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
         detail: this._localizationService.translateTextFromJson('microphone_access_denied'),
         life: 5000
       });

@@ -95,7 +95,7 @@ export class CheckDoctorAtReservationFacade {
           }
         }),
         catchError((error: ApiError) => {
-          this.handleError(error, 'general.errorCheckingReservation');
+          this.handleError(error, 'an_error_has_occurredCheckingReservation');
           return EMPTY;
         }),
         finalize(() => {
@@ -132,7 +132,7 @@ export class CheckDoctorAtReservationFacade {
 
     this._toastService.add({
       severity: 'error',
-      summary: this._localizationService.translateTextFromJson('general.error'),
+      summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
       detail: message,
       life: 5000,
     });

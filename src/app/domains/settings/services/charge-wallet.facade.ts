@@ -53,7 +53,7 @@ export class ChargeWalletFacade {
           const message = this._localization.translateTextFromJson('wallet.chargeFailed');
           this._toast.add({
             severity: 'error',
-            summary: this._localization.translateTextFromJson('general.error'),
+            summary: this._localization.translateTextFromJson('an_error_has_occurred'),
             detail: message,
             life: 5000
           });

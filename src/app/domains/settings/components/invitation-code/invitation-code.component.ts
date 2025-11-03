@@ -17,7 +17,7 @@ import { TranslationsFacade } from '../../../../common/core/translations/service
   imports: [
     CommonModule,
     ShareSocialComponent,
-    
+
   ],
   styleUrls: ['./invitation-code.component.scss'],
   templateUrl: './invitation-code.component.html',
@@ -27,7 +27,7 @@ export class InvitationCodeComponent {
   private readonly translationsFacade = inject(TranslationsFacade);
   protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
   protected translate(key: string): string { return this.translationsFacade.translate(key); }
-  
+
   @Input({ required: true }) invitationCode!: string;
 
   private readonly platformId = inject(PLATFORM_ID);
@@ -54,7 +54,7 @@ export class InvitationCodeComponent {
       .catch((err) => {
         this.toast.add({
           severity: 'error',
-          summary: this.i18n.translateTextFromJson('general.error'),
+          summary: this.i18n.translateTextFromJson('an_error_has_occurred'),
           detail: this.i18n.translateTextFromJson('referral_code_copy_failed'),
           life: 3000
         });

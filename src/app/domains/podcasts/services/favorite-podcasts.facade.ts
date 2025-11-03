@@ -60,12 +60,12 @@ export class FavoritePodcastsFacade {
           Logger.error('Favorite podcasts fetch failed', err);
           this._toast.add({
             severity: 'error',
-            summary: this._localization.translateTextFromJson('general.error'),
-            detail: this._localization.translateTextFromJson('general.errorLoadingFavoritePodcasts'),
+            summary: this._localization.translateTextFromJson('an_error_has_occurred'),
+            detail: this._localization.translateTextFromJson('an_error_has_occurredLoadingFavoritePodcasts'),
             life: 5000
           });
           this.updateState({
-            errorMessage: this._localization.translateTextFromJson('general.errorLoadingFavoritePodcasts')
+            errorMessage: this._localization.translateTextFromJson('an_error_has_occurredLoadingFavoritePodcasts')
           });
           this.updateState({ status: false });
           return EMPTY;
@@ -96,12 +96,12 @@ export class FavoritePodcastsFacade {
           Logger.error('Favorite podcasts fetch failed', err);
           this._toast.add({
             severity: 'error',
-            summary: this._localization.translateTextFromJson('general.error'),
-            detail: this._localization.translateTextFromJson('general.errorLoadingFavoritePodcasts'),
+            summary: this._localization.translateTextFromJson('an_error_has_occurred'),
+            detail: this._localization.translateTextFromJson('an_error_has_occurredLoadingFavoritePodcasts'),
             life: 5000
           });
           this.updateState({
-            errorMessage: this._localization.translateTextFromJson('general.errorLoadingFavoritePodcasts')
+            errorMessage: this._localization.translateTextFromJson('an_error_has_occurredLoadingFavoritePodcasts')
           });
           this.updateState({ status: false });
           return EMPTY;

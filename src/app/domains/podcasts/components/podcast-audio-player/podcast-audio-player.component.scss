@@ -1,7 +1,7 @@
 @use "../../../../common/styles/scss/abstracts/mixins" as *;
 
 .podcast-audio-player {
-  @include abs-logical(fixed, null, 2.8125rem, null, 50%, 10018);
+  @include abs-logical(fixed, null, 2.8125rem, 50%, null, 10018);
   @include flex-box(row, 1.5rem, center, space-between);
   transform: translateX(-50%);
   width: 70%;
@@ -11,9 +11,13 @@
   border: 1px solid rgba(161, 161, 161, 0.1);
   background: rgba(161, 161, 161, 0.83);
   backdrop-filter: blur(0.8625rem);
-
   audio {
     display: none;
+  }
+
+  &:dir(rtl) {
+    inset-inline-start: initial;
+    inset-inline-end: 50%;
   }
   &__info-container {
     @include flex-box(row, 1.5rem, center, space-between);
@@ -210,7 +214,7 @@
     content: "";
     position: absolute;
     top: 0;
-    left: -100%;
+    inset-inline-start: -100%;
     width: 200%;
     height: 100%;
     background: linear-gradient(
@@ -225,10 +229,10 @@
 
 @keyframes shimmer-move {
   0% {
-    left: -100%;
+    inset-inline-start: -100%;
   }
 
   100% {
-    left: 100%;
+    inset-inline-start: 100%;
   }
 }

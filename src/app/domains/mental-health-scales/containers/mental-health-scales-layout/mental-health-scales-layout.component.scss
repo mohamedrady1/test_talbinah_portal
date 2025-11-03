@@ -17,10 +17,27 @@
             backdrop-filter: blur(20px);
         }
 
+        // Segment control for mobile
+        &__segment {
+            display: none;
+
+            @include respond(md) {
+                display: block;
+                margin-bottom: 0.75rem;
+            }
+        }
+
         &__cards {
             @include flex-box(row, 0.75rem);
             overflow-x: hidden;
             padding-inline-end: 0.5rem;
+
+            // Hide content based on active tab (mobile only)
+            @include respond(md) {
+                .mobile-hidden {
+                    display: none;
+                }
+            }
 
             .mental-health-scale-layout__choose-mood,
             .mental-health-scale-layout__metrics,
@@ -74,6 +91,10 @@
 
         &__choose-mood {
             background: linear-gradient(to right, var(--color-icon-2, #f5dab8) 0%, var(--color-icon, #baf0e8) 100%);
+            
+            @include respond(md) {
+                display: block !important;
+            }
         }
 
         &__metrics {

@@ -104,7 +104,7 @@ export class ScheduleReservationFacade {
         }),
         catchError((error: ApiError) => {
           // Catch and handle HTTP or network errors
-          this.handleError(error, 'general.errorSchedulingReservation');
+          this.handleError(error, 'an_error_has_occurredSchedulingReservation');
           return EMPTY; // Prevent the observable stream from completing with an error
         }),
         finalize(() => {
@@ -135,10 +135,10 @@ export class ScheduleReservationFacade {
     Logger.error(`Error scheduling reservation:`, error);
     handleApiErrors(error); // Call your common error handler
     // this._toastService.error(error?.message ?? this._localizationService.translateTextFromJson(translationKey));
-    const errorMessage = error?.message || this._localizationService.translateTextFromJson('general.error');
+    const errorMessage = error?.message || this._localizationService.translateTextFromJson('an_error_has_occurred');
     this._toastService.add({
       severity: 'error',
-      summary: this._localizationService.translateTextFromJson('general.error'),
+      summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
       detail: errorMessage,
       life: 5000
     });

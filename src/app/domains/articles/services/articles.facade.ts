@@ -112,12 +112,13 @@ export class ArticlesFacade {
               errorMessage: null,
             });
           } else {
+            // Empty response is not an error, just set response to null or empty
             this._updateArticlesListState({
-              response: null,
+              response: response || null,
               totalItems: 0,
               totalPages: 1,
               searchSuggestions: [],
-              errorMessage: '📭 No articles found.',
+              errorMessage: null,
             });
           }
 

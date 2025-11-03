@@ -1,4 +1,11 @@
 import { ICardHeaderConfig } from "../../../shared"
+import { SegmentOption } from '../../../shared/components/segment-control/segment-control.component';
+
+export const PodcastSegmentOptions: SegmentOption[] = [
+  { id: 'recommended', title: 'podcast_card_recommended_title' },
+  { id: 'explore', title: 'podcast_card_explore_title' },
+  { id: 'favourite', title: 'podcast_card_favorites_title' }
+];
 
 export const MostListenedHeaderConfig: ICardHeaderConfig = {
   title: 'podcast_card_most_listened_title',

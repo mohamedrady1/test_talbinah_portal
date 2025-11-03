@@ -21,11 +21,30 @@
         }
     }
 
+    // Segment control for mobile
+    &__segment {
+        display: none;
+
+        @include respond(md) {
+            display: block;
+            margin-bottom: 0.75rem;
+        }
+    }
+
     &__cards {
         @include flex-box(row, 0.75rem);
 
         @include respond(lg) {
             flex-direction: column;
+        }
+
+        // Hide content based on active tab (mobile only)
+        @include respond(md) {
+            .podcast__recommended-list.mobile-hidden,
+            .podcast__explore-list.mobile-hidden,
+            .podcast__favourite-list.mobile-hidden {
+                display: none;
+            }
         }
     }
 
@@ -79,7 +98,7 @@
     &__list {
         @include grid-box(repeat(2, 1fr), 1.25rem);
 
-        @include respond(lg) {
+        @include respond(md) {
             grid-template-columns: 1fr;
         }
     }

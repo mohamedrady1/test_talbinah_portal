@@ -71,7 +71,7 @@ export class PodcastsListFacade {
           }
         }),
         catchError((error: ApiError) => {
-          this.handleFetchError(error, 'allPodcasts', 'general.errorLoadingPodcasts');
+          this.handleFetchError(error, 'allPodcasts', 'an_error_has_occurredLoadingPodcasts');
           return EMPTY;
         }),
         finalize(() => {
@@ -129,7 +129,7 @@ export class PodcastsListFacade {
 
     this._toastService.add({
       severity: 'error',
-      summary: this._localizationService.translateTextFromJson('general.error'),
+      summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
       detail: errorMessage,
       life: 5000
     });

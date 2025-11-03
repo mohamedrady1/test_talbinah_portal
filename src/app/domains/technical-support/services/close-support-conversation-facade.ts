@@ -138,7 +138,7 @@ export class CloseSupportConversationFacade {
 
     this._toastService.add({
       severity: 'error',
-      summary: 'Error',
+      summary: 'an_error_has_occurred',
       detail: message,
       life: 5000,
     });

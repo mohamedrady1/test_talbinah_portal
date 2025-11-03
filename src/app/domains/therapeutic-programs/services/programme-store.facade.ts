@@ -87,7 +87,7 @@ export class ProgrammeStoreFacade {
         }),
         catchError((error: ApiError) => {
           // Catch and handle HTTP or network errors
-          this.handleError(error, 'general.errorStoringProgramme');
+          this.handleError(error, 'an_error_has_occurredStoringProgramme');
           return EMPTY; // Prevent the observable stream from completing with an error
         }),
         finalize(() => {

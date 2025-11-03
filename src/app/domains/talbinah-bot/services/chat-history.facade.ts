@@ -152,7 +152,7 @@ export class ChatHistoryFacade {
       catchError((error: ApiError) => {
         handleApiErrors(error);
         this._updateState({
-          errorMessage: this._localizationService.translateTextFromJson('general.errorOccurred'),
+          errorMessage: this._localizationService.translateTextFromJson('an_error_has_occurredOccurred'),
           status: false
         });
         return EMPTY;
@@ -193,7 +193,7 @@ export class ChatHistoryFacade {
       catchError((error: ApiError) => {
         handleApiErrors(error);
         this._updateState({
-          errorMessage: this._localizationService.translateTextFromJson('general.errorOccurred'),
+          errorMessage: this._localizationService.translateTextFromJson('an_error_has_occurredOccurred'),
           status: false
         });
         return EMPTY;

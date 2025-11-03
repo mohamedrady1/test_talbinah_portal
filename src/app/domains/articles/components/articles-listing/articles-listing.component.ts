@@ -1,7 +1,7 @@
 import { TranslationsFacade } from '../../../../common/core/translations/services';
-import { CompeleteDataAndRegisterNowComponent, GlobalSearchInputComponent, ICardHeaderConfig, InputSearchConfig, ModalService, PageLayoutCardHeaderComponent, PaginationConfig, PaginationListingComponent, StorageKeys } from '../../../../shared';
+import { CompeleteDataAndRegisterNowComponent, GlobalSearchInputComponent, ICardHeaderConfig, InputSearchConfig, ModalService, PageLayoutCardHeaderComponent, PaginationConfig, PaginationListingComponent, SegmentControlComponent, StorageKeys } from '../../../../shared';
 import { CardType, Logger, StorageService } from '../../../../common';
-import { ArticlesCardSideHeader, ArticlesRoutesEnum, MostFavoriteArticlesSideHeader, MostReadArticlesSideHeader } from '../../constants';
+import { ArticlesCardSideHeader, ArticlesRoutesEnum, ArticlesSegmentOptions, MostFavoriteArticlesSideHeader, MostReadArticlesSideHeader } from '../../constants';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, PLATFORM_ID, computed, signal, effect } from '@angular/core';
 import { ArticleCardComponent } from '../article-card/article-card.component';
 import { IArticle } from '../../dtos';
@@ -33,8 +33,7 @@ import { Router } from '@angular/router';
     ErrorStateComponent,
     EmptyStateComponent,
     CompeleteDataAndRegisterNowComponent,
-
-    
+    SegmentControlComponent,
   ],
   templateUrl: './articles-listing.component.html',
   styleUrls: ['./articles-listing.component.scss'],
@@ -75,7 +74,10 @@ export class ArticlesListingComponent {
   // Configuration constants
   readonly headerConfig: ICardHeaderConfig = ArticlesCardSideHeader;
   readonly mostReadHeaderConfig: ICardHeaderConfig = MostReadArticlesSideHeader;
-  readonly mostFavoriteHeaderConfig: ICardHeaderConfig = MostFavoriteArticlesSideHeader;
+  readonly mostFavoriteHeaderConfig = computed<ICardHeaderConfig>(() => ({
+    ...MostFavoriteArticlesSideHeader,
+    isAllButtonVisible: (this.favoriteArticles()?.length ?? 0) > 4
+  }));
   readonly cardTypes = CardType;
 
   // Pagination configuration
@@ -97,6 +99,15 @@ export class ArticlesListingComponent {
 
   // ----- Computed Signals -----
   public readonly isLoggedIn = computed(() => !!this.token());
+
+  // Mobile segment control
+  protected selectedSegmentId = signal<string>('all-articles');
+  protected readonly segmentOptions = ArticlesSegmentOptions;
+
+  // Computed properties for showing sections
+  protected readonly showAllArticles = computed(() => this.selectedSegmentId() === 'all-articles');
+  protected readonly showMostRead = computed(() => this.selectedSegmentId() === 'most-read');
+  protected readonly showFavourite = computed(() => this.selectedSegmentId() === 'favourite');
 
   readonly searchConfig = computed<InputSearchConfig>(() => ({
     formControl: this.searchControl,
@@ -260,7 +271,7 @@ export class ArticlesListingComponent {
     this.modalService.open(ArticlesFavouriteListComponent, {
       inputs: {
         image: 'images/home/icons/articles.png',
-        title: this.mostFavoriteHeaderConfig.title,
+        title: this.mostFavoriteHeaderConfig().title,
       }, width: '50%',
       outputs: {
         closed: () => {
@@ -268,6 +279,10 @@ export class ArticlesListingComponent {
         }
       }
     })
+  }
+
+  protected onSegmentChanged(option: typeof ArticlesSegmentOptions[number]): void {
+    this.selectedSegmentId.set(option.id as string);
   }
 }
 

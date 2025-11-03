@@ -126,7 +126,7 @@ export class MyMeasurementsFacade {
           handleApiErrors(error); // Common error handling for toasts/logging
           this._toastService.add({
             severity: 'error',
-            summary: this._localizationService.translateTextFromJson('general.error'),
+            summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
             detail: error?.message || this._localizationService.translateTextFromJson('measurements.errorLoading'), // New translation key
             life: 5000
           });

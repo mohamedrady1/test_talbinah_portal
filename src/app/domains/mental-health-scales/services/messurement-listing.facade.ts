@@ -112,7 +112,7 @@ export class MentalHealthScalesFacade {
         }),
         catchError((error: ApiError) => {
           this._updateScalesState({
-            errorMessage: this._localizationService.translateTextFromJson('general.errorLoadingScales'),
+            errorMessage: this._localizationService.translateTextFromJson('an_error_has_occurredLoadingScales'),
             response: [] // Clear response on error to maintain type consistency
           });
           handleApiErrors(error);

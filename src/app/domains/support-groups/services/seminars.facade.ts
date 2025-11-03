@@ -149,7 +149,7 @@ export class SeminarsFacade { // Renamed: TherapeuticProgramsFacade -> SeminarsF
           }
         }),
         catchError((error: ApiError) => {
-          this.handleFetchError(error.message, 'allSeminars', 'general.errorLoadingSeminars'); // Renamed: errorLoadingPodcasts -> errorLoadingSeminars
+          this.handleFetchError(error.message, 'allSeminars', 'an_error_has_occurredLoadingSeminars'); // Renamed: errorLoadingPodcasts -> errorLoadingSeminars
           return EMPTY;
         }),
         finalize(() => {
@@ -212,7 +212,7 @@ export class SeminarsFacade { // Renamed: TherapeuticProgramsFacade -> SeminarsF
         }),
         catchError((error: ApiError) => {
 
-          this.handleFetchError(error.message, 'myPrograms', 'general.errorLoadingMySeminars'); // Renamed: errorLoadingMyPodcasts -> errorLoadingMySeminars
+          this.handleFetchError(error.message, 'myPrograms', 'an_error_has_occurredLoadingMySeminars'); // Renamed: errorLoadingMyPodcasts -> errorLoadingMySeminars
           return EMPTY;
         }),
         finalize(() => {

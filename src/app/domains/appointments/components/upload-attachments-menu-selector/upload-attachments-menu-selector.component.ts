@@ -36,9 +36,9 @@ export class UploadAttachmentsMenuSelectorComponent implements OnInit, OnDestroy
   private readonly renderer = inject(Renderer2);
   private readonly toast = inject(ToastService);
   private readonly translationsFacade = inject(TranslationsFacade);
-  
+
   protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
-  
+
   protected translate(key: string): string {
     return this.translationsFacade.translate(key);
   }
@@ -102,7 +102,7 @@ export class UploadAttachmentsMenuSelectorComponent implements OnInit, OnDestroy
       if (validImages.length === 0) {
         this.toast.add({
           severity: 'error',
-          summary: 'error',
+          summary: 'an_error_has_occurred',
           detail: 'error_to_delete_post',
           life: 3000
         }); this.clearFileInputs();

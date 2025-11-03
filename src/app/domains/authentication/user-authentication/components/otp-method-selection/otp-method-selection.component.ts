@@ -143,7 +143,7 @@ export class OtpMethodSelectionComponent {
             handleApiErrorsMessage(error);
             this._ToastService.add({
               severity: 'error',
-              summary: 'general.error',
+              summary: 'an_error_has_occurred',
               detail: String(error?.message ?? 'Unknown error'),
               life: 5000,
             });

@@ -66,12 +66,12 @@ export class FavoriteDoctorsFacade {
           Logger.error('Favorite doctors fetch failed', err);
           this._toast.add({
             severity: 'error',
-            summary: this._localization.translateTextFromJson('general.error'),
-            detail: this._localization.translateTextFromJson('general.errorLoadingFavoriteDoctors'),
+            summary: this._localization.translateTextFromJson('an_error_has_occurred'),
+            detail: this._localization.translateTextFromJson('an_error_has_occurredLoadingFavoriteDoctors'),
             life: 5000
           });
           this.updateState({
-            errorMessage: this._localization.translateTextFromJson('general.errorLoadingFavoriteDoctors')
+            errorMessage: this._localization.translateTextFromJson('an_error_has_occurredLoadingFavoriteDoctors')
           });
           this.updateState({ status: false });
           return EMPTY;

@@ -6,10 +6,10 @@
                 <div class="img-container">
                     <img class="w-100 h-100" [src]="'images/toast/' + toast.severity + '.svg'" [alt]="toast.severity">
                 </div>
-                <p class="mb-1" [ngClass]="'text-' + toast.severity">{{ toast.summary |translate }}</p>
+                <p class="mb-1" [ngClass]="'text-' + toast.severity">{{ translate(toast.summary) }}</p>
             </div>
             <div class="content px-6">
-                <p class="text-white">{{ toast.detail |translate }}</p>
+                <p class="text-white">{{ translate(toast.detail) }}</p>
             </div>
             <div class="close position-absolute"
                 [ngStyle]="currentLanguage == 'ar' ? { left: '10px' } : { right: '10px' }"

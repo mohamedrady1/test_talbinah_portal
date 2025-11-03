@@ -126,7 +126,7 @@ export class DoctorsListFacade {
         this._errorMessage.set(err.message || 'Unknown error');
         this._toastService.add({
           severity: 'error',
-          summary: 'general.error',
+          summary: 'an_error_has_occurred',
           detail: 'general.doctorsError',
           life: 5000,
         });

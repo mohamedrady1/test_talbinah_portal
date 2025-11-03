@@ -38,7 +38,7 @@ export class AssignToDepartmentFacade {
         } else {
           this._ToastService.add({
             severity: 'error',
-            summary: 'error',
+            summary: 'an_error_has_occurred',
             detail: response?.message || 'Transfer completed with issues',
             life: 5000,
           });
@@ -49,7 +49,7 @@ export class AssignToDepartmentFacade {
         // error handler
         this._ToastService.add({
           severity: 'error',
-          summary: 'error',
+          summary: 'an_error_has_occurred',
           detail: this.error() || 'Unknown error',
           life: 5000,
         });

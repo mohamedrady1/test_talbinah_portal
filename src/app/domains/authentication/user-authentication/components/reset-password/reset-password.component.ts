@@ -187,7 +187,7 @@ export class ResetPasswordComponent implements OnInit { // Implement OnInit
       Logger.warn('Missing auth data payload in localStorage. Redirecting to login...');
       this._ToastService.add({
         severity: 'error',
-        summary: 'general.error',
+        summary: 'an_error_has_occurred',
         detail: 'general.missingData',
         life: 5000,
       });
@@ -214,7 +214,7 @@ export class ResetPasswordComponent implements OnInit { // Implement OnInit
       Logger.error('Invalid auth data payload in localStorage. Redirecting to login...');
       this._ToastService.add({
         severity: 'error',
-        summary: 'general.error',
+        summary: 'an_error_has_occurred',
         detail: 'general.missingData',
         life: 5000,
       });
@@ -333,7 +333,7 @@ export class ResetPasswordComponent implements OnInit { // Implement OnInit
             handleApiErrorsMessage(error);
             this._ToastService.add({
               severity: 'error',
-              summary: 'general.error',
+              summary: 'an_error_has_occurred',
               detail: error?.message,
               life: 5000,
             });

@@ -108,7 +108,7 @@ export class CancelReservationFacade {
         }),
         catchError((error: ApiError) => {
           // Catch and handle HTTP or network errors
-          this.handleError(error, 'general.errorCancellingReservation');
+          this.handleError(error, 'an_error_has_occurredCancellingReservation');
           return EMPTY; // Prevent the observable stream from completing with an error
         }),
         finalize(() => {

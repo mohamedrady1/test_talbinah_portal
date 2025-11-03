@@ -6,7 +6,7 @@
     background: var(--Dark-WHITE, #fff);
     padding: 0.5rem;
     border-radius: 1rem;
-
+    flex-wrap: wrap;
     @include respond(sm) {
         width: 100%;
     }
@@ -41,6 +41,3 @@
         }
     }
 }
-
-
-

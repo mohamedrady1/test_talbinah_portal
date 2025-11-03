@@ -22,7 +22,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HeaderComponent } from '../header';
 import { TranslateModule } from '@ngx-translate/core';
 import { SiteHeaderComponent } from '../../../domains';
-
+import { TranslationsFacade } from '../../../common/core/translations/services';
 @Component({
   selector: 'app-modal-host',
   standalone: true,
@@ -38,7 +38,11 @@ export class ModalHostComponent implements OnInit, AfterViewInit, OnDestroy, OnC
   private readonly platformId = inject(PLATFORM_ID);
   private readonly environmentInjector = inject(EnvironmentInjector);
   private subscriptions: any[] = [];
-
+  private readonly translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
+  }
   @Input() component: any;
   @Input() config: any;
   @Input() headerConfig: any;

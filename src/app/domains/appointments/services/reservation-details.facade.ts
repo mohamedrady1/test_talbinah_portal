@@ -94,7 +94,7 @@ export class ReservationDetailsFacade { // Renamed from SessionWithDoctorFacade 
       }),
       catchError((error: ApiError) => {
         // Handle network errors or unhandled server errors
-        const localizedError = this._localizationService.translateTextFromJson('general.errorOccurred');
+        const localizedError = this._localizationService.translateTextFromJson('an_error_has_occurredOccurred');
         const errorMessage = error.message || localizedError;
         this._updateReservationDetailsState({
           status: false,

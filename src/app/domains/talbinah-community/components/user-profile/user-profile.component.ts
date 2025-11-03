@@ -590,7 +590,7 @@ export class UserProfileComponent implements AfterViewInit {
             Logger.warn('Post deletion error', response);
             this._ToastService.add({
               severity: 'error',
-              summary: 'general.error',
+              summary: 'an_error_has_occurred',
               detail: response?.message || 'Error to delete post.',
               life: 5000
             });
@@ -601,7 +601,7 @@ export class UserProfileComponent implements AfterViewInit {
           handleApiErrorsMessage(error);
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
+            summary: 'an_error_has_occurred',
             detail: error?.message || 'Failed to delete post.',
             life: 5000
           });
@@ -614,6 +614,12 @@ export class UserProfileComponent implements AfterViewInit {
 
   // --- Start: Follow/Unfollow Handlers ---
   protected toggleFollow(): void {
+    // Check if user is logged in
+    if (!this.isLoggedIn()) {
+      this._RoleGuardService.openLoginModal();
+      return;
+    }
+
     if (this.userCommunityProfileId() === undefined || this.isLoadingFollow()) {
       Logger.warn('Cannot toggle follow: User ID is missing or a request is already in progress.');
       return;
@@ -686,7 +692,7 @@ export class UserProfileComponent implements AfterViewInit {
           handleApiErrorsMessage(error); // Display generic API error message
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
+            summary: 'an_error_has_occurred',
             detail: error?.message || 'Error occurred while updating follow status.',
             life: 5000,
           });
@@ -862,7 +868,7 @@ export class UserProfileComponent implements AfterViewInit {
 
     this._ToastService.add({
       severity: 'error',
-      summary: 'general.error',
+      summary: 'an_error_has_occurred',
       detail: error?.message || '❌ Failed to fetch user identity profile.',
       life: 5000
     });

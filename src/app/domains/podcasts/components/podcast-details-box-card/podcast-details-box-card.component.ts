@@ -29,7 +29,7 @@ import { TranslationsFacade } from '../../../../common/core/translations/service
     TranslateModule,
 
     LazyLoadImageDirective,
-    
+
   ],
   templateUrl: './podcast-details-box-card.component.html',
   styleUrls: ['./podcast-details-box-card.component.scss'],
@@ -37,13 +37,13 @@ import { TranslationsFacade } from '../../../../common/core/translations/service
 })
 export class PodcastDetailsBoxCardComponent {
   private readonly translationsFacade = inject(TranslationsFacade);
-  
+
   protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
-  
+
   protected translate(key: string): string {
     return this.translationsFacade.translate(key);
   }
-  
+
   @Input({ required: true }) item!: IGlobalPodcastItemModel;
   @Input() isBookMarked = signal<boolean>(false);
   @Input() isloadingFavourite = false;
@@ -116,8 +116,8 @@ export class PodcastDetailsBoxCardComponent {
       error: () => {
         this._ToastService.add({
           severity: 'error',
-          summary: 'general.error',
-          detail: 'general.errorUpdatingFavoriteStatus',
+          summary: 'an_error_has_occurred',
+          detail: 'an_error_has_occurredUpdatingFavoriteStatus',
           life: 5000,
         });
       },

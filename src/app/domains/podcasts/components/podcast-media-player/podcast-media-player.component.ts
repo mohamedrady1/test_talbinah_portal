@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, EventEmitter, inject, Input, Output, PLATFORM_ID, signal, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, ElementRef, EventEmitter, inject, Input, OnDestroy, Output, PLATFORM_ID, signal, ViewChild } from '@angular/core';
 import { LazyLoadImageDirective } from '../../../../common/core/directives/lazyloading/lazy-load-image.directive';
 import { FavoritePodcastsFacade, ToggleFavoritePodcastFacade } from '../../services';
 import { IGlobalPodcastItemModel, Logger, StorageService } from '../../../../common';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { LocalizationService, ModalService, StorageKeys } from '../../../../shared';
+import { LocalizationService, ModalService, StorageKeys, ToastService } from '../../../../shared';
 import { TranslateModule } from '@ngx-translate/core';
 import { RoleGuardService } from '../../../authentication';
 import { TranslationsFacade } from '../../../../common/core/translations/services';
@@ -16,21 +16,21 @@ import { TranslationsFacade } from '../../../../common/core/translations/service
     CommonModule,
 
     LazyLoadImageDirective,
-    
+
   ],
   templateUrl: './podcast-media-player.component.html',
   styleUrls: ['./podcast-media-player.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PodcastMediaPlayerComponent {
+export class PodcastMediaPlayerComponent implements OnDestroy {
   private readonly translationsFacade = inject(TranslationsFacade);
-  
+
   protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
-  
+
   protected translate(key: string): string {
     return this.translationsFacade.translate(key);
   }
-  
+
   private readonly platformId = inject(PLATFORM_ID);
 
   // SSR-safe browser check
@@ -63,6 +63,8 @@ export class PodcastMediaPlayerComponent {
   @ViewChild('progressBar') progressBarRef!: ElementRef<HTMLDivElement>;
   @ViewChild('volumeBar') volumeBarRef!: ElementRef<HTMLDivElement>;
 
+  private readonly _ToastService = inject(ToastService);
+
 
   protected isPlaying = signal(false);
   protected isLoading = signal(false);
@@ -73,6 +75,8 @@ export class PodcastMediaPlayerComponent {
   protected progress = signal(0);
   protected volume = signal(1);
   protected previousVolume = signal(1);
+
+  private loadingTimeout: any = null;
 
   @Input() externalFavouriteToggled = signal<IGlobalPodcastItemModel | null>(null);
   @Output() public favouriteToggled = new EventEmitter<IGlobalPodcastItemModel>();
@@ -105,21 +109,45 @@ export class PodcastMediaPlayerComponent {
 
       console.log('PodcastMediaPlayerComponent.ngAfterViewInit - currentTime:', this.currentTime);
 
+      // Check if audio source is valid
+      if (!audio.src || audio.src === '') {
+        Logger.error('Audio source is empty or invalid');
+        this._ToastService.add({
+          severity: 'error',
+          summary: 'an_error_has_occurred',
+          detail: this.translate('audio_file_decryption_error'),
+          life: 5000,
+        });
+        this.isLoading.set(false);
+        return;
+      }
+
+      // Error handler for audio element
+      audio.addEventListener('error', (e) => {
+        this.handleAudioError(e);
+      });
+
       setTimeout(() => {
         if (this.currentTime && !isNaN(this.currentTime) && this.currentTime > 0) {
           console.log('Setting audio time to:', this.currentTime);
           audio.currentTime = this.currentTime;
           this.currentTimeSignal.set(this.currentTime);
-          audio.play();
+          audio.play().catch((error) => {
+            this.handlePlayError(error);
+          });
           this.isPlaying.set(true);
         } else {
           console.log('No valid currentTime provided:', this.currentTime);
         }
       }, 100); // Increased timeout to ensure audio element is ready
 
-      audio.addEventListener('waiting', () => this.isLoading.set(true));
+      audio.addEventListener('waiting', () => {
+        this.isLoading.set(true);
+        this.startLoadingTimeout();
+      });
       audio.addEventListener('canplay', () => {
         this.isLoading.set(false);
+        this.clearLoadingTimeout();
         if (audio.duration && audio.duration !== Infinity && this.duration() === 0) {
           this.duration.set(audio.duration);
         }
@@ -127,6 +155,7 @@ export class PodcastMediaPlayerComponent {
       audio.addEventListener('playing', () => {
         this.isPlaying.set(true);
         this.isLoading.set(false);
+        this.clearLoadingTimeout();
       });
       audio.addEventListener('pause', () => this.isPlaying.set(false));
       audio.addEventListener('ended', () => {
@@ -189,7 +218,9 @@ export class PodcastMediaPlayerComponent {
       if (this.isPlaying()) {
         audio.pause();
       } else {
-        audio.play();
+        audio.play().catch((error) => {
+          this.handlePlayError(error);
+        });
       }
     }
   }
@@ -271,6 +302,71 @@ export class PodcastMediaPlayerComponent {
     this.isFullscreen.set(false);
     this.onMinimize.emit(this.currentTimeSignal());
     this.modalService.closeAll();
+  }
+
+  private handleAudioError(error: any): void {
+    Logger.error('Audio error:', error);
+    const audio = this.audioElementRef?.nativeElement;
+    let errorMessage = 'audio_file_decryption_error';
+
+    if (audio?.error) {
+      errorMessage = 'audio_file_decryption_error';
+    }
+
+    this._ToastService.add({
+      severity: 'error',
+      summary: 'an_error_has_occurred',
+      detail: this.translate(errorMessage),
+      life: 5000,
+    });
+
+    this.isPlaying.set(false);
+    this.isLoading.set(false);
+  }
+
+  private handlePlayError(error: any): void {
+    Logger.error('Play error:', error);
+    let errorMessage = 'audio_file_decryption_error';
+    this._ToastService.add({
+      severity: 'error',
+      summary: 'an_error_has_occurred',
+      detail: this.translate(errorMessage),
+      life: 5000,
+    });
+
+    this.isPlaying.set(false);
+    this.isLoading.set(false);
+    this.clearLoadingTimeout();
+  }
+
+  private startLoadingTimeout(): void {
+    this.clearLoadingTimeout();
+
+    // Set timeout for 10 seconds
+    this.loadingTimeout = setTimeout(() => {
+      if (this.isLoading()) {
+        Logger.error('Audio loading timeout - taking too long to load');
+        this._ToastService.add({
+          severity: 'error',
+          summary: 'an_error_has_occurred',
+          detail: this.translate('audio_file_decryption_error'),
+          life: 5000,
+        });
+        this.isLoading.set(false);
+        this.isPlaying.set(false);
+      }
+    }, 5000); // 10 seconds timeout
+  }
+
+  private clearLoadingTimeout(): void {
+    if (this.loadingTimeout) {
+      clearTimeout(this.loadingTimeout);
+      this.loadingTimeout = null;
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.clearLoadingTimeout();
   }
 }
 

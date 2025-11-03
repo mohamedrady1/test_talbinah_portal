@@ -228,12 +228,12 @@ export class PodcastsMainPageFacade {
   private handleFetchAllError(error: ApiError): void {
     Logger.error('Error fetching all podcasts:', error);
     handleApiErrors(error);
-    this.updateAllPodcastsState({ errorMessage: this._LocalizationService.translateTextFromJson('general.errorLoadingPodcasts') });
+    this.updateAllPodcastsState({ errorMessage: this._LocalizationService.translateTextFromJson('an_error_has_occurredLoadingPodcasts') });
 
     this._ToastService.add({
       severity: 'error',
-      summary: this._LocalizationService.translateTextFromJson('general.error'),
-      detail: error?.message || this._LocalizationService.translateTextFromJson('general.errorLoadingPodcasts'),
+      summary: this._LocalizationService.translateTextFromJson('an_error_has_occurred'),
+      detail: error?.message || this._LocalizationService.translateTextFromJson('an_error_has_occurredLoadingPodcasts'),
       life: 5000
     });
 
@@ -293,11 +293,11 @@ export class PodcastsMainPageFacade {
   private handleFetchFavouriteError(error: ApiError): void {
     Logger.error('Error fetching favorite podcasts:', error);
     handleApiErrors(error);
-    this.updateFavouritePodcastsState({ errorMessage: this._LocalizationService.translateTextFromJson('general.errorLoadingFavoritePodcasts') });
+    this.updateFavouritePodcastsState({ errorMessage: this._LocalizationService.translateTextFromJson('an_error_has_occurredLoadingFavoritePodcasts') });
 
     this._ToastService.add({
       severity: 'error',
-      summary: this._LocalizationService.translateTextFromJson('general.error'),
+      summary: this._LocalizationService.translateTextFromJson('an_error_has_occurred'),
       detail: error?.message || this._LocalizationService.translateTextFromJson('general.failedUpdateFavoriteStatus'),
       life: 5000
     });
@@ -395,12 +395,12 @@ export class PodcastsMainPageFacade {
   private handleFetchRandomError(error: ApiError): void {
     Logger.error('Error fetching random podcasts:', error);
     handleApiErrors(error);
-    this.updateRandomPodcastsState({ errorMessage: this._LocalizationService.translateTextFromJson('general.errorLoadingRandomPodcasts') });
+    this.updateRandomPodcastsState({ errorMessage: this._LocalizationService.translateTextFromJson('an_error_has_occurredLoadingRandomPodcasts') });
 
     this._ToastService.add({
       severity: 'error',
-      summary: this._LocalizationService.translateTextFromJson('general.error'),
-      detail: error?.message || this._LocalizationService.translateTextFromJson('general.errorLoadingRandomPodcasts'),
+      summary: this._LocalizationService.translateTextFromJson('an_error_has_occurred'),
+      detail: error?.message || this._LocalizationService.translateTextFromJson('an_error_has_occurredLoadingRandomPodcasts'),
       life: 5000
     });
 
@@ -458,7 +458,7 @@ export class PodcastsMainPageFacade {
       });
       this._ToastService.add({
         severity: 'error',
-        summary: this._LocalizationService.translateTextFromJson('general.error'),
+        summary: this._LocalizationService.translateTextFromJson('an_error_has_occurred'),
         detail: response?.message || this._LocalizationService.translateTextFromJson('general.failedUpdateFavoriteStatus'),
         life: 5000
       });
@@ -468,12 +468,12 @@ export class PodcastsMainPageFacade {
   private handleFetchRecommendedError(error: ApiError): void {
     Logger.error('Error fetching recommended podcasts:', error);
     handleApiErrors(error);
-    this.updateRecommendedPodcastsState({ errorMessage: this._LocalizationService.translateTextFromJson('general.errorLoadingRecommendedPodcasts') });
+    this.updateRecommendedPodcastsState({ errorMessage: this._LocalizationService.translateTextFromJson('an_error_has_occurredLoadingRecommendedPodcasts') });
 
     this._ToastService.add({
       severity: 'error',
-      summary: this._LocalizationService.translateTextFromJson('general.error'),
-      detail: error?.message || this._LocalizationService.translateTextFromJson('general.errorLoadingRecommendedPodcasts'),
+      summary: this._LocalizationService.translateTextFromJson('an_error_has_occurred'),
+      detail: error?.message || this._LocalizationService.translateTextFromJson('an_error_has_occurredLoadingRecommendedPodcasts'),
       life: 5000
     });
 
@@ -521,12 +521,12 @@ export class PodcastsMainPageFacade {
   private handleFetchPodcastCategoriesError(error: ApiError): void {
     Logger.error('Error fetching podcast categories:', error);
     handleApiErrors(error);
-    this.updatePodcastCategoriesState({ errorMessage: this._LocalizationService.translateTextFromJson('general.errorLoadingPodcastCategories') });
+    this.updatePodcastCategoriesState({ errorMessage: this._LocalizationService.translateTextFromJson('an_error_has_occurredLoadingPodcastCategories') });
 
     this._ToastService.add({
       severity: 'error',
-      summary: this._LocalizationService.translateTextFromJson('general.error'),
-      detail: error?.message || this._LocalizationService.translateTextFromJson('general.errorLoadingPodcastCategories'),
+      summary: this._LocalizationService.translateTextFromJson('an_error_has_occurred'),
+      detail: error?.message || this._LocalizationService.translateTextFromJson('an_error_has_occurredLoadingPodcastCategories'),
       life: 5000
     });
 
@@ -563,7 +563,7 @@ export class PodcastsMainPageFacade {
             this.updatePodcastBookmarkStatus(podcast.id, originalIsBookmarked); // Revert optimistic update
             this._ToastService.add({
               severity: 'error',
-              summary: this._LocalizationService.translateTextFromJson('general.error'),
+              summary: this._LocalizationService.translateTextFromJson('an_error_has_occurred'),
               detail: response?.message || this._LocalizationService.translateTextFromJson('general.failedUpdateFavoriteStatus'),
               life: 5000
             });
@@ -574,8 +574,8 @@ export class PodcastsMainPageFacade {
           handleApiErrors(error);
           this._ToastService.add({
             severity: 'error',
-            summary: this._LocalizationService.translateTextFromJson('general.error'),
-            detail: error?.message ?? this._LocalizationService.translateTextFromJson('general.errorUpdatingFavoriteStatus'),
+            summary: this._LocalizationService.translateTextFromJson('an_error_has_occurred'),
+            detail: error?.message ?? this._LocalizationService.translateTextFromJson('an_error_has_occurredUpdatingFavoriteStatus'),
             life: 5000
           });
 

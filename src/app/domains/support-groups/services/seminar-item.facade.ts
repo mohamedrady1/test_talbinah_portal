@@ -84,7 +84,7 @@ export class SeminarItemFacade {
         }),
         catchError((error: ApiError) => {
           Logger.error('Error fetching seminar:', error);
-          this.handleFetchError(error, 'general.errorLoadingProgramDetails');
+          this.handleFetchError(error, 'an_error_has_occurredLoadingProgramDetails');
           return EMPTY; // Prevent stream from completing on error
         }),
         finalize(() => {

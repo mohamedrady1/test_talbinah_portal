@@ -11,9 +11,10 @@
                 <p class="new-otp-verification__code-text-message">
                     {{ translate('enter_code_sent_to_you') }}
                     <span class="new-otp-verification__code-phone-number">
+
+                        <span class="phone-number">{{neededDataToVerify()?.payploadCheckNumber?.phone_no || ''}}</span>
                         <span class="country-code">{{(neededDataToVerify()?.payploadCheckNumber?.country_code ||
                             '+966').replace('+', '')}}+</span>
-                        <span class="phone-number">{{neededDataToVerify()?.payploadCheckNumber?.phone_no || ''}}</span>
                     </span>
                 </p>
             </div>

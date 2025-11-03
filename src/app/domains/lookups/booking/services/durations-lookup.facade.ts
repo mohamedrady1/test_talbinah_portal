@@ -53,7 +53,7 @@ export class DurationsLookupFacade {
         }
       }),
       catchError((error: ApiError) => {
-        const localizedError = this._localizationService.translateTextFromJson('general.errorOccurred');
+        const localizedError = this._localizationService.translateTextFromJson('an_error_has_occurredOccurred');
         this._updateDurationsState({
           status: false,
           errorMessage: localizedError

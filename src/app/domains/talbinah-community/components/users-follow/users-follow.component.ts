@@ -190,7 +190,7 @@ export class UsersFollowComponent implements OnInit {
           } else {
             this._ToastService.add({
               severity: 'error',
-              summary: 'general.error',
+              summary: 'an_error_has_occurred',
               detail: res.message || ('talbinahCommunity.unfollowFailed'),
               life: 5000,
             });
@@ -204,7 +204,7 @@ export class UsersFollowComponent implements OnInit {
           handleApiErrorsMessage(error);
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
+            summary: 'an_error_has_occurred',
             detail: error?.message !== undefined && error?.message !== null ? String(error?.message) : ('talbinahCommunity.unfollowErrorOccurred'),
             life: 5000,
           });

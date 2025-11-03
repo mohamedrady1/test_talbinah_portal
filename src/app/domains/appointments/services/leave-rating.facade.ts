@@ -84,7 +84,7 @@ export class LeaveRatingFacade {
           }
         }),
         catchError((error: ApiError) => {
-          this.handleError(error, 'general.errorSubmittingRating');
+          this.handleError(error, 'an_error_has_occurredSubmittingRating');
           return EMPTY;
         }),
         finalize(() => {
@@ -126,7 +126,7 @@ export class LeaveRatingFacade {
 
     this._toastService.add({
       severity: 'error',
-      summary: this._localization.translateTextFromJson('general.error'),
+      summary: this._localization.translateTextFromJson('an_error_has_occurred'),
       detail: errorMessage,
       life: 5000,
     });

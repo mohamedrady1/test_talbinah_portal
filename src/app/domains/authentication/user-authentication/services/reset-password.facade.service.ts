@@ -64,7 +64,7 @@ export class ResetPasswordFacade {
                     Logger.warn('⚠️ Reset password failed:', message);
                     this._toastService.add({
                         severity: 'error',
-                        summary: this._localizationService.translateTextFromJson('general.error'),
+                        summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
                         detail: message,
                         life: 5000,
                     });
@@ -80,7 +80,7 @@ export class ResetPasswordFacade {
                 handleApiErrorsMessage(error);
                 this._toastService.add({
                     severity: 'error',
-                    summary: this._localizationService.translateTextFromJson('general.error'),
+                    summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
                     detail: error?.message || 'خطأ في الاتصال بالسيرفر',
                     life: 5000,
                 });

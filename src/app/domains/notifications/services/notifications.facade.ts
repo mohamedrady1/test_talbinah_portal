@@ -105,7 +105,7 @@ export class NotificationsFacade {
           });
         }),
         catchError((error) => {
-          this.handleFetchError(error, 'allNotifications', 'general.errorLoadingMoreNotifications');
+          this.handleFetchError(error, 'allNotifications', 'an_error_has_occurredLoadingMoreNotifications');
           return EMPTY;
         }),
         finalize(() => {
@@ -153,7 +153,7 @@ export class NotificationsFacade {
 
     this._toastService.add({
       severity: 'error',
-      summary: this._localizationService.translateTextFromJson('general.error'),
+      summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
       detail: this._localizationService.translateTextFromJson(translationKey),
       life: 5000
     });

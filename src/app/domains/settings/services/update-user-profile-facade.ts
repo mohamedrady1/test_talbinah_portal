@@ -82,7 +82,7 @@ export class UpdateUserProfileFacade {
           Logger.warn('⚠️ Profile update failed:', message);
           this._toastService.add({
             severity: 'error',
-            summary: this._localizationService.translateTextFromJson('general.error'),
+            summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
             detail: message,
             life: 4000,
           });
@@ -102,7 +102,7 @@ export class UpdateUserProfileFacade {
 
         this._toastService.add({
           severity: 'error',
-          summary: this._localizationService.translateTextFromJson('general.error'),
+          summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
           detail: message,
           life: 4000,
         });

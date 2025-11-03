@@ -48,7 +48,7 @@ export class RegisterFacade {
                     Logger.warn('⚠️ Register failed:', message);
                     this._toastService.add({
                         severity: 'error',
-                        summary: this._localizationService.translateTextFromJson('general.error'),
+                        summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
                         detail: message,
                         life: 5000
                     });
@@ -61,7 +61,7 @@ export class RegisterFacade {
                 handleApiErrorsMessage(error);
                 this._toastService.add({
                     severity: 'error',
-                    summary: this._localizationService.translateTextFromJson('general.error'),
+                    summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
                     detail: message,
                     life: 5000
                 });

@@ -110,13 +110,14 @@ export class FavoriteArticlesFacade {
               totalPages: totalPages,
             });
           } else {
+            // Empty response is not an error
             this._updateState({
               articles: [],
               status: response.status,
-              errorMessage: '📭 No favorite articles found.',
-              currentPage: 1, // Reset to 1 if no articles
-              totalItems: 0, // Reset to 0
-              totalPages: 1, // Reset to 1
+              errorMessage: null,
+              currentPage: 1,
+              totalItems: 0,
+              totalPages: 1,
             });
           }
 

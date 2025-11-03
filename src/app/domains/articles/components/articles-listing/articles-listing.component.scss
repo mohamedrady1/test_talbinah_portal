@@ -11,6 +11,25 @@
     grid-template-columns: 1fr;
   }
 
+  // Segment control for mobile
+  &__segment {
+    display: none;
+
+    @include respond(md) {
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  // Hide content based on active tab (mobile only)
+  @include respond(md) {
+    .articles-listing__left-panel.mobile-hidden,
+    .articles-listing__my-programs.mobile-hidden,
+    .articles-listing__my-programs-cards.mobile-hidden {
+      display: none;
+    }
+  }
+
   &__left-panel {
     @include flex-box(column, 0.75rem);
     flex: 1;

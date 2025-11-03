@@ -92,7 +92,7 @@ export class KhawiikBooksLookupFacade {
         }
       }),
       catchError((error: ApiError) => {
-        const localizedError = this._localizationService.translateTextFromJson('general.errorOccurred');
+        const localizedError = this._localizationService.translateTextFromJson('an_error_has_occurredOccurred');
         this._updateKhawiikBooksState({
           status: false,
           errorMessage: localizedError
@@ -125,7 +125,7 @@ export class KhawiikBooksLookupFacade {
           Logger.error('KhawiikBooksLookupFacade: Failed to start mission - API status false', response.message);
           this._toastService.add({
             severity: 'error',
-            summary: this._localizationService.translateTextFromJson('general.error'),
+            summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
             detail: response.message || this._localizationService.translateTextFromJson('khawiik.mission.startFailed'),
             life: 5000
           });
@@ -135,10 +135,10 @@ export class KhawiikBooksLookupFacade {
         Logger.error('KhawiikBooksLookupFacade: Error starting mission:', error);
 
         // Show error toast with the error message
-        const errorMessage = error.message || this._localizationService.translateTextFromJson('general.errorOccurred');
+        const errorMessage = error.message || this._localizationService.translateTextFromJson('an_error_has_occurredOccurred');
         this._toastService.add({
           severity: 'error',
-          summary: this._localizationService.translateTextFromJson('general.error'),
+          summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
           detail: errorMessage,
           life: 5000
         });
@@ -186,7 +186,7 @@ export class KhawiikBooksLookupFacade {
           Logger.error('KhawiikBooksLookupFacade: Failed to track voice duration - API status false', response.message);
           this._toastService.add({
             severity: 'error',
-            summary: this._localizationService.translateTextFromJson('general.error'),
+            summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
             detail: response.message || this._localizationService.translateTextFromJson('khawiik.voice.trackFailed'),
             life: 5000
           });
@@ -195,10 +195,10 @@ export class KhawiikBooksLookupFacade {
       catchError((error: ApiError) => {
         Logger.error('KhawiikBooksLookupFacade: Error tracking voice duration:', error);
 
-        const errorMessage = error.message || this._localizationService.translateTextFromJson('general.errorOccurred');
+        const errorMessage = error.message || this._localizationService.translateTextFromJson('an_error_has_occurredOccurred');
         this._toastService.add({
           severity: 'error',
-          summary: this._localizationService.translateTextFromJson('general.error'),
+          summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
           detail: errorMessage,
           life: 5000
         });

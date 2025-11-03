@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, Elemen
 import { LazyLoadImageDirective } from '../../../../common/core/directives/lazyloading/lazy-load-image.directive';
 import { isBrowser, ModalService, StorageKeys, SvgIconComponent, ToastService } from '../../../../shared';
 import { FavoritePodcastsFacade, PodcastsListFacade, ToggleFavoritePodcastFacade } from '../../services';
-import { IGlobalPodcastItemModel, Logger, StorageService } from '../../../../common';
+import { IGlobalPodcastItemModel, Logger, StorageService, TranslationsFacade } from '../../../../common';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { PodcastDetailsComponent } from '../podcast-details';
 import { PodcastDetailsHeaderConfig } from '../../configs';
@@ -90,7 +90,6 @@ export class PodcastAudioPlayerComponent implements OnChanges {
         audio.currentTime = newTime;
         this.currentAudioTime = newTime;
 
-        // إذا كان الـ audio متوقف، ابدأ التشغيل
         if (audio.paused) {
           audio.play().then(() => {
             console.log('Audio started playing from time:', newTime);
@@ -98,6 +97,7 @@ export class PodcastAudioPlayerComponent implements OnChanges {
             this._changeDetectorRef.detectChanges();
           }).catch((error) => {
             console.error('Error playing audio:', error);
+            this.handlePlayError(error);
           });
         }
 
@@ -114,12 +114,17 @@ export class PodcastAudioPlayerComponent implements OnChanges {
 
     audio.addEventListener('timeupdate', this.timeUpdateHandler);
 
-    // إذا كان هناك currentTime من الـ input، اضبطه
+    audio.addEventListener('error', (e) => {
+      this.handleAudioError(e);
+    });
+
     if (this.currentTime && !isNaN(this.currentTime) && this.currentTime > 0) {
       console.log('ngAfterViewInit: Setting initial time to:', this.currentTime);
       audio.currentTime = this.currentTime;
       this.currentAudioTime = this.currentTime;
-      audio.play();
+      audio.play().catch((error) => {
+        this.handlePlayError(error);
+      });
       this.isPlaying = true;
       this._changeDetectorRef.detectChanges();
     }
@@ -128,7 +133,9 @@ export class PodcastAudioPlayerComponent implements OnChanges {
       this.isEnded = true;
       this.isPlaying = false;
       if (this.isRepeatOne) {
-        audio.play();
+        audio.play().catch((error) => {
+          this.handlePlayError(error);
+        });
         this.isPlaying = true;
 
       }
@@ -166,7 +173,9 @@ export class PodcastAudioPlayerComponent implements OnChanges {
 
     const audio = this.audioPlayerRef.nativeElement;
     if (audio.paused) {
-      audio.play();
+      audio.play().catch((error) => {
+        this.handlePlayError(error);
+      });
       this.isPlaying = true;
     } else {
       audio.pause();
@@ -276,8 +285,8 @@ export class PodcastAudioPlayerComponent implements OnChanges {
         error: () => {
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
-            detail: 'general.errorUpdatingFavoriteStatus',
+            summary: 'an_error_has_occurred',
+            detail: 'an_error_has_occurredUpdatingFavoriteStatus',
             life: 5000,
           });
           this._changeDetectorRef.detectChanges();
@@ -310,5 +319,56 @@ export class PodcastAudioPlayerComponent implements OnChanges {
       width: '70%',
       height: '78vh'
     });
+  }
+
+  private handleAudioError(error: any): void {
+    Logger.error('Audio error:', error);
+    const audio = this.audioPlayerRef?.nativeElement;
+    let errorMessage = 'audio_file_decryption_error';
+
+    if (audio?.error) {
+      if (audio.error.code) {
+
+        errorMessage = 'audio_file_decryption_error';
+
+      }
+    }
+
+    this._ToastService.add({
+      severity: 'error',
+      summary: 'an_error_has_occurred',
+      detail: this.translate(errorMessage),
+      life: 5000,
+    });
+
+    this.isPlaying = false;
+    this._changeDetectorRef.detectChanges();
+  }
+
+  private handlePlayError(error: any): void {
+    Logger.error('Play error:', error);
+    let errorMessage = 'audio_file_decryption_error';
+
+    if (error.name === 'NotSupportedError') {
+      errorMessage = 'audio_file_decryption_error';
+    } else if (error.name === 'NotAllowedError') {
+      errorMessage = 'audio_file_decryption_error';
+    } else if (error.name === 'AbortError') {
+      errorMessage = 'audio_file_decryption_error';
+    }
+
+    this._ToastService.add({
+      severity: 'error',
+      summary: 'an_error_has_occurred',
+      detail: this.translate(errorMessage),
+      life: 5000,
+    });
+    this.isPlaying = false;
+    this._changeDetectorRef.detectChanges();
+  }
+  private translationsFacade = inject(TranslationsFacade);
+  protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
+  protected translate(key: string): string {
+    return this.translationsFacade.translate(key);
   }
 }

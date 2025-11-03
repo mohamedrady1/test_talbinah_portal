@@ -186,7 +186,7 @@ export class checkReservationRequestFacade {
           }
         }),
         catchError((error: ApiError) => {
-          this.handleError(error, 'general.errorCheckEmergencyAppointment');
+          this.handleError(error, 'an_error_has_occurredCheckEmergencyAppointment');
           return EMPTY;
         }),
         finalize(() => {

@@ -363,7 +363,6 @@
 
 @media (min-width: 768px) {
   @for $i from 0 through 8 {
-
     .gap-md-#{$i},
     .gap-lg-#{$i}:not([class*="gap-md-"]) {
       // استخدم gap-md إذا لم يتم تحديد gap-lg
@@ -374,7 +373,6 @@
 
 @media (min-width: 992px) {
   @for $i from 0 through 8 {
-
     .gap-lg-#{$i},
     .gap-xl-#{$i}:not([class*="gap-lg-"]) {
       // استخدم gap-lg إذا لم يتم تحديد gap-xl
@@ -414,7 +412,15 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
+.text-capitalize {
+  text-transform: capitalize !important;
+}
+.text-uppercase {
+  text-transform: uppercase !important;
+}
+.text-lowercase {
+  text-transform: lowercase !important;
+}
 .w-100 {
   width: 100% !important;
 }

@@ -166,7 +166,7 @@ export class CommentCardComponent implements OnInit {
             this.revertCommentLikeOptimisticUpdate(trigger);
             this._ToastService.add({
               severity: 'error',
-              summary: 'general.error',
+              summary: 'an_error_has_occurred',
               detail: res.message || 'Failed to update comment like status.',
               life: 5000,
             });
@@ -180,7 +180,7 @@ export class CommentCardComponent implements OnInit {
           handleApiErrorsMessage(error);
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
+            summary: 'an_error_has_occurred',
             detail: error?.message || 'Error occurred while updating comment like status.',
             life: 5000,
           });

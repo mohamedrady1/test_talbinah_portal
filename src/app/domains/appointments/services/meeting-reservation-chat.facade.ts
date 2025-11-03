@@ -109,7 +109,7 @@ export class MeetingReservationChatFacade {
       }),
       catchError((error: ApiError) => {
         // Network or unhandled server error
-        const localizedError = this._localizationService.translateTextFromJson('general.errorOccurred');
+        const localizedError = this._localizationService.translateTextFromJson('an_error_has_occurredOccurred');
         this._updateChatDetailState({
           status: false,
           errorMessage: localizedError,
@@ -155,7 +155,7 @@ export class MeetingReservationChatFacade {
         }
       }),
       catchError((error: ApiError) => {
-        const localizedError = this._localizationService.translateTextFromJson('general.errorOccurred');
+        const localizedError = this._localizationService.translateTextFromJson('an_error_has_occurredOccurred');
         this._updateMessageSendingState({
           status: false,
           errorMessage: localizedError

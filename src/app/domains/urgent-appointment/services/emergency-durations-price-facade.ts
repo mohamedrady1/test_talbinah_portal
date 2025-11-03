@@ -56,7 +56,7 @@ export class EmergencyDurationsPriceLookupFacade {
         }
       }),
       catchError((error: ApiError) => {
-        const localizedError = this._localizationService.translateTextFromJson('general.errorOccurred');
+        const localizedError = this._localizationService.translateTextFromJson('an_error_has_occurredOccurred');
         this._updateEmergencyDurationsPriceState({
           status: false,
           errorMessage: localizedError

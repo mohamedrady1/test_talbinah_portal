@@ -93,7 +93,7 @@ export class ToggleFavoritePodcastFacade {
           const errorMessage = response?.message || this._localizationService.translateTextFromJson('general.failedUpdateFavoriteStatus');
           this._toastService.add({
             severity: 'error',
-            summary: this._localizationService.translateTextFromJson('general.error'),
+            summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
             detail: errorMessage,
             life: 5000,
           });
@@ -107,11 +107,11 @@ export class ToggleFavoritePodcastFacade {
         }
       }),
       catchError((error: ApiError) => {
-        const errorMessage = error?.message || this._localizationService.translateTextFromJson('general.errorUpdatingFavoriteStatus');
+        const errorMessage = error?.message || this._localizationService.translateTextFromJson('an_error_has_occurredUpdatingFavoriteStatus');
         handleApiErrors(error);
         this._toastService.add({
           severity: 'error',
-          summary: this._localizationService.translateTextFromJson('general.error'),
+          summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
           detail: errorMessage,
           life: 5000,
         });

@@ -2,6 +2,7 @@
   <div class="podcast-layout__header">
     <app-site-header></app-site-header>
   </div>
+
   <div class="podcast-layout__container" #card>
     <app-page-layout-header [config]="headerConfig" [card]="cardRef" [disablePadding]="true"
       (closeRequested)="goHome()"></app-page-layout-header>
@@ -29,7 +30,15 @@
           }
         </div>
         }
-        <div class="podcast__recommended-list">
+
+        <!-- Mobile Segment Control -->
+        <div class="podcast__segment">
+          <app-segment-control [options]="segmentOptions" [selectedId]="selectedSegmentId()"
+            (selectionChanged)="onSegmentChanged($event)">
+          </app-segment-control>
+        </div>
+
+        <div class="podcast__recommended-list" [class.mobile-hidden]="!showRecommended()">
           <app-card-header [config]="recommendedPodcastListListHeaderConfig()"
             [isPrevDisabled]="isPrevRecommendedDisabled()" [isNextDisabled]="isNextRecommendedDisabled()"
             (prevClicked)="onPrevRecommended()" (nextClicked)="onNextRecommended()"
@@ -56,7 +65,7 @@
       </div>
 
       <div class="podcast__cards">
-        <div class="podcast__explore-list">
+        <div class="podcast__explore-list" [class.mobile-hidden]="!showExplore()">
           <app-card-header [config]="explorePodcastListHeaderConfig()" [isPrevDisabled]="isPrevExploreDisabled()"
             [isNextDisabled]="isNextExploreDisabled()" (prevClicked)="onPrevExplore()"
             (tabSelected)="onTabCategorySelected($event)" (nextClicked)="onNextExplore()">
@@ -98,7 +107,7 @@
                     } -->
         </div>
 
-        <div class="podcast__favourite-list">
+        <div class="podcast__favourite-list" [class.mobile-hidden]="!showFavourite()">
           <app-card-header [config]="favouritePodcastListHeaderConfig()" (allClicked)="openAllFavouritePopup()">
           </app-card-header>
           @if(isLoggedIn()){

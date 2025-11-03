@@ -78,7 +78,7 @@ export class LogoutFacade {
                     });
                     this._toastService.add({
                         severity: 'error',
-                        summary: 'general.error',
+                        summary: 'an_error_has_occurred',
                         detail: err.message ?? 'حدث خطأ أثناء تسجيل الخروج'
                     });
                     handleApiErrors(err);

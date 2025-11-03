@@ -10,7 +10,7 @@ export function handleApiErrorsMessage(apiError: ApiError): void {
     // if (_ToastService) {
     //   _ToastService.add({
     //     severity: 'error',
-    //     summary: 'general.error',
+    //     summary: 'an_error_has_occurred',
     //     detail: apiError?.message,
     //     life: 5000,
     //   });

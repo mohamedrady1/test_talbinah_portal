@@ -165,7 +165,7 @@ export class PsychologicalPostsFacade {
           } else {
             this.toast.add({
               severity: 'error',
-              summary: this.i18n.translateTextFromJson('general.error'),
+              summary: this.i18n.translateTextFromJson('an_error_has_occurred'),
               detail: res?.message ?? this.i18n.translateTextFromJson('error_to_delete_post'),
               life: 5000
             });
@@ -175,7 +175,7 @@ export class PsychologicalPostsFacade {
           handleApiErrorsMessage(err);
           this.toast.add({
             severity: 'error',
-            summary: this.i18n.translateTextFromJson('general.error'),
+            summary: this.i18n.translateTextFromJson('an_error_has_occurred'),
             detail: err?.message ?? this.i18n.translateTextFromJson('general.failedToDeletePost'),
             life: 5000
           });

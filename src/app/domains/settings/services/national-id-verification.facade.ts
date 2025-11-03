@@ -87,7 +87,7 @@ export class NationalIdVerificationFacade {
           Logger.warn('NationalIdVerificationFacade: Verification failed (API reported status: false):', message, response);
           this._toastService.add({
             severity: 'error',
-            summary: this._localizationService.translateTextFromJson('general.error'),
+            summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
             detail: message,
             life: 5000,
           });
@@ -104,7 +104,7 @@ export class NationalIdVerificationFacade {
         handleApiErrors(error); // Generic API error handling
         this._toastService.add({
           severity: 'error',
-          summary: this._localizationService.translateTextFromJson('general.error'),
+          summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
           detail: message,
           life: 5000,
         });

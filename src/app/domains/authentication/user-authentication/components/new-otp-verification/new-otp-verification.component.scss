@@ -244,6 +244,11 @@
         gap: 0.5rem;
         align-items: center;
         flex-direction: row-reverse;
+
+        &:dir(rtl) {
+            flex-direction: row;
+        }
+
         .country-code {
             font-weight: 700;
             color: var(--text-primary, #000);

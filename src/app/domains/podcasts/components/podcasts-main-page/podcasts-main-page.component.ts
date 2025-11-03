@@ -11,6 +11,7 @@ import {
   NoRandomPodcasts,
   NoRecommendedPodcasts,
   RecommendedPodcastListHeaderConfig,
+  PodcastSegmentOptions,
 } from '../../configs';
 import {
   EmptyStateCardComponent,
@@ -23,6 +24,7 @@ import {
   MoodModalIntegrationService,
   StorageKeys,
   CompeleteDataAndRegisterNowComponent,
+  SegmentControlComponent,
 } from '../../../../shared';
 import {
   Component,
@@ -74,6 +76,7 @@ import { RoleGuardService, UserContextService } from '../../../authentication';
 
     AutoExactHeightDirective,
     CompeleteDataAndRegisterNowComponent,
+    SegmentControlComponent,
   ],
   templateUrl: './podcasts-main-page.component.html',
   styleUrls: ['./podcasts-main-page.component.scss'],
@@ -93,6 +96,15 @@ export class PodcastsMainPageComponent {
   protected randomPodcastsLoaded = signal(false);
   protected recommendedPodcastsLoaded = signal(false);
   protected podcastCategoriesLoaded = signal(false);
+
+  // Mobile segment control
+  protected selectedSegmentId = signal<string>('recommended');
+  protected readonly segmentOptions = PodcastSegmentOptions;
+
+  // Computed properties for showing sections
+  protected readonly showRecommended = computed(() => this.selectedSegmentId() === 'recommended');
+  protected readonly showExplore = computed(() => this.selectedSegmentId() === 'explore');
+  protected readonly showFavourite = computed(() => this.selectedSegmentId() === 'favourite');
 
   protected readonly PodcastItemTypes = PodcastItemType;
   protected readonly noRecommendedPodcasts = NoRecommendedPodcasts;
@@ -584,5 +596,9 @@ export class PodcastsMainPageComponent {
         outputs: { closed: () => console.log('The model is closed') },
       });
     }
+  }
+
+  protected onSegmentChanged(option: typeof PodcastSegmentOptions[number]): void {
+    this.selectedSegmentId.set(option.id as string);
   }
 }

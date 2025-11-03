@@ -115,7 +115,7 @@ export class TherapeuticProgramsFacade {
           }
         }),
         catchError((error: ApiError) => {
-          this.handleFetchError(error, 'allPrograms', 'general.errorLoadingPodcasts');
+          this.handleFetchError(error, 'allPrograms', 'an_error_has_occurredLoadingPodcasts');
           return EMPTY;
         }),
         finalize(() => {
@@ -168,7 +168,7 @@ export class TherapeuticProgramsFacade {
           }
         }),
         catchError((error: ApiError) => {
-          this.handleFetchError(error, 'myPrograms', 'general.errorLoadingMyPodcasts'); // Use a different translation key for "my" programs error
+          this.handleFetchError(error, 'myPrograms', 'an_error_has_occurredLoadingMyPodcasts'); // Use a different translation key for "my" programs error
           return EMPTY;
         }),
         finalize(() => {

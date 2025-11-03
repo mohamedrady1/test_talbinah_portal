@@ -49,7 +49,7 @@ export class AsGuestFacade {
           Logger.warn('⚠️ AsGuestFacade | As guest failed:', message);
           this._toastService.add({
             severity: 'error',
-            summary: this._localizationService.translateTextFromJson('general.error'),
+            summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
             detail: message,
             life: 5000
           });
@@ -66,7 +66,7 @@ export class AsGuestFacade {
         handleApiErrorsMessage(error);
         this._toastService.add({
           severity: 'error',
-          summary: this._localizationService.translateTextFromJson('general.error'),
+          summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
           detail: message,
           life: 5000
         });
@@ -84,7 +84,7 @@ export class AsGuestFacade {
   setError(message: string): void {
     this._toastService.add({
       severity: 'error',
-      summary: this._localizationService.translateTextFromJson('general.error'),
+      summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
       detail: message,
       life: 5000
     });

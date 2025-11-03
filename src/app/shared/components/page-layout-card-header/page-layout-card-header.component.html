@@ -5,7 +5,7 @@
     </p>
   </div>
   @if (config.isTabsEnabled) {
-  <div class="card-header__tabs">
+  <div class="card-header__tabs text-capitalize">
     @for (tab of config.tabs; track $index) {
     <div class="tab" [class.active]="selectedTab() === tab" (click)="selectTab(tab)">
       {{ translate(tab) }}

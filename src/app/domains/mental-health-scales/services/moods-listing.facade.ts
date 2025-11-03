@@ -102,7 +102,7 @@ export class MoodsListingFacade {
           }
         }),
         catchError((error: ApiError) => {
-          this.handleFetchError(error, 'general.errorLoadingMoods');
+          this.handleFetchError(error, 'an_error_has_occurredLoadingMoods');
           return EMPTY; // Prevent stream from completing on error
         }),
         finalize(() => {

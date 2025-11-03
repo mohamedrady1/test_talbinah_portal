@@ -275,7 +275,7 @@ export class UpdatePsychologicalSocietyComponent implements OnInit, OnChanges {
             handleApiErrorsMessage(error);
             this._ToastService.add({
               severity: 'error',
-              summary: 'general.error',
+              summary: 'an_error_has_occurred',
               detail: error?.message || 'Failed to update identity',
               life: 5000,
             });

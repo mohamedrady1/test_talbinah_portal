@@ -90,7 +90,7 @@ export class CancelEmergencyAppointmentFacade {
         }),
         catchError((error: ApiError) => {
           // Catch and handle HTTP or network errors
-          this.handleError(error, 'general.errorCancelEmergencyAppointment');
+          this.handleError(error, 'an_error_has_occurredCancelEmergencyAppointment');
           return EMPTY; // Prevent the observable stream from completing with an error
         }),
         finalize(() => {

@@ -39,7 +39,7 @@ export class UserSupportConversationLogFacade {
         } else {
           this.toast.add({
             severity: 'error',
-            summary: 'error',
+            summary: 'an_error_has_occurred',
             detail: res.message || 'Message failed',
             life: 5000,
           });
@@ -49,7 +49,7 @@ export class UserSupportConversationLogFacade {
       if (!isLoading && err) {
         this.toast.add({
           severity: 'error',
-          summary: 'error',
+          summary: 'an_error_has_occurred',
           detail: err,
           life: 5000,
         });

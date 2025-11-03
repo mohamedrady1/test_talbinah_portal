@@ -89,7 +89,7 @@ export class UserMoodStoreFacade {
           }
         }),
         catchError((error: ApiError) => {
-          this.handleMoodStoreError(error, 'general.errorStoringMood');
+          this.handleMoodStoreError(error, 'an_error_has_occurredStoringMood');
           return EMPTY;
         }),
         finalize(() => {

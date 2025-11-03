@@ -78,21 +78,21 @@ export class VoicePreferenceFacade {
 
             this._toastService.add({
               severity: 'error',
-              summary: this._localizationService.translateTextFromJson('general.error'),
+              summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
               detail: errorMsg,
               life: 5000,
             });
           }
         }),
         catchError((error: ApiError) => {
-          const localizedError = this._localizationService.translateTextFromJson('general.errorOccurred');
+          const localizedError = this._localizationService.translateTextFromJson('an_error_has_occurredOccurred');
           this._updateState({ status: false, errorMessage: localizedError });
           Logger.error('VoicePreferenceFacade: Error saving voice:', error);
           handleApiErrors(error);
 
           this._toastService.add({
             severity: 'error',
-            summary: this._localizationService.translateTextFromJson('general.error'),
+            summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
             detail: localizedError,
             life: 5000,
           });

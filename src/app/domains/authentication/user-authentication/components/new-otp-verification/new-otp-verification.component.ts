@@ -37,9 +37,9 @@ export interface NewOtpVerificationModalData {
 })
 export class NewOtpVerificationComponent {
   private readonly translationsFacade = inject(TranslationsFacade);
-  
+
   protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
-  
+
   protected translate(key: string): string {
     return this.translationsFacade.translate(key);
   }
@@ -126,7 +126,7 @@ export class NewOtpVerificationComponent {
       Logger.warn('Missing auth data payload in localStorage. Redirecting to login...');
       this._ToastService.add({
         severity: 'error',
-        summary: 'error',
+        summary: 'an_error_has_occurred',
         detail: 'missing_data',
         life: 5000,
       });
@@ -142,7 +142,7 @@ export class NewOtpVerificationComponent {
       Logger.error('Invalid auth data payload in localStorage. Redirecting to login...');
       this._ToastService.add({
         severity: 'error',
-        summary: 'error',
+        summary: 'an_error_has_occurred',
         detail: 'missing_data',
         life: 5000,
       });
@@ -216,7 +216,7 @@ export class NewOtpVerificationComponent {
           this.verifyCodeError.set(error);
           this._ToastService.add({
             severity: 'error',
-            summary: 'error',
+            summary: 'an_error_has_occurred',
             detail: String(error?.message ?? 'Unknown error'),
             life: 5000,
           });
@@ -347,7 +347,7 @@ export class NewOtpVerificationComponent {
       this.isWaiting.set(true);
       this._ToastService.add({
         severity: 'error',
-        summary: 'error',
+        summary: 'an_error_has_occurred',
         detail: 'failed_to_resend_verification_code',
         life: 5000,
       });
@@ -385,7 +385,7 @@ export class NewOtpVerificationComponent {
           this.methodSelectionError.set(error);
           this._ToastService.add({
             severity: 'error',
-            summary: 'error',
+            summary: 'an_error_has_occurred',
             detail: String(error?.message ?? 'Unknown error'),
             life: 5000,
           });
@@ -393,7 +393,7 @@ export class NewOtpVerificationComponent {
           this.isWaiting.set(true);
           this._ToastService.add({
             severity: 'error',
-            summary: 'error',
+            summary: 'an_error_has_occurred',
             detail: 'failed_to_resend_verification_code',
             life: 5000,
           });
@@ -410,7 +410,7 @@ export class NewOtpVerificationComponent {
       this.isWaiting.set(true);
       this._ToastService.add({
         severity: 'error',
-        summary: 'error',
+        summary: 'an_error_has_occurred',
         detail: 'failed_to_resend_verification_code',
         life: 5000,
       });
@@ -480,7 +480,7 @@ export class NewOtpVerificationComponent {
         error: (error: ApiError) => {
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
+            summary: 'an_error_has_occurred',
             detail: String(error?.message ?? 'Unknown error'),
             life: 5000,
           });

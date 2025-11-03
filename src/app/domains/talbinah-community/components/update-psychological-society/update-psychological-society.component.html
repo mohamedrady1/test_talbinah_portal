@@ -48,7 +48,7 @@
           @for (emoji of emojisList(); track $index) {
           <div class="avatar-option" [class.avatar-option--selected]="selectedEmoji() === emoji"
             (click)="selectEmoji(emoji)">
-            <img [src]="emoji.image" [alt]="emoji.id" />
+            <img [src]="emoji.image" [alt]="emoji.id" onerror="this.src='images/icons/logo-2.png'" />
           </div>
           }
 

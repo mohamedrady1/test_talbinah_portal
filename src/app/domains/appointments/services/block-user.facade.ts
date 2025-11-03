@@ -117,12 +117,12 @@ export class BlockUserFacade {
     Logger.error('Error while blocking doctor:', error);
     handleApiErrors(error);
 
-    const errorMessage = error?.message || this._localizationService.translateTextFromJson('general.error');
+    const errorMessage = error?.message || this._localizationService.translateTextFromJson('an_error_has_occurred');
     this.updateState({ error: errorMessage });
 
     this._toastService.add({
       severity: 'error',
-      summary: this._localizationService.translateTextFromJson('general.error'),
+      summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
       detail: errorMessage,
       life: 5000
     });

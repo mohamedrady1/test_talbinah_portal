@@ -148,12 +148,12 @@ export class PodcastCategoriesFacade {
     handleApiErrors(error);
 
     const message = this._localization.translateTextFromJson(
-      'general.errorLoadingPodcastCategories'
+      'an_error_has_occurredLoadingPodcastCategories'
     );
 
     this._toastService.add({
       severity: 'error',
-      summary: this._localization.translateTextFromJson('general.error'),
+      summary: this._localization.translateTextFromJson('an_error_has_occurred'),
       detail: error?.message ?? message,
       life: 5000,
     });

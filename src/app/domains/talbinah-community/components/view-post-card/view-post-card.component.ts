@@ -225,7 +225,7 @@ export class ViewPostCardComponent implements OnInit { // Implement OnInit
             this.revertLikeOptimisticUpdate(trigger);
             this._ToastService.add({
               severity: 'error',
-              summary: 'general.error',
+              summary: 'an_error_has_occurred',
               detail: res.message || 'Failed to update like status.',
               life: 5000,
             });
@@ -239,7 +239,7 @@ export class ViewPostCardComponent implements OnInit { // Implement OnInit
           handleApiErrorsMessage(error);
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
+            summary: 'an_error_has_occurred',
             detail: error?.message || 'Error occurred while updating like status.',
             life: 5000,
           });
@@ -284,7 +284,7 @@ export class ViewPostCardComponent implements OnInit { // Implement OnInit
             this.revertBookmarkOptimisticUpdate(trigger);
             this._ToastService.add({
               severity: 'error',
-              summary: 'general.error',
+              summary: 'an_error_has_occurred',
               detail: res.message || 'Failed to update bookmark status.',
               life: 5000,
             });
@@ -298,7 +298,7 @@ export class ViewPostCardComponent implements OnInit { // Implement OnInit
           handleApiErrorsMessage(error);
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
+            summary: 'an_error_has_occurred',
             detail: error?.message || 'Error occurred while updating bookmark status.',
             life: 5000,
           });
@@ -344,7 +344,7 @@ export class ViewPostCardComponent implements OnInit { // Implement OnInit
             this.config.is_followed = this._isFollowed(); // Revert config
             this._ToastService.add({
               severity: 'error',
-              summary: 'general.error',
+              summary: 'an_error_has_occurred',
               detail: res.message || 'Failed to update follow status.',
               life: 5000,
             });
@@ -359,7 +359,7 @@ export class ViewPostCardComponent implements OnInit { // Implement OnInit
           handleApiErrorsMessage(error);
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
+            summary: 'an_error_has_occurred',
             detail: error?.message || 'Error occurred while updating follow status.',
             life: 5000,
           });

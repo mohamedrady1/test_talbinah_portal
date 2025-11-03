@@ -6,10 +6,18 @@
     <app-page-layout-header [config]="headerConfig" [card]="cardRef" [disablePadding]="true"
       (closeRequested)="goHome()"></app-page-layout-header>
     <div class="mental-health-scale-layout__cards" appAutoExactHeight [enabled]="!isFullscreen">
-      <div>
-        <div class="mental-health-scale-layout__choose-mood">
-          <app-choose-your-mood></app-choose-your-mood>
-        </div>
+      <div class="mental-health-scale-layout__choose-mood">
+        <app-choose-your-mood></app-choose-your-mood>
+      </div>
+
+      <!-- Mobile Segment Control -->
+      <div class="mental-health-scale-layout__segment">
+        <app-segment-control [options]="segmentOptions" [selectedId]="selectedSegmentId()"
+          (selectionChanged)="onSegmentChanged($event)">
+        </app-segment-control>
+      </div>
+
+      <div [class.mobile-hidden]="!showTests()">
         <div class="mental-health-scale-layout__metrics">
           <app-card-header [config]="testHeaderConfig" (allClicked)="openAllMentalHealthScales('test')">
           </app-card-header>
@@ -34,7 +42,8 @@
           </div>
         </div>
       </div>
-      <div class="mental-health-scale-layout__cards-card">
+
+      <div class="mental-health-scale-layout__cards-card" [class.mobile-hidden]="!showMeasurements()">
         <div>
           <app-card-header [config]="moodHeaderConfig">
           </app-card-header>

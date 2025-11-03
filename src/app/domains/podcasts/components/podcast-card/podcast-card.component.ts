@@ -25,7 +25,7 @@ import { TranslationsFacade } from '../../../../common/core/translations/service
     CommonModule,
 
     LazyLoadImageDirective,
-    
+
   ],
   templateUrl: './podcast-card.component.html',
   styleUrls: ['./podcast-card.component.scss'],
@@ -33,13 +33,13 @@ import { TranslationsFacade } from '../../../../common/core/translations/service
 })
 export class PodcastCardComponent {
   private readonly translationsFacade = inject(TranslationsFacade);
-  
+
   protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
-  
+
   protected translate(key: string): string {
     return this.translationsFacade.translate(key);
   }
-  
+
   @Input({ required: true }) item!: IGlobalPodcastItemModel | null;
   @Input() isTask!: { status: boolean } | null;
   @Input() hideFavouriteAction!: boolean | null;
@@ -176,8 +176,8 @@ export class PodcastCardComponent {
         error: () => {
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
-            detail: 'general.errorUpdatingFavoriteStatus',
+            summary: 'an_error_has_occurred',
+            detail: 'an_error_has_occurredUpdatingFavoriteStatus',
             life: 5000,
           });
         }

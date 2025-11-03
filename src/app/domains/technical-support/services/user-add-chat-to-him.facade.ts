@@ -38,7 +38,7 @@ export class UserAddChatToHimFacade {
           } else {
             this._ToastService.add({
               severity: 'error',
-              summary: 'error',
+              summary: 'an_error_has_occurred',
               detail: response?.message || 'Adding chat failed',
               life: 5000,
             });
@@ -48,7 +48,7 @@ export class UserAddChatToHimFacade {
         if (!isLoading && this.error()) {
           this._ToastService.add({
             severity: 'error',
-            summary: 'error',
+            summary: 'an_error_has_occurred',
             detail: this.error() || 'Unknown error',
             life: 5000,
           });

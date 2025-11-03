@@ -361,7 +361,7 @@ export class MySavedPostsComponent {
             Logger.warn('Post deletion error', response);
             this._ToastService.add({
               severity: 'error',
-              summary: 'general.error',
+              summary: 'an_error_has_occurred',
               detail: response?.message || 'Error to delete post.',
               life: 5000
             });
@@ -372,7 +372,7 @@ export class MySavedPostsComponent {
           handleApiErrorsMessage(error);
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
+            summary: 'an_error_has_occurred',
             detail: error?.message || 'Failed to delete post.',
             life: 5000
           });

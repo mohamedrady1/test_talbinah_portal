@@ -24,7 +24,7 @@ export class SettingsRewardDetailsComponent implements OnDestroy {
   private readonly translationsFacade = inject(TranslationsFacade);
   protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
   protected translate(key: string): string { return this.translationsFacade.translate(key); }
-  
+
   @Input({ required: true }) rewardItem!: RewardItem;
 
   private readonly platformId = inject(PLATFORM_ID);
@@ -68,7 +68,7 @@ export class SettingsRewardDetailsComponent implements OnDestroy {
       .catch((err) => {
         this.toast.add({
           severity: 'error',
-          summary: this.i18n.translateTextFromJson('general.error'),
+          summary: this.i18n.translateTextFromJson('an_error_has_occurred'),
           detail: this.i18n.translateTextFromJson('settings.rewardItem.copyFailed'),
           life: 3000,
         });

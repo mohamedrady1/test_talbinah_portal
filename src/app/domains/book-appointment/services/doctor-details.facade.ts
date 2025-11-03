@@ -82,7 +82,7 @@ export class DoctorDetailsFacade {
             Logger.debug('[DoctorDetailsFacade] Stored doctor details in TransferState for SSR');
           }
         } else {
-          const errorMsg = res.message || this._localization.translateTextFromJson('general.errorOccurred');
+          const errorMsg = res.message || this._localization.translateTextFromJson('an_error_has_occurredOccurred');
           this._updateDoctorDetailsState({
             status: false,
             errorMessage: errorMsg,
@@ -92,7 +92,7 @@ export class DoctorDetailsFacade {
         }
       }),
       catchError((error: ApiError) => {
-        const fallbackMessage = this._localization.translateTextFromJson('general.errorOccurred');
+        const fallbackMessage = this._localization.translateTextFromJson('an_error_has_occurredOccurred');
         this._updateDoctorDetailsState({
           status: false,
           errorMessage: fallbackMessage,

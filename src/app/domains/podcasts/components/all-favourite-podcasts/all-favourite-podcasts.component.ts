@@ -102,7 +102,7 @@ export class AllFavouritePodcastsComponent {
             Logger.debug('Toggle Item Favourite Podcast fetch failed:', response.message);
             this._ToastService.add({
               severity: 'error',
-              summary: this.localization.translateTextFromJson('general.error'),
+              summary: this.localization.translateTextFromJson('an_error_has_occurred'),
               detail: response?.message || this.localization.translateTextFromJson('general.failedUpdateFavoriteStatus'),
               life: 5000
             });
@@ -113,8 +113,8 @@ export class AllFavouritePodcastsComponent {
           handleApiErrors(error);
           this._ToastService.add({
             severity: 'error',
-            summary: this.localization.translateTextFromJson('general.error'),
-            detail: error?.message ?? this.localization.translateTextFromJson('general.errorUpdatingFavoriteStatus'),
+            summary: this.localization.translateTextFromJson('an_error_has_occurred'),
+            detail: error?.message ?? this.localization.translateTextFromJson('an_error_has_occurredUpdatingFavoriteStatus'),
             life: 5000
           });
 

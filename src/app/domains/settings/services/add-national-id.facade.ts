@@ -92,7 +92,7 @@ export class ToggleFavoriteArticleFacade {
   //   //       Logger.warn(`Failed to toggle favorite status for article ID ${articleId}: ${errorMessage}`);
   //   //       this._toastService.add({
   //   //         severity: 'error',
-  //   //         summary: this._localizationService.translateTextFromJson('general.error'),
+  //   //         summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
   //   //         detail: errorMessage,
   //   //         life: 5000
   //   //       });
@@ -109,12 +109,12 @@ export class ToggleFavoriteArticleFacade {
   //   //   }),
   //   //   catchError((error: ApiError) => {
   //   //     // Network or unexpected JavaScript error
-  //   //     const errorMessage = error?.message || this._localizationService.translateTextFromJson('general.errorUpdatingFavoriteStatus');
+  //   //     const errorMessage = error?.message || this._localizationService.translateTextFromJson('an_error_has_occurredUpdatingFavoriteStatus');
   //   //     Logger.error(`Error toggling favorite status for article ID ${articleId}:`, error);
   //   //     handleApiErrors(error); // Handle generic API errors (e.g., authentication)
   //   //     this._toastService.add({
   //   //       severity: 'error',
-  //   //       summary: this._localizationService.translateTextFromJson('general.error'),
+  //   //       summary: this._localizationService.translateTextFromJson('an_error_has_occurred'),
   //   //       detail: errorMessage,
   //   //       life: 5000
   //   //     });

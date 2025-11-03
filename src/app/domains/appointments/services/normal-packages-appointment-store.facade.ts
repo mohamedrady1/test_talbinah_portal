@@ -115,7 +115,7 @@ export class NormalPackagesReservationFacade {
         }),
         catchError((error: ApiError) => {
           // Catch and handle HTTP or network errors
-          this.handleError(error, 'general.errorSchedulingReservation');
+          this.handleError(error, 'an_error_has_occurredSchedulingReservation');
           return EMPTY; // Prevent the observable stream from completing with an error
         }),
         finalize(() => {

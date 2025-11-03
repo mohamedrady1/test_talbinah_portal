@@ -72,7 +72,7 @@ export class PostInteractionService {
       Logger.warn('Service: Cannot submit empty comment.');
       this._ToastService.add({
         severity: 'error',
-        summary: 'general.error',
+        summary: 'an_error_has_occurred',
         detail: 'Comment cannot be empty.',
         life: 3000,
       });
@@ -82,7 +82,7 @@ export class PostInteractionService {
       Logger.error('Service: Cannot submit comment, Post ID is missing.');
       this._ToastService.add({
         severity: 'error',
-        summary: 'general.error',
+        summary: 'an_error_has_occurred',
         detail: 'Cannot submit comment, post ID is missing.',
         life: 5000,
       });
@@ -128,7 +128,7 @@ export class PostInteractionService {
             this.likeError.set({ message: res.message || 'Failed to update like status.', timestamp: new Date().toISOString() });
             this._ToastService.add({
               severity: 'error',
-              summary: 'general.error',
+              summary: 'an_error_has_occurred',
               detail: res.message || 'Failed to update like status.',
               life: 5000,
             });
@@ -141,7 +141,7 @@ export class PostInteractionService {
           handleApiErrorsMessage(error);
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
+            summary: 'an_error_has_occurred',
             detail: error?.message || 'Error occurred while updating like status.',
             life: 5000,
           });
@@ -185,7 +185,7 @@ export class PostInteractionService {
             this.bookmarkError.set({ message: res.message || 'Failed to update bookmark status.', timestamp: new Date().toISOString() });
             this._ToastService.add({
               severity: 'error',
-              summary: 'general.error',
+              summary: 'an_error_has_occurred',
               detail: res.message || 'Failed to update bookmark status.',
               life: 5000,
             });
@@ -198,7 +198,7 @@ export class PostInteractionService {
           handleApiErrorsMessage(error);
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
+            summary: 'an_error_has_occurred',
             detail: error?.message || 'Error occurred while updating bookmark status.',
             life: 5000,
           });
@@ -242,7 +242,7 @@ export class PostInteractionService {
             this.followError.set({ message: res.message || 'Failed to update follow status.', timestamp: new Date().toISOString() });
             this._ToastService.add({
               severity: 'error',
-              summary: 'general.error',
+              summary: 'an_error_has_occurred',
               detail: res.message || 'Failed to update follow status.',
               life: 5000,
             });
@@ -255,7 +255,7 @@ export class PostInteractionService {
           handleApiErrorsMessage(error);
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
+            summary: 'an_error_has_occurred',
             detail: error?.message || 'Error occurred while updating follow status.',
             life: 5000,
           });
@@ -299,7 +299,7 @@ export class PostInteractionService {
             this.commentError.set({ message: res.message || 'Failed to add comment.', timestamp: new Date().toISOString() });
             this._ToastService.add({
               severity: 'error',
-              summary: 'general.error',
+              summary: 'an_error_has_occurred',
               detail: res.message || 'Failed to add comment.',
               life: 5000,
             });
@@ -312,7 +312,7 @@ export class PostInteractionService {
           handleApiErrorsMessage(error);
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
+            summary: 'an_error_has_occurred',
             detail: error?.message || 'Error occurred while adding comment.',
             life: 5000,
           });

@@ -111,7 +111,7 @@ export class UploadAttachmentsFacade {
 
           Logger.debug('Chat files uploaded:', urls);
         } else {
-          const fallback = this._i18n.translateTextFromJson('general.error');
+          const fallback = this._i18n.translateTextFromJson('an_error_has_occurred');
           const errorMsg = response?.message || fallback;
           this.handleError({ message: errorMsg } as ApiError, fallback);
         }
@@ -140,7 +140,7 @@ export class UploadAttachmentsFacade {
 
     this._toast.add({
       severity: 'error',
-      summary: this._i18n.translateTextFromJson('general.error'),
+      summary: this._i18n.translateTextFromJson('an_error_has_occurred'),
       detail: message,
       life: 5000,
     });

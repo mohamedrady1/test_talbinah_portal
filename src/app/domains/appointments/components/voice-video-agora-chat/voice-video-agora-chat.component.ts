@@ -34,7 +34,7 @@ import { TranslationsFacade } from '../../../../common/core/translations/service
     SvgIconComponent,
     MediaControlsComponent,
     RemoteStreamComponent,
-    
+
   ],
   templateUrl: './voice-video-agora-chat.component.html',
   styleUrls: ['./voice-video-agora-chat.component.scss'],
@@ -44,7 +44,7 @@ export class VoiceVideoAgoraChatComponent implements OnInit, OnDestroy, OnChange
   private readonly translationsFacade = inject(TranslationsFacade);
   protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
   protected translate(key: string): string { return this.translationsFacade.translate(key); }
-  
+
   @Input() currentReservationData: IGlobalReservationModel | null = null;
   @Output() expandChatPanel = new EventEmitter<void>();
 
@@ -135,10 +135,10 @@ export class VoiceVideoAgoraChatComponent implements OnInit, OnDestroy, OnChange
       Logger.debug('[VoiceVideoAgoraChat] Agora initialized and joined channel:', this.CHANNEL_NAME);
     } catch (err) {
       Logger.error('[VoiceVideoAgoraChat] Failed to init Agora:', err);
-      const message = (err as any)?.message || this.localization.translateTextFromJson('general.error');
+      const message = (err as any)?.message || this.localization.translateTextFromJson('an_error_has_occurred');
       this.toast.add({
         severity: 'error',
-        summary: this.localization.translateTextFromJson('general.error'),
+        summary: this.localization.translateTextFromJson('an_error_has_occurred'),
         detail: message,
         life: 5000
       })

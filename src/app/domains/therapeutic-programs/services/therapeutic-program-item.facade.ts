@@ -95,7 +95,7 @@ export class TherapeuticProgramItemFacade {
           }
         }),
         catchError((error: ApiError) => {
-          this.handleFetchError(error, 'general.errorLoadingProgramDetails');
+          this.handleFetchError(error, 'an_error_has_occurredLoadingProgramDetails');
           // this.errorMessage.set(error?.message || this._localizationService.translateTextFromJson('program.emptyState.programNotFound'));
           return EMPTY; // Prevent stream from completing on error
         }),

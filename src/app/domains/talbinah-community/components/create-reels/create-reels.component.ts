@@ -510,7 +510,7 @@ export class CreateReelsComponent implements OnInit {
           handleApiErrorsMessage(error);
           this._ToastService.add({
             severity: 'error',
-            summary: 'general.error',
+            summary: 'an_error_has_occurred',
             detail: error?.message || 'Unknown error occurred during post creation.',
             life: 5000,
           });
@@ -545,7 +545,7 @@ export class CreateReelsComponent implements OnInit {
       this.submissionError.set({ message: response.message || 'Submission failed unexpectedly.', timestamp: new Date().toISOString() });
       this._ToastService.add({
         severity: 'error',
-        summary: 'general.error',
+        summary: 'an_error_has_occurred',
         detail: response.message || 'Post could not be created.',
         life: 5000,
       });

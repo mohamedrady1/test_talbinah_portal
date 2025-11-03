@@ -80,7 +80,7 @@ export class CalculateReservationPriceFacade {
         }),
         catchError((error: ApiError) => {
           // Catch and handle HTTP or network errors
-          this.handleError(error, error?.message ?? 'general.errorCalculatingPrice');
+          this.handleError(error, error?.message ?? 'an_error_has_occurredCalculatingPrice');
           Logger.debug('Error calculating reservation price:', error?.message);
 
           return EMPTY; // Prevent the observable stream from completing with an error

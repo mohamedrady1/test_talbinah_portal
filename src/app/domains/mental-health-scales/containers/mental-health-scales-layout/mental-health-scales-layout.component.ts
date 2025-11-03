@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, inject, PLATFORM_ID, Si
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { EmptyStateComponent, ErrorStateComponent, LocalizationService, ModalService, PageLayoutHeaderComponent, MoodModalIntegrationService, StorageKeys, CompeleteDataAndRegisterNowComponent } from '../../../../shared';
+import { EmptyStateComponent, ErrorStateComponent, LocalizationService, ModalService, PageLayoutHeaderComponent, MoodModalIntegrationService, StorageKeys, CompeleteDataAndRegisterNowComponent, SegmentControlComponent } from '../../../../shared';
 import { AutoExactHeightDirective } from '../../../../common/core/directives';
 import { Logger, MetadataService, StorageService } from '../../../../common';
 import { SiteHeaderComponent } from '../../../header';
@@ -20,6 +20,7 @@ import {
   MentalHealthScaleListShimmerComponent,
   MentalHealthScalesFacade,
   MentalHealthScaleTestShimmerComponent,
+  MentalHealthSegmentOptions,
   MoodHeaderConfig,
   MyMeasurementsFacade,
   TestHeaderConfig,
@@ -51,6 +52,7 @@ import { RoleGuardService, UserContextService } from '../../../authentication';
     TimeScaleComponent,
     CardComponent,
     CompeleteDataAndRegisterNowComponent,
+    SegmentControlComponent,
   ],
   templateUrl: './mental-health-scales-layout.component.html',
   styleUrls: ['./mental-health-scales-layout.component.scss'],
@@ -90,6 +92,14 @@ export class MentalHealthScalesLayoutComponent implements OnInit, OnDestroy {
   protected refreshLoginStatus(): void {
     this.token.set(this._StorageService.getItem<string>(StorageKeys.TOKEN) ?? null);
   }
+
+  // Mobile segment control
+  protected selectedSegmentId = signal<string>('tests');
+  protected readonly segmentOptions = MentalHealthSegmentOptions;
+
+  // Computed properties for showing sections
+  protected readonly showTests = computed(() => this.selectedSegmentId() === 'tests');
+  protected readonly showMeasurements = computed(() => this.selectedSegmentId() === 'measurements');
 
   headerConfig: headerConfig = MentalHealthHeaderConfig;
   testHeaderConfig: ICardHeaderConfig = TestHeaderConfig;
@@ -184,11 +194,11 @@ export class MentalHealthScalesLayoutComponent implements OnInit, OnDestroy {
       title: title[lang],
       description: meta.description[lang],
       keywords: 'mental health scale, home, talbinah',
-      image: 'https://api.talbinah.net/dashboard_assets/Talbinah.png',
-      url: 'https://talbinah.com/mental-health-scales',
+      image: 'https://talbinah.net/dashboard_assets/Talbinah.png',
+      url: 'https://talbinah.net/mental-health-scales',
       robots: 'index, follow',
       locale: 'en_US',
-      canonical: 'https://talbinah.com/mental-health-scales'
+      canonical: 'https://talbinah.net/mental-health-scales'
     });
   }
 
@@ -235,5 +245,9 @@ export class MentalHealthScalesLayoutComponent implements OnInit, OnDestroy {
         height: 'fit-content'
       });
     }
+  }
+
+  protected onSegmentChanged(option: typeof MentalHealthSegmentOptions[number]): void {
+    this.selectedSegmentId.set(option.id as string);
   }
 }

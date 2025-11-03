@@ -86,10 +86,11 @@ export class MostViewedArticlesFacade {
               errorMessage: null,
             });
           } else {
+            // Empty response is not an error
             this._updateState({
               article: null,
-              status: response.status, // Still success, but no data
-              errorMessage: '📭 No most viewed articles found.',
+              status: response.status,
+              errorMessage: null,
             });
           }
 

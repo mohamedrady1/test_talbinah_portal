@@ -45,13 +45,13 @@ import { TranslationsFacade } from '../../../../common/core/translations/service
 })
 export class MainPageLayoutComponent implements OnInit, OnDestroy {
   private readonly translationsFacade = inject(TranslationsFacade);
-  
+
   protected readonly translateApi = (key: string, lang?: string) => this.translationsFacade.translate(key, lang);
-  
+
   protected translate(key: string): string {
     return this.translationsFacade.translate(key);
   }
-  
+
   // ----- Signals -----
   public userIdentityProfileDataSignal = signal<IUserIdentifyProfileData | null>(null);
   private userIdentityProfileState = signal<{ profileResponse: IUserIdentifyProfileResponseDto | null }>({ profileResponse: null });
@@ -282,7 +282,7 @@ export class MainPageLayoutComponent implements OnInit, OnDestroy {
     Logger.error('Failed to fetch user identity profile:', error);
     this._ToastService.add({
       severity: 'error',
-      summary: 'general.error',
+      summary: 'an_error_has_occurred',
       detail: error?.message || 'Failed to fetch user identity profile.',
       life: 5000
     });
